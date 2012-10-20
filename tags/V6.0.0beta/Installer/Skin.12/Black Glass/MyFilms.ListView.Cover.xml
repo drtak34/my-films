@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+  <controls>
+
+    <!-- MENU COVER -->
+    <control>
+      <description>Art for Menu</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>62</posX>
+      <posY>88</posY>
+      <width>245</width>
+      <height>348</height>
+      <centered>yes</centered>
+      <zoom>yes</zoom>
+      <keepaspectratio>no</keepaspectratio>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.menuimage</texture>
+      <!-- <colordiffuse>40ffffff</colordiffuse> -->
+      <!-- <texture>#myfilms.coverimage</texture> -->
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(40)</visible>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="10,10" reversible="true" condition="!Control.isvisible(40)">conditional</animation>
+      <!-- <animation effect="zoom" time="250" start="0,0" center="350,100" reversible="true" condition="Control.isvisible(40)">visiblechange</animation> -->
+      <!-- <animation effect="slide" tween="cubic" easing="inout" time="250" start="-100" condition="Control.isvisible(36)">conditional</animation> -->
+    </control>
+
+    <!-- FILMS COVER -->
+    <control>
+      <description>Cover Art for Films</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>62</posX>
+      <posY>88</posY>
+      <width>245</width>
+      <height>348</height>
+      <centered>yes</centered>
+      <zoom>yes</zoom>
+      <keepaspectratio>no</keepaspectratio>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.coverimage</texture>
+      <!-- <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture> -->
+      <!-- <colordiffuse>40ffffff</colordiffuse> -->
+      <!-- <texture>#myfilms.coverimage</texture> -->
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(36)|Control.isvisible(39)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <!--			<animation effect="zoom" time="250" start="10,10" center="550,100" reversible="true" condition="Control.isvisible(36)">visiblechange</animation> -->
+      <!--			<animation effect="slide" tween="cubic" easing="inout" time="250" start="-100" condition="Control.isvisible(39)">conditional</animation> -->
+      <animation effect="slide" tween="cubic" easing="inout" time="250" start="-300" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+      <!--
+			<animation effect="slide" time="450" start="-400,0">visiblechange</animation>
+			<animation effect="zoom" time="450" start="10,10" center="550,100" reversible="true" condition="Control.isvisible(36)">visiblechange</animation>
+			<animation effect="slide" tween="cubic" easing="inout" time="250" start="-100" condition="Control.isvisible(39)">conditional</animation>
+-->
+    </control>
+
+    <control>
+      <description>Collection banner</description>
+      <id>0</id>
+      <type>image</type>
+      <posX>185</posX>
+      <posY>88</posY>
+      <texture>myfilms\collection.png</texture>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(36)|Control.isvisible(39)]+!string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="65,90" reversible="true" condition="!Control.isvisible(36)">conditional</animation>
+    </control>
+
+    <control>
+      <description>Cover Art for Films - GLASS OVERLAY</description>
+      <type>image</type>
+      <id>0</id>
+      <keepaspectratio>no</keepaspectratio>
+      <posX>30</posX>
+      <posY>83</posY>
+      <width>283</width>
+      <height>360</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
+      <!-- <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+control.hasthumb(1020)</visible> -->
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[control.isvisible(36)|control.isvisible(39)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="slide" tween="cubic" easing="inout" time="250" start="-300" condition="Control.isvisible(36)|control.isvisible(39)">conditional</animation>
+    </control>
+
+    <!-- VIEWS COVER -->
+
+    <control>
+      <description>Cover Art for Views</description>
+      <type>image</type>
+      <id>0</id>
+      <keepaspectratio>yes</keepaspectratio>
+      <posX>62</posX>
+      <posY>88</posY>
+      <width>245</width>
+      <height>348</height>
+      <centered>yes</centered>
+      <!--			<valign>top</valign> -->
+      <zoom>no</zoom>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.viewcoverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(37)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <!--			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation> -->
+      <!--			<animation effect="slide" time="450" start="-50,0">visiblechange</animation> -->
+      <!--			<animation effect="zoom" time="250" start="30,30" center="390,40" condition="!Control.isvisible(36)">conditional</animation> -->
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="450,90" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+    </control>
+
+
+    <!-- PERSONS COVER -->
+
+    <control>
+      <description>Cover Art for Persons</description>
+      <type>image</type>
+      <id>0</id>
+      <keepaspectratio>yes</keepaspectratio>
+      <posX>62</posX>
+      <posY>88</posY>
+      <width>245</width>
+      <height>348</height>
+      <centered>yes</centered>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.personcoverimage</texture>
+      <!-- <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.picture</texture> -->
+      <!-- <colordiffuse>40ffffff</colordiffuse> -->
+      <!-- <texture>#myfilms.coverimage</texture> -->
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(38)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <!--			<animation effect="slide" time="450" start="-400,0" condition="Control.hasfocus(50)">conditional</animation> -->
+      <!--			<animation effect="slide" time="450" start="-50,0">visiblechange</animation> -->
+      <!--			<animation effect="zoom" time="450" start="30,30" center="390,40" condition="!Control.isvisible(36)">conditional</animation> -->
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="450,90" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+    </control>
+
+
+    <!-- VIEWS and PERSONS GLASS OVERLAY -->
+
+    <control>
+      <description>Cover Art Glass Overlay for views</description>
+      <type>image</type>
+      <id>0</id>
+      <keepaspectratio>no</keepaspectratio>
+      <posX>30</posX>
+      <posY>83</posY>
+      <width>283</width>
+      <height>360</height>
+      <!--			<texture flipY="true" diffuse="Thumb_Mask.png">DVDCase_coverflow.png</texture> -->
+      <texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+!control.isvisible(40)+[Control.isvisible(37)|Control.isvisible(38)|string.contains(#myfilms.viewcoverimage,\)|string.contains(#myfilms.personcoverimage,\)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="450,90" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+    </control>
+
+
+    <!-- FILMS COLLECTIONS COVER -->
+    <control>
+      <description>Cover Art for Groups or Hierarchies or Collections</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>62</posX>
+      <posY>88</posY>
+      <width>245</width>
+      <height>348</height>
+      <centered>yes</centered>
+      <zoom>yes</zoom>
+      <keepaspectratio>no</keepaspectratio>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.groupcoverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="65,90" reversible="true" condition="!Control.isvisible(36)">conditional</animation>
+    </control>
+    <control>
+      <description>Collection banner</description>
+      <id>0</id>
+      <type>image</type>
+      <posX>185</posX>
+      <posY>88</posY>
+      <texture>myfilms\collection.png</texture>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="65,90" reversible="true" condition="!Control.isvisible(36)">conditional</animation>
+    </control>
+
+    <!-- FILMS COLLECTIONS GLASS OVERLAY -->
+
+    <control>
+      <description>Cover Art for Groups or Hierarchies or Collections - GLASS OVERLAY</description>
+      <type>image</type>
+      <id>0</id>
+      <keepaspectratio>no</keepaspectratio>
+      <posX>30</posX>
+      <posY>83</posY>
+      <width>283</width>
+      <height>360</height>
+      <!--			<texture flipY="true" diffuse="Thumb_Mask.png">DVDCase_coverflow.png</texture> -->
+      <texture flipY="true" diffuse="Thumb_Mask.png">DVDCase.png</texture>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+!control.isvisible(40)+[control.isvisible(36)|control.isvisible(39)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="65,90" reversible="true" condition="Control.isvisible(39)">conditional</animation>
+    </control>
+
+
+    <!-- Watched Icon start (cover) -->
+    <!--
+			<control>
+				<description>Watched Icon Background</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>276</posX>
+				<posY>109</posY>
+				<width>32</width>
+				<height>40</height>
+				<colordiffuse>b0ffffff</colordiffuse>
+				<texture>MyFilms\overlaywubg.png</texture>
+				<visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+!Control.hasfocus(10099)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control> 
+			<control>
+				<description>Watched Icon</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>282</posX>
+				<posY>113</posY>
+				<width>24</width>
+				<height>24</height>
+				<texture>MyFilms\overlaywatched.png</texture>
+				<visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+!Control.hasfocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control>
+
+			<control>
+				<description>Un-Watched Icon</description>
+				<type>image</type>
+				<id>0</id>
+				<posX>282</posX>
+				<posY>113</posY>
+				<width>24</width>
+				<height>24</height>
+				<texture>MyFilms\overlayunwatched.png</texture>
+				<visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+!Control.hasfocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
+				<animation effect="fade" time="250">visiblechange</animation>
+				<animation effect="fade" time="250">WindowClose</animation>	
+				<animation effect="fade" time="250">WindowOpen</animation>
+			</control>
+-->
+    <!-- Watched Icon end -->
+
+  </controls>
+</window>

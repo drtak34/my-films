@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+  <controls>
+    <control>
+      <description>Overlay NonFilmstrip</description>
+      <type>image</type>
+      <id>0</id>
+      <width>1280</width>
+      <height>720</height>
+      <texture>bg.jpg</texture>
+      <colordiffuse>c0ffffff</colordiffuse>
+      <visible>![facadeview.filmstrip|facadeview.coverflow]</visible>
+      <shouldCache>true</shouldCache>
+    </control>
+    <control>
+      <description>Overlay Filmstrip</description>
+      <type>image</type>
+      <id>0</id>
+      <width>1280</width>
+      <height>720</height>
+      <texture>MyFilms\fanart_overlay_overall.png</texture>
+      <colordiffuse>dfffffff</colordiffuse>
+      <visible>facadeview.filmstrip|facadeview.coverflow</visible>
+      <shouldCache>true</shouldCache>
+    </control>
+<!--
+    <control>
+      <description>Additional Overlay Menu</description>
+      <type>image</type>
+      <id>0</id>
+      <width>1280</width>
+      <height>720</height>
+      <texture>black.png</texture>
+      <colordiffuse>5fffffff</colordiffuse>
+      <visible>control.isvisible(40)+![facadeview.filmstrip|facadeview.coverflow]</visible>
+      <shouldCache>true</shouldCache>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="450">WindowClose</animation>
+      <animation effect="fade" time="450">visiblechange</animation>
+    </control>
+-->
+  </controls>
+</window>

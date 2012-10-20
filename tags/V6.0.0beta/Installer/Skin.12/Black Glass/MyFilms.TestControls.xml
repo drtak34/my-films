@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+  <controls>
+
+<!-- TEST THUMBS AND LABELS for visibility check  -->
+
+    <control>
+      <id>0</id>
+      <type>image</type>
+      <posX>450</posX>
+      <posY>5</posY>
+      <width>50</width>
+      <height>75</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.menuimage</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.HasFocus(50)]</visible>
+      <animation effect="fade" time="250" reversible="false">visible</animation>
+    </control>
+    <control>
+      <id>0</id>
+      <type>image</type>
+      <posX>505</posX>
+      <posY>5</posY>
+      <width>50</width>
+      <height>75</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.viewcoverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.HasFocus(50)]</visible>
+      <animation effect="fade" time="250" reversible="false">visible</animation>
+    </control>
+    <control>
+      <id>0</id>
+      <type>image</type>
+      <posX>560</posX>
+      <posY>5</posY>
+      <width>50</width>
+      <height>75</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.personcoverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.HasFocus(50)]</visible>
+      <animation effect="fade" time="250" reversible="false">visible</animation>
+    </control>
+    <control>
+      <id>0</id>
+      <type>image</type>
+      <posX>615</posX>
+      <posY>5</posY>
+      <width>50</width>
+      <height>75</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.groupcoverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.HasFocus(50)]</visible>
+      <animation effect="fade" time="250" reversible="false">visible</animation>
+    </control>
+    <control>
+      <id>0</id>
+      <type>image</type>
+      <posX>670</posX>
+      <posY>5</posY>
+      <width>50</width>
+      <height>75</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#myfilms.coverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.HasFocus(50)]</visible>
+      <animation effect="fade" time="250" reversible="false">visible</animation>
+    </control>
+    <control>
+      <id>0</id>
+      <type>image</type>
+      <posX>735</posX>
+      <posY>5</posY>
+      <width>50</width>
+      <height>75</height>
+      <texture flipY="true" diffuse="Thumb_Mask.png">#selectedthumb</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.HasFocus(50)]</visible>
+      <animation effect="fade" time="250" reversible="false">visible</animation>
+    </control>
+
+		<control>
+			<description>Testlabel Film</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>440</posX>
+			<posY>100</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+      <label>36 - Film: #myfilms.coverimage</label>
+      <visible>control.isvisible(36)</visible>
+		</control>
+		<control>
+			<description>Testlabel Views</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>440</posX>
+			<posY>110</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+			<label>37 - View: #myfilms.viewcoverimage</label>
+      <visible>control.isvisible(37)</visible>
+		</control>
+		<control>
+			<description>Testlabel Person</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>440</posX>
+			<posY>120</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+			<label>38 - Person: #myfilms.personcoverimage</label>
+      <visible>control.isvisible(38)</visible>
+		</control>
+		<control>
+			<description>Testlabel Hierarchy or Collection</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>440</posX>
+			<posY>130</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+			<label>39 - Hierarchy: #myfilms.groupcoverimage</label>
+      <visible>control.isvisible(39)</visible>
+		</control>
+		<control>
+			<description>Testlabel Menu</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>440</posX>
+			<posY>140</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+			<label>40 - Menu!</label>
+      <visible>control.isvisible(40)</visible>
+		</control>
+		<control>
+			<description>Testlabel Indexed</description>
+			<type>label</type>
+			<id>0</id>
+			<posX>440</posX>
+			<posY>150</posY>
+			<width>600</width>
+			<font>font10</font>
+			<textcolor>60ffffff</textcolor>
+			<label>41 - Indexed!</label>
+      <visible>control.isvisible(41)</visible>
+		</control>
+  </controls>
+</window>

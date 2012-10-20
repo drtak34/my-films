@@ -1,0 +1,1892 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <metadata name="ownerLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="mailLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="siteLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="descriptionLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="indexLabel1.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="labelLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="dBfieldLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="valueLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="filterLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="sortFieldHierarchyLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="sortDirectionHierarchyLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="layoutHierarchyLabel.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="label68.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="label70.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="label69.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <metadata name="ToolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="label69.ToolTip" xml:space="preserve">
+    <value>You can define the sort order for the respective view.
+Mostly, "Ascending" is the best choice.
+For fields like "Date" or "Rating" it is useful to use "Descending".
+You can set separate sort orders for the view itself, the underlying film list and optional hierarchy film lists.</value>
+  </data>
+  <metadata name="label66.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="label66.ToolTip" xml:space="preserve">
+    <value>The Value will allow you to directly display the film list filtered to that value.
+Practically, a rule "DBfield like *Value*" will be used - but other than Filter Expression, 
+this is affecting the display (Film list instead of grouped view).
+
+Important: If this field is set, MyFilms will directly display a filmlist and skip any "grouped" View.
+Use "*" to show complete filmlist.</value>
+  </data>
+  <metadata name="label65.GenerateMember" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>False</value>
+  </metadata>
+  <data name="Config_Name.ToolTip" xml:space="preserve">
+    <value>Enter a unique name for each configuration.
+You can have more than one configuration referencing a single database, or multiple configurations referencing multiple databases.  
+Configurations can be password protected in the ‘Security’ section below, to restrict access to children for example.</value>
+  </data>
+  <data name="Config_Dflt.ToolTip" xml:space="preserve">
+    <value>Check this box for the configuration that you want to be loaded each time the plugin is accessed.  
+If you have more than one configuration, and there are no configurations selected as the default, you will be prompted to select a configuration the first time.  
+Subsequently, the most recent configuration used will be loaded.
+</value>
+  </data>
+  <data name="Config_Menu.ToolTip" xml:space="preserve">
+    <value>If you have defined several configurations, you can choose to display the Choose Config Menu when entering the plugin. 
+1.	On - displays a list of Configs whenever you open the plugin
+2.	Off with view defined - Displays configs on first entering MF, but not after reentering - returns to last config
+3.	Off without view defined - displays last config when reentering plugin
+
+Note: You can't select that option if a Default Config is defined.</value>
+  </data>
+  <data name="cbAllowTraktSync.ToolTip" xml:space="preserve">
+    <value>If enabled, TRAKT plugin is allowed to synchronize your movie data
+for this config to the TRAKT site.
+
+Notes:
+You can enable this for multiple configs.
+Do only enable for movie collections.
+It is not recommended to enable for private videos or documentaries, as 
+there is usually no movie data available on internet databases.</value>
+  </data>
+  <data name="SLogo_Type.ToolTip" xml:space="preserve">
+    <value>There are fou fields referenced in the skin files to display logos - ID2001, ID2002, ID2003 and the combined ID2012.
+
+You can nominate which logos that you want to see in one of the three skin fields by referring to these ID numbers.
+THe combined field ID2012 will automatically have all definitions of ID2001 and ID2002.
+
+For example, you can define rules for genre in ID2002 and type of movie (Divx, Xvid, HD...) in ID2001. 
+
+If the skin designer has defined two physically distinct fields, you will see two separate logo images.  
+However, if the two fields are defined with the same x and y position values, 
+those two logo files are concatenated and only one image containing both the logos is displayed. 
+
+This latter situation is most often the case.</value>
+  </data>
+  <data name="chkLogos.ToolTip" xml:space="preserve">
+    <value>Select this option if you want the following logos to be displayed for selected items.
+You can select an existing rule for modification by clicking in the list.
+Editing is done by changing the settings on the bottom.
+You have to click "Update Logo Rule" to store changes to the rule.</value>
+  </data>
+  <data name="LogoView.ToolTip" xml:space="preserve">
+    <value>This is the overview of all your defined Logo rules.
+Each line presents a rule, that is checked for logo display.
+You can add new rules by setting the rule in the lower part of this screen and press "add" to add it to the rule set.
+If you select a rule, you can edit / change it.
+To store changes, you have to click "Update Logo Rule" - otherwise changes are not permanent.</value>
+  </data>
+  <data name="txtLogosPath.ToolTip" xml:space="preserve">
+    <value>Enter (or use the browse button) the full path to the folder containing the logo image files.  
+To optimise performance, an image containing all the logos to be displayed for each movie is dynamically created.
+Those cached images usually are stored in \Thumbs\Myfilms_Logos
+If you leave the field empty, logos will be searched in &lt;mediaportal program data&gt;\skins\&lt;skin name&gt;\media\logos.
+Thus the default rules will try to assign logos of the current selected skin, if available.
+You can use Presets to use default behavior, use B3W logos or use optional logo pack.</value>
+  </data>
+  <data name="comboBoxLogoPresets.ToolTip" xml:space="preserve">
+    <value>You may choose from several presets to help you getting started.
+However you can define your logo rules yourself if you want. For user defined logorules, the 
+fully qualified path to a logo is stored in the rule, so it might not be fully portable.
+
+"Use skins default logos" is the default and will search for logos in the skindirectory\media\logos 
+and it's subdirectories for logos matching the name in the logo rule. It should work in most situations.</value>
+  </data>
+  <data name="Fanart.ToolTip" xml:space="preserve">
+    <value>Select the “Use Fanart” option if you have image files to be displayed as background fanart.  
+Enter the full path (or use the browse button) to the root folder containing the fanart image files.
+There will be one subfolder for each movie, that can contain images with any name. If there are multiple images, they will all be loaded in details view.
+
+Select the option “Use movie cover for missing Fanart” to have the movie's DVD cover 
+displayed as a background image for movies without a matching fanart file. Be aware, that using that option will often create fanart image of low quality
+because of low resolution of cover images and you might get a distorted picture as covers and fanarts don't have the same size.
+Therefore it is recommended to enable “Use the default image for missing fanart”.
+
+Note:
+When scanning and importing new films, My Films (AMCUpdater) will limit the download to 3 images by default. 
+You may alter these options in AMCU Settings on the Database Fields tab under picture handling. 
+You may also download additional fanart images from within My Films.</value>
+  </data>
+  <data name="chkFanartDefaultViews.ToolTip" xml:space="preserve">
+    <value>If enabled, fanart will be used for group views.
+MyFilms will autocreate subfolders for you.
+Images placed in those folders will be used for fanart display
+ in the default group views (category, year, genre).
+
+If disabled, default fanart will be displayed, if it is enabled.</value>
+  </data>
+  <data name="groupBox22.ToolTip" xml:space="preserve">
+    <value>Select the “Use thumbs for group views" option if you have image files 
+to be displayed as cover image replacement in grouped views.  
+Images for "Viewls" like Genre, Year, Country, etc. - excluding "person like" Views - see Person Views.
+
+These image files must have the same name as the list item of the group, e.g. "2010.jpg" or "action.png".
+Enter the full path (or use the browse button) to your folder containing the view thumb image files.
+
+Select the option 'Use the default movie cover for missing thumbs' if you wish to use a movie cover 
+when no thumb for views is available.
+
+You can also use fanart for those views, to do so, put fanart in the subfolder 
+for year, category, country, e.g. &lt;fanartfolder&gt;\\_view\\year\2010";
+The setting for this path is done via the Fanart path setting automatically; 
+See "Fanart for default group views - path" below.</value>
+  </data>
+  <data name="pictureBoxDefaultViewImage.ToolTip" xml:space="preserve">
+    <value>Click to select the image file that you wish to use as the default view image.  
+The default view image will be displayed for the "grouped" views, like "Country", "Year", etc.
+when a view does not have specific associated photo or image
+and it will be used as a default view image.</value>
+  </data>
+  <data name="btnResetThumbs.ToolTip" xml:space="preserve">
+    <value>That action will remove all generated cache thumbs for group views.
+(Your original images will not be deleted.)
+This is only required, if you replaced existing (and already cached thumbs) 
+with new ones to let MyFilms (re)create the cache.</value>
+  </data>
+  <data name="MesFilmsViews.ToolTip" xml:space="preserve">
+    <value>This path is the "root folder" for group thumbs.
+The respective thumbs will be loaded from subfolders, named like the views 
+you choose - e.g. &lt;country&gt;\&lt;countryname.jpg&gt;
+You can place a "default.jpg" in the respective sub folder that will be displayed
+when no specific thumb can be matched.</value>
+  </data>
+  <data name="groupBox1.ToolTip" xml:space="preserve">
+    <value>Use this area to define a path where cover images are stored.
+This is mainly required, if you have only image names without full path stored in your DB.
+You can also define a default cover, that will be used, if there is no cover defined or found for a movie record.
+</value>
+  </data>
+  <data name="pictureBoxDefaultCover.ToolTip" xml:space="preserve">
+    <value>Click to change Default Movie Cover.
+The default cover image will be displayed when a movie entry does not have an associated cover image
+and it will be used as a default fanart image if the appropriate Fanart option is selected in the ‘Picture’ section, 
+and a movie entry does not have an associated fanart image.</value>
+  </data>
+  <data name="txtPicturePrefix.ToolTip" xml:space="preserve">
+    <value>You can define a prefix for the cover images that will be 
+added to the image name.
+This is useful, if you store all images for different configurations 
+in the same directory.
+There are 3 possible scenarios:
+1. adding image name prefix (e.g. "AntDB_")
+2. adding subdirectory for image covers, that is subfolder of the catalog directory (e.g. "moviecovers\")
+3. Both of the above (e.g. "moviecovers\AntDB_")
+
+This setting is used, if you grab new pictures with MyFilms to determine the location where to store them.</value>
+  </data>
+  <data name="cbPictureHandling.ToolTip" xml:space="preserve">
+    <value>This defines how cover images are stored to your catalog.
+The setting cannot directly be modified - MyFilms automatically sets it based on settings 
+you choose for your catalog path, your Picture prefix and the path you select as "Cover Image Path".
+
+Options:
+Full Path - stores the full path in the catalog. 
+Relative Path - stores only the relative path in the catalog. 
+The "relative path" option is only possible, if you're defining a sub path to your catalog file.
+If you do select a path that is NOT a subdir of the catalog file, this setting will require "Full Path".
+
+If the Cover Images Path is the same as the catalog directory, 
+this setting should be "Relative Path" and only the image name will be stored in the catalog.</value>
+  </data>
+  <data name="MesFilmsImg.ToolTip" xml:space="preserve">
+    <value>Enter the full path to the folder containing the DVD cover image files – by default it is the same as the path to your database file.
+You can use the browse button to find the correct path.
+MyFilms Setup has some logic to help you to set Picture Prefix and Picture Handling, 
+so in certain cases you just have to select the path with the browse button and Setup will automatically 
+populate or change them accordingly.
+Remark:
+If you choose a subfolder to your catalog directory, MyFilms setup will automatically split the path and
+set this path to the catalog directory and the rest of the path to the Picture Prefix.</value>
+  </data>
+  <data name="groupBox_ArtistImages.ToolTip" xml:space="preserve">
+    <value>Use this area to define a path where artist thumbs (images for persons) should be stored.
+Works same way as cover images for movies.
+It is used for "person like" Views, like actors, director, producer, writer.</value>
+  </data>
+  <data name="pictureBoxDefaultPersonImage.ToolTip" xml:space="preserve">
+    <value>Click to select the image file that you wish to use as the default person image.  
+The default person image will be displayed when a person does not have an associated photo or image
+and it will be used as a default person image.</value>
+  </data>
+  <data name="btnResetThumbsArtist.ToolTip" xml:space="preserve">
+    <value>That action will remove all generated person image thumbs.
+(Your original images will not be deleted.)
+This is only required, if you replaced existing (and already cached thumbs) 
+with new ones to let MyFilms (re)create the cache.
+</value>
+  </data>
+  <data name="MesFilmsImgArtist.ToolTip" xml:space="preserve">
+    <value>Enter the full path to the folder containing the person image files.
+Matching will be done based on images filename that matches the person's name.
+You can use the browse button to find the correct path.</value>
+  </data>
+  <data name="groupBox_AMCupdater.ToolTip" xml:space="preserve">
+    <value>For updating the whole database and scan for and add new movies to your catalog automatically,
+including grabbing media info, internet movie data, cover image and fanart.
+You can use and launch AMCUpdater in batch mode from inside the MyFilms GUI or schedule a task 
+to run independently from Mediaportal / My Films.</value>
+  </data>
+  <data name="groupBoxAMCUpdaterConfigFile.ToolTip" xml:space="preserve">
+    <value>You can define, what AMCUpdater config file should be used.
+This applies to:
+- Launching Global Import in MyFilms GUI
+- Launching AMCUpdater via "Import" button in setup
+- Launching AMCUpdater via desktop icon
+
+If you select a filename or directory, that currently does not exist (no existing AMCU config file), MyFilms
+will ask you if a new config with default values should be created there for you.
+
+Note: If you changed this setting, you have to "(re)create Desktop Icon" 
+to update the link - otherwise, it won't use the new config file you've set.</value>
+  </data>
+  <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
+    <value>Choose the config file for AMCupdater that should be used for the scheduled run.
+MyFilms will create such a file for each Configuration Name.
+You find those files in the mediaportal datadirectory and they are named "MyFilmsAMCSettings_&lt;Configuration Name&gt;".
+However, if you created your own configs in AMCupdater GUI and saved it somewhere else, you can also choose those.</value>
+  </data>
+  <data name="scheduleAMCUpdater.ToolTip" xml:space="preserve">
+    <value>You can use the Windows scheduler to schedule AMCupdater to run and update automatically to update your catalog.
+Make sure the configuration you choose for this matches your needs.
+Note: You can always launch AMCupdater from within MyFilms anytime you wish and let it import movies in the background.
+If you prefer that, you do NOT require to schedule a task via scheduler.</value>
+  </data>
+  <data name="AmcTitleSearchHandling.ToolTip" xml:space="preserve">
+    <value>Options are:
+File Name: use file name for title field
+Folder Name: use folder name for title field
+Relative Name: use whole content of path for title
+ 
+File Name + Internet Lookup
+Folder Name + Internet Lookup
+Relative Name + Internet Lookup
+
+All the same as above, but adding internet lookup, trying to get a matching movie 
+and then replacing title with the title found by the internet grabber.
+
+Example:
+So if you have named your files by movie title, select “title”. 
+If you have your movie files in folders, that have the movie title, select “folder”.</value>
+  </data>
+  <data name="btnCreateAMCDefaultConfig.ToolTip" xml:space="preserve">
+    <value>MyFilms will create a default configuration for AMCupdater based on your current MyFilms Configuration.
+This configuration is used, when you start AMCupdater from the setup or the created desktop icon.
+You might want to recreate this configuration, if you have changed settings in MyFilms setup and AMCupdater setup
+and want to create a new default setup.
+In normal usage this is not required, as saving MyFilms config also pushes changes to AMCupdater config file.
+Note: This will overwrite your existing AMC Updater settings file - so you'll lose customizations you made.</value>
+  </data>
+  <data name="chkAMC_Purge_Missing_Files.ToolTip" xml:space="preserve">
+    <value>Checks your Ant Movie Database catalog for references to files which no longer exist.
+If enabled, AMC Updater will remove entries from your DB, when movie file(s) cannot be found in your movie folder or subfolders!
+Use with care and make sure, you really want to remove films from your DB, that are not accessible during update scan !
+
+Entries with sources outside the scan directories are not purged automatically - only entries with sources 
+within the active scan folders will be purged automatically.
+For example, an entry listing a Source of 'd:\Movies' will not be considered an orphan if you only scan 'e:\Other Movies'.
+
+Also check your AMCupdater settings, as there are options to configure how updating behaves:
+- If you update DB with AMCupdater, AMCupdater should recognize that the film moved and just update source - (adjustable in AMCupdatersetup).
+- If you moved the file, update and the movie is no longer available, the record will be removed (“purged”) from your DB and disappear.
+- There are settings in AMCupdater to PREVENT it from purging files - even when movie files are NOT available during scanning - this is mostly for DVD-drives, 
+but can also be used for USB-attached drives.
+This makes sure entries won’t be removed from DB - and if you start a film in MF, it won’t find film and will ask you to insert media.</value>
+  </data>
+  <data name="chkAMCUpd.ToolTip" xml:space="preserve">
+    <value>If checked, the global update options will be available in My Films to run AMCupdater in the background, 
+scanning for new movies, adding them to your catalog and and loading data for it.
+Loading data includes:
+- reading media info via mediainfo.dll
+- getting internet info via the selected internet grabber script
+- getting cover image via the selected internet grabber script
+- loading fanart</value>
+  </data>
+  <data name="groupBoxDeletionOptions.ToolTip" xml:space="preserve">
+    <value>The automatic Deletion Options allow you to update and/or delete records and/or media files 
+after the corresponding movie is watched - or manually via the context menu.
+
+ATTENTION:
+Be careful - enabling delete options can delete not only the record in your database, but also the movie linked to it!
+Update DB = update the record with settings of "Player finished Update Action"
+Delete DB entry = delete the record from the DB
+Delete Movie file = PHYSICALLY DELETES your movie from storage medium.</value>
+  </data>
+  <data name="gpspfield.ToolTip" xml:space="preserve">
+    <value>This defines the action taken, when the player finishes.
+You can update e.g. the "checked" field with a value "true to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical sourcefiles would get deleted after player finishes!
+
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
+  <data name="chkSuppressAutomatic.ToolTip" xml:space="preserve">
+    <value>When enabled, the selected actions are automatically performed after a movie is watched.
+
+Note: If physical removal is selected, your movie files will be deleted
+from disk after you watched it - handle with care !</value>
+  </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>This option allows AMC users to update field info for storing your "watched status" - AMC4.x users even have to possibility to keep record
+of watched info and user rating for multiple users - either local ones or Trakt users, the latter allowing syncing with Trakt website (see MUS).
+
+You can choose a field to be used for "watched status" - a good recommendation is "Checked" or the new extended "Watched" field in AMC4.
+You can choose to update this field when starting a movie or when playback is finished.
+You can update e.g. the "checked" field with a value "true" to indicate "watched status". 
+However be careful not to activate the delete options ("Delete Options", otherwise the physical source files would get deleted after player finishes!
+You will have the option in the GUI to switch to "unwatched movies only" - based on the update of the "checked" field</value>
+  </data>
+  <data name="btnWatchedImport.ToolTip" xml:space="preserve">
+    <value>You can import a formerly created backupfile of your watched status.
+Important:
+Importing a status will OVERWRITE the content of the field, that you have configured for "Field used for Watched Status" !
+All former content will be lost after this operation - so choose this action with care and only if you know what you are doing.
+If you are not sure, take a backup of your XML catalog file before you start.</value>
+  </data>
+  <data name="btnWatchedExport.ToolTip" xml:space="preserve">
+    <value>You can export the current content of the watched field for your database to an external file.
+Main purpose is to take a backup of your watched status, when you e.g. plan to make changes on your config.
+You could also use it to "move" your watched data from one field to another:
+- port your current settings
+- Change the "Field used for Watched Status"
+- Import your watched data
+As a result, the content will have been copied to the new field.
+A useful case is, if you used "checked" field in that past, but want to change to "Enhanced Watched Status Handling" - as
+this requires the use of a field that supports text content (like e.g. mdiainfo or borrower).</value>
+  </data>
+  <data name="textBoxGlobalUnwatchedOnlyValue.ToolTip" xml:space="preserve">
+    <value>By Default, unwatched items are identified by having either "false" or "" (empty) in the related field.
+The field used for watched / unwatched status can be configured in the Update Tab.
+
+However, you can define a value other than that, if you require it.</value>
+  </data>
+  <data name="cbWatched.ToolTip" xml:space="preserve">
+    <value>Choose the DB field you want to use for the Watched Status Handling.
+By Default, "Checked" field is used.
+
+Notes: 
+If you use other field than "Checked", you should make sure, it's content matches your needs.
+E.g. using "MediaLabel", but having that field already populated with content other than "Value to identify unwatched items" 
+would result in getting all movies displayed as "watched". So you might have to clear that field first and make sure
+that it will not get populated accidentially (e.g. AMCupdater Medialabel) or set Value for unwatched to the Value you set to the field by default.
+
+If you are using "Enhanced Watched Status Handling" and use AMC, you should select another field than "Checked", as AMC handles Checked field 
+as "boolean" - while Enhanced Watched Status handling required a text field (When saving in AMC3 you would loose enhanced infos).
+A good recommendation is "Borrower" (AMC3) or the new extended "Watched" field in AMC4 when using Enhanced/Multi-user Watched Status Handling.
+
+If you use a field that is already populated, it might initially show your movies as "watched" - e.g. when using "MediaLabel" and having imported
+movies with AMCupdater's default settings, MediaLabel will be populated with "AMCU".</value>
+  </data>
+  <data name="btnMUSdeleteUserData.ToolTip" xml:space="preserve">
+    <value>"Delete User Data" allows you to remove the MUS (Multi User Status) data for a specific user.
+This is useful, if you added a user once but don't use it anymore - you want to keep all MUL data, except for that user.
+Warning: all user data will be removed from your DB and cannot be restored, including user rating, watched dates, 
+watched counts and watched state.</value>
+  </data>
+  <data name="UserProfileName.ToolTip" xml:space="preserve">
+    <value>You can set a "User Profile Name" that will be used for watched status handling.
+This is useful, if you want the watched status kept separately for different users.
+If you checked "Enhanced Watched Status handling" you can select the user 
+in the hidden menu ("Options" - "Global Settings ...") in MyFilms GUI.
+The user "global" is always existing and is counting global watched status.</value>
+  </data>
+  <data name="groupBox_UserItemsDetails.ToolTip" xml:space="preserve">
+    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
+As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
+These are user defined items for the details screen.
+You can also change the assignment in MyFilms GUI (Options - View Options).</value>
+  </data>
+  <data name="groupBox_UserItemsMain.ToolTip" xml:space="preserve">
+    <value>You can enter a unique label and select a database field for any additional information you wish to have displayed for a movie. 
+As this can be skin dependant, some experimentation may be required to see what can be displayed and where it might appear.
+These are user defined items for the main screen.
+You can also change the assignment in MyFilms GUI (Options - View Options).</value>
+  </data>
+  <data name="groupBox_Separators.ToolTip" xml:space="preserve">
+    <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
+there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... ‘  
+The actual separators used can vary depending on the web-site used to grab the movie information.
+
+When using the ‘Search’ function, the plugin needs to know exactly which separators are used 
+in your movie database. A pre-defined list of separators is already given.
+
+For actors, their names are often followed by a role (Clint Eastwood (Inspector Harry), or Clint Eastwood as Inspector Harry,... ). 
+The plugin needs to know what separator is used to indicate the role text for finding or searching on actors.
+
+Note: Separators will need time to process - for person views (e.g. actors), you can speed up 
+the view sigificantly by defining only those separators you really need.</value>
+  </data>
+  <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
+    <value>Select from the list, the view you want to see when first entering the plugin.  
+Select the option “Display Always that view when using this config”, 
+if you always want to see this view for this configuration, when returning to MyFilms.  
+If you do not select the option “Display Always that view when using this config”, 
+the last view used before exiting the plugin will be shown next time.</value>
+  </data>
+  <data name="chkReversePersonNames.ToolTip" xml:space="preserve">
+    <value>If checked, Person names (like Actors, Directors, etc.) will be "reversed".
+This is useful, if you prefer to have lists starting with last nme, but internet grabber provide the names as "first Last".
+Example:
+Internetgrabber results in "Bruce Willis"
+Reverse Person Names changes this to "Willis, Bruce".
+</value>
+  </data>
+  <data name="chkShowEmpty.ToolTip" xml:space="preserve">
+    <value>This option allows you to display also groups of empty values, e.g. if you select a view by category, 
+you will get an additional group in the view with films having no category assigned.
+This is useful, if you want to make sure, all your films are included in a specific view or if you want to check films without values.</value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value>In movie hierarchies, normally the same sort order is used
+as in all other views.
+If you prefer a different sort order once you entered a movie group (hierarchy, collection),
+you can define a different sort order here.
+
+Example:
+You usually browse your movies sorted by rating, descending to alway have highest rated movies at the beginning.
+You are using movie hierarchies / collections, like e.g.
+Star Trek\Star Trek 1
+Star Trek\Star Trek 2
+If you enter the movie collection (here 'Star Trek') you prefer to have the movies sorted by year, ascending to have
+them in a better order.
+To achieve that, choose "Year" and "ASC".
+Note: the settings apply for ALL orders whenever you enter a hierarchy group, including single movies or multiple second level hierarchies.
+
+</value>
+  </data>
+  <data name="chkGlobalAvailableOnly.ToolTip" xml:space="preserve">
+    <value>"Only available" option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+Note:
+The availability status is only usable after MyFilms has done a scan. 
+This can be enabled at startup on the General tab by checking the ‘Scan media on start’ option.
+Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
+  </data>
+  <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
+    <value>Unwatched option acts as global overlayfilter for all views
+and this setting is used for start view.
+It can be switched on/off from the GUI during runtime.
+So you should only activate this if you want to filter your views always when entering MyFilms.
+
+AMC users can configure the field and value to identify unwatched films
+on "update" tab (Watched-Status Handling).</value>
+  </data>
+  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 53</value>
+  </metadata>
+  <data name="groupBoxView.ToolTip" xml:space="preserve">
+    <value>Views by ‘Category’, by ‘Year’ and by ‘Country’ and by 'Actor' are already defined by default.  
+In this section you can define additional views; 
+select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
+If there is no value entered, a menu will be displayed for the range of values available in the database.  
+If a value is entered, a list of the movies with that value will be displayed.
+Optional: 
+- If you want to use a list of values, you can add them as comma separated values.
+- You can set Index to values of 1 or 2 to get indexed display of the values
+- You can define a Filter same way as "Config Filter" to restrict or limit the results</value>
+  </data>
+  <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1245, 18</value>
+  </metadata>
+  <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1245, 18</value>
+  </metadata>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
+  <metadata name="mFview.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1167, 18</value>
+  </metadata>
+  <data name="AntViewsImage.ToolTip" xml:space="preserve">
+    <value>Preview of Cover Image loaded for this View.
+Klick to open dialog to choose a custom one. 
+
+If no image is selected, MyFilms will try to use default images, were possible - so even
+if you have not defined an image here, you might get a default image displayed in GUI.</value>
+  </data>
+  <metadata name="bindingNavigatorViews.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 53</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripButtonDelete.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAW9JREFUOE+tkk0o
+        w3EYx3dV3kq5uKBWDiPT8hISMiQsMiEyQ9qBg0hoFwcHUi7kgIvkQFJSTrQ4zdvmrTW1/kuT0i74x+X3
+        MRal/fEnv8tz+H2fz/N8vz0azX88PG6wmcDp4E881hYR3VUIixF2Nr+FcO2DlbnPGjaWoM+M6DAiOitg
+        YUoR8rqhsJTBWG/kP6fOMKTegGjKh/7mTyIx0oUw58C0/XubLM8iKtPeQIx2gfcMJgbD0FBVlRE+D7QU
+        hS2ZshANuTDQqq75fQIHe6GVcxHV6VCr/2VzQIKmAshOQNbHc6+PhTqDOggBP5jzoDCJoLUaLo7fwr3V
+        hSCr8z8EeHcLbSU8FCfjLU0nuL/70cB4Py5tDLL7UBnC8xMMW6EkhRNdIsGt9QjhTXkGUnsN8rVf4Q72
+        tpFzEnGlRiH1NIL8qDjJoY1DdjkVADNjSGnReI2ZIF196VW22+D8SAFw6YLJITjaV5e2qotSIXoBiiMD
+        HEVvQ/IAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="toolStripButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAStJREFUOE9jYBg0
+        oHDW8/9NC57/z5z4+D8uR4W3P8Apx5A789n/VUfe/8elKL77wf/ghmu4DciY8vT/wn0fsCqK73n4f+n+
+        ///9qy/gNiCh58n/aVveYyiKaL8P1pw56/9/r9ITuA2I7Hr0v3f1BxRFoa33wJpb1wFt7/z73yX/AG4D
+        Apsf/q+b/w6uKLjl7v9Fe///7wBqzpjz879d3c//9hnbcRvgUXX/f/60NyiK7Ipv/0+f8/u/f9e3/zqF
+        7/5bJKzHbYB96d3/2ZNfYyjSTzn/36ToxX+VrE//jSOX4TbAIu/O/9T+11gVGSSd+C+b9vW/bvA83AYY
+        Zt3+H9byEqci/dTL/zV8p+E2QCftxn+/6od4Fal4TMBtgFPulf8gBXgVDZqMh+wQAPB2wKsSwCgmAAAA
+        AElFTkSuQmCC
+</value>
+  </data>
+  <data name="toolStripButton4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAL1JREFUOE9jYBgy
+        ILz9wX+yHRvf/eB/cMM18gyI73n4f+n+///9qy+QbkBE+32w5sxZ//97lZ4gzYDQ1ntgza3rgLZ3/v3v
+        kn+AeAOCW+7+X7T3//8OoOaMOT//29X9/G+fsZ14A0ChbVd8+3/6nN///bu+/dcpfPffImE9aQaADNFP
+        Of/fpOjFf5WsT/+NI5eRbgDIEIOkE/9l077+1w2eR54BYJekXv6v4TuNfANAhqh4TKDMALKTMc01AgDQ
+        FGCYkuTLEQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="toolStripButton5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAKtJREFUOE9jYBh0
+        oHDW8/8UOSp35rP/Cd33yDckY8rT//P2//6f0HWHPEMSep78n73v1//OrX//u5VeJt2QyK5H/6ds+/W/
+        ZOnf/wnT//63yT1LmiGBzQ//t659D9ZsXPLlv3T0tf/GkcuIN8Sj6v7/krnv4JoVXXqI1wyKPvvSu/8D
+        W56BbSZZM8gAi7w7/20KrpCnGWSAYdZt8jWDDNBJu0GanylKtoNCMwCgfl+gC2KedgAAAABJRU5ErkJg
+        gg==
+</value>
+  </data>
+  <data name="toolStripButton6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAATBJREFUOE9jYBhU
+        oHDW8/+4HASSa1rw/H/mxMc41TDkznz2P6H7HlYFILlVR97/D29/gNuAjClP/8/b//t/QtcdDEUguYX7
+        PvwPbriG24CEnif/Z+/79b9z69//bqWXURSC5KZtef/fv/oCbgMiux79n7Lt1/+SpX//J0z/+98m9yxc
+        MUiud/WH/16lJ3AbENj88H/r2vdgzcYlX/5LR1/7bxy5DKwBJFc3/91/l/wDuA3wqLr/v2TuO7hmRZce
+        uGKQXP60N//tM7bjNsC+9O7/wJZnYJuRNYNcAJLLnvz6v0XCetwGWOTd+W9TcAVDM8gAkFxq/2u4l7Cm
+        F8Os21g1gxSD5MJaXv7XDZ6H2wU6aTdwSoLk/Kof/tfwnYbbAHz5yin3yn8VjwlgPKjyHwMAvtG/s0Vm
+        x8MAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="toolStripButtonAdd.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAU1JREFUOE9jYBi0
+        4O4C9v+35nH+vzqH6//FGbz/SXbodaDGP48a//952PD/5GQB0g04P50XbsDBHhHSDTg+SRBoe93/Pw+q
+        /u9oFydswKWZPP/PTuX7fxKo8Ui/0P993SJAzeX//94r+r++Qeb/qhq5/0srFf/PL1X+P6tIFdPAU0B/
+        /nlYD9RUC8SV///cKwHivP9/72b+/3sn+f/f23H//92MAOKQ/5NyNDENONQrDHbu3/ulQI0FQI3ZQI2p
+        QI0J///digZqDPv/70bQ/3/X/f53peliGrCzXeL/lmap/+vAzpX/v6RC8f/fWzFAjeH/p+Zp/J+QpfW/
+        O0P3f3uq/v/mREPCYTIb6E+Qc//dCPjfk6FDWAN6QgH5898NfyD2+9+arE+6Ad3pumD/gnB9nBHpBrQk
+        GfxviDf8XxNr/L8y2oR0A0hO++RqAAAkI9ieo+gjUwAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="toolStripButtonMoveUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="toolStripButtonAddDefaults.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAgxJREFUOE+lkvtL
+        U2EYx+0PEbtpFwnBKPGKiJImGP0gYhIYs1E5GF5gIxkpA00JRSmMEF0ohMh+GaRWYlqabMVcNdS2QpaI
+        VqiDIYhk397vA6fXhCjyhYdzeM/5fp7vczkAdeL2cwho7v/wWzT1zcN+Pwhr51uY2/y41PQaF+wzKKiZ
+        QvaN58g0jyLd5KEUcQbg+84P/Cm2tncQjW3j68YWIqubCC3FcOJc478BAuGoZM6zvoRnakXEruEIjhc4
+        /g5gZop9c+voGAyLbQIfeBZxLL9BA1jzXvuGbWamuKh+GmmVbswE19A59FEBbmoAG7YbsLtm2mZmiml9
+        cvabNDwpz6YB7LYBoMXCumkJr7LOmnnHzBQ/9X2Bo2cOibm1GsBREbAQiYmw/8lnuCeWkVzcgnZlnw1j
+        3HV/wuNXK6i/9x5Hc6wawDlTXHbLJ+LZUBQPRyKwdQdxutwl1h+NLXHh5Ht1ewBHsiwawCW57HyDAfWR
+        dvl0uhZQ1eqX8aVc7EKLqrum651ATLf9OJx5XQM4KmY0xPzZ0hFAiQJnXB0WwME0E3IsL5B17ZlADqWb
+        NYDrOepdlcysmTWWOrxqbceRWtaLk0VO1XW72D5Vckd2gMBfq8zdpmUG62NJvKM4+XyziDk24xmfWoGE
+        s1c0gHPmbrPTpHNJKOCo2G1mZs20zcwUJ5yp1AB5+8/zEwgF5GMVDxh4AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="groupBox5.ToolTip" xml:space="preserve">
+    <value>"Filter Expression" allows you to apply filter rules, that limit the results.
+Other than "Value", it will keep "grouped Views" as display and not directly show a filmlist of the results - allowing you to have
+views like "Category, Year, etc. - so Filter Expression can be used as Filter to allow free combinations of any conditions users might want.
+MyFilms helps you to create such conditions, but if you're familiar with MS Expressions, you can use them directly too.
+
+That filter can be combined with "Value", e.g.:
+You want all your action movies directly as film list from last 30 days (DBfield Category, value “action”, filter “ageadded &lt; 30”)
+You could do the same in the past by using different configs based on same catalog - as Filter works same way as config filter. 
+But now, you don’t need separate configs, just für that. 
+You still might want to use different configs, if you e.g. want to have password protection, etc. </value>
+  </data>
+  <data name="groupBox24.ToolTip" xml:space="preserve">
+    <value>The Trailer section allows you to use a selectable DB field to store trailer source path infos
+and thus to integrate trailers into MyFilms.
+Trailer can be searched within the plugin and "autoregistered".
+GUI can display if a trailer is present (registered) and play it.
+By default, the search includes media files in the directory of the main movie and it's subdirectories, 
+searching for media files containing "trlr" or "trailer" in the filename.
+So to enable MyFilms to find and register trailers, you can drop them in the movies directory or a subfolder 
+and make sure they are named accordingly (many downloader utilities do it this way).
+You can add an additional trailer search path that will search for and register media files containing the movie's title.</value>
+  </data>
+  <data name="cbTrailerAutoregister.ToolTip" xml:space="preserve">
+    <value>When checked, MyFilms will autoregister trailers in the movie directory 
+when entering the details view of the movie.
+This is mainly intended to easen the registering of trailers downloaded by OnlineVideos plugin into
+the movie directory and does not replace the full register scan.
+
+Note: Using this option will upate your DB whenever you enter the Details View and there is trailers found. 
+Disable the option, if you don't want regular writing to your DB.</value>
+  </data>
+  <data name="PathStorageTrailer.ToolTip" xml:space="preserve">
+    <value>Enter or select the path for extended search for trailers.
+MyFilms will try to find matching media files based on the title chosen for trailer search 
+and media files in subdirectories containing the movie name.
+You can add more than one search path by separating them with semicolon, e.g. "path1; path2".
+If you choose a new path it will be added to your existing path(s).</value>
+  </data>
+  <data name="AntStorageTrailer.ToolTip" xml:space="preserve">
+    <value>Choose the DB fireld where MyFilms should store the info about the source path of trailers.
+For AMC3.x users, "Borrower" is a good recommendation, as it's not commonly used. 
+AMC4.x users should use the "SourceTrailer" field that was introduced for this purpose (and keeps Borrower free).
+However make sure, you do not use this field for other purposes (e.g. seen status)
+If you use external ANT movie catalog to edit this field manually, you can add more than one movie by separating them with semicolon.
+e.g.: "\\server\path\trailer1.flv;C:\Movies\trailer2.flv"
+When using the trailer search &amp; register, MyFilms will automatically populate this DB field for you.</value>
+  </data>
+  <data name="groupBox_AntSelectedEnreg.ToolTip" xml:space="preserve">
+    <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
+select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
+
+For example, if you have a configuration of movies for children to watch, 
+and you wish to exclude ‘adult’ movies, then store a specific code (e.g. “XXX’) in an unused field in your ANT database 
+and define a filter to not include films when that field value equals ‘XXX’.  
+Define this configuration by default and a menu of other configurations will not appear, 
+so children will not be aware of any other configurations.
+
+Adult movies can then be included in another configuration that is password protected.
+
+Alterternatively you could define a "whitelist" config for children:
+Category LIKE '*Children*' will include all movies, that have Children as part of the Category
+Category LIKE 'Children' will include all movies, that have Children as Category
+
+Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions)
+not in
+like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
+  </data>
+  <data name="groupBox3.ToolTip" xml:space="preserve">
+    <value>If you wish to filter records to be displayed, or records to be excluded for this particular configuration, 
+select the database field/s, select the appropriate operator/s and enter a value for that field/s. 
+
+For example, if you have a configuration of movies for children to watch, 
+and you wish to exclude ‘adult’ movies, then store a specific code (e.g. “XXX’) in an unused field in your ANT database 
+and define a filter to not include films when that field value equals ‘XXX’.  
+Define this configuration by default and a menu of other configurations will not appear, 
+so children will not be aware of any other configurations.
+
+Adult movies can then be included in another configuration that is password protected.
+
+Alterternatively you could define a "whitelist" config for children:
+Category LIKE '*Children*' will include all movies, that have Children as part of the Category
+Category LIKE 'Children' will include all movies, that have Children as Category
+
+Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions)
+not in
+like in (operates like a sequence of "field like '*valuex*' having comma separated values as a list</value>
+  </data>
+  <data name="AntFilterSign1.ToolTip" xml:space="preserve">
+    <value>Supprted filter operators:
+=
+like
+not like
+&lt;
+&gt;
+# executed as "&lt;&gt;"
+in (requires a list of allowed expressions, placeholders not allowed)
+not in
+like in (operates as a sequence of "field like '*value1*' OR field like '*value2*' ... )
+
+Examples:
+"Number IN (1, 2, 3)"                    // integer values
+"Number NOT IN (1, 2, 3)"  // values not from the list
+"TranslatedTitle IN ('Matrix', 'Avalon', 'Star Trek')"     // string values
+"OriginalTitle LIKE 'j*'"       // values that start with 'j'
+"Actors LIKE '%jo%'"     // values that contain 'jo'
+"Category NOT LIKE 'j*'"   // values that don't start with 'j'
+"Category # 'Action' AND Category &lt;&gt; 'Horror'"
+"Category NOT IN ('Action', 'Horror')"
+"Actors IN ('Bruce Willis', 'Adriano Celentano')"
+"AgeAdded_Num &lt; 30" // only show movies added last 30 days</value>
+  </data>
+  <data name="groupBox_PreLaunchingCommand.ToolTip" xml:space="preserve">
+    <value>You can define here a command batch file to be executed 
+before each movie launch. 
+In the parameter field, select the item field of your database 
+passed as  parameter to the command file.
+
+Very unused...</value>
+  </data>
+  <data name="tbExternalPlayerExtensions.ToolTip" xml:space="preserve">
+    <value>Here you can define the extension that will launch 
+the external player automatically, if the execution path is defined.
+Multiple values can be separated by semi colon (";").
+If you leave this field empty (and have a path to a player defined),
+you will still be able to start playback with external player via context menu.</value>
+  </data>
+  <data name="chkScanMediaOnStart.ToolTip" xml:space="preserve">
+    <value>If checked, MyFilms will automatically scan all media files (films, trailer) to check 
+if they are currently "reachable".
+This is useful if you have stored parts of your movies on storage that is not always available, 
+e.g. USB drives or NAS servers.
+THe scan can also be launched from GUI in global options.</value>
+  </data>
+  <data name="SearchOnlyExactMatches.ToolTip" xml:space="preserve">
+    <value>If checked, only files with exact matching with search name will 
+be "autostarted". 
+Example: Searchname = "movie", filename = movie.avi.
+If unchecked, also files that only contain a part of the search title will 
+be autostarted.
+Example: Searchname = "movie", filename = "movie divx.avi"</value>
+  </data>
+  <data name="PathStorage.ToolTip" xml:space="preserve">
+    <value>Enter the full path to the folder(s) containing the movie files.  
+You can enter several different paths separated by a semi-colon and you can select the option “search in sub-folders”, if required.  
+You can also use the browse button to locate the correct folder(s).
+
+This setting is optional, if 'DB Item for Movie Source Info' is configured and you have populated that source field with proper data - however, 
+it CAN be configured to allow MyFilms to search for movies, if it can't find them in 'DB Item for Movie Source Info'.
+
+The setting is mandatory, if you do not use the 'DB Item for Movie Source Info' - in this case this is the way MyFilms searches for the movies to play.</value>
+  </data>
+  <data name="ItemSearchFileName.ToolTip" xml:space="preserve">
+    <value>If the media file is not found with the 'Ant Item for Storage Info' field, you 
+can search for the file with the movie name.
+Choose the title used for the search.
+Note: This setting is optional and not required, if you populate your "DB Item for Movie Source Info" 
+with fully qualified path to your media files.</value>
+  </data>
+  <data name="AntStorage.ToolTip" xml:space="preserve">
+    <value>Select the field in your AMC database that you have used for the movie’s file name / path information.  
+
+This field in the AMC database can contain a single filename or multiple file names separated by a semi-colon.  
+If the movie comprises many files, then you could also use a playlist file (.m3u), or an image file (.iso, .bin) or a folder name (containing DVD files or .avi files).
+
+If you have configured a "Path for Movies File Search", the filename is sufficient, otherwise the field requires the fully qualified name including path to the movie file.</value>
+  </data>
+  <data name="AntIdentItem.ToolTip" xml:space="preserve">
+    <value>For offline movies - that is, if a movie file cannot be located (neither by the Movie Source Info, nor by searching) - 
+a popup window will advise you that the movie cannot be launched.
+In the first field, select the database item to be displayed containing the Media/Disc ID where the movie is stored
+(usually MediaLabel).
+In the second field you can enter your own text message to provide additional information.
+
+This is for users using offline library content, like DVD and BR discs or USB drives.</value>
+  </data>
+  <data name="groupBox_Security.ToolTip" xml:space="preserve">
+    <value>You can set a password on a config.
+Selecting that config will then ask the user to enter the password.
+This is useful to deny access to certain movies, e.g. having all adult movies in a separate config and set a password.
+
+Note: If you have a password on the default config, each time you enter myfilms the user will have to enter the password.</value>
+  </data>
+  <data name="CatalogType.ToolTip" xml:space="preserve">
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies …..).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the ‘date modified’).  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named “Catalog_File_without_extension”.</value>
+  </data>
+  <data name="groupBox_TitleOrder.ToolTip" xml:space="preserve">
+    <value>Title selection:
+You can set the mapping of the master title, secondary title and sort title to DB-fields to match your catalog.
+
+Grouping:
+Using a hierarchy separator in the title field(s) in your catalog allows you to do grouping of your films and have a hierarchical presentation. 
+This can be used to group more than one movie together,
+e.g. for collections.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
+  </data>
+  <data name="label17.ToolTip" xml:space="preserve">
+    <value>Character used for hierarchical presentation. This can be used to group more than one movie together,
+e.g. for collections.
+
+Using a hierarchy separator in the Original or Translated Title field in your movie database
+allows you to group your films in MyFilms presentation.
+
+You get grouping by adding the separator to the respective content of the title fields.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
+  </data>
+  <data name="TitleDelim.ToolTip" xml:space="preserve">
+    <value>Character used for hierarchical presentation. This can be used to group more than one movie together,
+e.g. for collections.
+
+Using a hierarchy separator in the Original or Translated Title field in your movie database
+allows you to group your films in MyFilms presentation.
+
+You get grouping by adding the separator to the respective content of the title fields.
+
+Example:
+Hierachy Separator: "\"
+movie 1: Moviecollection\movie1
+movie 2: Moviecollection\movie2
+movie 3: Moviecollection\movie3
+
+Will show "Moviecollection" with 3 items in it.</value>
+  </data>
+  <data name="AntTitle1.ToolTip" xml:space="preserve">
+    <value>Select the ANT database field that you want to be displayed as the ‘Master Title’.
+You can use hierarchies for "grouping" when defining a hierarchy separator 
+and use it in the content of your catalog's title field.</value>
+  </data>
+  <data name="groupBoxExtendedFieldHandling.ToolTip" xml:space="preserve">
+    <value>MyFilms internally supports more than just the Ant Movie Catalog (AMC) fields.
+However, you might prefer to add those fields to standard ANT fields for display reasons:
+Your skin only shows standard ANT fields (external catalogs) and you need the user defined items 
+to display other fields in the skin.</value>
+  </data>
+  <data name="btnLaunchAMCglobal.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        OdO/AZk0m+sODGQxAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnLaunchAMCglobal.ToolTip" xml:space="preserve">
+    <value>Starts AMC Updater (external application) with the created configuration file.
+With AMC Updater you can interactively update your DB with internet data, scan directories for files to 
+add them to your DB and show your catalog and edit the content.
+It can run independently from MyFilms.</value>
+  </data>
+  <data name="buttonDeleteTmpCatalog.ToolTip" xml:space="preserve">
+    <value>If you changed you external Catalog settings, they will only apply, if an import is done in MyFilms.
+This import will happen, if the timestamp of the external catalog data is changed/updated - 
+e.g. when the data was refreshed.
+However, you can force to import the data by deleting the MyFilms cache DB.</value>
+  </data>
+  <data name="buttonOpenTmpFileAMC.ToolTip" xml:space="preserve">
+    <value>You can launch AntMovieCatalog (AMC) to open your MyFilms cache-tmp file.
+However, you should be aware, that only for native AMC config editing from inside
+AMC is possible AND replecting in MyFilms. 
+If you are using an external catalog, all changes will be overwritten on next export from you 
+external catalog - so AMC should only be used for readonly.</value>
+  </data>
+  <data name="AMCConfigView.ToolTip" xml:space="preserve">
+    <value>List the content of the AMCupdater configuration options.
+Those options are used to create the Default Config and when launching AMCupdater from 
+MyFilms setup or via the desktop icon.
+
+Note:
+This config will be created for AMCupdater when you first create a MyFilms config.
+It won't be updated, until you press button "(re)create Default Config".
+This is to make sure, MyFilms won't overwrite any settings that you may have done in AMCupdater itself.</value>
+  </data>
+  <data name="btnHyperLinkParamGen.ToolTip" xml:space="preserve">
+    <value>You can create start parameters for use on buttons anywhere in MediaPortal.
+Select the configuration, views, layout or search parameters, create the start parameters
+and copy the resulting hyperlink as hyperlink parameter to the button anywhere in your skin.</value>
+  </data>
+  <data name="groupBox_GrabberOptions.ToolTip" xml:space="preserve">
+    <value>You can update your movie data via internet from inside MyFilms GUI.
+
+You have to define the xml parser file ("grabber script") to be used.
+
+With the 'try to find best match automatically' option enabled, the grabber will
+try to find best match but can provide errors in some cases. It's better to
+don't enable it. In that case, you'll get a menu to choose the right movie.
+
+You can change those options from MyFilms GUI (global settings) also.
+
+</value>
+  </data>
+  <data name="ItemSearchGrabberScriptsFilter.ToolTip" xml:space="preserve">
+    <value>You can filter the Grabber scripts that should be displayed in the selection menu.
+Usage:
+- use ";" or "," as separator
+- use 2-letter language codes for country/language selection (e.g. "en" for english, "de" for german)
+- use "all" to display grabber scripts for multiple languages
+- leave empty or use "*" to show all available grabber scripts
+- if no scripts match your restriction, your list might result empty.</value>
+  </data>
+  <data name="txtGrabberDisplay.ToolTip" xml:space="preserve">
+    <value>Set the default grabber script for updates within MyFilms.
+If you selected "Don't use default script", you still can choose to use another script - but default script
+will always appear as first entry.
+
+For global override settings, that affect possibly any grabber sfcript, see "MyFilms Grabber Override Options".</value>
+  </data>
+  <data name="chkGrabber_Always.ToolTip" xml:space="preserve">
+    <value>If checked, MyFilms will choose the best match automatically.
+If unchecked, you'll get possible matching movies presented in a list to choose manually yourself.
+Automatically matching best result may lead to wrong information for a movie.</value>
+  </data>
+  <data name="btnEditScript.ToolTip" xml:space="preserve">
+    <value>This launches the MyFilms Grabber Interface.
+The current default script will be autoloaded.
+You can set user defined options or switch to expert mode to 
+modify the grabber script in detail.
+
+Remark: Changes to the Grabber Options will apply to the script,
+so all MyFilms configs that use it, will be affected.
+If you want those settings to only apply to a certain MyFilms config, you should save the script
+with a separate name and set this as default grabber script.</value>
+  </data>
+  <data name="groupBox6.ToolTip" xml:space="preserve">
+    <value>You can set several options for the internet grabber.
+Be aware, that not all options are supported by all grabber scripts.
+However, IMDB (full) script should support all options listed here.
+If you set no values, the default settings of the grabber
+will be used instead.
+The default settings (of the grabber script) can be changed by editing 
+the grabber script in the "My Films Grabber Interface" ("Grabber Options").
+</value>
+  </data>
+  <data name="cbGrabberOverrideLanguage.ToolTip" xml:space="preserve">
+    <value>Preferred Language(s) for 
+Translated Title(s) and Certification
+
+Depending on the abilities of your grabber script, you can
+set a language/country here to tell the grabber to get related info.
+Most internet sites only support titles for different countries - IMDB-Full script 
+also supports Certification for different countries.
+Note: To use Certification, you have to map that data to one of the standard fields 
+of your ANT Movie Catalog.
+Note: You can add more than one language/country using comma separated values.
+Example: You would like to grab titles for germany and Canada you set "Germany, Canada".
+As the dropdown only allows choosing one value, multiple values have to be entered manually.</value>
+  </data>
+  <data name="chkGrabber_ChooseScript.ToolTip" xml:space="preserve">
+    <value>If unchecked, you will be asked to manually choose the script to use for internet data update.
+If checked, the Default script will always be used.
+You can change this setting also from inside MyFilms GUI in global options.</value>
+  </data>
+  <data name="txtGrabber.ToolTip" xml:space="preserve">
+    <value>Choose a default grabber script to be used for internet data update in MyFilms GUI.
+Grabber script files are located in the mediaportal data directory in \scripts\MyFilms after installation.
+
+This setting will also be used to set the script as default script for AMCupdater configuration - however 
+you can change AMCupdater settings in the GUI to use any other settings.</value>
+  </data>
+  <data name="btnFirstTimeSetup.ToolTip" xml:space="preserve">
+    <value>The "Setup Wizard" allows you to create new MyFilms Configs with presets to get quickly a working config
+without worrying about all detailed config options.
+
+Usually, MyFilms will be used with external catalog software, thus you have an existing catalog and 
+will just configure MyFilms to use it.
+
+For users willing to create a new configuration from scratch, this setup wizard can be used.
+It enables you to create a new MyFilms configuration by just entering some basic infos:
+- A configuration name and 
+- the path to an existing movie catalog, if you want to use it
+- the folder to scan for your movies
+
+It will basically do the following:
+- Create a new empty catalog file (ANT-MC format) or use the one you selected
+- Preset many of the values in MyFilms
+- Set IMDB internet grabber as default
+
+This will give you a quick way to test MyFilms right away.
+You still can tweak all settings later to your personal preferences.
+
+Note:
+If you want to test or do skinning, but don't have a working catalog, you can select the "SampleMovies.xml" catalog.
+In that case, it is also recommended to select "SampleMovies" in Country dopdown, 
+this will preset the IMDB-Full grabber for you and make sure, your DB will be populated also with extended frields.</value>
+  </data>
+  <data name="btnServerSync.ToolTip" xml:space="preserve">
+    <value>Central Configuration - Network Setup:
+The Network Client Setup allows you to setup your MyFilms Client 
+in networked environments with central storage.
+A network server has to be running and a central config must be present.
+
+Do NOT use this, if running standalone HTPC - using this setup type
+will overwrite your local config file !!!
+
+Note: If the Automatic Sync on startup is enabled, the local config will be disabled.</value>
+  </data>
+  <data name="groupBox_UpdateGrabberScripts.ToolTip" xml:space="preserve">
+    <value>Updating Grabber Scripts will download missing grabberscripts from online site 
+and update existing grabber scripts, if there is an update with higher version number available.
+If an existing grabber script will be updated, a backup file will be created in a sub directory "backup" with the 
+extension of the update date and time (useful, if you had customized the default grabber script(s)).
+If you are sure you don't need the backup files, you can delete them via "delete script backups".</value>
+  </data>
+  <data name="groupBoxMultiUserState.ToolTip" xml:space="preserve">
+    <value>MUS (Multi User States) option is automatically set, depending on your selected catalog type.
+It will be enabled, when using AMC4.x catalog type and disabled when using AMC3.x catalog type.
+
+Note:
+Support for MUS (formerly EWS - EnhancedWatchedHandling) has been discontinued for AMC3.x catalog types!
+
+If enabled, watched status will be stored with extended info:
+- Watched count in user context (if a user context is set)
+- Watched date (date movie was watched last time)
+- User Rating (if the user has either set it manually or by Trakt rating dialog after movie is watched)
+
+Watched count in user context requires a user profile name to choose.
+By default, the username is "empty" and this "user" will have the default states for wathced, user arting, etc.
+
+It is updated each time a movie is launched together with 'date watched'.
+
+Note:
+"Gobal" values will be available to skin representing aggregated values, like 
+- total watched count of all users
+- last watched date of all users
+- best rating of all users
+
+The "global count" will inclease each time any user is watching a film thus representing "total plays".</value>
+  </data>
+  <data name="labelTraktDescription.Text" xml:space="preserve">
+    <value>"Trakt.TV" actively keeps a record of what TV shows and movies you are watching. 
+Based on your favorites, your friends, and the community, trakt recommends 
+other TV shows and movies.
+
+You need to have the trakt plugin installed and configure a user account.
+If you don't have a useraccount, you can register on trakt website.
+
+To successfully use Trakt with MyFilms, you have to both allow MyFilms to provide 
+data to Trakt plugin by enabling Trakt here and you have to enable MyFilms 
+in Trakt setup (setup or from GUI)
+
+You can enable or disable Trakt synchronisation separately for each MyFilms config.</value>
+  </data>
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>269, 17</value>
+  </metadata>
+  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>111, 17</value>
+  </metadata>
+  <data name="label41.Text" xml:space="preserve">
+    <value>Development: Guzzi, Zebons, Orion Hall, Titof
+Wiki Docs: Dadeo, Guzzi
+Skinning: Dadeo, ysmp, Guzzi
+MF logos: Dadeo, Guzzi
+Genre images: Carlos 'Fiinix' Nabb (Fiinix Design)
+Testing: Dadeo, z3us, ncoH, TLD
+Project Management and Design: Guzzi, Dadeo
+Grabbers Scripts: Guzzi, z3us
+
+Special thanks to Dadeo: Without him, this former private version would never have made it to a public release!</value>
+  </data>
+  <data name="label28.Text" xml:space="preserve">
+    <value>My Films is an extension to support users who already have invested time and energy to develop extensive movie catalogs 
+using movie catalog software. 
+It provides an ‘out of the box’ solution to use your movie catalog in MediaPortal without needing 
+to rescan or redownload your data and artwork.
+MyFilms allows you to manage your movie collection in either one of the supported external catalogs, with the supplied 
+AMC Updater or even from within MyFilms plugin itself.
+
+My Films is designed to combine the powerful features of movie catalog software with the 
+superb media center features of MediaPortal.</value>
+  </data>
+  <metadata name="personBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1025, 18</value>
+  </metadata>
+  <metadata name="antMovieCatalog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>399, 17</value>
+  </metadata>
+  <metadata name="customFieldBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>688, 17</value>
+  </metadata>
+  <metadata name="propertiesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>528, 18</value>
+  </metadata>
+  <metadata name="antMovieCatalog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>399, 17</value>
+  </metadata>
+  <data name="pictureBoxMyFilms.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <metadata name="customFieldsBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>848, 17</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>125</value>
+  </metadata>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAMDAAAAEAIACoJQAAFgAAACgAAAAwAAAAYAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAACAAAAAgAAAAIAAAACAAAAAgAAAAEAAAABAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAABAAAAAgAAAAQAAAAHAAAACwAAAA4AAAAQAAAAEwAAABUAAAAUAAAAEgAA
+        AA8AAAAMAAAACQAAAAYAAAADAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAUAAAALAAAAEgAAABsAAAAkAAAALAAAADIAAAA2AAAAOwAA
+        AD4AAAA9AAAAOgAAADUAAAAvAAAAKAAAACAAAAAXAAAADwAAAAgAAAADAAAAAQAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAGAAAADgAAABoAAAAqAAAAOAEAAEYXFRJlMSwmiUpC
+        OaVYTkS2Y1dLw2ZbTsplWk7IYVZKwVVLQbNEPDSeKiUgfhAODFkAAAA/AAAAMgAAACQAAAAVAAAACwAA
+        AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAABAAAAA0AAAAdAAAAMQcGBksvKSSDXVJHv4N1
+        ZeyUhnf/mI2B/5uSiP+el5D/oJuV/6Kemf+jn5r/op2Y/6GclP+fl43/m5CE/5SHeP17bl/hT0Y9rSIe
+        GnEDAgI/AAAAKQAAABcAAAAJAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAHAAAAFQAAACsMCwlPRT01nX1v
+        YeSViHv9oZqS/6+sqP+5t7X/urm4/7Ozsv2QkI/VZWVlnlNTU4lmZ2ehlZWV2bq6uv3IyMf/zMzM/8bG
+        xf+4trP/p6Ga/5WKffpyZlnVMiwmgwUEBEAAAAAiAAAADwAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAAbAQEBNjIt
+        JoJ/cWLml42B/6ainf+5uLb/ycfF/9TS0P/W1dP/ysnI/2VlZK8FBQVGAAAANgAAADYAAAA7BwcHUXBw
+        br3X19f/6uvq/+3t7f/n5+f/2tva/8nKyf+wrqr/mpCG/XFkV9IdGhZiAAAAKwAAABMAAAAFAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAACQAA
+        AB0LCQhGXlRIupSHev6hnZn/r66r/7y6t//Kycb/2dfU/+Xj4f/o5+T/zMvJ/2tjW9oSEQ+NDg4NjhAQ
+        D5IREA+THhwZn3RqYO7Ozs3/9vb1//39/f/7+/v/8/Px/+Tk4//R0tH/v7+//6uopf+Shnr4QzszlAIC
+        AjMAAAAUAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAGAAAAGgwLCUZyZVjSmI+G/qSinv+pqKX7pqSh8aimpPC5t7X4vLu4/5aVkv9eXVv/OTc2/ysp
+        J/8rKSb+LSso/y8tKv8xLyz/MzEu/zUzMP8+PDn/VlRR/4WDgv/GxcT/6eno/+Hh4P/T09L/x8fG/7y8
+        u/+vr63/m5OK/FZNQ6oCAgIvAAAAEAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAIAAAARBwYFOGxgU8mclY3/qKai/39+e88uLS1xExMSVxQTE3grKynZOTc1/zw6
+        Of8zMS//Kykn/y4sKf8xLiz/MzEu/zYzMP84NTL/OTc0/zs4Nf88OTb/PTo2/zw5Nv87ODX/VVJP/4iH
+        hfp3d3bCfXx8waKioeW3t7X/sbCu/6CZkv9KQjmYAQEAJAAAAAoAAAABAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAgAAAAjU0pApJyUjP+zsK3/q6ij9yIfHIAAAABeCwsKpC8u
+        LfdcW1n/VlVT/zw7OP8tKyn/MC4s/zQxLv83NDL/OTc0/zw5Nv8+Ozj/QD05/0I/O/9DPzz/REA9/0RB
+        Pf9EQT3/Q0A8/0E+O/82NDDiEBAPfAICAlVRUU+kuLe0/bi2s/+clIv6LyokbAAAABYAAAADAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAABAeGxdUkYd89LSxrf/JxsL/wr66/42C
+        dfMkIR7bTk1M/XJxcP9bWln/Q0E//zEvLP81Mi//QDw3/0xGQP9XUEj/X1dO/2RbUf9lXFL/YlpR/11W
+        Tv9WUEr/UEtG/0xIRP9KR0P/SkZC/0lGQv9IRED/Qz879SIfHaJhVkvJu7i0/snHw/+1sq3/gHdt2QcH
+        BSwAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAABhcU0mrqKSe/8rH
+        wv/e2tX/2tfT/2NgXv9fXl3/fHp6/2FgX/9PTEn/V09H/3BkWP+Og3b/pZuR/7OspP+7tq//v7q1/8C8
+        t/+/u7b/vbiz/7mzrP+vp57/oZeM/4yBdP91al7/YVlS/1FMSP9OSkb/TElE/0xIQ/+Vjob/0dDN/9rY
+        1P/KxsH/pqKa/TUwKm4AAAAOAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwQD
+        AyOPhnvturey/9nV0P/p5eD/tLGt/15dXP+BgH//cm1o/350aP+jmI3/vrmz/9TS0f/e3d7/3dzc/9jX
+        1/+xsK//jouJ/4F/fP+Qjov/s7Kw/9PS0f/Z19b/2djW/9XT0f/HxMD/s6uj/5mOgv91amD/WlVO/1BM
+        SP9kYV3/4N7b/+jl4f/Y1c//ubSu/2tlXbgAAAASAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAACRcUET6inJX/wr66/9rW0f/n497/fHt4/4eEgf+LgXb/rKSb/83Lyf/e3t7/5ubm/+vq
+        6v/s6+v/5eTk/46Miv9PTEf/UU1J/1VRTP9XU07/XFhS/5eUkP/h4N7/5+Xj/+bk4v/g3dr/1tPQ/8rG
+        w/+2sav/nJKG/3ZsYf9VUEv/ubez/+fk4f/a1tH/wLu0/46IgOEAAAAWAAAABAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAACScjH0+mop3/vru2/8vHw//Gw7//fXVt/6KYjf/Mycf/2tra/+Dh
+        4f/o6Oj/7+/v//X09P/19PT/6ejn/4V+dv9WUUz/V1NO/1pWUf9dWVT/ZWBZ/5KIff/k4+L/7u3q/+7s
+        6f/p5+T/4d7b/9fTz//IxMD/u7ex/6ulnP+MgXT/lpCK/9PRzf/MyMP/vLew/5uWjvcHBwYgAAAABQAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAByMhHkikoZz/paOe9XZ0ccaQhnzvuLGq/9bW
+        1v/X1tb/ysrK/8jIyP/a2tr/6urq//Ly8v/49/f/8/Ly/9rX1v+lm5D/iX5y/4N4a/+NgXT/p5yR/9LQ
+        zf/r6uj/8e/t/+/t6v/p5+T/4N7a/9XSzv/KxsH/v7q1/7Wwqf+oopr/mo+E/4J8ddyEgn7Sqqag+52Y
+        j/8WFRQtAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABRYWFS6bl5P2LSwqhlZO
+        RLnCvbn+19fX/6Wko/9PTUv/PTo3/0A9Ov9QTUr/hoSC/97d3f/39vb/+vn5//X08//p6Oj/3t3c/9jW
+        1f/c29n/5eTj/+3s6//y8e//8fDt/+7s6f/i4N3/zcrG/6+rp/+dmJP/mpWQ/6Oel/+qpJz/opqR/5CG
+        evk0LymZVlJNtJiTi/4TEhElAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwQD
+        AxiUj4rtcWVZ2Ly3sf3e3t7/z83N/z06N/8yMC3/ODYz/z47OP9EQT3/SUZB/6ahnP/08/P//fz8//z7
+        +//5+Pj/9vX1//Tz8v/08/L/9fTz//X18//z8vD/8e/t/+no5f/DwL3/gn12/3Zwav90b2j/cWtl/29p
+        Y/+Be3T/pJyT/5uSh/+Fem31hXlr8Y6JgewDAgISAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAwAAABNvbGi8sKig/+Dh4f/r6+v/5ePi/5SLgf9WTkb/S0ZA/09KRP9eV07/g3dr/8zI
+        xP/19PT//fz8//38/P/8+/v//Pv6//v6+v/6+vn/+fj3//b29P/08/H/8fDt/+bl4v+po5z/gHlx/314
+        cf97dW//eHJs/3RvaP9+dGn/pJyR/6KYjv+Rhnr/jIJ1/2toYrYAAAALAAAAAQAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAABlaVEyh1dTT/+zt7f/29vb/9PPz/+jn5v/LxsH/ta2l/7Co
+        n/+/ubL/2dfW/+/u7v/7+vr//fz8//Lw7//V0c3/wLmz/7Sspf+yq6P/t7Co/8W/uf/d2dX/7ezp/+ro
+        5f/Oy8f/oJaL/42Bdf+IfXH/iHxw/46CdP+hl4z/r6ed/6mfk/+ZjoH/hXhr/zw3MnsAAAAPAAAAAQAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAB+hmpPi4+Pk//T09P/8/Pz//fz8//r5
+        +f/19PT/8PDw/+7u7//x8fH/9vb2//v6+v/v7ez/samh/5KGev+gmI7/trCq/8G+uf/Ewb7/v7u3/7Cq
+        pP+XjYL/loyA/8K8tv/j4N7/1NLO/8XBvP+6tK3/t7Cp/7mzq/+5sqn/t6+k/66kmP+ekoX/iHtt/05F
+        O6cAAAASAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACRMQDjjNysf+6Onp//X1
+        9f/7+/v//fz8//38/P/+/f3//Pz8//z8/P/9/f3//f39/9zZ1f+Ie23/n5WK/8O/uv/V09D/3t7c/+Tk
+        4//n5+f/5eXl/+Dh4f/Z2dj/vrq0/42Cdf+dkoj/3tvX/93Z1f/V0cz/zcjC/8fBuf+/uK//ubCl/66k
+        mP+fk4b/i31v/2dbTdsAAAAWAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACScj
+        IE3Z2dj/5+fn/+7u7v/w8PD/8O/v//Py8v/29fX/+/v7//39/f/+/v7/6ujm/4h7bf+hl4z/xcG6/9bT
+        zv/j4d7/7ezr//X19P/4+Pj/9fX1/+7u7v/n5+X/3NrX/8XBvP+KfW//o5mO/+Le2v/b1tH/0MrE/8S+
+        t/+5sqn/sKed/6edkf+aj4L/inxu/3NlVvgGBQQhAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAABy0rKEvb29v/2dnZ8o6OjqdoaGiWamhn+oSDgf/Ix8f/8fDw//r6+v/+/v7/tq+n/5CD
+        df++uLD/08/I/+Le2f/x7+z/+fj3//39/P/+/v7//v7+//z8/P/y8fD/5+Xi/9XSzP+tpZr/gHJj/9DL
+        xf/Y087/xsC6/6ulnf+Ujob/jYiB9FVRTJRpYVi/g3dp/HVnV/8QDgstAAAABQAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAABR0dHDDQ0NDxLCwsZQAAADwFBARPMC0r8Tg1Mv9APTn/t7Wz//X1
+        9f/+/v7/p56U/6Wbj//JxLz/3NjS/+rm4v/29PH/+vn4//39/P/+/v7//v7+//39/f/4+Pf/7Ovn/9zZ
+        0/+8tav/gXNk/722rv/RzMf/pJ6X/4yFff+Gf3j/WVVQvAAAADoAAABHOjQtmnRmVv0NCwkjAAAAAwAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwQEBBTDwsDmSkM9ngwLCWUHBwZrMC4r8j05
+        Nv9bU0v/vLaw//X19f/9/v7/ta2l/6uil//OycL/39vV/+rn4//39fL/+/n4//39/P/+/v7//v7+//39
+        /f/49/b/7ezq/9/c2P/AurH/i35w/8W/uf/Py8b/npSK/46FfP+HgHn/WFNPxQYFBF8fHBh+b2NV22xf
+        UOkBAQEQAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAmen5+10s/L/p+V
+        i+94bWLffXJl+5WKff/DvLX/6+vr//j4+P/+/v7/29fT/6mflf/LxsD/3drV/+jl4v/x7+3/+fj3//39
+        /P/+/v7//f39//n5+f/y8fH/6+rn/93a1/+1raT/n5aL/+He2v/Z1tL/xL+5/6WbkP+Thnj/gXVn8Hpt
+        X+WLfW/7gXRm/1NKPrAAAAAHAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAVJSkpV5eXl++7u7//u7u7/7u3t//Dw8f/x8fH/9fX1//j4+P/8/Pz/+/v7/8nDvf+5sqn/1dLO/+Ph
+        3v/r6uj/8PDv//T08//19fX/8/Pz//Hx8f/t7Oz/5OPh/8jDvv+nnpT/087K/+Ph3v/b2NX/0s/K/8vH
+        wv/Ev7n/vbew/7OspP+jmpD/iX5x+icjHlAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAEICAgPsLCwv/Dw8P/09PT/9fX1//X09P/09PT/8/Pz//Hx8f/09PT/+Pj4//j3
+        9//W0s3/w722/9HMyP/h393/6eno/+3t7f/v7+7/7e3t/+no6P/c2tf/xb+5/7qzrP/U0M3/0c3K/8O/
+        uv++urX/xsK9/8/Mx//OycT/ysS+/8G7s/+0raX/b2VdvAQEAw0AAAABAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAELy8vNuDg4O709PT/9vb2//Pz8/ysrKr4end1/25r
+        aP9+e3j/rKqo/+3t7f/6+vr/8vHw/93a1//Py8b/z8rF/9LOyf/Szsn/z8vG/8vGwP/PysX/3tvY/+Lg
+        3f+rpJ3/nJWM/5mRiP+UjIT/kImB/4iDfuLOy8b70MvG/8jDvf+elo3sHBoXMgAAAAMAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABUhISE/p6en19vb2/3Jy
+        cZsODQ1yPDk15EpGQv9QTEj/VlFM/4SAe//4+Pj//fz8//7+/v/9/f3/+fj4//X08//z8vH/9vX0//r5
+        +f/7+vr/9vb1/8nEvv+Xj4b/lpCH/5ONhP+Oh3/9X1pVyzUwKZ7Iw7z91NHM/7Sup/UuKydKAAAAAwAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA
+        AAVPT09U3t7e6Z2XkNYjHxp0EhAObzEuK8BRTEf8YltT/52Sh//5+fn//Pv7//z8/P/6+vr/9vX1//Py
+        8v/19fT/+Pj4//r5+f/6+vn/+Pj3/+7t6/+wp5z/lYl9/5CFeP+AdmrseG1h3LOqoPrc2db/uLOt6Do3
+        M1EAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAEAAAADOjo6NLu7usnHwLj8nJKH6oh9ceSfk4f7xLuz//Hv7v/7+/v/+/v7//Lx
+        8f+tqqb/jomE/4qEf/+VkIv/uLSx//Dv7//5+fn/+vn5//j39v/08/L/5+Xj/9vW0v/Z1tH/4+He/+Ti
+        3/+gnJfHLywqMgAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAggICAp2dnZy0dLS3/X19f/9/f3//f39//38
+        /P/9/f3/+vr6/nd0cc9QTEjQX1pV22VgW99oY17gZF9Z2pSOiOr7+/v/+/v6//r6+v/4+Pf/9vX1//T0
+        8//v7u3/xcPA3mVjX28GBgUIAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAADHx8fGXNz
+        c2zFxcXM5eXl9fX19f/7+/v/+/v7/6Gakt0uKSR/FRMRWxIQD1YbGBVmQjszmq6lnPD9/f3//Pz8//z8
+        /P/5+fn/6+rp9cTDwctmZWNpGhkYGAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAQAAAAIKCgoJPj4+NH19fXGioaGzzc3N39/e3frDvbf9opmP4JmQhdKnnZPszcfB/u/v
+        7v/q6en609PS3qalpLJ7enlwOTk4MwgICAgAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAQAAAAIAAAACAgICBRkYGBM5OTkrR0dHPEZG
+        RkJFRURBRUVFOzc2NioWFhYSAgICBAAAAAIAAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAABAAAAAQAAAAEAAAABAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD////////8/f////////z9////////
+        /P3////////8/f////////z9///wD////P3//gAA///8/f/4AAAf//z9/+AAAA///P3/gAAAA//8/f8A
+        AAAB//z9/gAAAAD//P38AAAAAH/8/fwAAAAAP/z9+AAAAAAf/P3wAAAAAB/8/fAAAAAAH/z98AAAAAAP
+        /P3wAAAAAA/8/fAAAAAAD/z98AAAAAAP/P3wAAAAAA/8/fAAAAAAD/z98AAAAAAP/P3wAAAAAA/8/fAA
+        AAAAD/z98AAAAAAP/P3wAAAAAA/8/fAAAAAAD/z98AAAAAAP/P3wAAAAAA/8/fAAAAAAD/z98AAAAAAP
+        /P34AAAAAB/8/fgAAAAAH/z9/AAAAAA//P3+AAAAAH/8/f4AAAAA//z9/wAAAAH//P3/wAAAA//8/f/g
+        AAAP//z9//gAAB///P3//gAA///8/f//+B////z9/////////P3////////8/f////////z9////////
+        /P0=
+</value>
+  </data>
+</root>
