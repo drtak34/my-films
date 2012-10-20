@@ -3106,6 +3106,10 @@ Public Class Form1
         Dim response As MsgBoxResult = MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If response = MsgBoxResult.Yes Then
             Try
+                'take a backup for manual restore first
+                LogEvent("Backing up exclusion file.", EventLogLevel.ImportantEvent)
+                Dim NewFileName As String = Replace(txtExcludeFilePath.Text, ".txt", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-").Replace("/", "-") + ".txt")
+                My.Computer.FileSystem.CopyFile(txtExcludeFilePath.Text, NewFileName, True)
                 My.Computer.FileSystem.DeleteFile(txtExcludeFilePath.Text)
                 MsgBox("File deleted !", MsgBoxStyle.Information)
             Catch deleteException As Exception
