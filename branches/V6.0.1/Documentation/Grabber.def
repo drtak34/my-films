@@ -1,0 +1,79 @@
+0	        'OriginalTitle = 0
+1	        'TranslatedTitle = 1
+2	        'PicturePathLong = 2
+3	        'Description = 3
+4	        'Rating = 4
+5	        'Actors = 5
+6	        'Director = 6
+7	        'Producer = 7
+8	        'Year = 8
+9	        'Country = 9
+10	        'Category = 10
+11	        'URL = 11
+12	        'PicturePathShort = 12
+13	        'Writer = 20
+14	        'Comments = 14
+15	        'Language = 15
+16	        'Tagline = 16
+17	        'Certification = 17
+18		IMDB_Id
+19	        ''IMDBrank = 21
+20	        'Studio = 22
+21	        'Edition = 23
+22	        'Fanart = 24
+23		Generic1
+24		Generic2
+25		Generic3
+26	        'TranslatedTitleAllNames = 26
+27	        'TranslatedTitleAllValues = 27
+28	        'CertificationAllNames = 28
+29	        'CertificationAllValues = 29
+
+
+Sub Pages:
+URL Gateway
+URL Redirection Generic 1
+URL Redirection Generic 2
+URL Redirection Cover
+URL Redirection Persons
+URL Redirection Title
+URL Redirection Certification
+URL Redirection Comment
+URL Redirection Description
+
+Details Edit:
+0	(Start-End Detail Page)
+1	Original Title
+2	Translated Title
+3	URL Cover
+4	Rate 1
+5	Rate 2
+6	Director
+7	Producer
+8	Writer
+9	Actors
+10	Country
+11	Genre
+12	Year
+13	IMDB_Id
+14	Description / Synopsys
+15	Comment
+16	Language
+17	Tagline
+18	Certification
+19	Studio
+20	Edition
+21	IMDB_Rank
+22	TMDB_Id
+23	Generic Field 1
+24	Generic Field 2
+25	Generic Field 3
+26	URL Gateway
+27	URL Redirection Generic 1
+28	URL Redirection Generic 2
+29	URL Redirection cover
+30	URL Redirection persons
+31	URL Redirection TTitle
+32	URL Redirection Certification
+33	URL Redirection Comment
+34	URL Redirection Description

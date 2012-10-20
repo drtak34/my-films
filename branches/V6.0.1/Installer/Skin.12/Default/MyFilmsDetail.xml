@@ -1,0 +1,2115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<window>
+	<id>7987</id>
+	<defaultcontrol>10000</defaultcontrol>
+	<allowoverlay>player.hasmedia+!control.hasfocus(10099)</allowoverlay>
+	<define>#header.label:#myfilms.config.pluginname</define>
+	<controls>
+     	 <control>
+      	    <description>BG</description>
+      	    <type>image</type>
+      	    <id>0</id>
+      	    <width>720</width>
+      	    <height>576</height>
+      	    <texture>background.png</texture>
+    	</control>
+    <import>MyFilms.common.window.xml</import>
+
+    <!-- FANART -->
+	<control>
+		<type>label</type>
+		<description>Dummy Label Visible when Fanart found</description>
+		<id>35</id>
+		<posX>0</posX>
+		<posY>0</posY>
+		<label></label>
+		<visible>yes</visible>
+		<focusable>no</focusable>
+	</control>
+	<control>
+		<description>fanart</description>
+		<type>image</type>
+		<id>1000</id>
+		<posX>-170</posX>
+		<posY>0</posY>
+		<width>1194</width>
+		<height>576</height>
+		<keepaspectratio>no</keepaspectratio>
+		<centered>yes</centered>
+		<zoom>yes</zoom>
+		<texture>#myfilms.fanart</texture>
+		<animation effect="fade" time="300">visible</animation>
+		<animation effect="fade" time="300">hidden</animation>                                     
+	</control>
+	<control>
+		<description>fanart</description>
+		<type>multiimage</type>
+		<id>1001</id>
+		<posX>-170</posX>
+		<posY>0</posY>
+		<width>1194</width>
+		<height>576</height>
+		<imagepath></imagepath>
+		<timeperimage>5000</timeperimage>
+		<fadetime>1000</fadetime>
+		<loop>yes</loop>
+		<keepaspectratio>no</keepaspectratio>
+		<randomize>true</randomize>
+	</control>
+    <control>
+		<description>Overlay for FanArt</description>
+		<id>0</id>
+		<type>image</type>
+		<posX>-170</posX>
+		<posY>0</posY>
+		<width>1194</width>
+		<height>576</height>
+		<texture>myfilms\backgroundthumbsview.png</texture>
+		<colordiffuse>cc808080</colordiffuse>
+		<visible>Control.isvisible(35)</visible>
+		<animation effect="fade" time="70">visible</animation>
+		<animation effect="fade" time="70" delay="300">hidden</animation>
+    </control>
+	<control>
+		<description>Overlay to darken FanArt</description>
+		<id>0</id>
+		<type>image</type>
+		<posX>0</posX>
+		<posY>0</posY>
+		<width>720</width>
+		<height>576</height>
+		<texture>black.png</texture>
+		<colordiffuse>90ffffff</colordiffuse>
+		<visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+	</control>
+	<!-- <control>
+		<description>Top Gradient Overlay for Fanart View</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>-152</posX>
+		<posY>0</posY>
+		<width>1024</width>
+		<height>100</height>
+		<texture>MyFilms\gradient_top.png</texture>
+		<colordiffuse>90ffffff</colordiffuse>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+	</control> --> 
+	<control>
+		<description>Bottom Gradient Overlay for Fanart View</description>
+		<id>0</id>
+		<type>image</type>
+		<posX>-152</posX>
+		<posY>476</posY>
+		<width>1024</width>
+		<height>100</height>
+		<texture>MyFilms\gradient.png</texture>
+		<colordiffuse>ccffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+	</control>
+   
+    <!-- Windows Info --> 			
+	<control>
+		<description>Date Time</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>690</posX>
+		<posY>12</posY>
+		<label>#date | #time</label>
+		<align>right</align>
+		<font>font11</font>
+		<textcolor>ff6FAFE1</textcolor>
+		<visible>!Control.HasFocus(10099)</visible>
+	</control>
+	<!-- <control>
+		<description>My Films logo</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>10</posX>
+		<posY>-10</posY>
+		<width>120</width>
+		<height>120</height>
+		<texture>hover_Films.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+	</control> -->
+    <import>MyFilms.common.window.xml</import>
+    
+    <!-- GLOBAL FILTER SECTION -->
+	<control>
+		<description>Global Filter Icons group</description>
+		<type>group</type>
+		<posX>110</posX>
+		<posY>55</posY>
+		<layout>StackLayout(5,Horizontal,true)</layout>
+		<dimColor>ivory</dimColor>
+		<control>
+			<type>image</type>
+			<description>UnWatched Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\overlayunwatched.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Media Available Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\online.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.isonline,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Trailer Global Filter Icon</description>
+			<id>0</id>
+			<width>16</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>MyFilms\filmstrip.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.trailersonly,True)</visible>
+		</control>
+		<control>
+			<type>image</type>
+			<description>Rating Global Filter Icon</description>
+			<id>0</id>
+			<width>18</width>
+			<keepaspectratio>yes</keepaspectratio>
+			<texture>stargood.png</texture>
+			<visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
+		</control>
+		<!-- <control>
+			<type>label</type>
+			<description>Rating Global Filter Value</description>
+			<id>1</id>
+			<label>#myfilms.globalfilter.minratingvalue</label>
+			<visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
+		</control> -->
+	</control>
+    <!-- END GLOBAL FILTER SECTION -->
+	
+	<!-- DOWNLOAD/STATUS INDICATORS/Message -->
+    <control>
+      <description>Download Icon - whenever background downloading is in process</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>290</posX>
+      <posY>35</posY>
+      <width>25</width>
+      <height>25</height>
+      <texture>MyFilms\download.png</texture>
+	  <visible>!Control.HasFocus(10099)+string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|!string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Global Updates Status Message</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>325</posX>
+      <posY>40</posY>
+      <width>275</width>
+      <align>left</align>
+      <font>font10</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.statusmessage</label>
+      <visible>!Control.HasFocus(10099)</visible>
+      <!-- "Global update active" message -->
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Persons icon</description>
+      <type>image</type>
+      <id>0</id>
+	  <posX>325</posX>
+      <posY>37</posY>
+      <width>20</width>
+      <height>20</height>
+	  <keepaspectratio>yes</keepaspectratio>
+      <texture>MyFilms\Persons.png</texture>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Person Image/Info Download Status Messages</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>352</posX>
+      <posY>40</posY>
+      <width>248</width>
+      <align>left</align>
+      <font>font10</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.details.downloads.count - #myfilms.details.downloads.name</label>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+	<!-- OnlineVideos Trailer download indicator -->
+    <control>
+      <description>OnlineVideos icon</description>
+      <type>image</type>
+      <id>0</id>
+	  <posX>325</posX>
+      <posY>28</posY>
+      <width>40</width>
+      <height>40</height>
+      <texture>hover_onlinevideos.png</texture>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>OnlineVideos Trailer downloads count</description>
+      <type>label</type>
+      <id>47016</id>
+	  <posX>352</posX>
+      <posY>40</posY>
+      <align>left</align>
+      <font>font10</font>
+      <label>#OnlineVideos.currentDownloads</label>
+	  <textcolor>ff6FAFE1</textcolor>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+
+    <!-- Hidden Side Menu -->    
+	<control>
+		<type>actiongroup</type>
+		<description>action menu</description>
+		<defaultcontrol>102</defaultcontrol>
+		<onexit>0</onexit>
+		<buttonX>10</buttonX>
+		<buttonY>50</buttonY>
+		<buttonwidth>60</buttonwidth>
+		<buttonheight>476</buttonheight>
+		<textureFocus>Action_focus.png</textureFocus>
+		<textureNoFocus>Action_nofocus.png</textureNoFocus>
+		<width>250</width>
+		<height>400</height>
+		<dimColor>00ffffff</dimColor>
+		<visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>	
+		<control>
+			<type>image</type>
+			<id>0</id>
+			<posX>30</posX>
+			<posY>75</posY>
+			<width>240</width>
+			<height>360</height>
+			<texture>Backslide.png</texture>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
+			<animation effect="slide" time="250" start="-400,0">visible</animation>
+			<animation effect="slide" time="250" end="-400,0">hidden</animation>
+		</control>
+		<control>
+			<type>group</type>
+			<description>Menu Buttons group element</description>
+			<posX>55</posX>
+			<posY>105</posY>
+			<width>180</width>
+			<height>120</height>
+			<layout>StackLayout(0,Vertical,True)</layout>
+			<visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
+			<animation effect="slide" time="250" start="-400,0">visible</animation>
+			<animation effect="slide" time="250" end="-400,0">hidden</animation>
+			<control>
+				<type>button</type>
+				<description>Back</description>
+				<id>102</id>
+				<onup>10012</onup>
+				<ondown>109</ondown>
+				<onright>10000</onright>
+				<label>712</label>
+				<width>180</width>
+			</control>
+			<control>
+				<type>button</type>
+				<description>Trailers</description>
+				<id>109</id>
+				<onup>102</onup>
+				<ondown>107</ondown>
+				<onright>10000</onright>
+				<label>5906</label>
+				<width>180</width>
+			</control>
+			<control>
+				<type>button</type>
+				<description>Options</description>
+				<id>107</id>
+				<onup>109</onup>
+				<ondown>104</ondown>
+				<onright>10000</onright>
+				<label>496</label>
+				<width>180</width>
+			</control>
+			<control>
+				<type>button</type>
+				<description>previous</description>
+				<id>104</id>
+				<onright>10000</onright>
+				<ondown>103</ondown>
+				<onup>107</onup>
+				<label>210</label>
+				<width>180</width>
+			</control>
+			<control>
+				<type>button</type>
+				<description>next</description>
+				<id>103</id>
+				<onright>10000</onright>
+				<ondown>106</ondown>
+				<onup>104</onup>
+				<label>209</label>
+				<width>180</width>
+			</control>
+			<control>
+				<type>button</type>
+				<description>First</description>
+				<id>106</id>
+				<onright>10000</onright>
+				<ondown>105</ondown>
+				<onup>103</onup>
+				<width>180</width>
+			</control>
+			<control>
+				<type>button</type>
+				<description>Last</description>
+				<id>105</id>
+				<onright>10000</onright>
+				<ondown>9876</ondown>
+				<onup>106</onup>
+				<width>180</width>
+			</control>
+	    <!-- Additional Buttons for Links to other Plugins -->
+            <control>
+                <description>Video settings</description>
+                <type>button</type>
+                <id>9876</id>
+                <label>Video Settings</label>
+				<width>180</width>
+                <hyperlink>703</hyperlink>
+                <onright>10000</onright>
+                <onup>105</onup>
+                <ondown>10012</ondown>
+				<width>180</width>
+            </control>				
+			<control>
+				<description>TV-Series</description>
+				<type>button</type>
+				<id>10012</id>
+				<hyperlink>9811</hyperlink>
+				<label>1300</label>
+				<width>180</width>
+				<onright>10000</onright>
+				<onup>9876</onup>
+				<ondown>102</ondown>
+				<visible>plugin.isenabled(MP-TV Series)</visible>
+			</control>
+		</control>
+	</control>
+	
+	<!-- VIRTUAL VIEWS MENU -->
+	<control>
+		<description>Play Button and Overview</description>
+		<type>button</type>
+		<id>10000</id>
+		<posX>30</posX>
+		<posY>450</posY>
+		<width>200</width>
+		<height>25</height>
+		<onup>10004</onup>
+		<ondown>10001</ondown>
+		<onleft>107</onleft>
+		<onright>10099</onright>
+		<label>#myfilms.menu.overview</label>
+		<font>font11</font>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
+		<textXOff>25</textXOff>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
+		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+	</control>
+	<control>
+		<type>button</type>
+		<description>Description</description>
+		<id>10001</id>
+		<posX>30</posX>
+		<posY>468</posY>
+		<width>200</width>
+		<height>25</height>
+		<onup>10000</onup>
+		<ondown>10002</ondown>
+		<onleft>107</onleft>
+		<onright>10099</onright>
+		<label>#myfilms.menu.description</label>
+		<font>font11</font>
+		<align>left</align>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
+		<textXOff>25</textXOff>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
+		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+    </control>
+    <control>
+		<type>button</type>
+		<description>Comment</description>
+		<posX>30</posX>
+		<posY>486</posY>
+		<width>200</width>
+		<height>25</height>
+		<id>10002</id>
+		<onup>10001</onup>
+		<ondown>10003</ondown>
+		<onleft>107</onleft>
+		<onright>10099</onright>
+		<label>#myfilms.menu.comments</label>
+		<font>font11</font>
+		<align>left</align>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
+		<textXOff>25</textXOff>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
+		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+    </control>
+    <control>
+		<type>button</type>
+		<description>Actor Details</description>
+		<posX>30</posX>
+		<posY>504</posY>
+		<width>200</width>
+		<height>25</height>
+		<id>10003</id>
+		<onup>10002</onup>
+		<ondown>10004</ondown>
+		<onleft>107</onleft>
+		<onright>10099</onright>
+		<label>#myfilms.menu.actors</label>
+		<font>font11</font>
+		<align>left</align>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
+		<textXOff>25</textXOff>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
+		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+    </control>
+    <control>
+		<type>button</type>
+		<description>Technical Details</description>
+		<posX>30</posX>
+		<posY>522</posY>
+		<width>200</width>
+		<height>25</height>
+		<id>10004</id>
+		<onup>10003</onup>
+		<ondown>10000</ondown>
+		<onleft>107</onleft>
+		<onright>10099</onright>
+		<label>#myfilms.menu.techinfos</label>
+		<font>font11</font>
+		<align>left</align>
+		<textcolorNoFocus>bb6FAFE1</textcolorNoFocus>
+		<textXOff>25</textXOff>
+		<textureFocus>MyFilms\ledon.png</textureFocus>
+		<textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
+		<visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+    </control>
+    <control>
+		<type>button</type>
+		<description>Full Colour Fanart View</description>
+		<posX>2000</posX>
+		<posY>1</posY>
+		<id>10099</id>
+		<onup>10000</onup>
+		<ondown>10000</ondown>
+		<onleft>10000</onleft>
+		<onright>10099</onright>
+		<label>-</label>
+		<font>font11</font>
+		<align>left</align>
+		<textureFocus>-</textureFocus>
+		<textureNoFocus>-</textureNoFocus>
+		<visible>Control.isvisible(35)</visible>
+    </control>
+	<!-- END Virtual Views Menu -->
+
+	<!-- MAIN INFO -->
+	<control>
+		<description>Master Title</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>70</posY>
+		<align>left</align>
+		<textcolor>ff6FAFE1</textcolor>
+		<width>380</width>
+		<font>font18</font>
+		<label>#myfilms.user.mastertitle.value</label>
+		<visible>!Control.HasFocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+	</control>
+    <!-- Watched/Unwatched Icon -->
+    <control>
+		<type>image</type>
+		<description>UnWatched Icon</description>
+		<id>0</id>
+		<posX>310</posX>
+		<posY>100</posY>
+		<width>14</width>
+		<height>14</height>
+		<texture>MyFilms\overlayunwatched.png</texture>
+		<visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
+    </control>
+    <control>
+	<type>image</type>
+		<description>Watched Icon</description>
+		<id>0</id>
+		<posX>310</posX>
+		<posY>100</posY>
+		<width>14</width>
+		<height>14</height>
+		<texture>MyFilms\overlaywatched.png</texture>
+		<visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
+    </control>
+    <control>
+		<type>imagelist</type>
+		<description>Rating Stars</description>
+		<id>1</id>
+		<posX>335</posX>
+		<posY>103</posY>
+		<width>180</width>
+		<height>12</height>
+		<textureWidth>12</textureWidth>
+		<textureHeight>12</textureHeight>
+		<subitems>
+			<subitem>greystar.png</subitem>
+			<subitem>stargood.png</subitem>
+		</subitems>
+		<orientation>horizontal</orientation>
+		<percentage>#myfilms.db.rating.value</percentage>
+		<imagesToDraw>10</imagesToDraw>
+		<visible>!Control.HasFocus(10099)</visible>
+    </control>
+	<control>
+		<description>Rating Value</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>460</posX>
+		<posY>100</posY>
+		<label>(#myfilms.db.rating.value/10)</label>
+		<font>font10</font>
+		<align>left</align>
+		<textcolor>ffffcc00</textcolor>
+		<visible>string.equals(#myfilms.db.rating.value)+!Control.HasFocus(10099)</visible>		
+    </control>
+	<control>
+		<description>User Rating</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>520</posX>
+		<posY>100</posY>
+		<label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)',''))</label>
+		<width>160</width>
+		<font>font10</font>
+		<textcolor>ff6FAFE1</textcolor>
+		<align>left</align>
+		<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)</visible>		
+	</control>
+	<control>
+		<description>Year - Duration Value</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>120</posY>
+		<label>#myfilms.db.year.value - #myfilms.db.length.value #myfilms.db.length.unit</label>
+		<font>font15</font>
+		<align>left</align>
+		<textcolor>ivory</textcolor>
+		<visible>!Control.HasFocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<description>Edition</description>
+		<id>1</id>
+		<posX>450</posX>
+		<posY>122</posY>
+		<font>font13</font>
+		<width>250</width>
+		<height>24</height>
+		<textcolor>ff6FAFE1</textcolor>
+		<label>#myfilms.db.edition.value</label>
+		<visible>!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Secondary Title</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>144</posY>
+		<label>#myfilms.user.secondarytitle.value</label>
+		<width>370</width>
+		<font>font13</font>
+		<textcolor>bbFFFFF0</textcolor>
+		<shadowColor>-</shadowColor>
+		<visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.secondarytitle.value,#myfilms.user.mastertitle.value)</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+	</control>
+
+	<!-- OVERVIEW -->
+	<control>
+		<description>Details User Item 1 Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>167</posY>
+		<label>#myfilms.user.detailsitem1.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 1 Value</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>166</posY>
+		<label>#myfilms.user.detailsitem1.value</label>
+		<width>260</width>
+		<font>font13</font>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 2 Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>189</posY>
+		<label>#myfilms.user.detailsitem2.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 2 Value</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>188</posY>
+		<label>#myfilms.user.detailsitem2.value</label>
+		<width>260</width>
+		<font>font13</font>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 3 Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>211</posY>
+		<label>#myfilms.user.detailsitem3.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 3 Value</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>210</posY>
+		<label>#myfilms.user.detailsitem3.value</label>
+		<width>260</width>
+		<font>font13</font>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 4 Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>233</posY>
+		<label>#myfilms.user.detailsitem4.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 4 Value</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>232</posY>
+		<label>#myfilms.user.detailsitem4.value</label>
+		<width>260</width>
+		<font>font13</font>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 5 Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>254</posY>
+		<label>#myfilms.user.detailsitem5.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 5 Value</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>253</posY>
+		<label>#myfilms.user.detailsitem5.value</label>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 6 Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>276</posY>
+		<label>#myfilms.user.detailsitem6.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Details User Item 6 Value</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>275</posY>
+		<label>#myfilms.user.detailsitem6.value</label>
+		<width>235</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Watched Label</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>297</posY>
+		<label>#myfilms.user.watched.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Watched Date</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>297</posY>
+		<label>#(iif(neq(#myfilms.user.watcheddate.value,''),'#myfilms.user.watcheddate.value ',''))</label>
+		<width>235</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Watched Count Label </description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>585</posX>
+		<posY>297</posY>
+		<label>#myfilms.user.watchedcount.label:</label>
+		<width>236</width>
+		<align>right</align>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Watched Count</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>590</posX>
+		<posY>297</posY>
+		<label>#(iif(neq(#myfilms.user.watchedcount.value,'0'),'#myfilms.user.watchedcount.value(#myfilms.user.watchedcountglobal.value)',''))</label>
+		<width>236</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Actors Label</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>320</posY>
+		<label>#myfilms.db.actors.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>160</width>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Actors (Overview)</description>
+		<type>textboxscrollup</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>322</posY>
+		<width>260</width>
+		<height>92</height>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.actors.value</label>
+		<font>font12</font>
+		<seperator>: : :</seperator>
+		<lineSpacing>.8</lineSpacing>
+		<shadowColor>-</shadowColor>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Description (Overview)</description>
+		<type>textboxscrollup</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>402</posY>
+		<width>400</width>
+		<height>123</height>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.description.value</label>
+		<seperator>: : :</seperator>
+		<font>font13</font>
+		<lineSpacing>.8</lineSpacing>
+		<shadowColor>-</shadowColor>
+		<visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+	</control>
+	
+	<!-- Description Virtual View -->
+	<control>
+		<description>Plot/Description Label</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>167</posY>
+		<label>#myfilms.db.description.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>Control.HasFocus(10001)</visible>
+	</control>
+	<control>
+		<description>Plot/Description Value</description>
+		<type>textboxscrollup</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>192</posY>
+		<width>400</width>
+		<height>330</height>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.description.value</label>
+		<seperator>: : :</seperator>
+		<font>font13</font>
+		<lineSpacing>.9</lineSpacing>
+		<shadowColor>-</shadowColor>
+		<visible>Control.HasFocus(10001)</visible>
+	</control>
+
+	<!--  Comments Virtual View -->
+	<control>
+		<description>Comments Label</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>167</posY>
+		<label>#myfilms.db.comments.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>Control.HasFocus(10002)</visible>
+	</control>
+	<control>
+		<description>Comments Value</description>
+		<type>textboxscrollup</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>192</posY>
+		<width>400</width>
+		<height>330</height>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.comments.value</label>
+		<seperator>: : :</seperator>
+		<font>font13</font>
+		<lineSpacing>.9</lineSpacing>
+		<shadowColor>-</shadowColor>
+		<visible>Control.HasFocus(10002)</visible>
+	</control>
+	
+	<!-- Actors/Persons Virttual View -->
+	<control>
+		<description>Actors Label</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>167</posY>
+		<label>#myfilms.db.actors.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>200</width>
+		<visible>Control.HasFocus(10003)</visible>
+	</control>
+	<control>
+		<description>Actors value (actor images available)</description>
+		<type>textboxscrollup</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>192</posY>
+		<width>400</width>
+		<height>330</height>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.actors.value</label>
+		<seperator>: : :</seperator>
+		<font>font13</font>
+		<lineSpacing>.9</lineSpacing>
+		<shadowColor>-</shadowColor>
+		<visible>Control.HasFocus(10003)+string.equals(#myfilms.db.actors.actor1.image,)</visible>
+	</control>
+	<control>
+		<description>Actors value (no actor images available)</description>
+		<type>textboxscrollup</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>190</posY>
+		<width>400</width>
+		<height>135</height>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.actors.value</label>
+		<seperator>: : :</seperator>
+		<font>font12</font>
+		<lineSpacing>.9</lineSpacing>
+		<shadowColor>-</shadowColor>
+		<visible>Control.HasFocus(10003)+!string.equals(#myfilms.db.actors.actor1.image,)</visible>
+	</control>
+    <control>
+      <description>Actors 1 Label</description>
+      <type>textbox</type>
+      <id>1</id>
+      <posX>295</posX>
+      <posY>450</posY>
+      <width>100</width>
+      <textalign>center</textalign>
+      <font>font10</font>
+      <textcolor>ivory</textcolor>
+      <label>#myfilms.db.actors.actor1.name</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!string.equals(#myfilms.db.actors.actor1.image,)</visible>
+    </control>
+    <control>
+      <description>Actors 1 image</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>310</posX>
+      <posY>320</posY>
+      <width>80</width>
+      <height>120</height>
+      <align>center</align>
+      <valign>top</valign>
+      <zoom>yes</zoom>
+      <keepaspectratio>yes</keepaspectratio>
+      <texture mask="videothumbmask.png">#myfilms.db.actors.actor1.image</texture>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>      
+        <description>Actors 1 image frame</description>
+        <type>image</type>
+        <id>0</id>
+		<posX>310</posX>
+		<posY>320</posY>
+		<width>80</width>
+		<height>120</height>
+        <texture>MyFilms\Videothumbframe.png</texture>
+        <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+string.equals(#myfilms.db.actors.actor1.image)</visible>	
+    </control>
+    <control>
+      <description>Actors 2 Label</description>
+      <type>textbox</type>
+      <id>1</id>
+      <posX>395</posX>
+      <posY>450</posY>
+      <width>100</width>
+      <textalign>center</textalign>
+      <font>font10</font>
+      <textcolor>ivory</textcolor>
+      <label>#myfilms.db.actors.actor2.name</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>
+      <description>Actors 2 image</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>410</posX>
+      <posY>320</posY>
+      <width>80</width>
+      <height>120</height>
+      <align>center</align>
+      <valign>top</valign>
+      <zoom>yes</zoom>
+      <keepaspectratio>yes</keepaspectratio>
+      <texture mask="videothumbmask.png">#myfilms.db.actors.actor2.image</texture>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>      
+        <description>Actors 2 image frame</description>
+        <type>image</type>
+        <id>0</id>
+		<posX>410</posX>
+		<posY>320</posY>
+		<width>80</width>
+		<height>120</height>
+        <texture>MyFilms\Videothumbframe.png</texture>
+        <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+string.equals(#myfilms.db.actors.actor2.image)</visible>	
+    </control>
+    <control>
+      <description>Actors 3 Label</description>
+      <type>textbox</type>
+      <id>1</id>
+      <posX>495</posX>
+      <posY>450</posY>
+      <width>100</width>
+      <textalign>center</textalign>
+      <font>font10</font>
+      <textcolor>ivory</textcolor>
+      <label>#myfilms.db.actors.actor3.name</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>
+      <description>Actors 3 image</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>510</posX>
+      <posY>320</posY>
+      <width>80</width>
+      <height>120</height>
+      <align>center</align>
+      <valign>top</valign>
+      <zoom>yes</zoom>
+      <keepaspectratio>yes</keepaspectratio>
+      <texture mask="videothumbmask.png">#myfilms.db.actors.actor3.image</texture>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>      
+	  <description>Actors 3 image frame</description>
+	  <type>image</type>
+	  <id>0</id>
+	  <posX>510</posX>
+	  <posY>320</posY>
+	  <width>80</width>
+	  <height>120</height>
+	  <texture>MyFilms\Videothumbframe.png</texture>
+	  <visible>Control.HasFocus(10003)+!Control.HasFocus(10099+string.equals(#myfilms.db.actors.actor3.image)</visible>	
+    </control>
+    <control>
+      <description>Actors 4 Label</description>
+      <type>textbox</type>
+      <id>1</id>
+      <posX>595</posX>
+      <posY>450</posY>
+      <width>100</width>
+      <textalign>center</textalign>
+      <font>font10</font>
+      <textcolor>ivory</textcolor>
+      <label>#myfilms.db.actors.actor4.name</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>
+      <description>Actors 4 image</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>610</posX>
+      <posY>320</posY>
+      <width>80</width>
+      <height>120</height>
+      <align>center</align>
+      <valign>top</valign>
+      <zoom>yes</zoom>
+      <keepaspectratio>yes</keepaspectratio>
+      <texture mask="videothumbmask.png">#myfilms.db.actors.actor4.image</texture>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>      
+        <description>Actors 4 image frame</description>
+        <type>image</type>
+        <id>0</id>
+		<posX>610</posX>
+		<posY>320</posY>
+		<width>80</width>
+		<height>120</height>
+        <texture>MyFilms\Videothumbframe.png</texture>
+        <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+string.equals(#myfilms.db.actors.actor4.image)</visible>	
+    </control>
+   <!--  <control>
+      <description>Actors 5 Label</description>
+      <type>textbox</type>
+      <id>1</id>
+      <posX>695</posX>
+      <posY>450</posY>
+      <width>100</width>
+      <align>center</align>
+      <font>font10</font>
+      <textcolor>ff6FAFE1</textcolor>
+      <label>#myfilms.db.actors.actor5.name</label>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Actors 5 image</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>710</posX>
+      <posY>320</posY>
+      <width>80</width>
+      <height>120</height>
+      <textalign>center</textalign>
+      <valign>top</valign>
+      <zoom>yes</zoom>
+      <keepaspectratio>yes</keepaspectratio>
+      <texture mask="videothumbmask.png">#myfilms.db.actors.actor5.image</texture>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+    </control>
+    <control>      
+        <description>Actors 5 image frame</description>
+        <type>image</type>
+        <id>0</id>
+		<posX>710</posX>
+		<posY>320</posY>
+		<width>80</width>
+		<height>120</height>
+        <texture>MyFilms\Videothumbframe.png</texture>
+        <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+string.equals(#myfilms.db.actors.actor5.image)</visible>	
+    </control>	-->
+	
+	<!-- Technical Details Virtual View -->
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>167</posY>
+		<label>#myfilms.db.videoformat.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>166</posY>
+		<label>#myfilms.db.videoformat.value</label>
+		<width>235</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>189</posY>
+		<label>#myfilms.db.videobitrate.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>188</posY>
+		<label>#myfilms.db.videobitrate.value kbit/sec.</label>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<width>235</width>
+		<visible>string.equals(#myfilms.db.videobitrate.value)+Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>210</posY>
+		<label>#myfilms.db.resolution.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>209</posY>
+		<label>#myfilms.db.resolution.value</label>
+		<width>100</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>640</posX>
+		<posY>210</posY>
+		<label>#myfilms.db.aspectratio.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<align>right</align>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>650</posX>
+		<posY>209</posY>
+		<label>#myfilms.db.aspectratio.value</label>
+		<width>60</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<description>Calculated aspect ratio for AMC3</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>650</posX>
+		<posY>209</posY>
+		<label>#myfilms.db.calc.aspectratio.value</label>
+		<width>60</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)+!string.equals(#myfilms.db.aspectratio.value)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>232</posY>
+		<label>174</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<label>#myfilms.db.framerate.label:</label>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>231</posY>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.framerate.value fps</label>
+		<width>120</width>
+		<font>font13</font>
+		<visible>string.equals(#myfilms.db.framerate.value)+Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>254</posY>
+		<label>#myfilms.db.calc.imageformat.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>253</posY>
+		<label>#myfilms.db.calc.imageformat.value</label>
+		<width>235</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>276</posY>
+		<label>#myfilms.db.audioformat.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>275</posY>
+		<label>#myfilms.db.audioformat.value</label>
+		<width>235</width>
+        <textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>298</posY>
+		<label>#myfilms.db.audiobitrate.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>297</posY>
+		<label>#myfilms.db.audiobitrate.value kbit/sec.</label>
+		<width>235</width>
+        <textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>string.equals(#myfilms.db.audiobitrate.value)+Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>320</posY>
+		<label>#myfilms.db.number.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>319</posY>
+		<label>No. #myfilms.db.number.value</label>
+		<width>100</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>640</posX>
+		<posY>320</posY>
+		<label>#myfilms.db.checked.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<align>right</align>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>650</posX>
+		<posY>319</posY>
+		<label>#myfilms.db.checked.value</label>
+		<width>60</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>342</posY>
+		<label>#myfilms.db.date.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>341</posY>
+		<label>#myfilms.db.date.value</label>
+		<width>235</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>640</posX>
+		<posY>342</posY>
+		<label>#myfilms.db.borrower.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<align>right</align>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>650</posX>
+		<posY>341</posY>
+		<label>#myfilms.db.borrower.value</label>
+		<width>55</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)+!string.equals(#myfilms.db.borrower.value,#myfilms.user.sourcetrailer.value)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>364</posY>
+		<label>#myfilms.db.medialabel.label: </label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>363</posY>
+		<label>#myfilms.db.medialabel.value</label>
+		<width>100</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>640</posX>
+		<posY>364</posY>
+		<label>#myfilms.db.mediatype.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<align>right</align>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>650</posX>
+		<posY>363</posY>
+		<label>#myfilms.db.mediatype.value</label>
+		<width>55</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>386</posY>
+		<label>#myfilms.db.size.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>385</posY>
+		<label>#myfilms.db.size.value MB</label>
+		<width>100</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>string.equals(#myfilms.db.size.value)+Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>640</posX>
+		<posY>386</posY>
+		<label>#myfilms.db.disks.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<align>right</align>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>650</posX>
+		<posY>385</posY>
+		<label>#myfilms.db.disks.value</label>
+		<width>125</width>
+		<textcolor>ivory</textcolor>
+		<font>font13</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>408</posY>
+		<label>#myfilms.db.url.label:</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>407</posY>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<label>#myfilms.db.url.value</label>
+		<font>font12</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>430</posY>
+		<label>#myfilms.user.source.label#(iif(neq(#myfilms.db.disks.value,''),' (#myfilms.db.disks.value)','')):</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>429</posY>
+		<label>#myfilms.user.source.filepath</label>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>451</posY>
+		<label>#myfilms.user.source.filename</label>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>474</posY>
+		<label>#myfilms.user.sourcetrailer.label#(iif(neq(#myfilms.user.sourcetrailer.count,''),'(#myfilms.user.sourcetrailer.count)','')):</label>
+		<textcolor>ff6FAFE1</textcolor>
+		<font>font12</font>
+		<width>125</width>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+	<!-- <control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>473</posY>
+		<label>#myfilms.user.sourcetrailer.filepath</label>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control> -->
+	<control>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>435</posX>
+		<posY>473</posY>
+		<label>#myfilms.user.sourcetrailer.shortname</label>
+		<width>260</width>
+		<textcolor>ivory</textcolor>
+		<font>font12</font>
+		<visible>Control.HasFocus(10004)</visible>
+	</control>
+
+    <!-- Images section -->
+	<control>
+		<description>Main Cover Image</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>30</posX>
+		<posY>75</posY>
+		<width>250</width>
+		<height>375</height>
+		<texture mask="videothumbmask.png">#myfilms.picture</texture>	
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]</visible>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
+	</control>
+	<control>
+		<description>Main Cover Frame</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>30</posX>
+		<posY>75</posY>
+		<width>250</width>
+		<height>375</height>
+		<texture>MyFilms\Videothumbframe.png</texture>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>View Small Image</description>
+		<id>0</id>
+		<posX>225</posX>
+		<posY>70</posY>
+		<width>60</width>
+		<height>90</height>
+		<texture mask="videothumbmask.png">#myfilms.viewcoverimage</texture>	
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
+	</control>
+	<control>
+		<type>image</type>
+		<description>Person Small Image</description>
+		<id>0</id>
+		<posX>225</posX>
+		<posY>70</posY>
+		<width>60</width>
+		<height>90</height>
+		<texture mask="videothumbmask.png">#myfilms.personcoverimage</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<centered>yes</centered>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
+	</control>
+	<control>
+		<description>Frame for small views/persons images</description>
+		<type>image</type>
+		<id>0</id>      
+		<posX>225</posX>
+		<posY>70</posY>
+		<width>60</width>
+		<height>90</height>
+		<texture>MyFilms\Videothumbframe.png</texture>
+		<visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)]+[string.contains(#myfilms.viewcoverimage,\)|string.contains(#myfilms.personcoverimage,\)]</visible>
+		<animation effect="fade" time="250">visiblechange</animation>
+    </control>
+	<control>
+		<type>image</type>
+		<description>Group Small Cover</description>
+		<id>0</id>
+		<posX>225</posX>
+		<posY>360</posY>
+		<width>60</width>
+		<height>90</height>
+		<texture mask="videothumbmask.png">#myfilms.groupcoverimage</texture>	
+		<visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)]</visible>
+		<animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="250">Visible</animation>
+	</control>
+   	<control>
+		<description>Frame for small group images</description>
+		<type>image</type>
+		<id>0</id>
+		<posX>225</posX>
+		<posY>360</posY>
+		<width>60</width>
+		<height>90</height>
+		<texture>MyFilms\Videothumbframe.png</texture>
+	    <visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)]</visible>        
+		<animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+		<description>Collection Banner</description>
+		<id>0</id>
+		<type>image</type>
+		<posX>248</posX>
+		<posY>360</posY>
+		<width>36</width>
+		<height>36</height>
+		<texture>myfilms\collection.png</texture>
+		<visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>        
+		<animation effect="fade" time="250">visiblechange</animation>
+    </control>
+ 
+    <!-- Common Elements for Bottom -->
+	<control>
+		<description>Video/Audio Format</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>530</posY>
+		<label>#(iif(neq(#myfilms.db.mediatype.value,''),'#myfilms.db.mediatype.value | ',''))#(iif(neq(#myfilms.db.calc.format.value,''),'#myfilms.db.calc.format.value | ',''))#(iif(neq(#myfilms.db.resolution.value,''),'#myfilms.db.resolution.value',''))#(iif(neq(#myfilms.db.framerate.value,''),'@#myfilms.db.framerate.value fps  | ',' | '))#(iif(neq(#myfilms.db.size.value,''),'#myfilms.db.size.value MB | ',''))#(iif(neq(#myfilms.db.disks.value,''),'#myfilms.db.disks.value file(s)',''))</label>
+		<font>font10</font>
+		<width>380</width>
+		<textcolor>ff6FAFE1</textcolor>
+		<visible>!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>No. Date Languages Subtitles</description>
+		<type>fadelabel</type>
+		<id>1</id>
+		<posX>310</posX>
+		<posY>545</posY>
+		<label>#(iif(neq(#myfilms.db.number.value,''),'#myfilms.db.number.label: #myfilms.db.number.value | ',''))#(iif(neq(#myfilms.db.date.value,''),'#myfilms.db.dateadded.label: #myfilms.db.date.value | ',''))#(iif(neq(#myfilms.db.languages.value,''),'#myfilms.db.languages.label: #myfilms.db.languages.value | ',''))#(iif(neq(#myfilms.db.subtitles.value,''),'#myfilms.db.subtitles.label: #myfilms.db.subtitles.value',''))</label>
+		<font>font10</font>
+		<textcolor>ff6FAFE1</textcolor>
+		<width>380</width>
+		<visible>!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<type>image</type>
+		<description>thumb Logos ID 2012</description>
+		<id>2012</id>
+		<posX>310</posX>
+		<posY>505</posY>
+		<width>400</width>
+		<height>25</height>
+		<texture>#myfilms.logos_id2012</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<spaceBetweenItems>2</spaceBetweenItems>
+		<visible>!Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<type>image</type>
+		<description>thumb Logos ID 2003</description>
+		<id>2003</id>
+		<posX>285</posX>
+		<posY>520</posY>
+		<width>20</width>
+		<height>20</height>
+		<texture>#myfilms.logos_id2003</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<spaceBetweenItems>2</spaceBetweenItems>
+		<visible>!Control.HasFocus(10099)</visible>
+	</control>
+
+<!-- FULL FANART VIEW START -->
+	<control>
+		<type>label</type>
+		<description>Title (Full Fanart View)</description>
+		<id>1</id>
+		<posX>30</posX>
+		<posY>520</posY>
+		<width>660</width>
+		<align>center</align>
+		<font>font16</font>
+		<textcolor>ff6FAFE1</textcolor>
+		<label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.user.mastertitle.groupcount,''),' #myfilms.user.mastertitle.groupcount',''))#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
+		<visible>Control.HasFocus(10099)</visible>
+	</control>
+	<!-- Watched/Unwatched Icon (Full Fanart) -->
+	<control>
+		<type>image</type>
+		<description>UnWatched Icon</description>
+		<id>0</id>
+		<posX>260</posX>
+		<posY>534</posY>
+		<width>12</width>
+		<height>12</height>
+		<align>left</align>
+		<texture>MyFilms\overlayunwatched.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<visible>Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<type>image</type>
+		<description>Watched Icon</description>
+		<id>0</id>
+		<posX>260</posX>
+		<posY>534</posY>
+		<width>12</width>
+		<height>12</height>
+		<texture>MyFilms\overlaywatched.png</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<visible>Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<description>Rating Stars(Full Fanart)</description>
+		<type>imagelist</type>
+		<id>1</id>
+		<posX>302</posX>
+		<posY>535</posY>
+		<height>12</height>
+		<align>left</align>
+		<textureWidth>12</textureWidth>
+		<textureHeight>12</textureHeight>
+		<colordiffuse>ffffffff</colordiffuse>
+		<subitems>
+			<subitem>greystar.png</subitem>
+			<subitem>stargood.png</subitem>
+		</subitems>
+		<orientation>horizontal</orientation>
+		<align>left</align>
+		<imagesToDraw>10</imagesToDraw>
+		<percentage>#myfilms.db.rating.value</percentage>
+		<visible>Control.HasFocus(10099)</visible>
+		<animation effect="fade" time="250">visiblechange</animation>
+	</control>
+    <control>
+		<description>Rating Value(Full Fanart)</description>
+		<type>label</type>
+		<id>1</id>
+		<posX>450</posX>
+		<posY>532</posY>
+		<label>(#myfilms.db.rating.value#(iif(neq(#myfilms.user.rating.value,''),' | #myfilms.user.rating.value','')))</label>
+		<font>font10</font>
+		<align>left</align>
+		<textcolor>ffffcc00</textcolor>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.db.rating.value)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+    </control>
+	<control>
+		<type>label</type>
+		<description>Genre (Full Fanart)</description>
+		<id>1</id>
+		<posX>30</posX>
+		<posY>555</posY>
+		<width>660</width>
+		<align>center</align>
+		<font>font11</font>
+		<textcolor>ff6FAFE1</textcolor>
+		<label>#(iif(neq(#myfilms.db.category.value,''),'#myfilms.db.category.value',''))</label>
+		<visible>Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<description>Year and Runtime (Full Fanart View)</description>
+		<id>1</id>
+		<posX>690</posX>
+		<posY>545</posY>
+		<width>220</width>
+		<align>right</align>
+		<font>font12</font>
+		<textcolor>ivory</textcolor>
+		<label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value',''))#(iif(neq(#myfilms.db.length.value,''),' - #myfilms.db.length.value #myfilms.db.length.unit',''))</label>
+		<visible>Control.HasFocus(10099)</visible>
+	</control>
+	<control>
+		<type>label</type>
+		<description>Group Name</description>
+		<id>1</id>
+		<posX>30</posX>
+		<posY>520</posY>
+		<width>660</width>
+		<align>center</align>
+		<font>font12</font>
+		<textcolor>90ffffff</textcolor>
+		<label>971</label>
+		<visible>Control.HasFocus(10099)+string.equals(#myfilms.user.mastertitle.groupcount)+!control.isvisible(34)+[facadeview.filmstrip|facadeview.coverflow]</visible>
+		<animation effect="fade" start="100" end="0" time="500">Hidden</animation>
+		<animation effect="fade" start="0" end="100" time="500">Visible</animation>
+	</control> 
+	<control>
+		<type>image</type>
+		<description>thumb Logos ID 2001 (Full Fanart View)</description>
+		<id>2001</id>
+		<posX>20</posX>
+		<posY>540</posY>
+		<width>200</width>
+		<height>20</height>
+		<texture>#myfilms.logos_id2001</texture>
+		<keepaspectratio>yes</keepaspectratio>
+		<spaceBetweenItems>0</spaceBetweenItems>
+		<colordiffuse>cfffffff</colordiffuse>
+		<visible>Control.HasFocus(10099)</visible>
+	</control>
+<!-- END FULL FANART VIEW  -->
+
+	<!-- Additional Display for Info Movie available -->
+		<control>
+			<description>Movie available Info Label</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>245</posX>
+			<posY>510</posY>
+			<width>80</width>
+			<label>Film:</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>ff6FAFE1</textcolor>
+			<visible>!Control.HasFocus(10099)</visible>
+		</control>
+		<control>
+			<description>Movie unavailable Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>511</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_red.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unavailable)</visible>
+		</control>
+		<control>
+			<description>Movie available Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>511</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_green.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,available)</visible>
+		</control>
+		<control>
+			<description>Movie offline Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>511</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,offline)</visible>
+		</control>
+		<control>
+			<description>Movie unknown Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>511</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_grey.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unknown)</visible>
+		</control>
+
+<!-- Trailer Available Info -->
+
+		<control>
+			<description>Trailer available Info Label</description>
+			<type>fadelabel</type>
+			<id>1</id>
+			<posX>245</posX>
+			<posY>527</posY>
+			<width>80</width>
+			<label>Trailer:</label>
+			<font>font10</font>
+			<align>right</align>
+			<textcolor>ff6FAFE1</textcolor>
+			<visible>!Control.HasFocus(10099)</visible>
+		</control>
+		<control>
+			<description>Trailer unavailable Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>528</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_red.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>c0ffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)</visible>
+		</control>
+		<control>
+			<description>Trailer available Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>528</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_green.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,available)</visible>
+		</control>
+		<control>
+			<description>Trailer offline Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>528</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_yellow.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,offline)</visible>
+		</control>
+		<control>
+			<description>Trailer unknown Icon</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>255</posX>
+			<posY>528</posY>
+			<width>15</width>
+			<height>15</height>
+			<texture>MyFilms\led_grey.png</texture>
+			<keepaspectratio>yes</keepaspectratio>
+			<centered>yes</centered>
+			<colordiffuse>ffffffff</colordiffuse>
+			<visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
+		</control>
+
+	<control>
+		<type>animation</type>
+		<description>Waiting during search</description>
+		<id>2080</id>
+		<posX>330</posX>
+		<posY>328</posY>
+		<width>64</width>
+		<height>64</height>
+		<textures>common.waiting.1.png;common.waiting.2.png;common.waiting.3.png;common.waiting.4.png;common.waiting.5.png;common.waiting.6.png;common.waiting.7.png;common.waiting.8.png</textures>
+		<Duration>0:0:01.5</Duration>
+		<keepaspectratio>yes</keepaspectratio>
+	</control>
+  </controls>
+</window>
