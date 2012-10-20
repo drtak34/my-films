@@ -3103,8 +3103,8 @@ Public Class Form1
     End Sub
 
     Private Sub btnExcludeFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExcludeFileDelete.Click
-        Dim response As MsgBoxResult = MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If response = MsgBoxResult.Yes Then
+        Dim dialogResult As Windows.Forms.DialogResult = Windows.Forms.MessageBox.Show("Are you sure you want to delete the file ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If dialogResult = Windows.Forms.DialogResult.OK Then
             Try
                 My.Computer.FileSystem.DeleteFile(txtExcludeFilePath.Text)
                 MsgBox("File deleted !", MsgBoxStyle.Information)
