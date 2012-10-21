@@ -10145,19 +10145,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgYesNo.Reset();
           dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800)); // Warning: Long runtime !
           dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798801)); //should really the trailer search be started
-          // dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), w_index_count.ToString()))); // for <xx> movies ?
-          dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), wr.Length.ToString()));
-          // for <xx> movies ?
+          dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), wr.Length.ToString())); // for <xx> movies ?
           dlgYesNo.DoModal(GetID);
           if (!(dlgYesNo.IsConfirmed)) break;
 
-          GUIDialogProgress dlgPrgrs =
-            (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+          GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
           if (dlgPrgrs != null)
           {
             dlgPrgrs.Reset();
             dlgPrgrs.DisplayProgressBar = true;
-            dlgPrgrs.ShowWaitCursor = true;
+            dlgPrgrs.ShowWaitCursor = false;
             dlgPrgrs.DisableCancel(true);
             dlgPrgrs.SetHeading("MyFilms Trailer Registration");
             dlgPrgrs.StartModal(GUIWindowManager.ActiveWindow);
@@ -10171,22 +10168,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   try
                   {
                     string title = wr[i][MyFilms.conf.StrTitle1].ToString();
-                    LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number: '" + i + "' - Index to search: '" + w_index[i] + "'");
-                    if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Register trailer for '" + title + "'");
-                    if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / w_index_count;
+                    LogMyFilms.Debug("GlobalSearchTrailerLocal - Number: '" + i + "' - Index to search: '" + w_index[i] + "'");
                     // MyFilmsDetail.setGUIProperty("statusmessage", "Register trailer for '" + title + "'");
-
-                    //MyFilmsDetail.SearchTrailerLocal((DataRow[])MesFilms.r, Convert.ToInt32(w_index[i]));
-                    MyFilmsDetail.SearchTrailerLocal(r, Convert.ToInt32(i), doExtendedSearch);
+                    if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Register trailer for '" + title + "'");
+                    int iprogress = i * 100 / w_index_count;
+                    if (iprogress > 100) iprogress = 100;
+                    if (dlgPrgrs != null) dlgPrgrs.Percentage = iprogress;
+                    MyFilmsDetail.SearchTrailerLocal(r, Convert.ToInt32(i), doExtendedSearch, false);
                   }
                   catch (Exception ex)
                   {
-                    LogMyFilms.Debug("(GlobalSearchTrailerLocal) - index: '" + i + "', Exception: '" + ex.Message + "', Stacktrace: '" + ex.StackTrace + "'");
+                    LogMyFilms.Debug("GlobalSearchTrailerLocal - index: '" + i + "', Exception: '" + ex.Message + "', Stacktrace: '" + ex.StackTrace + "'");
                   }
                 }
-
+                MyFilmsDetail.Update_XML_database();
+                
                 if (dlgPrgrs != null) dlgPrgrs.Percentage = 100;
-                dlgPrgrs.ShowWaitCursor = false;
                 dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846));
                 Thread.Sleep(50);
                 dlgPrgrs.Close(); // Done...
@@ -11097,9 +11094,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlgYesNotrailersearch.IsConfirmed)
             {
               //setProcessAnimationStatus(true, m_SearchAnimation);
-              //LogMyFilms.Debug("(SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(): '" + (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "'"));
+              //LogMyFilms.Debug("SearchTrailerLocal() SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(): '" + (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "'"));
               LogMyFilms.Debug("(Auto search trailer after selecting PLAY) title: '" + (r[MyFilms.conf.StrIndex] + "'"));
-              MyFilmsDetail.SearchTrailerLocal(r, MyFilms.conf.StrIndex, true);
+              MyFilmsDetail.SearchTrailerLocal(r, MyFilms.conf.StrIndex, true, true);
               //afficher_detail(true);
               //setProcessAnimationStatus(false, m_SearchAnimation);
               MyFilmsDetail.trailerPlayed = true;

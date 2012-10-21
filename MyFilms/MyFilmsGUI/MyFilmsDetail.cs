@@ -609,7 +609,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             {
               //GUIWaitCursor.Init(); GUIWaitCursor.Show();
-              SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false);
+              SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, false, true);
               // Todo: Update DB, if intended
               // GUIWaitCursor.Hide();
             }
@@ -1140,9 +1140,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlgYesNotrailersearch.IsConfirmed)
             {
               SetProcessAnimationStatus(true, m_SearchAnimation);
-              //LogMyFilms.Debug("(SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(): '" + (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "'"));
-              LogMyFilms.Debug("(Auto search trailer after selecting PLAY) title: '" + (MyFilms.r[MyFilms.conf.StrIndex].ToString() + "'"));
-              MyFilmsDetail.SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+              //LogMyFilms.Debug("SearchTrailerLocal() SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(): '" + (MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString() + "'"));
+              LogMyFilms.Debug("(Auto search trailer after selecting PLAY) title: '" + (MyFilms.r[MyFilms.conf.StrIndex] + "'"));
+              SearchTrailerLocal(MyFilms.r, MyFilms.conf.StrIndex, true, true);
               afficher_detail(true);
               SetProcessAnimationStatus(false, m_SearchAnimation);
               trailerPlayed = true;
@@ -2214,13 +2214,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             // 2.) Im Verzeichnis des Films suchen nach Filmdateien die das Wort "Trailer" im Namen haben (Endung beliebig: avi, mov, flv, etc.)
             // 3.) Im (Trailer)-Suchpfad nach Verzeichnissen, die nach dem Filmnamen benannt sind - dann alle Files darin registrien
 
-            LogMyFilms.Debug("(SearchTrailerLocal) SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex]: '" + (MyFilms.r[MyFilms.conf.StrIndex].ToString() + "'"));
-            SearchTrailerLocal((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex, true);
+            LogMyFilms.Debug("SelectedItemInfo from (MyFilms.r[MyFilms.conf.StrIndex]: '" + (MyFilms.r[MyFilms.conf.StrIndex] + "'"));
+            SearchTrailerLocal(MyFilms.r, MyFilms.conf.StrIndex, true, true);
             SetProcessAnimationStatus(false, m_SearchAnimation);
             afficher_detail(true);
             GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
             dlgOk.SetHeading(GUILocalizeStrings.Get(107986));//my films
-            dlgOk.SetLine(1, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle.ToString()].ToString());//video title
+            dlgOk.SetLine(1, MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrSTitle].ToString());//video title
             dlgOk.SetLine(2, result.Count.ToString() + " " + GUILocalizeStrings.Get(10798705)); // trailers found ! 
             dlgOk.DoModal(GetID);
             break;
@@ -2232,7 +2232,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgYesNo.DoModal(GetID);
           if (dlgYesNo.IsConfirmed)
           {
-            MyFilmsDetail.DeleteTrailerFromDB((DataRow[])MyFilms.r, (int)MyFilms.conf.StrIndex);
+            DeleteTrailerFromDB(MyFilms.r, MyFilms.conf.StrIndex);
             //MyFilms.r = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, MyFilms.conf.StrFilmSelect, MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens);
             afficher_detail(true);
           }
@@ -9321,7 +9321,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //path = Path.GetDirectoryName(path);
         //if (path == null || !Directory.Exists(path))
         //{
-        //  LogMyFilms.Warn("(SearchtrailerLocal) directory of movie '" + titlename + "' doesn't exist anymore - check your DB");
+        //  LogMyFilms.Warn("Directory of movie '" + titlename + "' doesn't exist anymore - check your DB");
         //  return;
         //}
         if (path.Contains("\\")) path = path.Substring(0, path.LastIndexOf("\\", StringComparison.Ordinal));
@@ -9330,7 +9330,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       catch (Exception)
       {
-        LogMyFilms.Debug("(SearchtrailerLocal) error with directory of movie '" + titlename + "' - check your DB");
+        LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() error with directory of movie '" + titlename + "' - check your DB");
         return;
       }
       #endregion
@@ -9590,41 +9590,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------
     //  Search All Trailerfiles locally
     //-------------------------------------------------------------------------------------------        
-    public static void SearchTrailerLocal(DataRow[] r1, int index, bool extendedSearch)
+    public static void SearchTrailerLocal(DataRow[] r1, int index, bool extendedSearch, bool saveresult)
     {
-      LogMyFilms.Debug("(SearchTrailerLocal) - mastertitle      : '" + MyFilms.r[index][MyFilms.conf.StrTitle1] + "'");
-      if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
-        LogMyFilms.Debug("(SearchTrailerLocal) - secondary title  : '" + MyFilms.r[index][MyFilms.conf.StrTitle2] + "'");
-      LogMyFilms.Debug("(SearchTrailerLocal) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
-
       var trailerFiles = new List<string>();
       var split = MyFilms.r[index][MyFilms.conf.StrStorageTrailer].ToString().Split(new Char[] { ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
       var oldTrailerFiles = split.Distinct().ToList();
 
       string titlename = MyFilms.r[index][MyFilms.conf.StrTitle1].ToString();
-      string titlename2 = "";
-      if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
-        titlename2 = MyFilms.r[index][MyFilms.conf.StrTitle2].ToString();
+      if (titlename.Contains("\\")) titlename = titlename.Substring(titlename.LastIndexOf("\\", StringComparison.Ordinal) + 1);
+      string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? MyFilms.r[index][MyFilms.conf.StrTitle2].ToString() : "";
 
-      LogMyFilms.Debug("(SearchtrailerLocal) Extended Search '" + extendedSearch + "' for movie '" + titlename + "' in search directories: '" + MyFilms.conf.StrDirStorTrailer + "'");
+      LogMyFilms.Debug("SearchTrailerLocal() - mastertitle      : '" + titlename + "'");
+      LogMyFilms.Debug("SearchTrailerLocal() - secondary title  : '" + titlename2 + "'");
+      LogMyFilms.Debug("SearchTrailerLocal() - Cleaned Title    : '" + Utils.FilterFileName(titlename.ToLower()) + "'");
+      LogMyFilms.Debug("SearchTrailerLocal() - Extended Search '" + extendedSearch + "' for movie '" + titlename + "' in search directories: '" + MyFilms.conf.StrDirStorTrailer + "'");
 
-      #region Retrieve original directory of mediafiles
-      string directoryname = "";
+      #region Get original directory of mediafiles
+      string directoryname;
       try
       {
         string movieName = MyFilms.r[index][MyFilms.conf.StrStorage].ToString().Trim();
-        movieName = movieName.Substring(movieName.LastIndexOf(";", System.StringComparison.Ordinal) + 1);
+        movieName = movieName.Substring(movieName.LastIndexOf(";", StringComparison.Ordinal) + 1);
         directoryname = Path.GetDirectoryName(movieName);
-        LogMyFilms.Debug("(SearchtrailerLocal) get media directory name: '" + directoryname + "'");
+        LogMyFilms.Debug("SearchTrailerLocal() - media directory name: '" + directoryname + "'");
         if (directoryname == null || !Directory.Exists(directoryname))
         {
-          LogMyFilms.Debug("(SearchtrailerLocal) directory of movie '" + titlename + "' doesn't exist anymore - check your DB");
+          LogMyFilms.Warn("SearchTrailerLocal() directory of movie '" + titlename + "' doesn't exist anymore - check your DB");
           return;
         }
       }
       catch
       {
-        LogMyFilms.Debug("(SearchtrailerLocal) error with directory of movie '" + titlename + "' - check your DB");
+        LogMyFilms.Error("SearchTrailerLocal() error with directory of movie '" + titlename + "' - check your DB");
         return;
       }
       #endregion
@@ -9635,10 +9632,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         string[] files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
         trailerFiles.AddRange(files.Where(filefound => (filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl") || filefound.ToLower().Contains("clip")) && Utils.IsVideo(filefound)));
       }
-
       #endregion
 
-      #region extended search - Search Filenames with "title" in extended Trailer Searchpathes
+      #region Search files in MyFilms subdirectory (used by TMDB trailer loader if not stored in movie dir)
+      if (!string.IsNullOrEmpty(MyFilms.conf.StrDirStorTrailer))
+      {
+        string newpath = Path.Combine(Path.Combine(MyFilms.conf.StrDirStorTrailer + @"MyFilms\", directoryname.Substring(directoryname.LastIndexOf("\\", StringComparison.Ordinal) + 1)), "Trailer");
+        LogMyFilms.Debug("SearchTrailerLocal() - search TMDB download trailer in '" + newpath + "'");
+        if (Directory.Exists(newpath))
+        {
+          string[] files = Directory.GetFiles(newpath, "*.*", SearchOption.AllDirectories);
+          trailerFiles.AddRange(files.Where(Utils.IsVideo));
+        }
+        else
+        {
+          LogMyFilms.Debug("SearchTrailerLocal() - path does not exist: '" + newpath + "'");
+        }
+      }
+      #endregion
+
+      #region Extended search - Search Filenames with "title" in extended Trailer Searchpathes
       if (extendedSearch && !string.IsNullOrEmpty(MyFilms.conf.StrDirStorTrailer))
       {
         LogMyFilms.Debug("SearchTrailerLocal - starting ExtendedSearch in Searchdirectory: '" + MyFilms.conf.StrDirStorTrailer + "'");
@@ -9650,7 +9663,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("(TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "', search title1: '" + titlename.ToLower() + "', search title2: '" + titlename2.ToLower() + "'");
           string[] files = Directory.GetFiles(storage, "*.*", SearchOption.TopDirectoryOnly);
           trailerFiles.AddRange(files.Where(MediaPortal.Util.Utils.IsVideo).Where(item => (!string.IsNullOrEmpty(titlename) && item.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && item.ToLower().Contains(titlename2.ToLower()))));
-
           #endregion
 
           #region Now search for subdirectories matching the movie and add the content of them as result
@@ -9683,7 +9695,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (trailerFiles.Count > 0)
       {
-        LogMyFilms.Debug("(SearchTrailerLocal) - Total Files found: '" + trailerFiles.Count + "'");
+        LogMyFilms.Debug("SearchTrailerLocal() - Total Files found: '" + trailerFiles.Count + "'");
         trailerFiles.AddRange(oldTrailerFiles);
         trailerFiles = trailerFiles.Select(x => x.Trim()).Distinct().ToList().Select(f => new FileInfo(f)).OrderByDescending(f => f.Length).Select(x => x.FullName).ToList();
         string newtrailerentry = "";
@@ -9692,216 +9704,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (newtrailerentry.Length > 0) newtrailerentry += ";";
           newtrailerentry += trailerFile;
         }
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Old Trailersourcepath: '" + MyFilms.r[index][MyFilms.conf.StrStorageTrailer] + "'");
+        LogMyFilms.Debug("SearchTrailerLocal() - Old Trailersourcepath: '" + MyFilms.r[index][MyFilms.conf.StrStorageTrailer] + "'");
         MyFilms.r[index][MyFilms.conf.StrStorageTrailer] = newtrailerentry;
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - New Trailersourcepath    : '" + MyFilms.r[index][MyFilms.conf.StrStorageTrailer] + "'");
-        Update_XML_database();
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Database Updated !!!!");
+        LogMyFilms.Debug("SearchTrailerLocal() - New Trailersourcepath    : '" + MyFilms.r[index][MyFilms.conf.StrStorageTrailer] + "'");
+        if (saveresult)
+        {
+          Update_XML_database();
+          LogMyFilms.Debug("SearchTrailerLocal() - Database Updated !!!!");
+        }
       }
       else
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
+        LogMyFilms.Debug("SearchTrailerLocal() - NO TRAILERS FOUND !!!!");
     }
-
-    //-------------------------------------------------------------------------------------------
-    //  Search All Trailerfiles locally
-    //-------------------------------------------------------------------------------------------        
-    public static void SearchTrailerLocalOld(DataRow[] r1, int index, bool extendedSearch)
-    {
-      LogMyFilms.Debug("(SearchTrailerLocal) - mastertitle      : '" + MyFilms.r[index][MyFilms.conf.StrTitle1] + "'");
-      if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
-        LogMyFilms.Debug("(SearchTrailerLocal) - secondary title  : '" + MyFilms.r[index][MyFilms.conf.StrTitle2] + "'");
-      LogMyFilms.Debug("(SearchTrailerLocal) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
-      LogMyFilms.Debug("(SearchtrailerLocal) - Index            : '" + index + "'");
-      LogMyFilms.Debug("(SearchtrailerLocal) - StrDirStortrailer: '" + MyFilms.conf.StrDirStorTrailer + "'");
-      LogMyFilms.Debug("(SearchtrailerLocal) - FullMediasource  : '" + (string)MyFilms.r[index][MyFilms.conf.StrStorage].ToString().Trim() + "'");
-
-      result = new ArrayList();
-      var resultsize = new ArrayList();
-      var filesfound = new string[100];
-      var filesfoundsize = new Int64[100];
-      int filesfoundcounter = 0;
-      string file = MyFilms.r[index][MyFilms.conf.StrTitle1].ToString();
-      string titlename = MyFilms.r[index][MyFilms.conf.StrTitle1].ToString();
-      string titlename2 = "";
-      if (Helper.FieldIsSet(MyFilms.conf.StrTitle2))
-        titlename2 = MyFilms.r[index][MyFilms.conf.StrTitle2].ToString();
-      string directoryname = "";
-      string movieName = "";
-      string[] files = null;
-      Int64 wsize = 0; // Temporary Filesize detection
-      LogMyFilms.Debug("(SearchtrailerLocal) Extended Search '" + extendedSearch + "' for movie '" + file + "' in search directories: '" + MyFilms.conf.StrDirStorTrailer + "'");
-
-      //Retrieve original directory of mediafiles
-      //directoryname
-      movieName = MyFilms.r[index][MyFilms.conf.StrStorage].ToString().Trim();
-      movieName = movieName.Substring(movieName.LastIndexOf(";", System.StringComparison.Ordinal) + 1);
-      LogMyFilms.Debug("(SearchtrailerLocal) splits media directory name: '" + movieName + "'");
-      try
-      { directoryname = Path.GetDirectoryName(movieName); }
-      catch
-      { directoryname = ""; }
-      LogMyFilms.Debug("(SearchtrailerLocal) get media directory name: '" + directoryname + "'");
-      if (!Directory.Exists(directoryname))
-      {
-        directoryname = "";
-        LogMyFilms.Debug("(SearchtrailerLocal) directory of movie '" + movieName + "' doesn't exist anymore - check your DB");
-      }
-
-      //Search Files in Mediadirectory
-      if (!string.IsNullOrEmpty(directoryname))
-      {
-        files = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories);
-        foreach (string filefound in files.Where(filefound => (filefound.ToLower().Contains("trailer") || filefound.ToLower().Contains("trl") || filefound.ToLower().Contains("clip")) && MediaPortal.Util.Utils.IsVideo(filefound)))
-        {
-          wsize = new FileInfo(filefound).Length;
-          result.Add(filefound);
-          resultsize.Add(wsize);
-          filesfound[filesfoundcounter] = filefound;
-          filesfoundsize[filesfoundcounter] = new FileInfo(filefound).Length;
-          filesfoundcounter = filesfoundcounter + 1;
-          LogMyFilms.Debug("(TrailersearchLocal) - FilesFound in MediaDir: Size '" + wsize + "' - Name '" + filefound + "'");
-        }
-      }
-
-      //Search Filenames with "title" in Trailer Searchpath
-      if (extendedSearch && !string.IsNullOrEmpty(MyFilms.conf.StrDirStorTrailer))
-      {
-        LogMyFilms.Debug("SearchTrailerLocal - starting ExtendedSearch in Searchdirectory: '" + MyFilms.conf.StrDirStorTrailer.ToString() + "'");
-        // split searchpath information delimited by semicolumn (multiple searchpathes from config)
-        string[] trailerdirectories = MyFilms.conf.StrDirStorTrailer.Split(new Char[] { ';' });
-        foreach (string storage in trailerdirectories)
-        {
-          LogMyFilms.Debug("(TrailersearchLocal) - TrailerSearchDirectory: '" + storage + "', search title1: '" + titlename.ToLower() + "', search title2: '" + titlename2.ToLower() + "'");
-          // First search rootdirectory
-          files = Directory.GetFiles(storage, "*.*", SearchOption.TopDirectoryOnly);
-          foreach (string filefound in files)
-          {
-            LogMyFilms.Debug(
-              "(TrailersearchLocal) - Files found in root dir to check matching: '" + filefound + "'");
-            if ((!string.IsNullOrEmpty(titlename) && filefound.ToLower().Contains(titlename.ToLower())) ||
-                (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower())) &&
-                (MediaPortal.Util.Utils.IsVideo(filefound)))
-            {
-              wsize = new FileInfo(filefound).Length;
-              result.Add(filefound);
-              resultsize.Add(wsize);
-              filesfound[filesfoundcounter] = filefound;
-              filesfoundsize[filesfoundcounter] = new FileInfo(filefound).Length;
-              filesfoundcounter = filesfoundcounter + 1;
-              LogMyFilms.Debug("(TrailersearchLocal) - Matching Singlefiles found in TrailerRootDIR: Size '" + wsize + "' - Name '" + filefound + "'");
-            }
-          }
-
-          // Now search subdirectories
-          string[] directories = Directory.GetDirectories(storage, "*.*", SearchOption.AllDirectories);
-          foreach (string directoryfound in directories)
-          {
-            LogMyFilms.Debug(
-              "(TrailersearchLocal) - Directory found to check matching: '" + directoryfound + "'");
-            // check for directories with title name
-            // if ((!string.IsNullOrEmpty(titlename) && directoryfound.ToString().ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && directoryfound.ToString().ToLower().Contains(titlename2.ToLower())))
-            if (Utility.ContainsAll(directoryfound, titlename, ":") || Utility.ContainsAll(directoryfound, titlename2, ":"))
-            {
-              LogMyFilms.Debug("(TrailersearchLocal) - Matching Directory found : '" + directoryfound + "'");
-              files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files.Where(MediaPortal.Util.Utils.IsVideo))
-              {
-                wsize = new FileInfo(filefound).Length;
-                result.Add(filefound);
-                resultsize.Add(wsize);
-                filesfound[filesfoundcounter] = filefound;
-                filesfoundsize[filesfoundcounter] = new System.IO.FileInfo(filefound).Length;
-                filesfoundcounter = filesfoundcounter + 1;
-                LogMyFilms.Debug("(TrailersearchLocal) - Files added matching Directory: Size '" + wsize + "' - Name '" + filefound + "'");
-              }
-            }
-            else
-            {
-              files = Directory.GetFiles(directoryfound, "*.*", SearchOption.AllDirectories);
-              foreach (string filefound in files)
-              {
-                LogMyFilms.Debug(
-                  "(TrailersearchLocal) - Files found in sub dir to check matching: '" + filefound + "'");
-                // if (((!string.IsNullOrEmpty(titlename) && filefound.ToLower().Contains(titlename.ToLower())) || (!string.IsNullOrEmpty(titlename2) && filefound.ToLower().Contains(titlename2.ToLower()))) && (MediaPortal.Util.Utils.IsVideo(filefound)))
-                if (Utility.ContainsAll(filefound, titlename, ":") || Utility.ContainsAll(filefound, titlename2, ":") && MediaPortal.Util.Utils.IsVideo(filefound))
-                {
-                  wsize = new FileInfo(filefound).Length;
-                  result.Add(filefound);
-                  resultsize.Add(wsize);
-                  filesfound[filesfoundcounter] = filefound;
-                  filesfoundsize[filesfoundcounter] = new FileInfo(filefound).Length;
-                  filesfoundcounter = filesfoundcounter + 1;
-                  LogMyFilms.Debug("(TrailersearchLocal) - Matching Singlefiles found in TrailerDIR: Size '" + wsize + "' - Name '" + filefound + "'");
-                }
-              }
-            }
-          }
-        }
-      }
-
-      var sort = from fn in filesfound
-                 orderby new FileInfo(fn).Length descending
-                 select fn;
-      foreach (string n in filesfound.Where(n => !string.IsNullOrEmpty(n)))
-      {
-        LogMyFilms.Debug("(Sorted Trailerfiles) ******* : '" + n + "'");
-      }
-
-      Array.Sort(filesfoundsize);
-      for (int i = 0; i < result.Count; i++)
-      {
-        if (!string.IsNullOrEmpty(filesfound[i])) LogMyFilms.Debug("(Sorted Trailerfiles) ******* : Number: '" + i + "' - Size: '" + filesfoundsize[i] + "' - Name: '" + filesfound[i] + "'");
-      }
-
-      string trailersourcepath = "";
-
-      if (result.Count != 0)
-      {
-        //result.Sort();
-        trailersourcepath = result[0].ToString();
-        //ArrayList wresult = new ArrayList();
-        //foreach (String s in result)
-        if (result.Count > 1)
-        {
-          for (int i = 1; i < result.Count; i++)
-          {
-            if (!trailersourcepath.Contains(result[i].ToString()))
-            {
-              trailersourcepath = trailersourcepath + ";" + result[i];
-              LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Added Trailer to Trailersource: '" + result[i] + "'");
-            }
-            else
-            {
-              LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - NOT added Trailer to Trailersource (DUPE): '" + result[i] + "'");
-            }
-          }
-        }
-        LogMyFilms.Debug("(SearchTrailerLocal) - Total Files found: '" + result.Count + "', TrailerSourcePath: '" + trailersourcepath + "'");
-      }
-
-      else
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - NO TRAILERS FOUND !!!!");
-
-      if ((trailersourcepath.Length > 0) && Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
-      {
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Old Trailersourcepath: '" + MyFilms.r[index][MyFilms.conf.StrStorageTrailer] + "'");
-        MyFilms.r[index][MyFilms.conf.StrStorageTrailer] = trailersourcepath;
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - New Trailersourcepath    : '" + MyFilms.r[index][MyFilms.conf.StrStorageTrailer] + "'");
-        Update_XML_database();
-        LogMyFilms.Debug("MyFilmsDetails (SearchTrailerLocal) - Database Updated !!!!");
-      }
-    }
-
 
     //-------------------------------------------------------------------------------------------
     //  Delete Trailer Entries From DB
     //-------------------------------------------------------------------------------------------        
-    public static void DeleteTrailerFromDB(DataRow[] r1, int Index)
+    public static void DeleteTrailerFromDB(DataRow[] r1, int index)
     {
-      MyFilms.r[Index][MyFilms.conf.StrStorageTrailer] = string.Empty;
-      LogMyFilms.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Trailer entries Deleted for Current Movie !");
+      MyFilms.r[index][MyFilms.conf.StrStorageTrailer] = string.Empty;
+      LogMyFilms.Debug("DeleteTrailerFromDB() - Trailer entries Deleted for Current Movie !");
       Update_XML_database();
-      LogMyFilms.Debug("MyFilmsDetails (DeleteTrailerFromDB) - Database Updated !");
+      LogMyFilms.Debug("DeleteTrailerFromDB() - Database Updated !");
     }
 
     private static void HandleWakeUpNas()
