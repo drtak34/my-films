@@ -12814,7 +12814,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       bool filter = true;
       if (dlg == null) return;
 
-      conf.StrSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
+      conf.StrSelect = conf.StrViewSelect = conf.StrTitleSelect = conf.StrTxtSelect = ""; //clear all selects
       conf.WStrSort = conf.StrSTitle;
       conf.Boolselect = false;
       conf.Boolreturn = false;
