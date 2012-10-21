@@ -3577,9 +3577,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
     {
+      if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0")) return false;
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":-1")) return false;
-      // if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
       return true; // count > 0 -> return true
     }
 
