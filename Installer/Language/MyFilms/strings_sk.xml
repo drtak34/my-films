@@ -402,6 +402,12 @@
     <String id="10798970">Global filter "choose custom filter" ({0})</String>
     <String id="10798971">Global filter "disable custom filter" ({0})</String>
     <String id="10798980">Play random trailers</String>
+    <String id="10798981">Trailer Scrobbling ...</String>
+    <String id="10798982">Play next Trailer ?</String>
+    <String id="10798983">Cancel</String>
+    <String id="10798984">Next Trailer</String>
+    <String id="10798985">Do you want to play the main movie ?</String>
+    <String id="10798986">MyFilms Movie Preview</String>
     <String id="10799201">MyFilms Cover Manager</String>
     <String id="10799202">Resolution</String>
     <String id="10799203">Filter ...</String>

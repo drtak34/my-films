@@ -316,6 +316,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     internal const int ID_MyFilmsCoverManager = 7992;
     internal const int ID_MyFilmsDialogMultiSelect = 7993;
     internal const int ID_MyFilmsFanartManager = 7994;
+    internal const int ID_MyFilmsFullScreen = 7995;
+    internal const int ID_MyFilmsTrailerOSD = 7996;
 
     internal const int ID_BrowseTheWeb = 54537689;
     internal const int ID_OnlineVideos = 4755;
@@ -503,8 +505,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static List<string> currentFanartList = new List<string>();
 
     // current Trailer List for Scrobbling
-    private static List<MFMovie> currentTrailerMoviesList = new List<MFMovie>();
-    public static MFMovie currentTrailerPlayingItem = null;
+    internal static List<MFMovie> currentTrailerMoviesList = new List<MFMovie>();
+    internal static MFMovie currentTrailerPlayingItem = null;
     public static bool trailerscrobbleactive = false;
 
     //PlayList currentPlaylist = null;
@@ -5104,8 +5106,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         #region add online info entry
-        if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
-        {
+        //if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
+        //{
           item = new GUIListItem();
           item.Label = "*** " + GUILocalizeStrings.Get(10798825) + " ***"; // 10798825 online information
           item.DVDLabel = "onlineinfo";
@@ -5115,7 +5117,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.IconImageBig = item.ThumbnailImage;
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
           if (facadeFilms != null) facadeFilms.Add(item);
-        }
+        //}
         #endregion
       }
       else
@@ -10866,12 +10868,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          // play random movies or trailers in "view context" (selected group)
-          if (MyFilmsDetail.ExtendedStartmode("Context: random trailer scrobbling in views context"))
-          {
+          //// play random movies or trailers in "view context" (selected group)
+          //if (MyFilmsDetail.ExtendedStartmode("Context: random trailer scrobbling in views context"))
+          //{
             dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
             updChoice.Add("playrandomtrailers");
-          }
+          //}
         }
 
         if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
@@ -13228,9 +13230,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("PlayRandomTrailersInit() - currentLabel = '" + currentLabel + "', showCategorySelection = '" + showCategorySelection + "'");
       currentTrailerMoviesList.Clear();
-      // string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-      // DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
 
+      #region Collect films with trailers in active view
       foreach (DataRow sr in r.Where(sr => Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer) && sr[MyFilms.conf.StrStorageTrailer].ToString().Trim() != ""))
       {
         try
@@ -13238,15 +13239,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var movie = new MFMovie();
           movie.Config = Configuration.CurrentConfig; // MF config context
           movie.ID = !string.IsNullOrEmpty(sr["Number"].ToString()) ? Int32.Parse(sr["Number"].ToString()) : 0;
-          movie.Year = Int32.Parse(sr["Year"].ToString());
-          movie.Title = sr["OriginalTitle"].ToString();
+          int year = 1900;
+          movie.Year = (Int32.TryParse(sr["Year"].ToString(), out year)) ? year : 1900;
+          movie.Title = Helper.TitleWithoutGroupName(sr["OriginalTitle"].ToString());
+          movie.TranslatedTitle = Helper.TitleWithoutGroupName(sr["TranslatedTitle"].ToString());
 
           string mediapath = string.Empty;
           if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer))
           {
             mediapath = sr[MyFilms.conf.StrStorageTrailer].ToString();
-            if (mediapath.Contains(";")) // take the first source file
-              mediapath = mediapath.Substring(0, mediapath.IndexOf(";")).Trim();
+            if (mediapath.Contains(";")) mediapath = mediapath.Substring(0, mediapath.IndexOf(";", StringComparison.Ordinal)).Trim();  // take the first source file
           }
           movie.File = mediapath;
           movie.Trailer = mediapath;
@@ -13259,6 +13261,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Error("add movie exception - err:{0} stack:{1}", mex.Message, mex.StackTrace);
         }
       }
+      #endregion
+
       #region Remove any blocked movies (disabled)
       //moviesToPlay.RemoveAll(movie => TraktSettings.BlockedFolders.Any(f => movie.Path.Contains(f)));
 
@@ -13272,9 +13276,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
       #endregion
 
-      // we now have a list with movies matching the choice and their index/number value -> now do loop for selection
-      // for (int i = 0; i < currentTrailerMoviesList.Count; i++) LogMyFilms.Debug("(ResultList) - Index: '" + i + "' - Number: '" + currentTrailerMoviesList[i].ID + "'");
-      LogMyFilms.Debug("(ResultBuildIndex) Found " + currentTrailerMoviesList.Count + " Records");
+      LogMyFilms.Debug("PlayRandomTrailersInit() - Found " + currentTrailerMoviesList.Count + " Records with trailers in current view");
       if (currentTrailerMoviesList.Count == 0)
       {
         ShowMessageDialog(GUILocalizeStrings.Get(10798621), "Suchergebnis: 0", "Keine Filme in der Auswahl vorhanden"); // menu for random search
@@ -13286,44 +13288,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void OnTrailerEnded(string filename)
     {
       LogMyFilms.Debug("OnTrailerEnded(): Received TrailerEnded event with filename '" + filename + "', trailerscrobbleactive = '" + trailerscrobbleactive + "'");
-      // if (MyFilms.trailerscrobbleactive) MyFilms.trailerscrobbleactive = false;
+      if (MyFilms.trailerscrobbleactive) MyFilms.trailerscrobbleactive = false;
 
       new Thread(delegate()
       {
         {
-          // GUIWaitCursor.Init(); GUIWaitCursor.Show(); 
           Thread.Sleep(2000);
           // GUIControl.ShowControl(GetID, 34);
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
           {
-            {
-              PlayRandomTrailer(true);
-            }
+            PlayRandomTrailer(true);
             return 0;
           }, 0, 0, null);
       }) { Name = "MyFilmsLaunchPlayRandomTrailer", IsBackground = true }.Start();
     }
 
-    private void PlayRandomTrailer(bool showMenu)
+    internal void PlayRandomTrailer(bool showMenu)
     {
       LogMyFilms.Debug("PlayRandomTrailer() - showMenu = '" + showMenu + "'");
       if (showMenu)
       {
-        GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-        dlgYesNo.SetHeading("Wollen Sie den Hauptfilm sehen?");
-        //dlgYesNo.SetLine(1, MyFilms.r[Convert.ToInt32(w_index[RandomNumber])]["Originaltitle"].ToString());
-        //dlgYesNo.SetLine(2, "Current ID = '" + w_index[RandomNumber] + "'");
-        dlgYesNo.SetLine(2, "Und nu ?");
+        var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+        dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798981)); // Trailer Scrobbling ...
+        dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798982)); // Play next Trailer ?
         dlgYesNo.TimeOut = 10;
-        dlgYesNo.SetYesLabel("Options");
-        dlgYesNo.SetNoLabel("Next Trailer");
+        dlgYesNo.SetYesLabel(GUILocalizeStrings.Get(10798983)); // Cancel
+        dlgYesNo.SetNoLabel(GUILocalizeStrings.Get(10798984)); // Next Trailer
         dlgYesNo.SetDefaultToYes(false);
         dlgYesNo.DoModal(ID_MyFilms);
         if (dlgYesNo.IsConfirmed)
         {
-          TrailerScrobbleOptionsMenu(0);
-          //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
+          trailerscrobbleactive = false;
+          // TrailerScrobbleOptionsMenu(0);
+          // MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
           return;
         }
       }
@@ -13332,21 +13330,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var rnd = new Random();
       Int32 randomNumber = rnd.Next(currentTrailerMoviesList.Count);
       LogMyFilms.Debug("RandomNumber: '" + randomNumber + "', Record: '" + currentTrailerMoviesList[randomNumber].ID + "', RandomTitle: '" + currentTrailerMoviesList[randomNumber].Title + "'");
-      //for (int i = 0; i < facadeFilms.Count; i++)
-      //{
-      //  facadeFilms[i].Label
-      //  // Do something here
-      //}
 
-      var trailer = new ArrayList();
-      trailer.Add(currentTrailerMoviesList[randomNumber].File);
+      var trailer = new ArrayList { currentTrailerMoviesList[randomNumber].File };
       currentTrailerPlayingItem = currentTrailerMoviesList[randomNumber];
+
+      // set the active movie in facade
+      for (int i = 0; i < MyFilms.r.Length; i++)
+      {
+        DataRow sr = r[i];
+        if (!string.IsNullOrEmpty(sr["Number"].ToString()) && MyFilms.currentTrailerPlayingItem != null && MyFilms.currentTrailerPlayingItem.ID == Int32.Parse(sr["Number"].ToString()))
+        {
+          MyFilms.conf.StrIndex = i;
+          MyFilms.conf.StrTIndex = sr[MyFilms.conf.StrTitle1].ToString();
+          try
+          {
+            for (int ii = 0; i < facadeFilms.Count; ii++)
+            {
+              if (facadeFilms[ii].Label == MyFilms.conf.StrTIndex)
+              {
+                GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, ii);
+                // facadeFilms.SelectedListItemIndex = ii;
+                break;
+              }
+            }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("PlayRandonTrailer() - error: " + ex.StackTrace);
+          }
+        }
+      }
       trailerscrobbleactive = true;
 
       MyFilmsDetail.trailerPlayed = true;
-      // MyFilmsDetail.trailerScrobblingMode = true;
-      // MyFilmsDetail.Launch_Movie_Trailer(MyFilms.conf.StrIndex, GetID, m_SearchAnimation);
-
       MyFilmsDetail.Launch_Movie_Trailer_Scrobbling(trailer, ID_MyFilms);
     }
 
@@ -13440,7 +13456,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg1YesNo.DoModal(ID_MyFilms);
             if (dlg1YesNo.IsConfirmed)
               //Launch_Movie(select_item, GetID, m_SearchAnimation);
-              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
+              MyFilmsDetail.Launch_Movie(facadeFilms.SelectedListItem.ItemId, GetID, null, false);
             //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
             break;
           case "NewSearch":
