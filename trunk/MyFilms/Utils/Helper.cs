@@ -469,6 +469,30 @@ namespace MyFilmsPlugin.MyFilms.Utils
     }
 
     /// <summary>
+    /// Removes the group name from MyFilms title
+    /// </summary>
+    /// <param name="fullTitleName"></param>
+    /// <returns></returns>
+    public static string TitleWithoutGroupName(string fullTitleName)
+    {
+      return fullTitleName.Contains("\\") ? fullTitleName.Substring(fullTitleName.LastIndexOf("\\", StringComparison.Ordinal) + 1) : fullTitleName;
+    }
+
+    public static string PicturePath(string dbPictureValue, string coverPath, string defaultcover)
+    {
+      string pictureFile = "";
+      if (dbPictureValue.Length > 0)
+      {
+        if (dbPictureValue.IndexOf(":\\", StringComparison.Ordinal) == -1 && dbPictureValue.Substring(0, 2) != "\\\\")
+          pictureFile = coverPath + "\\" + dbPictureValue;
+        else
+          pictureFile = dbPictureValue;
+      }
+      if (string.IsNullOrEmpty(pictureFile) || !File.Exists(pictureFile)) pictureFile = defaultcover;
+      return pictureFile;
+    }
+
+    /// <summary>
     /// Returns a string limited by length
     /// </summary>
     /// <param name="sName"></param>

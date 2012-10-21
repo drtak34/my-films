@@ -7945,6 +7945,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           newitem.Type = PlayListItem.PlayListItemType.Video;
           playlist.Add(newitem);
         }
+        MyFilms.trailerscrobbleactive = true; // needs to be set active again here
+        // set OSD values
+        try
+        {
+          SetDelayedGuiPropertiesNowPlayingTrailer(MyFilms.currentTrailerPlayingItem);
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Info("Error setting OSD properties: " + ex.StackTrace);
+        }
         PlayMovieFromPlayListTrailer(0);
       }
     }
@@ -8408,43 +8418,73 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // start a thread that will set the properties in 2 seconds (otherwise MediaPortal core logic would overwrite them)
       if (rowPlaying == null) return;
       new Thread(delegate(object o)
+      {
+        try
+        {
+          var movie = o as DataRow;
+          // string alternativeTitle = video["TranslatedTitle"].ToString();
+
+          #region Cover
+          string pictureFile = string.Empty;
+          if (movie["Picture"].ToString().Length > 0)
           {
-            try
-            {
-              var movie = o as DataRow;
-              // string alternativeTitle = video["TranslatedTitle"].ToString();
+            if ((movie["Picture"].ToString().IndexOf(":\\", System.StringComparison.Ordinal) == -1) && (movie["Picture"].ToString().Substring(0, 2) != "\\\\"))
+              pictureFile = MyFilms.conf.StrPathImg + "\\" + movie["Picture"].ToString();
+            else
+              pictureFile = movie["Picture"].ToString();
+          }
+          if (string.IsNullOrEmpty(pictureFile) || !File.Exists(pictureFile))
+            pictureFile = MyFilms.conf.DefaultCover;
+          #endregion
 
-              #region Cover
-              string pictureFile = string.Empty;
-              if (movie["Picture"].ToString().Length > 0)
-              {
-                if ((movie["Picture"].ToString().IndexOf(":\\", System.StringComparison.Ordinal) == -1) && (movie["Picture"].ToString().Substring(0, 2) != "\\\\"))
-                  pictureFile = MyFilms.conf.StrPathImg + "\\" + movie["Picture"].ToString();
-                else
-                  pictureFile = movie["Picture"].ToString();
-              }
-              if (string.IsNullOrEmpty(pictureFile) || !File.Exists(pictureFile))
-                pictureFile = MyFilms.conf.DefaultCover;
-              #endregion
+          Thread.Sleep(2000);
 
-              Thread.Sleep(2000);
+          string titleToShow = movie[MyFilms.conf.StrTitle1].ToString();
+          if (titleToShow.Contains("\\")) titleToShow = titleToShow.Substring(titleToShow.LastIndexOf("\\") + 1); // strip group names ...
 
-              string titleToShow = movie[MyFilms.conf.StrTitle1].ToString();
-              if (titleToShow.Contains("\\")) titleToShow = titleToShow.Substring(titleToShow.LastIndexOf("\\") + 1); // strip group names ...
+          LogMyFilms.Debug("Setting Video Properties for '{0}'", titleToShow);
 
-              LogMyFilms.Debug("Setting Video Properties for '{0}'", titleToShow);
+          if (!string.IsNullOrEmpty(titleToShow)) GUIPropertyManager.SetProperty("#Play.Current.Title", titleToShow);
+          if (!string.IsNullOrEmpty(movie["Description"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Plot", movie["Description"].ToString());
+          if (!string.IsNullOrEmpty(movie["Year"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Year", movie["Year"].ToString());
 
-              if (!string.IsNullOrEmpty(titleToShow)) GUIPropertyManager.SetProperty("#Play.Current.Title", titleToShow);
-              if (!string.IsNullOrEmpty(movie["Description"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Plot", movie["Description"].ToString());
-              if (!string.IsNullOrEmpty(movie["Year"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Year", movie["Year"].ToString());
+          if (!string.IsNullOrEmpty(pictureFile)) GUIPropertyManager.SetProperty("#Play.Current.Thumb", pictureFile);
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Warn("Error setting playing video properties: {0}", ex.ToString());
+        }
+      }) { IsBackground = true, Name = "MyFilmsSetNowPlayingProperties" }.Start(rowPlaying);
+    }
 
-              if (!string.IsNullOrEmpty(pictureFile)) GUIPropertyManager.SetProperty("#Play.Current.Thumb", pictureFile);
-            }
-            catch (Exception ex)
-            {
-              LogMyFilms.Warn("Error setting playing video properties: {0}", ex.ToString());
-            }
-          }) { IsBackground = true, Name = "MyFilmsSetNowPlayingProperties" }.Start(rowPlaying);
+    private static void SetDelayedGuiPropertiesNowPlayingTrailer(MFMovie rowPlaying)
+    {
+      // start a thread that will set the properties in 2 seconds (otherwise MediaPortal core logic would overwrite them)
+      if (rowPlaying == null) return;
+      new Thread(delegate(object o)
+      {
+        try
+        {
+          var movie = o as MFMovie;
+          string pictureFile = Helper.PicturePath(MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString(), MyFilms.conf.StrPathImg, MyFilms.conf.DefaultCover);
+
+          Thread.Sleep(2000);
+          string titleToShow = Helper.TitleWithoutGroupName(rowPlaying.TranslatedTitle) + " (" + Helper.TitleWithoutGroupName(rowPlaying.Title) + ") - " + rowPlaying.Year.ToString();
+          LogMyFilms.Debug("Setting Video Properties for '{0}'", titleToShow);
+
+          if (!string.IsNullOrEmpty(titleToShow)) GUIPropertyManager.SetProperty("#Play.Current.Title", "Trailer: " + titleToShow);
+          if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Plot", MyFilms.r[MyFilms.conf.StrIndex]["Description"].ToString());
+          if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString())) GUIPropertyManager.SetProperty("#Play.Current.Year", MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString());
+          if (!string.IsNullOrEmpty(pictureFile)) GUIPropertyManager.SetProperty("#Play.Current.Thumb", pictureFile);
+
+          Thread.Sleep(1000); // make sure, refreshrate notification is over ...
+          ShowNotificationDialog(GUILocalizeStrings.Get(10798986), titleToShow); // MyFilms Movie Preview
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Warn("Error setting playing video properties: {0}", ex.ToString());
+        }
+      }) { IsBackground = true, Name = "MyFilmsSetNowPlayingProperties" }.Start(rowPlaying);
     }
 
     private void GUIWindowManager_OnNewAction(MediaPortal.GUI.Library.Action action)
@@ -8471,18 +8511,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // dlgYesNo.SetNoLabel("Cancel");
               dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
               //dlgYesNo.DoModal(GetID);
-              if (!(dlgYesNo.IsConfirmed))
-                return;
+              if (!(dlgYesNo.IsConfirmed)) return;
               Menu_CreateFanart_OnMoviePosition_Parameterized(duration, currentposition, file, title);
             }
             break;
           }
         case MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY:
+        case MediaPortal.GUI.Library.Action.ActionType.ACTION_SELECT_ITEM:
           {
             if (MyFilms.trailerscrobbleactive)
             {
               LogMyFilms.Debug("GUIWindowManager_OnNewAction(): Trailer Action: Play main movie");
-              // ToDo: Play main movie
+              var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+              dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798981)); // Trailer Scrobbling ...
+              dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798985)); // Do you want to play the main movie ?
+              dlgYesNo.SetLine(2, "'" + MyFilms.currentTrailerPlayingItem.TranslatedTitle + "'");
+              dlgYesNo.SetLine(3, "(" + MyFilms.currentTrailerPlayingItem.Title + ") - " + MyFilms.currentTrailerPlayingItem.Year.ToString());
+              dlgYesNo.TimeOut = 10;
+              //dlgYesNo.SetYesLabel("Options");
+              //dlgYesNo.SetNoLabel("Next Trailer");
+              dlgYesNo.SetDefaultToYes(false);
+              dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
+              if (dlgYesNo.IsConfirmed)
+              {
+                Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
+                return;
+              }
+              else
+                dlgYesNo.DeInit();
             }
             break;
           }
@@ -8492,7 +8548,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               LogMyFilms.Debug("GUIWindowManager_OnNewAction(): Trailer Action: Show Options menu");
               // ToDo: Show Options menu
-
             }
             break;
           }
@@ -8501,6 +8556,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (MyFilms.trailerscrobbleactive)
             {
               // ToDo: Play next Trailer
+              var rnd = new Random();
+              Int32 randomNumber = rnd.Next(MyFilms.currentTrailerMoviesList.Count);
+              LogMyFilms.Debug("RandomNumber: '" + randomNumber + "', Record: '" + MyFilms.currentTrailerMoviesList[randomNumber].ID + "', RandomTitle: '" + MyFilms.currentTrailerMoviesList[randomNumber].Title + "'");
+
+              var trailer = new ArrayList { MyFilms.currentTrailerMoviesList[randomNumber].File };
+              MyFilms.currentTrailerPlayingItem = MyFilms.currentTrailerMoviesList[randomNumber];
+
+              // set the active movie in facade
+              for (int i = 0; i < MyFilms.r.Length; i++)
+              {
+                DataRow sr = MyFilms.r[i];
+                if (!string.IsNullOrEmpty(sr["Number"].ToString()) && MyFilms.currentTrailerPlayingItem.ID == Int32.Parse(sr["Number"].ToString()))
+                {
+                  MyFilms.conf.StrIndex = i;
+                  MyFilms.conf.StrTIndex = sr[MyFilms.conf.StrTitle1].ToString();
+                }
+              }
+              
+              g_Player.Stop();
+              MyFilms.trailerscrobbleactive = true;
+              trailerPlayed = true;
+              Launch_Movie_Trailer_Scrobbling(trailer, MyFilms.ID_MyFilmsDetail);
             }
             break;
           }
@@ -10083,7 +10160,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //playMovie(queuedMedia.AttachedMovies[0], queuedMedia.Part);
         return true;
       }
-
       return false;
     }
 
