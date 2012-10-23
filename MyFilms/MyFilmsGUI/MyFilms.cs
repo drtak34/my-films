@@ -7403,7 +7403,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string filename = MyFilms.conf.StrPathArtist + "\\" + personname + ".jpg";  // string filename = Path.Combine(MyFilms.conf.StrPathArtist, personname); //File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
               bool vdBexists = false;
 
-              item.Label = personFacadeName + " (updating...)";
+              item.Label = personFacadeName + " " + GUILocalizeStrings.Get(10799205); // (updating...)
 
               #region get person info from VDB
               item.Label3 = "Loading details from VDB ...";
