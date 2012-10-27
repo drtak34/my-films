@@ -145,7 +145,7 @@
     <String id="1079879">Infos sur les participants</String>
     <String id="1079880">Toujours utiliser la vue({0})par défaut au lancement</String>
     <String id="1079881">S'il vous plaît sélectionner la valeur pour l'évaluation minimale</String>
-    <String id="1079882">Mise à jour des informations personnelles(IMDB)</String>
+    <String id="1079882">Mise à jour des informations personnelles</String>
     <String id="1079883">Mettre à jour les infos des particpants(IMDB)</String>
     <String id="1079884">Détails sur l'acteur sélectionné</String>
     <String id="1079885">Filmographie de l'acteur sélectionné(IMDB)</String>
@@ -156,6 +156,7 @@
     <String id="1079890">Clips de la personne sélectionnée(IMDB)</String>
     <String id="1079891">Photos de la personne sélectionnée (IMDB)</String>
     <String id="1079892">Mise à jour ...</String>
+    <String id="1079893">Filmography (TMDB)</String>
     <String id="1079894">Marquer comme visionné(s)</String>
     <String id="1079895">Marquer comme non visionné(s)</String>
     <String id="1079896">Personnes</String>
