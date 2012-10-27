@@ -10706,6 +10706,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return false;
       string strUserProfileNameSelection = choiceGlobalUserProfileName[dlg.SelectedLabel];
 
+      #region create a backup copy of DB file
+      string backupcopy = conf.StrFileXml.Replace(".xml", " - backup - " + DateTime.Now.ToString().Replace(":", "-") + ".xml").Replace("/", "-");
+      try
+      {
+        File.Copy(conf.StrFileXml, backupcopy, true);
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("Delete_UserProfileName() - error creating backup copy - Exception: ", ex.Message);
+      }
+      LogMyFilms.Debug("Delete_UserProfileName() - finished creating a DB backupcopy to '" + backupcopy + "'");
+      #endregion
+
       #region delete all userdata for that selected user profile name
       LogMyFilms.Debug("Delete_UserProfileName() - Delete username '" + strUserProfileNameSelection + "' from DB");
       var watch = new Stopwatch(); watch.Reset(); watch.Start();
