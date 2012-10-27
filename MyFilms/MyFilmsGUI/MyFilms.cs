@@ -10558,8 +10558,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           keyboard.Reset();
           keyboard.Text = ""; // Default string is empty
           keyboard.DoModal(GetID);
-          if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text)))
+          if (keyboard.IsConfirmed && !string.IsNullOrEmpty(keyboard.Text))
+          {
+            #region create a backup copy of DB file
+            string backupcopy = conf.StrFileXml.Replace(".xml", " - backup - " + DateTime.Now.ToString().Replace(":", "-") + ".xml").Replace("/", "-");
+            try
+            {
+              File.Copy(conf.StrFileXml, backupcopy, true);
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Error("Change_UserProfileName() - error creating backup copy - Exception: ", ex.Message);
+            }
+            LogMyFilms.Debug("Change_UserProfileName() - finished creating a DB backupcopy to '" + backupcopy + "'");
+            #endregion
             conf.StrUserProfileName = keyboard.Text;
+          }
           else
             return;
           break;
