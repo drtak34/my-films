@@ -68,11 +68,13 @@ Public Class Form1
 #If Config = "Release" Then
         ToolStripMenuItemDebug.Visible = False
         ToolStripMenuItemOptions.Visible = False
+        BtnImportWatcher.Visible = False
         HideTabPage(ViewPersons)
         HideTabPage(ViewCatalog)
 #Else
         ToolStripMenuItemDebug.Visible = True
         ToolStripMenuItemOptions.Visible = True
+        BtnImportWatcher.Visible = True
 #End If
 
 
