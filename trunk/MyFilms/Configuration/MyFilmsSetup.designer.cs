@@ -585,7 +585,6 @@
           this.mailTextBox = new System.Windows.Forms.TextBox();
           this.siteTextBox = new System.Windows.Forms.TextBox();
           this.descriptionTextBox = new System.Windows.Forms.TextBox();
-          this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.Tab_OldStuff = new System.Windows.Forms.TabPage();
           this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -5857,7 +5856,6 @@
           this.Tab_Other.Controls.Add(this.siteTextBox);
           this.Tab_Other.Controls.Add(descriptionLabel);
           this.Tab_Other.Controls.Add(this.descriptionTextBox);
-          this.Tab_Other.Controls.Add(this.btnGrabberInterface);
           this.Tab_Other.Controls.Add(this.lblAMCupdaterConfigPreview);
           this.Tab_Other.Controls.Add(this.AMCConfigView);
           this.Tab_Other.Location = new System.Drawing.Point(4, 22);
@@ -6132,16 +6130,6 @@
           this.descriptionTextBox.Name = "descriptionTextBox";
           this.descriptionTextBox.Size = new System.Drawing.Size(134, 20);
           this.descriptionTextBox.TabIndex = 9;
-          // 
-          // btnGrabberInterface
-          // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(607, 40);
-          this.btnGrabberInterface.Name = "btnGrabberInterface";
-          this.btnGrabberInterface.Size = new System.Drawing.Size(134, 27);
-          this.btnGrabberInterface.TabIndex = 10;
-          this.btnGrabberInterface.Text = "Grabber Interface";
-          this.btnGrabberInterface.UseVisualStyleBackColor = true;
-          this.btnGrabberInterface.Click += new System.EventHandler(this.btnGrabberInterface_Click);
           // 
           // lblAMCupdaterConfigPreview
           // 
@@ -6843,7 +6831,6 @@
         private TextBox txtAMCUpd_cnf_Display;
         private LinkLabel linkLabelTrakt;
         private TabPage Tab_Other;
-        private Button btnGrabberInterface;
         private Label lblAMCupdaterConfigPreview;
         private ListView AMCConfigView;
         private ColumnHeader Option;
