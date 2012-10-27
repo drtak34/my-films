@@ -10547,8 +10547,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       dlg.DoModal(GetID);
-      if (dlg.SelectedLabel == -1)
-        return;
+      if (dlg.SelectedLabel == -1) return;
+
       string strUserProfileNameSelection = choiceGlobalUserProfileName[dlg.SelectedLabel];
       switch (strUserProfileNameSelection)
       {
@@ -10651,8 +10651,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
       }
       watch.Stop();
-      LogMyFilms.Debug("Change_UserProfileName() - finished updating DB fields... (" + (watch.ElapsedMilliseconds) + " ms)");
+      LogMyFilms.Debug("Change_UserProfileName() - finished updating DB fields ... (" + (watch.ElapsedMilliseconds) + " ms)");
       #endregion
+
+      watch.Reset(); watch.Start();
+      MyFilmsDetail.Update_XML_database();
+      watch.Stop();
+      LogMyFilms.Debug("Change_UserProfileName() - finished saving updated DB ... (" + (watch.ElapsedMilliseconds) + " ms)");
     }
 
     private bool Delete_UserProfileName()
