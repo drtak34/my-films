@@ -10929,7 +10929,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
-      #region Artistcontext
+      #region Personcontext
       if (this.facadeFilms.SelectedListItemIndex > -1 && this.facadeFilms.SelectedListItem.IsFolder && IsPersonField(conf.WStrSort) && (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll))
       {
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
@@ -10937,7 +10937,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
           updChoice.Add("artistdetail");
 
-          dlg.Add(GUILocalizeStrings.Get(1079884) + " (TMDB)"); // GetSelectFromTMDB
+          dlg.Add(GUILocalizeStrings.Get(1079893)); // Filmographie (TMDB)
           updChoice.Add("artistdetailtmdb");
         }
 
@@ -10953,11 +10953,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.Add(GUILocalizeStrings.Get(1079890)); //Show IMDB clips http://www.imdb.com/name/nm0000288/videogallery
         updChoice.Add("artistimdbclips");
 
+        dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB/TMDB
+        updChoice.Add("updateperson");
+
         if (MyFilmsDetail.ExtendedStartmode("Context Artist: IMDB all sort of details and updates (several entries)"))
         {
-          dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB and create actorthumbs - optional: load mediathek for person backdrops etc.
-          updChoice.Add("updateperson");
-
           if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
           {
             dlg.Add(GUILocalizeStrings.Get(1079899)); //Update Internet Person Details
@@ -16094,7 +16094,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             actorId = Convert.ToInt32(strActor[0]); // IMDBActor  GetActorInfo(int idActor) we need integer)
             actorname = strActor[1];
           }
-          MediaPortal.Video.Database.VideoDatabase.GetActorInfo(actorId);
+          VideoDatabase.GetActorInfo(actorId);
         }
       }
     }

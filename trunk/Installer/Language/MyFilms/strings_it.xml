@@ -145,7 +145,7 @@
     <String id="1079879">Informazioni personaggi</String>
     <String id="1079880">Mostra sempre Vista Iniziale di Default ({0})</String>
     <String id="1079881">Seleziona Valore minimo classifica</String>
-    <String id="1079882">Aggiorna info Personaggi (IMDB)</String>
+    <String id="1079882">Aggiorna info Personaggi</String>
     <String id="1079883">Aggiorna Info per tutti i pesonaggi (IMDB)</String>
     <String id="1079884">Dettagli personaggio selezionato</String>
     <String id="1079885">Filmografia personaggio selezionato (IMDB)</String>
@@ -156,6 +156,7 @@
     <String id="1079890">Clip persona selezionata (IMDB)</String>
     <String id="1079891">Foto persona selezionata (IMDB)</String>
     <String id="1079892">Aggiornamento ...</String>
+    <String id="1079893">Filmography (TMDB)</String>
     <String id="1079894">Imposta Visto</String>
     <String id="1079895">Imposta Non Visto</String>
     <String id="1079896">Persone</String>

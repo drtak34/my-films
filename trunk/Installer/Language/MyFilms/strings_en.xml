@@ -145,10 +145,10 @@
     <String id="1079879">Info for related person(s)</String>
     <String id="1079880">Always use Default Start View ({0})</String>
     <String id="1079881">Please select value for minimum rating</String>
-    <String id="1079882">Update person info (IMDB)</String>
+    <String id="1079882">Update person info</String>
     <String id="1079883">Update Info for all involved persons (IMDB)</String>
     <String id="1079884">Details for selected person</String>
-    <String id="1079885">Filmography for selected person (IMDB)</String>
+    <String id="1079885">Filmography for selected person (IMDB Web)</String>
     <String id="1079886">View IMDB web page for selected person</String>
     <String id="1079887">Film clips for selected film (IMDB)</String>
     <String id="1079888">Photos for selected film (IMDB)</String>
@@ -156,6 +156,7 @@
     <String id="1079890">Film clips for selected person (IMDB)</String>
     <String id="1079891">Photos for selected person (IMDB)</String>
     <String id="1079892">Update ...</String>
+    <String id="1079893">Filmography (TMDB)</String>
     <String id="1079894">Set watched</String>
     <String id="1079895">Set unwatched</String>
     <String id="1079896">Persons</String>

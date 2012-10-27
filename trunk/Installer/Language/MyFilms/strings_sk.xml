@@ -146,7 +146,7 @@
     <String id="1079879">Info o prepojenej osobe</String>
     <String id="1079880">Vždy používaj Default Start pohľad ({0})</String>
     <String id="1079881">Prosím, vyberte hodnotu minimálne hodnotenie</String>
-    <String id="1079882">Aktualizácia osoba info (IMDB)</String>
+    <String id="1079882">Aktualizácia osoba info</String>
     <String id="1079883">Aktualizácia informácií pre všetky zúčastnené osoby (IMDB)</String>
     <String id="1079884">Podrobnosti pre vybrané osoby</String>
     <String id="1079885">Filmografia pre vybrané osoby (IMDB)</String>
@@ -157,6 +157,7 @@
     <String id="1079890">Filmové klipy pre vybrané osoby (IMDB)</String>
     <String id="1079891">Fotografie pre vybrané osoby (IMDB)</String>
     <String id="1079892">Aktualizácia ...</String>
+    <String id="1079893">Filmography (TMDB)</String>
     <String id="1079894">Označiť za Prezrené</String>
     <String id="1079895">Označiť za Neprezrené</String>
     <String id="1079896">Osoby</String>

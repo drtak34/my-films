@@ -145,7 +145,7 @@
     <String id="1079879">Información sobre persona relacionada</String>
     <String id="1079880">Mostrar siempre la vista por defecto ({0})</String>
     <String id="1079881">Por favor establezca un valor como valoración mínima</String>
-    <String id="1079882">Actualizar información sobre persona (IMDB)</String>
+    <String id="1079882">Actualizar información sobre persona</String>
     <String id="1079883">Actualizar información de las personas que intervienen (IMDB)</String>
     <String id="1079884">Detalles sobre la persona seleccionada</String>
     <String id="1079885">Filmografía de la persona seleccionada (IMDB)</String>
@@ -156,6 +156,7 @@
     <String id="1079890">Extractos de películas sobre la persona seleccionada (IMDB)</String>
     <String id="1079891">Fotos de la persona seleccionada (IMDB)</String>
     <String id="1079892">Actualizar ...</String>
+    <String id="1079893">Filmography (TMDB)</String>
     <String id="1079894">Marcar como vista</String>
     <String id="1079895">Marcar como no vista</String>
     <String id="1079896">Persons</String>
