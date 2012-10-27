@@ -885,17 +885,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (downloadingWorker.IsBusy) downloadingWorker.CancelAsync(); // cancel person image download, if user does select any (other) action
 
-      string StrUpdItem1 = null;
-      string StrUpdText1 = null;
-      string StrUpdDflT1 = null;
-      string StrUpdItem2 = null;
-      string StrUpdText2 = null;
-      string StrUpdDflT2 = null;
-      int ItemID;
-
       var ds = new AntMovieCatalog();
-      ItemID = (int)MyFilms.r[MyFilms.conf.StrIndex]["Number"]; //set unique id num (ant allows it to be non-unique but that is a bad idea)
-      //May wish to completely re-load the dataset before updating any fields if used in multi-user system, but would req concurrency locks etc so...
+      // int ItemID = (int)MyFilms.r[MyFilms.conf.StrIndex]["Number"];
+      // May wish to completely re-load the dataset before updating any fields if used in multi-user system, but would req concurrency locks etc so...
 
       var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
       var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
@@ -1294,21 +1286,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewMenu.Add("updmediainfos");
           }
 
-          //No more needed because of updproperties !!! - so discussion about removal?
-          if (ExtendedStartmode("Details context: Itemx update to labely (moved to testmode"))
-          {
-            if (Helper.FieldIsSet(StrUpdItem1))
-            {
-              dlgmenu.Add(StrUpdText1.Length > 0 ? StrUpdText1 : StrUpdItem1);
-              choiceViewMenu.Add("item1");
-            }
-            if (Helper.FieldIsSet(StrUpdItem2))
-            {
-              dlgmenu.Add(StrUpdText2.Length > 0 ? StrUpdText2 : StrUpdItem2);
-              choiceViewMenu.Add("item2");
-            }
-          }
-
           if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
           {
             dlgmenu.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
@@ -1678,98 +1655,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (wfile != string.Empty)
           {
             MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage] = wfile;
-            Update_XML_database();
-            afficher_detail(true);
-          }
-          #endregion
-          break;
-
-        case "item1":
-          #region item1
-
-          keyboard.Text = !string.IsNullOrEmpty(StrUpdDflT1)
-                            ? StrUpdDflT1
-                            : MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1].ToString();
-          keyboard.DoModal(GetID);
-          if (keyboard.IsConfirmed)
-          {
-            switch (ds.Movie.Columns[StrUpdItem1].DataType.Name)
-            {
-              case "Decimal":
-                try
-                {
-                  MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1] = Convert.ToDecimal(keyboard.Text);
-                }
-                catch
-                {
-                  dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                  dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                  dlgOK.DoModal(GetID);
-                  return;
-                }
-                break;
-              case "Int32":
-                try
-                {
-                  MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1] = Convert.ToInt32(keyboard.Text);
-                }
-                catch
-                {
-                  dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                  dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                  dlgOK.DoModal(GetID);
-                  return;
-                }
-                break;
-              default:
-                MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem1] = keyboard.Text;
-                break;
-            }
-
-            Update_XML_database();
-            afficher_detail(true);
-          }
-          #endregion
-          break;
-
-        case "item2":
-          #region item2
-          keyboard.Text = !string.IsNullOrEmpty(StrUpdDflT2) ? StrUpdDflT2 : MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2].ToString();
-          keyboard.DoModal(GetID);
-          if (keyboard.IsConfirmed)
-          {
-            switch (ds.Movie.Columns[StrUpdItem2].DataType.Name)
-            {
-              case "Decimal":
-                try
-                {
-                  MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2] = Convert.ToDecimal(keyboard.Text);
-                }
-                catch
-                {
-                  dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                  dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                  dlgOK.DoModal(GetID);
-                  return;
-                }
-                break;
-              case "Int32":
-                try
-                {
-                  MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2] = Convert.ToInt32(keyboard.Text);
-                }
-                catch
-                {
-                  dlgOK.SetHeading(GUILocalizeStrings.Get(924)); // menu
-                  dlgOK.SetLine(1, GUILocalizeStrings.Get(10798644)); // wrong input
-                  dlgOK.DoModal(GetID);
-                  return;
-                }
-                break;
-              default:
-                MyFilms.r[MyFilms.conf.StrIndex][StrUpdItem2] = keyboard.Text;
-                break;
-            }
             Update_XML_database();
             afficher_detail(true);
           }
