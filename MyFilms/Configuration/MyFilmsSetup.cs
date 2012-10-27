@@ -5203,37 +5203,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         chkDfltFanartImage.Checked = false;
     }
 
-    private void btnGrabberInterface_Click(object sender, EventArgs e)
-    {
-      using (var p = new Process())
-      {
-        var psi = new ProcessStartInfo();
-        psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\MyFilms_Grabber_Interface.exe";
-        psi.UseShellExecute = true;
-        psi.WindowStyle = ProcessWindowStyle.Normal;
-        //psi.Arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
-        //psi.Arguments = " \"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI\"";
-        psi.ErrorDialog = true;
-        if (OSInfo.OSInfo.VistaOrLater())
-        {
-          psi.Verb = "runas";
-        }
-
-        p.StartInfo = psi;
-        LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup");
-        try
-        {
-          p.Start();
-          //p.WaitForExit();
-        }
-        catch (Exception ex)
-        {
-          LogMyFilms.Debug(ex.ToString());
-        }
-        LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup done");
-      }
-    }
-
     private void cbPictureHandling_SelectedIndexChanged(object sender, EventArgs e)
     {
       // options:
