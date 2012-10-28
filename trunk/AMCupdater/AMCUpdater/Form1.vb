@@ -2892,9 +2892,6 @@ Public Class Form1
     Private Function LoadMyFilmsFromDisk(ByVal catalogfile As String) As Boolean
         '#Region "load catalog from file into dataset"
         Dim success As Boolean = False
-
-        watch.Reset()
-        watch.Start()
         Try
             Using fs As New FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read)
                 'LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" & catalogfile & "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read")
@@ -2916,7 +2913,6 @@ Public Class Form1
             success = False
             MessageBox.Show("Error reading xml database after " & myMovieCatalog.Movie.Count & " records; movie: '" & myMovieCatalog.Movie(myMovieCatalog.Movie.Count - 1).OriginalTitle & "'; error : " & e.Message, "AMC Updater - DB Reader", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        watch.[Stop]()
         'LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) & " ms)")
         '#End Region
 
