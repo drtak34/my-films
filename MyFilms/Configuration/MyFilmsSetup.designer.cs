@@ -3747,8 +3747,7 @@
           this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
           this.SearchSubDirsTrailer.TabIndex = 6;
           this.SearchSubDirsTrailer.Text = "Search in Sub Folders";
-          this.ToolTip1.SetToolTip(this.SearchSubDirsTrailer, "Select this option if you want the search for the trailer files\r\nto include sub-f" +
-                  "olders of the defined path.\r\n");
+          this.ToolTip1.SetToolTip(this.SearchSubDirsTrailer, resources.GetString("SearchSubDirsTrailer.ToolTip"));
           this.SearchSubDirsTrailer.UseVisualStyleBackColor = true;
           // 
           // ShowTrailerWhenStartingMovie
