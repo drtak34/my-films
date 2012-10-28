@@ -4643,6 +4643,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       string newConfigName = input.ConfigName;
       string newCatalogType = input.CatalogType;
       string newCountry = input.Country;
+      bool newUseNfoGrabber = input.UseNfoGrabber;
       int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
       if (string.IsNullOrEmpty(newConfigName))
       {
@@ -5045,6 +5046,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         #endregion
       }
 
+      #region override with nfo grabber, if selected
+      if (newUseNfoGrabber)
+      {
+        txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\NFO.xml";
+      }
+      #endregion
+
       #region AMCUpdater settings
       chkAMCUpd.Checked = true; // Use AMCupdater
       AMCMovieScanPath.Text = PathStorage.Text;
@@ -5121,6 +5129,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       input.Text = "MyFilms - New Catalog";
       input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
       input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
+      input.HideNfoCheckBox = true;
       input.ShowDialog(this);
       string newConfig_Name = input.ConfigName;
       string newCatalogType = input.CatalogType;

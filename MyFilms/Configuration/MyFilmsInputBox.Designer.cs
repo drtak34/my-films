@@ -41,6 +41,7 @@
           this.cbCountry = new System.Windows.Forms.ComboBox();
           this.lblCountry = new System.Windows.Forms.Label();
           this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+          this.cbUseNfoGrabber = new System.Windows.Forms.CheckBox();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
           this.SuspendLayout();
           // 
@@ -86,7 +87,7 @@
           // pictureBox1
           // 
           this.pictureBox1.Image = global::MyFilmsPlugin.Properties.Resources.film_reel_128x128;
-          this.pictureBox1.Location = new System.Drawing.Point(353, 12);
+          this.pictureBox1.Location = new System.Drawing.Point(367, 12);
           this.pictureBox1.Name = "pictureBox1";
           this.pictureBox1.Size = new System.Drawing.Size(85, 65);
           this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -201,11 +202,24 @@
           this.lblCountry.TabIndex = 6;
           this.lblCountry.Text = "Country";
           // 
+          // cbUseNfoGrabber
+          // 
+          this.cbUseNfoGrabber.AutoSize = true;
+          this.cbUseNfoGrabber.Location = new System.Drawing.Point(358, 134);
+          this.cbUseNfoGrabber.Name = "cbUseNfoGrabber";
+          this.cbUseNfoGrabber.Size = new System.Drawing.Size(100, 17);
+          this.cbUseNfoGrabber.TabIndex = 9;
+          this.cbUseNfoGrabber.Text = "use nfo grabber";
+          this.toolTip1.SetToolTip(this.cbUseNfoGrabber, "When checked, nfo grabber will be set as fefault to retrieve info from your movie" +
+                  "s.\r\nIf unchecked, a grabber based on the country setting will be preset.");
+          this.cbUseNfoGrabber.UseVisualStyleBackColor = true;
+          // 
           // MyFilmsInputBox
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(470, 213);
+          this.Controls.Add(this.cbUseNfoGrabber);
           this.Controls.Add(this.lblCountry);
           this.Controls.Add(this.cbCountry);
           this.Controls.Add(this.label4);
@@ -239,5 +253,6 @@
         private System.Windows.Forms.ComboBox cbCountry;
         private System.Windows.Forms.Label lblCountry;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox cbUseNfoGrabber;
     }
 }
