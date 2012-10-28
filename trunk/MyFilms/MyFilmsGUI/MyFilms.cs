@@ -329,8 +329,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     internal const string ImdbBaseUrl = "http://www.imdb.com/";
     internal const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
-    internal const int maxTmdbResults = 299;
 
+    internal const int MaxTmdbResults = 299;
+    internal const int MaxSearchHistoryLength = 30;
 
     internal const string GlobalUsername = "Global";
     internal const string DefaultUsername = "Default";
@@ -2556,7 +2557,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("GetPopularMovies() - Loaded Page: " + ipage + " (of " + movieSearchResults.total_pages + "), Total Results = '" + movieSearchResults.total_results + "', (" + (watch.ElapsedMilliseconds) + " ms)");
         movies.AddRange(movieSearchResults.results);
         ipage++;
-        if (ipage > movieSearchResults.total_pages || !all || movies.Count > maxTmdbResults) break;
+        if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
       watch.Stop();
       LogMyFilms.Debug("GetPopularMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
@@ -2578,7 +2579,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("GetNowPlayingMovies() - Loaded Page: " + ipage + " (of " + movieSearchResults.total_pages + "), Total Results = '" + movieSearchResults.total_results + "', (" + (watch.ElapsedMilliseconds) + " ms)");
         movies.AddRange(movieSearchResults.results);
         ipage++;
-        if (ipage > movieSearchResults.total_pages || !all || movies.Count > maxTmdbResults) break;
+        if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
       movies = movies.OrderByDescending(x => x.release_date).ToList();
       watch.Stop();
@@ -2602,7 +2603,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("GetTopRatedMovies() - Loaded Page: " + ipage + " (of " + movieSearchResults.total_pages + "), Total Results = '" + movieSearchResults.total_results + "', (" + (watch.ElapsedMilliseconds) + " ms)");
         movies.AddRange(movieSearchResults.results);
         ipage++;
-        if (ipage > movieSearchResults.total_pages || !all || movies.Count > maxTmdbResults) break;
+        if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
       movies = movies.OrderByDescending(x => x.vote_average).ToList();
       watch.Stop();
@@ -2626,7 +2627,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("GetUpcomingMovies() - Loaded Page: " + ipage + " (of " + movieSearchResults.total_pages + "), Total Results = '" + movieSearchResults.total_results + "', (" + (watch.ElapsedMilliseconds) + " ms)");
         movies.AddRange(movieSearchResults.results);
         ipage++;
-        if (ipage > movieSearchResults.total_pages || !all || movies.Count > maxTmdbResults) break;
+        if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
       movies = movies.OrderBy(x => x.release_date).ToList();
       watch.Stop();
@@ -5714,7 +5715,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       keyboard.DoModal(GetID);
       if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
       {
-        UpdateRecentSearch(keyboard.Text, 20);
+        UpdateRecentSearch(keyboard.Text, MaxSearchHistoryLength);
         switch (choiceSearch[dlg.SelectedLabel])
         {
           case "title":
@@ -13010,7 +13011,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.StrSelect = wproperty + " > " + wRating;
       else
         {
-          UpdateRecentSearch(choiceSearch[dlg.SelectedLabel], 20);
+          UpdateRecentSearch(choiceSearch[dlg.SelectedLabel], MaxSearchHistoryLength);
           // conf.StrSelect = (wproperty == "Number") ? wproperty + " = " + choiceSearch[dlg.SelectedLabel] : wproperty + " like '*" + choiceSearch[dlg.SelectedLabel] + "*'";
           conf.StrSelect = this.Equalexpression(wproperty, choiceSearch[dlg.SelectedLabel]);
         }
@@ -14073,13 +14074,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
       var choiceSearch = new List<string>();
 
-      if (null == keyboard) return; //if (null == keyboard) return true;
+      if (dlg == null) return;
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(10798608)); //Search global persons by role
+
+      dlg.Add("<" + GUILocalizeStrings.Get(10798633) + ">"); // New Search
+      choiceSearch.Add("");
+
+      if (SearchHistory.Count > 0)
+      {
+        for (int i = SearchHistory.Count; i > 0; i--)
+        {
+          dlg.Add(SearchHistory[i - 1]);
+          choiceSearch.Add(SearchHistory[i - 1]);
+        }
+      }
+      dlg.DoModal(GetID);
+      if (dlg.SelectedLabel == -1)
+      {
+        if (returnToContextmenu) this.Context_Menu_Movie(this.facadeFilms.SelectedListItem.ItemId);
+        else this.Change_Search_Options();
+        return;
+      }
+
+      if (null == keyboard) return;
       keyboard.Reset();
-      keyboard.Text = "";
+      keyboard.Text = choiceSearch[dlg.SelectedLabel];
       keyboard.DoModal(GetID);
       if (!keyboard.IsConfirmed || keyboard.Text.Length == 0) return;
 
-      UpdateRecentSearch(keyboard.Text, 20);
+      UpdateRecentSearch(keyboard.Text, MaxSearchHistoryLength);
       if (control_searchText(keyboard.Text))
         wperson = keyboard.Text;
       else
@@ -14298,11 +14322,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // if all prerequisites are met, do the search itself
       if (continueSearch && (!string.IsNullOrEmpty(keyboard.Text) || !string.IsNullOrEmpty(searchstring)))
       {
-        UpdateRecentSearch(keyboard.Text, 20);
-        // makes sure, searchstring will go to first place, if already present ... maxItems 20
+        UpdateRecentSearch(keyboard.Text, MaxSearchHistoryLength);
         var wCount = new List<int>();
-        string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline +
-                                    GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+        string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
         switch (wproperty)
         {
           case "all":
