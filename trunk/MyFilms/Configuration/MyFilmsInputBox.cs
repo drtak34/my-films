@@ -35,6 +35,30 @@
           set { cbCountry.Text = value; }
         }
 
+        public bool UseNfoGrabber
+        {
+          get { return cbUseNfoGrabber.Checked; }
+          set { cbUseNfoGrabber.Checked = value; }
+        }
+
+        public bool HideNfoCheckBox
+        {
+          get { return hideNfoCheckBox; }
+          set
+          {
+            hideNfoCheckBox = value;
+            if (hideNfoCheckBox)
+            {
+              cbUseNfoGrabber.Enabled = false;
+            }
+            else
+            {
+              cbUseNfoGrabber.Enabled = true;
+            }
+          }
+        }
+        private bool hideNfoCheckBox = false;
+
         public bool ShowOnlyName
         {
           get { return showOnlyName; }
@@ -45,11 +69,13 @@
             {
               cbCountry.Enabled = false;
               cbCatalogType.Enabled = false;
+              cbUseNfoGrabber.Enabled = false;
             }
             else
             {
               cbCountry.Enabled = true;
               cbCatalogType.Enabled = true;
+              cbUseNfoGrabber.Enabled = true;
             }
           }
         }
