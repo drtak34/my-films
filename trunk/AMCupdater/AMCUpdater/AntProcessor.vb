@@ -1632,13 +1632,13 @@ Public Class AntProcessor
                                 Else
                                     itemValue = .DgvUpdateMovie(2, i).Value
                                 End If
-                                If itemName = "Date" Then
-                                    Try
-                                        itemValue = String.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(itemValue))
-                                    Catch ex As Exception
-                                        itemValue = Nothing 'String.Format("{0:yyyy/MM/dd}", DateTime.Now)
-                                    End Try
-                                End If
+                                'If itemName = "Date" Then
+                                '    Try
+                                '        itemValue = String.Format("{0:yyyy/MM/dd}", Convert.ToDateTime(itemValue))
+                                '    Catch ex As Exception
+                                '        itemValue = Nothing 'String.Format("{0:yyyy/MM/dd}", DateTime.Now)
+                                '    End Try
+                                'End If
                             Catch ex As Exception
                                 MsgBox("Exception updating data ('" + itemName + "') to Movie: " + ex.Message, MsgBoxStyle.OkOnly)
                             End Try
