@@ -9361,7 +9361,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
             if (dlg == null) return;
             dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
+            dlg.SetHeading(GUILocalizeStrings.Get(10798992)); // Select movie ...
 
             foreach (MovieResult movieResult in moviesfound.results)
             {
@@ -9378,7 +9378,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (selectedMovieId == 0)
       {
-        LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB - no movie found - no trailers added to DL queue - returning"); 
+        LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB - no movie found - no trailers added to DL queue - returning");
+        if (interactive) ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798995)); // No matching movie found !
         return;
       }
 
@@ -9393,7 +9394,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (trailersfound.Count == 0)
       {
         LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - no trailers found - returning");
-        if (interactive) ShowNotificationDialog("Info", "OnlineVideos is not available!");
+        if (interactive) ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798996)); // no trailers found !
       }
       else
       {
@@ -9407,9 +9408,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region build menu with available trailers
           var choiceView = new List<Youtube>();
           dlg.Reset();
-          dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
+          dlg.SetHeading(GUILocalizeStrings.Get(10798993)); // Select trailer ...
 
-          dlg.Add("<load all>");
+          dlg.Add("<" + GUILocalizeStrings.Get(10798997) + ">"); // load all 
           choiceView.Add(new Youtube());
 
           foreach (Youtube trailer in trailersfound)
@@ -9437,7 +9438,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + selectedTrailer.source);
           var choiceView = new List<string>();
           dlg.Reset();
-          dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
+          dlg.SetHeading(GUILocalizeStrings.Get(10798994)); // Select quality ...
           foreach (KeyValuePair<string, string> availableTrailerFile in availableTrailerFiles)
           {
             dlg.Add(availableTrailerFile.Key);
