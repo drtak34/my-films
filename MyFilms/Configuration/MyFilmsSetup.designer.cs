@@ -585,7 +585,6 @@
           this.mailTextBox = new System.Windows.Forms.TextBox();
           this.siteTextBox = new System.Windows.Forms.TextBox();
           this.descriptionTextBox = new System.Windows.Forms.TextBox();
-          this.btnGrabberInterface = new System.Windows.Forms.Button();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.Tab_OldStuff = new System.Windows.Forms.TabPage();
           this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -2032,7 +2031,6 @@
           this.groupBoxAMCUpdaterConfigFile.TabIndex = 1;
           this.groupBoxAMCUpdaterConfigFile.TabStop = false;
           this.groupBoxAMCUpdaterConfigFile.Text = "AMCU Config File ...";
-          this.ToolTip1.SetToolTip(this.groupBoxAMCUpdaterConfigFile, resources.GetString("groupBoxAMCUpdaterConfigFile.ToolTip"));
           // 
           // txtAMCUpd_cnf_Display
           // 
@@ -5088,7 +5086,7 @@
           this.labelTraktDescription.AutoSize = true;
           this.labelTraktDescription.Location = new System.Drawing.Point(21, 54);
           this.labelTraktDescription.Name = "labelTraktDescription";
-          this.labelTraktDescription.Size = new System.Drawing.Size(407, 156);
+          this.labelTraktDescription.Size = new System.Drawing.Size(407, 195);
           this.labelTraktDescription.TabIndex = 1;
           this.labelTraktDescription.Text = resources.GetString("labelTraktDescription.Text");
           // 
@@ -5820,7 +5818,7 @@
           this.label41.AutoSize = true;
           this.label41.Location = new System.Drawing.Point(27, 18);
           this.label41.Name = "label41";
-          this.label41.Size = new System.Drawing.Size(529, 130);
+          this.label41.Size = new System.Drawing.Size(529, 143);
           this.label41.TabIndex = 0;
           this.label41.Text = resources.GetString("label41.Text");
           this.label41.Click += new System.EventHandler(this.label41_Click);
@@ -5840,7 +5838,7 @@
           this.label28.AutoSize = true;
           this.label28.Location = new System.Drawing.Point(27, 25);
           this.label28.Name = "label28";
-          this.label28.Size = new System.Drawing.Size(584, 117);
+          this.label28.Size = new System.Drawing.Size(584, 130);
           this.label28.TabIndex = 0;
           this.label28.Text = resources.GetString("label28.Text");
           // 
@@ -5857,7 +5855,6 @@
           this.Tab_Other.Controls.Add(this.siteTextBox);
           this.Tab_Other.Controls.Add(descriptionLabel);
           this.Tab_Other.Controls.Add(this.descriptionTextBox);
-          this.Tab_Other.Controls.Add(this.btnGrabberInterface);
           this.Tab_Other.Controls.Add(this.lblAMCupdaterConfigPreview);
           this.Tab_Other.Controls.Add(this.AMCConfigView);
           this.Tab_Other.Location = new System.Drawing.Point(4, 22);
@@ -6132,16 +6129,6 @@
           this.descriptionTextBox.Name = "descriptionTextBox";
           this.descriptionTextBox.Size = new System.Drawing.Size(134, 20);
           this.descriptionTextBox.TabIndex = 9;
-          // 
-          // btnGrabberInterface
-          // 
-          this.btnGrabberInterface.Location = new System.Drawing.Point(607, 40);
-          this.btnGrabberInterface.Name = "btnGrabberInterface";
-          this.btnGrabberInterface.Size = new System.Drawing.Size(134, 27);
-          this.btnGrabberInterface.TabIndex = 10;
-          this.btnGrabberInterface.Text = "Grabber Interface";
-          this.btnGrabberInterface.UseVisualStyleBackColor = true;
-          this.btnGrabberInterface.Click += new System.EventHandler(this.btnGrabberInterface_Click);
           // 
           // lblAMCupdaterConfigPreview
           // 
@@ -6843,7 +6830,6 @@
         private TextBox txtAMCUpd_cnf_Display;
         private LinkLabel linkLabelTrakt;
         private TabPage Tab_Other;
-        private Button btnGrabberInterface;
         private Label lblAMCupdaterConfigPreview;
         private ListView AMCConfigView;
         private ColumnHeader Option;
