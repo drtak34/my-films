@@ -409,6 +409,14 @@
     <String id="10798984">Nächster ...</String>
     <String id="10798985">Hauptfilm starten ?</String>
     <String id="10798986">MyFilms Filmvorschau</String>
+    <String id="10798990">Lade einzelnen Trailer (TMDB)</String>
+    <String id="10798991">Lade Trailer für diese Filme (TMDB)</String>
+    <String id="10798992">Wähle Film ...</String>
+    <String id="10798993">Wähle Trailer ...</String>
+    <String id="10798994">Wähle Qualität ...</String>
+    <String id="10798995">Kein Film gefunden !</String>
+    <String id="10798996">Keine Trailer gefunden !</String>
+    <String id="10798997">Lade alle Trailer</String>
     <String id="10799201">MyFilms Cover Manager</String>
     <String id="10799202">Auflösung</String>
     <String id="10799203">Filter ...</String>

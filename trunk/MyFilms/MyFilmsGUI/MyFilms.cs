@@ -10918,16 +10918,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         if (MyFilmsDetail.ExtendedStartmode("Context: TMDB API trailer and download entries")) // if (conf.ViewContext != ViewContext.TmdbMovies)
         {
-          dlg.Add(GUILocalizeStrings.Get(10798710) + " (TMDB)");//play trailer
-          updChoice.Add("playtrailertmdb");
+          //// not yet implemented
+          //dlg.Add(GUILocalizeStrings.Get(10798710) + " (TMDB)");//play trailer
+          //updChoice.Add("playtrailertmdb");
 
-          dlg.Add(GUILocalizeStrings.Get(10798710) + " - All (TMDB)");//play trailer
-          updChoice.Add("playtrailertmdball");
+          //dlg.Add(GUILocalizeStrings.Get(10798710) + " - All (TMDB)");//play trailer
+          //updChoice.Add("playtrailertmdball");
 
-          dlg.Add("Download Trailer" + " (TMDB)");
+          dlg.Add(GUILocalizeStrings.Get(10798990)); /// Load single trailer (TMDB)
           updChoice.Add("downloadtrailertmdb");
 
-          dlg.Add("Download all Trailer" + " (TMDB)");
+          dlg.Add(GUILocalizeStrings.Get(10798991)); // Load all trailers for these movies (TMDB)
           updChoice.Add("downloadtrailertmdball");
 
           if (MyFilms.conf.BoolEnableOnlineServices) dlg.Add(string.Format(GUILocalizeStrings.Get(1079921), GUILocalizeStrings.Get(10798628))); // Get Online Info
