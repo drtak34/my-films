@@ -111,9 +111,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         // this.Label_UserProfileName.Visible = false;
         // this.UserProfileName.Visible = false;
         this.cbTrailerAutoregister.Visible = false;
-        this.SearchSubDirsTrailer.Visible = false; // Disable Trailer options, that are not yet implemented
         this.ShowTrailerWhenStartingMovie.Visible = false;
-        this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
         this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
         this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
         this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
