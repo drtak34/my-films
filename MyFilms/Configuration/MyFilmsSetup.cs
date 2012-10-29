@@ -111,7 +111,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         // this.Label_UserProfileName.Visible = false;
         // this.UserProfileName.Visible = false;
         this.cbTrailerAutoregister.Visible = false;
+        this.SearchSubDirsTrailer.Visible = false; // Disable Trailer options, that are not yet implemented
         this.ShowTrailerWhenStartingMovie.Visible = false;
+        this.btnGrabberInterface.Visible = false; // disable grabber interface in normal mode
         this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
         this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
         this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
@@ -4643,7 +4645,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       string newConfigName = input.ConfigName;
       string newCatalogType = input.CatalogType;
       string newCountry = input.Country;
-      bool newUseNfoGrabber = input.UseNfoGrabber;
       int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
       if (string.IsNullOrEmpty(newConfigName))
       {
@@ -5046,13 +5047,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         #endregion
       }
 
-      #region override with nfo grabber, if selected
-      if (newUseNfoGrabber)
-      {
-        txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\NFO.xml";
-      }
-      #endregion
-
       #region AMCUpdater settings
       chkAMCUpd.Checked = true; // Use AMCupdater
       AMCMovieScanPath.Text = PathStorage.Text;
@@ -5129,7 +5123,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       input.Text = "MyFilms - New Catalog";
       input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
       input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
-      input.HideNfoCheckBox = true;
       input.ShowDialog(this);
       string newConfig_Name = input.ConfigName;
       string newCatalogType = input.CatalogType;
@@ -5208,6 +5201,37 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     {
       if (chkDfltFanart.Checked)
         chkDfltFanartImage.Checked = false;
+    }
+
+    private void btnGrabberInterface_Click(object sender, EventArgs e)
+    {
+      using (var p = new Process())
+      {
+        var psi = new ProcessStartInfo();
+        psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\MyFilms_Grabber_Interface.exe";
+        psi.UseShellExecute = true;
+        psi.WindowStyle = ProcessWindowStyle.Normal;
+        //psi.Arguments = "\"" + Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings_" + Config_Name.Text + ".xml" + "\"" + " " + "LogDirectory" + " " + "GUI";
+        //psi.Arguments = " \"" + Config.GetDirectoryInfo(Config.Dir.Config).ToString() + @"\MyFilmsAMCSettings_" + Config_Name.Text + "\" \"" + Config.GetDirectoryInfo(Config.Dir.Log).ToString() + "\" \"GUI\"";
+        psi.ErrorDialog = true;
+        if (OSInfo.OSInfo.VistaOrLater())
+        {
+          psi.Verb = "runas";
+        }
+
+        p.StartInfo = psi;
+        LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup");
+        try
+        {
+          p.Start();
+          //p.WaitForExit();
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Debug(ex.ToString());
+        }
+        LogMyFilms.Debug("MyFilmsSetup: Launch Grabber_Interface from PluginSetup done");
+      }
     }
 
     private void cbPictureHandling_SelectedIndexChanged(object sender, EventArgs e)
