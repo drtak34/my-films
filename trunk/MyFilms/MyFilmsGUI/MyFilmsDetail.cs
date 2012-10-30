@@ -9270,15 +9270,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - secondary title  : '" + MyFilms.r[index][MyFilms.conf.StrTitle2] + "'");
       //LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
 
-      string titlename = MyFilms.r[index][MyFilms.conf.StrTitle1].ToString();
+      string titlename = r1[index][MyFilms.conf.StrTitle1].ToString();
       if (titlename.Contains("\\")) titlename = titlename.Substring(titlename.LastIndexOf("\\") + 1);
-      string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? MyFilms.r[index][MyFilms.conf.StrTitle2].ToString() : "";
+      string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? r1[index][MyFilms.conf.StrTitle2].ToString() : "";
+      if (titlename2.Contains("\\")) titlename2 = titlename2.Substring(titlename2.LastIndexOf("\\") + 1);
 
       string path;
       #region Retrieve original directory of mediafiles
       try
       {
-        path = MyFilms.r[index][MyFilms.conf.StrStorage].ToString();
+        path = r1[index][MyFilms.conf.StrStorage].ToString();
         if (path.Contains(";")) path = path.Substring(0, path.IndexOf(";", StringComparison.Ordinal));
         //path = Path.GetDirectoryName(path);
         //if (path == null || !Directory.Exists(path))
@@ -9299,11 +9300,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       string imdb = "";
       #region get imdb number sor better search match
-      if (!string.IsNullOrEmpty(MyFilms.r[index]["IMDB_Id"].ToString()))
-        imdb = MyFilms.r[index]["IMDB_Id"].ToString();
-      else if (!string.IsNullOrEmpty(MyFilms.r[index]["URL"].ToString()))
+      if (!string.IsNullOrEmpty(r1[index]["IMDB_Id"].ToString()))
+        imdb = r1[index]["IMDB_Id"].ToString();
+      else if (!string.IsNullOrEmpty(r1[index]["URL"].ToString()))
       {
-        string urLstring = MyFilms.r[index]["URL"].ToString();
+        string urLstring = r1[index]["URL"].ToString();
         var cutText = new Regex("" + @"tt\d{7}" + "");
         var m = cutText.Match(urLstring);
         if (m.Success) imdb = m.Value;
@@ -9339,12 +9340,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         TmdbMovieSearch moviesfound;
         if (int.TryParse(r1[index]["Year"].ToString(), out year))
         {
-          moviesfound = api.SearchMovie(r1[index][MyFilms.conf.StrTitle1].ToString(), 1, null, year);
-          if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(r1[index][MyFilms.conf.StrTitle1].ToString(), 1, null);
+          moviesfound = api.SearchMovie(titlename, 1, null, year);
+          if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename, 1, null);
         }
         else
         {
           moviesfound = api.SearchMovie(r1[index][MyFilms.conf.StrTitle1].ToString(), 1, null);
+          if (moviesfound.results.Count == 0 && titlename2.Length > 0)
+          {
+            if (int.TryParse(r1[index]["Year"].ToString(), out year))
+            {
+              moviesfound = api.SearchMovie(titlename2, 1, null, year);
+              if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename2, 1, null);
+            }
+          }
         }
 
         if (moviesfound.results.Count == 1)
@@ -9353,24 +9362,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          LogMyFilms.Debug("GetImagesForFilmList() - Movie Search Results: '" + moviesfound.total_results.ToString() + "' for movie '" + r1[index][MyFilms.conf.StrTitle1] + "'");
+          LogMyFilms.Debug("GetImagesForFilmList() - Movie Search Results: '" + moviesfound.total_results.ToString() + "' for movie '" + titlename + "'");
           if (!interactive) return;
           else
           {
-            var choiceMovies = new List<MovieResult>();
-            var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-            if (dlg == null) return;
-            dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(10798992)); // Select movie ...
-
-            foreach (MovieResult movieResult in moviesfound.results)
+            if (moviesfound.results.Count == 0)
             {
-              dlg.Add(movieResult.title + " (" + movieResult.release_date + ")");
-              choiceMovies.Add(movieResult);
+              while(selectedMovieId == 0)
+              {
+                selectedMovieId = SearchTmdbMovie(titlename, titlename2, year, language);
+                if (selectedMovieId == -1) return; // cancel search
+              }
             }
-            dlg.DoModal(GUIWindowManager.ActiveWindow);
-            if (dlg.SelectedLabel == -1) return;
-            selectedMovieId = choiceMovies[dlg.SelectedLabel].id;
+            else
+            {
+              var choiceMovies = new List<MovieResult>();
+              var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+              if (dlg == null) return;
+              dlg.Reset();
+              dlg.SetHeading(GUILocalizeStrings.Get(10798992)); // Select movie ...
+
+              foreach (MovieResult movieResult in moviesfound.results)
+              {
+                dlg.Add(movieResult.title + " (" + movieResult.release_date + ")");
+                choiceMovies.Add(movieResult);
+              }
+              dlg.DoModal(GUIWindowManager.ActiveWindow);
+              if (dlg.SelectedLabel == -1) return;
+              selectedMovieId = choiceMovies[dlg.SelectedLabel].id;
+            }
           }
         }
       }
@@ -9515,6 +9535,78 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
       }
       #endregion
+    }
+
+    private static int SearchTmdbMovie(string title, string title2, int year, string language)
+    {
+      LogMyFilms.Debug("SearchTmdbMovie() - title '" + title + "', title2 '" + title2 + "', year '" + year.ToString() + "'");
+      var api = new Tmdb(MyFilms.TmdbApiKey, language);
+
+      const int minChars = 2;
+      const bool filter = true;
+
+      var allMoviesFound = new List<MovieResult>();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlg == null) return -1;
+      dlg.Reset();
+      dlg.SetHeading(GUILocalizeStrings.Get(10798646));  // Search Films
+      dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
+      foreach (MovieResult t in api.SearchMovie(title, 1, null).results)
+      {
+        string dialoginfoline = t.title + "  (" + t.release_date + ")";
+        dlg.Add(dialoginfoline);
+        allMoviesFound.Add(t);
+      }
+      if (title2.Length > 0)
+      {
+        foreach (MovieResult t in api.SearchMovie(title2, 1, null).results)
+        {
+          string dialoginfoline = t.title + "  (" + t.release_date + ")";
+          dlg.Add(dialoginfoline);
+          allMoviesFound.Add(t);
+        }
+      }
+      if (allMoviesFound.Count > 0)
+      {
+        dlg.DoModal(wGetID);
+      }
+      else
+      {
+        dlg.SelectedLabel = 0;
+      }
+      if (dlg.SelectedLabel == -1) return -1;
+
+      if (dlg.SelectedLabel == 0)
+      {
+        //First Show Dialog to choose Otitle, Ttitle or substrings - or Keyboard to manually enter searchstring!!!
+        var dlgSearchFilm = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        if (dlgSearchFilm == null) return -1;
+        dlgSearchFilm.Reset();
+        dlgSearchFilm.SetHeading(GUILocalizeStrings.Get(1079859)); // choose search expression
+        dlgSearchFilm.Add("  *****  " + GUILocalizeStrings.Get(1079858) + "  *****  ");
+        dlgSearchFilm.Add(title);
+        dlgSearchFilm.Add(title2);
+        foreach (object t in from object t in MyFilms.SubTitleGrabbing(title) where t.ToString().Length > 1 select t) dlgSearchFilm.Add(t.ToString());
+        foreach (object t in from object t in MyFilms.SubTitleGrabbing(title2) where t.ToString().Length > 1 select t) dlgSearchFilm.Add(t.ToString());
+        foreach (object t in from object t in MyFilms.SubWordGrabbing(title, minChars, filter) where t.ToString().Length > 1 select t) dlgSearchFilm.Add(t.ToString()); // Min 3 Chars, Filter true (no der die das)
+        foreach (object t in from object t in MyFilms.SubWordGrabbing(title2, minChars, filter) where t.ToString().Length > 1 select t) dlgSearchFilm.Add(t.ToString());
+        dlgSearchFilm.DoModal(wGetID);
+
+        if (dlgSearchFilm.SelectedLabel == 0) // enter manual searchstring via VK
+        {
+          var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+          if (null == keyboard) return -1;
+          keyboard.Reset();
+          keyboard.Text = title;
+          keyboard.DoModal(wGetID);
+          if (keyboard.IsConfirmed && keyboard.Text.Length > 0) return SearchTmdbMovie(keyboard.Text, "", year, language);
+        }
+        if (dlgSearchFilm.SelectedLabel > 0) return SearchTmdbMovie(dlgSearchFilm.SelectedLabelText, "", year, language);
+      }
+
+      if (dlg.SelectedLabel > 0) return allMoviesFound[dlg.SelectedLabel].id;
+
+      return 0; // return 0 if no movie found or -1 if search was cancelled
     }
 
     //-------------------------------------------------------------------------------------------

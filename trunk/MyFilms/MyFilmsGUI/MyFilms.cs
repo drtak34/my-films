@@ -11155,7 +11155,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
           conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
-          MyFilmsDetail.SearchAndDownloadTrailerOnlineTMDB(r, MyFilms.conf.StrIndex, false, true, null);
+          MyFilmsDetail.SearchAndDownloadTrailerOnlineTMDB(r, MyFilms.conf.StrIndex, false, true, (MyFilms.conf.StrDirStorTrailer.Length > 0) ? MyFilms.conf.StrDirStorTrailer : null); // MyFilmsDetail.SearchAndDownloadTrailerOnlineTMDB(r, MyFilms.conf.StrIndex, false, true, null);
           break;
 
         case "downloadtrailertmdball":
