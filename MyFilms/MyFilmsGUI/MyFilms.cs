@@ -771,7 +771,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitFolders();
 
       // load trailer queue
-      InitializeQueuedTrailerDownloader(30); // initialize threaded trailer loader params: delay to start (to let OV initialize)
+      TrailertoDownloadQueue = BaseMesFilms.LoadQueueFromDisk("Trailer");
+      InitializeQueuedTrailerDownloader(30); // initialize trailer download threads with delayed start (to let OV assembly initialize)
 
       #region launch TMDB data loader in background ... (disabled)
       //new System.Threading.Thread(delegate()
@@ -15001,7 +15002,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             Thread.Sleep(delayToStart * 1000); // wait specified delay to let OV instance initialize
 
-            TrailertoDownloadQueue = BaseMesFilms.LoadQueueFromDisk("Trailer");
             // start the parallel downloader, of there is anything in queue
             if (TrailertoDownloadQueue.Count > 0)
             {
