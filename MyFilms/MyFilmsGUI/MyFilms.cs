@@ -771,17 +771,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       InitFolders();
 
       // load trailer queue
-      TrailertoDownloadQueue = BaseMesFilms.LoadQueueFromDisk("Trailer");
-      // start the parallel downloader, of there is anything in queue
-      if (TrailertoDownloadQueue.Count > 0)
-      {
-        // bgDownloadTrailer.RunWorkerAsync(); // single worker thread
-        // start multiple worker threads
-        for (int f = 0; f < maxThreads; f++)
-        {
-          threadArray[f].RunWorkerAsync(f);
-        }
-      }
+      InitializeQueuedTrailerDownloader(30); // initialize threaded trailer loader params: delay to start (to let OV initialize)
 
       #region launch TMDB data loader in background ... (disabled)
       //new System.Threading.Thread(delegate()
@@ -14992,6 +14982,51 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         threadArray[f].WorkerSupportsCancellation = true;
         threadDoneEventArray[f] = new AutoResetEvent(false); // to signal worker finished ...
       }
+    }
+
+    private void InitializeQueuedTrailerDownloader(int delayToStart)
+    {
+      new Thread(delegate()
+      {
+        {
+          try
+          {
+            LogMyFilms.Info("InitializeQueuedTrailerDownloader() - try starting '{0}' trailer download threads with delay = '{1}'", maxThreads, delayToStart); 
+
+            if (!Win32API.IsConnectedToInternet())
+            {
+              LogMyFilms.Error("InitializeQueuedTrailerDownloader() - No Internet connection available - not starting Trailer Download threads!");
+              return;
+            }
+
+            Thread.Sleep(delayToStart * 1000); // wait specified delay to let OV instance initialize
+
+            TrailertoDownloadQueue = BaseMesFilms.LoadQueueFromDisk("Trailer");
+            // start the parallel downloader, of there is anything in queue
+            if (TrailertoDownloadQueue.Count > 0)
+            {
+              // bgDownloadTrailer.RunWorkerAsync(); // single worker thread
+              // start multiple worker threads
+              for (int f = 0; f < maxThreads; f++)
+              {
+                LogMyFilms.Debug("InitializeQueuedTrailerDownloader() - starting trailer download thread '" + f + "'"); 
+                threadArray[f].RunWorkerAsync(f);
+              }
+            }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("InitializeQueuedTrailerDownloader() - Error starting trailer download threads: " + ex.Message);
+          }
+        }
+        GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+        {
+          {
+            // this after thread finished ...
+          }
+          return 0;
+        }, 0, 0, null);
+      }) { Name = "InitializeQueuedTrailerDownloader", IsBackground = true }.Start();
     }
 
     private delegate void UpdateWatchTextDelegate(string newText);
