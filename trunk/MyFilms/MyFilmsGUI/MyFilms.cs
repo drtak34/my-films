@@ -14992,11 +14992,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           try
           {
-            LogMyFilms.Info("InitializeQueuedTrailerDownloader() - try starting '{0}' trailer download threads with delay = '{1}'", maxThreads, delayToStart); 
+            LogMyFilms.Info("InitializeQueuedTrailerDownloader() - waiting '{0}' seconds to try starting '{1}' trailer download threads", delayToStart, maxThreads); 
 
             if (!Win32API.IsConnectedToInternet())
             {
-              LogMyFilms.Error("InitializeQueuedTrailerDownloader() - No Internet connection available - not starting Trailer Download threads!");
+              LogMyFilms.Error("InitializeQueuedTrailerDownloader() - No Internet connection available - aborting start of Trailer download threads!");
               return;
             }
 
