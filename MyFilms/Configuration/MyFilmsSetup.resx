@@ -189,7 +189,7 @@ Use "*" to show complete filmlist.</value>
   <data name="Config_Name.ToolTip" xml:space="preserve">
     <value>Enter a unique name for each configuration.
 You can have more than one configuration referencing a single database, or multiple configurations referencing multiple databases.  
-Configurations can be password protected in the �Security� section below, to restrict access to children for example.</value>
+Configurations can be password protected in the 'Security' section below, to restrict access to children for example.</value>
   </data>
   <data name="Config_Dflt.ToolTip" xml:space="preserve">
     <value>Check this box for the configuration that you want to be loaded each time the plugin is accessed.  
@@ -275,15 +275,15 @@ Images placed in those folders will be used for fanart display
 If disabled, default fanart will be displayed, if it is enabled.</value>
   </data>
   <data name="Fanart.ToolTip" xml:space="preserve">
-    <value>Select the �Use Fanart� option if you have image files to be displayed as background fanart.  
+    <value>Select the 'Use Fanart' option if you have image files to be displayed as background fanart.  
 Enter the full path (or use the browse button) to the root folder containing the fanart image files.
 There will be one sub-folder for each movie, that can contain images with any name. If there are multiple images, they will all be loaded in details view.
 
 
-Select the option �Use movie cover for missing Fanart� to have the movie's DVD cover 
+Select the option 'Use movie cover for missing Fanart' to have the movie's DVD cover 
 displayed as a background image for movies without a matching fanart file. Be aware, that using that option will often create fanart image of low quality
 because of low resolution of cover images and you might get a distorted picture as covers and fanart don't have the same size.
-Therefore it is recommended to enable �Use the default image for missing fanart�.
+Therefore it is recommended to enable 'Use the default image for missing fanart'.
 
 
 Note:
@@ -311,7 +311,7 @@ You can place a "default.jpg" in the respective sub folder that will be displaye
 when no specific thumb can be matched.</value>
   </data>
   <data name="groupBox22.ToolTip" xml:space="preserve">
-    <value>Select the �Use thumbs for group views" option if you have image files 
+    <value>Select the 'Use thumbs for group views" option if you have image files 
 to be displayed as cover image replacement in grouped views.  
 Images for "Views" like Genre, Year, Country, etc. - excluding "person like" Views - see Person Views.
 
@@ -332,7 +332,7 @@ See "Fanart for default group views - path" below.</value>
   <data name="pictureBoxDefaultCover.ToolTip" xml:space="preserve">
     <value>Click to change Default Movie Cover.
 The default cover image will be displayed when a movie entry does not have an associated cover image
-and it will be used as a default fanart image if the appropriate Fanart option is selected in the �Picture� section, 
+and it will be used as a default fanart image if the appropriate Fanart option is selected in the 'Picture' section, 
 and a movie entry does not have an associated fanart image.</value>
   </data>
   <data name="txtPicturePrefix.ToolTip" xml:space="preserve">
@@ -365,7 +365,7 @@ If the Cover Images Path is the same as the catalog directory,
 this setting should be "Relative Path" and only the image name will be stored in the catalog.</value>
   </data>
   <data name="MesFilmsImg.ToolTip" xml:space="preserve">
-    <value>Enter the full path to the folder containing the DVD cover image files � by default it is the same as the path to your database file.
+    <value>Enter the full path to the folder containing the DVD cover image files ' by default it is the same as the path to your database file.
 You can use the browse button to find the correct path.
 My Films Setup has some logic to help you to set Picture Prefix and Picture Handling, 
 so in certain cases you just have to select the path with the browse button and Setup will automatically 
@@ -430,8 +430,8 @@ and then replacing title with the title found by the Internet grabber.
 
 
 Example:
-So if you have named your files by movie title, select �title�. 
-If you have your movie files in folders, that have the movie title, select �folder�.</value>
+So if you have named your files by movie title, select 'title'. 
+If you have your movie files in folders, that have the movie title, select 'folder'.</value>
   </data>
   <data name="btnCreateAMCDefaultConfig.ToolTip" xml:space="preserve">
     <value>My Films will create a default configuration for AMCUpdater based on your current My Films Configuration.
@@ -454,10 +454,10 @@ For example, an entry listing a Source of 'd:\Movies' will not be considered an 
 
 Also check your AMCUpdater settings, as there are options to configure how updating behaves:
 - If you update DB with AMCUpdater, AMCUpdater should recognize that the film moved and just update source - (adjustable in AMCUpdater setup).
-- If you moved the file, update and the movie is no longer available, the record will be removed (�purged�) from your DB and disappear.
+- If you moved the file, update and the movie is no longer available, the record will be removed ('purged') from your DB and disappear.
 - There are settings in AMCUpdater to PREVENT it from purging files - even when movie files are NOT available during scanning - this is mostly for DVD-drives, 
 but can also be used for USB-attached drives.
-This makes sure entries won�t be removed from DB - and if you start a film in My Films, it won�t find film and will ask you to insert media.</value>
+This makes sure entries won't be removed from DB - and if you start a film in My Films, it won't find film and will ask you to insert media.</value>
   </data>
   <data name="chkAMCUpd.ToolTip" xml:space="preserve">
     <value>If checked, the global update options will be available in My Films to run AMCUpdater in the background, 
@@ -583,11 +583,11 @@ You can also change the assignment in My Films GUI (Options - View Options).</va
   </data>
   <data name="groupBox_Separators.ToolTip" xml:space="preserve">
     <value>Genre, country and actors are grouped in unique fields in the database and sometimes 
-there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... �  
+there are multiple entries in each of these fields which may be separated by commas - for example  Genre = 'Comedy, Comedy Romantic, ... 
 The actual separators used can vary depending on the web-site used to grab the movie information.
 
 
-When using the �Search� function, the plugin needs to know exactly which separators are used 
+When using the 'Search' function, the plugin needs to know exactly which separators are used 
 in your movie database. A pre-defined list of separators is already given.
 
 
@@ -640,7 +640,7 @@ So you should only activate this if you want to filter your views always when en
 
 Note:
 The availability status is only usable after My Films has done a scan. 
-This can be enabled at startup on the General tab by checking the �Scan media on start� option.
+This can be enabled at startup on the General tab by checking the 'Scan media on start' option.
 Scan might take some time, depending on the size of your DB and location of your movies (e.g. NAS).</value>
   </data>
   <data name="chkGlobalUnwatchedOnly.ToolTip" xml:space="preserve">
@@ -655,9 +655,9 @@ on "update" tab (Watched-Status Handling).</value>
   </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
-Select the option �Display Always that view when using this config�, 
+Select the option 'Display Always that view when using this config', 
 if you always want to see this view for this configuration, when returning to My Films.  
-If you do not select the option �Display Always that view when using this config�, 
+If you do not select the option 'Display Always that view when using this config', 
 the last view used before exiting the plugin will be shown next time.</value>
   </data>
   <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -803,13 +803,13 @@ My Films helps you to create such conditions, but if you're familiar with MS Exp
 
 
 That filter can be combined with "Value", e.g.:
-You want all your action movies directly as film list from last 30 days (DBfield Category, value �action�, filter �ageadded &lt; 30�)
+You want all your action movies directly as film list from last 30 days (DBfield Category, value 'action', filter 'ageadded')
 You could do the same in the past by using different configs based on same catalog - as Filter works same way as config filter. 
-But now, you don�t need separate configs, just for that. 
+But now, you don't need separate configs, just for that. 
 You still might want to use different configs, if you e.g. want to have password protection, etc. </value>
   </data>
   <data name="groupBoxView.ToolTip" xml:space="preserve">
-    <value>Views by �Category�, by �Year� and by �Country� and by 'Actor' are already defined by default.  
+    <value>Views by 'Category', by 'Year' and by 'Country' and by 'Actor' are already defined by default.  
 In this section you can define additional views; 
 select the database field, enter a label for that field to be displayed in the menu, and then enter a value for the field.  
 If there is no value entered, a menu will be displayed for the range of values available in the database.  
@@ -870,8 +870,8 @@ select the database field/s, select the appropriate operator/s and enter a value
 
 
 For example, if you have a configuration of movies for children to watch, 
-and you wish to exclude �adult� movies, then store a specific code (e.g. �XXX�) in an unused field in your ANT database 
-and define a filter to not include films when that field value equals �XXX�.  
+and you wish to exclude 'adult' movies, then store a specific code (e.g. 'XXX') in an unused field in your ANT database 
+and define a filter to not include films when that field value equals 'XXX'.  
 Define this configuration by default and a menu of other configurations will not appear, 
 so children will not be aware of any other configurations.
 
@@ -926,8 +926,8 @@ select the database field/s, select the appropriate operator/s and enter a value
 
 
 For example, if you have a configuration of movies for children to watch, 
-and you wish to exclude �adult� movies, then store a specific code (e.g. �XXX�) in an unused field in your ANT database 
-and define a filter to not include films when that field value equals �XXX�.  
+and you wish to exclude 'adult' movies, then store a specific code (e.g. 'XXX') in an unused field in your ANT database 
+and define a filter to not include films when that field value equals 'XXX'.  
 Define this configuration by default and a menu of other configurations will not appear, 
 so children will not be aware of any other configurations.
 
@@ -984,7 +984,7 @@ Example: Search name = "movie", filename = "movie divx.avi"</value>
   </data>
   <data name="PathStorage.ToolTip" xml:space="preserve">
     <value>Enter the full path to the folder(s) containing the movie files.  
-You can enter several different paths separated by a semi-colon and you can select the option �search in sub-folders�, if required.  
+You can enter several different paths separated by a semi-colon and you can select the option 'search in sub-folders', if required.  
 You can also use the browse button to locate the correct folder(s).
 
 
@@ -1002,7 +1002,7 @@ Note: This setting is optional and not required, if you populate your "DB Item f
 with fully qualified path to your media files.</value>
   </data>
   <data name="AntStorage.ToolTip" xml:space="preserve">
-    <value>Select the field in your AMC database that you have used for the movie�s file name / path information.  
+    <value>Select the field in your AMC database that you have used for the movie's file name / path information.  
 
 
 This field in the AMC database can contain a single filename or multiple file names separated by a semi-colon.  
@@ -1030,9 +1030,9 @@ This is useful to deny access to certain movies, e.g. having all adult movies in
 Note: If you have a password on the default config, each time you enter My Films the user will have to enter the password.</value>
   </data>
   <data name="CatalogType.ToolTip" xml:space="preserve">
-    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies �..).  
-Types other than AMC will have a temporary file generated each time the original file is modified (based on the �date modified�).  
-The generated file is fully compatible with AMC and is stored in the same path as the original file and named �Catalog_File_without_extension�.</value>
+    <value>Select the type of xml catalog file (AMC, DVDP, MyMovies, ...).  
+Types other than AMC will have a temporary file generated each time the original file is modified (based on the 'date modified').  
+The generated file is fully compatible with AMC and is stored in the same path as the original file and named 'Catalog_File_without_extension'.</value>
   </data>
   <data name="label17.ToolTip" xml:space="preserve">
     <value>Character used for hierarchical presentation. This can be used to group more than one movie together,
@@ -1077,7 +1077,7 @@ movie 3: Moviecollection\movie3
 Will show "Moviecollection" with 3 items in it.</value>
   </data>
   <data name="AntTitle1.ToolTip" xml:space="preserve">
-    <value>Select the ANT database field that you want to be displayed as the �Master Title�.
+    <value>Select the ANT database field that you want to be displayed as the 'Master Title'.
 You can use hierarchies for "grouping" when defining a hierarchy separator 
 and use it in the content of your catalog's title field.</value>
   </data>
@@ -1385,7 +1385,7 @@ Special thanks to Dadeo: Without him, this former private version would never ha
   <data name="label28.Text" xml:space="preserve">
     <value>My Films is an extension to support users who already have invested time and energy to develop extensive movie catalogs 
 using movie catalog software. 
-It provides an �out of the box� solution to use your movie catalog in MediaPortal without needing 
+It provides an 'out of the box' solution to use your movie catalog in MediaPortal without needing 
 to rescan or re-download your data and artwork.
 My Films allows you to manage your movie collection in either one of the supported external catalogs, with the supplied 
 AMC Updater or even from within My Films plugin itself.
