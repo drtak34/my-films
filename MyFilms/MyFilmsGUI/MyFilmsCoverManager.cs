@@ -968,7 +968,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (loadingWorker.CancellationPending) return;
 
         GUIListItem item = null;
-        GUIWaitCursor.Init(); GUIWaitCursor.Show(); // show waitcorsor while covers are searched on local drive...
+        GUIWaitCursor.Init(); GUIWaitCursor.Show(); // show waitcursor while covers are searched on local drive...
         var covers = GetLocalCover(MyFilms.r, MyFilms.conf.StrIndex, ArtworkFileName);
         GUIWaitCursor.Hide();
 
