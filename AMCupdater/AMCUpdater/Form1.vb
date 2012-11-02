@@ -2774,11 +2774,52 @@ Public Class Form1
     Private Sub VidéoBindingNavigatorSaveItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VidéoBindingNavigatorSaveItem.Click
 
         BindingNavigatorPositionItem.Focus()
-        Dim destXml As New System.Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
-        destXml.WriteStartDocument(False)
-        destXml.Formatting = System.Xml.Formatting.Indented
-        myMovieCatalog.WriteXml(destXml)
-        destXml.Close()
+
+        ' copy custom fields to AMC4 extended fields
+        Dim commonColumns As IEnumerable(Of DataColumn) = myMovieCatalog.Movie.Columns.OfType(Of DataColumn)().Intersect(myMovieCatalog.CustomFields.Columns.OfType(Of DataColumn)(), New DataColumnComparer()).Where(Function(x) x.ColumnName <> "Movie_Id").ToList()
+        For Each movieRow As AntMovieCatalog.MovieRow In myMovieCatalog.Movie
+            If movieRow.RowState <> DataRowState.Deleted Then
+                movieRow.BeginEdit()
+                Dim customFields As AntMovieCatalog.CustomFieldsRow = Nothing
+                If movieRow.GetCustomFieldsRows().Length = 0 Then
+                    ' create CustomFields Element, if not existing ...
+                    customFields = myMovieCatalog.CustomFields.NewCustomFieldsRow()
+                    customFields.SetParentRow(movieRow)
+                    myMovieCatalog.CustomFields.AddCustomFieldsRow(customFields)
+                End If
+                customFields = movieRow.GetCustomFieldsRows()(0)
+                For Each dc As DataColumn In commonColumns
+                    customFields(dc.ColumnName) = movieRow(dc.ColumnName)
+                Next
+            End If
+        Next
+        myMovieCatalog.Movie.AcceptChanges()
+
+        ' new method to save:
+        Using fsTmp = File.Create(CurrentSettings.XML_File.Replace(".xml", ".tmp"), 1000, FileOptions.DeleteOnClose) ' creates "lock file"
+            ' make sure, only one process is writing to file !
+            Using fs = New FileStream(CurrentSettings.XML_File, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)
+                ' lock the file for any other use, as we do write to it now !
+                fs.SetLength(0) ' do not append, owerwrite !
+                Using myXmlTextWriter = New XmlTextWriter(fs, System.Text.Encoding.Default)
+                    myXmlTextWriter.Formatting = Formatting.Indented
+                    myXmlTextWriter.WriteStartDocument()
+                    myMovieCatalog.WriteXml(myXmlTextWriter, XmlWriteMode.IgnoreSchema)
+                    myXmlTextWriter.Flush()
+                    myXmlTextWriter.Close()
+                End Using
+                'xmlDoc.Save(fs);
+                fs.Close()
+                ' write buffer and release lock on file (either Flush, Dispose or Close is required)
+            End Using
+        End Using
+
+        ' old method:
+        'Dim destXml As New System.Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
+        'destXml.WriteStartDocument(False)
+        'destXml.Formatting = System.Xml.Formatting.Indented
+        'myMovieCatalog.WriteXml(destXml)
+        'destXml.Close()
     End Sub
 
     Private Sub SpeichernToolStripButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SpeichernToolStripButton.Click
@@ -2924,40 +2965,52 @@ Public Class Form1
         'Dim now As DateTime = DateTime.Now
         'watch.Reset()
         'watch.Start()
-        'Dim commonColumns As IEnumerable(Of DataColumn) = myMovieCatalog.Movie.Columns.OfType(Of DataColumn)().Intersect(myMovieCatalog.CustomFields.Columns.OfType(Of DataColumn)(), New DataColumnComparer())
+        Dim commonColumns As IEnumerable(Of DataColumn) = myMovieCatalog.Movie.Columns.OfType(Of DataColumn)().Intersect(myMovieCatalog.CustomFields.Columns.OfType(Of DataColumn)(), New DataColumnComparer()).Where(Function(x) x.ColumnName <> "Movie_Id").ToList()
+
         ''data.Movie.BeginLoadData();
         ''data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
-        'For Each movieRow As AntMovieCatalog.MovieRow In myMovieCatalog.Movie
-        '    movieRow.BeginEdit()
-        '    ' Convert(Date,'System.DateTime')
-        '    Dim added As DateTime
-        '    Dim iAge As Integer = 9999
-        '    ' set default to 9999 for those, where we do not have date(added) in DB ...
-        '    ' CultureInfo ci = CultureInfo.CurrentCulture;
-        '    If Not movieRow.IsDateNull() AndAlso DateTime.TryParse(movieRow.[Date], added) Then
-        '        ' CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
-        '        movieRow.DateAdded = added
-        '        ' iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
-        '        iAge = CInt(now.Subtract(added).TotalDays)
-        '    End If
-        '    movieRow.AgeAdded = iAge
-        '    ' sets integer value
-        '    movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge)
-        '    Dim index As String = movieRow(MyFilms.conf.StrTitle1).ToString()
-        '    movieRow.IndexedTitle = If((index.Length > 0), index.Substring(0, 1).ToUpper(), "")
-        '    movieRow.Persons = (If(movieRow.Actors, " ")) & ", " & (If(movieRow.Producer, " ")) & ", " & (If(movieRow.Director, " ")) & ", " & (If(movieRow.Writer, " "))
-        '    ' Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
-        '    ' if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
-        '    ' Copy CustomFields data ....
-        '    Dim customFields As AntMovieCatalog.CustomFieldsRow = movieRow.GetCustomFieldsRows()(0)
-        '    ' Relations["Movie_CustomFields"]
-        '    For Each dc As DataColumn In commonColumns
-        '        Dim temp As Object
-        '        If dc.ColumnName <> "Movie_Id" AndAlso DBNull.Value <> (InlineAssignHelper(temp, customFields(dc.ColumnName))) Then
-        '            movieRow(dc.ColumnName) = temp
-        '        End If
-        '    Next
-        'Next
+        For Each movieRow As AntMovieCatalog.MovieRow In myMovieCatalog.Movie
+            '    movieRow.BeginEdit()
+            '    ' Convert(Date,'System.DateTime')
+            '    Dim added As DateTime
+            '    Dim iAge As Integer = 9999
+            '    ' set default to 9999 for those, where we do not have date(added) in DB ...
+            '    ' CultureInfo ci = CultureInfo.CurrentCulture;
+            '    If Not movieRow.IsDateNull() AndAlso DateTime.TryParse(movieRow.[Date], added) Then
+            '        ' CultureInfo.InvariantCulture ??? // else movieRow.DateAdded = DateTime.MinValue; ???
+            '        movieRow.DateAdded = added
+            '        ' iAge = (!movieRow.IsDateAddedNull()) ? ((int)now.Subtract(movieRow.DateAdded).TotalDays) : 9999;
+            '        iAge = CInt(now.Subtract(added).TotalDays)
+            '    End If
+            '    movieRow.AgeAdded = iAge
+            '    ' sets integer value
+            '    movieRow.RecentlyAdded = MyFilms.GetDayRange(iAge)
+            '    Dim index As String = movieRow(MyFilms.conf.StrTitle1).ToString()
+            '    movieRow.IndexedTitle = If((index.Length > 0), index.Substring(0, 1).ToUpper(), "")
+            '    movieRow.Persons = (If(movieRow.Actors, " ")) & ", " & (If(movieRow.Producer, " ")) & ", " & (If(movieRow.Director, " ")) & ", " & (If(movieRow.Writer, " "))
+            '    ' Persons: ISNULL(Actors,' ') + ', ' + ISNULL(Producer, ' ') + ', ' + ISNULL(Director, ' ') + ', ' + ISNULL(Writer, ' ')
+            '    ' if (!movieRow.IsLengthNull()) movieRow.Length_Num = Convert.ToInt32(movieRow.Length);
+            If movieRow.GetCustomFieldsRows().Length > 0 Then
+                ' customfields are present - use it! (we only create them on saving)
+                Dim customFields = movieRow.GetCustomFieldsRows()(0)
+                ' Relations["Movie_CustomFields"]
+                For Each dc As DataColumn In commonColumns
+                    'object temp;
+                    '''/ only copy CustomFields, if not nothing, as user might have initial values in Elements!
+                    'if (DBNull.Value != (temp = customFields[dc.ColumnName]))
+                    '  movieRow[dc.ColumnName] = temp;
+                    movieRow(dc.ColumnName) = customFields(dc.ColumnName)
+                Next
+            End If            '    ' Copy CustomFields data ....
+            '    Dim customFields As AntMovieCatalog.CustomFieldsRow = movieRow.GetCustomFieldsRows()(0)
+            '    ' Relations["Movie_CustomFields"]
+            '    For Each dc As DataColumn In commonColumns
+            '        Dim temp As Object
+            '        If dc.ColumnName <> "Movie_Id" AndAlso DBNull.Value <> (InlineAssignHelper(temp, customFields(dc.ColumnName))) Then
+            '            movieRow(dc.ColumnName) = temp
+            '        End If
+            '    Next
+        Next
         ''data.EnforceConstraints = true;
         ''data.Movie.EndLoadData();
         'LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc PreAcceptChanges ... (" + (watch.ElapsedMilliseconds) & " ms)")
@@ -3422,5 +3475,17 @@ Public Class Form1
 
 End Class
 
+Friend Class DataColumnComparer
+    Implements IEqualityComparer(Of DataColumn)
+
+    Public Overloads Function Equals(ByVal x As DataColumn, ByVal y As DataColumn) As Boolean Implements IEqualityComparer(Of DataColumn).Equals
+        Return x.Caption = y.Caption
+    End Function
+
+    Public Overloads Function GetHashCode(ByVal obj As DataColumn) As Integer Implements IEqualityComparer(Of DataColumn).GetHashCode
+        Return obj.Caption.GetHashCode()
+    End Function
+
+End Class
 
 
