@@ -2328,7 +2328,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (Helper.IsOnlineVideosAvailableAndEnabled)
                       {
                         MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + movie.Trailers.youtube[0].source);
-                        MyFilmsPlugin.Utils.OVplayer.Play("http://www.youtube.com/watch?v=" + movie.Trailers.youtube[0].source);
+                        bool success = MyFilmsPlugin.Utils.OVplayer.Play("http://www.youtube.com/watch?v=" + movie.Trailers.youtube[0].source);
+                        if (!success) MyFilmsDetail.ShowNotificationDialog("Info", "Online content not available!");
                       }
                       else
                       {
@@ -2373,7 +2374,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                         if (Helper.IsOnlineVideosAvailableAndEnabled)
                         {
                           MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(choiceView[dlg.SelectedLabel]);
-                          MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel]);
+                          bool success = MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel]);
+                          if (!success) MyFilmsDetail.ShowNotificationDialog("Info", "Online content not available!");
                         }
                         else
                         {

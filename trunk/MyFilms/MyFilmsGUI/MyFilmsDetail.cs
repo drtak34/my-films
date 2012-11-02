@@ -5310,7 +5310,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               LogMyFilms.Debug("Fanart " + listemovies[0].Name.Substring(listemovies[0].Name.LastIndexOf("\\") + 1) + " downloaded for " + wttitle);
               if (listemovies[0].Persons.Count > 0)
               {
-                LogMyFilms.Debug("PersonArtwork: " + listemovies[0].Persons.Count.ToString() + " Personas checked for " + wttitle);
+                LogMyFilms.Debug("PersonArtwork: " + listemovies[0].Persons.Count.ToString() + " Persons checked for " + wttitle);
                 foreach (DbPersonInfo person in listemovies[0].Persons)
                 {
                   LogMyFilms.Debug("PersonArtwork: " + person.Images.Count.ToString() + " images found for " + person.Name);
