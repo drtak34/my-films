@@ -2796,24 +2796,30 @@ Public Class Form1
         myMovieCatalog.Movie.AcceptChanges()
 
         ' new method to save:
-        Using fsTmp = File.Create(CurrentSettings.XML_File.Replace(".xml", ".tmp"), 1000, FileOptions.DeleteOnClose) ' creates "lock file"
-            ' make sure, only one process is writing to file !
-            Using fs = New FileStream(CurrentSettings.XML_File, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None)
-                ' lock the file for any other use, as we do write to it now !
-                fs.SetLength(0) ' do not append, owerwrite !
-                Using myXmlTextWriter = New XmlTextWriter(fs, System.Text.Encoding.Default)
-                    myXmlTextWriter.Formatting = Formatting.Indented
-                    myXmlTextWriter.WriteStartDocument()
-                    myMovieCatalog.WriteXml(myXmlTextWriter, XmlWriteMode.IgnoreSchema)
-                    myXmlTextWriter.Flush()
-                    myXmlTextWriter.Close()
+        Try
+            Using fsTmp = File.Create(CurrentSettings.XML_File.Replace(".xml", ".tmp"), 1000, FileOptions.DeleteOnClose) ' creates "lock file"
+                Using fs = New FileStream(CurrentSettings.XML_File, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read) ' make sure, only one process is writing to file !
+                    ' lock the file for any other use, as we do write to it now !
+                    fs.SetLength(0) ' do not append, owerwrite !
+                    Using myXmlTextWriter = New XmlTextWriter(fs, System.Text.Encoding.Default)
+                        myXmlTextWriter.Formatting = Formatting.Indented
+                        myXmlTextWriter.WriteStartDocument()
+                        myMovieCatalog.WriteXml(myXmlTextWriter, XmlWriteMode.IgnoreSchema)
+                        myXmlTextWriter.Flush()
+                        myXmlTextWriter.Close()
+                    End Using
+                    'xmlDoc.Save(fs);
+                    fs.Close() ' write buffer and release lock on file (either Flush, Dispose or Close is required)
                 End Using
-                'xmlDoc.Save(fs);
-                fs.Close()
-                ' write buffer and release lock on file (either Flush, Dispose or Close is required)
+                fsTmp.Close()
             End Using
-        End Using
 
+            Dim info As New FileInfo(CurrentSettings.XML_File)
+            Dim length As Long = info.Length
+            LogEvent("Finished saving xml file to disk  - movies: '" & myMovieCatalog.Movie.Count() & "', Size = '" & length & "' bytes.", EventLogLevel.Informational)
+        Catch ex As Exception
+            MessageBox.Show("Error saving xml - error : " & ex.Message, "AMC Updater - Save", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
         ' old method:
         'Dim destXml As New System.Xml.XmlTextWriter(CurrentSettings.XML_File, System.Text.Encoding.Default)
         'destXml.WriteStartDocument(False)
@@ -2935,7 +2941,6 @@ Public Class Form1
         Dim success As Boolean = False
         Try
             Using fs As New FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.Read)
-                'LogMyFilms.Debug("LoadMyFilmsFromDisk()- opening '" & catalogfile & "' as FileStream with FileMode.Open, FileAccess.Read, FileShare.Read")
                 For Each dataTable As DataTable In myMovieCatalog.Tables
                     dataTable.BeginLoadData()
                 Next
@@ -2947,26 +2952,19 @@ Public Class Form1
                     dataTable.EndLoadData()
                 Next
                 fs.Close()
-                'LogMyFilms.Debug("LoadMyFilmsFromDisk()- closing  '" & catalogfile & "' FileStream")
             End Using
             success = True
         Catch e As Exception
             success = False
             MessageBox.Show("Error reading xml database after " & myMovieCatalog.Movie.Count & " records; movie: '" & myMovieCatalog.Movie(myMovieCatalog.Movie.Count - 1).OriginalTitle & "'; error : " & e.Message, "AMC Updater - DB Reader", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
         End Try
-        'LogMyFilms.Debug("LoadMyFilmsFromDisk()- Finished  (" + (watch.ElapsedMilliseconds) & " ms)")
-        '#End Region
 
         'CreateOrUpdateCustomsFieldsProperties()
 
         'CreateMissingCustomFieldsEntries()
 
-        ''#Region "calculate artificial columns like AgeAdded, IndexedTitle, Persons, etc. and CustomFields Copy ..."
-        'Dim now As DateTime = DateTime.Now
-        'watch.Reset()
-        'watch.Start()
         Dim commonColumns As IEnumerable(Of DataColumn) = myMovieCatalog.Movie.Columns.OfType(Of DataColumn)().Intersect(myMovieCatalog.CustomFields.Columns.OfType(Of DataColumn)(), New DataColumnComparer()).Where(Function(x) x.ColumnName <> "Movie_Id").ToList()
-
         ''data.Movie.BeginLoadData();
         ''data.EnforceConstraints = false; // primary key uniqueness, foreign key referential integrity and nulls in columns with AllowDBNull = false etc...
         For Each movieRow As AntMovieCatalog.MovieRow In myMovieCatalog.Movie
@@ -3013,11 +3011,7 @@ Public Class Form1
         Next
         ''data.EnforceConstraints = true;
         ''data.Movie.EndLoadData();
-        'LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc PreAcceptChanges ... (" + (watch.ElapsedMilliseconds) & " ms)")
-        'myMovieCatalog.Movie.AcceptChanges()
-        'watch.[Stop]()
-        'LogMyFilms.Debug("LoadMyFilmsFromDisk() - Calc & CustomField Copy Finished ... (" + (watch.ElapsedMilliseconds) & " ms)")
-        ''#End Region
+        myMovieCatalog.Movie.AcceptChanges()
 
         Return success
     End Function
