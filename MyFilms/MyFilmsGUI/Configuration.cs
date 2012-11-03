@@ -563,6 +563,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         IndexedChars = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "IndexedChars", 0);
         BoolReverseNames = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ReversePersonNames", false);
         BoolVirtualPathBrowsing = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "VirtualPathBrowsing", false);
+        BoolAskForPlaybackQuality = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AskForPlaybackQuality", false);
         WStrSort = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WStrSort", string.Empty);
         Wselectedlabel = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WSelectedLabel", string.Empty);
         Wstar = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Wstar", string.Empty);
@@ -666,7 +667,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         this.AllowRecentlyAddedApi = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AllowRecentAddedAPI", false);
 
         AlwaysDefaultView = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AlwaysDefaultView", false);
-        if ((AlwaysDefaultView) || (MyFilms.InitialStart) || (loadParams != null && (!string.IsNullOrEmpty(loadParams.View) || !string.IsNullOrEmpty(loadParams.MovieID))))
+        if (AlwaysDefaultView || MyFilms.InitialStart || (loadParams != null && (!string.IsNullOrEmpty(loadParams.View) || !string.IsNullOrEmpty(loadParams.MovieID))))
         {
           this.ViewContext = MyFilms.ViewContext.StartView;
           this.StrIndex = -1;
@@ -816,6 +817,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public bool BoolShowEmptyValuesInViews { get; set; }
     public bool BoolDontSplitValuesInViews { get; set; }
     public bool BoolReverseNames { get; set; }
+    public bool BoolAskForPlaybackQuality { get; set; }
     public string StrPersons { get; set; }
     public string StrTxtView { get; set; }
     public string StrTxtSelect { get; set; }
@@ -958,6 +960,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "IndexedChars", MyFilms.conf.IndexedChars);
         // XmlConfig.WriteXmlConfig("MyFilms", currentConfig, "ReversePersonNames", MyFilms.conf.BoolReverseNames); // removed, to make it NonPersistant
         xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "VirtualPathBrowsing", MyFilms.conf.BoolVirtualPathBrowsing);
+        xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "AskForPlaybackQuality", MyFilms.conf.BoolAskForPlaybackQuality);
 
         xmlConfig.WriteXmlConfig("MyFilms", currentConfig, "WSelectedLabel", MyFilms.conf.Wselectedlabel);
 

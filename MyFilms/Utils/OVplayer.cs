@@ -68,7 +68,7 @@ namespace MyFilmsPlugin.Utils
       return downloadUrls;
     }
     
-    public static bool Play(string stream)
+    public static bool Play(string stream, bool showPlaybackQualitySelectionDialog)
     {
       if (string.IsNullOrEmpty(stream)) return false;
 
@@ -81,13 +81,35 @@ namespace MyFilmsPlugin.Utils
 
         try
         {
-          var ovHosterProxy = OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
-          stream = ovHosterProxy.GetVideoUrls(stream);
+          bool interactiveSuccessful = false;
+          if (showPlaybackQualitySelectionDialog)
+          {
+            Dictionary<string, string> availableTrailerFiles = GetYoutubeDownloadUrls(stream);
+            var choiceView = new List<string>();
+            var dlg = (MediaPortal.Dialogs.GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+            if (dlg == null) return false;
+            dlg.Reset();
+            dlg.SetHeading(MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings.Get(10798994)); // Select quality ...
+            foreach (KeyValuePair<string, string> availableTrailerFile in availableTrailerFiles)
+            {
+              dlg.Add(availableTrailerFile.Key);
+              choiceView.Add(availableTrailerFile.Value); // this is the download URL
+            }
+            dlg.DoModal(GUIWindowManager.ActiveWindow);
+            if (dlg.SelectedLabel == -1) return false;
+            stream = choiceView[dlg.SelectedLabel];
+            interactiveSuccessful = true;
+          }
+
+          if (!interactiveSuccessful)
+          {
+            var ovHosterProxy = OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
+            stream = ovHosterProxy.GetVideoUrls(stream);
+          }
         }
         catch (Exception ex)
         {
           LogMyFilms.Debug("playback url exception: '{0}'", ex.Message);
-          // LogMyFilms.Debug("playback option exception: " + ex.StackTrace);
           return false;
         }
 
