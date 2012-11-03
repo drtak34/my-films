@@ -15778,7 +15778,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (Directory.Exists(path))
           {
             MyFilms.conf.TrailerList.Add(Directory.GetFiles(path));
-            if (MyFilms.conf.SearchSubDirsTrailer == false) continue;
             foreach (string sFolderSub in Directory.GetDirectories(path, "*", SearchOption.AllDirectories))
             {
               conf.TrailerList.Add(Directory.GetFiles(sFolderSub));

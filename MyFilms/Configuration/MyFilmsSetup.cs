@@ -857,7 +857,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", SearchFileName.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", SearchSubDirs.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", SearchOnlyExactMatches.Checked);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirsTrailer", SearchSubDirsTrailer.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TrailerAutoregister", cbTrailerAutoregister.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatched", CheckWatched.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatchedPlayerStopped", CheckWatchedPlayerStopped.Checked);
@@ -1020,6 +1019,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "CurrentSortMethodInHierarchies");
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethodInHierarchies");
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "AntDfltSortMethod");
+      XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "SearchSubDirsTrailer");
 
       // XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling"); // ToDo: can be removed in later release, when we don't support nonEnhanced/AMC3 anymore
     }
@@ -1327,7 +1327,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       SearchFileName.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", false);
       SearchSubDirs.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", false);
       SearchOnlyExactMatches.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", false);
-      SearchSubDirsTrailer.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirsTrailer", false);
       cbTrailerAutoregister.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "TrailerAutoregister", false);
       check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", false);
       comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOLtimeout", "15");
@@ -1762,7 +1761,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       cbSuppressAutomaticAction.ResetText();
       SearchSubDirs.Checked = false;
       SearchOnlyExactMatches.Checked = false;
-      SearchSubDirsTrailer.Checked = false;
       cbTrailerAutoregister.Checked = false;
       check_WOL_enable.Checked = false;
       comboWOLtimeout.ResetText();
