@@ -370,7 +370,6 @@
           this.groupBox24 = new System.Windows.Forms.GroupBox();
           this.cbTrailerAutoregister = new System.Windows.Forms.CheckBox();
           this.labelTrailers = new System.Windows.Forms.Label();
-          this.SearchSubDirsTrailer = new System.Windows.Forms.CheckBox();
           this.ShowTrailerWhenStartingMovie = new System.Windows.Forms.CheckBox();
           this.btnTrailer = new System.Windows.Forms.Button();
           this.PathStorageTrailer = new System.Windows.Forms.TextBox();
@@ -3702,7 +3701,6 @@
           // 
           this.groupBox24.Controls.Add(this.cbTrailerAutoregister);
           this.groupBox24.Controls.Add(this.labelTrailers);
-          this.groupBox24.Controls.Add(this.SearchSubDirsTrailer);
           this.groupBox24.Controls.Add(this.ShowTrailerWhenStartingMovie);
           this.groupBox24.Controls.Add(this.btnTrailer);
           this.groupBox24.Controls.Add(this.PathStorageTrailer);
@@ -3737,17 +3735,6 @@
           this.labelTrailers.TabIndex = 0;
           this.labelTrailers.Text = "To enable Trailer support, you must select a DB Item/field for storing Trailer in" +
               "fo";
-          // 
-          // SearchSubDirsTrailer
-          // 
-          this.SearchSubDirsTrailer.AutoSize = true;
-          this.SearchSubDirsTrailer.Location = new System.Drawing.Point(27, 132);
-          this.SearchSubDirsTrailer.Name = "SearchSubDirsTrailer";
-          this.SearchSubDirsTrailer.Size = new System.Drawing.Size(130, 17);
-          this.SearchSubDirsTrailer.TabIndex = 6;
-          this.SearchSubDirsTrailer.Text = "Search in Sub Folders";
-          this.ToolTip1.SetToolTip(this.SearchSubDirsTrailer, resources.GetString("SearchSubDirsTrailer.ToolTip"));
-          this.SearchSubDirsTrailer.UseVisualStyleBackColor = true;
           // 
           // ShowTrailerWhenStartingMovie
           // 
@@ -6745,7 +6732,6 @@
         private TabPage Tab_Trailer;
         private GroupBox groupBox24;
         private Label labelTrailers;
-        private CheckBox SearchSubDirsTrailer;
         private CheckBox ShowTrailerWhenStartingMovie;
         private Button btnTrailer;
         private TextBox PathStorageTrailer;

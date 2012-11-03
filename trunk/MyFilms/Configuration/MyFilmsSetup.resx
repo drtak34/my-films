@@ -829,14 +829,6 @@ the movie directory and does not replace the full register scan.
 Note: Using this option will update your DB whenever you enter the Details View and there is trailers found. 
 Disable the option, if you don't want regular writing to your DB.</value>
   </data>
-  <data name="SearchSubDirsTrailer.ToolTip" xml:space="preserve">
-    <value>Select this option if you want the search for the trailer files
-to include sub-folders of the defined path.
-
-Note: subdirs will ALWAYS be included on trailer searches for a single movie!
-This setting only affects the global search for trailers, when directory 
-is searched for each movie.</value>
-  </data>
   <data name="PathStorageTrailer.ToolTip" xml:space="preserve">
     <value>Enter or select the path for extended search for trailers.
 My Films will try to find matching media files based on the title chosen for trailer search 
