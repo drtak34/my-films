@@ -2342,12 +2342,13 @@ Public Class AntRecord
         'xmlFile.Close()
 
         Try
-            Using fsLock As FileStream = File.Create(LockFilename(_XMLFilePath), 1000, FileOptions.DeleteOnClose) ' create lock file to avoid concurrent writing
-                Using fs As New FileStream(_XMLFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None) ' Dim xmlFile As New FileStream(_XMLFilePath, FileMode.Open, FileAccess.Write, FileShare.Read) ' lock the file for any other use, as we do write to it now !
+            Using fsLock As FileStream = File.Create(LockFilename(_xmlFilePath), 1000, FileOptions.DeleteOnClose) ' create lock file to avoid concurrent writing
+                Using fs As New FileStream(_xmlFilePath, FileMode.OpenOrCreate, FileAccess.Write, FileShare.Read) ' Dim xmlFile As New FileStream(_XMLFilePath, FileMode.Open, FileAccess.Write, FileShare.Read) ' lock the file for any other use, as we do write to it now !
                     fs.SetLength(0) ' do not append, owerwrite !
                     XMLDoc.Save(fs)
                     fs.Close() ' write buffer and release lock on file (either Flush, Dispose or Close is required)
                 End Using
+                fsLock.Close()
             End Using
             ' retry later 
         Catch ex As Exception
