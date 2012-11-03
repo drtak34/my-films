@@ -3826,7 +3826,7 @@ Partial Class Form1
         '
         'TextBox3
         '
-        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "DateAdded", True))
+        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Date", True))
         Me.TextBox3.Location = New System.Drawing.Point(447, 20)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(50, 20)
