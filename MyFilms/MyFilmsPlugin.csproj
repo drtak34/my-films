@@ -216,7 +216,6 @@
     <Compile Include="MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilmsGUI\GUIBackgroundTask.cs" />
     <Compile Include="MyFilmsGUI\MFView.cs" />
-    <Compile Include="MyFilmsGUI\GUIConnector.cs" />
     <Compile Include="MyFilmsGUI\GUIDialogMultiSelect.cs" />
     <Compile Include="MyFilmsGUI\GUIUtils.cs" />
     <Compile Include="MyFilmsGUI\LoadParameterInfo.cs" />
