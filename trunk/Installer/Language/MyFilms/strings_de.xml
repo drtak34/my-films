@@ -97,7 +97,7 @@
     <String id="1079831">Lösche Film aus Datenbank</String>
     <String id="1079832">Lösche Film Datei(en) von Disk</String>
     <String id="1079833">Lösche Film aus Datenbank und von Disk</String>
-    <String id="1079834">Die Film Media Dateien werden unwiderruflich gel�scht !</String>
+    <String id="1079834">Die Film Media Dateien werden unwiderruflich gelöscht !</String>
     <String id="1079835">Wollen Sie die Film Dateien löschen ?</String>
     <String id="1079836">Füge Film zu Boxset hinzu ...</String>
     <String id="1079837">Film aus Boxset entfernen</String>
@@ -144,7 +144,7 @@
     <String id="1079878">Wollen Sie diese Auswahl treffen ?</String>
     <String id="1079879">Infos zu beteiligten Personen</String>
     <String id="1079880">Umschalten 'Immer Standardansicht zeigen ({0})'</String>
-    <String id="1079881">Bitte wählen sie den globalen Wert f�r die Minimalbewertung</String>
+    <String id="1079881">Bitte wählen sie den globalen Wert für die Minimalbewertung</String>
     <String id="1079882">Update der aktuellen Person</String>
     <String id="1079883">Update aller beteiligten Personen (IMDB)</String>
     <String id="1079884">Weitere Infos zur Person</String>
@@ -174,6 +174,7 @@
     <String id="1079908">Film Sammlung</String>
     <String id="1079909">Wähle Rolle</String>
     <String id="1079910">Anzahl</String>
+    <String id="1079919">Umschalten 'Manuelle Wahl Wiedergabequalität ({0})'</String>
     <String id="1079920">Umschalten 'Immer Standard Start Konfiguration ({0})'</String>
     <String id="1079921">Umschalten 'Zeige Online Informationen ({0})'</String>
     <String id="10798500">Spiele Film (externer Player)</String>
@@ -260,7 +261,7 @@
     <String id="10798690">Globale Updates ...</String>
     <String id="10798691">Globaler Filter "Nur Filme mit Trailer" ({0})</String>
     <String id="10798692">Globaler Filter "Nur Filme mit Minimalbewertung" ({0})</String>
-    <String id="10798693">Ändern Wert für "Minimalbewertung" (aktuell: '{0}')</String>
+    <String id="10798693">Wert ändern für "Minimalbewertung" (aktuell: '{0}')</String>
     <String id="10798694">Suche Trailer - alle Filme (lokal)</String>
     <String id="10798695">Trailersuche beendet !</String>
     <String id="10798696">Globaler Filter "Nur ungesehene Filme" ({0})</String>
@@ -417,6 +418,7 @@
     <String id="10798995">Kein Film gefunden !</String>
     <String id="10798996">Keine Trailer gefunden !</String>
     <String id="10798997">Lade alle Trailer</String>
+    <String id="10798998">Wiedergabe nicht möglich !</String>
     <String id="10799201">MyFilms Cover Manager</String>
     <String id="10799202">Auflösung</String>
     <String id="10799203">Filter ...</String>

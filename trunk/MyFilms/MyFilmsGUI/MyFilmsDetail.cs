@@ -9893,6 +9893,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return;
     }
 
+    internal KeyValuePair<string, object>? ShowSelectionDialog(string headline, List<KeyValuePair<string, object>> itemsList)
+    {
+      var choiceView = new List<object>();
+      var dlg = (MediaPortal.Dialogs.GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlg == null) return null;
+      dlg.Reset();
+      dlg.SetHeading(headline);
+      foreach (KeyValuePair<string, object> keyValuePair in itemsList)
+      {
+        dlg.Add(keyValuePair.Key);
+        choiceView.Add(keyValuePair.Value);
+      }
+      dlg.DoModal(GUIWindowManager.ActiveWindow);
+      if (dlg.SelectedLabel == -1) return null;
+      return new KeyValuePair<string, object>(dlg.SelectedLabelText, choiceView[dlg.SelectedLabel]);
+    }
+
     private static string GetMyFilmsDefaultLogo()
     {
       // first check subfolder of current skin (allows skinners to use custom icons)

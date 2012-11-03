@@ -1216,7 +1216,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       base.OnShowContextMenu();
     }
-
     #endregion
 
     #region Main Context Menu (inactive)
@@ -2298,121 +2297,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                   case ViewContext.TmdbMovies:
                     #region TMDB online movies selection
-                    // MyFilmsPlugin.Utils.OVplayer.Play(facadeFilms.SelectedListItem.Path);
-                    string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
-                    var api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
-                    var movie = facadeFilms.SelectedListItem.TVTag as OnlineMovie;
-                    if (movie == null) break;
-                    movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, language);
-                    if (movie.Trailers.youtube.Count == 0)
-                    {
-                      LogMyFilms.Debug("GetTrailers - no trailer found for language '" + language + "' - try default");
-                      movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null);
-                    }
-                    LogMyFilms.Debug("GetTrailers - found '" + movie.Trailers.youtube.Count + "' YouTube Trailers");
-                    bool launchLocalMovies = false;
-                    if (movie.Trailers.youtube.Count == 0)
-                    {
-                      if (facadeFilms.SelectedListItem.IsRemote)
-                      {
-                        MyFilmsDetail.ShowNotificationDialog("Info", "No trailer available!");
-                      }
-                      else
-                      {
-                        launchLocalMovies = true;
-                      }
-                    }
-                    else if (movie.Trailers.youtube.Count == 1 && facadeFilms.SelectedListItem.IsRemote)
-                    {
-                      #region play single trailer in OV player factory
-                      if (Helper.IsOnlineVideosAvailableAndEnabled)
-                      {
-                        MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls("http://www.youtube.com/watch?v=" + movie.Trailers.youtube[0].source);
-                        bool success = MyFilmsPlugin.Utils.OVplayer.Play("http://www.youtube.com/watch?v=" + movie.Trailers.youtube[0].source);
-                        if (!success) MyFilmsDetail.ShowNotificationDialog("Info", "Online content not available!");
-                      }
-                      else
-                      {
-                        MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
-                      }
-                      #endregion
-                    }
-                    else
-                    {
-                      #region build menu with local and trailers
-                      var choiceView = new List<string>();
-                      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-                      if (dlg == null) break;
-                      dlg.Reset();
-                      dlg.SetHeading(GUILocalizeStrings.Get(1079903)); // Change View ...
-
-                      if (facadeFilms.SelectedListItem.IsRemote == false)
-                      {
-                        dlg.Add(GUILocalizeStrings.Get(342));//videos
-                        choiceView.Add("videos");
-                      }
-
-                      foreach (Youtube trailer in movie.Trailers.youtube)
-                      {
-                        dlg.Add(trailer.name + " (" + trailer.size + ")");
-                        choiceView.Add("http://www.youtube.com/watch?v=" + trailer.source);
-                      }
-
-                      //dlg.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
-                      //choiceView.Add("youtube");
-                      #endregion
-
-                      dlg.DoModal(GetID);
-                      if (dlg.SelectedLabel == -1) break;
-                      if (choiceView[dlg.SelectedLabel] == "videos") 
-                        launchLocalMovies = true;
-                      //else if (choiceView[dlg.SelectedLabel] == "youtube")
-                      //  MyFilmsDetail.LaunchOnlineVideos("YouTubeMore");
-                      else
-                      {
-                        #region play trailer in OV player factory
-                        if (Helper.IsOnlineVideosAvailableAndEnabled)
-                        {
-                          MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(choiceView[dlg.SelectedLabel]);
-                          bool success = MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel]);
-                          if (!success) MyFilmsDetail.ShowNotificationDialog("Info", "Online content not available!");
-                        }
-                        else
-                        {
-                          MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
-                        }
-                        #endregion
-                      }
-                    }
-
-                    if (launchLocalMovies)
-                    {
-                      #region jump to local movies
-                      SaveListState(false);
-                      conf.Wselectedlabel = facadeFilms.SelectedListItem.Label;
-                      conf.Boolselect = true;
-                      conf.Boolreturn = (!this.facadeFilms.SelectedListItem.IsFolder);
-                      //conf.StrTxtSelect = "";
-                      //conf.StrTitleSelect = "";
-                      conf.StrSelect = ""; // reset movie context filter for person views
-                      conf.StrPersons = ""; // reset person list filter
-                      conf.StrViewSelect = ""; // reset view list filter
-                      viewcover.Filename = "";
-                      personcover.Filename = "";
-                      groupcover.Filename = "";
-
-                      new Thread(delegate()
-                      {
-                        do
-                        {
-                          if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
-                          conf.StrTitleSelect += conf.Wselectedlabel;
-                        }
-                        while (GetFilmList() == false); //keep calling while single folders found
-                        GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
-                      }) { Name = "GetFilmList", IsBackground = true }.Start();
-                      #endregion
-                    }
+                    Change_SelectTmdbEntry_Action(facadeFilms.SelectedListItem);
                     #endregion
                     break;
 
@@ -6766,6 +6651,143 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    private void Change_SelectTmdbEntry_Action(GUIListItem selItem)
+    {
+      // MyFilmsPlugin.Utils.OVplayer.Play(facadeFilms.SelectedListItem.Path);
+      string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+      var api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+      var movie = facadeFilms.SelectedListItem.TVTag as OnlineMovie;
+      if (movie == null) return;
+
+      #region search trailers
+      var trailersfound = new List<Youtube>();
+      int iLocalTrailers = 0;
+      TmdbMovieTrailers trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, language); // trailers in local language
+      if (trailers.youtube.Count > 0)
+      {
+        trailersfound.AddRange(trailers.youtube);
+        iLocalTrailers = trailersfound.Count;
+      }
+      trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null); // all trailers
+      if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
+      LogMyFilms.Debug("Change_SelectTmdbEntry_Action - found '" + trailersfound.Count + "' YouTube Trailers");
+
+      //movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, language);
+      //if (movie.Trailers.youtube.Count == 0)
+      //{
+      //  LogMyFilms.Debug("GetTrailers - no trailer found for language '" + language + "' - try default");
+      //  movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null);
+      //}
+      //LogMyFilms.Debug("GetTrailers - found '" + movie.Trailers.youtube.Count + "' YouTube Trailers");
+      #endregion
+
+      bool launchLocalMovies = false;
+      if (trailersfound.Count == 0)
+      {
+        if (selItem.IsRemote)
+        {
+          MyFilmsDetail.ShowNotificationDialog("Info", "No trailer available!");
+        }
+        else
+        {
+          launchLocalMovies = true;
+        }
+      }
+      else if (trailersfound.Count == 1 && selItem.IsRemote)
+      {
+        #region play single trailer in OV player factory
+        if (Helper.IsOnlineVideosAvailableAndEnabled)
+        {
+          bool success = MyFilmsPlugin.Utils.OVplayer.Play("http://www.youtube.com/watch?v=" + trailersfound[0].source, conf.BoolAskForPlaybackQuality);
+          if (!success) MyFilmsDetail.ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798998)); // Cannot play online content !
+        }
+        else
+        {
+          MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
+        }
+        #endregion
+      }
+      else
+      {
+        #region build menu with local and trailers
+        var choiceView = new List<string>();
+        var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        if (dlg == null) return;
+        dlg.Reset();
+        dlg.SetHeading(GUILocalizeStrings.Get(1079860)); // Manual Selection
+
+        if (selItem.IsRemote == false)
+        {
+          dlg.Add(GUILocalizeStrings.Get(342));//videos
+          choiceView.Add("videos");
+        }
+
+        for (int i = 0; i < trailersfound.Count; i++)
+        {
+          Youtube trailer = trailersfound[i];
+          string entry = trailer.name + " (" + trailer.size + ")";
+          if (i < iLocalTrailers) entry += " - (" + language + ")";
+          dlg.Add(entry);
+          choiceView.Add("http://www.youtube.com/watch?v=" + trailer.source);
+        }
+
+        //dlg.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
+        //choiceView.Add("youtube");
+        #endregion
+
+        dlg.DoModal(GetID);
+        if (dlg.SelectedLabel == -1) return;
+        if (choiceView[dlg.SelectedLabel] == "videos")
+          launchLocalMovies = true;
+        //else if (choiceView[dlg.SelectedLabel] == "youtube")
+        //  MyFilmsDetail.LaunchOnlineVideos("YouTubeMore");
+        else
+        {
+          #region play trailer in OV player factory
+          if (Helper.IsOnlineVideosAvailableAndEnabled)
+          {
+            MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(choiceView[dlg.SelectedLabel]);
+            bool success = MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel], MyFilms.conf.BoolAskForPlaybackQuality);
+            if (!success) MyFilmsDetail.ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798998)); // Cannot play online content !
+          }
+          else
+          {
+            MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
+          }
+          #endregion
+        }
+      }
+
+      if (launchLocalMovies)
+      {
+        #region jump to local movies
+        SaveListState(false);
+        conf.Wselectedlabel = selItem.Label;
+        conf.Boolselect = true;
+        conf.Boolreturn = (!selItem.IsFolder);
+        //conf.StrTxtSelect = "";
+        //conf.StrTitleSelect = "";
+        conf.StrSelect = ""; // reset movie context filter for person views
+        conf.StrPersons = ""; // reset person list filter
+        conf.StrViewSelect = ""; // reset view list filter
+        viewcover.Filename = "";
+        personcover.Filename = "";
+        groupcover.Filename = "";
+
+        new Thread(delegate()
+        {
+          do
+          {
+            if (conf.StrTitleSelect != "") conf.StrTitleSelect += conf.TitleDelim;
+            conf.StrTitleSelect += conf.Wselectedlabel;
+          }
+          while (GetFilmList() == false); //keep calling while single folders found
+          GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
+        }) { Name = "GetFilmList", IsBackground = true }.Start();
+        #endregion
+      }
+    }
+
     /// <summary>Selects records for display grouping them as required</summary>
     /// <param name="WstrSelect">Select this kind of records</param>
     /// <param name="WStrSort">Sort based on this</param>
@@ -9584,6 +9606,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             dlg1.Add(string.Format(GUILocalizeStrings.Get(1079842), conf.StrViewDfltItem)); // change default start config
             choiceViewGlobalOptions.Add("changedefaultconfig");
+
+            if (MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798628))); // Always ask for playback quality for online content ({0})
+            if (!MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798629)));
+            choiceViewGlobalOptions.Add("askforplaybackquality");
           }
 
           //if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
@@ -10210,14 +10236,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "showemptyvaluesinviews":
+          #region showemptyvaluesinviews
           MyFilms.conf.BoolShowEmptyValuesInViews = !MyFilms.conf.BoolShowEmptyValuesInViews;
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "ShowEmptyValuesInViews", MyFilms.conf.StrGrabber_ChooseScript); // disabled, as we do not keep the setting persistant in config
           LogMyFilms.Info("Grabber Option 'show empty values in views' changed to " + MyFilms.conf.BoolShowEmptyValuesInViews);
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           Refreshfacade();
           this.Change_Menu_Action("globaloptions");
+          #endregion
           break;
         case "choosescript":
+          #region choosescript
           MyFilms.conf.StrGrabber_ChooseScript = !MyFilms.conf.StrGrabber_ChooseScript;
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "Grabber_ChooseScript", MyFilms.conf.StrGrabber_ChooseScript);
           using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
@@ -10228,8 +10257,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info("Grabber Option 'use always that script' changed to " + MyFilms.conf.StrGrabber_ChooseScript);
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           this.Change_Menu_Action("globaloptions");
+          #endregion
           break;
         case "findbestmatch":
+          #region findbestmatch
           MyFilms.conf.StrGrabber_Always = !MyFilms.conf.StrGrabber_Always;
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "Grabber_Always", MyFilms.conf.StrGrabber_Always);
           using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
@@ -10240,6 +10271,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Info("Grabber Option 'try to find best match...' changed to " + MyFilms.conf.StrGrabber_Always.ToString());
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           this.Change_Menu_Action("globaloptions");
+          #endregion
           break;
 
         //case "alwayslistforgroups":
@@ -10311,6 +10343,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "alwaysdefaultconfig":
+          #region alwaysdefaultconfig
           MyFilms.conf.AlwaysShowConfigMenu = !MyFilms.conf.AlwaysShowConfigMenu;
           // AlwaysShowConfigMenu = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Menu_Config", false);
           // XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Menu_Config", MyFilms.conf.AlwaysShowConfigMenu);
@@ -10321,9 +10354,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Update Option 'use always default config...' changed to " + MyFilms.conf.AlwaysShowConfigMenu.ToString());
           this.Change_Menu_Action("globaloptions");
+          #endregion
           break;
 
+        case "askforplaybackquality":
+          #region askforplaybackquality
+          MyFilms.conf.BoolAskForPlaybackQuality = !MyFilms.conf.BoolAskForPlaybackQuality;
+          // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AlwaysDefaultView", MyFilms.conf.AlwaysDefaultView);
+          using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+          {
+            xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AskForPlaybackQuality", MyFilms.conf.BoolAskForPlaybackQuality);
+          }
+          // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
+          LogMyFilms.Info("Update Option 'Always ask for playback quality for online content...' changed to " + MyFilms.conf.BoolAskForPlaybackQuality.ToString());
+          this.Change_Menu_Action("globaloptions");
+          #endregion
+          break;
+        
         case "changedefaultconfig":
+          #region changedefaultconfig
           string currentDefaultConfig = "";
           using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
@@ -10372,9 +10421,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Update Option 'change default config' changed to " + currentDefaultConfig);
           Change_Menu_Action("globaloptions");
+          #endregion
           break;
 
         case "woluserdialog":
+          #region woluserdialog
           MyFilms.conf.StrCheckWOLuserdialog = !MyFilms.conf.StrCheckWOLuserdialog;
           // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "WOL-Userdialog", MyFilms.conf.StrCheckWOLuserdialog);
           using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
@@ -10384,6 +10435,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Update Option 'use WOL userdialog ...' changed to " + MyFilms.conf.StrCheckWOLuserdialog);
           this.Change_Menu_Action("globaloptions");
+          #endregion
           break;
 
         default: // other nonspecific views ...
@@ -10788,11 +10840,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     //   Display Context Menu for Movie 
     //--------------------------------------------------------------------------------------------
-    // Changed from private to PUBLIC - GUZZI - Original ZebonsMerge was private
-    // private void Context_Menu_Movie(int selecteditem)
-
-    public void Context_Menu_Movie(int selecteditem)
+    private void Context_Menu_Movie(int selecteditem)
     {
+      LogMyFilms.Debug("Context_Menu_Movie() - context = '" + conf.ViewContext.ToString() + "'");
       GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return;
       Context_Menu = true;
@@ -11082,6 +11132,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
 
+      #region TMDB online content context
+      if (conf.ViewContext == ViewContext.TmdbMovies)
+      {
+        if (MyFilms.conf.BoolAskForPlaybackQuality) dlg.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798628))); // Always ask for playback quality for online content ({0})
+        if (!MyFilms.conf.BoolAskForPlaybackQuality) dlg.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798629)));
+        updChoice.Add("askforplaybackquality");
+      }
+      #endregion
 
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1) return;
@@ -11318,6 +11376,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilms.conf.BoolEnableOnlineServices = !MyFilms.conf.BoolEnableOnlineServices;
             LogMyFilms.Debug("Context_Menu_Movie() : Option 'Show Online Info' changed to '" + MyFilms.conf.BoolEnableOnlineServices + "'");
             Refreshfacade();
+            break;
+          }
+
+        case "askforplaybackquality":
+          {
+            MyFilms.conf.BoolAskForPlaybackQuality = !MyFilms.conf.BoolAskForPlaybackQuality;
+            LogMyFilms.Debug("Context_Menu_Movie() : Option 'Always ask for playback quality for online content...' changed to '" + MyFilms.conf.BoolAskForPlaybackQuality + "'");
             break;
           }
 
