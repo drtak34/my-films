@@ -2954,6 +2954,10 @@ Public Class Form1
                 fs.Close()
             End Using
             success = True
+
+            Dim info As New FileInfo(catalogfile)
+            Dim length As Long = info.Length
+            LogEvent("Finished loading xml file from disk  - movies: '" & myMovieCatalog.Movie.Count() & "', Size = '" & length & "' bytes.", EventLogLevel.Informational)
         Catch e As Exception
             success = False
             MessageBox.Show("Error reading xml database after " & myMovieCatalog.Movie.Count & " records; movie: '" & myMovieCatalog.Movie(myMovieCatalog.Movie.Count - 1).OriginalTitle & "'; error : " & e.Message, "AMC Updater - DB Reader", MessageBoxButtons.OK, MessageBoxIcon.Error)
