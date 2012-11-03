@@ -1176,7 +1176,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // save current GUIlist in navigation cache, also stops any remaining facade background worker
       SaveListState(false);
 
-      GUIConnector.Instance.StopBackgroundTask();
+      GUIBackgroundTask.Instance.StopBackgroundTask();
 
       loadParamInfo.SafeDispose();
       //// Reset to force republishing details on reentering
