@@ -2279,7 +2279,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           Directory.CreateDirectory(path);
         }
-        catch (Exception) { }
+        catch (Exception ex)
+        {
+          LogMyFilms.Debug("Error creating downloadpath: '" + ex.Message + "'");
+        }
 
       switch (site)
       {
@@ -2309,7 +2312,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("Starting OnlineVideos with '" + oVstartparams + "'");
         // trailerPlayed = true; // should this be set here to make original movie doesn't get set to watched??
 
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title + titleextension);
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", path);
+        ////GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", GUILocalizeStrings.Get(10798749) + " (" + title + ")"); // download to movie directory
+
         GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, oVstartparams);
+
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
+        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", "");
       }
       else
       {
