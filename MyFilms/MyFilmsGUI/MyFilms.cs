@@ -11025,6 +11025,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
+      #region Moviecontext and Groupcontext and TMDBonline context (OnlineVideos search)
+      if (facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.TmdbMovies || conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection))
+      {
+        if (MyFilmsDetail.ExtendedStartmode("Context: OnlineVideos Context Search"))
+        {
+          if (Helper.IsOnlineVideosAvailableAndEnabled)
+          {
+            dlg.Add(GUILocalizeStrings.Get(10798600)); // Search OnlineVideos ... 
+            updChoice.Add("searchonlinevideos");
+          }
+        }
+      }
+      #endregion
+
       #region Moviecontext
       if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
       {
@@ -11240,6 +11254,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
+      #region Menucontext
       if (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.TmdbMovies)
       {
         dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
@@ -11251,6 +11266,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           updChoice.Add("menusavecurrentsettingstoview");
         }
       }
+      #endregion
 
       #region TMDB online content context
       if (conf.ViewContext == ViewContext.TmdbMovies)
@@ -11816,6 +11832,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
 
+        case "searchonlinevideos":
+          {
+            OnlineVideosSearchLauncher(facadeFilms.SelectedListItem.Label);
+            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            dlg.DeInit();
+            break;
+          }
+
         case "movieimdbtrailer": // Example: (http://www.imdb.com/title/tt0438488/videogallery)
           {
             BrowseTheWebLauncher("movie", "videogallery", this.facadeFilms.SelectedListItem.Label);
@@ -12292,6 +12316,63 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       }
       #endregion
+    }
+
+    private void OnlineVideosSearchLauncher(string searchexpression)
+    {
+      string path = "";
+      if (r != null && facadeFilms.SelectedListItemIndex > -1 && conf.ViewContext != ViewContext.TmdbMovies)
+      {
+        path = MyFilms.r[facadeFilms.SelectedListItemIndex][MyFilms.conf.StrStorage].ToString();
+        if (path.Contains(";")) path = path.Substring(0, path.IndexOf(";", System.StringComparison.Ordinal));
+        if (path.Contains("\\")) path = path.Substring(0, path.LastIndexOf("\\", System.StringComparison.Ordinal));
+
+        path = Path.Combine(path, "Trailer");
+      }
+      if (!Directory.Exists(path))
+        try
+        {
+          Directory.CreateDirectory(path);
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Debug("Error creating downloadpath: '" + ex.Message + "'");
+          path = "";
+        }
+
+      var choiceViewMenu = new List<string>(); // choiceViewMenu.Clear();
+      var dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      if (dlgmenu == null) return;
+      dlgmenu.Reset();
+      dlgmenu.SetHeading(GUILocalizeStrings.Get(10798600)); // Search OnlineVideos ...
+
+      dlgmenu.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
+      choiceViewMenu.Add("YouTube");
+
+      dlgmenu.Add(GUILocalizeStrings.Get(10798712)); //search apple itunes trailer with onlinevideos
+      choiceViewMenu.Add("iTunes Movie Trailers");
+
+      dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
+      choiceViewMenu.Add("IMDb Movie Trailers");
+
+      if (MyFilmsDetail.ExtendedStartmode("Details context: FilmStarts.de and optional all OnlineVideoSites menu ..."))
+      {
+        dlgmenu.Add("FilmStarts.de (OnlineVideos)");
+        choiceViewMenu.Add("FilmStarts.de Trailer");
+
+        //dlgmenu.Add("*** show all ***");
+        //choiceViewMenu.Add("showall");
+      }
+
+      dlgmenu.DoModal(GetID);
+      if (dlgmenu.SelectedLabel == -1) return;
+
+      string site = choiceViewMenu[dlgmenu.SelectedLabel];
+      dlgmenu.DeInit();
+
+      string oVstartparams = "site:" + site + "|category:|search:" + searchexpression + "|return:Locked" + "|downloaddir:" + path + "|downloadmenuentry:" + GUILocalizeStrings.Get(10798749) + " (" + searchexpression + ")"; // MyFilms: Download to movie directory
+      LogMyFilms.Debug("Starting OnlineVideos with '" + oVstartparams + "'");
+      GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, oVstartparams);
     }
 
     private void BrowseTheWebLauncher(string type, string extension, string searchexpression)
