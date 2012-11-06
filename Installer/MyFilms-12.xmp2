@@ -1421,6 +1421,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{36d8479b-42dd-464a-b9e8-e72b53160387}-wmv3.png</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\Media\Logos\MyFilms\wmv3.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilmsFanartManager.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{698c9aa2-3a13-4f4a-aca2-f9e99b287887}-MyFilmsFanartManager.xml</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\MyFilmsFanartManager.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -2358,6 +2365,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{4de922b3-592c-4846-ae6d-cdcb01afa29f}-NFO.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\NFO.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\IMDB.ES-TMDB.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{48eb9229-f72d-4d8f-9134-9659ce91b80e}-IMDB.ES-TMDB.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES-TMDB.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3071,13 +3085,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Base.12\MPLanguageTool.exe</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{8a4831c5-d449-4d35-abce-5cc190cf1bbc}-MPLanguageTool.exe</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Tools\MPLanguageTool.exe</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>plugins.12\Windows\TraktPlugin.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{752a42c1-cb9c-4626-bb74-774f42131d55}-TraktPlugin.dll</ZipFileName>
-              <DestinationFilename>%Plugins%\windows\TraktPlugin.dll</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -5881,13 +5888,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2f1c691d-9e05-494e-8be7-885cc7d721c9}-Thumbs.db</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\Default\Media\MyFilms\backgroundthumbsview.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{0eb509b4-aceb-45cf-90d3-48839287f266}-backgroundthumbsview.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Default\Media\MyFilms\backgroundthumbsview.png</DestinationFilename>
@@ -6241,6 +6241,27 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <LocalFileName>Skin.12\DefaultWide\Media\Logos\MyFilms\wmv3.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{c75f27d7-1cb1-4662-b8a8-af98b66f2bfc}-wmv3.png</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\Media\Logos\MyFilms\wmv3.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilmsFanartManager.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{107271af-9b3b-4850-b56a-96a6caa10a71}-MyFilmsFanartManager.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\MyFilmsFanartManager.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\MyFilmsFullScreen.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{54974221-66ab-45bd-a7ee-7221784ea8d4}-MyFilmsFullScreen.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsFullScreen.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\MyFilmsTrailerOSD.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{521a0225-88ff-4427-af3e-5411303d02ac}-MyFilmsTrailerOSD.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsTrailerOSD.xml</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -7182,19 +7203,6 @@ Please refer to the Wiki online documentation.</Value>
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
-      <PluginDependencyItem AssemblyName="TraktPlugin.dll">
-        <CompatibleVersion>
-          <Items>
-            <CompatibleVersionItem>
-              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.1.6.27644</DesignedForVersion>
-            </CompatibleVersionItem>
-          </Items>
-        </CompatibleVersion>
-        <SubSystemsUsed>
-          <Items />
-        </SubSystemsUsed>
-      </PluginDependencyItem>
     </Items>
   </PluginDependencies>
   <GeneralInfo>
@@ -7208,7 +7216,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2616</Revision>
+      <Revision>2663</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -7220,7 +7228,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.0.2592.mpe1</OnlineLocation>
-    <ReleaseDate>2012-10-19T05:48:38.3316157+02:00</ReleaseDate>
+    <ReleaseDate>2012-11-03T17:26:09.5841841+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -8661,6 +8669,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\MyFilmsFanartManager.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{698c9aa2-3a13-4f4a-aca2-f9e99b287887}-MyFilmsFanartManager.xml</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\MyFilmsFanartManager.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\DefaultLogos\1080p.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{130925f4-d816-46aa-ac5d-3d657e773230}-1080p.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\1080p.png</DestinationFilename>
@@ -9575,6 +9590,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <ZipFileName>Installer{CopyFile}\{4de922b3-592c-4846-ae6d-cdcb01afa29f}-NFO.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\NFO.xml</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\IMDB.ES-TMDB.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{48eb9229-f72d-4d8f-9134-9659ce91b80e}-IMDB.ES-TMDB.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES-TMDB.xml</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -10246,13 +10268,6 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Base.12\MPLanguageTool.exe</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{8a4831c5-d449-4d35-abce-5cc190cf1bbc}-MPLanguageTool.exe</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Tools\MPLanguageTool.exe</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>plugins.12\Windows\TraktPlugin.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{752a42c1-cb9c-4626-bb74-774f42131d55}-TraktPlugin.dll</ZipFileName>
-        <DestinationFilename>%Plugins%\windows\TraktPlugin.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -12021,9 +12036,16 @@ Please report bugs in MyFilms forum.</VersionDescription>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\Media\MyFilms\Thumbs.db</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2f1c691d-9e05-494e-8be7-885cc7d721c9}-Thumbs.db</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\Media\MyFilms\Thumbs.db</DestinationFilename>
+        <LocalFileName>Skin.12\Black Glass\MyFilmsFullScreen.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{54974221-66ab-45bd-a7ee-7221784ea8d4}-MyFilmsFullScreen.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsFullScreen.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\MyFilmsTrailerOSD.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{521a0225-88ff-4427-af3e-5411303d02ac}-MyFilmsTrailerOSD.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsTrailerOSD.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
