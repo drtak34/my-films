@@ -11040,12 +11040,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region Moviecontext and Groupcontext and TMDBonline context (OnlineVideos search)
       if (facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.TmdbMovies || conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection))
       {
-        if (MyFilmsDetail.ExtendedStartmode("Context: OnlineVideos Context Search"))
+        if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Context Search for OnlineVideos"))
         {
           if (Helper.IsOnlineVideosAvailableAndEnabled)
           {
             dlg.Add(GUILocalizeStrings.Get(10798600)); // Search OnlineVideos ... 
             updChoice.Add("searchonlinevideos");
+          }
+        }
+
+        if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Context Search for FyFilms (local)"))
+        {
+          if (conf.ViewContext == ViewContext.TmdbMovies)
+          {
+            dlg.Add(GUILocalizeStrings.Get(10798601)); // Search MyFilms ... 
+            updChoice.Add("searchmyfilms");
           }
         }
       }
@@ -11850,6 +11859,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
             dlg.DeInit();
             break;
+          }
+
+        case "searchmyfilms":
+          {
+            #region Search Myfilms by search expression from selecteditemlabel
+            GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+
+            if (dlgmenu == null) return;
+            dlgmenu.Reset();
+            dlgmenu.SetHeading(GUILocalizeStrings.Get(10798601)); // Search MyFilms ... 
+            
+            dlgmenu.Add(facadeFilms.SelectedListItem.Label); // add item Label
+            var searchitems = facadeFilms.SelectedListItem.Label.Split(new char[] { ' ' });
+            foreach (string searchitem in searchitems)
+            {
+              dlgmenu.Add(searchitem);
+            }
+            dlgmenu.DoModal(GetID);
+            if (dlgmenu.SelectedLabel == -1) break;
+
+            SearchMoviesbyProperties(true, dlgmenu.SelectedLabelText, null);
+
+            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            dlg.DeInit();
+            break;
+            #endregion
           }
 
         case "movieimdbtrailer": // Example: (http://www.imdb.com/title/tt0438488/videogallery)
@@ -14421,6 +14456,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (string.IsNullOrEmpty(searchExpression)) // if no search startparameter is set ...
       {
+        #region interactive search menu, when no expression available
         if (dlg == null) return;
         dlg.Reset();
         dlg.SetHeading(GUILocalizeStrings.Get(10798615)); // global search (films)
@@ -14478,10 +14514,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
         }
-
         wproperty = choiceSearch[dlg.SelectedLabel];
+        #endregion
 
-        #region perform selected search action
+        #region let user select the seaqrch option
         if (wproperty == "recentsearch") // if user choose recent search, set searchname = choice of user instead of asking via vkeyboard
         {
           var dlgrecent = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
@@ -14503,6 +14539,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         keyboard.Text = searchstring;
         keyboard.DoModal(GetID);
         if (keyboard.IsConfirmed) continueSearch = true;
+        #endregion
       }
       else
       {
@@ -14511,65 +14548,74 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         continueSearch = true;
       }
 
-      // if all prerequisites are met, do the search itself
+      #region if all prerequisites are met, do the search itself
       if (continueSearch && (!string.IsNullOrEmpty(keyboard.Text) || !string.IsNullOrEmpty(searchstring)))
       {
-        UpdateRecentSearch(keyboard.Text, MaxSearchHistoryLength);
-        var wCount = new List<int>();
-        string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
-        switch (wproperty)
+        new Thread(delegate()
         {
-          case "all":
-          case "recentsearch":
-
-            #region all and recent search
-
-            if (dlg == null) return;
-            dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-            //DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-            DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-            LogMyFilms.Debug("(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
-            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
-            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
-            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
-            LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
-            LogMyFilms.Debug("(GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
-            foreach (DataColumn dc in from wsr in wr from DataColumn dc in ds.Movie.Columns where wsr[dc.ColumnName].ToString().ToLower().Contains(keyboard.Text.ToLower()) select dc)
+          {
+            UpdateRecentSearch(keyboard.Text, MaxSearchHistoryLength);
+            var wCount = new List<int>();
+            string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+            switch (wproperty)
             {
-              if (wTableau.Contains(dc.ColumnName)) // search position in w_tableau for adding +1 to w_count
-              {
-                for (int i = 0; i < wTableau.Count; i++)
+              case "all":
+              case "recentsearch":
+
+                #region all and recent search
+
+                if (dlg == null) return;
+                dlg.Reset();
+                dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
+
+                #region do the search
+                MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
+                //DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                DataRow[] wr = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                LogMyFilms.Debug("(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
+                LogMyFilms.Debug("(GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
+                LogMyFilms.Debug("(GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
+                LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
+                LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
+                LogMyFilms.Debug("(GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
+                foreach (DataColumn dc in from wsr in wr from DataColumn dc in ds.Movie.Columns where wsr[dc.ColumnName].ToString().ToLower().Contains(keyboard.Text.ToLower()) select dc)
                 {
-                  if (wTableau[i] == dc.ColumnName)
+                  if (wTableau.Contains(dc.ColumnName)) // search position in w_tableau for adding +1 to w_count
                   {
-                    wCount[i]++;
-                    break;
+                    for (int i = 0; i < wTableau.Count; i++)
+                    {
+                      if (wTableau[i] == dc.ColumnName)
+                      {
+                        wCount[i]++;
+                        break;
+                      }
+                    }
+                  }
+                  else
+                  // add to w_tableau and move 1 to w_count
+                  {
+                    wTableau.Add(dc.ColumnName);
+                    wCount.Add(1);
+                    //LogMyFilms.Debug("(GlobalSearchAll) - AddProperty for: '" + dc.ColumnName.ToString().ToLower() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
                   }
                 }
-              }
-              else
-              // add to w_tableau and move 1 to w_count
-              {
-                wTableau.Add(dc.ColumnName);
-                wCount.Add(1);
-                //LogMyFilms.Debug("(GlobalSearchAll) - AddProperty for: '" + dc.ColumnName.ToString().ToLower() + "' - Content found: '" + wsr[dc.ColumnName].ToString() + "'");
-              }
-            }
-            LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + wTableau.Count + "'");
-            if (wTableau.Count == 0) // NodeLabelEditEventArgs Results found
-            {
-              var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-              dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
-              dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625));
-              dlgOk.DoModal(GetID);
-              if (dlg.SelectedLabel == -1) return;
-              break;
-            }
-            dlg.Reset();
-            dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618), keyboard.Text)); // menu & SearchString
-            choiceSearch.Clear();
-            var propertyList = new string[]
+                MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+                #endregion
+
+                LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + wTableau.Count + "'");
+                if (wTableau.Count == 0) // NodeLabelEditEventArgs Results found
+                {
+                  var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                  dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
+                  dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625));
+                  dlgOk.DoModal(GetID);
+                  if (dlg.SelectedLabel == -1) return;
+                  break;
+                }
+                dlg.Reset();
+                dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618), keyboard.Text)); // menu & SearchString
+                choiceSearch.Clear();
+                var propertyList = new string[]
               {
                 "TranslatedTitle", "OriginalTitle", "Description", "Comments", "Actors", "Director", "Producer", "Year",
                 "Date", "Category", "Country", "Rating", "Languages", "Subtitles", "FormattedTitle", "Checked",
@@ -14577,187 +14623,195 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 "Resolution", "Framerate", "Size", "Disks", "Number", "URL", "Borrower"
               };
 
-            foreach (string property in propertyList)
-            {
-              for (int i = 0; i < wTableau.Count; i++)
-              {
-                //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: w_tableau is '" + w_tableau[i] + "'"); 
-                if (wTableau[i].Equals(property))
-                {
-                  dlg.Add(string.Format(
-                      GUILocalizeStrings.Get(10798619),
-                      wCount[i],
-                      BaseMesFilms.TranslateColumn(property)
-                      ));
-                  choiceSearch.Add(wTableau[i]);
-                }
-              }
-            }
-              
-            dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1) return;
-            wproperty = choiceSearch[dlg.SelectedLabel];
-
-            if (control_searchText(keyboard.Text))
-            {
-              SaveListState(false);
-
-              conf.StrSelect = Equalexpression(wproperty, keyboard.Text);
-              conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + keyboard.Text + @"*]";
-              conf.StrTitleSelect = string.Empty;
-              SetLabelView("search"); // show "search"
-              GetFilmList();
-            }
-            break;
-
-            #endregion
-
-          case "all-Zebons":
-
-            #region All-Zebons
-
-            //ArrayList w_count = new ArrayList();
-            if (dlg == null) return;
-            dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-            DataRow[] wrz = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-            foreach (string wsearch in from wsr in wrz from string wsearch in GetDisplayItems("view") where System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wsr[wsearch].ToString().ToLower())).Contains(keyboard.Text.ToLower()) select wsearch)
-            {
-              if (wTableau.Contains(wsearch)) // search position in w_tableau for adding +1 to w_count
-              {
-                for (int i = 0; i < wTableau.Count; i++)
-                {
-                  if (wTableau[i].ToString() == wsearch)
-                  {
-                    wCount[i] = (int)wCount[i] + 1;
-                    break;
-                  }
-                }
-              }
-              else
-              // add to w_tableau and move 1 to w_count
-              {
-                wTableau.Add(wsearch);
-                wCount.Add(1);
-              }
-            }
-            if (wTableau.Count == 0)
-            {
-              if (dlg1 == null) return;
-              dlg1.SetHeading(GUILocalizeStrings.Get(10798613));
-              dlg1.SetLine(1, GUILocalizeStrings.Get(10798640));
-              dlg1.SetLine(2, keyboard.Text);
-              dlg1.DoModal(GUIWindowManager.ActiveWindow);
-              return;
-            }
-            dlg.Reset();
-            dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618), keyboard.Text)); // menu
-            choiceSearch.Clear();
-            for (int i = 0; i < wTableau.Count; i++)
-            {
-              dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), wCount[i], BaseMesFilms.TranslateColumn(wTableau[i].ToString())));
-              choiceSearch.Add(wTableau[i].ToString());
-            }
-            dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1) return;
-            wproperty = choiceSearch[dlg.SelectedLabel];
-            if (control_searchText(keyboard.Text))
-            {
-              SaveListState(false);
-              if (ds.Movie.Columns[wproperty].DataType.Name == "string")
-              {
-                conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel] + "*'";
-                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
-              }
-              else
-              {
-                conf.StrSelect = wproperty + " = '" + keyboard.Text + "'";
-                conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [" + keyboard.Text + @"]";
-              }
-              conf.StrTitleSelect = string.Empty;
-              // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
-              SetLabelView("search"); // show "search"
-              GetFilmList();
-            }
-            break;
-
-            #endregion
-
-          default:
-
-            #region default search handling
-
-            LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: wproperty is '" + wproperty + "'");
-            LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: SearchTest is '" + keyboard.Text + "'");
-            if (control_searchText(keyboard.Text))
-            {
-              DataRow[] wdr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
-              LogMyFilms.Debug("(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
-              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
-              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
-              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
-              LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
-              LogMyFilms.Debug("(GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
-              foreach (DataColumn dc in wdr.SelectMany(wsr => (from DataColumn dc in ds.Movie.Columns where dc.ColumnName == wproperty where wsr[dc.ColumnName].ToString().ToLower().Contains(keyboard.Text.ToLower()) select dc)))
-              {
-                if (wTableau.Contains(dc.ColumnName)) // search position in w_tableau for adding +1 to w_count
+                foreach (string property in propertyList)
                 {
                   for (int i = 0; i < wTableau.Count; i++)
                   {
-                    if (wTableau[i] == dc.ColumnName)
+                    //LogMyFilms.Debug("(GlobalSearchAll) - OutputSort: w_tableau is '" + w_tableau[i] + "'"); 
+                    if (wTableau[i].Equals(property))
                     {
-                      wCount[i]++;
-                      break;
+                      dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), wCount[i], BaseMesFilms.TranslateColumn(property)));
+                      choiceSearch.Add(wTableau[i]);
                     }
                   }
                 }
-                else
-                {
-                  wTableau.Add(dc.ColumnName);
-                  wCount.Add(1);
-                }
-              }
-              LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + wTableau.Count + "'");
-              if (wTableau.Count == 0) // No Results found
-              {
-                var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-                dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
-                dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625));
-                dlgOk.DoModal(GetID);
+
+                dlg.DoModal(GetID);
                 if (dlg.SelectedLabel == -1) return;
+                wproperty = choiceSearch[dlg.SelectedLabel];
+
+                if (control_searchText(keyboard.Text))
+                {
+                  SaveListState(false);
+
+                  conf.StrSelect = Equalexpression(wproperty, keyboard.Text);
+                  conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + keyboard.Text + @"*]";
+                  conf.StrTitleSelect = string.Empty;
+                  SetLabelView("search"); // show "search"
+                  GetFilmList();
+                }
                 break;
-              }
 
-              SaveListState(false);
+                #endregion
 
-              switch (wproperty)
-              {
-                case "Rating":
-                  //conf.StrSelect = wproperty + " = " + keyboard.Text; // Zebons version
-                  conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
-                  break;
-                case "Number":
-                case "AgeAdded":
-                  //conf.StrSelect = wproperty + " = " + keyboard.Text; // Zebons Version
-                  conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
-                  break;
-                default:
-                  conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
-                  break;
-              }
+              case "all-Zebons":
 
-              conf.StrTxtSelect = dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // Zebons Version
-              //conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]"; // Guzzi Version
-              conf.StrTitleSelect = "";
-              SetLabelView("search");
-              GetFilmList();
+                #region All-Zebons
+
+                //ArrayList w_count = new ArrayList();
+                if (dlg == null) return;
+                dlg.Reset();
+                dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
+                DataRow[] wrz = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                foreach (string wsearch in from wsr in wrz from string wsearch in GetDisplayItems("view") where System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wsr[wsearch].ToString().ToLower())).Contains(keyboard.Text.ToLower()) select wsearch)
+                {
+                  if (wTableau.Contains(wsearch)) // search position in w_tableau for adding +1 to w_count
+                  {
+                    for (int i = 0; i < wTableau.Count; i++)
+                    {
+                      if (wTableau[i].ToString() == wsearch)
+                      {
+                        wCount[i] = (int)wCount[i] + 1;
+                        break;
+                      }
+                    }
+                  }
+                  else
+                  // add to w_tableau and move 1 to w_count
+                  {
+                    wTableau.Add(wsearch);
+                    wCount.Add(1);
+                  }
+                }
+                if (wTableau.Count == 0)
+                {
+                  if (dlg1 == null) return;
+                  dlg1.SetHeading(GUILocalizeStrings.Get(10798613));
+                  dlg1.SetLine(1, GUILocalizeStrings.Get(10798640));
+                  dlg1.SetLine(2, keyboard.Text);
+                  dlg1.DoModal(GUIWindowManager.ActiveWindow);
+                  return;
+                }
+                dlg.Reset();
+                dlg.SetHeading(string.Format(GUILocalizeStrings.Get(10798618), keyboard.Text)); // menu
+                choiceSearch.Clear();
+                for (int i = 0; i < wTableau.Count; i++)
+                {
+                  dlg.Add(string.Format(GUILocalizeStrings.Get(10798619), wCount[i], BaseMesFilms.TranslateColumn(wTableau[i].ToString())));
+                  choiceSearch.Add(wTableau[i].ToString());
+                }
+                dlg.DoModal(GetID);
+                if (dlg.SelectedLabel == -1) return;
+                wproperty = choiceSearch[dlg.SelectedLabel];
+                if (control_searchText(keyboard.Text))
+                {
+                  SaveListState(false);
+                  if (ds.Movie.Columns[wproperty].DataType.Name == "string")
+                  {
+                    conf.StrSelect = wproperty + " like '*" + choiceSearch[dlg.SelectedLabel] + "*'";
+                    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [*" + choiceSearch[dlg.SelectedLabel] + @"*]";
+                  }
+                  else
+                  {
+                    conf.StrSelect = wproperty + " = '" + keyboard.Text + "'";
+                    conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + BaseMesFilms.TranslateColumn(wproperty) + " [" + keyboard.Text + @"]";
+                  }
+                  conf.StrTitleSelect = string.Empty;
+                  // getSelectFromDivx(conf.StrSelect, wproperty, conf.WStrSortSens, keyboard.Text, true, "");
+                  SetLabelView("search"); // show "search"
+                  GetFilmList();
+                }
+                break;
+
+                #endregion
+
+              default:
+
+                #region default search handling
+
+                LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: wproperty is '" + wproperty + "'");
+                LogMyFilms.Debug("(GlobalSearchAll) - ChosenProperty: SearchTest is '" + keyboard.Text + "'");
+                if (control_searchText(keyboard.Text))
+                {
+                  MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); //GUIWaitCursor.Init(); GUIWaitCursor.Show();
+                  DataRow[] wdr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
+                  LogMyFilms.Debug("(GlobalSearchAll) - GlobalFilterString: '" + GlobalFilterString + "' (INACTIVE for SEARCH !!!)");
+                  LogMyFilms.Debug("(GlobalSearchAll) - conf.StrDfltSelect: '" + conf.StrDfltSelect + "'");
+                  LogMyFilms.Debug("(GlobalSearchAll) - conf.StrTitle1    : [" + conf.StrTitle1 + " like '*']");
+                  LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSorta     : '" + conf.StrSorta + "'");
+                  LogMyFilms.Debug("(GlobalSearchAll) - conf.StrSortSens  : '" + conf.StrSortSens + "'");
+                  LogMyFilms.Debug("(GlobalSearchAll) - searchStringKBD   : '" + keyboard.Text + "'");
+                  foreach (DataColumn dc in wdr.SelectMany(wsr => (from DataColumn dc in ds.Movie.Columns where dc.ColumnName == wproperty where wsr[dc.ColumnName].ToString().ToLower().Contains(keyboard.Text.ToLower()) select dc)))
+                  {
+                    if (wTableau.Contains(dc.ColumnName)) // search position in w_tableau for adding +1 to w_count
+                    {
+                      for (int i = 0; i < wTableau.Count; i++)
+                      {
+                        if (wTableau[i] == dc.ColumnName)
+                        {
+                          wCount[i]++;
+                          break;
+                        }
+                      }
+                    }
+                    else
+                    {
+                      wTableau.Add(dc.ColumnName);
+                      wCount.Add(1);
+                    }
+                  }
+                  MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+
+                  LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + wTableau.Count + "'");
+                  if (wTableau.Count == 0) // No Results found
+                  {
+                    var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+                    dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
+                    dlgOk.SetLine(1, GUILocalizeStrings.Get(10798625));
+                    dlgOk.DoModal(GetID);
+                    if (dlg.SelectedLabel == -1) return;
+                    break;
+                  }
+
+                  SaveListState(false);
+
+                  switch (wproperty)
+                  {
+                    case "Rating":
+                      //conf.StrSelect = wproperty + " = " + keyboard.Text; // Zebons version
+                      conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
+                      break;
+                    case "Number":
+                    case "AgeAdded":
+                      //conf.StrSelect = wproperty + " = " + keyboard.Text; // Zebons Version
+                      conf.StrSelect = wproperty + " = " + Convert.ToInt32(keyboard.Text);
+                      break;
+                    default:
+                      conf.StrSelect = wproperty + " like '*" + keyboard.Text + "*'";
+                      break;
+                  }
+
+                  conf.StrTxtSelect = dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + dlg.SelectedLabelText + " [*" + keyboard.Text + @"*]"; // Zebons Version
+                  //conf.StrTxtSelect = "Selection " + wproperty + " [*" + keyboard.Text + @"*]"; // Guzzi Version
+                  conf.StrTitleSelect = "";
+                  SetLabelView("search");
+                  GetFilmList();
+                }
+                break;
+
+                #endregion
             }
-            break;
-
-            #endregion
-        }
+          }
+          GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+          {
+            {
+              // after thread finished ...
+            }
+            return 0;
+          }, 0, 0, null);
+        }) { Name = "MyFilmsSearchMoviesByProperties", IsBackground = true }.Start();
       }
-        #endregion
+      #endregion
     }
 
     //*****************************************************************************************
