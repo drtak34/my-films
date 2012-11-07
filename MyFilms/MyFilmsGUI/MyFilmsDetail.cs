@@ -2066,7 +2066,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           // this will be executed after background thread finished
           doUpdateDetailsViewByFinishEvent = true;
-          grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.All, false, sTitles);
+          grabb_Internet_Informations(title, GetID, wChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.All, false, sTitles, m_SearchAnimation);
           // afficher_detail(true); // -> will be executes by OnDetailsUpdated message handler later ...
           SetProcessAnimationStatus(false, m_SearchAnimation); // make sure it's switched off
           #endregion
@@ -2241,7 +2241,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
           mediapath = GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
           sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-          grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.Cover, false, sTitles);
+          grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.Cover, false, sTitles, m_SearchAnimation);
           afficher_detail(true);
           SetProcessAnimationStatus(false, m_SearchAnimation); // make sure it's switched off
           break;
@@ -2250,7 +2250,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
           mediapath = GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
           sTitles = GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-          grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.MultiCovers, false, sTitles);
+          grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, GrabType.MultiCovers, false, sTitles, m_SearchAnimation);
           afficher_detail(true);
           SetProcessAnimationStatus(false, m_SearchAnimation); // make sure it's switched off
           break;
@@ -2375,7 +2375,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       if (MyFilms.conf.StrFanart)
       {
-        Download_TMDB_Posters(stitles.OriginalTitle, stitles.TranslatedTitle, stitles.Director, stitles.Year.ToString(), true, GetID, stitles.OriginalTitle);
+        Download_TMDB_Posters(stitles.OriginalTitle, stitles.TranslatedTitle, stitles.Director, stitles.Year.ToString(), true, GetID, stitles.OriginalTitle, m_SearchAnimation);
       }
     }
 
@@ -2508,7 +2508,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
         }
         doUpdateDetailsViewByFinishEvent = true;
-        Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director.ToString(), imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, loadPersonImages);
+        Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, loadPersonImages, m_SearchAnimation);
       }
     }
 
@@ -3149,7 +3149,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  Grab URL Internet Movie Informations and update the XML database and refresh screen
     //  -> Selection of grabber script
     //-------------------------------------------------------------------------------------------        
-    public static void grabb_Internet_Informations(string fullMovieName, int GetID, bool choosescript, string wscript, string fullMoviePath, GrabType grabtype, bool showAll, Searchtitles sTitles)
+    public static void grabb_Internet_Informations(string fullMovieName, int GetID, bool choosescript, string wscript, string fullMoviePath, GrabType grabtype, bool showAll, Searchtitles sTitles, GUIAnimation searchanimation)
     {
       LogMyFilms.Debug("(grabb_Internet_Informations) with grabtype = '" + grabtype + "', title = '" + fullMovieName + "', choosescript = '" + choosescript + "', grabberfile = '" + wscript + "'");
       if (choosescript)
@@ -3235,21 +3235,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           if (dlg.SelectedLabelText == GUILocalizeStrings.Get(10798765))
           {
-            grabb_Internet_Informations(fullMovieName, GetID, true, wscript, fullMoviePath, grabtype, true, sTitles);
+            grabb_Internet_Informations(fullMovieName, GetID, true, wscript, fullMoviePath, grabtype, true, sTitles, searchanimation);
             return;
           }
           if (dlg.SelectedLabel > -1)
             wscript = scriptfile[dlg.SelectedLabel].ToString();
         }
       }
-      grabb_Internet_Informations_Search(fullMovieName, GetID, wscript, fullMoviePath, grabtype, sTitles);
+      grabb_Internet_Informations_Search(fullMovieName, GetID, wscript, fullMoviePath, grabtype, sTitles, searchanimation);
     }
 
     //-------------------------------------------------------------------------------------------
     //  Grab URL Internet Movie Informations and update the XML database and refresh screen
     //  -> Search and select matching movie
     //-------------------------------------------------------------------------------------------        
-    public static void grabb_Internet_Informations_Search(string fullMovieName, int GetID, string wscript, string fullMoviePath, GrabType grabtype, Searchtitles sTitles)
+    public static void grabb_Internet_Informations_Search(string fullMovieName, int GetID, string wscript, string fullMoviePath, GrabType grabtype, Searchtitles sTitles, GUIAnimation searchanimation)
     {
       if (string.IsNullOrEmpty(wscript)) return;
       LogMyFilms.Debug("grabb_Internet_Informations_Search() with title = '" + fullMovieName + "', grabberfile = '" + wscript + "'");
@@ -3267,7 +3267,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       new Thread(delegate()
         {
-          GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          SetProcessAnimationStatus(true, searchanimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
           try
           {
             // listUrl = Grab.ReturnURL(MovieName, wscript, 1, !MyFilms.conf.StrGrabber_Always, MoviePath); // MoviePath only when nfo reader used !!!
@@ -3277,7 +3277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             LogMyFilms.ErrorException("grabb_Internet_Details_Search() - exception = '" + ex.Message + "'", ex);
           }
-          GUIWaitCursor.Hide();
+          SetProcessAnimationStatus(false, searchanimation); // GUIWaitCursor.Hide();
 
           int listCount = listUrl.Count;
           if (!MyFilms.conf.StrGrabber_Always)
@@ -3286,7 +3286,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             case 1: // only one match -> grab details without user interaction
               wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[0];
-              grabb_Internet_Details_Informations(wurl.URL, movieHierarchy, wscript, GetID, false, grabtype, sTitles);
+              grabb_Internet_Details_Informations(wurl.URL, movieHierarchy, wscript, GetID, false, grabtype, sTitles, searchanimation);
               break;
             case 0:
               break;
@@ -3368,13 +3368,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 keyboard.Text = movieName;
                 keyboard.DoModal(GetID);
                 if (keyboard.IsConfirmed && keyboard.Text.Length > 0)
-                  grabb_Internet_Informations_Search(keyboard.Text, GetID, wscript, moviePath, grabtype, sTitles);
+                  grabb_Internet_Informations_Search(keyboard.Text, GetID, wscript, moviePath, grabtype, sTitles, searchanimation);
                 break;
               }
               if (dlg.SelectedLabel > 0 && dlg.SelectedLabel <= listUrl.Count)
               {
                 wurl = (Grabber_URLClass.IMDBUrl)listUrl[dlg.SelectedLabel - 1];
-                grabb_Internet_Details_Informations(wurl.URL, movieHierarchy, wscript, GetID, true, grabtype, sTitles);
+                grabb_Internet_Details_Informations(wurl.URL, movieHierarchy, wscript, GetID, true, grabtype, sTitles, searchanimation);
                 break;
               }
               if (dlg.SelectedLabel > listUrl.Count)
@@ -3389,7 +3389,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //  grabb_Internet_Informations_Search(keyboard.Text, GetID, wscript, MoviePath, grabtype, sTitles);
                 string strChoice = choiceViewMenu[dlg.SelectedLabel];
                 LogMyFilms.Debug("grabb_Internet_Informations_Search(): (re)search with new search expression: '" + strChoice + "'");
-                grabb_Internet_Informations_Search(strChoice, GetID, wscript, moviePath, grabtype, sTitles);
+                grabb_Internet_Informations_Search(strChoice, GetID, wscript, moviePath, grabtype, sTitles, searchanimation);
                 break;
               }
               break;
@@ -3403,7 +3403,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------
     //  Grab Internet Movie Details Informations and update the XML database and refresh screen
     //-------------------------------------------------------------------------------------------        
-    public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive, GrabType grabtype, Searchtitles sTitles)
+    public static void grabb_Internet_Details_Informations(string url, string moviehead, string wscript, int GetID, bool interactive, GrabType grabtype, Searchtitles sTitles, GUIAnimation searchanimation)
     {
       LogMyFilms.Debug("launching (grabb_Internet_Details_Informations) with url = '" + url + "', moviehead = '" + moviehead + "', wscript = '" + wscript + "', GetID = '" + GetID + "', interactive = '" + interactive + "'");
 
@@ -3433,13 +3433,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("Grabber - GetDetail: script = '" + wscript + "', url = '" + url + "', download path = '" + downLoadPath + "'");
       #endregion
 
-      new System.Threading.Thread(delegate()
+      new Thread(delegate()
           {
             #region load internet data
             var dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
             if (interactive)
             {
-              // GUIWaitCursor.Init(); GUIWaitCursor.Show();
               if (dlgPrgrs != null)
               {
                 dlgPrgrs.Reset();
@@ -3463,7 +3462,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (interactive)
             {
-              GUIWaitCursor.Hide();
+              // SetProcessAnimationStatus(false, searchanimation);
               if (dlgPrgrs != null)
               {
                 dlgPrgrs.ShowWaitCursor = false;
@@ -4176,7 +4175,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 #endregion
               }
-            GUIWaitCursor.Hide();
             GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
                 {
                   if (GetID != MyFilms.ID_MyFilmsCoverManager)
@@ -4776,7 +4774,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------
     //  Dowload TMDBinfos (Poster(s), Movieinfos) on theMovieDB.org
     //-------------------------------------------------------------------------------------------        
-    public static void Download_TMDB_Posters(string wtitle, string wttitle, string director, string year, bool choose, int wGetID, string savetitle)
+    public static void Download_TMDB_Posters(string wtitle, string wttitle, string director, string year, bool choose, int wGetID, string savetitle, GUIAnimation searchanimation)
     {
       string oldPicture = MyFilmsDetail.getGUIProperty("picture");
       string newPicture = ""; // full path to new picture
@@ -4799,9 +4797,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           try
           {
-            GUIWaitCursor.Init(); GUIWaitCursor.Show();
+            SetProcessAnimationStatus(true, searchanimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
             List<DbMovieInfo> listemovies = grab.GetTMDBinfos(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix, true, choose, MyFilms.conf.StrTitle1, language);
-            GUIWaitCursor.Hide();
+            SetProcessAnimationStatus(false, searchanimation); // GUIWaitCursor.Hide();
             LogMyFilms.Debug("(TMDB-Infos) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "', '" + language + "'");
             int listCount = listemovies.Count;
             LogMyFilms.Debug("(TMDB-Infos) - listemovies: Result Listcount: '" + listCount + "'");
@@ -4887,19 +4885,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     keyboard.DoModal(wGetID);
                     if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
                     {
-                      Download_TMDB_Posters(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
+                      Download_TMDB_Posters(keyboard.Text, wttitle, string.Empty, string.Empty, true, wGetID, savetitle, searchanimation);
                     }
                     break;
                   }
                   if (dlgs.SelectedLabel > 0 && dlgs.SelectedLabel < 3) // if one of otitle or ttitle selected, keep year and director
                   {
-                    Download_TMDB_Posters(dlgs.SelectedLabelText, wttitle, year, director, true, wGetID, savetitle);
+                    Download_TMDB_Posters(dlgs.SelectedLabelText, wttitle, year, director, true, wGetID, savetitle, searchanimation);
                     //Download_TMDB_Posters(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                     break;
                   }
                   if (dlgs.SelectedLabel > 2) // For subitems, search without year and director !
                   {
-                    Download_TMDB_Posters(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID, savetitle);
+                    Download_TMDB_Posters(dlgs.SelectedLabelText, wttitle, string.Empty, string.Empty, true, wGetID, savetitle, searchanimation);
                     //Download_TMDB_Posters(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                     break;
                   }
@@ -5400,7 +5398,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------
     //  Dowload backdrops on theMovieDB.org
     //-------------------------------------------------------------------------------------------        
-    public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string wftitle, string director, string imdbid, string year, bool choose, int wGetID, string savetitle, string personartworkpath, bool loadFanart, bool loadPersonImages)
+    public static void Download_Backdrops_Fanart(string wtitle, string wttitle, string wftitle, string director, string imdbid, string year, bool choose, int wGetID, string savetitle, string personartworkpath, bool loadFanart, bool loadPersonImages, GUIAnimation searchanimation)
     {
       new Thread(delegate()
       {
@@ -5410,8 +5408,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         catch { }
         try
         {
-          GUIWaitCursor.Init();
-          GUIWaitCursor.Show();
+          SetProcessAnimationStatus(true, searchanimation);  // GUIWaitCursor.Init(); GUIWaitCursor.Show();
           List<DbMovieInfo> listemovies = grab.GetFanart(
             wtitle,
             savetitle,
@@ -5423,7 +5420,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choose,
             MyFilms.conf.StrTitle1,
             personartworkpath);
-          GUIWaitCursor.Hide();
+          SetProcessAnimationStatus(false, searchanimation);  //GUIWaitCursor.Hide();
           //System.Collections.Generic.List<grabber.DBMovieInfo> listemovies = Grab.GetFanart(wtitle, wttitle, wyear, director, MyFilms.conf.StrPathFanart, true, choose);
           LogMyFilms.Debug("(DownloadBackdrops) - listemovies: '" + wtitle + "', '" + wttitle + "', '" + wyear + "', '" + director + "', '" + MyFilms.conf.StrPathFanart + "', 'true', '" + choose.ToString() + "', '" + MyFilms.conf.StrTitle1 + "'");
           int listCount = listemovies.Count;
@@ -5539,7 +5536,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       savetitle,
                       personartworkpath,
                       loadFanart,
-                      loadPersonImages);
+                      loadPersonImages,
+                      searchanimation);
                   }
                   break;
                 }
@@ -5557,7 +5555,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     savetitle,
                     personartworkpath,
                     loadFanart,
-                    loadPersonImages);
+                    loadPersonImages,
+                    searchanimation);
                   //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                   break;
                 }
@@ -5575,7 +5574,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     savetitle,
                     personartworkpath,
                     loadFanart,
-                    loadPersonImages);
+                    loadPersonImages,
+                    searchanimation);
                   //Download_Backdrops_Fanart(string wtitle, string wttitle, string director, string year, bool choose,int wGetID, string savetitle)
                   break;
                 }
@@ -9250,34 +9250,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return DaemonTools.IsMounted(file);
     }
 
-    public static void SetProcessAnimationStatus(bool enable, GUIAnimation mSearchAnimation)
-    {
-      try
-      {
-        //if (enable)
-        //{
-        //  GUIWaitCursor.Init(); 
-        //  GUIWaitCursor.Show();
-        //}
-        //else
-        //{
-        //  GUIWaitCursor.Hide();
-        //}
-        if (mSearchAnimation != null)
-        {
-          if (enable)
-            mSearchAnimation.AllocResources();
-          else
-            mSearchAnimation.Dispose();
-        }
-        mSearchAnimation.Visible = enable;
-      }
-      catch (Exception ex)
-      {
-        LogMyFilms.Warn("setProcessAnimationStatus '" + enable + "' - skin control missing? : " + ex.Message);
-      }
-    }
-
     static public string ReplaceString(string file)
     {
       file = file.Replace("-", " ");
@@ -10743,6 +10715,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       setDownloadStatus();
       if (!downloadingWorker.IsBusy) downloadingWorker.RunWorkerAsync(); // finally lets check if the downloader is already running, and if not start it
       return added;
+    }
+
+    internal static void SetProcessAnimationStatus(bool enable, GUIAnimation mSearchAnimation)
+    {
+      try
+      {
+        //if (enable)
+        //{
+        //  GUIWaitCursor.Init(); 
+        //  GUIWaitCursor.Show();
+        //}
+        //else
+        //{
+        //  GUIWaitCursor.Hide();
+        //}
+        if (mSearchAnimation != null)
+        {
+          if (enable)
+            mSearchAnimation.AllocResources();
+          else
+            mSearchAnimation.Dispose();
+        }
+        mSearchAnimation.Visible = enable;
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Warn("setProcessAnimationStatus '" + enable + "' - skin control missing? : " + ex.Message);
+      }
     }
 
     #region GUI Events

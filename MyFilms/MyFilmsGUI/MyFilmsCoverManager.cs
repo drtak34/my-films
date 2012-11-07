@@ -66,6 +66,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     [SkinControlAttribute(13)]
     protected GUIButtonControl ButtonDownloadCover = null;
 
+    [SkinControlAttribute((int)MyFilms.Controls.CTRL_GuiWaitCursor)]
+    protected GUIAnimation SearchAnimation;
+
     #endregion
 
     #region Enums
@@ -446,7 +449,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
             mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.Cover, false, sTitles);
+            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.Cover, false, sTitles, SearchAnimation);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.LoadMultiple:
@@ -454,12 +457,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
             mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.MultiCovers, false, sTitles);
+            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.MultiCovers, false, sTitles, SearchAnimation);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.LoadFromTmdb:
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.Year.ToString(), false, GetID, sTitles.OriginalTitle);
+            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.Year.ToString(), false, GetID, sTitles.OriginalTitle, SearchAnimation);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.CreateFromMovie:
@@ -573,19 +576,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
             mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.Cover, false, sTitles);
+            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.Cover, false, sTitles, SearchAnimation);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.LoadMultiple:
             title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
             mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.MultiCovers, false, sTitles);
+            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.MultiCovers, false, sTitles, SearchAnimation);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.LoadFromTmdb:
             sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.Year.ToString(), false, GetID, sTitles.OriginalTitle);
+            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.Year.ToString(), false, GetID, sTitles.OriginalTitle, SearchAnimation);
             // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
             break;
           case (int)MenuAction.CreateFromMovie:
