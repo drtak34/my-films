@@ -68,7 +68,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// <param name="taskDescription">description of the task to be invoked - will be shown in the error message if execution fails or times out</param>
     /// <param name="timeout">true: use the timeout, or false: wait forever</param>
     /// <returns>true, if the task could be successfully started in the background</returns>
-    internal bool ExecuteInBackgroundAndCallback(Func<object> task, Action<bool, object> resultHandler, string taskDescription, bool timeout)
+    internal bool ExecuteInBackgroundAndCallback(Func<object> task, Action<bool, object> resultHandler, string taskDescription, bool timeout, GUIAnimation searchanimation)
     {
       // make sure only one background task can be executed at a time
       if (!IsBusy && Monitor.TryEnter(this))
@@ -87,8 +87,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           _CurrentTaskSuccess = null;
 
           // init and show the wait cursor in MediaPortal
-          GUIWaitCursor.Init();
-          GUIWaitCursor.Show();
+          // GUIWaitCursor.Init(); GUIWaitCursor.Show();
+          MyFilmsDetail.SetProcessAnimationStatus(true, searchanimation);
 
           backgroundThread = new Thread(delegate()
           {
@@ -113,7 +113,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             timeoutTimer.Stop();
 
             // hide the wait cursor
-            GUIWaitCursor.Hide();
+            // GUIWaitCursor.Hide();
+            MyFilmsDetail.SetProcessAnimationStatus(false, searchanimation);
 
             // execute the ResultHandler on the Main Thread
             GUIWindowManager.SendThreadCallbackAndWait((p1, p2, o) =>
@@ -144,7 +145,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           _CurrentResultHandler = null;
 
           // hide the wait cursor
-          GUIWaitCursor.Hide();
+          // GUIWaitCursor.Hide();
+          MyFilmsDetail.SetProcessAnimationStatus(false, searchanimation);
 
           // could not start the background task
           return false;

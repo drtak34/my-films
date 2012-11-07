@@ -6352,7 +6352,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
           this.GetImagesAndUpdatesForTMDB();
         }
-      }, "GettingTmdbMovies", true); // false = no timeout !
+      }, "GettingTmdbMovies", true, m_SearchAnimation); // false = no timeout !
 
       GUIControl.HideControl(GetID, 34); // show film details
       watch.Stop();
@@ -6723,7 +6723,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region play single trailer in OV player factory
         if (Helper.IsOnlineVideosAvailableAndEnabled)
         {
-          bool success = MyFilmsPlugin.Utils.OVplayer.Play("http://www.youtube.com/watch?v=" + trailersfound[0].source, conf.BoolAskForPlaybackQuality);
+          bool success = MyFilmsPlugin.Utils.OVplayer.Play("http://www.youtube.com/watch?v=" + trailersfound[0].source, conf.BoolAskForPlaybackQuality, m_SearchAnimation);
           if (!success) MyFilmsDetail.ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798998)); // Cannot play online content !
         }
         else
@@ -6772,7 +6772,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (Helper.IsOnlineVideosAvailableAndEnabled)
           {
             MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(choiceView[dlg.SelectedLabel]);
-            bool success = MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel], MyFilms.conf.BoolAskForPlaybackQuality);
+            bool success = MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel], MyFilms.conf.BoolAskForPlaybackQuality, m_SearchAnimation);
             if (!success) MyFilmsDetail.ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798998)); // Cannot play online content !
           }
           else
@@ -12098,7 +12098,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
 
           this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-          MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All, false, sTitles);
+          MyFilmsDetail.grabb_Internet_Informations(title, GetID, MyFilms.conf.StrGrabber_ChooseScript, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.All, false, sTitles, m_SearchAnimation);
           // Fin_Charge_Init(false, true); // Guzzi: This might be required to reload facade and details ?
           // this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           // RefreshFacade() will be initiated by OnDetailsUpdated handler, if threaded loading is finished ! - so should NOT be loaded here ...
@@ -12110,7 +12110,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string personname = this.facadeFilms.SelectedListItem.Label;
 
           this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-          MyFilmsDetail.grabb_Internet_Informations(personname, GetID, MyFilms.conf.StrGrabber_ChooseScript, "", "", MyFilmsDetail.GrabType.Person, false, null);
+          MyFilmsDetail.grabb_Internet_Informations(personname, GetID, MyFilms.conf.StrGrabber_ChooseScript, "", "", MyFilmsDetail.GrabType.Person, false, null, m_SearchAnimation);
           // Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           // RefreshFacade() will be initiated by OnDetailsUpdated handler, if threaded loading is finished ! - so should NOT be loaded here ...
           break;
@@ -12154,7 +12154,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 LogMyFilms.Debug("MyFilmsDetails (fanart-menuselect) Download PersonArtwork 'enabled' - destination: '" + personartworkpath + "'");
               }
               this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, false);
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, false, m_SearchAnimation);
             }
           }
           break;
@@ -12175,7 +12175,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               personartworkpath = MyFilms.conf.StrPathArtist;
               LogMyFilms.Debug("Download PersonArtwork to path: '" + personartworkpath + "'");
               this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true);
+              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true, m_SearchAnimation);
             }
           }
           break;
@@ -12768,7 +12768,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private IMDBActor grabb_Person_Details(string name)
     {
       var person = new IMDBActor();
-      MyFilmsDetail.grabb_Internet_Informations_Search(name, GetID, conf.StrGrabber_cnf, "", MyFilmsDetail.GrabType.Person, null);
+      MyFilmsDetail.grabb_Internet_Informations_Search(name, GetID, conf.StrGrabber_cnf, "", MyFilmsDetail.GrabType.Person, null, m_SearchAnimation);
       return person;
     }
 

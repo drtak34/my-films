@@ -68,7 +68,7 @@ namespace MyFilmsPlugin.Utils
       return downloadUrls;
     }
     
-    public static bool Play(string stream, bool showPlaybackQualitySelectionDialog)
+    public static bool Play(string stream, bool showPlaybackQualitySelectionDialog, GUIAnimation searchanimation)
     {
       if (string.IsNullOrEmpty(stream)) return false;
 
@@ -170,7 +170,7 @@ namespace MyFilmsPlugin.Utils
           factory.PreparedPlayer.Dispose();
         }
       },
-      "PlayTrailerStream", false);
+      "PlayTrailerStream", false, searchanimation);
 
       return true;
     }

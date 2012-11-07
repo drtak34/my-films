@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <window>
   <controls>
-		<control>
-			<description>fanart</description>
-			<type>image</type>
-			<id>11</id>
-			<posX>0</posX>
-			<posY>0</posY>
-			<width>1280</width>
-			<height>720</height>
-			<!-- <colordiffuse>40ffffff</colordiffuse> -->
-			<texture>#myfilms.fanart</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<zoom>yes</zoom>
-			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-			<visible>no</visible>
-		</control>
-		<control>
-			<description>fanart2</description>
-			<type>image</type>
-			<id>21</id>
-			<posX>0</posX>
-			<posY>0</posY>
-			<width>1280</width>
-			<height>720</height>
-			<!-- <colordiffuse>40ffffff</colordiffuse> -->
-			<texture>#myfilms.fanart2</texture>
-			<keepaspectratio>yes</keepaspectratio>
-			<centered>yes</centered>
-			<zoom>yes</zoom>
-			<animation effect="fade" time="250">visiblechange</animation>
-			<animation effect="fade" time="250">WindowClose</animation>	
-			<animation effect="fade" time="250">WindowOpen</animation>
-			<visible>no</visible>
-		</control>
-		<control>
-			<type>image</type>
-			<description>fanart loading image - not in use</description>
-			<id>22</id>
-			<visible>no</visible>
-		</control>
+    <control>
+      <description>fanart</description>
+      <type>image</type>
+      <id>11</id>
+      <posX>0</posX>
+      <posY>0</posY>
+      <width>1280</width>
+      <height>720</height>
+      <!-- <colordiffuse>40ffffff</colordiffuse> -->
+      <texture>#myfilms.fanart</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <zoom>yes</zoom>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <visible>no</visible>
+    </control>
+    <control>
+      <description>fanart2</description>
+      <type>image</type>
+      <id>21</id>
+      <posX>0</posX>
+      <posY>0</posY>
+      <width>1280</width>
+      <height>720</height>
+      <!-- <colordiffuse>40ffffff</colordiffuse> -->
+      <texture>#myfilms.fanart2</texture>
+      <keepaspectratio>yes</keepaspectratio>
+      <centered>yes</centered>
+      <zoom>yes</zoom>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <visible>no</visible>
+    </control>
+    <control>
+      <type>image</type>
+      <description>fanart loading image - not in use</description>
+      <id>22</id>
+      <visible>no</visible>
+    </control>
 
-<!-- Start additional Backdrops
+    <!-- Start additional Backdrops
 
 		<control>
 			<description>alternate fanart</description>
