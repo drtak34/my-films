@@ -9682,13 +9682,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           // Delete UserProfileName
-          if (MyFilmsDetail.ExtendedStartmode("Global Settings - delete user profile"))
+          if (MyFilms.conf.EnhancedWatchedStatusHandling)
           {
-            if (MyFilms.conf.EnhancedWatchedStatusHandling)
-            {
-              dlg1.Add(GUILocalizeStrings.Get(1079818));
-              choiceViewGlobalOptions.Add("userprofilenamedelete");
-            }
+            dlg1.Add(GUILocalizeStrings.Get(1079818));
+            choiceViewGlobalOptions.Add("userprofilenamedelete");
           }
 
           // Choose grabber script for that session
@@ -10741,16 +10738,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (conf.StrUserProfileName != Helper.GetTraktUser())
             {
               bool success = Helper.ChangeTraktUser(conf.StrUserProfileName);
-              if (!success)
-                LogMyFilms.Info("An error occurred changing current Trakt user login credentials!");
+              if (!success) LogMyFilms.Info("An error occurred changing current Trakt user login credentials!");
             }
           }
           break;
       }
 
+      #region save new userprofilename to config
+      using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+      {
+        xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "UserProfileName", conf.StrUserProfileName);
+      }
+      // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
+      LogMyFilms.Info("Update Config 'UserProfileName' changed to " + conf.StrUserProfileName);
+      #endregion
+
       #region switch user data to dedicated fields (WatchedDate, RatingUser, userdefined 'Watched' field)
       LogMyFilms.Debug("Change_UserProfileName() - Switch user data to dedicated fields (WatchedDate, RatingUser, userdefined 'Watched' field)");
-      var watch = new Stopwatch(); watch.Reset(); watch.Start();
+      var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
+
       foreach (AntMovieCatalog.MovieRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens))
       {
         #region sync MUS state with direct DB fields for user rating, watched and Favorite
@@ -10802,18 +10808,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             string newValue = (sr.RatingUser > MultiUserData.FavoriteRating) ? MultiUserData.Add(sr["Favorite"].ToString(), conf.StrUserProfileName) : MultiUserData.Remove(sr["Favorite"].ToString(), conf.StrUserProfileName);
             sr["Favorite"] = (string.IsNullOrEmpty(newValue)) ? Convert.DBNull : newValue;
           }
-          sr[BaseMesFilms.MultiUserStateField] = userData.MultiUserStatesValue;
+          sr[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
         }
         #endregion
       }
-      watch.Stop();
-      LogMyFilms.Debug("Change_UserProfileName() - finished updating DB fields ... (" + (watch.ElapsedMilliseconds) + " ms)");
+      stopwatch.Stop();
+      LogMyFilms.Debug("Change_UserProfileName() - finished updating DB fields ... (" + (stopwatch.ElapsedMilliseconds) + " ms)");
       #endregion
 
-      watch.Reset(); watch.Start();
+      #region save xml DB
+      stopwatch.Reset(); stopwatch.Start();
       MyFilmsDetail.Update_XML_database();
-      watch.Stop();
-      LogMyFilms.Debug("Change_UserProfileName() - finished saving updated DB ... (" + (watch.ElapsedMilliseconds) + " ms)");
+      stopwatch.Stop();
+      LogMyFilms.Debug("Change_UserProfileName() - finished saving updated DB ... (" + (stopwatch.ElapsedMilliseconds) + " ms)");
+      #endregion
     }
 
     private bool Delete_UserProfileName()
@@ -10854,7 +10862,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (userprofilename == "")
         {
-          dlg.Add("<" + GUILocalizeStrings.Get(10798774) + ">");
+          dlg.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
         }
         else
         {
@@ -10863,9 +10871,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         choiceGlobalUserProfileName.Add(userprofilename);
       }
       dlg.DoModal(GetID);
-      if (dlg.SelectedLabel == -1)
-        return false;
+      if (dlg.SelectedLabel == -1) return false;
+
       string strUserProfileNameSelection = choiceGlobalUserProfileName[dlg.SelectedLabel];
+      // if (string.IsNullOrEmpty(strUserProfileNameSelection)) return false; // do we allow selection of empty userprofilename? It should not happen ....
 
       #region create a backup copy of DB file
       string backupcopy = conf.StrFileXml.Replace(".xml", " - backup - " + DateTime.Now.ToString().Replace(":", "-") + ".xml").Replace("/", "-");
@@ -10882,7 +10891,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #region delete all userdata for that selected user profile name
       LogMyFilms.Debug("Delete_UserProfileName() - Delete username '" + strUserProfileNameSelection + "' from DB");
-      var watch = new Stopwatch(); watch.Reset(); watch.Start();
+      var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
       foreach (AntMovieCatalog.MovieRow sr in BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens))
       {
         if (conf.EnhancedWatchedStatusHandling)
@@ -10895,10 +10904,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
-      watch.Stop();
-      LogMyFilms.Debug("Delete_UserProfileName() - finished updating DB fields... (" + (watch.ElapsedMilliseconds) + " ms)");
+      stopwatch.Stop();
+      LogMyFilms.Debug("Delete_UserProfileName() - finished removing UserProfileName '" + strUserProfileNameSelection + "' from  DB fields... (" + (stopwatch.ElapsedMilliseconds) + " ms)");
       #endregion
 
+      #region update xml db
+      MyFilmsDetail.Update_XML_database();
+      #endregion
       return true;
     }
 
@@ -11073,12 +11085,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          //// play random movies or trailers in "view context" (selected group)
-          //if (MyFilmsDetail.ExtendedStartmode("Context: random trailer scrobbling in views context"))
-          //{
+          // play random movies or trailers in "view context" (selected group)
+          if (MyFilmsDetail.ExtendedStartmode("Context: random trailer scrobbling in views context"))
+          {
             dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
             updChoice.Add("playrandomtrailers");
-          //}
+          }
         }
 
         if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)

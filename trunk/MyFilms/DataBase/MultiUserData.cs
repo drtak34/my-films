@@ -12,12 +12,12 @@ namespace MyFilmsPlugin.DataBase
   public class MultiUserData
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
+    private string MultiUserStatesValue { get; set; }
 
     public const decimal NoRating = -1;
     public const decimal FavoriteRating = 7;
     public static readonly DateTime NoWatchedDate = DateTime.MinValue;
 
-    public string MultiUserStatesValue { get; set; }
     public List<UserState> MultiUserStates { get; set; }
     
     public MultiUserData(string value)
