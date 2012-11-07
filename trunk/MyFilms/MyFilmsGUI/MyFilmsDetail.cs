@@ -10717,31 +10717,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return added;
     }
 
-    internal static void SetProcessAnimationStatus(bool enable, GUIAnimation mSearchAnimation)
+    internal static void SetProcessAnimationStatus(bool enable, GUIAnimation guiSearchAnimation)
     {
       try
       {
-        //if (enable)
-        //{
-        //  GUIWaitCursor.Init(); 
-        //  GUIWaitCursor.Show();
-        //}
-        //else
-        //{
-        //  GUIWaitCursor.Hide();
-        //}
-        if (mSearchAnimation != null)
+        if (guiSearchAnimation != null)
         {
           if (enable)
-            mSearchAnimation.AllocResources();
+            guiSearchAnimation.AllocResources();
           else
-            mSearchAnimation.Dispose();
+            guiSearchAnimation.Dispose();
+
+          guiSearchAnimation.Visible = enable;
         }
-        mSearchAnimation.Visible = enable;
+        else
+        {
+          LogMyFilms.Warn("SetProcessAnimationStatus '" + enable + "' - skin control missing? - falling back to MP GUIWaitCursor()"); 
+          if (enable)
+          {
+            GUIWaitCursor.Init();
+            GUIWaitCursor.Show();
+          }
+          else
+          {
+            GUIWaitCursor.Hide();
+          }
+        }
       }
       catch (Exception ex)
       {
-        LogMyFilms.Warn("setProcessAnimationStatus '" + enable + "' - skin control missing? : " + ex.Message);
+        LogMyFilms.Error("SetProcessAnimationStatus() -  '" + enable + "' - skin control missing? : " + ex.Message);
       }
     }
 
