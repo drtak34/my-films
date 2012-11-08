@@ -4944,11 +4944,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       }
       #endregion
 
-      // Create country specific settings
-      cbGrabberOverrideLanguage.Text = newCountry;
-
       #region set grabber defaults
       txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.xml";
+      cbGrabberOverrideLanguage.Text = newCountry; // Create country specific settings
       cbGrabberOverrideGetRoles.Text = "true";
       cbGrabberOverridePersonLimit.Text = "10";
       cbGrabberOverrideTitleLimit.Text = "0";
@@ -4958,14 +4956,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       switch (newCountry)
       {
         #region set country specific settings
+        // to allow skinners use IMDB-Full and get all properties loaded !
         case "USA (Full Detail Grabbing)":
-        case "SampleMovies": // to allow skinnders use IMDB-Full and get all properties loaded !
+        case "SampleMovies":
           txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB-Full.xml";
           cbGrabberOverrideGetRoles.Text = "true";
           cbGrabberOverridePersonLimit.Text = "10";
           cbGrabberOverrideTitleLimit.Text = "0";
           ItemSearchGrabberScriptsFilter.Text = "en, all";
+          cbGrabberOverrideLanguage.Text = "USA"; // preset for sample movies for skinners
           break;
+
         case "Austria":
         case "Germany":
           txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.DE-OFDB.xml";

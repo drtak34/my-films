@@ -5951,7 +5951,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       MatchCollection oMatches = oRegex.Matches(champselect);
       champselect = oMatches.Cast<Match>().Aggregate(champselect, (current, oMatch) => current.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty)));
-      List<grabber.DbPersonInfo> wtab = new List<grabber.DbPersonInfo>();
+      var wtab = new List<grabber.DbPersonInfo>();
 
       int wi;
       string[] Sep = conf.ListSeparator;
@@ -6141,17 +6141,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string sUnWatchedFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayunwatched.png";
 
       // Not Available (Files are not Local) Images
-      string sWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAwatched.png";
-      string sUnWatchedNAFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAunwatched.png";
+      string sWatchedNaFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAwatched.png";
+      string sUnWatchedNaFilename = GUIGraphicsContext.Skin + @"\Media\MyFilms\overlayNAunwatched.png";
 
-      // return if images dont exists
-      if (!(File.Exists(sWatchedFilename) &&
-            File.Exists(sUnWatchedFilename) &&
-            File.Exists(sWatchedNAFilename) &&
-            File.Exists(sUnWatchedNAFilename)))
-        return false;
-
-      return true;
+      // return if images do exist
+      return (File.Exists(sWatchedFilename) && File.Exists(sUnWatchedFilename) && File.Exists(sWatchedNaFilename) && File.Exists(sUnWatchedNaFilename));
     }
 
     private bool LoadWatchedFlag(GUIListItem item, bool bWatched, bool bAvailable)
