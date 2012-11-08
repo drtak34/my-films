@@ -3075,8 +3075,7 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
         <DisplayName>AddOns</DisplayName>
         <DefaulChecked>false</DefaulChecked>
         <Description>AddOns: Updated DLLs for Plugins or Tools not yet publically available  only for testing !
-- MP translator for MyFilms (installs in MyFilms\Tools
-- Trakt V2.1.0.1 with updated user rating support and support for categoriy sync</Description>
+- MP translator for MyFilms (installs in MyFilms\Tools</Description>
         <Files>
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
@@ -7197,8 +7196,8 @@ Please refer to the Wiki online documentation.</Value>
         <SubSystemsUsed>
           <Items>
             <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.DB" />
             <SubSystemItem Name="MP.Players.Video" />
+            <SubSystemItem Name="MP.DB" />
             <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
@@ -7216,7 +7215,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2663</Revision>
+      <Revision>2673</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -7228,7 +7227,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.0.2592.mpe1</OnlineLocation>
-    <ReleaseDate>2012-11-03T17:26:09.5841841+01:00</ReleaseDate>
+    <ReleaseDate>2012-11-07T12:54:04.8375959+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
