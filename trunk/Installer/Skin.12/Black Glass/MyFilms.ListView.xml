@@ -373,7 +373,7 @@
       <height>13</height>
       <texture>MyFilms\overlaywatched.png</texture>
       <colordiffuse>eea9d0f7</colordiffuse>
-      <visible>!string.equals(#myfilms.user.mastertitle,)+!control.isvisible(34)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.contains(#myfilms.user.watched.value)</visible>
+      <visible>!control.isvisible(34)+[control.isvisible(36)|Control.isvisible(39)]+!string.equals(#myfilms.user.mastertitle,)+[facadeview.list|facadeview.album]+control.hasfocus(50)+string.contains(#myfilms.user.watched.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
@@ -388,7 +388,7 @@
       <height>13</height>
       <texture>MyFilms\overlayunwatched.png</texture>
       <colordiffuse>7fffffff</colordiffuse>
-      <visible>!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)+!control.isvisible(40)+[facadeview.list|facadeview.album]+control.hasfocus(50)+!string.contains(#myfilms.user.watched.value)</visible>
+      <visible>!control.isvisible(34)+[control.isvisible(36)|Control.isvisible(39)]+!string.equals(#myfilms.user.mastertitle,)+string.equals(#myfilms.user.mastertitle.groupcount,)+[facadeview.list|facadeview.album]+control.hasfocus(50)+!string.contains(#myfilms.user.watched.value)</visible>
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">visiblechange</animation>
