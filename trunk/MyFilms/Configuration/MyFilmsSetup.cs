@@ -4999,6 +4999,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.FR.xml";
           ItemSearchGrabberScriptsFilter.Text = "fr, all";
           break;
+        case "Hungary":
+          txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\Port.hu-IMDB.xml";
+          ItemSearchGrabberScriptsFilter.Text = "hu, all";
+          break;
         case "Italy":
           txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.IT.xml";
           ItemSearchGrabberScriptsFilter.Text = "it, all";
@@ -5007,6 +5011,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.PT.xml";
           ItemSearchGrabberScriptsFilter.Text = "pt, all";
           break;
+
         // No country specific settings:  
         //Belgium
         //Brazil
@@ -5017,7 +5022,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //Finland
         //Greece
         //Hong Kong
-        //Hungary
         //Iceland
         //India
         //Ireland
