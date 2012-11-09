@@ -1303,11 +1303,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "globalmappings": // map useritems from GUI
           #region globalmappings
-          GUIDialogMenu dlg3 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          var dlg3 = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           if (dlg3 == null) return;
           dlg3.Reset();
           dlg3.SetHeading(GUILocalizeStrings.Get(10798771)); // Display options ...
-          List<string> choiceGlobalMappings = new List<string>();
+          var choiceGlobalMappings = new List<string>();
 
           #region populate menu
           dlg3.Add(GUILocalizeStrings.Get(10798820) + " 1 (" + MyFilms.conf.StritemDetails1 + "-" + MyFilms.conf.StrlabelDetails1 + ")"); // Details Display Item ....
@@ -1325,17 +1325,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           // master-, secondary-  and sorttitle
           //dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.Translate_Column(MyFilms.conf.StrTitle1) + ")"); // mastertitle
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" +
-            BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle1) + ")"); // mastertitle
+          dlg3.Add(GUILocalizeStrings.Get(10798790) + " (" + MyFilms.conf.StrTitle1 + "-" + BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle1) + ")"); // mastertitle
           choiceGlobalMappings.Add("mastertitle");
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798791) + " (" + MyFilms.conf.StrTitle2 + "-" +
-            BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle2) + ")"); // secondary title
+          dlg3.Add(GUILocalizeStrings.Get(10798791) + " (" + MyFilms.conf.StrTitle2 + "-" + BaseMesFilms.TranslateColumn(MyFilms.conf.StrTitle2) + ")"); // secondary title
           choiceGlobalMappings.Add("secondarytitle");
-          dlg3.Add(
-            GUILocalizeStrings.Get(10798792) + " (" + MyFilms.conf.StrSTitle + "-" +
-            BaseMesFilms.TranslateColumn(MyFilms.conf.StrSTitle) + ")"); // sort title
+          dlg3.Add(GUILocalizeStrings.Get(10798792) + " (" + MyFilms.conf.StrSTitle + "-" + BaseMesFilms.TranslateColumn(MyFilms.conf.StrSTitle) + ")"); // sort title
           choiceGlobalMappings.Add("sorttitle");
           #endregion
 
@@ -1368,8 +1362,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           if (selection > 5) // title fields
           {
-            ArrayList DisplayItems = MyFilms.GetDisplayItems("titles");
-            foreach (string[] displayItem in DisplayItems)
+            ArrayList displayItems = MyFilms.GetDisplayItems("titles");
+            foreach (string[] displayItem in displayItems)
             {
               dlg3.Add(displayItem[0] + "-" + displayItem[1]);
               choiceGlobalMappings.Add(displayItem[0]);
@@ -1377,8 +1371,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else // display item fields
           {
-            ArrayList DisplayItems = MyFilms.GetDisplayItems("viewitems");
-            foreach (string[] displayItem in DisplayItems)
+            ArrayList displayItems = MyFilms.GetDisplayItems("viewitems");
+            foreach (string[] displayItem in displayItems)
             {
               dlg3.Add(displayItem[1] + " (" + displayItem[0] + ")");
               choiceGlobalMappings.Add(displayItem[0]);
@@ -1401,7 +1395,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilms.UpdateUserItems(); // save to currentconfig - save time for WinDeInit
           //Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeFilms.SelectedListItem.ItemId, facadeFilms.SelectedListItem.Label);
           //Load_Config(Configuration.CurrentConfig, true);
-          MyFilmsDetail.Init_Detailed_DB(false); // clear properties 
+          Init_Detailed_DB(false); // clear properties 
           afficher_detail(true);
           return;
           #endregion
