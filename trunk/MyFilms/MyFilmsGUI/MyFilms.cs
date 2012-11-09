@@ -6639,6 +6639,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null);
                 }
                 // LogMyFilms.Debug("SearchTrailers - found '" + movie.Trailers.youtube.Count + "' YouTube Trailers");
+
+                DateTime releasedate;
+                string year = DateTime.TryParse(movie.MovieSearchResult.release_date, out releasedate) ? releasedate.Year.ToString() : "";
+                
                 for (int j = 0; j < movie.Trailers.youtube.Count; j++)
                 {
                   LogMyFilms.Debug("GetTrailers - Trailer #'" + j + "', name = '" + movie.Trailers.youtube[j].name + "', size = '" + movie.Trailers.youtube[j].size + "', source = '" + movie.Trailers.youtube[j].source + "'");
@@ -6646,15 +6650,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   {
                     item.Path = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source; // http://www.youtube.com/watch?v=KwPTIEWTYEI
                     item.IsDownloading = true;
-                    //if (MyFilms.conf.BoolEnableOnlineServices)
-                    //{
-                    //  string year = "";
-                    //  DateTime releasedate;
-                    //  if (DateTime.TryParse(movie.Movie.release_date, out releasedate))
-                    //    year = releasedate.Year.ToString();
-                    //  MyFilmsDetail.AddAllTrailersToQueue(movie.Trailers.youtube, MyFilms.conf.StrStorageTrailer, movie.Movie.title, year, true);
-                    //}
                   }
+
+                  #region add trailers to trailer download queue for caching
+                  if (MyFilmsDetail.ExtendedStartmode("Add online trailer to download queue") && MyFilms.conf.StrDirStorTrailer.Length > 0) // if (MyFilms.conf.BoolEnableOnlineServices)
+                  {
+                    string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
+                    var trailer = new Trailer();
+                    trailer.MovieTitle = item.Label;
+                    trailer.Trailername = movie.Trailers.youtube[j].name;
+                    trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source;
+                    trailer.SourceUrl = null;
+                    trailer.Quality = null;
+                    trailer.DestinationDirectory = destinationDirectory;
+                    LogMyFilms.Debug("GetImagesForTmdbFilmList() - trailer caching - add trailer '#" + j + "', path '" + destinationDirectory + "'");
+                    AddTrailerToDownloadQueue(trailer);
+                  }
+                  #endregion
                 }
                 #endregion
               }
