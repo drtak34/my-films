@@ -7723,7 +7723,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    public static void Launch_Movie_Trailer(int selectItem, int GetID, GUIAnimation m_SearchAnimation)
+    internal static void Launch_Movie_Trailer(int selectItem, int GetID, GUIAnimation m_SearchAnimation)
     //-------------------------------------------------------------------------------------------
     // Play Movie Trailers !!!
     //-------------------------------------------------------------------------------------------
