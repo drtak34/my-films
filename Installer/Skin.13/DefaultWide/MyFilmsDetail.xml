@@ -623,7 +623,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem1.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
     </control>
     <control>
       <description>Details User Item 1 Value</description>
@@ -647,7 +647,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem2.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
     </control>
     <control>
       <description>Details User Item 2 Value</description>
@@ -671,7 +671,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem3.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
     </control>
     <control>
       <description>Details User Item 3 Value</description>
@@ -695,7 +695,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem4.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
     </control>
     <control>
       <description>Details User Item 4 Value</description>
@@ -719,7 +719,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem5.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
     </control>
     <control>
       <description>Details User Item 5 Value</description>
@@ -743,7 +743,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem6.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
     </control>
     <control>
       <description>Details User Item 6 Value</description>
