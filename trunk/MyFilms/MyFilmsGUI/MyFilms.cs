@@ -446,7 +446,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #region Private/Public Properties
 
     private bool StopLoadingMenuDetails { get; set; } // to cancel menu counts, if user makes selection before it's finished ....
-    private bool StopLoadingViewDetails { get; set; }
+    internal bool StopLoadingViewDetails { get; set; }
     private bool StopLoadingFilmlistDetails { get; set; }
 
     private bool StopAddingTrailers { get; set; }
@@ -7427,7 +7427,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GUIListItem item = facadeFilms[i];
               string personname = (conf.BoolReverseNames && item.Label != EmptyFacadeValue) ? ReReverseName(item.Label) : item.Label.Replace(EmptyFacadeValue, "");
 
-              bool success = UpdatePersonDetails(personname, item, false);
+              bool success = MyFilmsDetail.UpdatePersonDetails(personname, item, false, StopLoadingViewDetails);
               if (success) // create small thumbs and assign to facade icons ...
               {
                 string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
@@ -7499,7 +7499,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "Loading Updates for '" + personsname + "'");
               if (dlgPrgrs != null) dlgPrgrs.Percentage = i * 100 / wTableau.Count;
               LogMyFilms.Info("MyFilmsPersonsUpdater - updating person '" + personsname + "'");
-              bool success = this.UpdatePersonDetails(personsname, null, true);
+              bool success = MyFilmsDetail.UpdatePersonDetails(personsname, null, true, false);
               i++;
             }
           }
@@ -7518,336 +7518,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return 0;
         }, 0, 0, null);
       }) { Name = "MyFilmsPersonsUpdater", IsBackground = true }.Start(persons);
-    }
-
-    private bool UpdatePersonDetails(string personname, GUIListItem item, bool forceupdate)
-    {
-      string item1LabelOrg = (item != null) ? item.Label : "";
-      string item3LabelOrg = (item != null) ? item.Label3 : "";
-      string filename = MyFilms.conf.StrPathArtist + "\\" + personname + ".jpg";  // string filename = Path.Combine(MyFilms.conf.StrPathArtist, personname); //File.Exists(MyFilms.conf.StrPathArtist + "\\" + personsname + ".jpg")))
-
-      IMDBActor person = null;
-      bool vdBexists = false;
-
-      if (item != null) item.Label = item1LabelOrg + " " + GUILocalizeStrings.Get(10799205); // (updating...)
-
-      #region get person info from VDB
-      if (item != null) item.Label3 = "Loading details from VDB ...";
-      var actorList = new ArrayList();
-      VideoDatabase.GetActorByName(personname, actorList);
-      LogMyFilms.Debug("UpdatePersonDetails() - found '" + actorList.Count + "' results for '" + personname + "'");
-      if (actorList.Count > 0 && actorList.Count < 5)
-      {
-        LogMyFilms.Debug("IMDB first search result: '" + actorList[0] + "'");
-        string[] strActor = actorList[0].ToString().Split(new char[] { '|' });
-        // int actorID = (strActor[0].Length > 0 && strActor.Count() > 1) ? Convert.ToInt32(strActor[0]) : 0; // string actorname = strActor[1];
-        int actorId;
-        int.TryParse(strActor[0], out actorId);
-        if (actorId > 0)
-        {
-          person = VideoDatabase.GetActorInfo(actorId);
-        }
-        if (person != null)
-        {
-          if (item != null) item.Label3 = "ID = " + actorId + ", URL = " + person.ThumbnailUrl;
-          vdBexists = true;
-        }
-        else
-        {
-          if (item != null) item.Label3 = "ID = " + actorId;
-        }
-      }
-      #endregion
-
-      if (person != null && File.Exists(filename) && !forceupdate && !person.Biography.ToLower().StartsWith("unknown") && !(person.Biography.Length > 8))
-      {
-        LogMyFilms.Debug("Skip update for '" + personname + "' - VDB entry and image already present !");
-        if (item != null)
-        {
-          item.MusicTag = person;
-          item.Label = item1LabelOrg;
-          item.Label3 = item3LabelOrg;
-        }
-        if (StopLoadingViewDetails && item != null) return false; // stop download if we have exited window
-        return true; // nothing to do
-      }
-
-      // region update person detail infos or load new ones ...
-      if (person == null || person.DateOfBirth.Length < 1 || person.DateOfBirth.ToLower().StartsWith("unknown") || !File.Exists(filename) || forceupdate)
-      {
-        if (person == null) person = new IMDBActor();
-
-        #region IMDB internet search
-        if (item != null) item.Label3 = "Searching IMDB ...";
-        var imdb = new IMDB();
-        imdb.FindActor(personname);
-
-        if (imdb.Count > 0)
-        {
-          if (imdb[0].URL.Length != 0)
-          {
-            if (item != null) item.Label3 = "Loading IMDB details ...";
-            //#if MP1X
-            // _imdb.GetActorDetails(_imdb[0], out person);
-            //#else
-            // _imdb.GetActorDetails(_imdb[0], false, out person);
-            //#endif
-            GUIUtils.GetActorDetails(imdb, imdb[0], false, out person);
-            LogMyFilms.Debug("Value found - birthday = " + person.DateOfBirth ?? "");
-            LogMyFilms.Debug("Value found - birthplace = " + person.PlaceOfBirth ?? "");
-          }
-        }
-        if (StopLoadingViewDetails && item != null && !forceupdate) return false; // stop download if we have exited window
-
-        #endregion
-
-        #region TMDB V3 API description
-        // Search
-        //TmdbMovieSearch SearchMovie(string query, int page)
-        //TmdbPersonSearch SearchPerson(string query, int page)
-        //TmdbCompanySearch SearchCompany(string query, int page);             
-
-        // Person Info
-        //TmdbPerson GetPersonInfo(int PersonID)
-        //TmdbPersonCredits GetPersonCredits(int PersonID)
-        //TmdbPersonImages GetPersonImages(int PersonID)
-        //Movie Info
-        //TmdbMovie GetMovieInfo(int MovieID)
-        //TmdbMovie GetMovieByIMDB(string IMDB_ID)
-        //TmdbMovieAlternateTitles GetMovieAlternateTitles(int MovieID, string Country)
-        //TmdbMovieCast GetMovieCast(int MovieID)
-        //TmdbMovieImages GetMovieImages(int MovieID)
-        //TmdbMovieKeywords GetMovieKeywords(int MovieID)
-        //TmdbMovieReleases GetMovieReleases(int MovieID)
-        //TmdbMovieTrailers GetMovieTrailers(int MovieID)
-        //TmdbSimilarMovies GetSimilarMovies(int MovieID, int page)
-        //TmdbTranslations GetMovieTranslations(int MovieID)
-
-        // Social Movie Info
-        //TmdbNowPlaying GetNowPlayingMovies(int page)
-        //TmdbPopular GetPopularMovies(int page)
-        //TmdbTopRated GetTopRatedMovies(int page)
-        //TmdbUpcoming GetUpcomingMovies(int page)
-        #endregion
-
-        #region TMDB v2 loading ...
-        //List<grabber.DBPersonInfo> personlist = tmdbapi.getPersonsByName(personname, false, language);
-        //if (personlist.Count > 0)
-        //{
-        //  grabber.DBPersonInfo f = personlist[0];
-
-        //  if (f != null && !File.Exists(filename))
-        //  {
-        //    if (f.Images.Count > 0)
-        //    {
-        //      //grabber.DBPersonInfo persondetails = new DBPersonInfo();
-        //      //persondetails = tmdbapi.getPersonsById(f.Id, string.Empty);
-        //      //LogMyFilms.Info("Person Artwork - " + f.Images.Count + " Images found for '" + f.Name + "'");
-        //      item.Label3 = "Loading TMDBv2 image ...";
-        //      string filename1person = Grabber.GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, f.Images[0], f.Name, false, true, out filename);
-        //      LogMyFilms.Debug("Person Image (TMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
-        //    }
-        //  }
-        //}
-        #endregion
-
-        #region experimental TMDB v3 code...
-        try
-        {
-          if (item != null) item.Label3 = "Searching TMDB ...";
-
-          // grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb(); // we're using new v3 api here
-          var api = new Tmdb(TmdbApiKey, CultureInfo.CurrentCulture.Name.Substring(0, 2)); // language is optional, default is "en"
-          TmdbConfiguration tmdbConf = api.GetConfiguration();
-          TmdbPersonSearch tmdbPerson = api.SearchPerson(personname, 1);
-          List<PersonResult> persons = tmdbPerson.results;
-
-          if (persons != null && persons.Count > 0)
-          {
-            PersonResult pinfo = persons[0];
-            if (item != null) item.Label3 = "Loading TMDB details ...";
-            TMDB.TmdbPerson singleperson = api.GetPersonInfo(pinfo.id);
-            // TMDB.TmdbPersonImages images = api.GetPersonImages(pinfo.id);
-            // TMDB.TmdbPersonCredits personFilmList = api.GetPersonCredits(pinfo.id);
-            SetActorDetailsFromTMDB(singleperson, tmdbConf, ref person);
-            if (!string.IsNullOrEmpty(singleperson.profile_path) && !File.Exists(filename))
-            {
-              if (item != null) item.Label3 = "Loading TMDB image ...";
-              string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, personname, false, true, out filename);
-              LogMyFilms.Debug("Person Image (TMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + personname + "', path = '" + filename1person + "', filename = '" + filename + "'");
-              if (item != null)
-              {
-                item.IconImage = filename;
-                item.IconImageBig = filename;
-                item.ThumbnailImage = filename;
-                item.Label3 = "TMDB ID = " + singleperson.id + ", URL = " + singleperson.profile_path;
-              }
-            }
-          }
-        }
-        catch (Exception tex)
-        {
-          LogMyFilms.DebugException("UpdatePersonDetails() - error in TMDB grabbing person '" + personname + "': " + tex.Message, tex);
-        }
-        if (StopLoadingViewDetails && item != null && !forceupdate) return false; // stop download if we have exited window
-        #endregion
-
-        #region Add actor to database to get infos in person facades later...
-        if (item != null) item.Label3 = "Save detail info to VDB ...";
-        try
-        {
-          //#if MP1X
-          //                  int actorId = VideoDatabase.AddActor(person.Name);
-          //#else
-          //                  int actorId = VideoDatabase.AddActor(null, person.Name);
-          //#endif
-          int actorId = GUIUtils.AddActor(null, person.Name);
-          if (actorId > 0)
-          {
-            if (!string.IsNullOrEmpty(person.Biography)) // clean up before saving ...
-            {
-              if (person.Biography.StartsWith("From Wikipedia, the free encyclopedia")) person.Biography = person.Biography.Replace("From Wikipedia, the free encyclopedia", "").TrimStart(new char[] { '.' }).Trim(new char[] { ' ', '\r', '\n' });
-            }
-            VideoDatabase.SetActorInfo(actorId, person);
-            //VideoDatabase.AddActorToMovie(_movieDetails.ID, actorId);
-            if (item != null) item.Label3 = (vdBexists) ? ("Updated ID" + actorId + ", URL = " + person.ThumbnailUrl) : ("Added ID" + actorId + ", URL = " + person.ThumbnailUrl);
-          }
-        }
-        catch (Exception ex)
-        {
-          if (item != null) item.Label = item1LabelOrg;
-          LogMyFilms.Debug("Error adding person to VDB: " + ex.Message, ex.StackTrace);
-        }
-        if (StopLoadingViewDetails && item != null && !forceupdate) return false; // stop download if we have exited window
-        #endregion
-
-        #region load missing images ...
-        if ((person.ThumbnailUrl.Contains("http:") && !File.Exists(filename)) || forceupdate)
-        {
-          #region MP Thumb download deactivated, as downloading not yet working !!!
-          //if (person.ThumbnailUrl != string.Empty) // to update MP person thumb dir
-          //{
-          //  string largeCoverArt = Utils.GetLargeCoverArtName(Thumbs.MovieActors, person.Name);
-          //  string coverArt = Utils.GetCoverArtName(Thumbs.MovieActors, person.Name);
-          //  Utils.FileDelete(largeCoverArt);
-          //  Utils.FileDelete(coverArt);
-          //  IMDBFetcher.DownloadCoverArt(Thumbs.MovieActors, person.ThumbnailUrl, person.Name);
-          //  //DownloadCoverArt(Thumbs.MovieActors, imdbActor.ThumbnailUrl, imdbActor.Name);
-          //}
-          #endregion
-          if (item != null) item.Label3 = "Loading image ...";
-          LogMyFilms.Debug(" Image found for person '" + personname + "', URL = '" + person.ThumbnailUrl + "'");
-          string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, personname, false, true, out filename);
-          LogMyFilms.Debug("Person Image (IMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + personname + "', path = '" + filename1person + "', filename = '" + filename + "'");
-
-          string strThumb = MyFilms.conf.StrPathArtist + personname + ".png";
-          string strThumbSmall = MyFilms.conf.StrPathArtist + personname + "_s.png";
-          if (File.Exists(filename) && (forceupdate || !File.Exists(strThumbSmall)))
-          {
-            if (item != null) item.Label3 = "Creating cache image ...";
-            //Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
-            createCacheThumb(filename, strThumbSmall, 100, 150, "small");
-            //Picture.CreateThumbnail(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
-            createCacheThumb(filename, strThumb, cacheThumbWith, cacheThumbHeight, "large");
-          }
-          
-          if (item != null)
-          {
-            if (File.Exists(strThumb)) // (re)check if thumbs exist...
-            {
-              item.IconImage = strThumbSmall;
-              item.IconImageBig = strThumb;
-              item.ThumbnailImage = strThumb;
-            }
-            else
-            {
-              item.IconImage = filename;
-              item.IconImageBig = filename;
-              item.ThumbnailImage = filename;
-            }
-
-            item.Label3 = "URL = " + person.ThumbnailUrl;
-            // item.NotifyPropertyChanged("ThumbnailImage");
-          }
-        }
-        #endregion
-
-        if (item != null)
-        {
-          item.MusicTag = person;
-        }
-
-        #region old stuff deactivated
-        //string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
-        ////string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
-        ////if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
-        ////{
-        ////  item.ThumbnailImage = texture;
-        ////  item.IconImage = texture;
-        ////  item.IconImageBig = texture;
-        ////}
-
-        //item.IconImage = strActiveFacadeImages[1];
-        //item.IconImageBig = strActiveFacadeImages[0];
-        //item.ThumbnailImage = strActiveFacadeImages[0];
-
-        //// if selected force an update of thumbnail
-        ////GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
-        ////if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
-        #endregion
-      }
-
-      if (item != null) // reset to original values
-      {
-        item.Label = item1LabelOrg;
-        item.Label3 = item3LabelOrg;
-      }
-      return true;
-    }
-
-    private void SetActorDetailsFromTMDB(TMDB.TmdbPerson tmdbPerson, TMDB.TmdbConfiguration conf, ref IMDBActor imdbPerson)
-    {
-      if (tmdbPerson == null)
-      {
-        LogMyFilms.Debug("SetActorDetailsFromTMDB() - TMDB person is 'null' - return");
-        return;
-      }
-      if (imdbPerson == null)
-      {
-        LogMyFilms.Debug("SetActorDetailsFromTMDB() - IMDB person is 'null' - return");
-        return;
-      }
-      string tmdbProfileSize = "original";
-      foreach (string profileSize in conf.images.profile_sizes.Where(profileSize => profileSize == "h632"))
-      {
-        tmdbProfileSize = profileSize;
-      }
-
-      // imdbPerson.IMDBActorID = 
-      // imdbPerson.Name = tmdbPerson.name;
-      // imdbPerson.MiniBiography = tmdbPerson.biography;
-      // LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB name     - old : '" + imdbPerson.Name + "', new: '" + tmdbPerson.name + "'");
-      if (!string.IsNullOrEmpty(tmdbPerson.biography))
-      {
-        // LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB bio      - old : '" + imdbPerson.Biography + "', new: '" + tmdbPerson.biography + "'");
-        imdbPerson.Biography = tmdbPerson.biography;
-      }
-
-      if (!string.IsNullOrEmpty(tmdbPerson.birthday))
-      {
-        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB birthday - old : '" + imdbPerson.DateOfBirth + "', new: '" + tmdbPerson.birthday + "'");
-        imdbPerson.DateOfBirth = tmdbPerson.birthday + ((!string.IsNullOrEmpty(tmdbPerson.deathday)) ? " (" + tmdbPerson.deathday + ")" : "");
-      }
-      if (!string.IsNullOrEmpty(tmdbPerson.place_of_birth))
-      {
-        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB b-place  - old : '" + imdbPerson.PlaceOfBirth + "', new: '" + tmdbPerson.place_of_birth + "'");
-        imdbPerson.PlaceOfBirth = tmdbPerson.place_of_birth;
-      }
-      if (!string.IsNullOrEmpty(tmdbPerson.profile_path))
-      {
-        LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB thumb    - old : '" + imdbPerson.ThumbnailUrl + "', new: '" + conf.images.base_url + tmdbProfileSize + tmdbPerson.profile_path + "'");
-        imdbPerson.ThumbnailUrl = conf.images.base_url + tmdbProfileSize + tmdbPerson.profile_path;
-      }
     }
 
     private void GetImagesOld(List<GUIListItem> itemsWithThumbs, string wStrSort, string strThumbDirectory, bool isperson, bool getThumbs, bool createFanartDir, bool countItems)
@@ -7944,11 +7614,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
     }
 
-    private string[] SetViewThumbs(string WStrSort, string itemlabel, string strThumbDirectory, bool isPerson, MFview.ViewRow currentCustomView, string DefaultViewImage, bool reversenames)
+    private string[] SetViewThumbs(string wStrSort, string itemlabel, string strThumbDirectory, bool isPerson, MFview.ViewRow currentCustomView, string defaultViewImage, bool reversenames)
     {
       if (isPerson && reversenames) itemlabel = ReReverseName(itemlabel);
 
-      string[] thumbimages = new string[2];
+      var thumbimages = new string[2];
       thumbimages[0] = string.Empty; // ThumbnailImage
       thumbimages[1] = string.Empty; //IconImage
       string strThumb = strThumbDirectory + itemlabel + ".png";
@@ -8036,9 +7706,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (strThumbSource != string.Empty)
           {
             //Picture.CreateThumbnail(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
-            createCacheThumb(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, "small");
+            CreateCacheThumb(strThumbSource, strThumbDirectory + itemlabel + "_s.png", 100, 150, "small");
             //Picture.CreateThumbnail(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
-            createCacheThumb(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, "large");
+            CreateCacheThumb(strThumbSource, strThumb, cacheThumbWith, cacheThumbHeight, "large");
             //thumbimages[0] = strThumbSource;
             //thumbimages[1] = strThumbDirectory + itemlabel + "_s.png";
             //return thumbimages;
@@ -8072,10 +7742,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumb, cacheThumbWith, cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
 
           // if there is a Default.jpg in the view subfolder
-          if (DefaultViewImage != null)
+          if (defaultViewImage != null)
           {
-            thumbimages[0] = DefaultViewImage;
-            thumbimages[1] = DefaultViewImage;
+            thumbimages[0] = defaultViewImage;
+            thumbimages[1] = defaultViewImage;
             return thumbimages;
           }
 
@@ -8106,7 +7776,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       #endregion
-      else if (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(WStrSort))
+      else if (MyFilms.conf.StrViewsDfltAll || IsCategoryYearCountryField(wStrSort))
       {
         if (File.Exists(strThumb)) // If there is thumbs in cache folder ...
         {
@@ -8119,11 +7789,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           string strPathViews = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
           string strPathViewsRoot = strPathViews;
-          strPathViews = strPathViews + WStrSort.ToLower() + "\\"; // added view subfolder to searchpath
+          strPathViews = strPathViews + wStrSort.ToLower() + "\\"; // added view subfolder to searchpath
           if (File.Exists(strPathViews + itemlabel + ".jpg"))
-            createCacheThumb(strPathViews + itemlabel + ".jpg", strThumb, cacheThumbWith, cacheThumbHeight, "large");
+            CreateCacheThumb(strPathViews + itemlabel + ".jpg", strThumb, cacheThumbWith, cacheThumbHeight, "large");
           else if (File.Exists(strPathViews + itemlabel + ".png"))
-            createCacheThumb(strPathViews + itemlabel + ".png", strThumb, cacheThumbWith, cacheThumbHeight, "large");
+            CreateCacheThumb(strPathViews + itemlabel + ".png", strThumb, cacheThumbWith, cacheThumbHeight, "large");
           if (File.Exists(strThumb))
           {
             thumbimages[0] = strThumb;
@@ -8135,10 +7805,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.conf.StrViewsDflt)
           {
             // if there is a Default.jpg in the view subfolder
-            if (DefaultViewImage != null)
+            if (defaultViewImage != null)
             {
-              thumbimages[0] = DefaultViewImage;
-              thumbimages[1] = DefaultViewImage;
+              thumbimages[0] = defaultViewImage;
+              thumbimages[1] = defaultViewImage;
               return thumbimages;
             }
             // if there is an image defined in Custom View
@@ -8173,30 +7843,30 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return thumbimages;
     }
 
-    private static void createCacheThumb(string ThumbSource, string ThumbTarget, int ThumbWidth, int ThumbHeight, string SpeedThumbSize)
+    internal static void CreateCacheThumb(string thumbSource, string thumbTarget, int thumbWidth, int thumbHeight, string speedThumbSize)
     {
-      var bmp = new System.Drawing.Bitmap(ThumbSource);
-      LogMyFilms.Debug("(SetViewThumb) - Image Width x Height = '" + bmp.Width + "x" + bmp.Height + "' (" + ThumbSource + ")");
-      if (bmp.Width < ThumbWidth && bmp.Height < ThumbHeight)
+      var bmp = new System.Drawing.Bitmap(thumbSource);
+      LogMyFilms.Debug("(SetViewThumb) - Image Width x Height = '" + bmp.Width + "x" + bmp.Height + "' (" + thumbSource + ")");
+      if (bmp.Width < thumbWidth && bmp.Height < thumbHeight)
       {
-        if (!SaveThumbnailFile(ThumbSource, ThumbTarget)) // if copy unsuccessful, try to create speedthumb
+        if (!SaveThumbnailFile(thumbSource, thumbTarget)) // if copy unsuccessful, try to create speedthumb
         {
-          Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, SpeedThumbSize == "small" ? Thumbs.SpeedThumbsSmall : Thumbs.SpeedThumbsLarge);
+          Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, speedThumbSize == "small" ? Thumbs.SpeedThumbsSmall : Thumbs.SpeedThumbsLarge);
         }
       }
       else
-        if (SpeedThumbSize == "small")
-          Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsSmall);
+        if (speedThumbSize == "small")
+          Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, Thumbs.SpeedThumbsSmall);
         else
-          Picture.CreateThumbnail(ThumbSource, ThumbTarget, ThumbWidth, ThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+          Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, Thumbs.SpeedThumbsLarge);
       bmp.SafeDispose();
     }
 
-    private static bool SaveThumbnailFile(string ThumbSource, string ThumbTarget)
+    internal static bool SaveThumbnailFile(string thumbSource, string thumbTarget)
     {
       try
       {
-        File.Copy(ThumbSource, ThumbTarget, true);
+        File.Copy(thumbSource, thumbTarget, true);
 
         //FileStream fs = new FileStream(ThumbSource, FileMode.Open, FileAccess.Read, FileShare.Read);	
         //BinaryReader reader = new BinaryReader(fs);
@@ -8215,14 +7885,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  fs.Flush();
         //}
 
-        File.SetAttributes(ThumbTarget, File.GetAttributes(ThumbTarget) | FileAttributes.Hidden);
+        File.SetAttributes(thumbTarget, File.GetAttributes(thumbTarget) | FileAttributes.Hidden);
         // even if run in background thread wait a little so the main process does not starve on IO
         Thread.Sleep(MediaPortal.Player.g_Player.Playing ? 100 : 1);
         return true;
       }
       catch (Exception ex)
       {
-        LogMyFilms.Error("(SaveThumbnailFile) - Error saving new thumbnail {0} - {1}", ThumbTarget, ex.Message);
+        LogMyFilms.Error("SaveThumbnailFile() - Error saving new thumbnail {0} - {1}", thumbTarget, ex.Message);
         return false;
       }
     }
@@ -8733,10 +8403,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
-      Stopwatch watch = new Stopwatch(); watch.Reset(); watch.Start();
-      string oldXmlDB = (conf != null) ? conf.StrFileXml : "";
+      var watch = new Stopwatch(); watch.Reset(); watch.Start();
+      string oldXmlDb = (conf != null) ? conf.StrFileXml : "";
       conf = new Configuration(CurrentConfig, true, create_temp, loadParams);
-      conf.IsDbReloadRequired = (oldXmlDB != conf.StrFileXml); // set reload flag, if the underlying DB has changed (it might not, if user switches config using the same DB)
+      conf.IsDbReloadRequired = (oldXmlDb != conf.StrFileXml); // set reload flag, if the underlying DB has changed (it might not, if user switches config using the same DB)
       watch.Stop();
       LogMyFilms.Debug("Load_Config(): Finished loading config '" + CurrentConfig + "' (" + (watch.ElapsedMilliseconds) + " ms)");
 
@@ -12017,7 +11687,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               try 
               {
-                bool success = UpdatePersonDetails((string)o, facadeFilms.SelectedListItem, true);
+                bool success = MyFilmsDetail.UpdatePersonDetails((string)o, facadeFilms.SelectedListItem, true, false);
               }
               catch (Exception ex)
               {
