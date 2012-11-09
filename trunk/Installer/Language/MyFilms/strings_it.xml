@@ -412,6 +412,9 @@
     <String id="10798984">Next Trailer</String>
     <String id="10798985">Do you want to play the main movie ?</String>
     <String id="10798986">MyFilms Movie Preview</String>
+    <String id="10798987">Movie Catalog ...</String>
+    <String id="10798988">Cached Trailer: </String>
+    <String id="10798989">Online Trailer: </String>
     <String id="10798990">Load single trailer (TMDB)</String>
     <String id="10798991">Load all trailers for these films (TMDB)</String>
     <String id="10798992">Select Movie  ...</String>

@@ -6697,6 +6697,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var movie = facadeFilms.SelectedListItem.TVTag as OnlineMovie;
       if (movie == null) return;
 
+      #region search locally cached trailers
+      var cachedTrailerFiles = new List<string>();
+      DateTime releasedate;
+      string year = DateTime.TryParse(movie.MovieSearchResult.release_date, out releasedate) ? releasedate.Year.ToString() : "";
+      string directoryname = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (movie.MovieSearchResult.title + ((year.Length > 0) ? (" (" + year + ")") : ""))); // string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
+      if (!string.IsNullOrEmpty(directoryname))
+      {
+        cachedTrailerFiles.AddRange(Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories).Where(Utils.IsVideo)); // trailerFiles = trailerFiles.Distinct().ToList();
+        LogMyFilms.Debug("Change_SelectTmdbEntry_Action - found '" + cachedTrailerFiles.Count + "' locally cached trailer files");
+      }
+      #endregion
+
       #region search trailers
       var trailersfound = new List<Youtube>();
       int iLocalTrailers = 0;
@@ -6709,18 +6721,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null); // all trailers
       if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
       LogMyFilms.Debug("Change_SelectTmdbEntry_Action - found '" + trailersfound.Count + "' YouTube Trailers");
-
-      //movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, language);
-      //if (movie.Trailers.youtube.Count == 0)
-      //{
-      //  LogMyFilms.Debug("GetTrailers - no trailer found for language '" + language + "' - try default");
-      //  movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null);
-      //}
-      //LogMyFilms.Debug("GetTrailers - found '" + movie.Trailers.youtube.Count + "' YouTube Trailers");
       #endregion
 
       bool launchLocalMovies = false;
-      if (trailersfound.Count == 0)
+      if (trailersfound.Count == 0 && cachedTrailerFiles.Count == 0)
       {
         if (selItem.IsRemote)
         {
@@ -6731,7 +6735,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           launchLocalMovies = true;
         }
       }
-      else if (trailersfound.Count == 1 && selItem.IsRemote)
+      else if (trailersfound.Count == 1 && selItem.IsRemote && cachedTrailerFiles.Count == 0)
       {
         #region play single trailer in OV player factory
         if (Helper.IsOnlineVideosAvailableAndEnabled)
@@ -6752,47 +6756,73 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
         if (dlg == null) return;
         dlg.Reset();
-        dlg.SetHeading(GUILocalizeStrings.Get(1079860)); // Manual Selection
+        dlg.SetHeading(GUILocalizeStrings.Get(10798986)); // MyFilms Movie Preview
 
+        #region movie catalog - local movies
         if (selItem.IsRemote == false)
         {
-          dlg.Add(GUILocalizeStrings.Get(342));//videos
+          dlg.Add(GUILocalizeStrings.Get(10798987)); // Movie Catalog ...
           choiceView.Add("videos");
         }
+        #endregion
 
+        #region add locally cached trailers
+        foreach (string cachedTrailerFile in cachedTrailerFiles)
+        {
+          var trailerName = cachedTrailerFile;
+          trailerName = trailerName.Contains("\\") ? trailerName.Substring(trailerName.LastIndexOf("\\", StringComparison.Ordinal) + 1) : trailerName;
+          trailerName = trailerName.Substring(trailerName.IndexOf("(trailer)", System.StringComparison.Ordinal) + 10); // strip title and trailer prefix
+          long wsize = File.Exists(cachedTrailerFile) ? new FileInfo(cachedTrailerFile).Length : 0;
+          string entry = GUILocalizeStrings.Get(10798988) + trailerName + " (" + string.Format("{0} MB", wsize / 1048576) + ")"; // local: 
+          dlg.Add(entry);
+          choiceView.Add(cachedTrailerFile);
+        }
+        #endregion
+        
+        #region add online trailers
         for (int i = 0; i < trailersfound.Count; i++)
         {
           Youtube trailer = trailersfound[i];
-          string entry = trailer.name + " (" + trailer.size + ")";
+          string entry = GUILocalizeStrings.Get(10798989) + trailer.name + " (" + trailer.size + ")"; // online: 
           if (i < iLocalTrailers) entry += " - (" + language + ")";
           dlg.Add(entry);
           choiceView.Add("http://www.youtube.com/watch?v=" + trailer.source);
         }
+        #endregion
 
-        //dlg.Add(GUILocalizeStrings.Get(10798711)); //search youtube trailer with onlinevideos
-        //choiceView.Add("youtube");
         #endregion
 
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1) return;
+
         if (choiceView[dlg.SelectedLabel] == "videos")
           launchLocalMovies = true;
-        //else if (choiceView[dlg.SelectedLabel] == "youtube")
-        //  MyFilmsDetail.LaunchOnlineVideos("YouTubeMore");
         else
         {
-          #region play trailer in OV player factory
-          if (Helper.IsOnlineVideosAvailableAndEnabled)
+          if (!choiceView[dlg.SelectedLabel].StartsWith("http"))
           {
-            MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(choiceView[dlg.SelectedLabel]);
-            bool success = MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel], MyFilms.conf.BoolAskForPlaybackQuality, m_SearchAnimation);
-            if (!success) MyFilmsDetail.ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798998)); // Cannot play online content !
+            #region play locally cached trailers locally
+            var trailer = new ArrayList { choiceView[dlg.SelectedLabel] };
+            // currentTrailerPlayingItem = choiceView[dlg.SelectedLabel];
+            MyFilmsDetail.trailerPlayed = true;
+            MyFilmsDetail.Launch_Movie_Trailer_Scrobbling(trailer, ID_MyFilms);
+            #endregion
           }
           else
           {
-            MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
+            #region play trailer in OV player factory
+            if (Helper.IsOnlineVideosAvailableAndEnabled)
+            {
+              MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(choiceView[dlg.SelectedLabel]);
+              bool success = MyFilmsPlugin.Utils.OVplayer.Play(choiceView[dlg.SelectedLabel], MyFilms.conf.BoolAskForPlaybackQuality, m_SearchAnimation);
+              if (!success) MyFilmsDetail.ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798998)); // Cannot play online content !
+            }
+            else
+            {
+              MyFilmsDetail.ShowNotificationDialog("Info", "OnlineVideos is not available!");
+            }
+            #endregion
           }
-          #endregion
         }
       }
 
