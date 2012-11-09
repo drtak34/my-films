@@ -948,7 +948,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       try
       {
         //Just opening the file as open/create
-        using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+        using (var fs = new FileStream(path, FileMode.OpenOrCreate))
         {
           //If required we can check for read/write by using fs.CanRead or fs.CanWrite
         }
@@ -957,8 +957,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
       catch (IOException ex)
       {
         //check if message is for a File IO
-        string __message = ex.Message;
-        if (__message.Contains("The process cannot access the file"))
+        string message = ex.Message;
+        if (message.Contains("The process cannot access the file"))
           return true;
         else
           throw;
@@ -979,7 +979,111 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
       return size;
     }
+
+    public static bool PersonUpdateAllowed(string path, string person) // default 7 days
+    {
+      return PersonUpdateAllowed(path, person, 7);
+    }
+    public static bool PersonUpdateAllowed(string path, string person, int days)
+    {
+      string filename = Path.Combine(path, (person + ".chk")); // create checkfilename
+      try
+      {
+        //DateTime creationTime = File.GetCreationTime(@"c:\file.txt");
+        //DateTime lastWriteTime = File.GetLastWriteTime(@"c:\file.txt");
+        //DateTime lastAccessTime = File.GetLastAccessTime(@"c:\file.txt");
+
+        //// UTC times
+        //DateTime creationTimeUtc = File.GetCreationTimeUtc(@"c:\file.txt");
+        //DateTime lastWriteTimeUtc = File.GetLastWriteTimeUtc(@"c:\file.txt");
+        //DateTime lastAccessTimeUtc = File.GetLastAccessTimeUtc(@"c:\file.txt");
+
+        //// write file last modification time (local / UTC)
+        //Console.WriteLine(lastWriteTime);     // 9/30/2007 2:16:04 PM
+        //Console.WriteLine(lastWriteTimeUtc);  // 9/30/2007 6:16:04 PM
+
+        DateTime dt = File.GetLastWriteTime(filename);
+        if ((DateTime.Now - dt).TotalDays > days) // true, if last update is longer than 'days' ago
+        {
+          SetLastModified(filename);
+          LogMyFilms.Debug("PersonUpdateAllowed() - TRUE,  last update = '" + dt.ToShortDateString() + "' for person '" + person + "', min days: '" + days + "', check file: '" + filename + "'"); 
+          return true;
+        }
+        else
+        {
+          LogMyFilms.Debug("PersonUpdateAllowed() - FALSE, last update = '" + dt.ToShortDateString() + "' for person: '" + person + "', min days: '" + days + "', check file: '" + filename + "'"); 
+          return false;
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("LastModified() - error with  file: : '" + ex.Message + "'");
+        if (!File.Exists(filename))
+        {
+          try
+          {
+            return CreateEmptyHiddenFile(filename); // returns true, if file successfully created
+          }
+          catch (Exception e)
+          {
+            LogMyFilms.Error("LastModified() - error creating file '" + filename + "': '" + e.Message + "'");
+            return false; // returns false = no update required, if error cannot be solved ... should not happen under normal circumstances
+          }
+        }
+      }
+      return false;
+    }
+
+    public static bool SetPersonLastChecked(string path, string person)
+    {
+      return SetLastModified(Path.Combine(path, (person + ".chk")));
+    }
+
+    private static bool SetLastModified(string filename)
+    {
+      try
+      {
+        if (!File.Exists(filename))
+        {
+          CreateEmptyHiddenFile(filename);
+          LogMyFilms.Error("SetLastModified() - created file '" + filename + "'");
+          return true;
+        }
+        else
+        {
+          File.SetLastWriteTime(filename, DateTime.Now);
+          LogMyFilms.Error("SetLastModified() - updated file '" + filename + "'");
+        }
+        return true;
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("UpdateLastModified() - error updating file: : '" + ex.Message + "'");
+        return false;
+      }
+    }
+
+    private static bool CreateEmptyHiddenFile(string filename)
+    {
+      try
+      {
+        FileStream fs = File.Create(filename);
+        fs.Close();
+        File.SetAttributes(filename, FileAttributes.Archive | FileAttributes.Hidden);
+        return true;
+
+        //File.Create(filename).Dispose();
+        //using (File.Create(filename)) { }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("CreateEmptyHiddenFile() - error creating file: : '" + ex.Message + "'");
+        return false;
+      }
+    }
+
   }
+
 
   // usage: RetryUtility.RetryAction( () => SomeFunctionThatCanFail(), 3, 1000 );
   public static class RetryUtility
@@ -1016,16 +1120,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
     public static DataTable Join(DataTable First, DataTable Second, DataColumn[] FJC, DataColumn[] SJC)
     {
       //Create Empty Table
-      DataTable table = new DataTable("Join");
+      var table = new DataTable("Join");
 
       // Use a DataSet to leverage DataRelation
-      using (DataSet ds = new DataSet())
+      using (var ds = new DataSet())
       {
         //Add Copy of Tables
         ds.Tables.AddRange(new DataTable[] { First.Copy(), Second.Copy() });
 
         //Identify Joining Columns from First
-        DataColumn[] parentcolumns = new DataColumn[FJC.Length];
+        var parentcolumns = new DataColumn[FJC.Length];
 
         for (int i = 0; i < parentcolumns.Length; i++)
         {
@@ -1033,7 +1137,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
 
         //Identify Joining Columns from Second
-        DataColumn[] childcolumns = new DataColumn[SJC.Length];
+        var childcolumns = new DataColumn[SJC.Length];
 
         for (int i = 0; i < childcolumns.Length; i++)
         {
@@ -1041,7 +1145,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
 
         //Create DataRelation
-        DataRelation r = new DataRelation(string.Empty, parentcolumns, childcolumns, false);
+        var r = new DataRelation(string.Empty, parentcolumns, childcolumns, false);
         ds.Relations.Add(r);
 
         //Create Columns for JOIN table
@@ -1064,7 +1168,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         foreach (DataRow firstrow in ds.Tables[0].Rows)
         {
           //Get "joined" rows
-          DataRow[] childrows = firstrow.GetChildRows(r);
+          var childrows = firstrow.GetChildRows(r);
           if (childrows != null && childrows.Length > 0)
           {
             object[] parentarray = firstrow.ItemArray;
