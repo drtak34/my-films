@@ -149,4 +149,8 @@
     <name>WorldOfVideo.xml</name>
     <version>0.9</version>
   </scripts>
+  <scripts>
+    <name>Port.hu-IMDB.xml</name>
+    <version>1.0</version>
+  </scripts>
 </grabberscripts>
