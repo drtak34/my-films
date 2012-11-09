@@ -138,6 +138,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         SearchSubDirs = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SearchSubDirs", false);
         SearchOnlyExactMatches = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SearchOnlyExactMatches", false);
         AutoRegisterTrailer = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "TrailerAutoregister", false);
+        CacheOnlineTrailer = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "CacheOnlineTrailer", false);
+        
 
         CheckWatched = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "CheckWatched", false);
         CheckWatchedPlayerStopped = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "CheckWatchedPlayerStopped", false);
@@ -825,6 +827,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string SearchFile { get; set; }
     public bool SearchFileTrailer { get; set; }
     public bool AutoRegisterTrailer { get; set; }
+    public bool CacheOnlineTrailer { get; set; }
     public string ItemSearchFile { get; set; }
     public string ItemSearchGrabber { get; set; }
     public string ItemSearchGrabberScriptsFilter { get; set; }
