@@ -426,6 +426,8 @@
     <String id="10799203">Filter ...</String>
     <String id="10799204">Stiahnuť obal ...</String>
     <String id="10799205">(updating...)</String>
+    <String id="10799206">Filter</String>
+    <String id="10799207">Stiahnuť obal</String>
     <String id="10799211">Zmazať vybraný obal</String>
     <String id="10799212">Odstrániť všetky "nízke"</String>
     <String id="10799213">Odstrániť všetky "stredné"</String>
@@ -441,5 +443,7 @@
     <String id="10799303">Miesto</String>
     <String id="10799304">Životopis</String>
     <String id="10799310">Užívateľské meno</String>
+    <String id="10799401">Globálna Aktualizácia</String>
+    <String id="10799402">Globálne Filtre</String>
   </Section>
 </Language>

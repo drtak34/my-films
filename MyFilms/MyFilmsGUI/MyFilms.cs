@@ -564,6 +564,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #endregion
 
     #region Enums
+    private enum MenuAction : int
+    {
+      Config,
+      WOL
+    }
+
     public enum FieldType
     {
       Title,
@@ -874,8 +880,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         BtnSrtBy.SortChanged += new SortEventHandler(SortChanged);
       }
 
-      GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnGlobalOverlayFilter, GUILocalizeStrings.Get(10798714)); // BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters ...
-      GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnGlobalUpdates, GUILocalizeStrings.Get(10798690));
+      GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnGlobalOverlayFilter, GUILocalizeStrings.Get(10799402)); // BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters
+      GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnGlobalUpdates, GUILocalizeStrings.Get(10799401)); // global updates
 
       //try { BtnGlobalUpdates.Label = GUILocalizeStrings.Get(10798690); } // Global Updates ...  
       //catch (Exception) { LogMyFilms.Warn("(InitMainScreen) - 'Global Updates' button label cannot be set - not defined in skin?"); }
@@ -5406,6 +5412,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg1.Add(GUILocalizeStrings.Get(6022));   // Change Config 
         //dlg1.Add(GUILocalizeStrings.Get(6029) + " " + GUILocalizeStrings.Get(6022));   // Change Config 
         choiceView.Add("config");
+        // choiceView.Add(MenuAction.Config);
       }
 
       if (MyFilms.conf.StrCheckWOLenable) // Show current NAS server status

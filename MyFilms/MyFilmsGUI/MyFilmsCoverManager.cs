@@ -201,8 +201,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       UpdateLayoutButton();
       if (this.LabelResolution != null) this.LabelResolution.Label = GUILocalizeStrings.Get(10799202); //  resolution
 
-      if (this.ButtonFilters != null) this.ButtonFilters.Label = GUILocalizeStrings.Get(10799203); //  filter ...
-      if (this.ButtonDownloadCover != null) this.ButtonDownloadCover.Label = GUILocalizeStrings.Get(10799204); //  Download covers ...
+      if (this.ButtonFilters != null) this.ButtonFilters.Label = GUILocalizeStrings.Get(10799207); //  Filter
+      if (this.ButtonDownloadCover != null) this.ButtonDownloadCover.Label = GUILocalizeStrings.Get(10799206); //  Download Covers
 
       ClearProperties();
       UpdateFilterProperty(false);

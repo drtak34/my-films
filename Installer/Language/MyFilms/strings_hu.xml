@@ -426,6 +426,8 @@
     <String id="10799203">Szűrő...</String>
     <String id="10799204">Borító letöltése...</String>
     <String id="10799205">(updating...)</String>
+    <String id="10799206">Szűrő</String>
+    <String id="10799207">Borító Letöltése</String>
     <String id="10799211">Borító törlése</String>
     <String id="10799212">Összes kisfelbontású törlése</String>
     <String id="10799213">Összes közepes felbontású törlése</String>
@@ -441,5 +443,7 @@
     <String id="10799303">Születés helye</String>
     <String id="10799304">Életrajt</String>
     <String id="10799310">Felhasználó név</String>
+    <String id="10799401">Teljes Frissítés</String>
+    <String id="10799402">Globális Szűrők</String>
   </Section>
 </Language>

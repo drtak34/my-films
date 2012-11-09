@@ -426,6 +426,8 @@
     <String id="10799203">Filter ...</String>
     <String id="10799204">Download Covers ...</String>
     <String id="10799205">(updating...)</String>
+    <String id="10799206">Filter</String>
+    <String id="10799207">Download Covers</String>
     <String id="10799211">Delete selected Cover</String>
     <String id="10799212">Delete all 'Low'</String>
     <String id="10799213">Delete all 'Medium'</String>
@@ -441,5 +443,7 @@
     <String id="10799303">Place</String>
     <String id="10799304">Biography</String>
     <String id="10799310">Username</String>
+    <String id="10799401">Mise à jour globale</String>
+    <String id="10799402">Filtres Globaux</String>
   </Section>
 </Language>
