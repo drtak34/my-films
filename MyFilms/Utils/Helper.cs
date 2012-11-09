@@ -982,7 +982,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     public static bool PersonUpdateAllowed(string path, string person) // default 7 days
     {
-      return PersonUpdateAllowed(path, person, 7);
+      return PersonUpdateAllowed(path, person, 30);
     }
     public static bool PersonUpdateAllowed(string path, string person, int days)
     {
