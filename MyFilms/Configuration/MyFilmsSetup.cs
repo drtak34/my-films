@@ -111,6 +111,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         // this.Label_UserProfileName.Visible = false;
         // this.UserProfileName.Visible = false;
         this.cbTrailerAutoregister.Visible = false;
+        this.cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
         this.ShowTrailerWhenStartingMovie.Visible = false;
         this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
         this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
@@ -858,6 +859,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", SearchSubDirs.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", SearchOnlyExactMatches.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TrailerAutoregister", cbTrailerAutoregister.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CacheOnlineTrailer", cbCacheOnlineTrailer.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatched", CheckWatched.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CheckWatchedPlayerStopped", CheckWatchedPlayerStopped.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AlwaysDefaultView", AlwaysDefaultView.Checked);
@@ -1328,6 +1330,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       SearchSubDirs.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", false);
       SearchOnlyExactMatches.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "SearchOnlyExactMatches", false);
       cbTrailerAutoregister.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "TrailerAutoregister", false);
+      cbCacheOnlineTrailer.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CacheOnlineTrailer", false);
       check_WOL_enable.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Enable", false);
       comboWOLtimeout.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOLtimeout", "15");
       check_WOL_Userdialog.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "WOL-Userdialog", false);
@@ -1762,6 +1765,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       SearchSubDirs.Checked = false;
       SearchOnlyExactMatches.Checked = false;
       cbTrailerAutoregister.Checked = false;
+      cbCacheOnlineTrailer.Checked = false;
       check_WOL_enable.Checked = false;
       comboWOLtimeout.ResetText();
       check_WOL_Userdialog.Checked = false;

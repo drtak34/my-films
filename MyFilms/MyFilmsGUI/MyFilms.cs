@@ -6653,7 +6653,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
 
                   #region add trailers to trailer download queue for caching
-                  if (MyFilmsDetail.ExtendedStartmode("Add online trailer to download queue") && MyFilms.conf.StrDirStorTrailer.Length > 0) // if (MyFilms.conf.BoolEnableOnlineServices)
+                  if (MyFilms.conf.CacheOnlineTrailer && MyFilms.conf.StrDirStorTrailer.Length > 0) // if (MyFilms.conf.BoolEnableOnlineServices)
                   {
                     string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
                     var trailer = new Trailer();
@@ -6699,13 +6699,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #region search locally cached trailers
       var cachedTrailerFiles = new List<string>();
-      DateTime releasedate;
-      string year = DateTime.TryParse(movie.MovieSearchResult.release_date, out releasedate) ? releasedate.Year.ToString() : "";
-      string directoryname = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (movie.MovieSearchResult.title + ((year.Length > 0) ? (" (" + year + ")") : ""))); // string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
-      if (!string.IsNullOrEmpty(directoryname))
+      if (MyFilms.conf.StrDirStorTrailer.Length > 0)
       {
-        cachedTrailerFiles.AddRange(Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories).Where(Utils.IsVideo)); // trailerFiles = trailerFiles.Distinct().ToList();
-        LogMyFilms.Debug("Change_SelectTmdbEntry_Action - found '" + cachedTrailerFiles.Count + "' locally cached trailer files");
+        try
+        {
+          DateTime releasedate;
+          string year = DateTime.TryParse(movie.MovieSearchResult.release_date, out releasedate) ? releasedate.Year.ToString() : "";
+          string directoryname = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (movie.MovieSearchResult.title + ((year.Length > 0) ? (" (" + year + ")") : ""))); // string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
+          if (!string.IsNullOrEmpty(directoryname) && Directory.Exists(directoryname))
+          {
+            cachedTrailerFiles.AddRange(Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories).Where(Utils.IsVideo)); // trailerFiles = trailerFiles.Distinct().ToList();
+            LogMyFilms.Debug("Change_SelectTmdbEntry_Action - found '" + cachedTrailerFiles.Count + "' locally cached trailer files");
+          }
+        }
+        catch (Exception ex) { LogMyFilms.Error("Change_SelectTmdbEntry_Action - error searching cached trailer files: '" + ex.Message); }
       }
       #endregion
 
@@ -9430,6 +9437,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798628))); // Always ask for playback quality for online content ({0})
             if (!MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798629)));
             choiceViewGlobalOptions.Add("askforplaybackquality");
+
+            if (MyFilms.conf.CacheOnlineTrailer) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079918), GUILocalizeStrings.Get(10798628))); // Cache trailers for online content ({0})
+            if (!MyFilms.conf.CacheOnlineTrailer) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079918), GUILocalizeStrings.Get(10798629)));
+            choiceViewGlobalOptions.Add("cacheonlinetrailer");
           }
 
           //if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
@@ -10179,6 +10190,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Update Option 'Always ask for playback quality for online content...' changed to " + MyFilms.conf.BoolAskForPlaybackQuality.ToString());
+          this.Change_Menu_Action("globaloptions");
+          #endregion
+          break;
+
+        case "cacheonlinetrailer":
+          #region cacheonlinetrailer
+          MyFilms.conf.CacheOnlineTrailer = !MyFilms.conf.CacheOnlineTrailer;
+          // XmlConfig.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "CacheOnlineTrailer", MyFilms.conf.CacheOnlineTrailer);
+          using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+          {
+            xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "CacheOnlineTrailer", MyFilms.conf.CacheOnlineTrailer);
+          }
+          // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
+          LogMyFilms.Info("Update Option 'Cache trailers for online content' changed to " + MyFilms.conf.CacheOnlineTrailer.ToString());
           this.Change_Menu_Action("globaloptions");
           #endregion
           break;

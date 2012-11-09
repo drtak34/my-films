@@ -368,6 +368,7 @@
           this.AntViewValue = new System.Windows.Forms.TextBox();
           this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
+          this.cbCacheOnlineTrailer = new System.Windows.Forms.CheckBox();
           this.cbTrailerAutoregister = new System.Windows.Forms.CheckBox();
           this.labelTrailers = new System.Windows.Forms.Label();
           this.ShowTrailerWhenStartingMovie = new System.Windows.Forms.CheckBox();
@@ -3699,6 +3700,7 @@
           // 
           // groupBox24
           // 
+          this.groupBox24.Controls.Add(this.cbCacheOnlineTrailer);
           this.groupBox24.Controls.Add(this.cbTrailerAutoregister);
           this.groupBox24.Controls.Add(this.labelTrailers);
           this.groupBox24.Controls.Add(this.ShowTrailerWhenStartingMovie);
@@ -3714,6 +3716,17 @@
           this.groupBox24.TabStop = false;
           this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
           this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
+          // 
+          // cbCacheOnlineTrailer
+          // 
+          this.cbCacheOnlineTrailer.AutoSize = true;
+          this.cbCacheOnlineTrailer.Location = new System.Drawing.Point(27, 189);
+          this.cbCacheOnlineTrailer.Name = "cbCacheOnlineTrailer";
+          this.cbCacheOnlineTrailer.Size = new System.Drawing.Size(182, 17);
+          this.cbCacheOnlineTrailer.TabIndex = 9;
+          this.cbCacheOnlineTrailer.Text = "Cache Trailers for Online Content";
+          this.ToolTip1.SetToolTip(this.cbCacheOnlineTrailer, resources.GetString("cbCacheOnlineTrailer.ToolTip"));
+          this.cbCacheOnlineTrailer.UseVisualStyleBackColor = true;
           // 
           // cbTrailerAutoregister
           // 
@@ -7070,5 +7083,6 @@
         private Label label41;
         private GroupBox groupBoxAbout;
         private Label label28;
+        private CheckBox cbCacheOnlineTrailer;
     }
 }
