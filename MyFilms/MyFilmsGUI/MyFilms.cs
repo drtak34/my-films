@@ -11930,13 +11930,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(1079867)); // menu
           var choiceSearch = new List<string>();
+          string personartworkpath = MyFilms.conf.StrPathArtist;
+          GUIListItem item;
 
           foreach (string role in roles.Where(role => MyFilms.r[index][role].ToString().Length > 0))
           {
             ArrayList wTableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[index][role].ToString())));
             foreach (object t in wTableau)
             {
-              dlg.Add(BaseMesFilms.TranslateColumn(role) + " : " + t);
+              item = new GUIListItem { Label = BaseMesFilms.TranslateColumn(role) + " : " + t };
+              if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
+              {
+                item.IconImage = File.Exists(personartworkpath + "\\" + t + ".jpg") ? personartworkpath + "\\" + t + ".jpg" : MyFilms.conf.DefaultCoverArtist;
+              }
+              dlg.Add(item);
               choiceSearch.Add(t.ToString());
             }
           }
@@ -11979,8 +11986,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //First add general option to show MP Actor Infos
           if (wperson.Length > 0)
           {
-            dlgPrgrs.Percentage = 20;
-            dlgPrgrs.SetLine(1, "search person on IMDB ...");
+            if (dlgPrgrs != null)
+            {
+              dlgPrgrs.Percentage = 20;
+              dlgPrgrs.SetLine(1, "search person on IMDB ...");
+            }
 
             if (MyFilmsDetail.ExtendedStartmode("relatedpersonsearch: add person option to dialog menu for personinfodialog"))
             {
@@ -11999,53 +12009,59 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           LogMyFilms.Debug("Adding search results for roles to menu ...");
-
-          dlgPrgrs.SetLine(1, "search actors ...");
-          dlgPrgrs.Percentage = 40;
-
+          if (dlgPrgrs != null)
+          {
+            dlgPrgrs.SetLine(1, "search actors ...");
+            dlgPrgrs.Percentage = 40;
+          }
           DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
           if (wr.Length > 0)
           {
             dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
             choiceSearch.Add("Actors");
           }
-          dlgPrgrs.SetLine(1, "search producers ...");
-          dlgPrgrs.Percentage = 60;
+          if (dlgPrgrs != null)
+          {
+            dlgPrgrs.SetLine(1, "search producers ...");
+            dlgPrgrs.Percentage = 60;
+          }
           wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
           if (wr.Length > 0)
           {
             dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
             choiceSearch.Add("Producer");
           }
-          dlgPrgrs.SetLine(1, "search directors ...");
-          dlgPrgrs.Percentage = 80;
+          if (dlgPrgrs != null)
+          {
+            dlgPrgrs.SetLine(1, "search directors ...");
+            dlgPrgrs.Percentage = 80;
+          }
           wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
           if (wr.Length > 0)
           {
             dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079869) + "  (" + wr.Length + ")");
             choiceSearch.Add("Director");
           }
-          dlgPrgrs.SetLine(1, "search writers ...");
-          dlgPrgrs.Percentage = 99;
+          if (dlgPrgrs != null)
+          {
+            dlgPrgrs.SetLine(1, "search writers ...");
+            dlgPrgrs.Percentage = 99;
+          }
           wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
           if (wr.Length > 0)
           {
             dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
             choiceSearch.Add("Writer");
           }
-          //wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Persons like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-          //if (wr.Length > 0)
-          //{
-          //  dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798951) + "  (" + wr.Length + ")");
-          //  choiceSearch.Add("Persons");
-          //}
 
-          // GUIWaitCursor.Hide();
-          dlgPrgrs.Percentage = 100;
-          dlgPrgrs.ShowWaitCursor = false;
-          dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846));
-          Thread.Sleep(10);
-          dlgPrgrs.Close(); // Done ...
+          if (dlgPrgrs != null)
+          {
+            dlgPrgrs.Percentage = 100;
+            dlgPrgrs.ShowWaitCursor = false;
+            dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846));
+            Thread.Sleep(10);
+            dlgPrgrs.Close(); // Done ...
+          }
 
           if (choiceSearch.Count == 0)
           {
