@@ -11930,15 +11930,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(1079867)); // menu
           var choiceSearch = new List<string>();
-          string personartworkpath = MyFilms.conf.StrPathArtist;
-          GUIListItem item;
+          var personartworkpath = MyFilms.conf.StrPathArtist;
 
+          #region show available persons
           foreach (string role in roles.Where(role => MyFilms.r[index][role].ToString().Length > 0))
           {
             ArrayList wTableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[index][role].ToString())));
             foreach (object t in wTableau)
             {
-              item = new GUIListItem { Label = BaseMesFilms.TranslateColumn(role) + " : " + t };
+              var item = new GUIListItem { Label = BaseMesFilms.TranslateColumn(role) + " : " + t };
               if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
               {
                 item.IconImage = File.Exists(personartworkpath + "\\" + t + ".jpg") ? personartworkpath + "\\" + t + ".jpg" : MyFilms.conf.DefaultCoverArtist;
@@ -11956,6 +11956,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgOK.DoModal(GUIWindowManager.ActiveWindow);
             return;
           }
+          #endregion
+
           dlg.DoModal(GetID);
           if (dlg.SelectedLabel == -1)
           {
@@ -11966,7 +11968,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
 
-          // GUIWaitCursor.Init(); GUIWaitCursor.Show();
           if (dlgPrgrs != null)
           {
             dlgPrgrs.Reset();
@@ -11988,7 +11989,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (dlgPrgrs != null)
             {
-              dlgPrgrs.Percentage = 20;
+              dlgPrgrs.Percentage = 19;
               dlgPrgrs.SetLine(1, "search person on IMDB ...");
             }
 
@@ -12009,58 +12010,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           LogMyFilms.Debug("Adding search results for roles to menu ...");
-          if (dlgPrgrs != null)
+          foreach (string role in roles)
           {
-            dlgPrgrs.SetLine(1, "search actors ...");
-            dlgPrgrs.Percentage = 40;
-          }
-          DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Actors like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-          if (wr.Length > 0)
-          {
-            dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079868) + "  (" + wr.Length + ")");
-            choiceSearch.Add("Actors");
-          }
-          if (dlgPrgrs != null)
-          {
-            dlgPrgrs.SetLine(1, "search producers ...");
-            dlgPrgrs.Percentage = 60;
-          }
-          wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Producer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-          if (wr.Length > 0)
-          {
-            dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798612) + "  (" + wr.Length + ")");
-            choiceSearch.Add("Producer");
-          }
-          if (dlgPrgrs != null)
-          {
-            dlgPrgrs.SetLine(1, "search directors ...");
-            dlgPrgrs.Percentage = 80;
-          }
-          wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Director like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-          if (wr.Length > 0)
-          {
-            dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(1079869) + "  (" + wr.Length + ")");
-            choiceSearch.Add("Director");
-          }
-          if (dlgPrgrs != null)
-          {
-            dlgPrgrs.SetLine(1, "search writers ...");
-            dlgPrgrs.Percentage = 99;
-          }
-          wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, "Writer like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
-          if (wr.Length > 0)
-          {
-            dlg.Add(GUILocalizeStrings.Get(10798610) + GUILocalizeStrings.Get(10798684) + "  (" + wr.Length + ")");
-            choiceSearch.Add("Writer");
+            if (dlgPrgrs != null)
+            {
+              dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(137) + " " + BaseMesFilms.TranslateColumn(role) + " ..."); // Search <persontype> ...
+              dlgPrgrs.Percentage = (dlgPrgrs.Percentage + 20 < 100) ? dlgPrgrs.Percentage + 20 : 100;
+            }
+            DataRow[] wr = BaseMesFilms.ReadDataMovies(MyFilms.conf.StrDfltSelect, role + " like '*" + wperson + "*'", MyFilms.conf.StrSorta, MyFilms.conf.StrSortSens, false);
+            if (wr.Length > 0)
+            {
+              dlg.Add(GUILocalizeStrings.Get(10798610) + BaseMesFilms.TranslateColumn(role) + "  (" + wr.Length + ")"); // movies as <persontype> (<count>)
+              choiceSearch.Add(role);
+            }
           }
 
           if (dlgPrgrs != null)
           {
-            dlgPrgrs.Percentage = 100;
-            dlgPrgrs.ShowWaitCursor = false;
+            dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false;
             dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846));
-            Thread.Sleep(10);
-            dlgPrgrs.Close(); // Done ...
+            Thread.Sleep(10); dlgPrgrs.Close(); // Done ...
           }
 
           if (choiceSearch.Count == 0)
@@ -12082,7 +12051,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           SaveListState(false); // SaveLastView(); // to restore to current context after search results ...
 
-          conf.StrSelect = choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'";
+          conf.StrSelect = choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'"; // conf.StrFilmSelect = choiceSearch[dlg.SelectedLabel] + " like '*" + wperson + "*'"; 
+          if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist)) personcover.Filename = File.Exists(personartworkpath + "\\" + wperson + ".jpg") ? personartworkpath + "\\" + wperson + ".jpg" : MyFilms.conf.DefaultCoverArtist;
+
+          #region set localized label
           switch (choiceSearch[dlg.SelectedLabel])
           {
             case "Actors":
@@ -12104,6 +12076,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + GUILocalizeStrings.Get(10798951) + " [*" + wperson + @"*]";
               break;
           }
+          #endregion
           conf.StrTitleSelect = "";
           conf.StrViewSelect = "";
           // conf.StrFilmSelect = "";
