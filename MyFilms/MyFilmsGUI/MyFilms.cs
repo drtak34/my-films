@@ -1226,663 +1226,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     #endregion
 
-    #region Main Context Menu (inactive)
-    //protected override void OnShowContextMenu()
-    //{
-    //  try
-    //  {
-    //    GUIListItem currentitem = this.facadeFilms.SelectedListItem;
-    //    if (currentitem == null) return;
-
-    //    IDialogbox dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-    //    if (dlg == null) return;
-
-    //    bool emptyList = currentitem.Label == "no items";
-    //    if (!emptyList)
-    //    {
-    //      switch (this.currentListLevel)
-    //      {
-    //        case Listlevel.Series:
-    //          {
-    //            selectedSeries = (DBSeries)currentitem.TVTag;
-    //          }
-    //          break;
-    //      }
-    //    }
-    //    bool bExitMenu = false;
-    //    do
-    //    {
-    //      dlg.Reset();
-    //      GUIListItem pItem = null;
-
-    //      if (!emptyList)
-    //      {
-    //        switch (this.currentListLevel)
-    //        {
-    //          case Listlevel.Movie:
-    //            dlg.SetHeading("Movie" + "MovieName");
-    //            break;
-
-    //          case Listlevel.Group:
-    //            dlg.SetHeading("Group" + "Groupname");
-    //            break;
-
-    //          case Listlevel.Person:
-    //            dlg.SetHeading("Translation.Person" + ": " + "PersonName");
-    //            break;
-    //          default:
-    //            // group
-    //            dlg.SetHeading("Menu");
-    //            break;
-    //        }
-
-    //        #region Top Level Menu Items - Context Sensitive
-    //        if (this.currentListLevel == Listlevel.Movie)
-    //        {
-    //          pItem = new GUIListItem("Translation.Toggle_watched_flag");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextItems.toggleWatched;
-
-    //          pItem = new GUIListItem("Translation.RateEpisode" + " ...");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextMenus.rate;
-    //        }
-    //        else if (this.currentListLevel != Listlevel.Group)
-    //        {
-    //          pItem = new GUIListItem("Translation.Mark_all_as_watched");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextItems.actionMarkAllWatched;
-
-    //          pItem = new GUIListItem("Translation.Mark_all_as_unwatched");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextItems.actionMarkAllUnwatched;
-    //        }
-
-    //        if (this.currentListLevel != Listlevel.Group)
-    //        {
-    //          if (MyFilms.conf.StrFanart) // only if skins supports it
-    //          {
-    //            pItem = new GUIListItem("Translation.FanArt" + " ...");
-    //            dlg.Add(pItem);
-    //            pItem.ItemId = (int)eContextItems.showFanartChooser;
-    //          }
-
-    //          if (File.Exists(GUIGraphicsContext.Skin + @"\TVSeries.Actors.xml"))
-    //          {
-    //            pItem = new GUIListItem("Translation.Actors" + " ...");
-    //            dlg.Add(pItem);
-    //            pItem.ItemId = (int)eContextItems.showActorsGUI;
-    //          }
-    //        }
-
-    //        if (this.currentListLevel == Listlevel.Movie)
-    //        {
-    //          if (true) //(selectedSeries.PosterList.Count > 1)
-    //          {
-    //            pItem = new GUIListItem("Translation.CycleSeriesPoster");
-    //            dlg.Add(pItem);
-    //            pItem.ItemId = (int)eContextItems.cycleMoviePoster;
-    //          }
-    //        }
-
-    //        #endregion
-    //      }
-    //      else
-    //        dlg.SetHeading("m_CurrLView.Name");
-
-    //      #region Top Level Menu Items - Non-Context Sensitive
-    //      pItem = new GUIListItem(Translation.ChangeView + " ...");
-    //      dlg.Add(pItem);
-    //      pItem.ItemId = (int)eContextMenus.switchView;
-
-    //      if (SkinSettings.GetLayoutCount(this.currentListLevel.ToString()) > 1)
-    //      {
-    //        pItem = new GUIListItem(Translation.ChangeLayout + " ...");
-    //        dlg.Add(pItem);
-    //        pItem.ItemId = (int)eContextMenus.switchLayout;
-    //      }
-
-    //      if (currentListLevel != Listlevel.Group)
-    //      {
-    //        pItem = new GUIListItem(Translation.Actions + " ...");
-    //        dlg.Add(pItem);
-    //        pItem.ItemId = (int)eContextMenus.action;
-    //      }
-
-    //      pItem = new GUIListItem(Translation.Options + " ...");
-    //      dlg.Add(pItem);
-    //      pItem.ItemId = (int)eContextMenus.options;
-    //      #endregion
-
-    //      #region Download menu - keep at the bottom for fast access (menu + up => there)
-    //      if (!emptyList && subtitleDownloadEnabled && this.currentListLevel == Listlevel.Episode)
-    //      {
-    //        pItem = new GUIListItem(Translation.Download + " ...");
-    //        dlg.Add(pItem);
-    //        pItem.ItemId = (int)eContextMenus.download;
-    //      }
-    //      #endregion
-
-    //      dlg.DoModal(GUIWindowManager.ActiveWindow);
-    //      #region Selected Menu Item Actions (Sub-Menus)
-    //      switch (dlg.SelectedId)
-    //      {
-    //        case (int)eContextMenus.download:
-    //          {
-    //            dlg.Reset();
-    //            dlg.SetHeading(Translation.Download);
-
-    //            if (subtitleDownloadEnabled)
-    //            {
-    //              pItem = new GUIListItem(Translation.Retrieve_Subtitle);
-    //              dlg.Add(pItem);
-    //              pItem.ItemId = (int)eContextItems.downloadSubtitle;
-    //            }
-
-    //            dlg.DoModal(GUIWindowManager.ActiveWindow);
-    //            if (dlg.SelectedId != -1)
-    //              bExitMenu = true;
-    //          }
-    //          break;
-
-    //        case (int)eContextMenus.action:
-    //          {
-    //            dlg.Reset();
-    //            dlg.SetHeading(Translation.Actions);
-    //            if (currentListLevel != Listlevel.Group)
-    //            {
-    //              if (DBOption.GetOptions(DBOption.cShowDeleteMenu))
-    //              {
-    //                pItem = new GUIListItem(Translation.Delete + " ...");
-    //                dlg.Add(pItem);
-    //                pItem.ItemId = (int)eContextItems.actionDelete;
-    //              }
-
-    //              if (!m_parserUpdaterWorking)
-    //              {
-    //                pItem = new GUIListItem(Translation.Update);
-    //                dlg.Add(pItem);
-    //                pItem.ItemId = (int)eContextItems.actionUpdate;
-    //              }
-
-    //              // add hidden menu
-    //              // check if item is already hidden
-    //              pItem = new GUIListItem();
-    //              switch (currentListLevel)
-    //              {
-    //                case Listlevel.Series:
-    //                  pItem.Label = selectedSeries[DBSeries.cHidden] ? Translation.UnHide : Translation.Hide;
-    //                  break;
-    //                case Listlevel.Season:
-    //                  pItem.Label = selectedSeason[DBSeries.cHidden] ? Translation.UnHide : Translation.Hide;
-    //                  break;
-    //                case Listlevel.Episode:
-    //                  pItem.Label = selectedEpisode[DBSeries.cHidden] ? Translation.UnHide : Translation.Hide;
-    //                  break;
-    //              }
-    //              dlg.Add(pItem);
-    //              pItem.ItemId = (int)eContextItems.actionHide;
-
-    //              pItem = new GUIListItem(Translation.updateMI);
-    //              dlg.Add(pItem);
-    //              pItem.ItemId = (int)eContextItems.actionRecheckMI;
-    //            }
-
-    //            // Online to Local Episode Matching order
-    //            if (this.currentListLevel != Listlevel.Group)
-    //            {
-    //              // get current online episode to local episode matching order
-    //              string currMatchOrder = selectedSeries[DBOnlineSeries.cChosenEpisodeOrder].ToString();
-    //              if (string.IsNullOrEmpty(currMatchOrder)) currMatchOrder = "Aired";
-
-    //              pItem = new GUIListItem(Translation.ChangeOnlineMatchOrder);
-    //              dlg.Add(pItem);
-    //              pItem.ItemId = (int)eContextItems.actionChangeOnlineEpisodeMatchOrder;
-    //            }
-
-    //            // Episode Sort By
-    //            if (this.currentListLevel == Listlevel.Episode || this.currentListLevel == Listlevel.Season)
-    //            {
-    //              // get current episode sort order (DVD or Aired)
-    //              string currSortBy = selectedSeries[DBOnlineSeries.cEpisodeSortOrder].ToString();
-    //              if (string.IsNullOrEmpty(currSortBy)) currSortBy = "Aired";
-
-    //              pItem = new GUIListItem(string.Format("{0}: {1}", Translation.SortBy, Translation.Get(currSortBy + "Order")));
-    //              dlg.Add(pItem);
-    //              pItem.ItemId = (int)eContextItems.actionEpisodeSortBy;
-    //            }
-
-    //            pItem = new GUIListItem(Translation.Force_Local_Scan + (m_parserUpdaterWorking ? Translation.In_Progress_with_Barracks : ""));
-    //            dlg.Add(pItem);
-    //            pItem.ItemId = (int)eContextItems.actionLocalScan;
-
-    //            pItem = new GUIListItem(Translation.Force_Online_Refresh + (m_parserUpdaterWorking ? Translation.In_Progress_with_Barracks : ""));
-    //            dlg.Add(pItem);
-    //            pItem.ItemId = (int)eContextItems.actionFullRefresh;
-
-    //            pItem = new GUIListItem(Translation.Play_Random_Episode);
-    //            dlg.Add(pItem);
-    //            pItem.ItemId = (int)eContextItems.actionPlayRandom;
-
-    //            if (!String.IsNullOrEmpty(DBOption.GetOptions(DBOption.cParentalControlPinCode)))
-    //            {
-    //              pItem = new GUIListItem(Translation.ParentalControlLocked);
-    //              dlg.Add(pItem);
-    //              pItem.ItemId = (int)eContextItems.actionLockViews;
-    //            }
-
-    //            dlg.DoModal(GUIWindowManager.ActiveWindow);
-    //            if (dlg.SelectedId != -1)
-    //              bExitMenu = true;
-    //          }
-    //          break;
-
-    //        case (int)eContextMenus.options:
-    //          {
-    //            dlg.Reset();
-    //            ShowOptionsMenu();
-    //            return;
-    //          }
-
-    //        case (int)eContextMenus.switchView:
-    //          {
-    //            dlg.Reset();
-    //            if (showViewSwitchDialog())
-    //              return;
-    //          }
-    //          break;
-
-    //        case (int)eContextMenus.switchLayout:
-    //          {
-    //            dlg.Reset();
-    //            ShowLayoutMenu();
-    //            return;
-    //          }
-
-    //        case (int)eContextMenus.addToView:
-    //          dlg.Reset();
-    //          ShowViewTagsMenu(true, selectedSeries);
-    //          return;
-
-    //        case (int)eContextMenus.removeFromView:
-    //          dlg.Reset();
-    //          ShowViewTagsMenu(false, selectedSeries);
-    //          return;
-
-    //        case (int)eContextMenus.rate:
-    //          {
-    //            switch (currentListLevel)
-    //            {
-    //              case Listlevel.Episode:
-    //                showRatingsDialog(m_SelectedEpisode, false);
-    //                break;
-    //              case Listlevel.Series:
-    //              case Listlevel.Season:
-    //                showRatingsDialog(m_SelectedSeries, false);
-    //                break;
-    //            }
-    //            LoadFacade();
-    //            if (dlg.SelectedId != -1)
-    //              bExitMenu = true;
-    //            return;
-    //          }
-
-    //        default:
-    //          bExitMenu = true;
-    //          break;
-    //      }
-    //      #endregion
-    //    }
-    //    while (!bExitMenu);
-
-    //    if (dlg.SelectedId == -1) return;
-
-    //    #region Selected Menu Item Actions
-    //    List<DBMovie> episodeList = new List<DBMovie>();
-    //    SQLCondition conditions = null;
-
-    //    switch (dlg.SelectedId)
-    //    {
-    //      #region Watched/Unwatched
-    //      case (int)eContextItems.toggleWatched:
-    //        // toggle watched
-    //        if (selectedEpisode != null)
-    //        {
-    //          bool watched = selectedEpisode[DBOnlineEpisode.cWatched];
-    //          if (selectedEpisode[DBMovie.cFilename].ToString().Length > 0)
-    //          {
-    //            conditions = new SQLCondition();
-    //            conditions.Add(new DBMovie(), DBMovie.cFilename, selectedEpisode[DBMovie.cFilename], SQLConditionType.Equal);
-    //            List<DBMovie> episodes = DBMovie.Get(conditions, false);
-    //            foreach (DBMovie episode in episodes)
-    //            {
-    //              episode[DBOnlineEpisode.cWatched] = !watched;
-    //              episode[DBOnlineEpisode.cTraktSeen] = watched ? 2 : 0;
-    //              episode.Commit();
-    //            }
-
-    //            FollwitConnector.Watch(episodes, !watched);
-    //          }
-    //          else
-    //          {
-    //            selectedEpisode[DBOnlineEpisode.cWatched] = !watched;
-    //            selectedEpisode[DBOnlineEpisode.cTraktSeen] = watched ? 2 : 0;
-    //            selectedEpisode.Commit();
-
-    //            FollwitConnector.Watch(selectedEpisode, !watched, false);
-    //          }
-    //          // Update Episode Counts
-    //          DBSeason.UpdateEpisodeCounts(m_SelectedSeries, m_SelectedSeason);
-
-    //          // Update Trakt
-    //          m_TraktSyncTimer.Change(10000, Timeout.Infinite);
-
-    //          LoadFacade();
-    //        }
-    //        break;
-
-    //      case (int)eContextItems.actionMarkAllWatched:
-    //        // Mark all watched that are visible on the facade and
-    //        // do not air in the future...its misleading marking watched on episodes
-    //        // you cant see. People could import a new episode and have it marked as watched accidently
-
-    //        if (selectedSeries != null)
-    //        {
-    //          conditions = new SQLCondition();
-    //          conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //          conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cFirstAired, DateTime.Now.ToString("yyyy-MM-dd"), SQLConditionType.LessEqualThan);
-    //        }
-
-    //        if (selectedSeason != null)
-    //        {
-    //          conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeasonIndex, selectedSeason[DBSeason.cIndex], SQLConditionType.Equal);
-    //        }
-
-    //        episodeList = DBMovie.Get(conditions, true);
-
-    //        // reset traktSeen flag for later synchronization 
-    //        // and set watched state
-    //        foreach (DBMovie episode in episodeList)
-    //        {
-    //          episode[DBOnlineEpisode.cWatched] = 1;
-    //          episode[DBOnlineEpisode.cTraktSeen] = 0;
-    //          episode.Commit();
-    //        }
-
-    //        FollwitConnector.Watch(episodeList, true);
-
-    //        // Updated Episode Counts
-    //        if (this.currentListLevel == Listlevel.Series && selectedSeries != null)
-    //        {
-    //          DBSeries.UpdateEpisodeCounts(selectedSeries);
-    //        }
-    //        else if (this.currentListLevel == Listlevel.Season && selectedSeason != null)
-    //        {
-    //          DBSeason.UpdateEpisodeCounts(selectedSeries, selectedSeason);
-    //        }
-
-    //        cache.dump();
-
-    //        // sync to trakt
-    //        m_TraktSyncTimer.Change(10000, Timeout.Infinite);
-
-    //        // refresh facade
-    //        LoadFacade();
-    //        break;
-
-    //      case (int)eContextItems.actionMarkAllUnwatched:
-    //        // Mark all unwatched that are visible on the facade
-
-    //        if (selectedSeries != null)
-    //        {
-    //          conditions = new SQLCondition();
-    //          conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //        }
-
-    //        if (selectedSeason != null)
-    //        {
-    //          conditions.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeasonIndex, selectedSeason[DBSeason.cIndex], SQLConditionType.Equal);
-    //        }
-
-    //        episodeList = DBMovie.Get(conditions, true);
-
-    //        // set traktSeen flag and watched state
-    //        // when traktSeen = 2, the seen flag will be removed from trakt
-    //        foreach (DBMovie episode in episodeList)
-    //        {
-    //          episode[DBOnlineEpisode.cWatched] = 0;
-    //          episode[DBOnlineEpisode.cTraktSeen] = 2;
-    //          episode.Commit();
-    //        }
-
-    //        FollwitConnector.Watch(episodeList, false);
-
-    //        // Updated Episode Counts
-    //        if (this.currentListLevel == Listlevel.Series && selectedSeries != null)
-    //        {
-    //          DBSeries.UpdateEpisodeCounts(selectedSeries);
-    //        }
-    //        else if (this.currentListLevel == Listlevel.Season && selectedSeason != null)
-    //        {
-    //          DBSeason.UpdateEpisodeCounts(selectedSeries, selectedSeason);
-    //        }
-
-    //        cache.dump();
-
-    //        // sync to trakt
-    //        m_TraktSyncTimer.Change(10000, Timeout.Infinite);
-
-    //        // refresh facade
-    //        LoadFacade();
-    //        break;
-    //      #endregion
-
-    //      #region Playlist
-    //      case (int)eContextItems.addToPlaylist:
-    //        AddItemToPlayList();
-    //        break;
-    //      #endregion
-
-    //      #region Cycle Artwork
-    //      case (int)eContextItems.cycleSeriesBanner:
-    //        CycleSeriesBanner(selectedSeries, true);
-    //        break;
-
-    //      case (int)eContextItems.cycleSeriesPoster:
-    //        CycleSeriesPoster(selectedSeries, true);
-    //        break;
-
-    //      case (int)eContextItems.cycleSeasonPoster:
-    //        CycleSeasonPoster(selectedSeason, true);
-    //        break;
-    //      #endregion
-
-    //      #region Fanart Chooser
-    //      case (int)eContextItems.showFanartChooser:
-    //        ShowFanartChooser(m_SelectedSeries[DBOnlineSeries.cID]);
-    //        break;
-    //      #endregion
-
-    //      #region Actors GUI
-    //      case (int)eContextItems.showActorsGUI:
-    //        GUIActors.SeriesId = m_SelectedSeries[DBOnlineSeries.cID];
-    //        GUIWindowManager.ActivateWindow(9816);
-    //        break;
-    //      #endregion
-
-    //      #region Force Online Series Query
-    //      case (int)eContextItems.forceSeriesQuery:
-    //        {
-    //          // clear the series
-    //          SQLCondition condition = new SQLCondition();
-    //          condition.Add(new DBMovie(), DBMovie.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //          DBMovie.Clear(condition);
-    //          condition = new SQLCondition();
-    //          condition.Add(new DBOnlineEpisode(), DBOnlineEpisode.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //          DBOnlineEpisode.Clear(condition);
-
-    //          condition = new SQLCondition();
-    //          condition.Add(new DBSeason(), DBSeason.cSeriesID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //          DBSeason.Clear(condition);
-
-    //          condition = new SQLCondition();
-    //          condition.Add(new DBSeries(), DBSeries.cID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //          DBSeries.Clear(condition);
-
-    //          condition = new SQLCondition();
-    //          condition.Add(new DBOnlineSeries(), DBOnlineSeries.cID, selectedSeries[DBSeries.cID], SQLConditionType.Equal);
-    //          DBOnlineSeries.Clear(condition);
-
-    //          // look for it again
-    //          m_parserUpdaterQueue.Add(new CParsingParameters(ParsingAction.NoExactMatch, null, true, false));
-    //          // Start Import if delayed
-    //          m_scanTimer.Change(1000, 1000);
-    //        }
-    //        break;
-    //      #endregion
-
-    //      #region Downloaders
-    //      case (int)eContextItems.downloadSubtitle:
-    //        {
-    //          if (selectedEpisode != null)
-    //          {
-    //            DBMovie episode = (DBMovie)currentitem.TVTag;
-    //            ShowSubtitleMenu(episode);
-    //          }
-    //        }
-    //        break;
-    //      #endregion
-
-    //      #region Favourites
-    //      /*case (int)eContextItems.actionToggleFavorite: {
-    //      // Toggle Favourites
-    //      m_SelectedSeries.toggleFavourite();
-
-    //      // If we are in favourite view we need to reload to remove the series
-    //      LoadFacade();
-    //      break;
-    //    }*/
-    //      #endregion
-
-    //      #region Actions
-    //      #region Hide
-    //      case (int)eContextItems.actionHide:
-    //        switch (this.currentListLevel)
-    //        {
-    //          case Listlevel.Series:
-    //            selectedSeries.HideSeries(!selectedSeries[DBSeries.cHidden]);
-    //            break;
-
-    //          case Listlevel.Season:
-    //            selectedSeason.HideSeason(!selectedSeason[DBSeason.cHidden]);
-    //            DBSeries.UpdateEpisodeCounts(m_SelectedSeries);
-    //            break;
-
-    //          case Listlevel.Episode:
-    //            selectedEpisode.HideEpisode(!selectedEpisode[DBOnlineEpisode.cHidden]);
-    //            DBSeason.UpdateEpisodeCounts(m_SelectedSeries, m_SelectedSeason);
-    //            break;
-    //        }
-    //        LoadFacade();
-    //        break;
-    //      #endregion
-
-    //      #region Delete
-    //      case (int)eContextItems.actionDelete:
-    //        {
-    //          dlg.Reset();
-    //          ShowDeleteMenu(selectedSeries, selectedSeason, selectedEpisode);
-    //        }
-    //        break;
-    //      #endregion
-
-    //      #region Update Series/Episode Information
-    //      case (int)eContextItems.actionUpdate:
-    //        {
-    //          dlg.Reset();
-    //          UpdateEpisodes(selectedSeries, m_SelectedSeason, m_SelectedEpisode);
-    //        }
-    //        break;
-    //      #endregion
-
-    //      #region MediaInfo
-    //      case (int)eContextItems.actionRecheckMI:
-    //        switch (currentListLevel)
-    //        {
-    //          case Listlevel.Episode:
-    //            m_SelectedEpisode.ReadMediaInfo();
-    //            // reload here so logos update
-    //            LoadFacade();
-    //            break;
-    //          case Listlevel.Season:
-    //            foreach (DBMovie ep in DBMovie.Get(m_SelectedSeason[DBSeason.cSeriesID], m_SelectedSeason[DBSeason.cIndex], false))
-    //              ep.ReadMediaInfo();
-    //            break;
-    //          case Listlevel.Series:
-    //            foreach (DBMovie ep in DBMovie.Get((int)m_SelectedSeries[DBSeries.cID], false))
-    //              ep.ReadMediaInfo();
-    //            break;
-    //        }
-    //        break;
-    //      #endregion
-
-    //      #region Import
-    //      case (int)eContextItems.actionLocalScan:
-    //        // queue scan
-    //        lock (m_parserUpdaterQueue)
-    //        {
-    //          m_parserUpdaterQueue.Add(new CParsingParameters(true, false));
-    //        }
-    //        // Start Import if delayed
-    //        m_scanTimer.Change(1000, 1000);
-    //        break;
-
-    //      case (int)eContextItems.actionFullRefresh:
-    //        // queue scan
-    //        lock (m_parserUpdaterQueue)
-    //        {
-    //          m_parserUpdaterQueue.Add(new CParsingParameters(false, true));
-    //        }
-    //        // Start Import if delayed
-    //        m_scanTimer.Change(1000, 1000);
-    //        break;
-    //      #endregion
-
-    //      #region Play
-    //      case (int)eContextItems.actionPlayRandom:
-    //        playRandomEp();
-    //        break;
-    //      #endregion
-
-    //      #region Episode Sort By
-    //      case (int)eContextItems.actionEpisodeSortBy:
-    //        ShowEpisodeSortByMenu(selectedSeries, false);
-    //        break;
-    //      #endregion
-
-    //      #region Local to Online Episode Match Order
-    //      case (int)eContextItems.actionChangeOnlineEpisodeMatchOrder:
-    //        ShowEpisodeSortByMenu(selectedSeries, true);
-    //        break;
-    //      #endregion
-
-    //      #region Lock Views
-    //      case (int)eContextItems.actionLockViews:
-    //        logicalView.IsLocked = true;
-    //        break;
-    //      #endregion
-    //      #endregion
-    //    }
-    //    #endregion
-    //  }
-    //  catch (Exception ex)
-    //  {
-    //    LogMyFilms.Error("The 'OnShowContextMenu' function has generated an error: " + ex.Message + ", StackTrace : " + ex.StackTrace);
-    //  }
-
-    //}
-    #endregion
-
     #region Action
 
     //---------------------------------------------------------------------------------------
@@ -2305,7 +1648,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                   case ViewContext.TmdbMovies:
                     #region TMDB online movies selection
-                    Change_SelectTmdbEntry_Action(facadeFilms.SelectedListItem);
+                    new Thread(delegate()
+                    {
+                      try
+                      {
+                        Change_SelectTmdbEntry_Action(facadeFilms.SelectedListItem);
+                      }
+                      catch (Exception ex) { LogMyFilms.Debug("Change_SelectTmdbEntry_Action - error: " + ex.Message); }
+                      GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => 0, 0, 0, null);
+                    }) { Name = "MyFilms_Change_SelectTmdbEntry_Action", IsBackground = true }.Start();
                     #endregion
                     break;
 
@@ -6697,6 +6048,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var movie = facadeFilms.SelectedListItem.TVTag as OnlineMovie;
       if (movie == null) return;
 
+      MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
+
       #region search locally cached trailers
       var cachedTrailerFiles = new List<string>();
       if (MyFilms.conf.StrDirStorTrailer.Length > 0)
@@ -6729,6 +6082,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
       LogMyFilms.Debug("Change_SelectTmdbEntry_Action - found '" + trailersfound.Count + "' YouTube Trailers");
       #endregion
+
+      MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
 
       bool launchLocalMovies = false;
       if (trailersfound.Count == 0 && cachedTrailerFiles.Count == 0)
@@ -6781,7 +6136,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           trailerName = trailerName.Substring(trailerName.IndexOf("(trailer)", System.StringComparison.Ordinal) + 10); // strip title and trailer prefix
           long wsize = File.Exists(cachedTrailerFile) ? new FileInfo(cachedTrailerFile).Length : 0;
           string entry = GUILocalizeStrings.Get(10798988) + trailerName + " (" + string.Format("{0} MB", wsize / 1048576) + ")"; // local: 
-          dlg.Add(entry);
+          using (var listItem = new GUIListItem {  Label = entry, IsDownloading = false, IconImage = MyFilms.conf.DefaultCover, Path = cachedTrailerFile })
+          {
+            dlg.Add(listItem);
+          }
           choiceView.Add(cachedTrailerFile);
         }
         #endregion
@@ -6792,7 +6150,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Youtube trailer = trailersfound[i];
           string entry = GUILocalizeStrings.Get(10798989) + trailer.name + " (" + trailer.size + ")"; // online: 
           if (i < iLocalTrailers) entry += " - (" + language + ")";
-          dlg.Add(entry);
+          using (var listItem = new GUIListItem { Label = entry, IsDownloading = true, IconImage = MyFilms.conf.DefaultCover, Path = ("http://www.youtube.com/watch?v=" + trailer.source) })
+          {
+            dlg.Add(listItem);
+          }
           choiceView.Add("http://www.youtube.com/watch?v=" + trailer.source);
         }
         #endregion
@@ -10689,20 +10050,209 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return dlg.SelectedLabelText;
     }
 
+    #region Main Context Menu (inactive)
+    //protected override void OnShowContextMenu()
+    //{
+    //  try
+    //  {
+    //    GUIListItem currentitem = this.facadeFilms.SelectedListItem;
+    //    if (currentitem == null) return;
+
+    //    var dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+    //    if (dlg == null) return;
+
+    //    bool emptyList = currentitem.Label == "no items";
+    //    if (!emptyList)
+    //    {
+    //      switch (this.currentListLevel)
+    //      {
+    //        case Listlevel.Series:
+    //          {
+    //            selectedSeries = (DBSeries)currentitem.TVTag;
+    //          }
+    //          break;
+    //      }
+    //    }
+    //    bool bExitMenu = false;
+
+    //    do
+    //    {
+    //      dlg.Reset();
+    //      GUIListItem pItem = null;
+
+    //      if (!emptyList)
+    //      {
+    //        switch (MyFilms.conf.CurrentView)
+    //        {
+    //          case ViewContext.TmdbMovies:
+    //            dlg.SetHeading("Movie" + "MovieName");
+    //            break;
+
+    //          case ViewContext.Group:
+    //            dlg.SetHeading("Group" + "Groupname");
+    //            break;
+
+    //          case ViewContext.Person:
+    //            dlg.SetHeading("Translation.Person" + ": " + "PersonName");
+    //            break;
+    //          default:
+    //            // group
+    //            dlg.SetHeading("Menu");
+    //            break;
+    //        }
+
+    //        #region Top Level Menu Items - Context Sensitive
+    //        if (this.currentListLevel == Listlevel.Movie)
+    //        {
+    //          pItem = new GUIListItem("Translation.Toggle_watched_flag");
+    //          dlg.Add(pItem);
+    //          pItem.ItemId = (int)eContextItems.toggleWatched;
+
+    //          pItem = new GUIListItem("Translation.RateEpisode" + " ...");
+    //          dlg.Add(pItem);
+    //          pItem.ItemId = (int)eContextMenus.rate;
+    //        }
+    //        else if (this.currentListLevel != Listlevel.Group)
+    //        {
+    //          pItem = new GUIListItem("Translation.Mark_all_as_watched");
+    //          dlg.Add(pItem);
+    //          pItem.ItemId = (int)eContextItems.actionMarkAllWatched;
+
+    //          pItem = new GUIListItem("Translation.Mark_all_as_unwatched");
+    //          dlg.Add(pItem);
+    //          pItem.ItemId = (int)eContextItems.actionMarkAllUnwatched;
+    //        }
+
+    //        #endregion
+    //      }
+    //      else
+    //        dlg.SetHeading("m_CurrLView.Name");
+
+    //      #region Top Level Menu Items - Non-Context Sensitive
+    //      pItem = new GUIListItem("Translation.ChangeView" + " ...");
+    //      dlg.Add(pItem);
+    //      pItem.ItemId = (int)eContextMenus.switchView;
+
+    //      if (currentListLevel != Listlevel.Group)
+    //      {
+    //        pItem = new GUIListItem(Translation.Actions + " ...");
+    //        dlg.Add(pItem);
+    //        pItem.ItemId = (int)eContextMenus.action;
+    //      }
+
+    //      pItem = new GUIListItem(Translation.Options + " ...");
+    //      dlg.Add(pItem);
+    //      pItem.ItemId = (int)eContextMenus.options;
+    //      #endregion
+
+    //      #region Download menu - keep at the bottom for fast access (menu + up => there)
+    //      if (!emptyList && subtitleDownloadEnabled && this.currentListLevel == Listlevel.Episode)
+    //      {
+    //        pItem = new GUIListItem(Translation.Download + " ...");
+    //        dlg.Add(pItem);
+    //        pItem.ItemId = (int)eContextMenus.download;
+    //      }
+    //      #endregion
+
+    //      dlg.DoModal(GUIWindowManager.ActiveWindow);
+
+    //      #region Selected Menu Item Actions (Sub-Menus)
+    //      switch (dlg.SelectedId)
+    //      {
+    //        case (int)eContextMenus.download:
+    //          {
+    //            dlg.Reset();
+    //            dlg.SetHeading(Translation.Download);
+
+    //            if (subtitleDownloadEnabled)
+    //            {
+    //              pItem = new GUIListItem(Translation.Retrieve_Subtitle);
+    //              dlg.Add(pItem);
+    //              pItem.ItemId = (int)eContextItems.downloadSubtitle;
+    //            }
+
+    //            dlg.DoModal(GUIWindowManager.ActiveWindow);
+    //            if (dlg.SelectedId != -1)
+    //              bExitMenu = true;
+    //          }
+    //          break;
+
+
+    //        case (int)eContextMenus.options:
+    //          {
+    //            dlg.Reset();
+    //            // ShowOptionsMenu();
+    //            return;
+    //          }
+
+    //        case (int)eContextMenus.switchView:
+    //          {
+    //            dlg.Reset();
+    //            // if (showViewSwitchDialog()) return;
+    //          }
+    //          break;
+
+    //        case (int)eContextMenus.switchLayout:
+    //          {
+    //            dlg.Reset();
+    //            // ShowLayoutMenu();
+    //            return;
+    //          }
+
+    //        default:
+    //          bExitMenu = true;
+    //          break;
+    //      }
+    //      #endregion
+    //    }
+    //    while (!bExitMenu);
+
+    //    if (dlg.SelectedId == -1) return;
+
+    //    #region Selected Menu Item Actions
+    //    List<MFMovie> episodeList = new List<MFMovie>();
+
+    //    switch (dlg.SelectedId)
+    //    {
+    //        #region Downloaders
+
+    //      case (int)eContextItems.downloadSubtitle:
+    //        {
+    //          if (selectedEpisode != null)
+    //          {
+    //            MFMovie episode = (MFMovie)currentitem.TVTag;
+    //            // ShowSubtitleMenu(episode);
+    //          }
+    //        }
+    //        break;
+
+    //        #endregion
+    //    }
+    //    #endregion
+
+    //  }
+    //  catch (Exception ex)
+    //  {
+    //    LogMyFilms.Error("The 'OnShowContextMenu' function has generated an error: " + ex.Message + ", StackTrace : " + ex.StackTrace);
+    //  }
+
+    //}
+    #endregion
+
     //--------------------------------------------------------------------------------------------
     //   Display Context Menu for Movie 
     //--------------------------------------------------------------------------------------------
     private void Context_Menu_Movie(int selecteditem)
     {
       LogMyFilms.Debug("Context_Menu_Movie() - context = '" + conf.ViewContext.ToString() + "'");
-      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return;
       Context_Menu = true;
       if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) conf.MenuSelectedId = facadeFilms.SelectedListItemIndex; // remember current facade position for Menu refresh
 
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079904)); // Context options ...
-      List<string> updChoice = new List<string>();
+      var updChoice = new List<string>();
       MyFilmsDetail.Searchtitles sTitles;
 
 
@@ -10756,7 +10306,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       #endregion
 
-      #region Moviecontext
+      #region Moviecontext - context searches
       if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
       {
         dlg.Add(GUILocalizeStrings.Get(1079866)); //Search related movies by persons
@@ -11273,7 +10823,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
 
-        #region Menu - all operations
+        #region Menu - all possible actions
 
         case "menusavecurrentsettingstoview":
           {
@@ -11650,6 +11200,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "moviepersonlist":
           {
+            #region display person list of current movie
             if (!this.facadeFilms.SelectedListItem.IsFolder && !conf.Boolselect)
             {
               conf.StrIndex = facadeFilms.SelectedListItem.ItemId;
@@ -11700,6 +11251,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //}.Start();
             }
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            #endregion
             break;
           }
 
@@ -12154,109 +11706,120 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void BrowseTheWebLauncher(string type, string extension, string searchexpression)
     {
+      //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser 
+      //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
       if (!Helper.IsBrowseTheWebAvailableAndEnabled)
       {
         ShowMessageDialog("MyFilms", "BrowseTheWeb plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.BrowseTheWeb));
         return;
       }
 
-      //int webBrowserWindowID = 16002; // WindowID for GeckoBrowser 
-      //int webBrowserWindowID = 54537689; // WindowID for BrowseTheWeb
-      //string url = ImdbBaseUrl + "";
       string url = string.Empty;
       const string zoom = "150";
 
-      //First search corresponding URL for the movie/person ...
-      switch (type)
+      new Thread(delegate()
       {
-        case "movie":
+        {
+          try
           {
-            var imdb = new IMDB();
-            imdb.Find(searchexpression);
-            foreach (IMDB.IMDBUrl t in imdb) LogMyFilms.Debug("movie imdb internet search - found: '" + t.Title + "', URL = '" + t.URL + "'");
-            if (imdb.Count > 0)
-            {
-              var wurl = imdb[0];
-              if (wurl.URL.Length != 0)
-              {
-                url = wurl.URL + extension; // Assign proper Webpage for infos
-                url = ImdbBaseUrl + url.Substring(url.IndexOf("title")); // redirect to base www.imdb.com server and remove localized returns...
-              }
-            }
-            break;
-          }
-        case "person":
-          {
-            var imdb = new IMDB();
-            imdb.FindActor(searchexpression);
-            if (imdb.Count > 0)
-            {
-              IMDB.IMDBUrl wurl = imdb[0];
-              if (wurl.URL.Length != 0)
-              {
-                url = wurl.URL + extension; // Assign proper Webpage for Actorinfos
-                url = ImdbBaseUrl + url.Substring(url.IndexOf("name")); // redirect to base www.imdb.com server and remove localized returns...
-              }
-              //_imdb.GetActorDetails(_imdb[0], false, out imdbActor); // Details here not needed - we just want the URL !
-            }
-            break;
-          }
-      }
+            MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
 
-      if (!string.IsNullOrEmpty(url))
-      {
-        //Load Webbrowserplugin with the URL
-        LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
-        GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
-        GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
-        MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
-        GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
-        MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
-        GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
-        GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
-      }
-      else
-      {
-        ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
-      }
+            #region First search corresponding URL for the movie/person ...
+            switch (type)
+            {
+              case "movie":
+                {
+                  var imdb = new IMDB();
+                  imdb.Find(searchexpression);
+                  foreach (IMDB.IMDBUrl t in imdb) LogMyFilms.Debug("movie imdb internet search - found: '" + t.Title + "', URL = '" + t.URL + "'");
+                  if (imdb.Count > 0)
+                  {
+                    var wurl = imdb[0];
+                    if (wurl.URL.Length != 0)
+                    {
+                      url = wurl.URL + extension; // Assign proper Webpage for infos
+                      url = ImdbBaseUrl + url.Substring(url.IndexOf("title", StringComparison.Ordinal)); // redirect to base www.imdb.com server and remove localized returns...
+                    }
+                  }
+                  break;
+                }
+              case "person":
+                {
+                  var imdb = new IMDB();
+                  imdb.FindActor(searchexpression);
+                  if (imdb.Count > 0)
+                  {
+                    IMDB.IMDBUrl wurl = imdb[0];
+                    if (wurl.URL.Length != 0)
+                    {
+                      url = wurl.URL + extension; // Assign proper Webpage for Actorinfos
+                      url = ImdbBaseUrl + url.Substring(url.IndexOf("name", StringComparison.Ordinal)); // redirect to base www.imdb.com server and remove localized returns...
+                    }
+                    //_imdb.GetActorDetails(_imdb[0], false, out imdbActor); // Details here not needed - we just want the URL !
+                  }
+                  break;
+                }
+            }
+            #endregion
+
+            MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
+          }
+          catch (Exception ex) { LogMyFilms.Debug("BrowseTheWebLauncher - error searching actor: " + ex.Message); }
+        }
+        GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+          {
+            if (!string.IsNullOrEmpty(url))
+            {
+              #region Load Webbrowserplugin with the URL
+              LogMyFilms.Debug("Launching BrowseTheWeb with URL = '" + url + "'");
+              GUIPropertyManager.SetProperty("#btWeb.startup.link", url);
+              GUIPropertyManager.SetProperty("#btWeb.link.zoom", zoom);
+              MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
+              GUIWindowManager.ActivateWindow((int)ExternalPluginWindows.BrowseTheWeb, false); //54537689
+              MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
+              GUIPropertyManager.SetProperty("#btWeb.startup.link", string.Empty);
+              GUIPropertyManager.SetProperty("#btWeb.link.zoom", string.Empty);
+              #endregion
+            }
+            else ShowMessageDialog(GUILocalizeStrings.Get(10798624), "", GUILocalizeStrings.Get(10798640)); // MyFilmsSystemInformation - no result found
+            return 0;
+          }, 0, 0, null);
+      }) { Name = "MyFilmsBrowseTheWebLauncher", IsBackground = true }.Start();
     }
 
     //*****************************************************************************************
     //*  select person type dialog
     //*****************************************************************************************
-    private string SelectPersonType(int Index)
+    private string SelectPersonType(int index)
     {
-      string persontype = string.Empty;
-
+      var choiceSearch = new List<string>();
       var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      var dlg1 = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      if (dlg == null) return "";
+      if (dlg == null) return string.Empty;
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(1079909)); // select role
-      var w_tableau = new ArrayList();
-      var choiceSearch = new List<string>();
 
-      foreach (string personfield in PersonTypes.Where(personfield => MyFilms.r[Index][personfield].ToString().Length > 0))
+      foreach (string personfield in PersonTypes.Where(personfield => MyFilms.r[index][personfield].ToString().Length > 0))
       {
-        w_tableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[Index][personfield].ToString())));
-        w_tableau = new ArrayList(w_tableau.ToArray().Distinct().ToList()); // make list unique/distinct
+        ArrayList wTableau = Search_String(System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(MyFilms.r[index][personfield].ToString())));
+        wTableau = new ArrayList(wTableau.ToArray().Distinct().ToList()); // make list unique/distinct
 
-        dlg.Add(BaseMesFilms.TranslateColumn(personfield) + " (" + w_tableau.Count + ")");
+        dlg.Add(BaseMesFilms.TranslateColumn(personfield) + " (" + wTableau.Count + ")");
         choiceSearch.Add(personfield);
       }
       if (choiceSearch.Count == 0)
       {
-        if (dlg1 == null) return "";
-        dlg1.SetHeading(GUILocalizeStrings.Get(1079909));
-        dlg1.SetLine(1, GUILocalizeStrings.Get(10798641));
-        dlg1.DoModal(GUIWindowManager.ActiveWindow);
-        return "";
+        var dialogOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+        if (dialogOk == null) return string.Empty;
+        dialogOk.SetHeading(GUILocalizeStrings.Get(1079909));
+        dialogOk.SetLine(1, GUILocalizeStrings.Get(10798641));
+        dialogOk.DoModal(GUIWindowManager.ActiveWindow);
+        return string.Empty;
       }
-      dlg.DoModal(GetID);
-      if (dlg.SelectedLabel == -1)
-        return "";
 
-      persontype = choiceSearch[dlg.SelectedLabel];
+      dlg.DoModal(GetID);
+      if (dlg.SelectedLabel == -1) return string.Empty;
+
+      string persontype = choiceSearch[dlg.SelectedLabel];
       return persontype;
     }
 
