@@ -178,6 +178,7 @@
     <String id="1079919">Always ask for playback quality for online content ({0})</String>
     <String id="1079920">Mindig az alapértelmezett konfiguráció indítása ({0})</String>
     <String id="1079921">Online információkérés ({0})</String>
+    <String id="1079930">Cast and Crew for selected film (IMDb)</String>
     <String id="10798500">Film lejátszása (külső programmal)</String>
     <String id="10798600">Search OnlineVideos ...</String>
     <String id="10798601">Search MyFilms ...</String>
@@ -449,5 +450,6 @@
     <String id="10799310">Felhasználó név</String>
     <String id="10799401">Teljes Frissítés</String>
     <String id="10799402">Globális Szűrők</String>
+    <String id="10799501">Web Details ...</String>
   </Section>
 </Language>

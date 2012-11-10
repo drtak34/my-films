@@ -67,7 +67,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIButtonControl ButtonDownloadCover = null;
 
     [SkinControlAttribute((int)MyFilms.Controls.CTRL_GuiWaitCursor)]
-    protected GUIAnimation SearchAnimation;
+    protected GUIAnimation SearchAnimation = null;
 
     #endregion
 

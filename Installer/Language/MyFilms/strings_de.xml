@@ -148,13 +148,13 @@
     <String id="1079882">Update der aktuellen Person</String>
     <String id="1079883">Update aller beteiligten Personen</String>
     <String id="1079884">Weitere Infos zur Person</String>
-    <String id="1079885">Filmographie (IMDB Web)</String>
-    <String id="1079886">Internetinfos zur Person (IMDB Web)</String>
-    <String id="1079887">Filmclips zum Film  (IMDB Web)</String>
-    <String id="1079888">Bildergallerie zum Film (IMDB Web)</String>
-    <String id="1079889">Internetinfos zum Film (IMDB Web)</String>
-    <String id="1079890">Filmclips zur Person (IMDB Web)</String>
-    <String id="1079891">Bildergallerie zur Person (IMDB Web)</String>
+    <String id="1079885">Filmographie (IMDB)</String>
+    <String id="1079886">Internetinfos zur Person (IMDB)</String>
+    <String id="1079887">Filmclips zum Film  (IMDB)</String>
+    <String id="1079888">Bildergallerie zum Film (IMDB)</String>
+    <String id="1079889">Internetinfos zum Film (IMDB)</String>
+    <String id="1079890">Filmclips zur Person (IMDB)</String>
+    <String id="1079891">Bildergallerie zur Person (IMDB)</String>
     <String id="1079892">Update ...</String>
     <String id="1079893">Filmographie (TMDB)</String>
     <String id="1079894">Als bereits gesehen markieren</String>
@@ -178,6 +178,7 @@
     <String id="1079919">Umschalten 'Manuelle Wahl Wiedergabequalität ({0})'</String>
     <String id="1079920">Umschalten 'Immer Standard Start Konfiguration ({0})'</String>
     <String id="1079921">Umschalten 'Zeige Online Informationen ({0})'</String>
+    <String id="1079930">Personen zum Film (IMDB)</String>
     <String id="10798500">Spiele Film (externer Player)</String>
     <String id="10798600">Suche OnlineVideos ...</String>
     <String id="10798601">Suche MyFilms ...</String>
@@ -273,7 +274,7 @@
     <String id="10798699">Wiki Online Hilfe (Web)</String>
     <String id="10798700">About ...</String>
     <String id="10798701">Optionen ...</String>
-    <String id="10798702">Updates ...</String>
+    <String id="10798702">Aktualisierung ...</String>
     <String id="10798703">Fanart und Cover ...</String>
     <String id="10798704">Trailer ...</String>
     <String id="10798705">Trailer gefunden !</String>
@@ -406,7 +407,7 @@
     <String id="10798968">Älter als 3 Jahre</String>
     <String id="10798970">Globaler Filter "Wähle Custom Filter" ({0})</String>
     <String id="10798971">Globaler Filter "Deaktiviere Custom Filter" ({0})</String>
-    <String id="10798980">Spiele zufällige Trailer</String>
+    <String id="10798980">Spiele zufällige Trailer dieser Ansicht</String>
     <String id="10798981">Trailer Scrobbling ...</String>
     <String id="10798982">Spiele nächsten Trailer ?</String>
     <String id="10798983">Abbrechen</String>
@@ -416,8 +417,8 @@
     <String id="10798987">Filme ...</String>
     <String id="10798988">Lokaler Trailer: </String>
     <String id="10798989">Online Trailer: </String>
-    <String id="10798990">Lade einzelnen Trailer (TMDB)</String>
-    <String id="10798991">Lade Trailer für diese Filme (TMDB)</String>
+    <String id="10798990">Lade Trailer für aktuellen Film (TMDB)</String>
+    <String id="10798991">Lade Trailer für alle Filme dieser Ansicht (TMDB)</String>
     <String id="10798992">Wähle Film ...</String>
     <String id="10798993">Wähle Trailer ...</String>
     <String id="10798994">Wähle Qualität ...</String>
@@ -449,5 +450,6 @@
     <String id="10799310">Username</String>
     <String id="10799401">Globale Updates</String>
     <String id="10799402">Globale Filter</String>
+    <String id="10799501">Internet Details ...</String>
   </Section>
 </Language>

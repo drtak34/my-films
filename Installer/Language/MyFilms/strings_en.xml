@@ -178,6 +178,7 @@
     <String id="1079919">Always ask for playback quality for online content ({0})</String>
     <String id="1079920">Always use default start config ({0})</String>
     <String id="1079921">Get online info ({0})</String>
+    <String id="1079930">Cast and Crew for selected film (IMDb)</String>
     <String id="10798500">Play film (external player)</String>
     <String id="10798600">Search OnlineVideos ...</String>
     <String id="10798601">Search MyFilms ...</String>
@@ -449,5 +450,6 @@
     <String id="10799310">User name</String>
     <String id="10799401">Global Updates</String>
     <String id="10799402">Global Filters</String>
+    <String id="10799501">Web Details ...</String>
   </Section>
 </Language>
