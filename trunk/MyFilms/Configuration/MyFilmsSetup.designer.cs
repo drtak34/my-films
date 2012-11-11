@@ -478,6 +478,7 @@
           this.groupBoxMultiUserState = new System.Windows.Forms.GroupBox();
           this.Label_UserProfileName = new System.Windows.Forms.Label();
           this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
+          this.Config_EnablePreload = new System.Windows.Forms.CheckBox();
           this.Tab_Trakt = new System.Windows.Forms.TabPage();
           this.groupBoxExternal = new System.Windows.Forms.GroupBox();
           this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
@@ -932,18 +933,18 @@
           // Config_Dflt
           // 
           this.Config_Dflt.AutoSize = true;
-          this.Config_Dflt.Location = new System.Drawing.Point(482, 17);
+          this.Config_Dflt.Location = new System.Drawing.Point(481, 17);
           this.Config_Dflt.Name = "Config_Dflt";
-          this.Config_Dflt.Size = new System.Drawing.Size(125, 17);
+          this.Config_Dflt.Size = new System.Drawing.Size(93, 17);
           this.Config_Dflt.TabIndex = 7;
-          this.Config_Dflt.Text = "Default Configuration";
+          this.Config_Dflt.Text = "Default Config";
           this.ToolTip1.SetToolTip(this.Config_Dflt, resources.GetString("Config_Dflt.ToolTip"));
           this.Config_Dflt.UseVisualStyleBackColor = true;
           // 
           // Config_Menu
           // 
           this.Config_Menu.AutoSize = true;
-          this.Config_Menu.Location = new System.Drawing.Point(482, 45);
+          this.Config_Menu.Location = new System.Drawing.Point(481, 45);
           this.Config_Menu.Name = "Config_Menu";
           this.Config_Menu.Size = new System.Drawing.Size(159, 17);
           this.Config_Menu.TabIndex = 8;
@@ -5008,6 +5009,17 @@
           this.chkEnhancedWatchedStatusHandling.Text = "MUS autoenabled";
           this.chkEnhancedWatchedStatusHandling.UseVisualStyleBackColor = true;
           // 
+          // Config_EnablePreload
+          // 
+          this.Config_EnablePreload.AutoSize = true;
+          this.Config_EnablePreload.Location = new System.Drawing.Point(578, 17);
+          this.Config_EnablePreload.Name = "Config_EnablePreload";
+          this.Config_EnablePreload.Size = new System.Drawing.Size(62, 17);
+          this.Config_EnablePreload.TabIndex = 76;
+          this.Config_EnablePreload.Text = "Preload";
+          this.ToolTip1.SetToolTip(this.Config_EnablePreload, resources.GetString("Config_EnablePreload.ToolTip"));
+          this.Config_EnablePreload.UseVisualStyleBackColor = true;
+          // 
           // Tab_Trakt
           // 
           this.Tab_Trakt.Controls.Add(this.groupBoxExternal);
@@ -6420,6 +6432,7 @@
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
           this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
           this.ClientSize = new System.Drawing.Size(779, 506);
+          this.Controls.Add(this.Config_EnablePreload);
           this.Controls.Add(this.btnServerSync);
           this.Controls.Add(this.buttonWikiHelp);
           this.Controls.Add(this.btnLaunchAMCglobal);
@@ -7084,5 +7097,6 @@
         private GroupBox groupBoxAbout;
         private Label label28;
         private CheckBox cbCacheOnlineTrailer;
+        private CheckBox Config_EnablePreload;
     }
 }
