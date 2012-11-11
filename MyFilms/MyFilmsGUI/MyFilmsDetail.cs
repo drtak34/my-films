@@ -11292,12 +11292,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.SetHeading(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
             foreach (CollectionPoster poster in collectionPosters)
             {
-              string posterUrl = tmdbConf.images.base_url + "w500" + poster.file_path;
+              string posterUrl = tmdbConf.images.base_url + "w154" + poster.file_path;
               LogMyFilms.Debug("TMDB - Collection Poster found = '" + posterUrl + "'");
               var item = new GUIListItem();
               item.Label = poster.width + " x " + poster.height;
-              item.IconImage = tmdbConf.images.base_url + "w500" + poster.file_path;
-              item.ThumbnailImage = tmdbConf.images.base_url + "w500" + poster.file_path;
+              item.IconImage = posterUrl;
+              item.ThumbnailImage = posterUrl;
               dlg.Add(item);
               choicePosters.Add(poster);
             }
