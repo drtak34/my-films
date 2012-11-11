@@ -9363,10 +9363,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - secondary title  : '" + MyFilms.r[index][MyFilms.conf.StrTitle2] + "'");
       //LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) - Cleaned Title    : '" + MediaPortal.Util.Utils.FilterFileName(MyFilms.r[index][MyFilms.conf.StrTitle1].ToString().ToLower()) + "'");
 
-      string titlename = r1[index][MyFilms.conf.StrTitle1].ToString();
-      if (titlename.Contains("\\")) titlename = titlename.Substring(titlename.LastIndexOf("\\") + 1);
-      string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? r1[index][MyFilms.conf.StrTitle2].ToString() : "";
-      if (titlename2.Contains("\\")) titlename2 = titlename2.Substring(titlename2.LastIndexOf("\\") + 1);
+      string titlename = Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
+      string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle2].ToString()) : "";
+      string collectionname = Helper.TitleFirstGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
 
       string path;
       #region Retrieve original directory of mediafiles
@@ -9455,7 +9454,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          LogMyFilms.Debug("GetImagesForFilmList() - Movie Search Results: '" + moviesfound.total_results.ToString() + "' for movie '" + titlename + "'");
+          LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - Movie Search Results: '" + moviesfound.total_results.ToString() + "' for movie '" + titlename + "'");
           if (!interactive) return;
           else
           {
@@ -9463,7 +9462,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               while(selectedMovieId == 0)
               {
-                selectedMovieId = SearchTmdbMovie(titlename, titlename2, year, language);
+                selectedMovieId = SearchTmdbMovie(titlename, titlename, titlename2, year, language, false);
                 if (selectedMovieId == -1) return; // cancel search
               }
             }
@@ -9630,35 +9629,73 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #endregion
     }
 
-    private static int SearchTmdbMovie(string title, string title2, int year, string language)
+    private static int SearchTmdbMovie(string searchexpression, string title, string title2, int year, string language, bool collectionsearch)
     {
       LogMyFilms.Debug("SearchTmdbMovie() - title '" + title + "', title2 '" + title2 + "', year '" + year.ToString() + "'");
       var api = new Tmdb(MyFilms.TmdbApiKey, language);
+      var tmdbConf = api.GetConfiguration();
+      var allMoviesFound = new List<MovieResult>();
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
 
       const int minChars = 2;
       const bool filter = true;
 
-      var allMoviesFound = new List<MovieResult>();
-      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
       if (dlg == null) return -1;
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(10798646));  // Search Films
       dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
-      foreach (MovieResult t in api.SearchMovie(title, 1, null).results)
+      allMoviesFound.Add(new MovieResult());
+
+      foreach (MovieResult t in api.SearchMovie(searchexpression, 1, null).results)
       {
-        string dialoginfoline = t.title + "  (" + t.release_date + ")";
-        dlg.Add(dialoginfoline);
+        LogMyFilms.Debug("TMDB - movie found '" + t.title + "'");
+        var item = new GUIListItem();
+        item.Label = t.title + "  (" + t.release_date + ")";
+        item.IconImage = tmdbConf.images.base_url + "w500" + t.poster_path;
+        item.ThumbnailImage = tmdbConf.images.base_url + "w500" + t.poster_path;
+        if (collectionsearch)
+        {
+          TmdbMovie tmdbMovie = api.GetMovieInfo(t.id);
+          TmdbCollection collection = api.GetCollectionInfo(tmdbMovie.belongs_to_collection.id);
+
+          LogMyFilms.Debug("TMDB - Value found - movie   = '" + (tmdbMovie.title ?? "") + "'");
+          LogMyFilms.Debug("TMDB - Value found - belongs to collection   = '" + (collection.name ?? "") + "'");
+
+          item.Label += " - " + (collection.name ?? "<no collection>");
+          item.IconImage = tmdbConf.images.base_url + "w500" + collection.poster_path;
+        }
+        dlg.Add(item);
         allMoviesFound.Add(t);
       }
-      if (title2.Length > 0)
-      {
-        foreach (MovieResult t in api.SearchMovie(title2, 1, null).results)
-        {
-          string dialoginfoline = t.title + "  (" + t.release_date + ")";
-          dlg.Add(dialoginfoline);
-          allMoviesFound.Add(t);
-        }
-      }
+
+      #region title2 search (disabled)
+      //if (title2.Length > 0)
+      //{
+      //  foreach (MovieResult t in api.SearchMovie(title2, 1, null).results)
+      //  {
+      //    LogMyFilms.Debug("TMDB - movie found '" + t.title + "'");
+
+      //    var item = new GUIListItem();
+      //    item.Label = t.title + "  (" + t.release_date + ")";
+      //    item.IconImage = tmdbConf.images.base_url + "w500" + t.poster_path;
+      //    item.ThumbnailImage = tmdbConf.images.base_url + "w500" + t.poster_path;
+      //    if (collectionsearch)
+      //    {
+      //      TmdbMovie tmdbMovie = api.GetMovieInfo(t.id);
+      //      TmdbCollection collection = api.GetCollectionInfo(tmdbMovie.belongs_to_collection.id);
+
+      //      LogMyFilms.Debug("TMDB - Value found - movie   = '" + (tmdbMovie.title ?? "") + "'");
+      //      LogMyFilms.Debug("TMDB - Value found - belongs to collection   = '" + (collection.name ?? "") + "'");
+
+      //      item.Label += " - " + (collection.name ?? "<no collection>");
+      //      item.IconImage = tmdbConf.images.base_url + "w500" + collection.poster_path;
+      //    }
+      //    dlg.Add(item);
+      //    allMoviesFound.Add(t);
+      //  }
+      //}
+      #endregion
+
       if (allMoviesFound.Count > 0)
       {
         dlg.DoModal(wGetID);
@@ -9692,9 +9729,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           keyboard.Reset();
           keyboard.Text = title;
           keyboard.DoModal(wGetID);
-          if (keyboard.IsConfirmed && keyboard.Text.Length > 0) return SearchTmdbMovie(keyboard.Text, "", year, language);
+          if (keyboard.IsConfirmed && keyboard.Text.Length > 0) return SearchTmdbMovie(keyboard.Text, title, title2, year, language, collectionsearch);
         }
-        if (dlgSearchFilm.SelectedLabel > 0) return SearchTmdbMovie(dlgSearchFilm.SelectedLabelText, "", year, language);
+        if (dlgSearchFilm.SelectedLabel > 0) return SearchTmdbMovie(dlgSearchFilm.SelectedLabelText, title, title2, year, language, collectionsearch);
       }
 
       if (dlg.SelectedLabel > 0) return allMoviesFound[dlg.SelectedLabel].id;
@@ -11065,6 +11102,305 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("SetActorDetailsFromTMDB() - update IMDB thumb    - old : '" + imdbPerson.ThumbnailUrl + "', new: '" + conf.images.base_url + tmdbProfileSize + tmdbPerson.profile_path + "'");
         imdbPerson.ThumbnailUrl = conf.images.base_url + tmdbProfileSize + tmdbPerson.profile_path;
       }
+    }
+
+    internal static void LoadCollectionImages(DataRow[] r1, int index, bool interactive, GUIAnimation animation)
+    {
+      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+      var dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+
+      new Thread(delegate(object o)
+      {
+        try
+        {
+          SetProcessAnimationStatus(true, animation);
+          string titlename = Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
+          string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle2].ToString()) : "";
+          string collectionname = Helper.TitleFirstGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
+
+          string path;
+          #region Retrieve original directory of mediafiles
+          try
+          {
+            path = r1[index][MyFilms.conf.StrStorage].ToString();
+            if (path.Contains(";")) path = path.Substring(0, path.IndexOf(";", StringComparison.Ordinal));
+            //path = Path.GetDirectoryName(path);
+            //if (path == null || !Directory.Exists(path))
+            //{
+            //  LogMyFilms.Warn("Directory of movie '" + titlename + "' doesn't exist anymore - check your DB");
+            //  return;
+            //}
+            if (path.Contains("\\")) path = path.Substring(0, path.LastIndexOf("\\", StringComparison.Ordinal));
+
+            // LogMyFilms.Debug("(SearchAndDownloadTrailerOnlineTMDB) get media directory name: '" + path + "'");
+          }
+          catch (Exception)
+          {
+            LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() error with directory of movie '" + titlename + "' - check your DB");
+            return;
+          }
+          #endregion
+
+          string imdb = "";
+          #region get imdb number sor better search match
+          if (!string.IsNullOrEmpty(r1[index]["IMDB_Id"].ToString()))
+            imdb = r1[index]["IMDB_Id"].ToString();
+          else if (!string.IsNullOrEmpty(r1[index]["URL"].ToString()))
+          {
+            string urLstring = r1[index]["URL"].ToString();
+            var cutText = new Regex("" + @"tt\d{7}" + "");
+            var m = cutText.Match(urLstring);
+            if (m.Success) imdb = m.Value;
+          }
+          #endregion
+
+          int year;
+
+          LogMyFilms.Debug("LoadCollectionImages() - movietitle = '" + titlename + "', collectionname = '" + collectionname + "', interactive = '" + interactive + "'");
+
+          string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+          var api = new Tmdb(MyFilms.TmdbApiKey, language); // language is optional, default is "en"
+          TmdbConfiguration tmdbConf = api.GetConfiguration();
+          foreach (string size in tmdbConf.images.poster_sizes) LogMyFilms.Debug("Available TMDB Poster Size: '" + size + "'");
+          // foreach (string size in tmdbConf.images.backdrop_sizes) LogMyFilms.Debug("Available TMDB Backdrop Size: '" + size + "'");
+          try
+          {
+            int selectedMovieId = 0;
+
+            #region search matching TMDB movie id
+            if (imdb.Contains("tt"))
+            {
+              TmdbMovie movie = api.GetMovieByIMDB(imdb);
+              if (movie.id > 0)
+              {
+                selectedMovieId = movie.id;
+              }
+            }
+
+            if (selectedMovieId == 0) // no movie found by imdb search
+            {
+              TmdbMovieSearch moviesfound;
+              if (int.TryParse(r1[index]["Year"].ToString(), out year))
+              {
+                moviesfound = api.SearchMovie(titlename, 1, null, year);
+                if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename, 1, null);
+              }
+              else
+              {
+                moviesfound = api.SearchMovie(r1[index][MyFilms.conf.StrTitle1].ToString(), 1, null);
+                if (moviesfound.results.Count == 0 && titlename2.Length > 0)
+                {
+                  if (int.TryParse(r1[index]["Year"].ToString(), out year))
+                  {
+                    moviesfound = api.SearchMovie(titlename2, 1, null, year);
+                    if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename2, 1, null);
+                  }
+                }
+              }
+              SetProcessAnimationStatus(false, animation);
+
+              if (moviesfound.results.Count == 1 && !interactive)
+              {
+                selectedMovieId = moviesfound.results[0].id;
+              }
+              else
+              {
+                LogMyFilms.Debug("LoadCollectionImages() - Movie Search Results: '" + moviesfound.total_results.ToString() + "' for movie '" + titlename + "'");
+                if (!interactive) return;
+                else
+                {
+                  if (moviesfound.results.Count == 0)
+                  {
+                    while (selectedMovieId == 0)
+                    {
+                      selectedMovieId = SearchTmdbMovie(titlename, titlename, titlename2, year, language, true);
+                      if (selectedMovieId == -1) return; // cancel search
+                    }
+                  }
+                  else
+                  {
+                    var choiceMovies = new List<MovieResult>();
+                    if (dlg == null) return;
+                    dlg.Reset();
+                    dlg.SetHeading(GUILocalizeStrings.Get(10798992)); // Select movie ...
+
+                    foreach (MovieResult movieResult in moviesfound.results)
+                    {
+                      dlg.Add(movieResult.title + " (" + movieResult.release_date + ")");
+                      choiceMovies.Add(movieResult);
+                    }
+                    dlg.DoModal(GUIWindowManager.ActiveWindow);
+                    if (dlg.SelectedLabel == -1) return;
+                    selectedMovieId = choiceMovies[dlg.SelectedLabel].id;
+                  }
+                }
+              }
+
+              // now load the artwork
+            }
+            #endregion
+
+            if (selectedMovieId == 0)
+            {
+              LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB - no movie found - no trailers added to DL queue - returning");
+              if (interactive) ShowNotificationDialog("Info", GUILocalizeStrings.Get(10798995)); // No matching movie found !
+              return;
+            }
+
+            SetProcessAnimationStatus(true, animation);
+            #region now load the details and collection images info
+            TmdbMovie tmdbMovie = api.GetMovieInfo(selectedMovieId);
+            TmdbCollection collection = api.GetCollectionInfo(tmdbMovie.belongs_to_collection.id);
+            var collectionPosters = new List<CollectionPoster>();
+            var backdrops = new List<CollectionBackdrop>();
+
+            LogMyFilms.Debug("TMDB - Value found - movie   = '" + (tmdbMovie.title ?? "") + "'" + " (" + tmdbMovie.release_date + ")");
+            LogMyFilms.Debug("TMDB - Value found - belongs to collection id = '" + collection.id.ToString() + "', name  = '" + (collection.name ?? "") + "'");
+
+            TmdbCollectionImages collectionImages = api.GetCollectionImages(collection.id, language);
+            LogMyFilms.Debug("TMDB - Collection Posters found for language = '" + language + "' : '" + collectionImages.posters.Count + "'");
+            collectionPosters.AddRange(collectionImages.posters);
+            backdrops.AddRange(collectionImages.backdrops);
+            collectionImages = api.GetCollectionImages(collection.id, null);
+            LogMyFilms.Debug("TMDB - Collection Posters found: '" + collectionImages.posters.Count + "'");
+            collectionPosters.AddRange(collectionImages.posters);
+            backdrops.AddRange(collectionImages.backdrops);
+
+            collectionPosters.Distinct();
+            backdrops.Distinct();
+
+            //foreach (CollectionBackdrop backdrop in backdrops)
+            //{
+            //  string fanartUrl = tmdbConf.images.base_url + "original" + backdrop.file_path;
+            //  LogMyFilms.Debug("TMDB - Backdrop found = '" + fanartUrl + "'");
+            //}
+            #endregion
+
+            if (collectionPosters.Count == 0)
+            {
+              SetProcessAnimationStatus(false, animation);
+              ShowNotificationDialog(GUILocalizeStrings.Get(10798760), GUILocalizeStrings.Get(10798625)); // no result found
+              return;
+            }
+
+            #region load collection images into selection menu
+            var choicePosters = new List<CollectionPoster>();
+            if (dlg == null) return;
+            dlg.Reset();
+            dlg.SetHeading(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
+            foreach (CollectionPoster poster in collectionPosters)
+            {
+              string posterUrl = tmdbConf.images.base_url + "w500" + poster.file_path;
+              LogMyFilms.Debug("TMDB - Collection Poster found = '" + posterUrl + "'");
+              var item = new GUIListItem();
+              item.Label = poster.width + " x " + poster.height;
+              item.IconImage = tmdbConf.images.base_url + "w500" + poster.file_path;
+              item.ThumbnailImage = tmdbConf.images.base_url + "w500" + poster.file_path;
+              dlg.Add(item);
+              choicePosters.Add(poster);
+            }
+            #endregion
+            SetProcessAnimationStatus(false, animation);
+
+            dlg.DoModal(GUIWindowManager.ActiveWindow);
+            if (dlg.SelectedLabel == -1) return;
+            CollectionPoster selectedPoster = choicePosters[dlg.SelectedLabel];
+
+            #region load collection cover images and fanart
+            SetProcessAnimationStatus(true, animation);
+            try
+            {
+              #region Poster
+
+              string localThumb = MyFilms.conf.StrPicturePrefix.Length > 0
+                             ? MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + collectionname + ".jpg"
+                             : Path.Combine(MyFilms.conf.StrPathImg, collectionname + ".jpg");
+              string remoteThumb = tmdbConf.images.base_url + "w500" + selectedPoster.file_path;
+              LogMyFilms.Debug("GetImagesTMDB() - localThumb = '" + localThumb + "'");
+              LogMyFilms.Debug("GetImagesTMDB() - remoteThumb = '" + remoteThumb + "'");
+
+              if (!string.IsNullOrEmpty(remoteThumb) && !string.IsNullOrEmpty(localThumb))
+              {
+                if (File.Exists(localThumb)) try { File.Delete(localThumb); }  catch (Exception) { }
+                Thread.Sleep(10);
+                if (GrabUtil.DownloadImage(remoteThumb, localThumb))
+                {
+                  string coverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies";
+                  string strThumb = MediaPortal.Util.Utils.GetCoverArtName(coverThumbDir, collectionname); // cached cover
+                  if (!string.IsNullOrEmpty(strThumb) && strThumb.Contains("."))
+                  {
+                    string strThumbSmall = strThumb.Substring(0, strThumb.LastIndexOf(".", StringComparison.Ordinal)) + "_s" + Path.GetExtension(strThumb);  // cached cover for Icons - small resolution
+                    if (!string.IsNullOrEmpty(localThumb) && localThumb != MyFilms.conf.DefaultCover)
+                    {
+                      Picture.CreateThumbnail(localThumb, strThumbSmall, 100, 150, 0, Thumbs.SpeedThumbsSmall);
+                      Picture.CreateThumbnail(localThumb, strThumb, MyFilms.cacheThumbWith, MyFilms.cacheThumbHeight, 0, Thumbs.SpeedThumbsLarge);
+                      LogMyFilms.Debug("Creating thumbimage for collection: '" + collection + "'");
+                    }
+                  }
+                  //// notify that image has been downloaded
+                  //item.NotifyPropertyChanged("PosterImageFilename");
+                  if (interactive) ShowNotificationDialog("Info", GUILocalizeStrings.Get(1079846)); // Done !
+                }
+              }
+              SetProcessAnimationStatus(false, animation);
+              #endregion
+
+              #region Fanart
+              if (MyFilms.conf.StrFanart)
+              {
+                //string fanartUrl = tmdbConf.images.base_url + "original" + movie.MovieSearchResult.backdrop_path;
+                //string filename;
+                //string filename1 = GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, fanartUrl, item.Label, true, true, out filename);
+                //// LogMyFilms.Debug("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + item.Label);
+
+                ////movie.MovieImages = api.GetMovieImages(movie.MovieSearchResult.id, language);
+                ////if (movie.MovieImages.posters.Count == 0)
+                ////{
+                ////  movie.MovieImages = api.GetMovieImages(movie.MovieSearchResult.id, null);
+                ////  LogMyFilms.Debug("GetImagesTMDB() - no '" + language + "' posters found - used default and found '" + movie.MovieImages.posters.Count + "'");
+                ////}
+                ////int ii = 0;
+                ////foreach (Backdrop fanart in movie.MovieImages.backdrops)
+                ////{
+                ////  if (ii == 0)
+                ////  {
+                ////    string fanartUrl = tmdbConf.images.base_url + "original" + fanart.file_path;
+                ////    string filename;
+                ////    string filename1 = GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, fanartUrl, item.Label, true, (i == 0), out filename);
+                ////    LogMyFilms.Debug("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + item.Label);
+                ////  }
+                ////  ii++;
+                ////}
+              }
+              #endregion
+
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Debug("GetImagesForTmdbCollection() - Error: '" + ex.Message + "'");
+              LogMyFilms.Debug("GetImagesForTmdbCollection() - Exception: '" + ex.StackTrace + "'");
+              SetProcessAnimationStatus(false, animation);
+            }
+            #endregion
+          }
+          catch (Exception tex)
+          {
+            LogMyFilms.DebugException("CollectionArtwork() - error in TMDB grabbing movie '" + titlename + "': " + tex.Message, tex);
+            SetProcessAnimationStatus(false, animation);
+          }
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.DebugException("Thread 'LoadCollectionImages' - exception! - ", ex);
+        }
+        GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+        {
+          // after background thread has finished !
+          return 0;
+        }, 0, 0, null);
+      }) { Name = "LoadCollectionImages", IsBackground = true }.Start();
     }
 
     internal static void SetProcessAnimationStatus(bool enable, GUIAnimation guiSearchAnimation)
