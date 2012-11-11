@@ -6682,196 +6682,80 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       StopLoadingViewDetails = false;
 
       new Thread(delegate()
-      {
-        #region images
-        Thread.Sleep(25);
-        var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
-        int i;
-
-        MFview.ViewRow currentCustomView = GetCustomViewFromViewLabel(conf.CurrentView);
-
-        // if there is a Default.jpg in the view subfolder
-        string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\") ? conf.StrPathViews : (conf.StrPathViews + "\\");
-        string strImageInViewsDefaultFolder = strPathViewsRoot + wStrSort.ToLower() + ".jpg";
-        string defaultViewImage = (File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
-        bool reversenames = conf.BoolReverseNames;
-
-        for (i = 0; i < facadeFilms.Count; i++)
         {
-          if (StopLoadingViewDetails) return; // stop download if we have exited window
-          try
-          {
-            GUIListItem item = facadeFilms[i];
+          #region images
 
-            #region get thumbs
-            if (getThumbs && facadeFilms[i] != null)
-            {
-              if (string.IsNullOrEmpty(facadeFilms[i].ThumbnailImage))
-              {
-                if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)
-                {
-                  LoadIndexSkinThumbs(facadeFilms[i]);
-                }
-                else
-                {
-                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
-                  //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
-                  //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
-                  //{
-                  //  item.ThumbnailImage = texture;
-                  //  item.IconImage = texture;
-                  //  item.IconImageBig = texture;
-                  //}
+          Thread.Sleep(25);
+          var stopwatch = new Stopwatch();
+          stopwatch.Reset();
+          stopwatch.Start();
+          int i;
 
-                  item.IconImage = strActiveFacadeImages[1];
-                  item.IconImageBig = strActiveFacadeImages[0];
-                  item.ThumbnailImage = strActiveFacadeImages[0];
+          MFview.ViewRow currentCustomView = GetCustomViewFromViewLabel(conf.CurrentView);
 
-                  // if selected force an update of thumbnail
-                  //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
-                  //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
-                }
-              }
-            }
-            #endregion
+          // if there is a Default.jpg in the view subfolder
+          string strPathViewsRoot = (conf.StrPathViews.Substring(conf.StrPathViews.Length - 1) == "\\")
+                                      ? conf.StrPathViews
+                                      : (conf.StrPathViews + "\\");
+          string strImageInViewsDefaultFolder = strPathViewsRoot + wStrSort.ToLower() + ".jpg";
+          string defaultViewImage = (File.Exists(strImageInViewsDefaultFolder)) ? strImageInViewsDefaultFolder : null;
+          bool reversenames = conf.BoolReverseNames;
 
-            if (createFanartDir) MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, wStrSort.ToLower());
-
-            #region thumb downloads (no active)
-            // ToDo: Add downloader to SetViewThumbs - or here ...
-
-            //string remoteThumb = item.ImageRemotePath;
-            //if (string.IsNullOrEmpty(remoteThumb)) continue;
-
-            //string localThumb = item.Image;
-            //if (string.IsNullOrEmpty(localThumb)) continue;
-
-            //if (Helper.DownloadFile(remoteThumb, localThumb))
-            //{
-            //  // notify that thumbnail image has been downloaded
-            //  item.ThumbnailImage = localThumb;
-            //  item.NotifyPropertyChanged("ThumbnailImage");
-            //}
-            #endregion
-          }
-          catch (Exception ex)
-          {
-            LogMyFilms.Warn("GetImages() - error setting facadelist item '" + i + "': " + ex.Message);
-          }
-        }
-        stopwatch.Stop();
-        LogMyFilms.Debug("GetImages() - Threaded facade images loader finished after '" + i + "' items (" + (stopwatch.ElapsedMilliseconds) + " ms)");
-        #endregion
-
-        #region counts for person lists
-        DataRow[] rtemp = null;
-        if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
-          rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrViewSelect + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
-        if (rtemp != null && conf.StrPersons.Length > 0)
-        {
-          Thread.Sleep(50);
-          stopwatch.Reset(); stopwatch.Start();
-          bool isReversed = conf.BoolReverseNames;
-          var facadeLabel = new string[facadeFilms.Count];
-          var facadeCounts = new int[facadeFilms.Count];
-          string label2NamePrefix = BaseMesFilms.TranslateColumn(wStrSort);
-          try
-          {
-            #region the fast version without continuous facade updates
-            //for (i = 0; i < facadeFilms.Count; i++)
-            //{
-            //  facadeFilms[i].Label2 = label2NamePrefix + " (" + rtemp.Count(x => x[wStrSort].ToString().Contains((isReversed) ? ReReverseName(facadeFilms[i].Label) : facadeFilms[i].Label)) + ")";
-            //}
-            #endregion
-
-            #region the slow version with continuous facade updates
-            for (int j = 0; j < facadeFilms.Count; j++)
-            {
-              facadeCounts[j] = 0;
-              facadeLabel[j] = (isReversed) ? ReReverseName(facadeFilms[j].Label) : facadeFilms[j].Label;
-            }
-
-            for (int j = 0; j < rtemp.Length; j++)
-            {
-              if (StopLoadingViewDetails) return; // stop download if we have exited window
-              string value = rtemp[j][wStrSort].ToString();
-              for (i = 0; i < facadeFilms.Count; i++)
-              {
-                if (value.Contains(facadeLabel[i])) // if (value.IndexOf(facadeLabels[i], StringComparison.OrdinalIgnoreCase) > 0)
-                {
-                  facadeCounts[i]++;
-                  facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
-                }
-              }
-            }
-            // for (int j = 0; j < facadeFilms.Count; j++) facadeFilms[j].Label2 = label2NamePrefix + " (" + facadeCounts[j] + ")";
-            #endregion
-
-            #region get counts (old and disabled)
-            //if (rtemp != null && conf.StrPersons.Length > 0)
-            //{
-            //  int count = rtemp.Count(x => x[wStrSort].ToString().Contains(item.Label));
-            //  // int count = rtemp.Count(x => x[wStrSort].ToString().IndexOf(item.Label, StringComparison.OrdinalIgnoreCase) > 0);
-            //  if (count > 0) item.Label2 = BaseMesFilms.Translate_Column(wStrSort) + " (" + count + ")"; // LogMyFilms.Debug("role: '" + WStrSort + "', count: '" + count + "'");
-
-            //  //foreach (string role in PersonTypes)
-            //  //{
-            //  // if (rtemp != null && (conf.StrPersons.Length > 0 || countItems)) {}
-            //  //  count = rtemp.Count(x => x[role].ToString().Contains(item.Label));
-            //  //  // LogMyFilms.Debug("role: '" + role + "', count: '" + count + "'");
-            //  //  if (count > 0) item.Label2 = (string.IsNullOrEmpty(item.Label2)) ? BaseMesFilms.Translate_Column(role) + " (" + count + ")" : item.Label2 + ", " + BaseMesFilms.Translate_Column(role) + " (" + count + ")";
-            //  //}
-            //}
-            #endregion
-          }
-          catch (Exception ex) { LogMyFilms.Warn("GetCounts() - error setting facadelist item '" + i + "': " + ex.Message); }
-          stopwatch.Stop();
-          LogMyFilms.Debug("GetCounts() - Threaded facade details loader exit after '" + i + "' items (" + (stopwatch.ElapsedMilliseconds) + " ms)");
-        }
-        #endregion
-
-        #region fanart directory creation (disabled - done in images section)
-        //watch.Reset(); watch.Start();
-        //for (i = 0; i < facadeFilms.Count; i++)
-        //{
-        //  if (StopLoadingViewDetails) return; // stop download if we have exited window
-        //  try
-        //  {
-        //    if (createFanartDir) MyFilmsDetail.Search_Fanart(facadeFilms[i].Label, true, "file", true, facadeFilms[i].ThumbnailImage, wStrSort.ToLower());
-        //  }
-        //  catch (Exception ex) { LogMyFilms.Warn("GetImages() - error setting facadelist item '" + i + "': " + ex.Message);
-        //  }
-        //}
-        //watch.Stop();
-        //LogMyFilms.Debug("GetImages() - fanart directory creation finished after '" + i + "' items (" + (watch.ElapsedMilliseconds) + " ms)");
-        #endregion
-
-        #region load actor details for person lists
-        Thread.Sleep(25);
-        stopwatch.Reset(); stopwatch.Start();
-        if (Win32API.IsConnectedToInternet() && MyFilms.conf.PersonsEnableDownloads && isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
-        {
           for (i = 0; i < facadeFilms.Count; i++)
           {
             if (StopLoadingViewDetails) return; // stop download if we have exited window
             try
             {
               GUIListItem item = facadeFilms[i];
-              string personname = (conf.BoolReverseNames && item.Label != EmptyFacadeValue) ? ReReverseName(item.Label) : item.Label.Replace(EmptyFacadeValue, "");
 
-              bool success = MyFilmsDetail.UpdatePersonDetails(personname, item, false, StopLoadingViewDetails);
-              if (success) // create small thumbs and assign to facade icons ...
+              #region get thumbs
+
+              if (getThumbs && facadeFilms[i] != null)
               {
-                string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
-                item.IconImage = strActiveFacadeImages[1];
-                item.IconImageBig = strActiveFacadeImages[0];
-                item.ThumbnailImage = strActiveFacadeImages[0];
-                // item.NotifyPropertyChanged("ThumbnailImage");
+                if (string.IsNullOrEmpty(facadeFilms[i].ThumbnailImage))
+                {
+                  if (conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn &&
+                      MyFilms.conf.StrViewsShowIndexedImgInIndViews)
+                  {
+                    LoadIndexSkinThumbs(facadeFilms[i]);
+                  }
+                  else
+                  {
+                    string[] strActiveFacadeImages = SetViewThumbs(
+                      wStrSort,
+                      item.Label,
+                      strThumbDirectory,
+                      isperson,
+                      currentCustomView,
+                      defaultViewImage,
+                      reversenames);
+                    //string texture = "[MyFilms:" + strActiveFacadeImages[0].GetHashCode() + "]";
+                    //if (GUITextureManager.LoadFromMemory(ImageFast.FastFromFile(strActiveFacadeImages[0]), texture, 0, 0, 0) > 0)
+                    //{
+                    //  item.ThumbnailImage = texture;
+                    //  item.IconImage = texture;
+                    //  item.IconImageBig = texture;
+                    //}
+
+                    item.IconImage = strActiveFacadeImages[1];
+                    item.IconImageBig = strActiveFacadeImages[0];
+                    item.ThumbnailImage = strActiveFacadeImages[0];
+
+                    // if selected force an update of thumbnail
+                    //GUIListItem selectedItem = GUIControl.GetSelectedListItem(ID_MyFilms, 50);
+                    //if (selectedItem == item) GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, selectedItem.ItemId, 0, null));
+                  }
+                }
               }
+
+              #endregion
+
+              if (createFanartDir) MyFilmsDetail.Search_Fanart(item.Label, true, "file", true, item.ThumbnailImage, wStrSort.ToLower());
 
               #region thumb downloads (no active)
 
               // ToDo: Add downloader to SetViewThumbs - or here ...
+
               //string remoteThumb = item.ImageRemotePath;
               //if (string.IsNullOrEmpty(remoteThumb)) continue;
 
@@ -6890,10 +6774,144 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             catch (Exception ex)
             {
               LogMyFilms.Warn("GetImages() - error setting facadelist item '" + i + "': " + ex.Message);
-              LogMyFilms.DebugException("GetImages() - error setting facadelist item '" + i + "': " + ex.Message, ex);
             }
           }
-        }
+          stopwatch.Stop();
+          LogMyFilms.Debug(
+            "GetImages() - Threaded facade images loader finished after '" + i + "' items (" +
+            (stopwatch.ElapsedMilliseconds) + " ms)");
+
+          #endregion
+
+          #region counts for person lists
+          DataRow[] rtemp = null;
+          if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
+            rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrViewSelect + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
+          if (rtemp != null && conf.StrPersons.Length > 0)
+          {
+            Thread.Sleep(50); stopwatch.Reset(); stopwatch.Start();
+            bool isReversed = conf.BoolReverseNames;
+            var facadeLabel = new string[facadeFilms.Count];
+            var facadeCounts = new int[facadeFilms.Count];
+            string label2NamePrefix = BaseMesFilms.TranslateColumn(wStrSort);
+            
+            try
+            {
+              #region update facade counts in realtime
+
+              for (i = 0; i < facadeFilms.Count; i++)
+              {
+                facadeCounts[i] = 0;
+                facadeLabel[i] = (isReversed) ? ReReverseName(facadeFilms[i].Label) : facadeFilms[i].Label;
+              }
+
+              foreach (string value in rtemp.Select(t => t[wStrSort].ToString()))
+              {
+                for (i = 0; i < facadeFilms.Count; i++)
+                {
+                  if (value.Contains(facadeLabel[i]))
+                  {
+                    facadeCounts[i]++;
+                    this.facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
+                  }
+                }
+                if (StopLoadingViewDetails) return;
+              }
+              LogMyFilms.Debug("GetCounts() - facade counts finished  (" + (stopwatch.ElapsedMilliseconds) + " ms)");
+              #endregion
+
+              #region get counts (old and disabled)
+              //if (rtemp != null && conf.StrPersons.Length > 0)
+              //{
+              //  //foreach (string role in PersonTypes)
+              //  //{
+              //  // if (rtemp != null && (conf.StrPersons.Length > 0 || countItems)) {}
+              //  //  count = rtemp.Count(x => x[role].ToString().Contains(item.Label));
+              //  //  // LogMyFilms.Debug("role: '" + role + "', count: '" + count + "'");
+              //  //  if (count > 0) item.Label2 = (string.IsNullOrEmpty(item.Label2)) ? BaseMesFilms.Translate_Column(role) + " (" + count + ")" : item.Label2 + ", " + BaseMesFilms.Translate_Column(role) + " (" + count + ")";
+              //  //}
+              //}
+              #endregion
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Warn("GetCounts() - error setting facadelist item '" + i + "': " + ex.Message);
+            }
+            stopwatch.Stop();
+            LogMyFilms.Debug("GetCounts() - Threaded facade details loader exit after '" + i + "' items (" + (stopwatch.ElapsedMilliseconds) + " ms)");
+          }
+
+          #endregion
+
+          #region fanart directory creation (disabled - done in images section)
+
+          //watch.Reset(); watch.Start();
+          //for (i = 0; i < facadeFilms.Count; i++)
+          //{
+          //  if (StopLoadingViewDetails) return; // stop download if we have exited window
+          //  try
+          //  {
+          //    if (createFanartDir) MyFilmsDetail.Search_Fanart(facadeFilms[i].Label, true, "file", true, facadeFilms[i].ThumbnailImage, wStrSort.ToLower());
+          //  }
+          //  catch (Exception ex) { LogMyFilms.Warn("GetImages() - error setting facadelist item '" + i + "': " + ex.Message);
+          //  }
+          //}
+          //watch.Stop();
+          //LogMyFilms.Debug("GetImages() - fanart directory creation finished after '" + i + "' items (" + (watch.ElapsedMilliseconds) + " ms)");
+
+          #endregion
+
+          #region load actor details for person lists
+
+          Thread.Sleep(25);
+
+          stopwatch.Reset(); stopwatch.Start();
+          if (Win32API.IsConnectedToInternet() && MyFilms.conf.PersonsEnableDownloads && isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
+          {
+            for (i = 0; i < facadeFilms.Count; i++)
+            {
+              if (StopLoadingViewDetails) return; // stop download if we have exited window
+              try
+              {
+                GUIListItem item = facadeFilms[i];
+                string personname = (conf.BoolReverseNames && item.Label != EmptyFacadeValue) ? ReReverseName(item.Label) : item.Label.Replace(EmptyFacadeValue, "");
+
+                bool success = MyFilmsDetail.UpdatePersonDetails(personname, item, false, StopLoadingViewDetails);
+                if (success) // create small thumbs and assign to facade icons ...
+                {
+                  string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
+                  item.IconImage = strActiveFacadeImages[1];
+                  item.IconImageBig = strActiveFacadeImages[0];
+                  item.ThumbnailImage = strActiveFacadeImages[0];
+                  // item.NotifyPropertyChanged("ThumbnailImage");
+                }
+                Thread.Sleep(20); // sleep a bit to let CPU for the GUI
+
+                #region thumb downloads (no active)
+
+                // ToDo: Add downloader to SetViewThumbs - or here ...
+                //string remoteThumb = item.ImageRemotePath;
+                //if (string.IsNullOrEmpty(remoteThumb)) continue;
+
+                //string localThumb = item.Image;
+                //if (string.IsNullOrEmpty(localThumb)) continue;
+
+                //if (Helper.DownloadFile(remoteThumb, localThumb))
+                //{
+                //  // notify that thumbnail image has been downloaded
+                //  item.ThumbnailImage = localThumb;
+                //  item.NotifyPropertyChanged("ThumbnailImage");
+                //}
+
+                #endregion
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Warn("GetImages() - error setting facadelist item '" + i + "': " + ex.Message);
+                LogMyFilms.DebugException("GetImages() - error setting facadelist item '" + i + "': " + ex.Message, ex);
+              }
+            }
+          }
 
         stopwatch.Stop();
         LogMyFilms.Debug("GetImages() - Threaded person details loader finished after '" + i + "' items (" + (stopwatch.ElapsedMilliseconds) + " ms)");
