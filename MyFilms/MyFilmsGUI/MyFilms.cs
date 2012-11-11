@@ -5110,7 +5110,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     internal string Equalexpression(string columnname, string comparevalue)
     {
-      string expression = "";
+      string expression;
       Type columnType = GetColumnType(columnname);
       if (columnType == typeof(decimal))
       {
@@ -5128,6 +5128,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         expression = columnname + " like '*" + StringExtensions.EscapeLikeValue(comparevalue) + "*'";
       }
+      LogMyFilms.Debug("Equalexpression() - called with columnname = '" + columnname + "', comparevalue = '" + comparevalue + "', resulting expression = '" + expression + "'");
       return expression;
     }
 
@@ -10291,7 +10292,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         #region Moviecontext and Groupcontext and TMDBonline context - add OnlineVideos and MyFilms search
-        if (facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll))
+        if (facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll && conf.ViewContext != ViewContext.Group))
         {
           if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Context Search for OnlineVideos"))
           {
@@ -13860,7 +13861,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  Global search movies by properties     (Guzzi Version)                               *
     //*****************************************************************************************
-    private void SearchMoviesbyProperties(bool returnToContextmenu, string searchExpression, string searchField) // Old hardcoded searchlist: "TranslatedTitle|OriginalTitle|Description|Comments|Actors|Director|Producer|Rating|Year|Date|Category|Country"
+    private void SearchMoviesbyProperties(bool returnToContextmenu, string searchExpression, string searchField)
     {
       LogMyFilms.Debug("SearchMoviesbyProperties() - started");
       // first select the property to be searching on
@@ -14023,7 +14024,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 #endregion
 
                 LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + wTableau.Count + "'");
-                if (wTableau.Count == 0) // NodeLabelEditEventArgs Results found
+                if (wTableau.Count == 0) // No Results found
                 {
                   var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
                   dlgOk.SetHeading(GUILocalizeStrings.Get(10798624)); //InfoPanel
@@ -14180,7 +14181,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       wCount.Add(1);
                     }
                   }
-                  MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+                  MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation);
 
                   LogMyFilms.Debug("(GlobalSearchAll) - Result of Search in all properties (w_tableau.Count): '" + wTableau.Count + "'");
                   if (wTableau.Count == 0) // No Results found
