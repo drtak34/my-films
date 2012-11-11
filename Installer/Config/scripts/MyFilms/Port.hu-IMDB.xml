@@ -5,7 +5,7 @@
     <URLPrefix>http://port.hu/</URLPrefix>
     <Language>hu</Language>
     <Type>details|cover</Type>
-    <Version>1.0</Version>
+    <Version>1.2</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -44,8 +44,8 @@
     <Details>
       <KeyStartBody Param1="" Param2="" />
       <KeyEndBody />
-      <KeyStartOTitle Param1="" Param2="">_x003C_h2_x0020_style_x003D__x0022_margin-top:_x0020_0px_x003B__x0020_margin-bottom:_x0020_0px_x003B__x0022__x0020_class_x003D__x0022_txt_x0022__x003E__x0028_</KeyStartOTitle>
-      <KeyEndOTitle>_x0029__x003C__x002F_h2_x003E_</KeyEndOTitle>
+      <KeyStartOTitle Param1="" Param2="">_x0023_REGEX_x0023_style_x003D__x0022_margin-top._x002A__x003F__x003E__x005C__x0028_</KeyStartOTitle>
+      <KeyEndOTitle>_x0029__x003C__x002F_h</KeyEndOTitle>
       <KeyOTitleIndex />
       <KeyOTitlePage />
       <KeyStartTTitle Param1="" Param2="">_x003C_title_x003E_</KeyStartTTitle>
@@ -292,7 +292,7 @@
       <KeyEncodingLinkCertification />
     </Details>
     <Mapping>
-      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_0 source="OriginalTitle" destination="TranslatedTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_1 source="TranslatedTitle" destination="OriginalTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
