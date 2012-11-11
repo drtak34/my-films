@@ -3298,7 +3298,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               for (int i = 0; i < listUrl.Count; i++)
               {
                 wurl = (Grabber.Grabber_URLClass.IMDBUrl)listUrl[i];
-                if (wurl.Director.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString()) && wurl.Year.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString()) && (!MyFilms.conf.StrGrabber_Always))
+                if (wurl.Director.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString()) && wurl.Year.Contains(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString()) && !MyFilms.conf.StrGrabber_Always)
                 {
                   if (dlg.SelectedLabel == -1)
                     dlg.SelectedLabel = i + 1;
