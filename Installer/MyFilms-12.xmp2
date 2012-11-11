@@ -2372,6 +2372,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{48eb9229-f72d-4d8f-9134-9659ce91b80e}-IMDB.ES-TMDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES-TMDB.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\Port.hu-IMDB.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b81acf59-aab3-4b70-8ca8-2d8156b674e5}-Port.hu-IMDB.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\Port.hu-IMDB.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -7215,7 +7222,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2673</Revision>
+      <Revision>2695</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -7227,7 +7234,7 @@ The My Films plugin allows you to combine the media center features of MediaPort
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.0.2592.mpe1</OnlineLocation>
-    <ReleaseDate>2012-11-07T12:54:04.8375959+01:00</ReleaseDate>
+    <ReleaseDate>2012-11-11T06:33:11.1232931+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -9595,6 +9602,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\scripts\MyFilms\IMDB.ES-TMDB.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{48eb9229-f72d-4d8f-9134-9659ce91b80e}-IMDB.ES-TMDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES-TMDB.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\Port.hu-IMDB.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b81acf59-aab3-4b70-8ca8-2d8156b674e5}-Port.hu-IMDB.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\Port.hu-IMDB.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />

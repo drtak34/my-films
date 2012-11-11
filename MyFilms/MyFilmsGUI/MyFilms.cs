@@ -784,6 +784,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}) { Name = "MyFilmsTmdbDataLoader", IsBackground = true, Priority = ThreadPriority.BelowNormal }.Start();
       #endregion
 
+      // preload config and dataset
+      InitConfigPreload();
+      
       bool result = Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
@@ -1083,6 +1086,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else if (facadeFilms.Count > 0) GUIControl.SelectItemControl(GetID, facadeFilms.GetID, 0);
 
         LogMyFilms.Debug("MyFilms.OnPageLoad() completed.");
+      }
+    }
+
+    private void InitConfigPreload()
+    {
+      bool preCachingEnabled = false;
+      LogMyFilms.Debug("InitConfigPreload() started preloading Config and DB.");
+      using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+      {
+        preCachingEnabled = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PreCaching", false);
+      }
+      if (preCachingEnabled)
+      {
+        PreviousConfig = Configuration.CurrentConfig;
+        LogMyFilms.Info("InitConfigPreload() - preloading enabled - try preloading config '" + (PreviousConfig?? "") + "'");
+        bool isDefaultConfig = Configuration.Current_Config(false); // don't show selection menu
+        Load_Config(Configuration.CurrentConfig, true, null);
+        if (string.IsNullOrEmpty(Configuration.CurrentConfig))
+        {
+          LogMyFilms.Error("InitConfigPreload(): Config is empty - exiting precaching!");
+          return;
+        }
+        InitFSwatcher(); // load DB watcher for multiseat
+        r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // if (InitialStart) BaseMesFilms.LoadMyFilms(conf.StrFileXml);
+        LogMyFilms.Debug("InitConfigPreload() finished preloading Config and DB.");
+      }
+      else
+      {
+        LogMyFilms.Debug("InitConfigPreload() finished without preloading Config and DB.");
       }
     }
 

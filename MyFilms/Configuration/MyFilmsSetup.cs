@@ -125,6 +125,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
         //CatalogType.Items.RemoveAt(8); // XBMC nfo reader (deparate files)
         //CatalogType.Items.Add("test");
+        Config_EnablePreload.Visible = false; // precaching of config and DB on Init phase
       }
       //else
       //{
@@ -755,6 +756,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (Config_Menu.Checked) XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
 
       XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Menu_Config", Config_Menu.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PreCaching", Config_EnablePreload.Checked);
+
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Logos", chkLogos.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "CatalogType", CatalogType.SelectedIndex.ToString());
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", AMCexePath.Text);
@@ -1384,6 +1387,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       View_Dflt_Item.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewDfltItem", "(none)");
       View_Dflt_Text.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewDfltText", "");
       Config_Dflt.Checked = (Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
+      Config_EnablePreload.Checked = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PreCaching", false);
 
       //if (!(AntViewItem1.Text == "Country") & !(AntViewItem1.Text == "Category") & !(AntViewItem1.Text == "Year") & !(AntViewItem1.Text == "(none)"))
       //    View_Dflt_Item.Items.Add(AntViewItem1.Text);
