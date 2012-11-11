@@ -1091,7 +1091,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void InitConfigPreload()
     {
-      bool preCachingEnabled = false;
+      bool preCachingEnabled;
       LogMyFilms.Debug("InitConfigPreload() started preloading Config and DB.");
       using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
@@ -1099,8 +1099,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       if (preCachingEnabled)
       {
+        LogMyFilms.Info("InitConfigPreload() - preloading enabled - try preloading config and database");
+        var preloadWatch = new Stopwatch(); preloadWatch.Reset(); preloadWatch.Start();
         PreviousConfig = Configuration.CurrentConfig;
-        LogMyFilms.Info("InitConfigPreload() - preloading enabled - try preloading config '" + (PreviousConfig?? "") + "'");
         bool isDefaultConfig = Configuration.Current_Config(false); // don't show selection menu
         Load_Config(Configuration.CurrentConfig, true, null);
         if (string.IsNullOrEmpty(Configuration.CurrentConfig))
@@ -1110,7 +1111,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         InitFSwatcher(); // load DB watcher for multiseat
         r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // if (InitialStart) BaseMesFilms.LoadMyFilms(conf.StrFileXml);
-        LogMyFilms.Debug("InitConfigPreload() finished preloading Config and DB.");
+        preloadWatch.Stop();
+        LogMyFilms.Info("InitConfigPreload() finished preloading Config '" + Configuration.CurrentConfig + "' and DB (" + (preloadWatch.ElapsedMilliseconds) + " ms).");
       }
       else
       {
