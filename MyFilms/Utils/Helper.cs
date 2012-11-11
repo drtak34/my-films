@@ -478,6 +478,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return fullTitleName.Contains("\\") ? fullTitleName.Substring(fullTitleName.LastIndexOf("\\", StringComparison.Ordinal) + 1) : fullTitleName;
     }
 
+    /// <summary>
+    /// Returns the group name from MyFilms title
+    /// </summary>
+    /// <param name="fullTitleName"></param>
+    /// <returns></returns>
+    public static string TitleFirstGroupName(string fullTitleName)
+    {
+      return fullTitleName.Contains("\\") ? fullTitleName.Substring(0, fullTitleName.IndexOf("\\", StringComparison.Ordinal)) : string.Empty;
+    }
+
     public static string PicturePath(string dbPictureValue, string coverPath, string defaultcover)
     {
       string pictureFile = "";

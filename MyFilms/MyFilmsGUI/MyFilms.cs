@@ -628,26 +628,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  CoverFlow = 5
     //}
 
-    enum eContextItems
-    {
-      toggleWatched,
-      cycleMoviePoster,
-      downloadSubtitle,
-      actionMarkAllWatched,
-      actionMarkAllUnwatched,
-    }
-
-    enum eContextMenus
-    {
-      download = 100,
-      action,
-      options,
-      rate,
-      switchView,
-      switchLayout,
-      addToView,
-      removeFromView
-    }
     #endregion
 
     #endregion
@@ -10404,6 +10384,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
           choice.Add("submenuoptions");
         }
+        else if (this.facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // when films with active movie facade
+        {
+          if (MyFilmsDetail.ExtendedStartmode("Context: Movies with current collection selected -> update submenu!"))
+          {
+            dlg.Add(GUILocalizeStrings.Get(10798702)); // "Updates ..."
+            choice.Add("submenuupdates");
+          }
+
+          dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
+          choice.Add("submenuoptions");
+        }
         #endregion
 
         #region Personcontext
@@ -10587,6 +10578,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Moviecontext
             if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
             {
+              if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Collection images download"))
+              {
+                if (!this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext == ViewContext.MovieCollection) // inside a collection a selected collection movie
+                {
+                  dlg.Add(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
+                  choice.Add("collectionimages");
+                }
+              }
+
               dlg.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
               choice.Add("downloadtrailertmdb");
 
@@ -10615,6 +10615,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 dlg.Add(GUILocalizeStrings.Get(5910));  //Update Internet Movie Details
                 choice.Add("grabber");
+              }
+            }
+            else if (this.facadeFilms.SelectedListItem.IsFolder && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // in a film list, a "collection folder"
+            {
+              if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Collection images download"))
+              {
+                dlg.Add(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
+                choice.Add("collectionimages");
               }
             }
             #endregion
@@ -11487,6 +11495,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
 
+        case "collectionimages":
+          {
+            MyFilmsDetail.LoadCollectionImages(r, MyFilms.conf.StrIndex, true, m_SearchAnimation);
+            break;
+          }
+
         case "covermanager":
           {
             LogMyFilms.Debug("Switching to Cover Manager Window");
@@ -11568,7 +11582,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "grabber":
           string title = MyFilmsDetail.GetSearchTitle(r, this.facadeFilms.SelectedListItem.ItemId, "titleoption");
           string mediapath = MyFilms.r[this.facadeFilms.SelectedListItem.ItemId][MyFilms.conf.StrStorage].ToString();
-          if (mediapath.Contains(";")) mediapath = mediapath.Substring(0, mediapath.IndexOf(";")); // take the first source file
+          if (mediapath.Contains(";")) mediapath = mediapath.Substring(0, mediapath.IndexOf(";", System.StringComparison.Ordinal)); // take the first source file
           sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
 
           this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
