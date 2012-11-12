@@ -6048,6 +6048,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Change_SelectTmdbEntry_Action(GUIListItem selItem)
     {
+      // ToDo: use callback to execute player code in main thread !!!
+
       //new Thread(delegate()
       //{
       //  try
@@ -6057,6 +6059,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  catch (Exception ex) { LogMyFilms.Debug("Change_SelectTmdbEntry_Action - error: " + ex.Message); }
       //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => 0, 0, 0, null);
       //}) { Name = "MyFilms_Change_SelectTmdbEntry_Action", IsBackground = true }.Start();
+
+      GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
+      {
+        // do things in background
+        string tmdBfunction = "";
+        if (tmdBfunction == GUILocalizeStrings.Get(10798829))  // Upcoming Movies
+          return UpcomingMovies;
+
+        if (!string.IsNullOrEmpty(tmdBfunction)) return GetPersonMovies(tmdBfunction, true);
+        return null;
+      },
+      delegate(bool success, object result)
+      {
+        // do things after background things finished:
+        if (!success) DoBack();
+        else
+        {
+          var moviecollection = result as IEnumerable<TmdbMovieSearchResult>;
+          if (moviecollection == null || !moviecollection.Any())
+          {
+            GUIUtils.ShowNotifyDialog(GUIUtils.PluginName(), "No Movie found !");
+            DoBack(); return;
+          }
+        }
+      }, "Change_SelectTmdbEntry_Action", true, m_SearchAnimation); // false = no timeout !
+
 
       // MyFilmsPlugin.Utils.OVplayer.Play(facadeFilms.SelectedListItem.Path);
       string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
@@ -10384,7 +10412,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("togglewatchedstatus");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Context: TMDB API trailer and download entries")) // if (conf.ViewContext != ViewContext.TmdbMovies)
+          if (MyFilmsDetail.ExtendedStartmode("Context: TMDB API play trailer")) // if (conf.ViewContext != ViewContext.TmdbMovies)
           {
             //// not yet implemented
             //dlg.Add(GUILocalizeStrings.Get(10798710) + " (TMDB)");//play trailer
@@ -10408,7 +10436,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          if (MyFilms.conf.StrSuppressAutomatic || MyFilms.conf.StrSuppressManual)
+          if (MyFilms.conf.StrSuppressAutomatic || MyFilms.conf.StrSuppressManual) // delete options
           {
             dlg.Add(GUILocalizeStrings.Get(1079830));
             choice.Add("suppress");
@@ -10437,7 +10465,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("submenufanartmanager");
           }
 
-          dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
           choice.Add("submenuoptions");
         }
         else if (this.facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // when films with active movie facade
@@ -10448,7 +10476,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("submenuupdates");
           }
 
-          dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
           choice.Add("submenuoptions");
         }
         #endregion
@@ -10471,7 +10499,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Add(GUILocalizeStrings.Get(10798702)); // "Updates ..."
           choice.Add("submenuupdates");
 
-          dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
           choice.Add("submenuoptions");
 
         }
@@ -10494,7 +10522,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region View context
         if (conf.ViewContext == ViewContext.Group)
         {
-          dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
           choice.Add("submenuoptions");
         }
         #endregion
@@ -10502,7 +10530,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region TMDB online content context
         if (conf.ViewContext == ViewContext.TmdbMovies)
         {
-          dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
           choice.Add("submenuoptions");
         }
         #endregion
@@ -10543,7 +10571,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region Menu options
         if (facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll))
         {
-          dlg.Add(GUILocalizeStrings.Get(10798701)); // Options ...
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
           choice.Add("submenuoptions");
         }
         #endregion
@@ -10643,11 +10671,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               }
 
-              dlg.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
-              choice.Add("downloadtrailertmdb");
+              if (MyFilmsDetail.ExtendedStartmode("Context: TMDB trailer downloads"))
+              {
+                dlg.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
+                choice.Add("downloadtrailertmdb");
 
-              dlg.Add(GUILocalizeStrings.Get(10798991)); // Load all trailers for these movies (TMDB)
-              choice.Add("downloadtrailertmdball");
+                dlg.Add(GUILocalizeStrings.Get(10798991)); // Load all trailers for these movies (TMDB)
+                choice.Add("downloadtrailertmdball");
+              }
 
               if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Update for all persons of movie")) // check if specialmode is configured for disabled features
               {
@@ -10737,10 +10768,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlg == null) return;
             Context_Menu = true;
             dlg.Reset();
-            dlg.SetHeading(GUILocalizeStrings.Get(10798701)); // Options ...
+            dlg.SetHeading(GUILocalizeStrings.Get(10799502)); // View Options ...
             choice.Clear();
 
-            if (facadeFilms.SelectedListItemIndex > -1 && conf.ViewContext != ViewContext.TmdbMovies)
+            if (facadeFilms.SelectedListItemIndex > -1 && conf.ViewContext != ViewContext.TmdbMovies && conf.ViewContext != ViewContext.Movie && conf.ViewContext != ViewContext.MovieCollection)
             {
               if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
               if (!MyFilms.conf.BoolShowEmptyValuesInViews) dlg.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798629)));

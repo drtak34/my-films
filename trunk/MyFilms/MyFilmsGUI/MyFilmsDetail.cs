@@ -910,7 +910,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region show root menu
           if (dlgmenu == null) return;
           dlgmenu.Reset();
-          dlgmenu.SetHeading(GUILocalizeStrings.Get(10798701)); // update menu
+          dlgmenu.SetHeading(GUILocalizeStrings.Get(10798701)); // Options ...
 
           dlgmenu.Add(GUILocalizeStrings.Get(10798704)); //trailer menu "Trailer ..."
           choiceViewMenu.Add("trailermenu");
