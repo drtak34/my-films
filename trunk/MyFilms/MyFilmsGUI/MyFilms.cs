@@ -1662,15 +1662,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     break;
                   case ViewContext.TmdbMovies:
                     #region TMDB online movies selection
-                    new Thread(delegate()
-                    {
-                      try
-                      {
-                        Change_SelectTmdbEntry_Action(facadeFilms.SelectedListItem);
-                      }
-                      catch (Exception ex) { LogMyFilms.Debug("Change_SelectTmdbEntry_Action - error: " + ex.Message); }
-                      GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => 0, 0, 0, null);
-                    }) { Name = "MyFilms_Change_SelectTmdbEntry_Action", IsBackground = true }.Start();
+                    Change_SelectTmdbEntry_Action(facadeFilms.SelectedListItem);
                     #endregion
                     break;
 
@@ -4103,9 +4095,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private int CountViewItems(DataRow[] filmrows, string WStrSort)
     {
-      int count;
-      count = 0;
-      var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase); //List<string> itemList = new List<string>();
+      int count = 0;
+      HashSet<string> set = new HashSet<string>(StringComparer.OrdinalIgnoreCase); //List<string> itemList = new List<string>();
 
       bool issplitfield = IsSplittableField(WStrSort);
       bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
@@ -6057,6 +6048,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Change_SelectTmdbEntry_Action(GUIListItem selItem)
     {
+      //new Thread(delegate()
+      //{
+      //  try
+      //  {
+      //    Change_SelectTmdbEntry_Action(facadeFilms.SelectedListItem);
+      //  }
+      //  catch (Exception ex) { LogMyFilms.Debug("Change_SelectTmdbEntry_Action - error: " + ex.Message); }
+      //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => 0, 0, 0, null);
+      //}) { Name = "MyFilms_Change_SelectTmdbEntry_Action", IsBackground = true }.Start();
+
       // MyFilmsPlugin.Utils.OVplayer.Play(facadeFilms.SelectedListItem.Path);
       string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
       var api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
@@ -6805,17 +6806,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 facadeLabel[i] = (isReversed) ? ReReverseName(facadeFilms[i].Label) : facadeFilms[i].Label;
               }
 
-              foreach (string value in rtemp.Select(t => t[wStrSort].ToString()))
+              for (int index = 0; index < rtemp.Length; index++)
               {
-                for (i = 0; i < facadeFilms.Count; i++)
+                string value = rtemp[index][wStrSort].ToString();
+                for (i = 0; i < this.facadeFilms.Count; i++)
                 {
-                  if (value.Contains(facadeLabel[i]))
+                  if (!value.Contains(facadeLabel[i]))
                   {
-                    facadeCounts[i]++;
-                    this.facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
+                    continue;
                   }
+                  facadeCounts[i]++;
+                  this.facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
                 }
-                if (StopLoadingViewDetails) return;
+                if (this.StopLoadingViewDetails) return;
               }
               LogMyFilms.Debug("GetCounts() - facade counts finished  (" + (stopwatch.ElapsedMilliseconds) + " ms)");
               #endregion
