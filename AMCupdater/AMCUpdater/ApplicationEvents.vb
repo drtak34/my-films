@@ -93,7 +93,7 @@ Namespace My
             End If
         End Sub
 
-
+        ' When Running in batch mode from MyFilms GUI
         Class BatchApplication
             Sub Main()
                 Console.WriteLine("AMCupdater: Starting in Batch Mode")
@@ -126,7 +126,7 @@ Namespace My
                     Console.WriteLine(s)
                     If s.ToLower.Contains("Movie_Scan_Path=".ToLower) Then
                         CurrentSettings.Movie_Scan_Path = s.Substring(s.IndexOf("=") + 1)
-                        LogEvent(" - OVERRIDE - Movie Path : " & CurrentSettings.Movie_Scan_Path, EventLogLevel.ImportantEvent)
+                        LogEvent(" - OVERRIDE - Movie Path    : " & CurrentSettings.Movie_Scan_Path, EventLogLevel.ImportantEvent)
                     ElseIf s.ToLower.Contains("XML_File=".ToLower) Then
                         CurrentSettings.XML_File = s.Substring(s.IndexOf("=") + 1)
                         LogEvent(" - OVERRIDE - XML File Path : " & CurrentSettings.XML_File, EventLogLevel.ImportantEvent)
@@ -135,7 +135,7 @@ Namespace My
                         LogEvent(" - OVERRIDE - Override Path : " & CurrentSettings.Override_Path, EventLogLevel.ImportantEvent)
                     ElseIf s.ToLower.Contains("Internet_Parser_Path=".ToLower) Then
                         CurrentSettings.Internet_Parser_Path = s.Substring(s.IndexOf("=") + 1)
-                        LogEvent(" - OVERRIDE - Parser Path : " & CurrentSettings.Internet_Parser_Path, EventLogLevel.ImportantEvent)
+                        LogEvent(" - OVERRIDE - Parser Path   : " & CurrentSettings.Internet_Parser_Path, EventLogLevel.ImportantEvent)
                     End If
                 Next
 
