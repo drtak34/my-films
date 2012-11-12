@@ -67,6 +67,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// <param name="resultHandler">method to invoke on the GUI Thread with the result of the task</param>
     /// <param name="taskDescription">description of the task to be invoked - will be shown in the error message if execution fails or times out</param>
     /// <param name="timeout">true: use the timeout, or false: wait forever</param>
+    /// <param name="searchanimation">Animation as waiting symbol</param>
     /// <returns>true, if the task could be successfully started in the background</returns>
     internal bool ExecuteInBackgroundAndCallback(Func<object> task, Action<bool, object> resultHandler, string taskDescription, bool timeout, GUIAnimation searchanimation)
     {

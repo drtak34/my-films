@@ -197,11 +197,11 @@ namespace MyFilmsPlugin.MyFilms
         case MinimumVersion.BrowseTheWeb:
           return "0.3.0";
         case MinimumVersion.OnlineVideos:
-          return "0.29";
+          return "1.2";
         case MinimumVersion.SubCentral:
           return "1.1";
         case MinimumVersion.Trakt:
-          return "1.0.5.1";
+          return "1.5.1.1";
         default: return "unknown";
       }
     }
