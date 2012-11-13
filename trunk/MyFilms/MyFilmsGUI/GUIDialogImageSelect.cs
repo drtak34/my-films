@@ -38,7 +38,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #region Overrides
     public override bool Init()
     {
-      GUIPropertyManager.SetProperty("#myfilms.selectedthumb", "");
       return Load(GUIGraphicsContext.Skin + @"\MyFilmsDialogImageSelect.xml");
     }
 
