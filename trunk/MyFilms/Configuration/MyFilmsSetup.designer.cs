@@ -1836,6 +1836,7 @@
           // 
           // cbPictureHandling
           // 
+          this.cbPictureHandling.BackColor = System.Drawing.SystemColors.Info;
           this.cbPictureHandling.FormattingEnabled = true;
           this.cbPictureHandling.Items.AddRange(new object[] {
             "Full Path",
