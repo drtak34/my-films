@@ -30,10 +30,10 @@ namespace Grabber_Interface
         {
           this.components = new System.ComponentModel.Container();
           System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GrabConfig));
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
           this.textConfig = new System.Windows.Forms.TextBox();
           this.button_Browse = new System.Windows.Forms.Button();
           this.label1 = new System.Windows.Forms.Label();
@@ -220,6 +220,8 @@ namespace Grabber_Interface
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.cbFileBasedReader = new System.Windows.Forms.CheckBox();
+          this.cbIgnoreCase = new System.Windows.Forms.CheckBox();
+          this.cbIgnoreCaseDetails = new System.Windows.Forms.CheckBox();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -923,6 +925,7 @@ namespace Grabber_Interface
           // 
           // tabPageDetailPage
           // 
+          this.tabPageDetailPage.Controls.Add(this.cbIgnoreCaseDetails);
           this.tabPageDetailPage.Controls.Add(this.pictureBoxPreviewCollection);
           this.tabPageDetailPage.Controls.Add(this.btnLoadDetailInWeb);
           this.tabPageDetailPage.Controls.Add(this.button_Load_File);
@@ -1165,6 +1168,7 @@ namespace Grabber_Interface
           // 
           // tabPageSearchPage
           // 
+          this.tabPageSearchPage.Controls.Add(this.cbIgnoreCase);
           this.tabPageSearchPage.Controls.Add(this.textHeaders);
           this.tabPageSearchPage.Controls.Add(this.textUserAgent);
           this.tabPageSearchPage.Controls.Add(this.textAccept);
@@ -1363,17 +1367,17 @@ namespace Grabber_Interface
           // 
           // ResultColumn1
           // 
-          dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle5;
+          dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn1.DefaultCellStyle = dataGridViewCellStyle1;
           resources.ApplyResources(this.ResultColumn1, "ResultColumn1");
           this.ResultColumn1.Name = "ResultColumn1";
           // 
           // Thumb
           // 
-          dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          dataGridViewCellStyle6.NullValue = null;
-          dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-          this.Thumb.DefaultCellStyle = dataGridViewCellStyle6;
+          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          dataGridViewCellStyle2.NullValue = null;
+          dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+          this.Thumb.DefaultCellStyle = dataGridViewCellStyle2;
           resources.ApplyResources(this.Thumb, "Thumb");
           this.Thumb.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
           this.Thumb.Name = "Thumb";
@@ -1386,16 +1390,16 @@ namespace Grabber_Interface
           // 
           // ResultColumn3
           // 
-          dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle7;
+          dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn3.DefaultCellStyle = dataGridViewCellStyle3;
           resources.ApplyResources(this.ResultColumn3, "ResultColumn3");
           this.ResultColumn3.Name = "ResultColumn3";
           // 
           // ResultColumn4
           // 
           this.ResultColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-          dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle8;
+          dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+          this.ResultColumn4.DefaultCellStyle = dataGridViewCellStyle4;
           resources.ApplyResources(this.ResultColumn4, "ResultColumn4");
           this.ResultColumn4.Name = "ResultColumn4";
           // 
@@ -1747,6 +1751,20 @@ namespace Grabber_Interface
           this.cbFileBasedReader.UseVisualStyleBackColor = true;
           this.cbFileBasedReader.CheckedChanged += new System.EventHandler(this.cbFileBasedReader_CheckedChanged);
           // 
+          // cbIgnoreCase
+          // 
+          resources.ApplyResources(this.cbIgnoreCase, "cbIgnoreCase");
+          this.cbIgnoreCase.Name = "cbIgnoreCase";
+          this.toolTip1.SetToolTip(this.cbIgnoreCase, resources.GetString("cbIgnoreCase.ToolTip"));
+          this.cbIgnoreCase.UseVisualStyleBackColor = true;
+          // 
+          // cbIgnoreCaseDetails
+          // 
+          resources.ApplyResources(this.cbIgnoreCaseDetails, "cbIgnoreCaseDetails");
+          this.cbIgnoreCaseDetails.Name = "cbIgnoreCaseDetails";
+          this.toolTip1.SetToolTip(this.cbIgnoreCaseDetails, resources.GetString("cbIgnoreCaseDetails.ToolTip"));
+          this.cbIgnoreCaseDetails.UseVisualStyleBackColor = true;
+          // 
           // GrabConfig
           // 
           resources.ApplyResources(this, "$this");
@@ -2007,6 +2025,8 @@ namespace Grabber_Interface
         private System.Windows.Forms.ToolStripMenuItem copySelectionToolStripMenuItem1;
         private System.Windows.Forms.CheckBox cbFileBasedReader;
         private System.Windows.Forms.PictureBox pictureBoxPreviewCollection;
+        private System.Windows.Forms.CheckBox cbIgnoreCase;
+        private System.Windows.Forms.CheckBox cbIgnoreCaseDetails;
 
     }
 }

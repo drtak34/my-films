@@ -144,9 +144,6 @@
   <data name="&gt;&gt;textConfig.ZOrder" xml:space="preserve">
     <value>29</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="button_Browse.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
@@ -165,6 +162,9 @@
   <data name="button_Browse.Text" xml:space="preserve">
     <value>Browse</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="button_Browse.ToolTip" xml:space="preserve">
     <value>Open a configuration file</value>
   </data>
@@ -446,9 +446,6 @@ This parameter makes it possible to define the beginning of the URL ("http://les
   <data name="&gt;&gt;radioButtonEN.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="button2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -556,7 +553,7 @@ expert mode is not required.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="cb_ParamDetail.Items" xml:space="preserve">
     <value>(Start-End Detail Page)</value>
@@ -1058,13 +1055,13 @@ on "User Options" tab.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;Button_Load_URL.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="button_Find_Detail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="button_Find_Detail.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 282</value>
+    <value>188, 282</value>
   </data>
   <data name="button_Find_Detail.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 21</value>
@@ -1090,7 +1087,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;button_Find_Detail.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="buttonPreviewDetailFullGrab.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1122,7 +1119,7 @@ This preview takes all user settings into consideration.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPreviewDetailFullGrab.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="buttonPrevParamDetail.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1158,7 +1155,7 @@ all options are working as desired, please use "Preview Full Grab".</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;buttonPrevParamDetail.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="lblResult.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1193,7 +1190,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;lblResult.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="TextURL.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 6</value>
@@ -1226,7 +1223,7 @@ This will be replaced by the grabber engine with the name of the mediafile.</val
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;TextURL.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="cb_Parameter.Items" xml:space="preserve">
     <value>(Start-End Result List)</value>
@@ -1444,7 +1441,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_Find.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="button_Preview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1474,7 +1471,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_Preview.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="button_GoDetailPage.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -1507,7 +1504,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;button_GoDetailPage.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="textRedir.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 29</value>
@@ -1534,7 +1531,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textRedir.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="buttonPrevParam1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1567,7 +1564,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="textStartPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>349, 14</value>
@@ -1913,72 +1910,8 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="&gt;&gt;groupBox8.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="MergePreferSource.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="MergePreferDestination.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <data name="dataGridViewMapping.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
-  </data>
-  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
-    <value>384, 116</value>
-  </data>
-  <data name="dataGridViewMapping.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
-    <value>Vertical</value>
-  </data>
-  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
-    <value>652, 410</value>
-  </data>
-  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
-    <value>With the Mapping Table you can control the mapping of grabbed data to 
-your catalog fields.
-You can e.g. map data of fields, that are missing in your catlaog to an existing field.
-You can "merge" data by adding it to fields at the end or the beginning.
-Options:
-- Replace: replaces the content of the destionation field with content of source field
-- Add to Start: Adds the content of source to the beginning of the destination field
-- Add to End: Adds the content of source to the end of the destination field
-- Merge (prefer source): replaces the content of the destionation field with content of source field, if source is not empty
-- Merge (prefer destination): replaces the content of the destionation field with content of source field, if destination is not empty
-
-Note: You can add more than one field to a destination field - so you could e.g. merge 
-data from several source fields to a single destination field.
-</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
-    <value>dataGridViewMapping</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
-    <value>tabPageUserSettings</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2051,6 +1984,46 @@ data from several source fields to a single destination field.
   </data>
   <data name="MergePreferDestination.Width" type="System.Int32, mscorlib">
     <value>66</value>
+  </data>
+  <data name="dataGridViewMapping.Location" type="System.Drawing.Point, System.Drawing">
+    <value>384, 116</value>
+  </data>
+  <data name="dataGridViewMapping.ScrollBars" type="System.Windows.Forms.ScrollBars, System.Windows.Forms">
+    <value>Vertical</value>
+  </data>
+  <data name="dataGridViewMapping.Size" type="System.Drawing.Size, System.Drawing">
+    <value>652, 410</value>
+  </data>
+  <data name="dataGridViewMapping.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="dataGridViewMapping.ToolTip" xml:space="preserve">
+    <value>With the Mapping Table you can control the mapping of grabbed data to 
+your catalog fields.
+You can e.g. map data of fields, that are missing in your catlaog to an existing field.
+You can "merge" data by adding it to fields at the end or the beginning.
+Options:
+- Replace: replaces the content of the destionation field with content of source field
+- Add to Start: Adds the content of source to the beginning of the destination field
+- Add to End: Adds the content of source to the end of the destination field
+- Merge (prefer source): replaces the content of the destionation field with content of source field, if source is not empty
+- Merge (prefer destination): replaces the content of the destionation field with content of source field, if destination is not empty
+
+Note: You can add more than one field to a destination field - so you could e.g. merge 
+data from several source fields to a single destination field.
+</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Name" xml:space="preserve">
+    <value>dataGridViewMapping</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;dataGridViewMapping.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="label29.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2243,10 +2216,10 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>3</value>
   </data>
   <data name="textFind.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 282</value>
+    <value>74, 282</value>
   </data>
   <data name="textFind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 20</value>
+    <value>108, 20</value>
   </data>
   <data name="textFind.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -2266,13 +2239,13 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textFind.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 283</value>
+    <value>72, 283</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 20</value>
+    <value>104, 20</value>
   </data>
   <data name="textBox5.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2292,7 +2265,7 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textBox5.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="textboxSearchAkasRegex.Location" type="System.Drawing.Point, System.Drawing">
     <value>295, 114</value>
@@ -2495,7 +2468,7 @@ This field allows you to "clean" your search expression.</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textSearchCleanup.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="textDReplaceWith.Location" type="System.Drawing.Point, System.Drawing">
     <value>314, 167</value>
@@ -2567,7 +2540,7 @@ application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textAccept.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="textUserAgent.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 51</value>
@@ -2594,7 +2567,7 @@ Request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NE
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textUserAgent.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="textHeaders.Location" type="System.Drawing.Point, System.Drawing">
     <value>72, 74</value>
@@ -2627,7 +2600,7 @@ Request.Headers.Add("Accept-Encoding", "deflate,sdch");</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textHeaders.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="EncodingSubPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 116</value>
@@ -2693,6 +2666,39 @@ If not set, default encoding will be used.</value>
   <data name="&gt;&gt;linkLabelMFwiki.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
+  <data name="cbIgnoreCaseDetails.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 278</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 30</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.Text" xml:space="preserve">
+    <value>ignore
+case</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.ToolTip" xml:space="preserve">
+    <value>When checked, the search will be case insensitive.
+This makes searching easier, but be aware, that the final grabber WILL
+search case sensitive - so you should verify the result properly.</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.Name" xml:space="preserve">
+    <value>cbIgnoreCaseDetails</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.Parent" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="pictureBoxPreviewCollection.Location" type="System.Drawing.Point, System.Drawing">
     <value>635, 276</value>
   </data>
@@ -2715,7 +2721,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCollection.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnLoadDetailInWeb.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2742,7 +2748,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailInWeb.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="button_Load_File.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2769,7 +2775,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;button_Load_File.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="label21.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2799,7 +2805,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label21.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="labelImageSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2832,7 +2838,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;labelImageSize.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="btnLoadDetailPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2859,7 +2865,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailPreview.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="textURLPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>89, 36</value>
@@ -2880,7 +2886,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textURLPreview.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="textBodyDetail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -2888,6 +2894,23 @@ If not set, default encoding will be used.</value>
   <metadata name="contextMenuStripDetails.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>409, 17</value>
   </metadata>
+  <data name="toolStripMenuDetailsCopyAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="toolStripMenuDetailsCopyAll.Text" xml:space="preserve">
+    <value>Copy All</value>
+  </data>
+  <data name="toolStripMenuDetailsCopyAll.ToolTipText" xml:space="preserve">
+    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
+RTF formatted content in an appropriate app - like e.g. wordpad. 
+There you'll find both options when choosing edit - insert ...</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Copy Selection</value>
+  </data>
   <data name="contextMenuStripDetails.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 48</value>
   </data>
@@ -2922,16 +2945,16 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="label10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="label10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>226, 282</value>
+    <value>235, 281</value>
   </data>
   <data name="label10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>106, 20</value>
   </data>
   <data name="label10.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -2949,10 +2972,25 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label10.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="groupBox3.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="textPreview.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
+    <value>324, 251</value>
+  </data>
+  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="textPreview.Text" xml:space="preserve">
+    <value />
   </data>
   <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
     <value>textPreview</value>
@@ -2988,7 +3026,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox3.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="lblSubPage.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3474,7 +3512,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="label15.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3504,7 +3542,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;label15.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="pictureBoxPreviewCover.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -3534,7 +3572,7 @@ If not set, default encoding will be used.</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCover.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="tabPageDetailPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -3563,48 +3601,37 @@ If not set, default encoding will be used.</value>
   <data name="&gt;&gt;tabPageDetailPage.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="toolStripMenuDetailsCopyAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+  <data name="cbIgnoreCase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="toolStripMenuDetailsCopyAll.Text" xml:space="preserve">
-    <value>Copy All</value>
+  <data name="cbIgnoreCase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 279</value>
   </data>
-  <data name="toolStripMenuDetailsCopyAll.ToolTipText" xml:space="preserve">
-    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
-RTF formatted content in an appropriate app - like e.g. wordpad. 
-There you'll find both options when choosing edit - insert ...</value>
+  <data name="cbIgnoreCase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 30</value>
   </data>
-  <data name="copySelectionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+  <data name="cbIgnoreCase.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
   </data>
-  <data name="copySelectionToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Copy Selection</value>
+  <data name="cbIgnoreCase.Text" xml:space="preserve">
+    <value>ignore
+case</value>
   </data>
-  <data name="textPreview.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="cbIgnoreCase.ToolTip" xml:space="preserve">
+    <value>When checked, the search will be case insensitive.
+This makes searching easier, but be aware, that the final grabber WILL
+search case sensitive - so you should verify the result properly.</value>
   </data>
-  <data name="textPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+  <data name="&gt;&gt;cbIgnoreCase.Name" xml:space="preserve">
+    <value>cbIgnoreCase</value>
   </data>
-  <data name="textPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 251</value>
+  <data name="&gt;&gt;cbIgnoreCase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="textPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;cbIgnoreCase.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
   </data>
-  <data name="textPreview.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="&gt;&gt;textPreview.Name" xml:space="preserve">
-    <value>textPreview</value>
-  </data>
-  <data name="&gt;&gt;textPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;textPreview.Parent" xml:space="preserve">
-    <value>groupBox3</value>
-  </data>
-  <data name="&gt;&gt;textPreview.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cbIgnoreCase.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="label36.AutoSize" type="System.Boolean, mscorlib">
@@ -3635,7 +3662,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label36.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label37.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3665,7 +3692,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label37.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label35.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3695,7 +3722,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label35.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="label9.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3725,7 +3752,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="labelSearchPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3755,7 +3782,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;labelSearchPosition.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="PositionSearch.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -3785,7 +3812,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;PositionSearch.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="button_Load_Web.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3896,7 +3923,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox6.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="label20.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4010,7 +4037,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="label17.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4040,7 +4067,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label17.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="textBody.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
@@ -4048,6 +4075,23 @@ There you'll find both options when choosing edit - insert ...</value>
   <metadata name="contextMenuStripSearch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>237, 17</value>
   </metadata>
+  <data name="toolStripMenuSearchCopyAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="toolStripMenuSearchCopyAll.Text" xml:space="preserve">
+    <value>Copy All</value>
+  </data>
+  <data name="toolStripMenuSearchCopyAll.ToolTipText" xml:space="preserve">
+    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
+RTF formatted content in an appropriate app - like e.g. wordpad. 
+There you'll find both options when choosing edit - insert ...</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 22</value>
+  </data>
+  <data name="copySelectionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy Selection</value>
+  </data>
   <data name="contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>157, 48</value>
   </data>
@@ -4082,7 +4126,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;textBody.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="lblResultsFound.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -4109,10 +4153,109 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;lblResultsFound.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn1.HeaderText" xml:space="preserve">
+    <value>#</value>
+  </data>
+  <data name="ResultColumn1.Width" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Thumb.HeaderText" xml:space="preserve">
+    <value>Img</value>
+  </data>
+  <data name="Thumb.MinimumWidth" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="Thumb.Width" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn2.HeaderText" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="ResultColumn2.MinimumWidth" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn3.HeaderText" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="ResultColumn3.Width" type="System.Int32, mscorlib">
+    <value>42</value>
+  </data>
+  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn4.HeaderText" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ResultColumn4.Width" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn5.HeaderText" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ResultColumn5.Width" type="System.Int32, mscorlib">
+    <value>43</value>
+  </data>
+  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn6.HeaderText" xml:space="preserve">
+    <value>DetailsURL</value>
+  </data>
+  <data name="ResultColumn6.Width" type="System.Int32, mscorlib">
+    <value>86</value>
+  </data>
+  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn7.HeaderText" xml:space="preserve">
+    <value>Director</value>
+  </data>
+  <data name="ResultColumn7.MinimumWidth" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="ResultColumn7.Width" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="ResultColumn8.HeaderText" xml:space="preserve">
+    <value>AKAs</value>
+  </data>
+  <data name="ResultColumn8.Width" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="dataGridViewSearchResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="dataGridViewSearchResults.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 16</value>
+  </data>
+  <data name="dataGridViewSearchResults.Size" type="System.Drawing.Size, System.Drawing">
+    <value>539, 165</value>
+  </data>
+  <data name="dataGridViewSearchResults.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
   </data>
   <data name="&gt;&gt;dataGridViewSearchResults.Name" xml:space="preserve">
     <value>dataGridViewSearchResults</value>
@@ -4148,7 +4291,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="labelSearchAkasRegex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4538,7 +4681,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="label4.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4568,7 +4711,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>25</value>
   </data>
   <data name="tabPageSearchPage.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -4596,161 +4739,6 @@ There you'll find both options when choosing edit - insert ...</value>
   </data>
   <data name="&gt;&gt;tabPageSearchPage.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="toolStripMenuSearchCopyAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="toolStripMenuSearchCopyAll.Text" xml:space="preserve">
-    <value>Copy All</value>
-  </data>
-  <data name="toolStripMenuSearchCopyAll.ToolTipText" xml:space="preserve">
-    <value>It will load both pure text as also RTF content to clipboard - but you will only be able to use 
-RTF formatted content in an appropriate app - like e.g. wordpad. 
-There you'll find both options when choosing edit - insert ...</value>
-  </data>
-  <data name="copySelectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
-  </data>
-  <data name="copySelectionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Copy Selection</value>
-  </data>
-  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="dataGridViewSearchResults.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="dataGridViewSearchResults.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
-  </data>
-  <data name="dataGridViewSearchResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>539, 165</value>
-  </data>
-  <data name="dataGridViewSearchResults.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.Name" xml:space="preserve">
-    <value>dataGridViewSearchResults</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;dataGridViewSearchResults.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn1.HeaderText" xml:space="preserve">
-    <value>#</value>
-  </data>
-  <data name="ResultColumn1.Width" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Thumb.HeaderText" xml:space="preserve">
-    <value>Img</value>
-  </data>
-  <data name="Thumb.MinimumWidth" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="Thumb.Width" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn2.HeaderText" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="ResultColumn2.MinimumWidth" type="System.Int32, mscorlib">
-    <value>100</value>
-  </data>
-  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn3.HeaderText" xml:space="preserve">
-    <value>Year</value>
-  </data>
-  <data name="ResultColumn3.Width" type="System.Int32, mscorlib">
-    <value>42</value>
-  </data>
-  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn4.HeaderText" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="ResultColumn4.Width" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn5.HeaderText" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="ResultColumn5.Width" type="System.Int32, mscorlib">
-    <value>43</value>
-  </data>
-  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn6.HeaderText" xml:space="preserve">
-    <value>DetailsURL</value>
-  </data>
-  <data name="ResultColumn6.Width" type="System.Int32, mscorlib">
-    <value>86</value>
-  </data>
-  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn7.HeaderText" xml:space="preserve">
-    <value>Director</value>
-  </data>
-  <data name="ResultColumn7.MinimumWidth" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="ResultColumn7.Width" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="ResultColumn8.HeaderText" xml:space="preserve">
-    <value>AKAs</value>
-  </data>
-  <data name="ResultColumn8.Width" type="System.Int32, mscorlib">
-    <value>58</value>
   </data>
   <data name="label34.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -4986,189 +4974,6 @@ If you want to create a new configuration based on the existing script, you can 
   </data>
   <data name="&gt;&gt;label22.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Name" xml:space="preserve">
-    <value>cbMaxWriters</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxWriters.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Name" xml:space="preserve">
-    <value>cbMaxDirectors</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxDirectors.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Name" xml:space="preserve">
-    <value>cbMaxProducers</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxProducers.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;chkGrabActorRoles.Name" xml:space="preserve">
-    <value>chkGrabActorRoles</value>
-  </data>
-  <data name="&gt;&gt;chkGrabActorRoles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chkGrabActorRoles.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;chkGrabActorRoles.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Name" xml:space="preserve">
-    <value>cbMaxActors</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;cbMaxActors.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;label28.Name" xml:space="preserve">
-    <value>label28</value>
-  </data>
-  <data name="&gt;&gt;label28.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label28.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label28.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;label27.Name" xml:space="preserve">
-    <value>label27</value>
-  </data>
-  <data name="&gt;&gt;label27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label27.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label27.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;label26.Name" xml:space="preserve">
-    <value>label26</value>
-  </data>
-  <data name="&gt;&gt;label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label26.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label26.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;label25.Name" xml:space="preserve">
-    <value>label25</value>
-  </data>
-  <data name="&gt;&gt;label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;label25.Parent" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 19</value>
-  </data>
-  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 172</value>
-  </data>
-  <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="groupBox9.Text" xml:space="preserve">
-    <value>Person Number Limit ...</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
-    <value>groupBox9</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.Parent" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 112</value>
-  </data>
-  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 414</value>
-  </data>
-  <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="groupBox7.Text" xml:space="preserve">
-    <value>Detail Grabber Options</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
-    <value>groupBox7</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
-    <value>tabPageUserSettings</value>
-  </data>
-  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tabPageUserSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tabPageUserSettings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tabPageUserSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1062, 653</value>
-  </data>
-  <data name="tabPageUserSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tabPageUserSettings.Text" xml:space="preserve">
-    <value>User Options</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.Name" xml:space="preserve">
-    <value>tabPageUserSettings</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.Parent" xml:space="preserve">
-    <value>tabControl1</value>
-  </data>
-  <data name="&gt;&gt;tabPageUserSettings.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="cbMaxWriters.Items" xml:space="preserve">
     <value>1</value>
@@ -5511,6 +5316,81 @@ If you want to create a new configuration based on the existing script, you can 
   </data>
   <data name="&gt;&gt;label25.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="groupBox9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 19</value>
+  </data>
+  <data name="groupBox9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>315, 172</value>
+  </data>
+  <data name="groupBox9.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="groupBox9.Text" xml:space="preserve">
+    <value>Person Number Limit ...</value>
+  </data>
+  <data name="&gt;&gt;groupBox9.Name" xml:space="preserve">
+    <value>groupBox9</value>
+  </data>
+  <data name="&gt;&gt;groupBox9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox9.Parent" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;groupBox9.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 112</value>
+  </data>
+  <data name="groupBox7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>350, 414</value>
+  </data>
+  <data name="groupBox7.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="groupBox7.Text" xml:space="preserve">
+    <value>Detail Grabber Options</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Name" xml:space="preserve">
+    <value>groupBox7</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox7.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="tabPageUserSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPageUserSettings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageUserSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1062, 653</value>
+  </data>
+  <data name="tabPageUserSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPageUserSettings.Text" xml:space="preserve">
+    <value>User Options</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.Name" xml:space="preserve">
+    <value>tabPageUserSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.Parent" xml:space="preserve">
+    <value>tabControl1</value>
+  </data>
+  <data name="&gt;&gt;tabPageUserSettings.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tabControl1.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
