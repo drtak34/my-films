@@ -792,7 +792,7 @@ namespace Grabber_Interface
       try
       {
         int iLength = 0;
-        int i = GrabUtil.FindPosition(textBody.Text, textBox5.Text, GLiSearch, ref iLength, true, false);
+        int i = GrabUtil.FindPosition(textBody.Text, textBox5.Text, GLiSearch, ref iLength, true, false, cbIgnoreCase.Checked);
         //int i = textBody.Find(textBox5.Text, GLiSearch, RichTextBoxFinds.None);
         if (i > 0)
         {
@@ -2987,7 +2987,7 @@ namespace Grabber_Interface
     private void buttonFind_Click(object sender, EventArgs e)
     {
       int iLength = 0;
-      int i = GrabUtil.FindPosition(textBodyDetail.Text, textFind.Text, GLiSearchD, ref iLength, true, false);
+      int i = GrabUtil.FindPosition(textBodyDetail.Text, textFind.Text, GLiSearchD, ref iLength, true, false, cbIgnoreCaseDetails.Checked);
       // int i = textBodyDetail.Find(textFind.Text, GLiSearchD, RichTextBoxFinds.None);
       if (i > 0)
       {
