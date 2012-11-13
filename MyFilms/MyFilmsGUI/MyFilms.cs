@@ -318,6 +318,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     internal const int ID_MyFilmsFanartManager = 7994;
     internal const int ID_MyFilmsFullScreen = 7995;
     internal const int ID_MyFilmsTrailerOSD = 7996;
+    internal const int ID_MyFilmsDialogImageSelect = 7997;
 
     internal const int ID_BrowseTheWeb = 54537689;
     internal const int ID_OnlineVideos = 4755;

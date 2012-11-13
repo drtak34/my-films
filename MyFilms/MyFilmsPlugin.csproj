@@ -215,6 +215,7 @@
     <Compile Include="MFMovie.cs" />
     <Compile Include="MyFilmsGUI\Configuration.cs" />
     <Compile Include="MyFilmsGUI\GUIBackgroundTask.cs" />
+    <Compile Include="MyFilmsGUI\GUIDialogImageSelect.cs" />
     <Compile Include="MyFilmsGUI\MFView.cs" />
     <Compile Include="MyFilmsGUI\GUIDialogMultiSelect.cs" />
     <Compile Include="MyFilmsGUI\GUIUtils.cs" />
