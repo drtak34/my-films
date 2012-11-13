@@ -3626,7 +3626,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                             && wProperty != "Photos" && wProperty != "PersonImages" && wProperty != "MultiFanart" &&
                             wProperty != "Trailer") //  && wProperty != "Collection" && wProperty != "CollectionImageURL"
                           {
-                            GUIListItem pItem = new GUIListItem(wProperty);
+                            var pItem = new GUIListItem(wProperty);
                             pItem.TVTag = wProperty;
                             if (i == (int)Grabber_URLClass.Grabber_Output.PicturePathLong) pItem.IconImage = Result[(int)Grabber_URLClass.Grabber_Output.PicturePathLong];
                             pItem.Selected = false;
@@ -11106,16 +11106,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     internal static void LoadCollectionImages(DataRow[] r1, int index, bool interactive, GUIAnimation animation)
     {
-      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-      var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
-      var dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
+      if (!File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsDialogImageSelect.xml"))
+      {
+        if (interactive) ShowNotificationDialog("Info", "Missing Skin File");
+        return;
+      }
+      // var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      var dlgMenuOrg = (GUIWindow)GUIWindowManager.GetWindow(2012);
+      var dlg = new GUIDialogImageSelect();
+      if (dlg == null) return;
+      dlg.Init();
+      GUIWindowManager.Replace(2009, dlg);
+
+      //var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      //var dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+      //var dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
 
       new Thread(delegate(object o)
       {
         try
         {
           SetProcessAnimationStatus(true, animation);
+          #region select and load collection image
           string titlename = Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
           string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle2].ToString()) : "";
           string collectionname = Helper.TitleFirstGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
@@ -11292,11 +11304,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.SetHeading(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
             foreach (CollectionPoster poster in collectionPosters)
             {
-              string posterUrl = tmdbConf.images.base_url + "w154" + poster.file_path;
+              string posterUrlSmall = tmdbConf.images.base_url + "w154" + poster.file_path;
+              string posterUrl = tmdbConf.images.base_url + "w500" + poster.file_path;
               LogMyFilms.Debug("TMDB - Collection Poster found = '" + posterUrl + "'");
               var item = new GUIListItem();
               item.Label = poster.width + " x " + poster.height;
-              item.IconImage = posterUrl;
+              item.IconImage = posterUrlSmall;
               item.ThumbnailImage = posterUrl;
               dlg.Add(item);
               choicePosters.Add(poster);
@@ -11323,7 +11336,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
               if (!string.IsNullOrEmpty(remoteThumb) && !string.IsNullOrEmpty(localThumb))
               {
-                if (File.Exists(localThumb)) try { File.Delete(localThumb); }  catch (Exception) { }
+                if (File.Exists(localThumb)) try { File.Delete(localThumb); }
+                  catch (Exception) { }
                 Thread.Sleep(10);
                 if (GrabUtil.DownloadImage(remoteThumb, localThumb))
                 {
@@ -11341,10 +11355,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   //// notify that image has been downloaded
                   //item.NotifyPropertyChanged("PosterImageFilename");
+                  SetProcessAnimationStatus(false, animation);
                   if (interactive) ShowNotificationDialog("Info", GUILocalizeStrings.Get(1079846)); // Done !
                 }
               }
-              SetProcessAnimationStatus(false, animation);
               #endregion
 
               #region Fanart
@@ -11384,6 +11398,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               SetProcessAnimationStatus(false, animation);
             }
             #endregion
+          #endregion
           }
           catch (Exception tex)
           {
@@ -11394,6 +11409,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         catch (Exception ex)
         {
           LogMyFilms.DebugException("Thread 'LoadCollectionImages' - exception! - ", ex);
+        }
+        finally
+        {
+          GUIWindowManager.Replace(2009, dlgMenuOrg);
+          SetProcessAnimationStatus(false, animation);
         }
         GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
         {

@@ -49,8 +49,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
             get
             {
-              return 2100;
-              // return MyFilms.ID_MyFilmsDialogMultiSelect;
+              return 2100; // -> return MP default entry to Window Manager // return MyFilms.ID_MyFilmsDialogMultiSelect;
             }
         }
 
