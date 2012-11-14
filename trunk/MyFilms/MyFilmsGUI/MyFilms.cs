@@ -461,6 +461,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static int Prev_ItemID = -1;
     public static string Prev_Label = string.Empty;
 
+    public static bool animationStatus = false;
+
     public static GUIListItem itemToPublish = null;
 
     public static Configuration conf;
@@ -5931,6 +5933,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   //}
                 }
                 #endregion
+
+                // send message to update facade
+                // GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, (int)Controls.CTRL_ListFilms, ItemId, 0, null));
 
                 #region disabled code
                 // string strThumb; // cached cover
