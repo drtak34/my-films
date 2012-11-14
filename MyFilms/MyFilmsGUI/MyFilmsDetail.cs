@@ -11191,7 +11191,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
 
-            if (selectedMovieId == 0) // no movie found by imdb search
+            if (selectedMovieId == 0) // no movie found by tmdb search
             {
               TmdbMovieSearch moviesfound;
               if (int.TryParse(r1[index]["Year"].ToString(), out year))
@@ -11438,14 +11438,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          LogMyFilms.Warn("SetProcessAnimationStatus '" + enable + "' - skin control missing? - falling back to MP GUIWaitCursor()"); 
-          if (enable)
+          LogMyFilms.Warn("SetProcessAnimationStatus '" + enable + "' - skin control missing? - falling back to MP GUIWaitCursor()");
+          if (enable && !MyFilms.animationStatus)
           {
+            MyFilms.animationStatus = true;
             GUIWaitCursor.Init();
             GUIWaitCursor.Show();
           }
-          else
+          else if (!enable && MyFilms.animationStatus)
           {
+            MyFilms.animationStatus = false;
             GUIWaitCursor.Hide();
           }
         }
