@@ -13,10 +13,11 @@
       <colordiffuse>80ffffff</colordiffuse>
     </control>
     <control>
-      <type>label</type>
+      <type>fadelabel</type>      
       <id>1</id>
       <posX>30</posX>
       <posY>10</posY>
+      <width>750</width>
       <label>#(iif(and(neq(L(102012), #currentmodule), neq(L(102002), #currentmodule), neq(L(100100), #currentmodule), neq(L(102015), #currentmodule)), #currentmodule, ' '))</label>
       <font>font13</font>
       <align>left</align>
