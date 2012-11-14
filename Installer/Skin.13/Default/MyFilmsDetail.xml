@@ -186,7 +186,7 @@
       <width>25</width>
       <height>25</height>
       <texture>MyFilms\download.png</texture>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|!string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
@@ -215,7 +215,7 @@
       <height>20</height>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\Persons.png</texture>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+![plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -229,7 +229,7 @@
       <font>font10</font>
       <textcolor>90ffffff</textcolor>
       <label>#myfilms.details.downloads.count - #myfilms.details.downloads.name</label>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+![plugin.isenabled(OnlineVideos)+string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
@@ -243,7 +243,7 @@
       <width>40</width>
       <height>40</height>
       <texture>hover_onlinevideos.png</texture>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -256,7 +256,7 @@
       <font>font10</font>
       <label>#OnlineVideos.currentDownloads</label>
       <textcolor>ff6FAFE1</textcolor>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
@@ -283,7 +283,7 @@
                         <width>250</width>
                         <height>360</height>
                         <texture>Backslide.png</texture>
-                        <colorDiffuse>ivoryf</colorDiffuse>
+                        <colorDiffuse>ivory</colorDiffuse>
                         <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
                         <animation effect="slide" time="70" start="-300,0">visible</animation>
                         <animation effect="slide" time="70" end="-300,0">hidden</animation>
