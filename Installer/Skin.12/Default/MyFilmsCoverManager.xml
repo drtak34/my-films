@@ -349,7 +349,6 @@
 				<type>button</type>
 				<id>2</id>
 				<width>160</width>
-				<label>Change Layout</label>
 				<onright>50</onright>
 				<onup>13</onup>
 			</control>
@@ -358,7 +357,6 @@
 				<type>button</type>
 				<id>12</id>
 				<width>160</width>
-				<label>Filter</label>
 				<onright>50</onright>
 			</control>
 			<control>
@@ -366,7 +364,6 @@
 				<type>button</type>
 				<id>13</id>
 				<width>160</width>
-				<label>Download</label>
 				<onright>50</onright>
 				<ondown>2</ondown>
 			</control>	

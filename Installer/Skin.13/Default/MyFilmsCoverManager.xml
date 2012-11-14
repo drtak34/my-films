@@ -324,8 +324,8 @@
                         <id>0</id>
                         <posX>14</posX>
                         <posY>62</posY>
-                        <width>220</width>
-                        <height>250</height>
+                        <width>240</width>
+                        <height>200</height>
                         <texture>Backslide.png</texture>
                         <colorDiffuse>ivoryf</colorDiffuse>
                         <visible>!Control.HasFocus(50)</visible>
@@ -345,8 +345,7 @@
                                 <description>Change Layout</description>
                                 <type>button</type>
                                 <id>2</id>
-                                <width>160</width>
-                                <label>Change Layout</label>
+                                <width>180</width>
                                 <onright>50</onright>
                                 <onup>13</onup>
                         </control>
@@ -354,16 +353,14 @@
                                 <description>Resolution Filter</description>
                                 <type>button</type>
                                 <id>12</id>
-                                <width>160</width>
-                                <label>Filter</label>
+                                <width>180</width>
                                 <onright>50</onright>
                         </control>
                         <control>
                                 <description>Download</description>
                                 <type>button</type>
                                 <id>13</id>
-                                <width>160</width>
-                                <label>Download</label>
+                                <width>180</width>
                                 <onright>50</onright>
                                 <ondown>2</ondown>
                         </control>      

@@ -331,7 +331,7 @@
 		<posX>26</posX>
 		<posY>78</posY>
 		<width>367</width>
-		<height>400</height>
+                <height>280</height>
 		<texture>Backslide.png</texture>
 		<colordiffuse>ffffffff</colordiffuse>
 		<visible>!Control.HasFocus(50)</visible>
@@ -354,7 +354,6 @@
 			<onright>50</onright>
 			<onup>13</onup>
 			<ondown>12</ondown>					
-			<label>Change Layout</label>                                        
 		</control>				
 		<control>
                         <description>Resolution Filter</description>
@@ -363,7 +362,6 @@
 			<onright>50</onright>
 			<onup>2</onup>
 			<ondown>13</ondown>
-			<label>Filter</label>
 		</control>
 		<control>
                         <description>Download Cover</description>
@@ -372,7 +370,6 @@
 			<onright>50</onright>
 			<onup>12</onup>
 			<ondown>2</ondown>
-                        <label>Download</label>
 			</control>				
 		</control>		 
 	</control>
