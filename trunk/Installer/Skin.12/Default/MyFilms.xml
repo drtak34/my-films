@@ -306,7 +306,7 @@
       <width>25</width>
       <height>25</height>
       <texture>MyFilms\download.png</texture>
-	  <visible>string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|!string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <visible>string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="zoom" start="100,100" end="120,120" time="500" condition="true" pulse="true">conditional</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
@@ -334,7 +334,7 @@
       <height>20</height>
 	  <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\Persons.png</texture>
-      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+![plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -348,7 +348,7 @@
       <font>font10</font>
       <textcolor>90ffffff</textcolor>
       <label>#myfilms.details.downloads.count - #myfilms.details.downloads.name</label>
-      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+![plugin.isenabled(OnlineVideos)+string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
@@ -362,7 +362,7 @@
       <width>40</width>
       <height>40</height>
       <texture>hover_onlinevideos.png</texture>
-      <visible>!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -375,7 +375,7 @@
       <font>font10</font>
       <label>#OnlineVideos.currentDownloads</label>
 	  <textcolor>ff6FAFE1</textcolor>
-      <visible>!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads, 0)</visible>
+      <visible>!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
 
@@ -775,7 +775,7 @@
 		<dimColor>10ffffff</dimColor>
 		<font>font12</font>
 		<textcolor>FFFFFFFF</textcolor>
-		<label>#myfilms.db.description.value</label>
+		<label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
 		<seperator>: : :</seperator>
 		<lineSpacing>.9</lineSpacing>
 		<shadowColor>-</shadowColor>
@@ -1426,7 +1426,7 @@
 									<posY>125</posY>
 									<width>170</width>
 									<height>58</height>
-									<label>#myfilms.db.description.value</label>
+									<label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
 									<font>font10</font>
 									<lineSpacing>2.5</lineSpacing>
 									<textcolor>ivory</textcolor>

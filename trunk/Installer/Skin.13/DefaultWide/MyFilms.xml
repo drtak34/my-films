@@ -252,7 +252,7 @@
       <width>30</width>
       <height>30</height>
       <texture>MyFilms\download.png</texture>
-      <visible>string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|!string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <visible>string.equals(#myfilms.details.downloads.status)|string.equals(#myfilms.statusmessage)|[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="zoom" start="100,100" end="105,105" time="500" condition="true" pulse="true">conditional</animation>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
@@ -280,7 +280,7 @@
       <height>25</height>
       <keepaspectratio>yes</keepaspectratio>
       <texture>MyFilms\Persons.png</texture>
-      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+![plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -294,7 +294,7 @@
       <font>font10</font>
       <textcolor>90ffffff</textcolor>
       <label>#myfilms.details.downloads.count - #myfilms.details.downloads.name</label>
-      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <visible>!string.equals(#myfilms.details.downloads.status,)+!string.equals(#myfilms.statusmessage)+![plugin.isenabled(OnlineVideos)+string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <!-- OnlineVideos Trailer download indicator -->
@@ -307,7 +307,7 @@
       <width>50</width>
       <height>50</height>
       <texture>hover_onlinevideos.png</texture>
-      <visible>!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <visible>!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -320,7 +320,7 @@
       <font>font10</font>
       <label>#OnlineVideos.currentDownloads</label>
       <textcolor>ff6FAFE1</textcolor>
-      <visible>!string.equals(#myfilms.statusmessage)+!string.equals(#OnlineVideos.currentDownloads,0)</visible>
+      <visible>!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <!-- Hidden Side Menu -->
