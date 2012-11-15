@@ -4906,21 +4906,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Add(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(344)); //Actors
       choiceSearch.Add("actors");
 
-      //if (MyFilmsDetail.ExtendedStartmode("User defined search items 1 and 2"))
-      //{
-      //  for (int i = 0; i < 2; i++)
-      //  {
-      //    if (Helper.FieldIsSet(MyFilms.conf.StrSearchItem[i]))
-      //    {
-      //      if (MyFilms.conf.StrSearchText[i].Length == 0)
-      //        dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchItem[i]); //Specific search with no text
-      //      else
-      //        dlg.Add(GUILocalizeStrings.Get(137) + " " + MyFilms.conf.StrSearchText[i]); //Specific search  text
-      //      choiceSearch.Add(string.Format("search{0}", i.ToString()));
-      //    }
-      //  }
-      //}
-
       if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder)
       {
         dlg.Add(GUILocalizeStrings.Get(1079866)); //Search related movies by persons
@@ -4933,130 +4918,140 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.DoModal(GetID);
       if (dlg.SelectedLabel == -1) return; // true;
 
-      if (choiceSearch[dlg.SelectedLabel] == "analogyperson")
-      {
-        SearchRelatedMoviesbyPersons((int)this.facadeFilms.SelectedListItem.ItemId, false);
-        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        dlg.DeInit();
-        return;
-      }
+      string menuselection = choiceSearch[dlg.SelectedLabel];
 
-      if (choiceSearch[dlg.SelectedLabel] == "analogyproperty")
+      switch (menuselection)
       {
-        SearchRelatedMoviesbyProperties((int)this.facadeFilms.SelectedListItem.ItemId, false);
-        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        dlg.DeInit();
-        return;
-      }
-      if (choiceSearch[dlg.SelectedLabel] == "randomsearch")
-      {
-        //SearchMoviesbyRandomWithTrailer(false); 
-        SearchMoviesbyRandomWithTrailerOriginalVersion(false);
-        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        dlg.DeInit();
-        return;
-      }
-      if (choiceSearch[dlg.SelectedLabel] == "globalareas")
-      {
-        SearchMoviesbyAreas(false);
-        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        dlg.DeInit();
-        return;
-      }
-      if (choiceSearch[dlg.SelectedLabel] == "globalproperty")
-      {
-        SearchMoviesbyProperties(false, string.Empty, string.Empty);
-        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        dlg.DeInit();
-        return;
-      }
+        case "analogyperson":
+          this.SearchRelatedMoviesbyPersons((int)this.facadeFilms.SelectedListItem.ItemId, false);
+          //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          dlg.DeInit();
+          return;
+        case "analogyproperty":
+          this.SearchRelatedMoviesbyProperties((int)this.facadeFilms.SelectedListItem.ItemId, false);
+          dlg.DeInit();
+          return;
+        case "randomsearch":
+          this.SearchMoviesbyRandomWithTrailerOriginalVersion(false);
+          dlg.DeInit();
+          return;
+        case "globalareas":
+          this.SearchMoviesbyAreas(false);
+          dlg.DeInit();
+          return;
+        case "globalproperty":
+          this.SearchMoviesbyProperties(false, string.Empty, string.Empty);
+          dlg.DeInit();
+          return;
+        case "globalpersons":
+          this.SearchMoviesbyPersons(false, string.Empty, string.Empty);
+          dlg.DeInit();
+          return;
 
-      if (choiceSearch[dlg.SelectedLabel] == "globalpersons")
-      {
-        SearchMoviesbyPersons(false, string.Empty, string.Empty);
-        //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        dlg.DeInit();
-        return;
-      }
+        default:
 
-      var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-      if (null == keyboard) return; //if (null == keyboard) return true;
-      keyboard.Reset();
-      keyboard.Text = "";
-      keyboard.DoModal(GetID);
-      if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
-      {
-        UpdateRecentSearch(keyboard.Text, MaxSearchHistoryLength);
-        switch (choiceSearch[dlg.SelectedLabel])
-        {
-          case "title":
-            if (control_searchText(keyboard.Text))
+          #region show last searches or new dialog
+          if (dlg == null) return;
+          dlg.Reset();
+          choiceSearch.Clear();
+          switch (menuselection)
+          {
+            case "title":
+              dlg.SetHeading(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(369) + " ..."); //Title
+              break;
+            case "actors":
+              dlg.SetHeading(GUILocalizeStrings.Get(137) + " " + GUILocalizeStrings.Get(344) + " ..."); //Actors
+              break;
+            default:
+              dlg.SetHeading(GUILocalizeStrings.Get(137) + " ..."); // Search ...
+              break;
+          }
+
+          dlg.Add("<" + GUILocalizeStrings.Get(10798633) + ">"); // New Search
+          choiceSearch.Add("");
+
+          if (SearchHistory.Count > 0)
+          {
+            for (int i = SearchHistory.Count; i > 0; i--)
             {
-              SaveListState(false);
-              conf.ViewContext = ViewContext.Movie;
-              conf.StrSelect = conf.StrTitle1 + " like '*" + keyboard.Text + "*'";
-              conf.StrTxtSelect = GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]"; // selection ...
-              conf.StrTitleSelect = "";
-              SetLabelView("search"); // show "search"
-              conf.CurrentView = "MovieNameSearch";
-              GetFilmList();
+              dlg.Add(SearchHistory[i - 1]);
+              choiceSearch.Add(SearchHistory[i - 1]);
             }
-            else return; // false;
-            break;
-          case "actors":
-            if (control_searchText(keyboard.Text))
+          }
+          dlg.DoModal(GetID);
+          if (dlg.SelectedLabel == -1)
+          {
+            Change_Search_Options();
+            return;
+          }
+          #endregion
+
+          var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+          if (null == keyboard) return; //if (null == keyboard) return true;
+          keyboard.Reset();
+          keyboard.Text = choiceSearch[dlg.SelectedLabel];
+          keyboard.DoModal(GetID);
+
+          if (!keyboard.IsConfirmed || keyboard.Text.Length == 0)
+          {
+            dlg.DeInit();
+            Change_Search_Options(); // recall search menu
+          }
+          else
+          {
+            #region do search as requested
+            UpdateRecentSearch(keyboard.Text, MaxSearchHistoryLength);
+            switch (menuselection)
             {
-              SaveListState(false);
-              conf.Boolselect = true;
-              conf.CurrentView = "ActorNameSearch";
-              conf.StrTitleSelect = "";
-              conf.StrViewSelect = "";
-              conf.IndexedChars = 0;
-              conf.Boolindexed = false;
-              conf.BoolSkipViewState = false;
+              case "title":
+                if (control_searchText(keyboard.Text))
+                {
+                  SaveListState(false);
+                  conf.ViewContext = ViewContext.Movie;
+                  conf.StrSelect = conf.StrTitle1 + " like '*" + keyboard.Text + "*'";
+                  conf.StrTxtSelect = GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]"; // selection ...
+                  conf.StrTitleSelect = "";
+                  SetLabelView("search"); // show "search"
+                  conf.CurrentView = "MovieNameSearch";
+                  GetFilmList();
+                }
+                else return; // false;
+                break;
+              case "actors":
+                if (control_searchText(keyboard.Text))
+                {
+                  SaveListState(false);
+                  conf.Boolselect = true;
+                  conf.CurrentView = "ActorNameSearch";
+                  conf.StrTitleSelect = "";
+                  conf.StrViewSelect = "";
+                  conf.IndexedChars = 0;
+                  conf.Boolindexed = false;
+                  conf.BoolSkipViewState = false;
 
-              filmcover.Filename = "";
-              viewcover.Filename = "";
-              personcover.Filename = "";
-              groupcover.Filename = "";
+                  filmcover.Filename = "";
+                  viewcover.Filename = "";
+                  personcover.Filename = "";
+                  groupcover.Filename = "";
 
-              conf.ViewContext = ViewContext.Person;
-              conf.WStrSort = "Actors";
-              conf.WStrSortSens = " ASC";
-              conf.Wselectedlabel = "";
-              conf.StrPersons = ""; // conf.StrPersons = keyboard.Text;
-              conf.StrTxtSelect = GUILocalizeStrings.Get(344) + " [*" + keyboard.Text + @"*]"; // selection ...
-              conf.StrTitleSelect = "";
-              SetLabelSelect(conf.StrTxtSelect);
-              SetLabelView("search"); // show "search"
-              conf.StrSelect = "Actors like '*" + keyboard.Text + "*'";
-              getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
+                  conf.ViewContext = ViewContext.Person;
+                  conf.WStrSort = "Actors";
+                  conf.WStrSortSens = " ASC";
+                  conf.Wselectedlabel = "";
+                  conf.StrPersons = ""; // conf.StrPersons = keyboard.Text;
+                  conf.StrTxtSelect = GUILocalizeStrings.Get(344) + " [*" + keyboard.Text + @"*]"; // selection ...
+                  conf.StrTitleSelect = "";
+                  SetLabelSelect(conf.StrTxtSelect);
+                  SetLabelView("search"); // show "search"
+                  conf.StrSelect = "Actors like '*" + keyboard.Text + "*'";
+                  getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
+                }
+                else return; // false;
+                break;
             }
-            else return; // false;
-            break;
-          case "search0":
-          case "search1":
-            //int i = 0;
-            //if (choiceSearch[dlg.SelectedLabel] == "search1") i = 1;
-            //var ds = new AntMovieCatalog();
-            //if (control_searchText(keyboard.Text))
-            //{
-            //  if (ds.Movie.Columns[conf.StrSearchItem[i]].DataType.Name == "string") 
-            //    conf.StrSelect = conf.StrSearchItem[i] + " like '*" + keyboard.Text + "*'";
-            //  else 
-            //    conf.StrSelect = conf.StrSearchItem[i] + " = '" + keyboard.Text + "'";
-            //  conf.StrTxtSelect = GUILocalizeStrings.Get(1079870) + " " + conf.StrSearchText[i] + " [*" + keyboard.Text + @"*]";
-            //  conf.StrTitleSelect = "";
-            //  GetFilmList();
-            //}
-            //else return; // false;
-            break;
-        }
-      }
-      else
-      {
-        dlg.DeInit();
-        Change_Search_Options(); // recall search menu
+            #endregion
+          }
+          break;
       }
     }
 
