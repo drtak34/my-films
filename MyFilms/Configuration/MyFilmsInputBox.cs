@@ -47,14 +47,7 @@
           set
           {
             hideNfoCheckBox = value;
-            if (hideNfoCheckBox)
-            {
-              cbUseNfoGrabber.Enabled = false;
-            }
-            else
-            {
-              cbUseNfoGrabber.Enabled = true;
-            }
+            this.cbUseNfoGrabber.Enabled = !this.hideNfoCheckBox;
           }
         }
         private bool hideNfoCheckBox = false;
