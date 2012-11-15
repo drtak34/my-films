@@ -100,6 +100,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
 
       if (MyFilms_PluginMode == "normal") // disable Trakt and other controls in standardmode
+      #region hide elements from GUI for test mode
       {
         //hide a tab by removing it from the TabPages collection
         this.tabPageSave = General.TabPages[13];
@@ -137,6 +138,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       //    this.General.TabPages.Insert(loc, this.tabPageSave);
       //  }
       //}
+      #endregion
 
       //// load about labels
       //LogMyFilms.Info("MyFilms.Init() started on '" + System.Environment.MachineName + "'.");
@@ -4643,6 +4645,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       }
       var input = new MyFilmsInputBox();
       input.Text = "MyFilms - Setup Wizard";
+      input.UseNfoGrabber = false;
       input.CatalogTypeSelectedIndex = 10; // preset to ANT MC  version 4.x
       input.CatalogType = "Ant Movie Catalog Xtended (V4.1)"; // preset to Ant Movie Catalog Xtended (V4.1) // input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2) 
       input.Country = "USA (Full Detail Grabbing)"; // preset for sample movies for skinners
@@ -4651,6 +4654,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       string newCatalogType = input.CatalogType;
       string newCountry = input.Country;
       int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
+      bool useNfoGrabber = input.UseNfoGrabber;
+
       if (string.IsNullOrEmpty(newConfigName))
       {
         MessageBox.Show("New Config Name must not be empty ! No Config created !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -5021,7 +5026,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           ItemSearchGrabberScriptsFilter.Text = "pt, all";
           break;
 
-        // No country specific settings:  
+        #region No country specific settings:
         //Belgium
         //Brazil
         //Croatia
@@ -5055,6 +5060,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //Turkey
         //Uruguay
         #endregion
+
+        #endregion
+      }
+
+      if (useNfoGrabber) // set to nfo grabber, if selected in setup
+      {
+        txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\NFO.xml";
+        ItemSearchGrabberScriptsFilter.Text = "all";
       }
 
       #region AMCUpdater settings
