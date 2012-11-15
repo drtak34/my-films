@@ -126,6 +126,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //CatalogType.Items.RemoveAt(8); // XBMC nfo reader (deparate files)
         //CatalogType.Items.Add("test");
         Config_EnablePreload.Visible = false; // precaching of config and DB on Init phase
+        butNew.Visible = false; // disable "new" button for normal mode for V6.0.1
       }
       //else
       //{
