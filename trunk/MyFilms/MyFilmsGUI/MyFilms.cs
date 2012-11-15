@@ -5007,6 +5007,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (control_searchText(keyboard.Text))
                 {
                   SaveListState(false);
+                  conf.Boolselect = false; // switch to film list view
                   conf.ViewContext = ViewContext.Movie;
                   conf.StrSelect = conf.StrTitle1 + " like '*" + keyboard.Text + "*'";
                   conf.StrTxtSelect = GUILocalizeStrings.Get(369) + " [*" + keyboard.Text + @"*]"; // selection ...
