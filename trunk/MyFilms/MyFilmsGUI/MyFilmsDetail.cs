@@ -1287,7 +1287,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (MyFilms.conf.UseThumbsForPersons && !string.IsNullOrEmpty(MyFilms.conf.StrPathArtist))
           {
-            dlgmenu.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
+            dlgmenu.Add(GUILocalizeStrings.Get(1079882)); // Update person info // old TMDB-v2-API menu entry was: dlgmenu.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
             choiceViewMenu.Add("personimages");
           }
 
