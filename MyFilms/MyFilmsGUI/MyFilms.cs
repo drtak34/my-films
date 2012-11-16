@@ -4377,8 +4377,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         #region add online info entry
-        //if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
-        //{
+        if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
+        {
           item = new GUIListItem();
           item.Label = "*** " + GUILocalizeStrings.Get(10798825) + " ***"; // 10798825 online information
           item.DVDLabel = "onlineinfo";
@@ -4388,7 +4388,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.IconImageBig = item.ThumbnailImage;
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
           if (facadeFilms != null) facadeFilms.Add(item);
-        //}
+        }
         #endregion
       }
       else
