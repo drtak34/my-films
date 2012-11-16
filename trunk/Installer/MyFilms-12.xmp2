@@ -1428,6 +1428,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{698c9aa2-3a13-4f4a-aca2-f9e99b287887}-MyFilmsFanartManager.xml</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\MyFilmsFanartManager.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilmsDialogImageSelect.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7f354fac-391c-44b3-87d9-f9b529d82c08}-MyFilmsDialogImageSelect.xml</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\MyFilmsDialogImageSelect.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -6269,6 +6276,20 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <ZipFileName>Installer{CopyFile}\{521a0225-88ff-4427-af3e-5411303d02ac}-MyFilmsTrailerOSD.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsTrailerOSD.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\DefaultWide\MyFilmsDialogImageSelect.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1b52f8cb-fe45-4185-a222-d08d8eb34e3f}-MyFilmsDialogImageSelect.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\DefaultWide\MyFilmsDialogImageSelect.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.12\Black Glass\MyFilmsDialogImageSelect.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9ea6ae07-34ed-4655-b808-92d29c9e0f52}-MyFilmsDialogImageSelect.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsDialogImageSelect.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -7184,7 +7205,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>99999</Revision>
         </MaxVersion>
         <WarnOnly>true</WarnOnly>
-        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.5.1.0 or above. V2.x is recommended to use latest features.</Message>
+        <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.5.1.0 or above. V2.2 + is recommended to use latest features with My Films.</Message>
         <Name>Trakt for MediaPortal</Name>
       </DependencyItem>
     </Items>
@@ -7202,10 +7223,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
+            <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.DB" />
-            <SubSystemItem Name="MP.SkinEngine" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -7222,19 +7243,19 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>0</Build>
-      <Revision>2697</Revision>
+      <Revision>2709</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
 
 
 The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.</ExtensionDescription>
-    <VersionDescription>This version is a beta test release of MyFilms 6.0.
+    <VersionDescription>This version is the final release of MyFilms 6.0.
 
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.0.2592.mpe1</OnlineLocation>
-    <ReleaseDate>2012-11-11T08:52:45.9436433+01:00</ReleaseDate>
+    <ReleaseDate>2012-11-13T05:59:56.2148178+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -8678,6 +8699,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\DefaultWide\MyFilmsFanartManager.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{698c9aa2-3a13-4f4a-aca2-f9e99b287887}-MyFilmsFanartManager.xml</ZipFileName>
         <DestinationFilename>%Skin%\DefaultWide\MyFilmsFanartManager.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\DefaultWide\MyFilmsDialogImageSelect.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7f354fac-391c-44b3-87d9-f9b529d82c08}-MyFilmsDialogImageSelect.xml</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\MyFilmsDialogImageSelect.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -12059,6 +12087,13 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Skin.12\Black Glass\MyFilmsTrailerOSD.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{521a0225-88ff-4427-af3e-5411303d02ac}-MyFilmsTrailerOSD.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsTrailerOSD.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.12\Black Glass\MyFilmsDialogImageSelect.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9ea6ae07-34ed-4655-b808-92d29c9e0f52}-MyFilmsDialogImageSelect.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsDialogImageSelect.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
