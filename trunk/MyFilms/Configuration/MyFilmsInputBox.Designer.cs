@@ -116,6 +116,7 @@
           this.toolTip1.SetToolTip(this.cbCatalogType, "Select the catalog type for this config.\r\nAMC 4.x is the \"most advacned\" and enab" +
                   "led all features in MyFilms.\r\nChoose the catalog type based on your personal use" +
                   " case.");
+          this.cbCatalogType.SelectedIndexChanged += new System.EventHandler(this.cbCatalogType_SelectedIndexChanged);
           // 
           // label3
           // 

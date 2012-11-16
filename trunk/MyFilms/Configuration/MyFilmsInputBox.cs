@@ -99,5 +99,17 @@
             MessageBox.Show(ex.Message);
           }
         }
+
+        private void cbCatalogType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          if (cbCatalogType.Text.Contains("Ant Movie Catalog"))
+          {
+            cbUseNfoGrabber.Visible = true;
+          }
+          else
+          {
+            cbUseNfoGrabber.Visible = false;
+          }
+        }
     }
 }
