@@ -334,11 +334,11 @@
     <String id="10798760">Download collection cover (TMDB)</String>
     <String id="10798761">Download covers (TMDb)</String>
     <String id="10798762">Change cover</String>
-    <String id="10798763">Cover Manager</String>
+    <String id="10798763">Cover Manager ...</String>
     <String id="10798764">Download multiple covers</String>
     <String id="10798765">*** Show All ***</String>
     <String id="10798766">Download single cover</String>
-    <String id="10798767">Fanart Manager</String>
+    <String id="10798767">Fanart Manager ...</String>
     <String id="10798768">No cover found!</String>
     <String id="10798769">Select cover as default</String>
     <String id="10798770">Show only films with media available ({0})</String>
@@ -346,7 +346,7 @@
     <String id="10798772">Choose field</String>
     <String id="10798773">Main display item</String>
     <String id="10798774">empty</String>
-    <String id="10798775">Trakt</String>
+    <String id="10798775">Trakt...</String>
     <String id="10798776">Trakt</String>
     <String id="10798777">Calendar</String>
     <String id="10798778">Friends</String>
@@ -435,6 +435,9 @@
     <String id="10799205">(updating)</String>
     <String id="10799206">Filter</String>
     <String id="10799207">Download Covers</String>
+    <String id="10799208">Create Covers ...</String>
+    <String id="10799209">Delete Covers ...</String>
+    <String id="10799210">Filter Covers ...</String>
     <String id="10799211">Delete selected cover</String>
     <String id="10799212">Delete all 'Low'</String>
     <String id="10799213">Delete all 'Medium'</String>
