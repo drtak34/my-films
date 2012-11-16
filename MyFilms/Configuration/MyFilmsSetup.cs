@@ -4655,6 +4655,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       string newCountry = input.Country;
       int newCatalogSelectedIndex = input.CatalogTypeSelectedIndex;
       bool useNfoGrabber = input.UseNfoGrabber;
+      if (!(newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10)) // if not Ant Movie Catalog, do NOT use nfo grabber anyway
+        useNfoGrabber = false;
 
       if (string.IsNullOrEmpty(newConfigName))
       {
