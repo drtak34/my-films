@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+  <controls>
+    <!--     *******************************************************************************************  -->
+    <!--     *************************   RECENTLY ADDED - MyFilms   ****************************  -->
+    <!--     *******************************************************************************************  -->
+    <control>
+      <description>Recently Added group</description>
+      <type>group</type>
+      <dimColor>ffffffff</dimColor>
+      <visible>Control.hasfocus(50)+Control.isvisible(40)+[string.equals(#latestMediaHandler.myfilms.latest1.title)|string.equals(#latestMediaHandler.myfilms.latest2.title)|string.equals(#latestMediaHandler.myfilms.latest3.title)]</visible>
+      <animation effect="fade" start="0" end="100" delay="1000" time="500" reversible="false">WindowOpen</animation>
+      <animation effect="fade" time="250" reversible="false">WindowClose</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <!--
+		<control>
+		  <description>background for recently added files</description>
+		  <type>image</type>
+		  <id>98764</id>
+		  <posX>370</posX>
+		  <posY>560</posY>
+		  <width>1220</width>
+		  <height>150</height>
+		  <texture>list_sub_focus.png</texture>
+		  <colordiffuse>ccffffff</colordiffuse>
+		  <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)+!Player.hasmedia</visible>
+		</control>
+-->
+
+      <!-- FILMS LABELS -->
+
+      <control>
+        <description>Updates label</description>
+        <type>label</type>
+        <id>0</id>
+        <posX>335</posX>
+        <posY>560</posY>
+        <width>300</width>
+        <label>4558</label>
+        <align>left</align>
+        <font>font14</font>
+        <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)</visible>
+        <textcolor>90FFFFFF</textcolor>
+      </control>
+      <control>
+        <description>MyFilms Latest Title 1</description>
+        <type>label</type>
+        <id>0</id>
+        <posX>335</posX>
+        <posY>600</posY>
+        <width>490</width>
+        <label>#latestMediaHandler.myfilms.latest1.dateAdded: #latestMediaHandler.myfilms.latest1.title (#latestMediaHandler.myfilms.latest1.year) - #latestMediaHandler.myfilms.latest1.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest1.genre</label>
+        <align>left</align>
+        <font>font11</font>
+        <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)+string.equals(#latestMediaHandler.myfilms.latest1.title)</visible>
+        <textcolor>90FFFFFF</textcolor>
+      </control>
+      <control>
+        <description>MyFilms Latest Title 2</description>
+        <type>label</type>
+        <id>0</id>
+        <posX>335</posX>
+        <posY>630</posY>
+        <width>490</width>
+        <label>#latestMediaHandler.myfilms.latest2.dateAdded: #latestMediaHandler.myfilms.latest2.title (#latestMediaHandler.myfilms.latest2.year) - #latestMediaHandler.myfilms.latest2.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest2.genre</label>
+        <align>left</align>
+        <font>font11</font>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)</visible>
+        <textcolor>90FFFFFF</textcolor>
+      </control>
+      <control>
+        <description>MyFilms Latest Title 3</description>
+        <type>label</type>
+        <id>0</id>
+        <posX>335</posX>
+        <posY>660</posY>
+        <width>490</width>
+        <label>#latestMediaHandler.myfilms.latest3.dateAdded: #latestMediaHandler.myfilms.latest3.title (#latestMediaHandler.myfilms.latest3.year) - #latestMediaHandler.myfilms.latest3.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest3.genre</label>
+        <align>left</align>
+        <font>font11</font>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)</visible>
+        <textcolor>90FFFFFF</textcolor>
+      </control>
+
+      <!-- COVERS -->
+
+      <control>
+        <description>Cover1</description>
+        <type>image</type>
+        <id>1</id>
+        <posX>30</posX>
+        <posY>560</posY>
+        <width>80</width>
+        <height>120</height>
+        <colordiffuse>ffffffff</colordiffuse>
+        <texture mask="DVDCase_coverflow_mask.png">#latestMediaHandler.myfilms.latest1.poster</texture>
+        <shouldCache>true</shouldCache>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest1.title)+!Player.hasmedia</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+      </control>
+      <control>
+        <description>Overlay Cover 1</description>
+        <type>image</type>
+        <id>0</id>
+        <posX>30</posX>
+        <posY>560</posY>
+        <width>80</width>
+        <height>120</height>
+        <texture>DVDCase_coverflow.png</texture>
+        <align>left</align>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest1.title)+!Player.hasmedia</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+      </control>
+      <control>
+        <description>Cover2</description>
+        <type>image</type>
+        <id>1</id>
+        <posX>130</posX>
+        <posY>560</posY>
+        <width>80</width>
+        <height>120</height>
+        <colordiffuse>ffffffff</colordiffuse>
+        <texture mask="DVDCase_coverflow_mask.png">#latestMediaHandler.myfilms.latest2.poster</texture>
+        <shouldCache>true</shouldCache>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)+!Player.hasmedia</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+      </control>
+      <control>
+        <description>Overlay Cover 2</description>
+        <type>image</type>
+        <id>0</id>
+        <posX>130</posX>
+        <posY>560</posY>
+        <width>80</width>
+        <height>120</height>
+        <texture>DVDCase_coverflow.png</texture>
+        <align>left</align>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)+!Player.hasmedia</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+      </control>
+      <control>
+        <description>Cover3</description>
+        <type>image</type>
+        <id>1</id>
+        <posX>230</posX>
+        <posY>560</posY>
+        <width>80</width>
+        <height>120</height>
+        <colordiffuse>ffffffff</colordiffuse>
+        <texture mask="DVDCase_coverflow_mask.png">#latestMediaHandler.myfilms.latest3.poster</texture>
+        <shouldCache>true</shouldCache>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)+!Player.hasmedia</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+      </control>
+      <control>
+        <description>Overlay Cover 3</description>
+        <type>image</type>
+        <id>0</id>
+        <posX>230</posX>
+        <posY>560</posY>
+        <width>80</width>
+        <height>120</height>
+        <texture>DVDCase_coverflow.png</texture>
+        <align>left</align>
+        <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)+!Player.hasmedia</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+      </control>
+    </control>
+  </controls>
+</window>
