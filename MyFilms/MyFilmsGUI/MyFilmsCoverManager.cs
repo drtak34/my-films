@@ -87,7 +87,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       DeleteAllExceptSelected,
       UseAsDefault,
       Filters,
-      ClearMovieCover
+      ClearMovieCover,
+      MenuMain,
+      MenuDownload,
+      MenuCreate,
+      MenuDelete,
+      MenuFilter
     }
 
     enum MenuFilterAction
@@ -201,8 +206,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       UpdateLayoutButton();
       if (this.LabelResolution != null) this.LabelResolution.Label = GUILocalizeStrings.Get(10799202); //  resolution
 
-      if (this.ButtonFilters != null) this.ButtonFilters.Label = GUILocalizeStrings.Get(10799207); //  Filter
-      if (this.ButtonDownloadCover != null) this.ButtonDownloadCover.Label = GUILocalizeStrings.Get(10799206); //  Download Covers
+      if (this.ButtonFilters != null) this.ButtonFilters.Label = GUILocalizeStrings.Get(10799206); //  Filter
+      if (this.ButtonDownloadCover != null) this.ButtonDownloadCover.Label = GUILocalizeStrings.Get(10799207); //  Download Covers
 
       ClearProperties();
       UpdateFilterProperty(false);
@@ -350,8 +355,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("cover.pagetitle", Title);
     }
 
-    #region Context Menu
     protected override void OnShowContextMenu()
+    {
+      ShowContextMenu();
+    }
+
+
+    #region Context Menu
+    private void ShowContextMenu()
+    {
+      ShowContextMenu((int)MenuAction.MenuMain, true); // calls main context menu
+    }
+    private void ShowContextMenu(int menuaction, bool iscontextmenu)
     {
       try
       {
@@ -364,86 +379,191 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           selectedCover = currentitem.TVTag as MFCover;
 
         var dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        GUIListItem pItem;
         if (dlg == null) return;
         dlg.Reset();
-        dlg.SetHeading(GUILocalizeStrings.Get(10799201)); // MyFilms Cover Manager
 
-        GUIListItem pItem;
-
-        if (!loadingWorker.IsBusy) // don't allowing filtering until all data is loaded
+        switch (menuaction)
         {
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10799203)); // Filter...
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.Filters;
+          case (int)MenuAction.MenuMain:
+            #region main menu
+            dlg.SetHeading(GUILocalizeStrings.Get(10799201)); // MyFilms Cover Manager
+
+            //// disabled, can be used by just select the item
+            //if (bCoverSelected)
+            //{
+            //  pItem = new GUIListItem(GUILocalizeStrings.Get(10798769)); // Select Cover as Default
+            //  dlg.Add(pItem);
+            //  pItem.ItemId = (int)MenuAction.UseAsDefault;
+            //}
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10799204)); // Download Covers ...
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuAction.MenuDownload;
+
+            if (MyFilmsDetail.ExtendedStartmode("CoverManager: Submenu 'create covers ...'"))
+            {
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10799208)); // Create Covers ...
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.MenuCreate;
+            }
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10799209)); // Delete Cover ...
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuAction.MenuDelete;
+
+            if (!loadingWorker.IsBusy) // don't allowing filtering until all data is loaded
+            {
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10799210)); // Filter Cover ...
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.MenuFilter;
+            }
+            #endregion
+            break;
+
+          case (int)MenuAction.MenuDownload:
+            #region submenu download covers ...
+            dlg.SetHeading(GUILocalizeStrings.Get(10799204)); // Download Covers ...
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10798766));  // Load single Cover ...
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuAction.LoadSingle;
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10798764)); // Load multiple Covers ...
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuAction.LoadMultiple;
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuAction.LoadFromTmdb;
+            #endregion
+            break;
+
+          case (int)MenuAction.MenuCreate:
+            #region submenu create covers ...
+            dlg.SetHeading(GUILocalizeStrings.Get(10799208));  // Create Covers ...
+
+            if (MyFilmsDetail.ExtendedStartmode("CoverManager: Creation of Covers from Movie not yet supported"))
+            {
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10798728)); // create cover from movie ...
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.CreateFromMovie;
+
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10798729)); // Create cover from film as mosaic
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.CreateFromMovieAsMosaic;
+            }
+            #endregion
+            break;
+
+          case (int)MenuAction.MenuDelete:
+            #region submenu delete covers ...
+            dlg.SetHeading(GUILocalizeStrings.Get(10799209));  // Delete Covers ...
+
+            if (bCoverSelected)
+            {
+              if (!loadingWorker.IsBusy && !string.IsNullOrEmpty(MyFilms.r[this.MovieId]["Picture"].ToString()))
+              {
+                pItem = new GUIListItem(GUILocalizeStrings.Get(10798810)); // Delete Movie Cover from DB
+                dlg.Add(pItem);
+                pItem.ItemId = (int)MenuAction.ClearMovieCover;
+              }
+
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10799212)); //"Delete all 'Low'"
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.DeleteAllLow;
+
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10799213)); // "Delete all 'Medium'"
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.DeleteAllMedium;
+
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10799214)); // "Delete all 'High'"
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.DeleteAllHigh;
+
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10799211)); // Delete selected Cover
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.DeleteSelected;
+
+              pItem = new GUIListItem(GUILocalizeStrings.Get(10799215)); // "Delete all except currently selected"
+              dlg.Add(pItem);
+              pItem.ItemId = (int)MenuAction.DeleteAllExceptSelected;
+            }
+            #endregion
+            break;
+
+          case (int)MenuAction.MenuFilter:
+            #region submenu filter covers ... (calls extra method)
+            dlg.SetHeading(GUILocalizeStrings.Get(10799210)); // Filter Cover ...
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10799221)); // All
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuFilterAction.all;
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10799222)); // High
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuFilterAction.high;
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10799223)); // Medium
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuFilterAction.medium;
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10799224)); // Low
+            dlg.Add(pItem);
+            pItem.ItemId = (int)MenuFilterAction.low;
+            #endregion
+            break;
         }
 
-        if (bCoverSelected)
-        {
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10798769)); // Select Cover as Default
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.UseAsDefault;
-        }
-        pItem = new GUIListItem(GUILocalizeStrings.Get(10798766));  // Load single Cover ...
-        dlg.Add(pItem);
-        pItem.ItemId = (int)MenuAction.LoadSingle;
-
-        pItem = new GUIListItem(GUILocalizeStrings.Get(10798764)); // Load multiple Covers ...
-        dlg.Add(pItem);
-        pItem.ItemId = (int)MenuAction.LoadMultiple;
-
-        pItem = new GUIListItem(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
-        dlg.Add(pItem);
-        pItem.ItemId = (int)MenuAction.LoadFromTmdb;
-
-        if (MyFilmsDetail.ExtendedStartmode("CoverManager: Creation of Covers from Movie not yet supported"))
-        {
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10798728)); // create cover from movie ...
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.CreateFromMovie;
-
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10798729)); // Create cover from film as mosaic
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.CreateFromMovieAsMosaic;
-
-        }
-
-        if (!loadingWorker.IsBusy && !string.IsNullOrEmpty(MyFilms.r[this.MovieId]["Picture"].ToString()))
-        {
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10798810)); // Delete Movie Cover from DB
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.ClearMovieCover;
-        }
-
-        if (bCoverSelected)
-        {
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10799212)); //"Delete all 'Low'"
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.DeleteAllLow;
-
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10799213)); // "Delete all 'Medium'"
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.DeleteAllMedium;
-
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10799214)); // "Delete all 'High'"
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.DeleteAllHigh;
-
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10799211)); // Delete selected Cover
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.DeleteSelected;
-
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10799215)); // "Delete all except currently selected"
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.DeleteAllExceptSelected;
-        }
-
-        // lets show it
         dlg.DoModal(GUIWindowManager.ActiveWindow);
+
+        if (dlg.SelectedLabel == -1)
+        {
+          #region conditional return to main menu
+          if (iscontextmenu)
+          {
+            switch (menuaction)
+            {
+              case (int)MenuAction.MenuMain:
+                dlg.Reset();
+                return;
+              case (int)MenuAction.MenuDownload:
+              case (int)MenuAction.MenuCreate:
+              case (int)MenuAction.MenuDelete:
+              case (int)MenuAction.MenuFilter:
+                ShowContextMenu((int)MenuAction.MenuMain, true);
+                break;
+            }
+          }
+          else
+          {
+            return;
+          }
+          #endregion
+        }
+
         string title = "";
         string mediapath = "";
         MyFilmsDetail.Searchtitles sTitles;
         switch (dlg.SelectedId) // what was chosen?
         {
+          case (int)MenuAction.MenuDownload:
+            dlg.Reset();
+            this.ShowContextMenu((int)MenuAction.MenuDownload, iscontextmenu);
+            break;
+          case (int)MenuAction.MenuCreate:
+            dlg.Reset();
+            this.ShowContextMenu((int)MenuAction.MenuCreate, iscontextmenu);
+            break;
+          case (int)MenuAction.MenuDelete:
+            dlg.Reset();
+            this.ShowContextMenu((int)MenuAction.MenuDelete, iscontextmenu);
+            break;
+          case (int)MenuAction.MenuFilter:
+            dlg.Reset();
+            ShowFiltersMenu();
+            break;
+
           case (int)MenuAction.LoadSingle:
             //downloadFanart(selectedCover);
             title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
@@ -509,10 +629,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             selectedCover.Chosen = true;
             this.SetDefaultCover(selectedCover);
             break;
-          case (int)MenuAction.Filters:
-            dlg.Reset();
-            ShowFiltersMenu();
-            break;
           case (int)MenuAction.ClearMovieCover:
             dlg.Reset();
             this.RemoveMovieCoverFromDb();
@@ -528,86 +644,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
     }
-
-    private void ShowCoverContextMenu()
-    {
-      try
-      {
-
-        var dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-        if (dlg == null) return;
-        dlg.Reset();
-        dlg.SetHeading(GUILocalizeStrings.Get(10799201)); // MyFilms Cover Manager
-
-        GUIListItem pItem;
-
-        pItem = new GUIListItem(GUILocalizeStrings.Get(10798766));  // Load single Cover ...
-        dlg.Add(pItem);
-        pItem.ItemId = (int)MenuAction.LoadSingle;
-
-        pItem = new GUIListItem(GUILocalizeStrings.Get(10798764)); // Load multiple Covers ...
-        dlg.Add(pItem);
-        pItem.ItemId = (int)MenuAction.LoadMultiple;
-
-        pItem = new GUIListItem(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
-        dlg.Add(pItem);
-        pItem.ItemId = (int)MenuAction.LoadFromTmdb;
-
-        if (MyFilmsDetail.ExtendedStartmode("CoverManager: Creation of Covers from Movie not yet supported"))
-        {
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10798728)); // create cover from movie ...
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.CreateFromMovie;
-
-          pItem = new GUIListItem(GUILocalizeStrings.Get(10798729)); // Create cover from film as mosaic
-          dlg.Add(pItem);
-          pItem.ItemId = (int)MenuAction.CreateFromMovieAsMosaic;
-
-        }
-
-        // lets show it
-        dlg.DoModal(GUIWindowManager.ActiveWindow);
-        string title = "";
-        string mediapath = "";
-        MyFilmsDetail.Searchtitles sTitles;
-        switch (dlg.SelectedId) // what was chosen?
-        {
-          case (int)MenuAction.LoadSingle:
-            title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
-            mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
-            sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.Cover, false, sTitles, SearchAnimation);
-            // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
-            break;
-          case (int)MenuAction.LoadMultiple:
-            title = MyFilmsDetail.GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
-            mediapath = MyFilmsDetail.GetMediaPathOfFirstFile(MyFilms.r, MyFilms.conf.StrIndex);
-            sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], mediapath);
-            MyFilmsDetail.grabb_Internet_Informations(title, GetID, true, MyFilms.conf.StrGrabber_cnf, mediapath, MyFilmsDetail.GrabType.MultiCovers, false, sTitles, SearchAnimation);
-            // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
-            break;
-          case (int)MenuAction.LoadFromTmdb:
-            sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-            MyFilmsDetail.Download_TMDB_Posters(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.Director, sTitles.Year.ToString(), false, GetID, sTitles.OriginalTitle, SearchAnimation);
-            // this.RefreshFacade(); // will be done by OnDetailsUpdated Message Handler
-            break;
-          case (int)MenuAction.CreateFromMovie:
-            //ToDo: Add Code for single image thumbnailer
-            this.RefreshFacade();
-            break;
-          case (int)MenuAction.CreateFromMovieAsMosaic:
-            MyFilmsDetail.CreateThumbFromMovie();
-            this.RefreshFacade();
-            break;
-        }
-      }
-      catch (Exception ex)
-      {
-        LogMyFilms.Debug("Exception in Artwork Chooser Context Menu: " + ex.Message);
-        return;
-      }
-    }
-
     #endregion
 
 
@@ -764,7 +800,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (control == this.ButtonDownloadCover)
       {
-        ShowCoverContextMenu();
+        ShowContextMenu((int)MenuAction.MenuDownload, false);
         this.ButtonDownloadCover.Focus = false;
         GUIControl.FocusControl(GetID, 50);
         return;
