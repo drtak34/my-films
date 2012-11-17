@@ -33,13 +33,13 @@ Partial Class Form1
         Dim SiteLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.TabControl1 = New System.Windows.Forms.TabControl
@@ -50,10 +50,13 @@ Partial Class Form1
         Me.Label88 = New System.Windows.Forms.Label
         Me.GroupBox27 = New System.Windows.Forms.GroupBox
         Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
-        Me.Label24 = New System.Windows.Forms.Label
-        Me.chkImportOnInternetFailIgnoreWhenInteractive = New System.Windows.Forms.CheckBox
-        Me.cbInternetLookupBehaviour = New System.Windows.Forms.ComboBox
+        Me.chkImportOnInternetFailInGuiMode = New System.Windows.Forms.CheckBox
+        Me.cbInternetLookupAlwaysPrompt = New System.Windows.Forms.CheckBox
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox
         Me.chkImportOnInternetFail = New System.Windows.Forms.CheckBox
+        Me.lblInternetLookupCaseExplanation = New System.Windows.Forms.Label
+        Me.Label24 = New System.Windows.Forms.Label
+        Me.cbInternetLookupBehaviour = New System.Windows.Forms.ComboBox
         Me.GroupBox23 = New System.Windows.Forms.GroupBox
         Me.txtParserFilePathDisplay = New System.Windows.Forms.TextBox
         Me.cbTitleHandling = New System.Windows.Forms.ComboBox
@@ -87,6 +90,7 @@ Partial Class Form1
         Me.btnManualDoTest = New System.Windows.Forms.Button
         Me.btnManualApplyChanges = New System.Windows.Forms.Button
         Me.grpManualInternetLookupSettings = New System.Windows.Forms.GroupBox
+        Me.cbManualInternetLookupAlwaysPrompt = New System.Windows.Forms.CheckBox
         Me.chkManualDontAskInteractive = New System.Windows.Forms.CheckBox
         Me.txtManualInternetParserPathDisplay = New System.Windows.Forms.TextBox
         Me.Button2 = New System.Windows.Forms.Button
@@ -552,6 +556,7 @@ Partial Class Form1
         Me.TabControl1.SuspendLayout()
         Me.Import_Movies.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
+        Me.GroupBox9.SuspendLayout()
         Me.GroupBox23.SuspendLayout()
         Me.GroupBox17.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
@@ -748,21 +753,23 @@ Partial Class Form1
         'GroupBox27
         '
         Me.GroupBox27.Controls.Add(Me.chkDontAskInteractive)
+        Me.GroupBox27.Controls.Add(Me.chkImportOnInternetFailInGuiMode)
+        Me.GroupBox27.Controls.Add(Me.cbInternetLookupAlwaysPrompt)
+        Me.GroupBox27.Controls.Add(Me.GroupBox9)
+        Me.GroupBox27.Controls.Add(Me.lblInternetLookupCaseExplanation)
         Me.GroupBox27.Controls.Add(Me.Label24)
-        Me.GroupBox27.Controls.Add(Me.chkImportOnInternetFailIgnoreWhenInteractive)
         Me.GroupBox27.Controls.Add(Me.cbInternetLookupBehaviour)
-        Me.GroupBox27.Controls.Add(Me.chkImportOnInternetFail)
-        Me.GroupBox27.Location = New System.Drawing.Point(11, 239)
+        Me.GroupBox27.Location = New System.Drawing.Point(11, 218)
         Me.GroupBox27.Name = "GroupBox27"
-        Me.GroupBox27.Size = New System.Drawing.Size(572, 83)
+        Me.GroupBox27.Size = New System.Drawing.Size(572, 126)
         Me.GroupBox27.TabIndex = 4
         Me.GroupBox27.TabStop = False
-        Me.GroupBox27.Text = "Importer Options ..."
+        Me.GroupBox27.Text = "Import Options ..."
         '
         'chkDontAskInteractive
         '
         Me.chkDontAskInteractive.AutoSize = True
-        Me.chkDontAskInteractive.Location = New System.Drawing.Point(364, 12)
+        Me.chkDontAskInteractive.Location = New System.Drawing.Point(406, 80)
         Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
         Me.chkDontAskInteractive.Size = New System.Drawing.Size(129, 17)
         Me.chkDontAskInteractive.TabIndex = 2
@@ -770,48 +777,79 @@ Partial Class Form1
         Me.ToolTip1.SetToolTip(Me.chkDontAskInteractive, resources.GetString("chkDontAskInteractive.ToolTip"))
         Me.chkDontAskInteractive.UseVisualStyleBackColor = True
         '
+        'chkImportOnInternetFailInGuiMode
+        '
+        Me.chkImportOnInternetFailInGuiMode.AutoSize = True
+        Me.chkImportOnInternetFailInGuiMode.Location = New System.Drawing.Point(406, 102)
+        Me.chkImportOnInternetFailInGuiMode.Name = "chkImportOnInternetFailInGuiMode"
+        Me.chkImportOnInternetFailInGuiMode.Size = New System.Drawing.Size(131, 17)
+        Me.chkImportOnInternetFailInGuiMode.TabIndex = 4
+        Me.chkImportOnInternetFailInGuiMode.Text = "Import if no automatch"
+        Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFailInGuiMode, resources.GetString("chkImportOnInternetFailInGuiMode.ToolTip"))
+        Me.chkImportOnInternetFailInGuiMode.UseVisualStyleBackColor = True
+        '
+        'cbInternetLookupAlwaysPrompt
+        '
+        Me.cbInternetLookupAlwaysPrompt.AutoSize = True
+        Me.cbInternetLookupAlwaysPrompt.Location = New System.Drawing.Point(406, 59)
+        Me.cbInternetLookupAlwaysPrompt.Name = "cbInternetLookupAlwaysPrompt"
+        Me.cbInternetLookupAlwaysPrompt.Size = New System.Drawing.Size(93, 17)
+        Me.cbInternetLookupAlwaysPrompt.TabIndex = 5
+        Me.cbInternetLookupAlwaysPrompt.TabStop = False
+        Me.cbInternetLookupAlwaysPrompt.Text = "always prompt"
+        Me.cbInternetLookupAlwaysPrompt.UseVisualStyleBackColor = True
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.chkImportOnInternetFail)
+        Me.GroupBox9.Location = New System.Drawing.Point(392, 9)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(174, 44)
+        Me.GroupBox9.TabIndex = 10
+        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.Text = "Import behaviour in MyFilms ..."
+        Me.ToolTip1.SetToolTip(Me.GroupBox9, "This is the import behaviour used when you run AMCU in MyFilms plugin " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "via Globa" & _
+                "l Updates > Import/Update all movies from the My Films main menu.")
+        '
+        'chkImportOnInternetFail
+        '
+        Me.chkImportOnInternetFail.AutoSize = True
+        Me.chkImportOnInternetFail.Location = New System.Drawing.Point(14, 17)
+        Me.chkImportOnInternetFail.Name = "chkImportOnInternetFail"
+        Me.chkImportOnInternetFail.Size = New System.Drawing.Size(134, 17)
+        Me.chkImportOnInternetFail.TabIndex = 3
+        Me.chkImportOnInternetFail.Text = "Import if no auto match"
+        Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFail, resources.GetString("chkImportOnInternetFail.ToolTip"))
+        Me.chkImportOnInternetFail.UseVisualStyleBackColor = True
+        '
+        'lblInternetLookupCaseExplanation
+        '
+        Me.lblInternetLookupCaseExplanation.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.lblInternetLookupCaseExplanation.Location = New System.Drawing.Point(12, 56)
+        Me.lblInternetLookupCaseExplanation.Name = "lblInternetLookupCaseExplanation"
+        Me.lblInternetLookupCaseExplanation.Size = New System.Drawing.Size(548, 63)
+        Me.lblInternetLookupCaseExplanation.TabIndex = 6
+        Me.lblInternetLookupCaseExplanation.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(12, 28)
+        Me.Label24.Location = New System.Drawing.Point(14, 26)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(85, 26)
+        Me.Label24.Size = New System.Drawing.Size(87, 13)
         Me.Label24.TabIndex = 0
-        Me.Label24.Text = "Internet Lookup " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Behaviour"
-        '
-        'chkImportOnInternetFailIgnoreWhenInteractive
-        '
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.AutoSize = True
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.Location = New System.Drawing.Point(364, 58)
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.Name = "chkImportOnInternetFailIgnoreWhenInteractive"
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.Size = New System.Drawing.Size(196, 17)
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.TabIndex = 4
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.Text = "Don't Import File in Interactive Mode"
-        Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFailIgnoreWhenInteractive, "If you want AMCupdater to import files in background mode (MyFIlms global update)" & _
-                ", " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "but do NOT want AMCupdater to import files for AMCupdater interactive GUI mo" & _
-                "de, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "you can set this option.")
-        Me.chkImportOnInternetFailIgnoreWhenInteractive.UseVisualStyleBackColor = True
+        Me.Label24.Text = "Import Behaviour"
         '
         'cbInternetLookupBehaviour
         '
         Me.cbInternetLookupBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbInternetLookupBehaviour.FormattingEnabled = True
-        Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(103, 33)
+        Me.cbInternetLookupBehaviour.Items.AddRange(New Object() {"Auto match only", "Auto match & media only if no match", "Auto match & ask if no match", "Manual match (always ask)"})
+        Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(116, 23)
         Me.cbInternetLookupBehaviour.Name = "cbInternetLookupBehaviour"
-        Me.cbInternetLookupBehaviour.Size = New System.Drawing.Size(198, 21)
+        Me.cbInternetLookupBehaviour.Size = New System.Drawing.Size(239, 21)
         Me.cbInternetLookupBehaviour.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.cbInternetLookupBehaviour, resources.GetString("cbInternetLookupBehaviour.ToolTip"))
-        '
-        'chkImportOnInternetFail
-        '
-        Me.chkImportOnInternetFail.AutoSize = True
-        Me.chkImportOnInternetFail.Location = New System.Drawing.Point(364, 35)
-        Me.chkImportOnInternetFail.Name = "chkImportOnInternetFail"
-        Me.chkImportOnInternetFail.Size = New System.Drawing.Size(184, 17)
-        Me.chkImportOnInternetFail.TabIndex = 3
-        Me.chkImportOnInternetFail.Text = "Import File if Internet Lookup Fails"
-        Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFail, resources.GetString("chkImportOnInternetFail.ToolTip"))
-        Me.chkImportOnInternetFail.UseVisualStyleBackColor = True
         '
         'GroupBox23
         '
@@ -822,7 +860,7 @@ Partial Class Form1
         Me.GroupBox23.Controls.Add(Me.btnSelectParserFile)
         Me.GroupBox23.Controls.Add(Me.Label23)
         Me.GroupBox23.Controls.Add(Me.txtParserFilePath)
-        Me.GroupBox23.Location = New System.Drawing.Point(11, 337)
+        Me.GroupBox23.Location = New System.Drawing.Point(11, 353)
         Me.GroupBox23.Name = "GroupBox23"
         Me.GroupBox23.Size = New System.Drawing.Size(572, 79)
         Me.GroupBox23.TabIndex = 5
@@ -832,7 +870,7 @@ Partial Class Form1
         'txtParserFilePathDisplay
         '
         Me.txtParserFilePathDisplay.Enabled = False
-        Me.txtParserFilePathDisplay.Location = New System.Drawing.Point(103, 17)
+        Me.txtParserFilePathDisplay.Location = New System.Drawing.Point(116, 18)
         Me.txtParserFilePathDisplay.Name = "txtParserFilePathDisplay"
         Me.txtParserFilePathDisplay.Size = New System.Drawing.Size(135, 20)
         Me.txtParserFilePathDisplay.TabIndex = 1
@@ -843,7 +881,7 @@ Partial Class Form1
         Me.cbTitleHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbTitleHandling.FormattingEnabled = True
         Me.cbTitleHandling.Items.AddRange(New Object() {"File Name", "Folder Name", "Relative Name", "File Name + Internet Lookup", "Folder Name + Internet Lookup", "Relative Name + Internet Lookup"})
-        Me.cbTitleHandling.Location = New System.Drawing.Point(103, 43)
+        Me.cbTitleHandling.Location = New System.Drawing.Point(116, 44)
         Me.cbTitleHandling.Name = "cbTitleHandling"
         Me.cbTitleHandling.Size = New System.Drawing.Size(198, 21)
         Me.cbTitleHandling.TabIndex = 5
@@ -870,7 +908,7 @@ Partial Class Form1
         'btnSelectParserFile
         '
         Me.btnSelectParserFile.CausesValidation = False
-        Me.btnSelectParserFile.Location = New System.Drawing.Point(269, 17)
+        Me.btnSelectParserFile.Location = New System.Drawing.Point(282, 18)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(32, 20)
         Me.btnSelectParserFile.TabIndex = 2
@@ -888,7 +926,7 @@ Partial Class Form1
         '
         'txtParserFilePath
         '
-        Me.txtParserFilePath.Location = New System.Drawing.Point(103, 17)
+        Me.txtParserFilePath.Location = New System.Drawing.Point(116, 18)
         Me.txtParserFilePath.Name = "txtParserFilePath"
         Me.txtParserFilePath.Size = New System.Drawing.Size(198, 20)
         Me.txtParserFilePath.TabIndex = 4
@@ -903,7 +941,7 @@ Partial Class Form1
         Me.GroupBox17.Controls.Add(Me.chkPurgeMissing)
         Me.GroupBox17.Controls.Add(Me.chkOverwriteXML)
         Me.GroupBox17.Controls.Add(Me.chkBackupXMLFirst)
-        Me.GroupBox17.Location = New System.Drawing.Point(11, 156)
+        Me.GroupBox17.Location = New System.Drawing.Point(11, 137)
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(572, 67)
         Me.GroupBox17.TabIndex = 3
@@ -1184,6 +1222,7 @@ Partial Class Form1
         '
         'grpManualInternetLookupSettings
         '
+        Me.grpManualInternetLookupSettings.Controls.Add(Me.cbManualInternetLookupAlwaysPrompt)
         Me.grpManualInternetLookupSettings.Controls.Add(Me.chkManualDontAskInteractive)
         Me.grpManualInternetLookupSettings.Controls.Add(Me.txtManualInternetParserPathDisplay)
         Me.grpManualInternetLookupSettings.Controls.Add(Me.Button2)
@@ -1199,23 +1238,33 @@ Partial Class Form1
         Me.grpManualInternetLookupSettings.TabStop = False
         Me.grpManualInternetLookupSettings.Text = "Internet Grabber Options ..."
         '
+        'cbManualInternetLookupAlwaysPrompt
+        '
+        Me.cbManualInternetLookupAlwaysPrompt.AutoSize = True
+        Me.cbManualInternetLookupAlwaysPrompt.Location = New System.Drawing.Point(343, 65)
+        Me.cbManualInternetLookupAlwaysPrompt.Name = "cbManualInternetLookupAlwaysPrompt"
+        Me.cbManualInternetLookupAlwaysPrompt.Size = New System.Drawing.Size(93, 17)
+        Me.cbManualInternetLookupAlwaysPrompt.TabIndex = 47
+        Me.cbManualInternetLookupAlwaysPrompt.Text = "always prompt"
+        Me.cbManualInternetLookupAlwaysPrompt.UseVisualStyleBackColor = True
+        '
         'chkManualDontAskInteractive
         '
         Me.chkManualDontAskInteractive.AutoSize = True
-        Me.chkManualDontAskInteractive.Location = New System.Drawing.Point(341, 58)
+        Me.chkManualDontAskInteractive.Location = New System.Drawing.Point(465, 58)
         Me.chkManualDontAskInteractive.Name = "chkManualDontAskInteractive"
-        Me.chkManualDontAskInteractive.Size = New System.Drawing.Size(192, 30)
+        Me.chkManualDontAskInteractive.Size = New System.Drawing.Size(78, 30)
         Me.chkManualDontAskInteractive.TabIndex = 6
-        Me.chkManualDontAskInteractive.Text = "Don't ask, if no match" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(no data update, if auto match fails)"
+        Me.chkManualDontAskInteractive.Text = "Don't ask," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "if no match"
         Me.ToolTip1.SetToolTip(Me.chkManualDontAskInteractive, resources.GetString("chkManualDontAskInteractive.ToolTip"))
         Me.chkManualDontAskInteractive.UseVisualStyleBackColor = True
         '
         'txtManualInternetParserPathDisplay
         '
         Me.txtManualInternetParserPathDisplay.Enabled = False
-        Me.txtManualInternetParserPathDisplay.Location = New System.Drawing.Point(99, 35)
+        Me.txtManualInternetParserPathDisplay.Location = New System.Drawing.Point(107, 35)
         Me.txtManualInternetParserPathDisplay.Name = "txtManualInternetParserPathDisplay"
-        Me.txtManualInternetParserPathDisplay.Size = New System.Drawing.Size(174, 20)
+        Me.txtManualInternetParserPathDisplay.Size = New System.Drawing.Size(166, 20)
         Me.txtManualInternetParserPathDisplay.TabIndex = 1
         '
         'Button2
@@ -1230,11 +1279,11 @@ Partial Class Form1
         'Label42
         '
         Me.Label42.AutoSize = True
-        Me.Label42.Location = New System.Drawing.Point(8, 60)
+        Me.Label42.Location = New System.Drawing.Point(8, 66)
         Me.Label42.Name = "Label42"
-        Me.Label42.Size = New System.Drawing.Size(85, 26)
+        Me.Label42.Size = New System.Drawing.Size(93, 13)
         Me.Label42.TabIndex = 4
-        Me.Label42.Text = "Internet Lookup " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Behaviour"
+        Me.Label42.Text = "Update Behaviour"
         '
         'btnManualSelectInternetParserPath
         '
@@ -1250,16 +1299,18 @@ Partial Class Form1
         '
         Me.cbManualInternetLookupBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbManualInternetLookupBehaviour.FormattingEnabled = True
-        Me.cbManualInternetLookupBehaviour.Location = New System.Drawing.Point(99, 63)
+        Me.cbManualInternetLookupBehaviour.Items.AddRange(New Object() {"Auto match only", "Auto match & ask if no match", "Manual match (always ask)"})
+        Me.cbManualInternetLookupBehaviour.Location = New System.Drawing.Point(107, 63)
         Me.cbManualInternetLookupBehaviour.Name = "cbManualInternetLookupBehaviour"
-        Me.cbManualInternetLookupBehaviour.Size = New System.Drawing.Size(227, 21)
+        Me.cbManualInternetLookupBehaviour.Size = New System.Drawing.Size(219, 21)
         Me.cbManualInternetLookupBehaviour.TabIndex = 5
+        Me.ToolTip1.SetToolTip(Me.cbManualInternetLookupBehaviour, resources.GetString("cbManualInternetLookupBehaviour.ToolTip"))
         '
         'txtManualInternetParserPath
         '
-        Me.txtManualInternetParserPath.Location = New System.Drawing.Point(99, 35)
+        Me.txtManualInternetParserPath.Location = New System.Drawing.Point(107, 35)
         Me.txtManualInternetParserPath.Name = "txtManualInternetParserPath"
-        Me.txtManualInternetParserPath.Size = New System.Drawing.Size(227, 20)
+        Me.txtManualInternetParserPath.Size = New System.Drawing.Size(219, 20)
         Me.txtManualInternetParserPath.TabIndex = 46
         Me.txtManualInternetParserPath.Visible = False
         '
@@ -4319,27 +4370,27 @@ Partial Class Form1
         Me.DataGridViewMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridViewMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridViewMovie.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewMovie.DefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridViewMovie.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewMovie.Location = New System.Drawing.Point(0, 22)
         Me.DataGridViewMovie.Name = "DataGridViewMovie"
         Me.DataGridViewMovie.ReadOnly = True
         Me.DataGridViewMovie.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridViewMovie.RowHeadersVisible = False
         Me.DataGridViewMovie.RowHeadersWidth = 20
         Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -4350,8 +4401,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn1
         '
         Me.DataGridViewTextBoxColumn1.DataPropertyName = "Number"
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
         Me.DataGridViewTextBoxColumn1.ReadOnly = True
@@ -4360,8 +4411,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn4
         '
         Me.DataGridViewTextBoxColumn4.DataPropertyName = "Year"
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
         Me.DataGridViewTextBoxColumn4.ReadOnly = True
@@ -4384,8 +4435,8 @@ Partial Class Form1
         'DataGridViewTextBoxColumn5
         '
         Me.DataGridViewTextBoxColumn5.DataPropertyName = "DateAdded"
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
@@ -5656,26 +5707,26 @@ Partial Class Form1
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.MovieBindingSource
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
         Me.ListVideos.ReadOnly = True
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
-        DataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle21.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.ListVideos.RowHeadersVisible = False
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
@@ -5750,6 +5801,8 @@ Partial Class Form1
         Me.Import_Movies.PerformLayout()
         Me.GroupBox27.ResumeLayout(False)
         Me.GroupBox27.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.GroupBox9.PerformLayout()
         Me.GroupBox23.ResumeLayout(False)
         Me.GroupBox23.PerformLayout()
         Me.GroupBox17.ResumeLayout(False)
@@ -6179,7 +6232,7 @@ Partial Class Form1
     Friend WithEvents chkParseTrailers As System.Windows.Forms.CheckBox
     Friend WithEvents cbTitleHandling As System.Windows.Forms.ComboBox
     Friend WithEvents Label43 As System.Windows.Forms.Label
-    Friend WithEvents chkImportOnInternetFailIgnoreWhenInteractive As System.Windows.Forms.CheckBox
+    Friend WithEvents chkImportOnInternetFailInGuiMode As System.Windows.Forms.CheckBox
     Friend WithEvents txtParserFilePathDisplay As System.Windows.Forms.TextBox
     Friend WithEvents txtManualInternetParserPathDisplay As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox27 As System.Windows.Forms.GroupBox
@@ -6383,4 +6436,8 @@ Partial Class Form1
     Friend WithEvents btnSelectConfigFile As System.Windows.Forms.Button
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents cbSkipExcludedMovieFiles As System.Windows.Forms.CheckBox
+    Friend WithEvents cbInternetLookupAlwaysPrompt As System.Windows.Forms.CheckBox
+    Friend WithEvents lblInternetLookupCaseExplanation As System.Windows.Forms.Label
+    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
+    Friend WithEvents cbManualInternetLookupAlwaysPrompt As System.Windows.Forms.CheckBox
 End Class

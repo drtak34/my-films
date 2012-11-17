@@ -71,6 +71,11 @@ Public Class Form1
         BtnImportWatcher.Visible = False
         HideTabPage(ViewPersons)
         HideTabPage(ViewCatalog)
+        cbInternetLookupAlwaysPrompt.Visible = False
+        chkDontAskInteractive.Visible = False
+        chkImportOnInternetFailInGuiMode.Visible = False
+        cbManualInternetLookupAlwaysPrompt.Visible = False
+        chkManualDontAskInteractive.Visible = False
 #Else
         ToolStripMenuItemDebug.Visible = True
         ToolStripMenuItemOptions.Visible = True
@@ -244,27 +249,29 @@ Public Class Form1
         cbManualParameterFieldList2.ValueMember = "FieldName"
         cbManualParameterFieldList2.SelectedIndex = -1
 
-        Dim dtInternetLookupBehaviour As New DataTable
-        With dtInternetLookupBehaviour
-            .Columns.Add("Value", System.Type.GetType("System.Boolean"))
-            .Columns.Add("Display", System.Type.GetType("System.String"))
-            .Rows.Add(True, "Always offer choice of movie")
-            .Rows.Add(False, "Try to find best match automatically")
-        End With
-        Dim dvInternetLookupBehaviour1 As New DataView(dtInternetLookupBehaviour)
-        Dim dvInternetLookupBehaviour2 As New DataView(dtInternetLookupBehaviour)
-        With cbInternetLookupBehaviour
-            .DataSource = dvInternetLookupBehaviour1
-            .DisplayMember = "Display"
-            .ValueMember = "Value"
-            .SelectedIndex = -1
-        End With
-        With cbManualInternetLookupBehaviour
-            .DataSource = dvInternetLookupBehaviour2
-            .DisplayMember = "Display"
-            .ValueMember = "Value"
-            .SelectedIndex = -1
-        End With
+        'Dim dtInternetLookupBehaviour As New DataTable
+        'With dtInternetLookupBehaviour
+        '    .Columns.Add("Value", System.Type.GetType("System.Boolean"))
+        '    .Columns.Add("Display", System.Type.GetType("System.String"))
+        '    .Rows.Add(True, "Always offer choice of movie")
+        '    .Rows.Add(False, "Try to find best match automatically")
+        'End With
+        'Dim dvInternetLookupBehaviour1 As New DataView(dtInternetLookupBehaviour)
+        'Dim dvInternetLookupBehaviour2 As New DataView(dtInternetLookupBehaviour)
+
+        'With cbInternetLookupBehaviour
+        '    .DataSource = dvInternetLookupBehaviour1
+        '    .DisplayMember = "Display"
+        '    .ValueMember = "Value"
+        '    .SelectedIndex = -1
+        'End With
+
+        'With cbManualInternetLookupBehaviour
+        '    .DataSource = dvInternetLookupBehaviour2
+        '    .DisplayMember = "Display"
+        '    .ValueMember = "Value"
+        '    .SelectedIndex = -1
+        'End With
 
         MediaData = New Hashtable
         'MediaData.Add("originaltitle", "originaltitle")
@@ -523,15 +530,40 @@ Public Class Form1
     End Sub
 
     Private Sub btnJustDoIt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnJustDoIt.Click
+        Dim currentusecase As String = cbInternetLookupBehaviour.Text ' saves current settings to later restore it
+        If (currentusecase = "Auto match, then manual match") Then
 
-        btnParseXML_Click(Nothing, Nothing)
-        btnProcessMovieList_Click(Nothing, Nothing)
-        'btnProcessTrailerList_Click(Nothing, Nothing) ' still has to be implemented - is just a remark
-        btnFindOrphans_Click(Nothing, Nothing)
-        If btnUpdateXML.Enabled = True Then
-            btnUpdateXML_Click(Nothing, Nothing)
+            cbInternetLookupBehaviour.Text = "Auto match only"
+            ApplyUseCasesToSettings()
+
+            btnParseXML_Click(Nothing, Nothing)
+            btnProcessMovieList_Click(Nothing, Nothing)
+            btnFindOrphans_Click(Nothing, Nothing)
+            If btnUpdateXML.Enabled = True Then
+                btnUpdateXML_Click(Nothing, Nothing)
+            End If
+
+            cbInternetLookupBehaviour.Text = "Manual match (always ask)"
+            ApplyUseCasesToSettings()
+
+            btnParseXML_Click(Nothing, Nothing)
+            btnProcessMovieList_Click(Nothing, Nothing)
+            btnFindOrphans_Click(Nothing, Nothing)
+            If btnUpdateXML.Enabled = True Then
+                btnUpdateXML_Click(Nothing, Nothing)
+            End If
+
+            cbInternetLookupBehaviour.Text = currentusecase
+            ApplyUseCasesToSettings()
+        Else
+            btnParseXML_Click(Nothing, Nothing)
+            btnProcessMovieList_Click(Nothing, Nothing)
+            'btnProcessTrailerList_Click(Nothing, Nothing) ' still has to be implemented - is just a remark
+            btnFindOrphans_Click(Nothing, Nothing)
+            If btnUpdateXML.Enabled = True Then
+                btnUpdateXML_Click(Nothing, Nothing)
+            End If
         End If
-
     End Sub
 
     Private Sub BtnImportWatcher_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnImportWatcher.Click
@@ -2164,8 +2196,6 @@ Public Class Form1
         If chkProhibitInternetLookup.Checked = True Then
             lblInternetLookupRequired.Visible = False
         End If
-
-
     End Sub
 
 #End Region
@@ -2378,12 +2408,12 @@ Public Class Form1
         CurrentSettings.Only_Add_Missing_Data = chkManualUpdateRecordsOnlyMissingData.Checked
         CurrentSettings.Only_Update_With_Nonempty_Data = chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Checked
 
-        CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
+        CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupAlwaysPrompt.Checked 'cbManualInternetLookupBehaviour.SelectedValue
         CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
 
         CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
-        CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = chkImportOnInternetFailIgnoreWhenInteractive.Checked
-        CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupBehaviour.SelectedValue
+        CurrentSettings.Import_File_On_Internet_Lookup_Failure_In_Guimode = chkImportOnInternetFailInGuiMode.Checked
+        CurrentSettings.Internet_Lookup_Always_Prompt = cbInternetLookupAlwaysPrompt.Checked 'cbInternetLookupBehaviour.SelectedValue
 
         CurrentSettings.Group_Name_Identifier = txtGroupNameIdentifier.Text
         CurrentSettings.Series_Name_Identifier = txtSeriesNameIdentifier.Text
@@ -2525,8 +2555,8 @@ Public Class Form1
             txtDefaultFileTypesNonMedia.Text = CurrentSettings.File_Types_Non_Media
             txtTrailerIentificationStrings.Text = CurrentSettings.File_Types_Trailer
             chkImportOnInternetFail.Checked = CurrentSettings.Import_File_On_Internet_Lookup_Failure
-            chkImportOnInternetFailIgnoreWhenInteractive.Checked = CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode
-            cbInternetLookupBehaviour.SelectedValue = CurrentSettings.Internet_Lookup_Always_Prompt
+            chkImportOnInternetFailInGuiMode.Checked = CurrentSettings.Import_File_On_Internet_Lookup_Failure_In_Guimode
+            cbInternetLookupAlwaysPrompt.Checked = CurrentSettings.Internet_Lookup_Always_Prompt 'cbInternetLookupBehaviour.SelectedValue = CurrentSettings.Internet_Lookup_Always_Prompt
             txtParserFilePath.Text = CurrentSettings.Internet_Parser_Path
             cbLogLevel.SelectedItem = CurrentSettings.Log_Level
             txtMovieFolder.Text = CurrentSettings.Movie_Scan_Path
@@ -2570,9 +2600,9 @@ Public Class Form1
 
             txtManualInternetParserPath.Text = CurrentSettings.Manual_Internet_Parser_Path
             If CurrentSettings.Manual_Internet_Lookup_Always_Prompt = "True" Then
-                cbManualInternetLookupBehaviour.SelectedValue = True
+                cbManualInternetLookupAlwaysPrompt.Checked = True ' cbManualInternetLookupBehaviour.SelectedValue = True
             Else
-                cbManualInternetLookupBehaviour.SelectedValue = False
+                cbManualInternetLookupAlwaysPrompt.Checked = False ' cbManualInternetLookupBehaviour.SelectedValue = False
             End If
             If CurrentSettings.Check_Field_Handling = True Then
                 cbCheckHandling.SelectedItem = "Checked"
@@ -2677,10 +2707,10 @@ Public Class Form1
                 chkImportOnInternetFail.Checked = False
             End If
 
-            If (CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = "True") Then
-                chkImportOnInternetFailIgnoreWhenInteractive.Checked = True
+            If (CurrentSettings.Import_File_On_Internet_Lookup_Failure_In_Guimode = "True") Then
+                chkImportOnInternetFailInGuiMode.Checked = True
             Else
-                chkImportOnInternetFailIgnoreWhenInteractive.Checked = False
+                chkImportOnInternetFailInGuiMode.Checked = False
             End If
 
             If chkOverwriteXML.Checked = True Then
@@ -2691,11 +2721,10 @@ Public Class Form1
             End If
 
             If CurrentSettings.Internet_Lookup_Always_Prompt = "True" Then
-                cbInternetLookupBehaviour.SelectedValue = True
+                cbInternetLookupAlwaysPrompt.Checked = True ' cbInternetLookupBehaviour.SelectedValue = True
             Else
-                cbInternetLookupBehaviour.SelectedValue = False
+                cbInternetLookupAlwaysPrompt.Checked = False ' cbInternetLookupBehaviour.SelectedValue = False
             End If
-
 
             If CurrentSettings.Store_Image_With_Relative_Path = True Then
                 cbPictureHandling.SelectedItem = "Relative Path"
@@ -2711,11 +2740,99 @@ Public Class Form1
                 cbPictureHandling.SelectedItem = "Create Moviethumb"
             End If
 
+            ' set use case selector according settings for import tab
+            If cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = True And chkImportOnInternetFailInGuiMode.Checked = False Then
+                cbInternetLookupBehaviour.Text = "Auto match only" '"Silent Mode - no import if no match"
+            ElseIf cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = True And chkImportOnInternetFailInGuiMode.Checked = True Then
+                cbInternetLookupBehaviour.Text = "Auto match & media only if no match" ' "Silent Mode - import media if no match"
+            ElseIf cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = False And chkImportOnInternetFailInGuiMode.Checked = True Then
+                cbInternetLookupBehaviour.Text = "Auto match & ask if no match" ' default? ' "Interactive Mode - only ask if no match"
+            ElseIf cbInternetLookupAlwaysPrompt.Checked = True And chkDontAskInteractive.Checked = False And chkImportOnInternetFailInGuiMode.Checked = False Then
+                cbInternetLookupBehaviour.Text = "Manual match (always ask)" ' "Interactive Mode - always ask"
+            Else
+                cbInternetLookupBehaviour.Text = ""
+            End If
+
+            ' set use case selector according settings for update tab
+            If cbManualInternetLookupAlwaysPrompt.Checked = False And chkManualDontAskInteractive.Checked = True Then
+                cbManualInternetLookupBehaviour.Text = "Auto match only" '"Silent Mode - no import if no match"
+            ElseIf cbManualInternetLookupAlwaysPrompt.Checked = False And chkManualDontAskInteractive.Checked = False Then
+                cbManualInternetLookupBehaviour.Text = "Auto match & ask if no match" ' default? ' "Interactive Mode - only ask if no match"
+            ElseIf cbManualInternetLookupAlwaysPrompt.Checked = True And chkManualDontAskInteractive.Checked = False Then
+                cbManualInternetLookupBehaviour.Text = "Manual match (always ask)" ' "Interactive Mode - always ask"
+            Else
+                cbManualInternetLookupBehaviour.Text = ""
+            End If
+
             Me.ValidateChildren()
 
         End If
     End Sub
+    Private Sub ApplyUseCasesToSettings()
 
+        Select Case cbInternetLookupBehaviour.SelectedItem
+            Case "Auto match, then manual match" ' ' 2 runs one after each other
+                btnParseXML.Enabled = False
+                btnProcessMovieList.Enabled = False
+                btnFindOrphans.Enabled = False
+                btnUpdateXML.Enabled = False
+
+            Case Else
+                btnParseXML.Enabled = True
+                btnProcessMovieList.Enabled = True
+                btnFindOrphans.Enabled = True
+                btnUpdateXML.Enabled = True
+        End Select
+
+        Select Case cbInternetLookupBehaviour.SelectedItem
+            Case "Auto match only" '"Silent Mode - no import if no match"
+                cbInternetLookupAlwaysPrompt.Checked = False  ' internetlookup always prompt
+                chkDontAskInteractive.Checked = True ' Don't ask if no match
+                chkImportOnInternetFailInGuiMode.Checked = False ' explanation of use case
+                lblInternetLookupCaseExplanation.Text = "Unattended - this mode allows you to import movies unattended, but only with correct matches." & Environment.NewLine & "Films that cannot be matched will not be imported. You can rerun the import using one of the interactive modes and select correct matches for the ones AMCU could not match automatically."
+
+            Case "Auto match & media only if no match" ' "Silent Mode - import media if no match"
+                cbInternetLookupAlwaysPrompt.Checked = False
+                chkDontAskInteractive.Checked = True
+                chkImportOnInternetFailInGuiMode.Checked = True
+                lblInternetLookupCaseExplanation.Text = "Unattended - this mode allows you to import movies unattended and include films, that cannot be automatically matched." & Environment.NewLine & "AMCU will not ask you if it does not find a match, instead it will import only the file name, title and media info."
+
+            Case "Auto match & ask if no match" ' default? ' "Interactive Mode - only ask if no match"
+                cbInternetLookupAlwaysPrompt.Checked = False
+                chkDontAskInteractive.Checked = False
+                chkImportOnInternetFailInGuiMode.Checked = True
+                lblInternetLookupCaseExplanation.Text = "Partly interactive - AMCU will match most of your films correctly. If it finds multiple, bad or no matches it will provide you a list with recommended matches based on year or IMDb tt numbers if available." & Environment.NewLine & "This is the most commonly used mode for most users as it provides the best results with only minimal interaction. The import process cannot run unattended because user action is required each time a movie cannot be matched."
+
+            Case "Manual match (always ask)" ' "Interactive Mode - always ask"
+                cbInternetLookupAlwaysPrompt.Checked = True
+                chkDontAskInteractive.Checked = False
+                chkImportOnInternetFailInGuiMode.Checked = False
+                lblInternetLookupCaseExplanation.Text = "Fully interactive - AMCU will not match any film automatically, instead always allows you to review the result and confirm and select the match you want." & Environment.NewLine & "This is a pure interactive mode, which allows you to always select the correct match for your films, including the manual selection of alternative websites for better results."
+
+            Case "Auto match, then manual match" ' ' 2 runs one after each other
+                lblInternetLookupCaseExplanation.Text = "Combined - this is a combination of 'Auto match only' and 'Manual match (always ask)'." & Environment.NewLine & "On first run, movies that can be matched will be imported, on a second run, the remaining will be handled interactively." & Environment.NewLine & "Note: This setting will not be saved."
+
+            Case Else
+                lblInternetLookupCaseExplanation.Text = "Default case - should not happen !" ' explanation of use case
+        End Select
+    End Sub
+
+    Private Sub ApplyManualUseCasesToSettings()
+        Select Case cbManualInternetLookupBehaviour.SelectedItem
+            Case "Auto match only" ' never ask - no update if no match"
+                cbManualInternetLookupAlwaysPrompt.Checked = False  ' internetlookup always prompt
+                chkManualDontAskInteractive.Checked = True ' Don't ask if no match
+
+            Case "Auto match & ask if no match" ' only ask if no match
+                cbManualInternetLookupAlwaysPrompt.Checked = False
+                chkManualDontAskInteractive.Checked = False
+
+            Case "Manual match (always ask)" ' always ask
+                cbManualInternetLookupAlwaysPrompt.Checked = True
+                chkManualDontAskInteractive.Checked = False
+            Case Else
+        End Select
+    End Sub
 #End Region
 
     Private Sub btnSelectFanartFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelectFanartFolder.Click
@@ -3471,6 +3588,13 @@ Public Class Form1
         ImageViewer.ShowDialog()
     End Sub
 
+    Private Sub cbInternetLookupBehaviour_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbInternetLookupBehaviour.SelectedIndexChanged
+        ApplyUseCasesToSettings()
+    End Sub
+
+    Private Sub cbManualInternetLookupBehaviour_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualInternetLookupBehaviour.SelectedIndexChanged
+        ApplyManualUseCasesToSettings()
+    End Sub
 End Class
 
 Friend Class DataColumnComparer
