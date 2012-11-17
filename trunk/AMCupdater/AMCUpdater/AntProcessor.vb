@@ -1596,11 +1596,16 @@ Public Class AntProcessor
                             .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
                             If FieldName = "Picture" Then
                                 Dim OldImage As String = ValueOld
-                                If ValueOld.Contains("\") Then
+                                If ValueOld Is Nothing Then
+                                    OldImage = ""
+                                ElseIf ValueOld.Contains("\") Then
                                     OldImage = ValueOld.Substring(ValueOld.LastIndexOf("\") + 1)
                                 End If
+
                                 Dim NewImage As String = ValueNew
-                                If ValueNew.Contains("\") Then
+                                If ValueNew Is Nothing Then
+                                    NewImage = ""
+                                ElseIf ValueNew.Contains("\") Then
                                     NewImage = ValueNew.Substring(ValueNew.LastIndexOf("\") + 1)
                                 End If
 
@@ -1608,7 +1613,7 @@ Public Class AntProcessor
                                 .PictureBoxNew.ImageLocation = If((Path.Combine(ImagePathTemp, NewImage)), "")
                             End If
                         Catch ex As Exception
-                            MsgBox("Exception adding data ('" + FieldName + "') to Movie Update Dialog: " + ex.Message, MsgBoxStyle.OkOnly)
+                            MsgBox("Error adding data ('" + FieldName + "') to Movie Update Dialog: " + ex.Message, MsgBoxStyle.OkOnly)
                         End Try
                     Next
 
