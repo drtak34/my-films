@@ -74,7 +74,8 @@ Public Class Form1
         cbInternetLookupAlwaysPrompt.Visible = False
         chkDontAskInteractive.Visible = False
         chkImportOnInternetFailInGuiMode.Visible = False
-
+        cbManualInternetLookupAlwaysPrompt.Visible = False
+        chkManualDontAskInteractive.Visible = False
 #Else
         ToolStripMenuItemDebug.Visible = True
         ToolStripMenuItemOptions.Visible = True
@@ -248,15 +249,15 @@ Public Class Form1
         cbManualParameterFieldList2.ValueMember = "FieldName"
         cbManualParameterFieldList2.SelectedIndex = -1
 
-        Dim dtInternetLookupBehaviour As New DataTable
-        With dtInternetLookupBehaviour
-            .Columns.Add("Value", System.Type.GetType("System.Boolean"))
-            .Columns.Add("Display", System.Type.GetType("System.String"))
-            .Rows.Add(True, "Always offer choice of movie")
-            .Rows.Add(False, "Try to find best match automatically")
-        End With
+        'Dim dtInternetLookupBehaviour As New DataTable
+        'With dtInternetLookupBehaviour
+        '    .Columns.Add("Value", System.Type.GetType("System.Boolean"))
+        '    .Columns.Add("Display", System.Type.GetType("System.String"))
+        '    .Rows.Add(True, "Always offer choice of movie")
+        '    .Rows.Add(False, "Try to find best match automatically")
+        'End With
         'Dim dvInternetLookupBehaviour1 As New DataView(dtInternetLookupBehaviour)
-        Dim dvInternetLookupBehaviour2 As New DataView(dtInternetLookupBehaviour)
+        'Dim dvInternetLookupBehaviour2 As New DataView(dtInternetLookupBehaviour)
 
         'With cbInternetLookupBehaviour
         '    .DataSource = dvInternetLookupBehaviour1
@@ -265,12 +266,12 @@ Public Class Form1
         '    .SelectedIndex = -1
         'End With
 
-        With cbManualInternetLookupBehaviour
-            .DataSource = dvInternetLookupBehaviour2
-            .DisplayMember = "Display"
-            .ValueMember = "Value"
-            .SelectedIndex = -1
-        End With
+        'With cbManualInternetLookupBehaviour
+        '    .DataSource = dvInternetLookupBehaviour2
+        '    .DisplayMember = "Display"
+        '    .ValueMember = "Value"
+        '    .SelectedIndex = -1
+        'End With
 
         MediaData = New Hashtable
         'MediaData.Add("originaltitle", "originaltitle")
@@ -2407,7 +2408,7 @@ Public Class Form1
         CurrentSettings.Only_Add_Missing_Data = chkManualUpdateRecordsOnlyMissingData.Checked
         CurrentSettings.Only_Update_With_Nonempty_Data = chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Checked
 
-        CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupBehaviour.SelectedValue
+        CurrentSettings.Manual_Internet_Lookup_Always_Prompt = cbManualInternetLookupAlwaysPrompt.Checked 'cbManualInternetLookupBehaviour.SelectedValue
         CurrentSettings.Manual_Internet_Parser_Path = txtManualInternetParserPath.Text
 
         CurrentSettings.Import_File_On_Internet_Lookup_Failure = chkImportOnInternetFail.Checked
@@ -2599,9 +2600,9 @@ Public Class Form1
 
             txtManualInternetParserPath.Text = CurrentSettings.Manual_Internet_Parser_Path
             If CurrentSettings.Manual_Internet_Lookup_Always_Prompt = "True" Then
-                cbManualInternetLookupBehaviour.SelectedValue = True
+                cbManualInternetLookupAlwaysPrompt.Checked = True ' cbManualInternetLookupBehaviour.SelectedValue = True
             Else
-                cbManualInternetLookupBehaviour.SelectedValue = False
+                cbManualInternetLookupAlwaysPrompt.Checked = False ' cbManualInternetLookupBehaviour.SelectedValue = False
             End If
             If CurrentSettings.Check_Field_Handling = True Then
                 cbCheckHandling.SelectedItem = "Checked"
@@ -2739,7 +2740,7 @@ Public Class Form1
                 cbPictureHandling.SelectedItem = "Create Moviethumb"
             End If
 
-            ' set use case selector according settings
+            ' set use case selector according settings for import tab
             If cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = True And chkImportOnInternetFailInGuiMode.Checked = False Then
                 cbInternetLookupBehaviour.Text = "Auto match only" '"Silent Mode - no import if no match"
             ElseIf cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = True And chkImportOnInternetFailInGuiMode.Checked = True Then
@@ -2750,6 +2751,17 @@ Public Class Form1
                 cbInternetLookupBehaviour.Text = "Manual match (always ask)" ' "Interactive Mode - always ask"
             Else
                 cbInternetLookupBehaviour.Text = ""
+            End If
+
+            ' set use case selector according settings for update tab
+            If cbManualInternetLookupAlwaysPrompt.Checked = False And chkManualDontAskInteractive.Checked = True Then
+                cbManualInternetLookupBehaviour.Text = "Auto match only" '"Silent Mode - no import if no match"
+            ElseIf cbManualInternetLookupAlwaysPrompt.Checked = False And chkManualDontAskInteractive.Checked = False Then
+                cbManualInternetLookupBehaviour.Text = "Auto match & ask if no match" ' default? ' "Interactive Mode - only ask if no match"
+            ElseIf cbManualInternetLookupAlwaysPrompt.Checked = True And chkManualDontAskInteractive.Checked = False Then
+                cbManualInternetLookupBehaviour.Text = "Manual match (always ask)" ' "Interactive Mode - always ask"
+            Else
+                cbManualInternetLookupBehaviour.Text = ""
             End If
 
             Me.ValidateChildren()
@@ -2765,7 +2777,7 @@ Public Class Form1
         Select Case cbInternetLookupBehaviour.SelectedItem
             Case "Auto match only" '"Silent Mode - no import if no match"
                 cbInternetLookupAlwaysPrompt.Checked = False  ' internetlookup always prompt
-                chkDontAskInteractive.Checked = True ' Don't ask if no match (also for MyFilms Background importer !!!
+                chkDontAskInteractive.Checked = True ' Don't ask if no match
                 chkImportOnInternetFailInGuiMode.Checked = False ' explanation of use case
                 lblInternetLookupCaseExplanation.Text = "Unattended - this mode allows you to import movies unattended, but only with correct matches." & Environment.NewLine & "Films, that cannot be matched will not be imported. You can rerun the import using one of the interactive modes and select correct matches for the ones AMCU could not match automatically."
 
@@ -2796,6 +2808,23 @@ Public Class Form1
 
             Case Else
                 lblInternetLookupCaseExplanation.Text = "Default case - should not happen !" ' explanation of use case
+        End Select
+    End Sub
+
+    Private Sub ApplyManualUseCasesToSettings()
+        Select Case cbManualInternetLookupBehaviour.SelectedItem
+            Case "Auto match only" ' never ask - no update if no match"
+                cbManualInternetLookupAlwaysPrompt.Checked = False  ' internetlookup always prompt
+                chkManualDontAskInteractive.Checked = True ' Don't ask if no match
+
+            Case "Auto match & ask if no match" ' only ask if no match
+                cbManualInternetLookupAlwaysPrompt.Checked = False
+                chkManualDontAskInteractive.Checked = False
+
+            Case "Manual match (always ask)" ' always ask
+                cbManualInternetLookupAlwaysPrompt.Checked = True
+                chkManualDontAskInteractive.Checked = False
+            Case Else
         End Select
     End Sub
 #End Region
@@ -3557,8 +3586,8 @@ Public Class Form1
         ApplyUseCasesToSettings()
     End Sub
 
-    Private Sub chkImportOnInternetFail_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkImportOnInternetFail.CheckedChanged
-
+    Private Sub cbManualInternetLookupBehaviour_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualInternetLookupBehaviour.SelectedIndexChanged
+        ApplyManualUseCasesToSettings()
     End Sub
 End Class
 
