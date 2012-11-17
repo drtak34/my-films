@@ -6976,6 +6976,59 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }.Start();
     }
 
+    private void UpdatePersonsInFacade(bool showprogressdialog)
+    {
+      LogMyFilms.Debug("UpdatePersonsInFacade() - starting background updater thread ...");
+      StopLoadingViewDetails = false;
+      new Thread(delegate(object o)
+      {
+        try
+        {
+          if (facadeFilms != null && Win32API.IsConnectedToInternet() && MyFilms.conf.PersonsEnableDownloads)
+          {
+            for (int i = 0; i < facadeFilms.Count; i++)
+            {
+              if (StopLoadingViewDetails) return; // stop download if we have exited window
+              try
+              {
+                GUIListItem item = facadeFilms[i];
+                string personname = (conf.BoolReverseNames && item.Label != EmptyFacadeValue) ? ReReverseName(item.Label) : item.Label.Replace(EmptyFacadeValue, "");
+
+
+                LogMyFilms.Info("MyFilmsPersonsUpdater - updating person '" + personname + "'");
+                bool success = MyFilmsDetail.UpdatePersonDetails(personname, item, showprogressdialog, StopLoadingViewDetails);
+
+                if (success) // create small thumbs and assign to facade icons ...
+                {
+                  //string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
+                  //item.IconImage = strActiveFacadeImages[1];
+                  //item.IconImageBig = strActiveFacadeImages[0];
+                  //item.ThumbnailImage = strActiveFacadeImages[0];
+                  //// item.NotifyPropertyChanged("ThumbnailImage");
+                }
+                Thread.Sleep(20); // sleep a bit to let CPU for the GUI
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Warn("UpdatePersonsInFacade() - error setting facadelist item '" + i + "': " + ex.Message);
+                LogMyFilms.DebugException("UpdatePersonsInFacade() - error setting facadelist item '" + i + "': " + ex.Message, ex);
+              }
+            }
+          }
+          LogMyFilms.Debug("UpdatePersonsInFacade() - Threaded person details loader finished.");
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.DebugException("Thread 'MyFilmsPersonsUpdater' - exception! - ", ex);
+        }
+        GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+        {
+          // after background thread has finished !
+          return 0;
+        }, 0, 0, null);
+      }) { Name = "MyFilmsPersonsUpdater", IsBackground = true }.Start();
+    }
+
     private void UpdatePersons(ArrayList persons, bool showprogressdialog)
     {
       LogMyFilms.Debug("UpdatePersons() - persons to update: '" + persons.Count + "'");
@@ -7005,7 +7058,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               i++;
             }
           }
-          if (dlgPrgrs != null) 
+          if (dlgPrgrs != null)
           {
             dlgPrgrs.Percentage = 100; dlgPrgrs.ShowWaitCursor = false; dlgPrgrs.SetLine(1, GUILocalizeStrings.Get(1079846)); dlgPrgrs.SetLine(2, ""); Thread.Sleep(50); dlgPrgrs.Close(); // Done...
           }
@@ -10701,11 +10754,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 choice.Add("downloadtrailertmdball");
               }
 
-              if (MyFilmsDetail.ExtendedStartmode("Context: IMDB Update for all persons of movie")) // check if specialmode is configured for disabled features
-              {
-                dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
-                choice.Add("updatepersonmovie");
-              }
+              dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
+              choice.Add("updatepersonmovie");
 
               if (conf.UseThumbsForPersons && !string.IsNullOrEmpty(conf.StrPathArtist))
               {
@@ -10740,6 +10790,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB/TMDB
               choice.Add("updateperson");
+
+              //if (MyFilmsDetail.ExtendedStartmode("Context Artist: update all persons in facade based on IMDB/TMDB"))
+              //{
+                if (facadeFilms.Count > 1 && !(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn))
+                {
+                  dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
+                  choice.Add("updatepersonfacadelist");
+                }
+              // }
 
               if (MyFilmsDetail.ExtendedStartmode("Context Artist: grabber scripts based person info update"))
               {
@@ -11600,6 +11659,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "updatepersonmovie":
           {
             UpdatePersons(MyFilms.Search_String(MyFilms.r[facadeFilms.SelectedListItem.ItemId]["Persons"].ToString()), true);
+            break;
+          }
+
+        case "updatepersonfacadelist":
+          {
+            UpdatePersonsInFacade(true);
             break;
           }
 
