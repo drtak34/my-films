@@ -2745,8 +2745,10 @@ Public Class Form1
                 cbInternetLookupBehaviour.Text = "Auto match only" '"Silent Mode - no import if no match"
             ElseIf cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = True And chkImportOnInternetFailInGuiMode.Checked = True Then
                 cbInternetLookupBehaviour.Text = "Auto match & media only if no match" ' "Silent Mode - import media if no match"
-            ElseIf cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = False And chkImportOnInternetFailInGuiMode.Checked = True Then
+            ElseIf cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = False And chkImportOnInternetFailInGuiMode.Checked = False Then
                 cbInternetLookupBehaviour.Text = "Auto match & ask if no match" ' default? ' "Interactive Mode - only ask if no match"
+                'ElseIf cbInternetLookupAlwaysPrompt.Checked = False And chkDontAskInteractive.Checked = False And chkImportOnInternetFailInGuiMode.Checked = True Then 'use case to import media, if manual selection fails - not supported - we map to 'auto match & ask if no match'
+                '    cbInternetLookupBehaviour.Text = "Auto match & ask if no match" '
             ElseIf cbInternetLookupAlwaysPrompt.Checked = True And chkDontAskInteractive.Checked = False And chkImportOnInternetFailInGuiMode.Checked = False Then
                 cbInternetLookupBehaviour.Text = "Manual match (always ask)" ' "Interactive Mode - always ask"
             Else
@@ -2788,7 +2790,7 @@ Public Class Form1
             Case "Auto match only" '"Silent Mode - no import if no match"
                 cbInternetLookupAlwaysPrompt.Checked = False  ' internetlookup always prompt
                 chkDontAskInteractive.Checked = True ' Don't ask if no match
-                chkImportOnInternetFailInGuiMode.Checked = False ' explanation of use case
+                chkImportOnInternetFailInGuiMode.Checked = False ' import if matching fails in AMC GUI mode
                 lblInternetLookupCaseExplanation.Text = "Unattended - this mode allows you to import movies unattended, but only with correct matches." & Environment.NewLine & "Films that cannot be matched will not be imported. You can rerun the import using one of the interactive modes and select correct matches for the ones AMCU could not match automatically."
 
             Case "Auto match & media only if no match" ' "Silent Mode - import media if no match"
@@ -2800,7 +2802,7 @@ Public Class Form1
             Case "Auto match & ask if no match" ' default? ' "Interactive Mode - only ask if no match"
                 cbInternetLookupAlwaysPrompt.Checked = False
                 chkDontAskInteractive.Checked = False
-                chkImportOnInternetFailInGuiMode.Checked = True
+                chkImportOnInternetFailInGuiMode.Checked = False
                 lblInternetLookupCaseExplanation.Text = "Partly interactive - AMCU will match most of your films correctly. If it finds multiple, bad or no matches it will provide you a list with recommended matches based on year or IMDb tt numbers if available." & Environment.NewLine & "This is the most commonly used mode for most users as it provides the best results with only minimal interaction. The import process cannot run unattended because user action is required each time a movie cannot be matched."
 
             Case "Manual match (always ask)" ' "Interactive Mode - always ask"

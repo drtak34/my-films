@@ -89,7 +89,7 @@
     <Value>False</Value>
   </Values>
   <Values Option="Internet_Lookup_Always_Prompt">
-    <Value>false</Value>
+    <Value>False</Value>
   </Values>
   <Values Option="Read_DVD_Label">
     <Value>False</Value>
