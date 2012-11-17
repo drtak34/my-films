@@ -2769,17 +2769,27 @@ Public Class Form1
         End If
     End Sub
     Private Sub ApplyUseCasesToSettings()
-        btnParseXML.Enabled = True
-        btnProcessMovieList.Enabled = True
-        btnFindOrphans.Enabled = True
-        btnUpdateXML.Enabled = True
+
+        Select Case cbInternetLookupBehaviour.SelectedItem
+            Case "Auto match, then manual match" ' ' 2 runs one after each other
+                btnParseXML.Enabled = False
+                btnProcessMovieList.Enabled = False
+                btnFindOrphans.Enabled = False
+                btnUpdateXML.Enabled = False
+
+            Case Else
+                btnParseXML.Enabled = True
+                btnProcessMovieList.Enabled = True
+                btnFindOrphans.Enabled = True
+                btnUpdateXML.Enabled = True
+        End Select
 
         Select Case cbInternetLookupBehaviour.SelectedItem
             Case "Auto match only" '"Silent Mode - no import if no match"
                 cbInternetLookupAlwaysPrompt.Checked = False  ' internetlookup always prompt
                 chkDontAskInteractive.Checked = True ' Don't ask if no match
                 chkImportOnInternetFailInGuiMode.Checked = False ' explanation of use case
-                lblInternetLookupCaseExplanation.Text = "Unattended - this mode allows you to import movies unattended, but only with correct matches." & Environment.NewLine & "Films, that cannot be matched will not be imported. You can rerun the import using one of the interactive modes and select correct matches for the ones AMCU could not match automatically."
+                lblInternetLookupCaseExplanation.Text = "Unattended - this mode allows you to import movies unattended, but only with correct matches." & Environment.NewLine & "Films that cannot be matched will not be imported. You can rerun the import using one of the interactive modes and select correct matches for the ones AMCU could not match automatically."
 
             Case "Auto match & media only if no match" ' "Silent Mode - import media if no match"
                 cbInternetLookupAlwaysPrompt.Checked = False
@@ -2791,7 +2801,7 @@ Public Class Form1
                 cbInternetLookupAlwaysPrompt.Checked = False
                 chkDontAskInteractive.Checked = False
                 chkImportOnInternetFailInGuiMode.Checked = True
-                lblInternetLookupCaseExplanation.Text = "Partly interactive - AMCU will match most of your films correctly. If it finds multiple, bad or no matches it will provide you a list with recommended matches based on year or IMDb tt numbers if available." & Environment.NewLine & "This is the most commonly used mode for most users as it provides the best results with only minimal interaction. The import process cannot run unattended, as user action is required each time a movie cannot be matched."
+                lblInternetLookupCaseExplanation.Text = "Partly interactive - AMCU will match most of your films correctly. If it finds multiple, bad or no matches it will provide you a list with recommended matches based on year or IMDb tt numbers if available." & Environment.NewLine & "This is the most commonly used mode for most users as it provides the best results with only minimal interaction. The import process cannot run unattended because user action is required each time a movie cannot be matched."
 
             Case "Manual match (always ask)" ' "Interactive Mode - always ask"
                 cbInternetLookupAlwaysPrompt.Checked = True
@@ -2801,10 +2811,6 @@ Public Class Form1
 
             Case "Auto match, then manual match" ' ' 2 runs one after each other
                 lblInternetLookupCaseExplanation.Text = "Combined - this is a combination of 'Auto match only' and 'Manual match (always ask)'." & Environment.NewLine & "On first run, movies that can be matched will be imported, on a second run, the remaining will be handled interactively." & Environment.NewLine & "Note: This setting will not be saved."
-                btnParseXML.Enabled = False
-                btnProcessMovieList.Enabled = False
-                btnFindOrphans.Enabled = False
-                btnUpdateXML.Enabled = False
 
             Case Else
                 lblInternetLookupCaseExplanation.Text = "Default case - should not happen !" ' explanation of use case
