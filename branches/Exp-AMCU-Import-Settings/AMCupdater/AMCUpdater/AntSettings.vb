@@ -346,9 +346,9 @@ Public Class AntSettings
             SetAttribute("Import_File_On_Internet_Lookup_Failure", value)
         End Set
     End Property
-    Public Property Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode() As Boolean
+    Public Property Import_File_On_Internet_Lookup_Failure_In_Guimode() As Boolean
         Get
-            Dim tempvalue As String = ReadAttribute("Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode").ToLower
+            Dim tempvalue As String = ReadAttribute("Import_File_On_Internet_Lookup_Failure_In_Guimode").ToLower
             If tempvalue = "true" Then
                 Return True
             Else
@@ -356,7 +356,7 @@ Public Class AntSettings
             End If
         End Get
         Set(ByVal value As Boolean)
-            SetAttribute("Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode", value)
+            SetAttribute("Import_File_On_Internet_Lookup_Failure_In_Guimode", value)
         End Set
     End Property
     Public Property Internet_Lookup_Always_Prompt() As Boolean
@@ -800,7 +800,7 @@ Public Class AntSettings
         End If
         dt.Rows.Add("Database_Fields_To_Import", "Date|True;Rating|True;Year|True;Length|True;VideoBitrate|True;AudioBitrate|True;Disks|True;Checked|True;MediaLabel|True;MediaType|True;OriginalTitle|True;TranslatedTitle|True;FormattedTitle|True;Director|True;Producer|True;Country|True;Category|True;Actors|True;URL|True;Description|True;Comments|True;VideoFormat|True;AudioFormat|True;Resolution|True;Framerate|True;Languages|True;Subtitles|True;Size|True;Picture|True") 'DatabaseFields
         dt.Rows.Add("Import_File_On_Internet_Lookup_Failure", "True") 'ImportFileOnInternetLookupFailure
-        dt.Rows.Add("Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode", "True") 'DontImportFileOnInternetLookupFailureInGuimode
+        dt.Rows.Add("Import_File_On_Internet_Lookup_Failure_In_Guimode", "False") ' ImportFileOnInternetLookupFailureInGuimode
         dt.Rows.Add("Internet_Lookup_Always_Prompt", "True") 'Set to True to always get choice of Movie from Internet lookup; false to attempt auto-match as before.
         dt.Rows.Add("Read_DVD_Label", "False")
         dt.Rows.Add("DVD_Drive_Letter", "")
@@ -871,7 +871,7 @@ Public Class AntSettings
                 If Not row Is Nothing Then
                     If Not row.Item("Value") Is DBNull.Value Then
                         value = dsDefaultSettings.Tables(0).Rows.Find(OptionName).Item("Value")
-                        LogEvent("ErrorEvent Reading Config Attribute '" & OptionName & "' - Using Default Value of '" & value.ToString & "'", EventLogLevel.ErrorEvent)
+                        LogEvent("Could not read Config Attribute '" & OptionName & "' - Using Default Value of '" & value.ToString & "'", EventLogLevel.ErrorEvent)
                     Else
                         LogEvent("ErrorEvent Reading Config Attribute '" & OptionName & "' - No Default Setting Found.", EventLogLevel.ErrorEvent)
                     End If

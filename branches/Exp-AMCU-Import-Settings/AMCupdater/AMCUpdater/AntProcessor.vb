@@ -2634,7 +2634,7 @@ Public Class AntProcessor
         LogEvent("  PurgeMissing : " + CurrentSettings.Purge_Missing_Files.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  PurgeMissing Always: " + CurrentSettings.Purge_Missing_Files_When_Source_Unavailable.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Import on Internet Lookup Failure : " + CurrentSettings.Import_File_On_Internet_Lookup_Failure.ToString, EventLogLevel.ImportantEvent)
-        LogEvent("  Don't Import on Internet Lookup Failure in GuiMode: " + CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode.ToString, EventLogLevel.ImportantEvent)
+        LogEvent("  Import on Internet Lookup Failure in GuiMode: " + CurrentSettings.Import_File_On_Internet_Lookup_Failure_In_Guimode.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Prohibit Internet Lookup : " + CurrentSettings.Prohibit_Internet_Lookup.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_Language    : " + CurrentSettings.Grabber_Override_Language.ToString, EventLogLevel.ImportantEvent)
         LogEvent("  Grabber_Override_PersonLimit : " + CurrentSettings.Grabber_Override_PersonLimit.ToString, EventLogLevel.ImportantEvent)
@@ -2950,10 +2950,10 @@ Public Class AntProcessor
                                 bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, Ant.LastOutputMessage)
                                 'LogEvent("ErrorEvent : " & blah.LastOutputMessage, EventLogLevel.ErrorEvent)
                             Else
-                                If CurrentSettings.Import_File_On_Internet_Lookup_Failure And (_InteractiveMode = False Or CurrentSettings.Dont_Import_File_On_Internet_Lookup_Failure_In_Guimode = False) Then
+                                If (_interactiveMode = False And CurrentSettings.Import_File_On_Internet_Lookup_Failure) Or (_interactiveMode = True And CurrentSettings.Import_File_On_Internet_Lookup_Failure_In_Guimode = True) Then
                                     'Doesn't matter if the Internet loookup worked; just load the entry:
                                     MovieRootNode.AppendChild(Ant.XMLElement)
-                                    _CountRecordsAdded += 1
+                                    _countRecordsAdded += 1
                                     Dim OutputMessage As String = String.Empty
                                     If ReplacementPath.IndexOf(";") >= 0 Then
                                         OutputMessage = " Files Imported - " & ReplacementPath
@@ -2963,25 +2963,25 @@ Public Class AntProcessor
                                     If Ant.InternetLookupOK = False Then
                                         OutputMessage += " (Internet Lookup Failed)"
                                     End If
-                                    bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, OutputMessage & " - " & Ant.LastOutputMessage)
+                                    bgwFolderScanUpdate.ReportProgress(_countRecordsAdded, OutputMessage & " - " & Ant.LastOutputMessage)
                                     NewAntID += 1
                                 Else
                                     'First check if the Internet Lookup works:
                                     If Ant.InternetLookupOK = True Then
                                         MovieRootNode.AppendChild(Ant.XMLElement)
-                                        _CountRecordsAdded += 1
+                                        _countRecordsAdded += 1
                                         If ReplacementPath.IndexOf(";") >= 0 Then
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Imported - " & ReplacementPath & " - " & Ant.LastOutputMessage)
+                                            bgwFolderScanUpdate.ReportProgress(_countRecordsAdded, " Files Imported - " & ReplacementPath & " - " & Ant.LastOutputMessage)
                                         Else
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Imported - " & ReplacementPath & " - " & Ant.LastOutputMessage)
+                                            bgwFolderScanUpdate.ReportProgress(_countRecordsAdded, " File  Imported - " & ReplacementPath & " - " & Ant.LastOutputMessage)
                                         End If
                                         NewAntID += 1
                                     Else
                                         'Mark as Ignored - do not import.
                                         If ReplacementPath.IndexOf(";") >= 0 Then
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " Files Not Imported - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
+                                            bgwFolderScanUpdate.ReportProgress(_countRecordsAdded, " Files Not Imported - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
                                         Else
-                                            bgwFolderScanUpdate.ReportProgress(_CountRecordsAdded, " File  Not Imported - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
+                                            bgwFolderScanUpdate.ReportProgress(_countRecordsAdded, " File  Not Imported - **********  " & ReplacementPath & "  *****" & " - " & Ant.LastOutputMessage)
                                         End If
                                     End If
                                 End If
