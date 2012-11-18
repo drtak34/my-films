@@ -41,6 +41,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   class MyFilmsFanartManager : GUIWindow
   {
+    #region skin controls
     [SkinControlAttribute(50)]
     protected GUIFacadeControl m_Facade = null;
 
@@ -61,7 +62,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     [SkinControlAttribute(15)]
     protected GUILabelControl labelChosen = null;
+    #endregion
 
+    #region enums
     enum menuAction
     {
       use,
@@ -101,6 +104,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       AlbumView = 4,
       PlayList = 5
     }
+    #endregion
 
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
     int seriesID = -1;
@@ -154,27 +158,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bool bDownloadSuccess = true;
         if (f != null && !f.isAvailableLocally)
         {
-          string filename = f[MFFanart.cBannerPath];
+          string filename = f.FullLocalPath;
           filename = filename.Replace("/", @"\");
-          string fullURL = (DBOnlineMirror.Banners.EndsWith("/") ? DBOnlineMirror.Banners : (DBOnlineMirror.Banners + "/")) + filename;
-          int nDownloadGUID = Online_Parsing_Classes.OnlineAPI.StartFileDownload(fullURL, Settings.Path.fanart, filename);
-          while (Online_Parsing_Classes.OnlineAPI.CheckFileDownload(nDownloadGUID))
-          {
-            if (downloadingWorker.CancellationPending)
-            {
-              // Cancel, clean up pending download
-              bDownloadSuccess = false;
-              Online_Parsing_Classes.OnlineAPI.CancelFileDownload(nDownloadGUID);
-              LogMyFilms.Debug("cancel Fanart download: " + f.FullLocalPath);
-            }
-            System.Windows.Forms.Application.DoEvents();
-          }
+          string fullURL = f.RemotePath;
+          string filename1person = Grabber.GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathFanart, fullURL, "titlename", false, true, out filename);
+          //int nDownloadGUID = Online_Parsing_Classes.OnlineAPI.StartFileDownload(fullURL, Settings.Path.fanart, filename);
+          //while (Online_Parsing_Classes.OnlineAPI.CheckFileDownload(nDownloadGUID))
+          //{
+          //  if (downloadingWorker.CancellationPending)
+          //  {
+          //    // Cancel, clean up pending download
+          //    bDownloadSuccess = false;
+          //    Online_Parsing_Classes.OnlineAPI.CancelFileDownload(nDownloadGUID);
+          //    LogMyFilms.Debug("cancel Fanart download: " + f.FullLocalPath);
+          //  }
+          //  System.Windows.Forms.Application.DoEvents();
+          //}
           // Download is either completed or canceled
           if (bDownloadSuccess)
           {
-            f[MFFanart.cLocalPath] = filename.Replace(Settings.GetPath(Settings.Path.fanart), string.Empty);
-            LogMyFilms.Debug("Successfully downloaded Fanart: " + f.FullLocalPath);
-            downloadingWorker.ReportProgress(0, f[DBFanart.cIndex]);
+            //f[MFFanart.cLocalPath] = filename.Replace(Settings.GetPath(Settings.Path.fanart), string.Empty);
+            //LogMyFilms.Debug("Successfully downloaded Fanart: " + f.FullLocalPath);
+            //downloadingWorker.ReportProgress(0, f[DBFanart.cIndex]);
           }
           else
             LogMyFilms.Debug("Error downloading Fanart: " + f.FullLocalPath);
@@ -528,7 +533,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           case (int)menuAction.use:
             if (selectedFanart.isAvailableLocally)
             {
-              MyFilmsDetail.setGUIProperty("FanArt.SelectedFanartIsChosen", Translation.Yes);
+              MyFilmsDetail.setGUIProperty("FanArt.SelectedFanartIsChosen", "Translation.Yes");
               SetFacadeItemAsChosen(m_Facade.SelectedListItemIndex);
 
               selectedFanart.Chosen = true;
@@ -536,9 +541,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             break;
           case (int)menuAction.optionRandom:
-            DBOption.SetOptions(DBOption.cFanartRandom, !DBOption.GetOptions(DBOption.cFanartRandom));
-            if (togglebuttonRandom != null)
-              togglebuttonRandom.Selected = DBOption.GetOptions(DBOption.cFanartRandom);
+            // ToDo: set ramdon option setting
+            bool toggleoption = false;
+            toggleoption = !toggleoption;
+            if (togglebuttonRandom != null) togglebuttonRandom.Selected = toggleoption;
             break;
           case (int)menuAction.disable:
             selectedFanart.Disabled = true;
@@ -562,7 +568,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           case (int)menuAction.clearcache:
             dlg.Reset();
-            Fanart.ClearFanartCache(SeriesID);
+            // ToDo: Fanart.ClearFanartCache(SeriesID);
             m_Facade.Clear();
             fetchList(SeriesID);
             loadingWorker.RunWorkerAsync(SeriesID);
@@ -617,22 +623,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         switch (dlg.SelectedId)
         {
           case (int)menuIntervalAction.FiveSeconds:
-            DBOption.SetOptions(DBOption.cRandomFanartInterval, "5000");
             break;
           case (int)menuIntervalAction.TenSeconds:
-            DBOption.SetOptions(DBOption.cRandomFanartInterval, "10000");
             break;
           case (int)menuIntervalAction.FifteenSeconds:
-            DBOption.SetOptions(DBOption.cRandomFanartInterval, "15000");
             break;
           case (int)menuIntervalAction.ThirtySeconds:
-            DBOption.SetOptions(DBOption.cRandomFanartInterval, "30000");
             break;
           case (int)menuIntervalAction.FortyFiveSeconds:
-            DBOption.SetOptions(DBOption.cRandomFanartInterval, "45000");
             break;
           case (int)menuIntervalAction.SixtySeconds:
-            DBOption.SetOptions(DBOption.cRandomFanartInterval, "60000");
             break;
         }
       }
@@ -666,13 +666,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         switch (dlg.SelectedId)
         {
           case (int)menuFilterAction.all:
-            DBOption.SetOptions(DBOption.cFanartThumbnailResolutionFilter, "0");
+            // DBOption.SetOptions(DBOption.cFanartThumbnailResolutionFilter, "0");
             break;
           case (int)menuFilterAction.hd:
-            DBOption.SetOptions(DBOption.cFanartThumbnailResolutionFilter, "1");
             break;
           case (int)menuFilterAction.fullhd:
-            DBOption.SetOptions(DBOption.cFanartThumbnailResolutionFilter, "2");
             break;
         }
         m_Facade.Clear();
@@ -779,7 +777,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (control == togglebuttonRandom)
       {
-        DBOption.SetOptions(DBOption.cFanartRandom, togglebuttonRandom.Selected);
+        // DBOption.SetOptions(DBOption.cFanartRandom, togglebuttonRandom.Selected);
         togglebuttonRandom.Focus = false;
         return;
       }
@@ -865,7 +863,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (chosen.isAvailableLocally && !chosen.Disabled)
           {
-            MyFilmsDetail.setGUIProperty("FanArt.SelectedFanartIsChosen", Translation.Yes);
+            MyFilmsDetail.setGUIProperty("FanArt.SelectedFanartIsChosen", "Translation.Yes");
             SetFacadeItemAsChosen(m_Facade.SelectedListItemIndex);
 
             // if we already have it, we simply set the chosen property (will itself "unchoose" all the others)
@@ -944,16 +942,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // sort fanart by highest rated
         onlineFanart.Sort();
 
-        // Filter Fanart Thumbnails to be displayed by resolution
-        if (DBOption.GetOptions(DBOption.cFanartThumbnailResolutionFilter) != 0)
-        {
-          string filteredRes = (DBOption.GetOptions(DBOption.cFanartThumbnailResolutionFilter) == "1" ? "1280x720" : "1920x1080");
-          for (int j = onlineFanart.Count - 1; j >= 0; j--)
-          {
-            if (onlineFanart[j][DBFanart.cResolution] != filteredRes)
-              onlineFanart.Remove(onlineFanart[j]);
-          }
-        }
+        //// Filter Fanart Thumbnails to be displayed by resolution
+        //if (DBOption.GetOptions(DBOption.cFanartThumbnailResolutionFilter) != 0)
+        //{
+        //  string filteredRes = (DBOption.GetOptions(DBOption.cFanartThumbnailResolutionFilter) == "1" ? "1280x720" : "1920x1080");
+        //  for (int j = onlineFanart.Count - 1; j >= 0; j--)
+        //  {
+        //    if (onlineFanart[j][DBFanart.cResolution] != filteredRes)
+        //      onlineFanart.Remove(onlineFanart[j]);
+        //  }
+        //}
 
         // Inform skin message how many fanarts are online
         loadingWorker.ReportProgress(onlineFanart.Count < 100 ? onlineFanart.Count : 100);
@@ -981,26 +979,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             item.IsRemote = false;
             item.IsDownloading = true;
           }
-          string filename = f[MFFanart.cThumbnailPath];
+          string filename = f.FullLocalPath;
           filename = filename.Replace("/", @"\");
-          string fullURL = (DBOnlineMirror.Banners.EndsWith("/") ? DBOnlineMirror.Banners : (DBOnlineMirror.Banners + "/")) + filename;
+          string fullURL = f.RemotePath;
 
           bool bDownloadSuccess = true;
-          int nDownloadGUID = Online_Parsing_Classes.OnlineAPI.StartFileDownload(fullURL, Settings.Path.fanart, filename);
-          while (Online_Parsing_Classes.OnlineAPI.CheckFileDownload(nDownloadGUID))
-          {
-            if (loadingWorker.CancellationPending)
-            {
-              // ZF: Cancel, clean up pending download
-              bDownloadSuccess = false;
-              Online_Parsing_Classes.OnlineAPI.CancelFileDownload(nDownloadGUID);
-              LogMyFilms.Debug("Cancelling fanart thumbnail download: " + filename);
-            }
-            System.Windows.Forms.Application.DoEvents();
-          }
+          //int nDownloadGUID = Online_Parsing_Classes.OnlineAPI.StartFileDownload(fullURL, "Path.fanart", filename);
+          //while (Online_Parsing_Classes.OnlineAPI.CheckFileDownload(nDownloadGUID))
+          //{
+          //  if (loadingWorker.CancellationPending)
+          //  {
+          //    // ZF: Cancel, clean up pending download
+          //    bDownloadSuccess = false;
+          //    // Online_Parsing_Classes.OnlineAPI.CancelFileDownload(nDownloadGUID);
+          //    LogMyFilms.Debug("Cancelling fanart thumbnail download: " + filename);
+          //  }
+          //  System.Windows.Forms.Application.DoEvents();
+          //}
 
           // ZF: should be downloaded now
-          filename = Helper.PathCombine(Settings.GetPath(Settings.Path.fanart), filename);
+          filename = Helper.PathCombine("Path.fanart", filename);
           if (bDownloadSuccess)
           {
             item.IconImage = item.IconImageBig = ImageAllocator.GetOtherImage(filename, new System.Drawing.Size(0, 0), false);
@@ -1199,12 +1197,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             // retrieve all fields in the table
             // ToDo: Get TMDB fanarts here ...
-            List<WatTmdb.V3.TmdbMovie> movies = new List<TmdbMovie>();
-            var movie = new WatTmdb.V3.TmdbMovie();
+            var movies = new List<TmdbMovie>();
+            var movie = new TmdbMovie();
             var results = movie.backdrop_path;
             if (results.Length > 0)
             {
-              List<MFFanart> ourFanart = new List<MFFanart>(results.Length);
+              var ourFanart = new List<MFFanart>(results.Length);
 
               for (int index = 0; index < results.Length; index++)
               {
@@ -1232,7 +1230,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public List<MFFanart> FanartsToDownload(int SeriesID)
     {
       // Only get a list of fanart that is available for download
-      String sqlQuery = "select * from ";
+      // String sqlQuery = "select * from ";
       // Get Preferred Resolution
       //int res = DBOption.GetOptions(DBOption.cAutoDownloadFanartResolution);
 
