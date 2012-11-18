@@ -7243,19 +7243,19 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>1</Build>
-      <Revision>2733</Revision>
+      <Revision>2738</Revision>
     </Version>
-    <ExtensionDescription>MyFilms is a plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
 
-
-The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.</ExtensionDescription>
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
     <VersionDescription>This version is the final release of MyFilms 6.0.
 
 Please report bugs in MyFilms forum.</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
-    <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.0.2592.mpe1</OnlineLocation>
-    <ReleaseDate>2012-11-17T18:15:24.6458802+01:00</ReleaseDate>
+    <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.1.2738.mpe1</OnlineLocation>
+    <ReleaseDate>2012-11-18T03:21:38.2659766+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
