@@ -76,6 +76,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   {
     #region Descriptif zones Ecran
 
+    #region skin controls
     enum Controls : int
     {
       //CTRL_TxtSelect = 12,
@@ -147,6 +148,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIImage ImgFanart;
     [SkinControlAttribute((int)Controls.CTRL_FanartDir)]
     protected GUIMultiImage ImgFanartDir;
+    #endregion
 
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
     static string wzone = null;

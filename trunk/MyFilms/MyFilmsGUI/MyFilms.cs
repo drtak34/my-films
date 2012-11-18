@@ -10539,6 +10539,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("submenufanartmanager");
           }
 
+          if (MyFilmsDetail.ExtendedStartmode("Context: Fanartmanager (new) -> new window!"))
+          {
+            if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsFanartManager.xml"))
+            {
+              dlg.Add(GUILocalizeStrings.Get(10798767) + " (new & wip)"); // Fanart Manager ... (new & wip)
+              choice.Add("fanartmanager");
+            }
+          }
+
           dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
           choice.Add("submenuoptions");
         }
@@ -11692,6 +11701,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIWindowManager.ActivateWindow(cm.GetID, false);
             break;
           }
+
+        //case "fanartmanager":
+        //  {
+        //    LogMyFilms.Debug("Switching to Fanart Manager Window");
+        //    MyFilmsFanartManager fm = null;
+        //    if (fm == null)
+        //    {
+        //      fm = new MyFilmsFanartManager();
+        //      var cmwindow = (GUIWindow)fm;
+        //      GUIWindowManager.Add(ref cmwindow);
+        //      fm.Init();
+        //    }
+        //    fm.setPageTitle("Fanart Manager"); // GUILocalizeStrings.Get(10798767) Fanart Manager ...
+        //    GUIWindowManager.ActivateWindow(fm.GetID, false);
+        //    break;
+        //  }
 
         case "suppress":
           {
