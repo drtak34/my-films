@@ -6984,7 +6984,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          if (facadeFilms != null && Win32API.IsConnectedToInternet() && MyFilms.conf.PersonsEnableDownloads)
+          if (facadeFilms != null && Win32API.IsConnectedToInternet())
           {
             for (int i = 0; i < facadeFilms.Count; i++)
             {
