@@ -76,15 +76,18 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       bool isPrefixEnabled = true;
 
-      using (MediaPortal.Profile.Settings reader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
-        isPrefixEnabled = reader.GetValueAsBool("general", "myprefix", true);
+      using (var reader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
+      {
+        // isPrefixEnabled = reader.GetValueAsBool("general", "myprefix", true); // setting moved in MP
+        isPrefixEnabled = reader.GetValueAsBool("gui", "myprefix", true);
+        if (language == null) language = reader.GetValueAsString("gui", "language", null); // try to get MP language from config
+      }
 
       string directory = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
       string cultureName = null;
-      if (language != null)
-        cultureName = GetCultureName(language);
+      if (language != null) cultureName = GetCultureName(language);
 
-      LogMyFilms.Info("Loading localised Strings - Path: '{0}', Culture: '{1}', Language: '{2}', Prefix: '{3}'", directory, cultureName, language, isPrefixEnabled);
+      LogMyFilms.Info("Loading localised Strings - Culture: '{0}', Language: '{1}', Prefix: '{2}', Path: '{3}'", cultureName, language, isPrefixEnabled, directory);
 
       _stringProvider = new LocalisationProvider(directory, cultureName, isPrefixEnabled);
 
