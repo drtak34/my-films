@@ -83,8 +83,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
       path = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
 
-      if (!System.IO.Directory.Exists(path))
-        System.IO.Directory.CreateDirectory(path);
+      if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
       string lang = PreviousLanguage = CurrentLanguage;
       LoadTranslations(lang);
@@ -99,8 +98,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     public static int LoadTranslations(string lang)
     {
-      XmlDocument doc = new XmlDocument();
-      Dictionary<string, string> TranslatedStrings = new Dictionary<string, string>();
+      var doc = new XmlDocument();
+      var TranslatedStrings = new Dictionary<string, string>();
       string langPath = string.Empty;
       try
       {
