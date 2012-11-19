@@ -519,6 +519,23 @@ namespace MyFilmsPlugin.MyFilms.Utils
     }
 
     /// <summary>
+    /// Returns true if only digits contained in the string
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    static bool IsDigitsOnly(string s)
+    {
+      int len = s.Length;
+      for (int i = 0; i < len; ++i)
+      {
+        char c = s[i];
+        if (c < '0' || c > '9')
+          return false;
+      }
+      return true;
+    }
+
+    /// <summary>
     /// Converts a string of letters to corresponding numbers
     /// </summary>
     /// <param name="input"></param>
