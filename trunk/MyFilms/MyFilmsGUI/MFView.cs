@@ -217,6 +217,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
     public string StrTxtSelect { get; set; }
     public bool Boolselect { get; set; }
     public bool Boolreturn { get; set; }
+    public bool Boolcollection { get; set; }
     public bool Boolindexed { get; set; }
     public bool Boolindexedreturn { get; set; }
     public int IndexedChars { get; set; }
@@ -249,6 +250,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
       this.StrTxtSelect = string.Empty;
       this.Boolselect = false;
       this.Boolreturn = false;
+      this.Boolcollection = false;
       this.Boolindexed = false;
       this.Boolindexedreturn = false;
       this.IndexedChars = 0;
@@ -280,6 +282,7 @@ namespace MyFilmsPlugin.MyFilmsGUI
         this.StrTxtSelect + "|" +
         this.Boolselect.ToString() + "|" +
         this.Boolreturn.ToString() + "|" +
+        this.Boolcollection.ToString() + "|" +
         this.Boolindexed.ToString() + "|" +
         this.Boolindexedreturn.ToString() + "|" +
         this.IndexedChars.ToString() + "|" +
@@ -320,23 +323,24 @@ namespace MyFilmsPlugin.MyFilmsGUI
       this.StrTxtSelect = split[6];
       this.Boolselect = bool.Parse(split[7]);
       this.Boolreturn = bool.Parse(split[8]);
-      this.Boolindexed = bool.Parse(split[9]);
-      this.Boolindexedreturn = bool.Parse(split[10]);
-      this.IndexedChars = int.Parse(split[11]);
-      this.BoolReverseNames = bool.Parse(split[12]);
-      this.BoolShowEmptyValuesInViews = bool.Parse(split[13]);
-      this.Wselectedlabel = split[14];
-      this.WStrSort = split[15];
-      this.WStrSortSensCount = split[16];
-      this.BoolSortCountinViews = bool.Parse(split[17]);
-      this.Wstar = split[18];
-      this.StrLayOut = int.Parse(split[19]);
-      this.WStrLayOut = int.Parse(split[20]);
-      this.StrLayOutInHierarchies = int.Parse(split[21]);
-      this.LastID = int.Parse(split[22]);
-      this.IndexItem = int.Parse(split[23]);
-      this.TitleItem = split[24];
-      this.BoolVirtualPathBrowsing = bool.Parse(split[25]);
+      this.Boolcollection = bool.Parse(split[9]);
+      this.Boolindexed = bool.Parse(split[10]);
+      this.Boolindexedreturn = bool.Parse(split[11]);
+      this.IndexedChars = int.Parse(split[12]);
+      this.BoolReverseNames = bool.Parse(split[13]);
+      this.BoolShowEmptyValuesInViews = bool.Parse(split[14]);
+      this.Wselectedlabel = split[15];
+      this.WStrSort = split[16];
+      this.WStrSortSensCount = split[17];
+      this.BoolSortCountinViews = bool.Parse(split[18]);
+      this.Wstar = split[19];
+      this.StrLayOut = int.Parse(split[20]);
+      this.WStrLayOut = int.Parse(split[21]);
+      this.StrLayOutInHierarchies = int.Parse(split[22]);
+      this.LastID = int.Parse(split[23]);
+      this.IndexItem = int.Parse(split[24]);
+      this.TitleItem = split[25];
+      this.BoolVirtualPathBrowsing = bool.Parse(split[26]);
     }
   }
 

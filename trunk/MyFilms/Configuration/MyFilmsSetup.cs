@@ -862,6 +862,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", GetLayoutFromName(LayOut.Text));
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOutInHierarchies", GetLayoutFromName(LayoutInHierarchies.Text));
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Dwp", crypto.Crypter(Dwp.Text));
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", SearchFileName.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", SearchSubDirs.Checked);
@@ -1400,6 +1401,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       //    View_Dflt_Item.Items.Add(AntViewItem2.Text);
 
       LayOut.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0));
+      LayoutInHierarchies.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOutInHierarchies", 0));
 
       AntViewText_Change();
       AntSort_Change();
@@ -1739,6 +1741,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AntItemDetails6.ResetText();
       TitleDelim.ResetText();
       LayOut.ResetText();
+      LayoutInHierarchies.ResetText();
       ListSeparator1.ResetText();
       ListSeparator2.ResetText();
       ListSeparator3.ResetText();

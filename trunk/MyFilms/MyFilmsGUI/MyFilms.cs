@@ -16867,9 +16867,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         obj.SetViewStatus(conf); // sets the context environment
         obj.SetItems(facadeFilms); // populate facade with former content
 
+        
         BtnSrtBy.IsEnabled = obj.SortButtonEnabled;
         BtnSrtBy.IsAscending = obj.SortButtonAsc;
         BtnSrtBy.Label = obj.SortButtonLabel;
+
+        BtnViewAs.Label = obj.ViewAsButtonLabel;
 
         SetDummyControlsForFacade(conf.ViewContext); // set here in advance to make visibility conditions cahnge faster on back navigation
 
@@ -17037,8 +17040,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             (Layout)mapSettings.ViewAs,
             conf,
             BtnSrtBy,
+            BtnViewAs,
             new CoverState(menucover.Filename, filmcover.Filename, viewcover.Filename, personcover.Filename, groupcover.Filename),
-            MyFilms.LastDbUpdate
+            LastDbUpdate
             ));
       }
       if (clear)

@@ -27,6 +27,8 @@ namespace MyFilmsPlugin.Utils
     public bool SortButtonAsc { get; set; }
     public string SortButtonLabel { get; set; }
 
+    public string ViewAsButtonLabel { get; set; }
+
     public string DbDfltSelect { get; set; }
     public string DbSelect { get; set; }
     public string DbField { get; set; }
@@ -47,7 +49,9 @@ namespace MyFilmsPlugin.Utils
 
     public MyFilms.Layout CurrentView { get; set; }
 
-    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, int pos, MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, CoverState coverstate, DateTime lastDBupdate)
+    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, int pos, 
+      MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, GUIButtonControl viewButton,
+      CoverState coverstate, DateTime lastDBupdate)
     {
       Items = new List<GUIListItem>();
       GetItems(control, title, itemtype, pos, curview);
@@ -68,8 +72,9 @@ namespace MyFilmsPlugin.Utils
       CurrentView = curview;
 
       SortButtonEnabled = srtButton.IsEnabled;
-      this.SortButtonAsc = srtButton.IsAscending;
+      SortButtonAsc = srtButton.IsAscending;
       SortButtonLabel = srtButton.Label;
+      ViewAsButtonLabel = viewButton.Label;
       CoverStatus = coverstate;
       LastDbUpdate = lastDBupdate;
     }
@@ -95,6 +100,7 @@ namespace MyFilmsPlugin.Utils
     {
       ViewStatus.Boolselect = conf.Boolselect;
       ViewStatus.Boolreturn = conf.Boolreturn;
+      ViewStatus.Boolcollection = conf.BoolCollection;
       ViewStatus.Boolindexed = conf.Boolindexed;
       ViewStatus.Boolindexedreturn = conf.Boolindexedreturn;
       ViewStatus.IndexedChars = conf.IndexedChars;
@@ -119,7 +125,7 @@ namespace MyFilmsPlugin.Utils
 
       ViewStatus.StrLayOut = conf.StrLayOut;
       ViewStatus.WStrLayOut = conf.WStrLayOut;
-      ViewStatus.StrLayOutInHierarchies = conf.StrLayOutInHierarchies;
+      // ViewStatus.StrLayOutInHierarchies = conf.StrLayOutInHierarchies;
       ViewStatus.LastID = conf.LastID;
 
       ViewStatus.CurrentView = conf.CurrentView;
@@ -132,6 +138,7 @@ namespace MyFilmsPlugin.Utils
     {
       conf.Boolselect = ViewStatus.Boolselect;
       conf.Boolreturn = ViewStatus.Boolreturn;
+      conf.BoolCollection = ViewStatus.Boolcollection;
       conf.Boolindexed = ViewStatus.Boolindexed;
       conf.Boolindexedreturn = ViewStatus.Boolindexedreturn;
       conf.IndexedChars = ViewStatus.IndexedChars;
@@ -155,7 +162,7 @@ namespace MyFilmsPlugin.Utils
 
       conf.StrLayOut = ViewStatus.StrLayOut;
       conf.WStrLayOut = ViewStatus.WStrLayOut;
-      conf.StrLayOutInHierarchies = ViewStatus.StrLayOutInHierarchies;
+      // conf.StrLayOutInHierarchies = ViewStatus.StrLayOutInHierarchies;
       conf.LastID = ViewStatus.LastID;
 
       conf.CurrentView = ViewStatus.CurrentView;
