@@ -10548,8 +10548,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
-          choice.Add("submenuoptions");
+          if (MyFilmsDetail.ExtendedStartmode("Context: Movies - show view options - only enabled when test features are enabled"))
+          {
+            dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
+            choice.Add("submenuoptions");
+          }
         }
         else if (this.facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // when films with active movie facade
         {
@@ -10559,8 +10562,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("submenuupdates");
           }
 
-          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
-          choice.Add("submenuoptions");
+          if (MyFilmsDetail.ExtendedStartmode("Context: Movies - show view options - only enabled when test features are enabled"))
+          {
+            dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
+            choice.Add("submenuoptions");
+          }
         }
         #endregion
 
