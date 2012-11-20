@@ -11,6 +11,9 @@
       <colordiffuse>c0ffffff</colordiffuse>
       <visible>![facadeview.filmstrip|facadeview.coverflow]</visible>
       <shouldCache>true</shouldCache>
+      <animation effect="fade" time="50">WindowOpen</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="450">visiblechange</animation>
     </control>
     <control>
       <description>Overlay Filmstrip</description>
@@ -22,6 +25,9 @@
       <colordiffuse>dfffffff</colordiffuse>
       <visible>facadeview.filmstrip|facadeview.coverflow</visible>
       <shouldCache>true</shouldCache>
+      <animation effect="fade" time="50">WindowOpen</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="450">visiblechange</animation>
     </control>
 <!--
     <control>
