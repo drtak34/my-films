@@ -39,6 +39,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private delegate bool GetStringFromKeyboardDelegate(ref string strLine, bool isPassword);
 
+    private delegate bool GetDirectoryDelegate(ref string strLine);
+
     public static readonly string MyFilmsLogo = GUIGraphicsContext.Skin + "\\Media\\MyFilms\\myfilms.png";
 
     public static string PluginName()
@@ -575,6 +577,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       return false;
     }
+
+    /// <summary>
+    /// Gets the input from the virtual keyboard window.
+    /// </summary>
+    public static bool GetDirectoryDialog(ref string strLine)
+    {
+      if (GUIGraphicsContext.form.InvokeRequired)
+      {
+        GetDirectoryDelegate d = GetDirectoryDialog;
+        object[] args = { strLine };
+        bool result = (bool)GUIGraphicsContext.form.Invoke(d, args);
+        strLine = (string)args[0];
+        return result;
+      }
+
+      GUIDialogFile dialogFile = (GUIDialogFile)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_FILE);
+      if (dialogFile == null) return false;
+
+      dialogFile.Init();
+      dialogFile.SetHeading(strLine);
+      dialogFile.DoModal(GUIWindowManager.ActiveWindow);
+
+      if (!dialogFile.IsCanceled)
+      {
+        strLine = dialogFile.GetDestinationDir();
+        return true;
+      }
+
+      return false;
+    }
+
+
   }
 
 }

@@ -26,15 +26,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System;
   using System.Collections.Generic;
   using System.Data;
+  using System.IO;
   using System.Linq;
 
   using MediaPortal.Configuration;
+  using MediaPortal.Dialogs;
+  using MediaPortal.GUI.Library;
 
   using MyFilmsPlugin.DataBase;
   using MyFilmsPlugin.MyFilms;
 
   using MyFilmsPlugin.MyFilms.CatalogConverter;
   using MyFilmsPlugin.MyFilms.Utils;
+
+  using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
 
   public class Configuration
   {
@@ -1104,6 +1109,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgOk.DoModal(MyFilms.ID_MyFilms);
           //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
           return false;
+
+          // return NewConfigWizard();
         }
 
         bool boolchoice = true;
@@ -1130,6 +1137,59 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       return isDefaultConfig;
+    }
+
+    private static bool NewConfigWizard()
+    {
+      //bool result = GUIUtils.ShowYesNoDialog("New Config Wizard", "Do you want to create a new MF config?");
+      //if (!result) return false;
+      //GUIUtils.ShowTextDialog("textheading", "söhgösdhgkösdgh hsudgö uögusioö ghisuöhg suioöhioöushgiosh<i öghsdöuiogh isöu<ghuiöh suiögh ösusöh uiö<h gusi<gh suiöhg  uiö<hö<");
+
+      //string scandirectory = "";
+      //GUIUtils.GetDirectoryDialog(ref scandirectory);
+
+      //try
+      //{
+      //  FileStream fs = File.Create(Config.GetFile(Config.Dir.Config, "MyFilms.xml"));
+      //  fs.Close();
+      //}
+      //catch (Exception ex)
+      //{
+      //  LogMyFilms.Error("CreateNewMyFilmsConfigFile - error creating file: : '" + ex.Message + "'");
+      //  return false;
+      //}
+      
+      //const string newConfigName = "Default";
+      //var tmpconf = new MyFilmsGUI.Configuration(newConfigName, true, true, null);
+      //Configuration.CurrentConfig = newConfigName;
+      //MyFilms.Load_Config(newConfigName, true, null);
+      //SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
+
+
+      //GUIDialogMenu mnu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      //mnu.Reset();
+      ////			mnu.SetHeading("Select drive");
+      //mnu.SetHeading("heading");
+
+      //foreach (Helper.Drive d in Helper.GetDrivesList())
+      //{
+      //  mnu.Add(d.Path + " " + d.TypeDescription);
+      //}
+
+      //mnu.DoModal(GUIWindowManager.ActiveWindow);
+
+      //int i = 0;
+      //foreach (Helper.Drive d in Helper.GetDrivesList())
+      //{
+      //  if (i == mnu.SelectedLabel)
+      //  {
+      //    string currentDrive = d.Path;
+      //  }
+
+      //  i++;
+      //}
+
+      //return true;
     }
 
   }
