@@ -1189,7 +1189,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //  i++;
       //}
 
-      //return true;
+      return true;
     }
 
   }

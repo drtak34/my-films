@@ -10763,19 +10763,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 choice.Add("downloadtrailertmdball");
               }
 
-              dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
-              choice.Add("updatepersonmovie");
-
               if (conf.UseThumbsForPersons && !string.IsNullOrEmpty(conf.StrPathArtist))
               {
-                dlg.Add(GUILocalizeStrings.Get(1079900)); // Download person images (selected film)
-                choice.Add("personimages");
-
-                if (MyFilmsDetail.ExtendedStartmode("old person images loader"))
-                {
-                  dlg.Add(GUILocalizeStrings.Get(1079900) + " (based on film search)"); // Download person images (selected film)
-                  choice.Add("personimagesold");
-                }
+                dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
+                choice.Add("updatepersonmovie");
               }
 
               if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
@@ -10800,14 +10791,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlg.Add(GUILocalizeStrings.Get(1079882)); // update personinfo from IMDB/TMDB
               choice.Add("updateperson");
 
-              //if (MyFilmsDetail.ExtendedStartmode("Context Artist: update all persons in facade based on IMDB/TMDB"))
-              //{
-                if (facadeFilms.Count > 1 && !(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn))
-                {
-                  dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
-                  choice.Add("updatepersonfacadelist");
-                }
-              // }
+              if (facadeFilms.Count > 1 && !(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn))
+              {
+                dlg.Add(GUILocalizeStrings.Get(1079883)); // update personinfos for all involved persons of a selected movie from IMDB and/or TMDB
+                choice.Add("updatepersonfacadelist");
+              }
 
               if (MyFilmsDetail.ExtendedStartmode("Context Artist: grabber scripts based person info update"))
               {
@@ -11833,29 +11821,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, true, false, m_SearchAnimation);
             }
           }
-          break;
-
-        case "personimagesold": // old version based on fanart loader framework - moved to test mode
-          if (!MyFilmsDetail.IsInternetConnectionAvailable())
-            break; // stop, if no internet available
-          else
-          {
-            string personartworkpath = string.Empty;
-            string imdbid = MyFilmsDetail.GetIMDB_Id(MyFilms.r[MyFilms.conf.StrIndex]);
-            sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
-            if (!string.IsNullOrEmpty(sTitles.FanartTitle) && MyFilms.conf.StrFanart)
-            {
-              LogMyFilms.Debug("Download PersonImages: originaltitle: '" + sTitles.OriginalTitle + "' - translatedtitle: '" + sTitles.TranslatedTitle + "' - (started from main menu)");
-              personartworkpath = MyFilms.conf.StrPathArtist;
-              LogMyFilms.Debug("Download PersonArtwork to path: '" + personartworkpath + "'");
-              this.doUpdateMainViewByFinishEvent = true; // makes sure, message handler will be triggered after backgroundthread is finished
-              MyFilmsDetail.Download_Backdrops_Fanart(sTitles.OriginalTitle, sTitles.TranslatedTitle, sTitles.FormattedTitle, sTitles.Director, imdbid, sTitles.Year.ToString(), true, GetID, sTitles.FanartTitle, personartworkpath, false, true, m_SearchAnimation);
-            }
-          }
-          break;
-
-        case "personimages":
-          MyFilmsDetail.AddPersonsToDownloadQueue();
           break;
 
         case "deletefanart":
