@@ -53,6 +53,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
   using TaskScheduler;
 
+  using AntMovieCatalog = MyFilmsPlugin.DataBase.AntMovieCatalog;
+
   public partial class MyFilmsSetup : Form
   {
     //private WshShellClass WshShell; // Added for creating Desktop icon via wsh
@@ -6284,6 +6286,50 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     private void label41_Click(object sender, EventArgs e)
     {
 
+    }
+
+    private void btnAMCimport_Click(object sender, EventArgs e)
+    {
+    //  try
+    //  {
+    //    LogMyFilms.Info("ACMupdater - try loading CurrentSettings");
+    //    Module1.CurrentSettings.LoadUserSettings(txtAMCUpd_cnf.Text);
+
+    //    var f = new FileInfo(AMCUpdater.Module1.CurrentSettings.XML_File);
+    //    if (!f.Exists)
+    //    {
+    //      LogMyFilms.Info(((@"XML File '"  + (AMCUpdater.Module1.CurrentSettings.XML_File + @"' Not Found."))));
+    //      var destXml = new XmlTextWriter(AMCUpdater.Module1.CurrentSettings.XML_File, System.Text.Encoding.Default);
+    //      destXml.Formatting = Formatting.Indented;
+    //      destXml.WriteStartDocument(false);
+    //      destXml.WriteStartElement("AntMovieCatalog");
+    //      destXml.WriteStartElement("Catalog");
+    //      destXml.WriteElementString("Properties", "");
+    //      destXml.WriteStartElement("Contents");
+    //      destXml.WriteEndElement();
+    //      destXml.WriteEndElement();
+    //      destXml.WriteEndElement();
+    //      destXml.Close();
+    //      LogMyFilms.Info("Creating XML File - FilePath : " + Module1.CurrentSettings.XML_File);
+    //    }
+    //    var ant = new AntProcessor();
+    //    ant.InteractiveMode = false;
+    //    ant.ProcessXML("");
+    //    ant.ProcessMovieFolder();
+    //    ant.ProcessOrphanFiles();
+    //    if (ant.CountOrphanFiles > 0 || ant.CountOrphanRecords > 0)
+    //    {
+    //      ant.UpdateXMLFile();
+    //    }
+    //  }
+    //  catch (Exception ex)
+    //  {
+    //    LogMyFilms.Error("Error: " + ex.Message);
+    //  }
+    //  finally
+    //  {
+    //    LogMyFilms.Info("Processing Complete.");
+    //  }
     }
   }
 
