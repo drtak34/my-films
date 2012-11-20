@@ -6511,7 +6511,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static void Init_Detailed_DB(bool log)
     {
       LogMyFilms.Debug("Init_Detailed_DB() - log = '" + log + "'");
-      using (var ds = new AntMovieCatalog())
+      using (AntMovieCatalog ds = new AntMovieCatalog())
       {
         foreach (DataColumn dc in ds.Movie.Columns)
         {
@@ -6521,7 +6521,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       MyFilms.currentMovie.Reset();
 
-      //Clear userdefined properties
       clearGUIProperty("db.calc.format.value", log);
       clearGUIProperty("db.calc.aspectratio.value", log);
       clearGUIProperty("db.calc.imageformat.value", log);

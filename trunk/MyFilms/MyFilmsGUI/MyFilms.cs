@@ -16875,7 +16875,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GUIControl.ClearControl(GetID, facadeFilms.GetID);
         //Fanartstatus(false);
         //currentFanartList.Clear();
+        MyFilmsDetail.Init_Detailed_DB(false); // clear all GUI properties
+        Clear_Logos();
+
         var obj = NavigationStack.Pop() as MyFilmsPlugin.Utils.NavigationObject;
+
 
         #region restore state properties
         mapSettings.ViewAs = (int)obj.CurrentView;
@@ -16888,12 +16892,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         conf.DbSelection = new string[] { obj.DbDfltSelect, obj.DbSelect, obj.DbField, obj.DbSort, obj.DbShowAll.ToString(), obj.DbExtraSort.ToString() };
         // Change_Layout_Action((int)obj.CurrentView); // switch here already the layout to BEFORE facade is populated !
         ShowPanel();  // switches to proper layout
-        obj.SetItems(facadeFilms); // populate facade with former content
+
         obj.SetViewStatus(conf); // sets the context environment
+        obj.SetItems(facadeFilms); // populate facade with former content
 
         BtnSrtBy.IsEnabled = obj.SortButtonEnabled;
         BtnSrtBy.IsAscending = obj.SortButtonAsc;
         BtnSrtBy.Label = obj.SortButtonLabel;
+
+        SetDummyControlsForFacade(conf.ViewContext); // set here in advance to make visibility conditions cahnge faster on back navigation
 
         facadeFilms.SelectedListItemIndex = obj.Position;
         Prev_ItemID = (facadeFilms == null || facadeFilms.SelectedListItemIndex == -1) ? -1 : facadeFilms.SelectedListItem.ItemId;
