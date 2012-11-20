@@ -21,7 +21,6 @@ namespace Grabber_Interface
   using System.Linq;
 
   using MediaPortal.Configuration;
-  using MediaPortal.Util;
 
   public partial class GrabConfig : Form
   {
@@ -1820,7 +1819,7 @@ namespace Grabber_Interface
         int iLength = 0;
 
         string strTemp = String.Empty;
-        HTMLUtil htmlUtil = new HTMLUtil();
+        // HTMLUtil htmlUtil = new HTMLUtil(); // in MP Core.dll
         bool bregexs = false;
         bool bregexe = false;
         if (starttext.StartsWith("#REGEX#"))

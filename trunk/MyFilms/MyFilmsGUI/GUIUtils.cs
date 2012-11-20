@@ -341,7 +341,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowNotifyDialog(string heading, string text)
     {
-      ShowNotifyDialog(heading, text, MyFilmsLogo, Translation.OK, -1);
+      ShowNotifyDialog(heading, text, MyFilmsLogo, GUILocalizeStrings.Get(186), -1); // "Ok" in MP Translation
     }
 
     /// <summary>
@@ -349,7 +349,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowNotifyDialog(string heading, string text, int timeOut)
     {
-      ShowNotifyDialog(heading, text, MyFilmsLogo, Translation.OK, timeOut);
+      ShowNotifyDialog(heading, text, MyFilmsLogo, GUILocalizeStrings.Get(186), timeOut);
     }
 
     /// <summary>
@@ -357,7 +357,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowNotifyDialog(string heading, string text, string image)
     {
-      ShowNotifyDialog(heading, text, image, Translation.OK, -1);
+      ShowNotifyDialog(heading, text, image, GUILocalizeStrings.Get(186), -1);
     }
 
     /// <summary>

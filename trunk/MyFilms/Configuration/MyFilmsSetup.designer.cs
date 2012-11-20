@@ -588,6 +588,7 @@
           this.descriptionTextBox = new System.Windows.Forms.TextBox();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.Tab_OldStuff = new System.Windows.Forms.TabPage();
+          this.btnAMCimport = new System.Windows.Forms.Button();
           this.groupBox8 = new System.Windows.Forms.GroupBox();
           this.label25 = new System.Windows.Forms.Label();
           this.label7 = new System.Windows.Forms.Label();
@@ -6153,6 +6154,7 @@
           // 
           // Tab_OldStuff
           // 
+          this.Tab_OldStuff.Controls.Add(this.btnAMCimport);
           this.Tab_OldStuff.Controls.Add(this.groupBox8);
           this.Tab_OldStuff.Location = new System.Drawing.Point(4, 22);
           this.Tab_OldStuff.Name = "Tab_OldStuff";
@@ -6163,6 +6165,16 @@
           this.Tab_OldStuff.ToolTipText = "Temorary placed elements";
           this.Tab_OldStuff.UseVisualStyleBackColor = true;
           // 
+          // btnAMCimport
+          // 
+          this.btnAMCimport.Location = new System.Drawing.Point(37, 27);
+          this.btnAMCimport.Name = "btnAMCimport";
+          this.btnAMCimport.Size = new System.Drawing.Size(101, 46);
+          this.btnAMCimport.TabIndex = 1;
+          this.btnAMCimport.Text = "Import Movies";
+          this.btnAMCimport.UseVisualStyleBackColor = true;
+          this.btnAMCimport.Click += new System.EventHandler(this.btnAMCimport_Click);
+          // 
           // groupBox8
           // 
           this.groupBox8.Controls.Add(this.label25);
@@ -6171,7 +6183,7 @@
           this.groupBox8.Controls.Add(this.LayOutViewFilms);
           this.groupBox8.Controls.Add(this.SortSensViewFilms);
           this.groupBox8.Controls.Add(this.SortViewFilms);
-          this.groupBox8.Location = new System.Drawing.Point(228, 144);
+          this.groupBox8.Location = new System.Drawing.Point(436, 6);
           this.groupBox8.Name = "groupBox8";
           this.groupBox8.Size = new System.Drawing.Size(291, 66);
           this.groupBox8.TabIndex = 0;
@@ -7099,5 +7111,6 @@
         private Label label28;
         private CheckBox cbCacheOnlineTrailer;
         private CheckBox Config_EnablePreload;
+        private Button btnAMCimport;
     }
 }
