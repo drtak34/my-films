@@ -10595,7 +10595,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         #region Add menu add and save options in Views and Movie Context
-        if (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.TmdbMovies)
+        if (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.TmdbMovies && conf.ViewContext != ViewContext.MovieCollection)
         {
           dlg.Add(GUILocalizeStrings.Get(1079823)); // Add to Menu as Custom View
           choice.Add("menuadd");
