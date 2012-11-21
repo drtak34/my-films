@@ -560,7 +560,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     // string list for search history
     public static List<string> SearchHistory = new List<string>();
+    
     LoadParameterInfo loadParamInfo;
+
+    internal static string internalLoadParam = null;
 
     // last update to catalog - used to know, if the backnavigation needs to reload the facade -  LoadFacade();
     public static DateTime LastDbUpdate { get; set; }
@@ -954,6 +957,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       base.OnPageLoad(); // let animations run
 
+      if (internalLoadParam != null) // internal option call, just do it
+      {
+        #region check, if main view was called with internal start param option
+        string option = internalLoadParam;
+        internalLoadParam = null;
+        LogMyFilms.Debug("OnPageload() launched with loadParam internal 'internalLoadParam' = '" + internalLoadParam + "'");
+
+        switch (option)
+        {
+          case "moviepersonlist":
+            {
+              MoviePersonListLauncher(false, true);
+              return;
+            }
+          default:
+            return;
+        }
+        #endregion
+      }
+
       if (InitialStart) NavigationStack.Clear();
 
       if (NavigationStack.Count > 0)
@@ -1271,6 +1294,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
 
+          // check, if it was an internal call 
+          if (internalLoadParam != null)
+          {
+            internalLoadParam = null;
+            GUIWindowManager.ShowPreviousWindow();
+          }
+        
           // LogStatusVars("PreviousMenu");
           string viewStateCacheName = (null != GetCustomViewFromViewLabel(conf.CurrentView)) ? "CustomView_" + conf.WStrSort : conf.WStrSort;
           if (!string.IsNullOrEmpty(viewStateCacheName))
@@ -8222,11 +8252,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   Change_View_Action(conf.StrViewDfltItem);
                 else
                 {
-                  //for (int i = 0; i < 5; i++)
-                  //{
-                  //  if (conf.StrViewDfltItem.ToLower() == conf.StrViewText[i].ToLower() || conf.StrViewDfltItem.ToLower() == conf.StrViewItem[i].ToLower())
-                  //    Change_View_Action(string.Format("View{0}", i));
-                  //}
                   // MFview.ViewRow customView = this.GetCustomViewFromViewLabel(conf.StrViewDfltItem);
                   foreach (MFview.ViewRow customView in Enumerable.Where(conf.CustomViews.View, customView => conf.StrViewDfltItem == customView.Label || conf.StrViewDfltItem == customView.DBfield))
                   {
@@ -8237,15 +8262,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               else // filteritem IS defined for the defaultview
               {
                 string wStrViewDfltItem = conf.StrViewDfltItem;
-                //for (int i = 0; i < 5; i++)
-                //{
-                //  if (conf.StrViewDfltItem == conf.StrViewText[i])
-                //  {
-                //    wStrViewDfltItem = conf.StrViewItem[i];
-                //    SetLabelView("View" + i);
-                //    break;
-                //  }
-                //}
                 foreach (MFview.ViewRow customView in Enumerable.Where(conf.CustomViews.View, customView => conf.StrViewDfltItem == customView.Label))
                 {
                   wStrViewDfltItem = customView.DBfield;
@@ -8480,6 +8496,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Change_View_Action(string selectedView)
     {
       LogMyFilms.Debug("Change_View_Action called with '" + selectedView + "'");
+      internalLoadParam = null; // clear internal start params
       conf.CurrentView = selectedView;
       conf.StrSelect = ""; // reset view filter
       conf.StrViewSelect = "";
@@ -9808,6 +9825,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //success = true;
         currentFanartList.Clear(); // clear fanart list
         NavigationStack.Clear(); // clear navigation stack
+        internalLoadParam = null; // clear internal start params
         InitMainScreen(false); // reset all properties and values
         InitGlobalFilters(false); // reset global filters, when loading new config !
         //Change "Config":
@@ -11560,58 +11578,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         case "moviepersonlist":
           {
-            #region display person list of current movie
             if (!this.facadeFilms.SelectedListItem.IsFolder && !conf.Boolselect)
             {
-              conf.StrIndex = facadeFilms.SelectedListItem.ItemId;
-              conf.StrTIndex = facadeFilms.SelectedListItem.Label;
-              
-              string persontype = SelectPersonType((int)facadeFilms.SelectedListItem.ItemId);
-              
-              if (string.IsNullOrEmpty(persontype)) break;
-              SaveListState(false);
-              conf.BoolSkipViewState = false;
-              conf.StrPersons = r[conf.StrIndex][persontype].ToString();
-              //conf.StrFilmSelect = conf.StrTitle1 + " not like ''";
-              conf.StrSelect = conf.StrTitle1 + " like '*" + StringExtensions.EscapeLikeValue(conf.StrTIndex) + "'"; // set view filter to current movie name - use "*" at the beginning to include movies with hierarchies !
-              //conf.StrSelect = "";
-
-              conf.WStrSort = persontype;
-              conf.WStrSortSens = " ASC";
-              SetLabelView(persontype.ToLower());
-              conf.ViewContext = ViewContext.Person;
-              conf.CurrentView = "MoviePersons";
-
-              // Change_View_Action(persontype);
-              // getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
-              // getSelectFromDivxThreaded();
-              // getSelectFromDivx(conf.StrTitle1 + " not like ''", persontype, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
-              // getSelectFromDivx(conf.StrFilmSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
-
-              getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
-              //new Thread(delegate()
-              //{
-              //  {
-              //    // MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
-              //    getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
-              //    // MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
-              //  }
-              //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
-              //  {
-              //    {
-              //      GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // removed, as it was causing trouble with menu focus control ...
-              //    }
-              //    return 0;
-              //  }, 0, 0, null);
-              //})
-              //{
-              //  Name = "MyFilmsMoviePersonList",
-              //  IsBackground = true,
-              //  Priority = ThreadPriority.Normal
-              //}.Start();
+              //string persontype = SelectPersonType((int)facadeFilms.SelectedListItem.ItemId);
+              //if (string.IsNullOrEmpty(persontype)) return;
+              MoviePersonListLauncher(true, true);
             }
-            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-            #endregion
             break;
           }
 
@@ -12060,10 +12032,63 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }) { Name = "MyFilmsBrowseTheWebLauncher", IsBackground = true }.Start();
     }
 
+
+    private void MoviePersonListLauncher(bool savestate, bool askforpersontype)
+    {
+      #region display person list of current movie
+      string persontype = "Persons";
+      if (askforpersontype) persontype = SelectPersonType(conf.StrIndex);
+      if (string.IsNullOrEmpty(persontype)) return;
+
+      if (savestate) SaveListState(false);
+
+      conf.BoolSkipViewState = false;
+      conf.StrPersons = r[conf.StrIndex][persontype].ToString();
+      //conf.StrFilmSelect = conf.StrTitle1 + " not like ''";
+      conf.StrSelect = conf.StrTitle1 + " like '*" + StringExtensions.EscapeLikeValue(conf.StrTIndex) + "'"; // set view filter to current movie name - use "*" at the beginning to include movies with hierarchies !
+      //conf.StrSelect = "";
+
+      conf.WStrSort = persontype;
+      conf.WStrSortSens = " ASC";
+      SetLabelView(persontype.ToLower());
+      conf.ViewContext = ViewContext.Person;
+      conf.CurrentView = "MoviePersons";
+
+      // Change_View_Action(persontype);
+      // getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
+      // getSelectFromDivxThreaded();
+      // getSelectFromDivx(conf.StrTitle1 + " not like ''", persontype, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
+      // getSelectFromDivx(conf.StrFilmSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
+
+      getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
+      //new Thread(delegate()
+      //{
+      //  {
+      //    // MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation); // GUIWaitCursor.Init(); GUIWaitCursor.Show();
+      //    getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.StrPersons, true, string.Empty);
+      //    // MyFilmsDetail.SetProcessAnimationStatus(false, m_SearchAnimation); //GUIWaitCursor.Hide();
+      //  }
+      //  GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+      //  {
+      //    {
+      //      GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms); // removed, as it was causing trouble with menu focus control ...
+      //    }
+      //    return 0;
+      //  }, 0, 0, null);
+      //})
+      //{
+      //  Name = "MyFilmsMoviePersonList",
+      //  IsBackground = true,
+      //  Priority = ThreadPriority.Normal
+      //}.Start();
+      GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+      #endregion
+    }
+    
     //*****************************************************************************************
     //*  select person type dialog
     //*****************************************************************************************
-    private string SelectPersonType(int index)
+    internal string SelectPersonType(int index)
     {
       var choiceSearch = new List<string>();
       var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);

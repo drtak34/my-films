@@ -946,6 +946,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewMenu.Add("delete");
           }
 
+          if (MyFilmsDetail.ExtendedStartmode("Detail context menu - moviepersonlisst"))
+          {
+            dlgmenu.Add(GUILocalizeStrings.Get(1079879)); //Search Infos to related persons (load persons in facadeview) - only available in filmlist
+            choiceViewMenu.Add("moviepersonlist");
+          }
+
           dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // Updates ...
           choiceViewMenu.Add("updatesmenu");
 
@@ -1680,6 +1686,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return;
             }
             Change_Menu(choiceViewMenu[dlgmenu.SelectedLabel].ToLower());
+            #endregion
+            break;
+          }
+
+        case "moviepersonlist":
+          {
+            #region display person list of current movie in main screen
+            MyFilms.internalLoadParam = "moviepersonlist";
+            GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilms,false);
             #endregion
             break;
           }
