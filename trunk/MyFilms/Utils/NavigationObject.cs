@@ -123,8 +123,8 @@ namespace MyFilmsPlugin.Utils
       ViewStatus.BoolSortCountinViews = conf.BoolSortCountinViews;
       ViewStatus.Wstar = conf.Wstar;
 
-      ViewStatus.StrLayOut = conf.StrLayOut;
       ViewStatus.WStrLayOut = conf.WStrLayOut;
+      // ViewStatus.StrLayOut = conf.StrLayOut;
       // ViewStatus.StrLayOutInHierarchies = conf.StrLayOutInHierarchies;
       ViewStatus.LastID = conf.LastID;
 
@@ -160,8 +160,8 @@ namespace MyFilmsPlugin.Utils
       conf.BoolSortCountinViews = ViewStatus.BoolSortCountinViews;
       conf.Wstar = ViewStatus.Wstar;
 
-      conf.StrLayOut = ViewStatus.StrLayOut;
       conf.WStrLayOut = ViewStatus.WStrLayOut;
+      // conf.StrLayOut = ViewStatus.StrLayOut;
       // conf.StrLayOutInHierarchies = ViewStatus.StrLayOutInHierarchies;
       conf.LastID = ViewStatus.LastID;
 
