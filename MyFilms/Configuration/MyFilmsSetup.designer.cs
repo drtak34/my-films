@@ -619,6 +619,7 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.numUpDownTrailersInIntro = new System.Windows.Forms.NumericUpDown();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -716,6 +717,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).BeginInit();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -3703,6 +3705,7 @@
           // 
           // groupBox24
           // 
+          this.groupBox24.Controls.Add(this.numUpDownTrailersInIntro);
           this.groupBox24.Controls.Add(this.cbCacheOnlineTrailer);
           this.groupBox24.Controls.Add(this.cbTrailerAutoregister);
           this.groupBox24.Controls.Add(this.labelTrailers);
@@ -6440,6 +6443,15 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // numUpDownTrailersInIntro
+          // 
+          this.numUpDownTrailersInIntro.Location = new System.Drawing.Point(283, 223);
+          this.numUpDownTrailersInIntro.Name = "numUpDownTrailersInIntro";
+          this.numUpDownTrailersInIntro.Size = new System.Drawing.Size(39, 20);
+          this.numUpDownTrailersInIntro.TabIndex = 10;
+          this.ToolTip1.SetToolTip(this.numUpDownTrailersInIntro, "You can set the number of trailers that will be played before the main movie star" +
+                  "ts.\r\nSet to \'0\' to disable trailer intro.");
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6600,6 +6612,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -7112,5 +7125,6 @@
         private CheckBox cbCacheOnlineTrailer;
         private CheckBox Config_EnablePreload;
         private Button btnAMCimport;
+        private NumericUpDown numUpDownTrailersInIntro;
     }
 }

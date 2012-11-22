@@ -10987,7 +10987,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "playrandomtrailers":  // only in views and intended for "multiple movies" // dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
-          PlayRandomTrailersInit(facadeFilms.SelectedListItem.Label, false);
+          PlayRandomTrailersInit(facadeFilms.SelectedListItem.Label, "");
           break;
 
         case "downloadtrailertmdb":
@@ -13066,9 +13066,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       ////LogMyFilms.Debug("(SearchRandomWithTrailer-Info): Here should happen the handling of menucontext....");
     }
 
-    private void PlayRandomTrailersInit(string currentLabel, bool showCategorySelection)
+    private void PlayRandomTrailersInit(string currentLabel, string categoryfilter)
     {
-      LogMyFilms.Debug("PlayRandomTrailersInit() - currentLabel = '" + currentLabel + "', showCategorySelection = '" + showCategorySelection + "'");
+      LogMyFilms.Debug("PlayRandomTrailersInit() - currentLabel = '" + currentLabel + "', showCategorySelection = '" + categoryfilter + "'");
       currentTrailerMoviesList.Clear();
 
       #region Collect films with trailers in active view

@@ -7610,6 +7610,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int movieIndex = 0;
 
       SearchAllFiles(MyFilms.r[select_item], false, ref noResumeMovie, ref newItems, ref movieIndex, false, filestorage);
+      
+      //  ToDo: add code to call population of trailers array and insert num of configured trailers into playlist
+      // newItems.Insert(0, <trailers>);
+      
       if (newItems.Count > 20) // Maximum 20 entries (limitation for MP dialogFileStacking)
       {
         var dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
