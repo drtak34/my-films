@@ -10217,183 +10217,108 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //    var dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
     //    if (dlg == null) return;
 
-    //    bool emptyList = currentitem.Label == "no items";
-    //    if (!emptyList)
-    //    {
-    //      switch (this.currentListLevel)
-    //      {
-    //        case Listlevel.Series:
-    //          {
-    //            selectedSeries = (DBSeries)currentitem.TVTag;
-    //          }
-    //          break;
-    //      }
-    //    }
-    //    bool bExitMenu = false;
-
     //    do
     //    {
     //      dlg.Reset();
     //      GUIListItem pItem = null;
-
-    //      if (!emptyList)
-    //      {
-    //        switch (MyFilms.conf.CurrentView)
-    //        {
-    //          case ViewContext.TmdbMovies:
-    //            dlg.SetHeading("Movie" + "MovieName");
-    //            break;
-
-    //          case ViewContext.Group:
-    //            dlg.SetHeading("Group" + "Groupname");
-    //            break;
-
-    //          case ViewContext.Person:
-    //            dlg.SetHeading("Translation.Person" + ": " + "PersonName");
-    //            break;
-    //          default:
-    //            // group
-    //            dlg.SetHeading("Menu");
-    //            break;
-    //        }
-
-    //        #region Top Level Menu Items - Context Sensitive
-    //        if (this.currentListLevel == Listlevel.Movie)
-    //        {
-    //          pItem = new GUIListItem("Translation.Toggle_watched_flag");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextItems.toggleWatched;
-
-    //          pItem = new GUIListItem("Translation.RateEpisode" + " ...");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextMenus.rate;
-    //        }
-    //        else if (this.currentListLevel != Listlevel.Group)
-    //        {
-    //          pItem = new GUIListItem("Translation.Mark_all_as_watched");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextItems.actionMarkAllWatched;
-
-    //          pItem = new GUIListItem("Translation.Mark_all_as_unwatched");
-    //          dlg.Add(pItem);
-    //          pItem.ItemId = (int)eContextItems.actionMarkAllUnwatched;
-    //        }
-
-    //        #endregion
-    //      }
-    //      else
-    //        dlg.SetHeading("m_CurrLView.Name");
-
-    //      #region Top Level Menu Items - Non-Context Sensitive
-    //      pItem = new GUIListItem("Translation.ChangeView" + " ...");
-    //      dlg.Add(pItem);
-    //      pItem.ItemId = (int)eContextMenus.switchView;
-
-    //      if (currentListLevel != Listlevel.Group)
-    //      {
-    //        pItem = new GUIListItem(Translation.Actions + " ...");
-    //        dlg.Add(pItem);
-    //        pItem.ItemId = (int)eContextMenus.action;
-    //      }
-
-    //      pItem = new GUIListItem(Translation.Options + " ...");
-    //      dlg.Add(pItem);
-    //      pItem.ItemId = (int)eContextMenus.options;
-    //      #endregion
-
-    //      #region Download menu - keep at the bottom for fast access (menu + up => there)
-    //      if (!emptyList && subtitleDownloadEnabled && this.currentListLevel == Listlevel.Episode)
-    //      {
-    //        pItem = new GUIListItem(Translation.Download + " ...");
-    //        dlg.Add(pItem);
-    //        pItem.ItemId = (int)eContextMenus.download;
-    //      }
-    //      #endregion
-
-    //      dlg.DoModal(GUIWindowManager.ActiveWindow);
-
-    //      #region Selected Menu Item Actions (Sub-Menus)
-    //      switch (dlg.SelectedId)
-    //      {
-    //        case (int)eContextMenus.download:
-    //          {
-    //            dlg.Reset();
-    //            dlg.SetHeading(Translation.Download);
-
-    //            if (subtitleDownloadEnabled)
-    //            {
-    //              pItem = new GUIListItem(Translation.Retrieve_Subtitle);
-    //              dlg.Add(pItem);
-    //              pItem.ItemId = (int)eContextItems.downloadSubtitle;
-    //            }
-
-    //            dlg.DoModal(GUIWindowManager.ActiveWindow);
-    //            if (dlg.SelectedId != -1)
-    //              bExitMenu = true;
-    //          }
-    //          break;
-
-
-    //        case (int)eContextMenus.options:
-    //          {
-    //            dlg.Reset();
-    //            // ShowOptionsMenu();
-    //            return;
-    //          }
-
-    //        case (int)eContextMenus.switchView:
-    //          {
-    //            dlg.Reset();
-    //            // if (showViewSwitchDialog()) return;
-    //          }
-    //          break;
-
-    //        case (int)eContextMenus.switchLayout:
-    //          {
-    //            dlg.Reset();
-    //            // ShowLayoutMenu();
-    //            return;
-    //          }
-
-    //        default:
-    //          bExitMenu = true;
-    //          break;
-    //      }
-    //      #endregion
-    //    }
-    //    while (!bExitMenu);
-
-    //    if (dlg.SelectedId == -1) return;
-
-    //    #region Selected Menu Item Actions
-    //    List<MFMovie> episodeList = new List<MFMovie>();
-
-    //    switch (dlg.SelectedId)
-    //    {
-    //        #region Downloaders
-
-    //      case (int)eContextItems.downloadSubtitle:
-    //        {
-    //          if (selectedEpisode != null)
-    //          {
-    //            MFMovie episode = (MFMovie)currentitem.TVTag;
-    //            // ShowSubtitleMenu(episode);
-    //          }
-    //        }
-    //        break;
-
-    //        #endregion
-    //    }
-    //    #endregion
-
-    //  }
-    //  catch (Exception ex)
-    //  {
-    //    LogMyFilms.Error("The 'OnShowContextMenu' function has generated an error: " + ex.Message + ", StackTrace : " + ex.StackTrace);
-    //  }
-
-    //}
     #endregion
+
+    public enum Menu
+    {
+      MainMenu,
+      HiddenMenuMain,
+      ContextMenuMain,
+      SubmenuOptions,
+      ClearMovieCover
+    }
+
+    private void ShowContextMenu()
+    {
+      ShowContextMenu((int)Menu.MainMenu, null, -1, true);
+    }
+
+    private void ShowContextMenu(int menuaction, Stack menunavigationstack, int lastposition, bool iscontextmenu)
+    {
+      try
+      {
+        if (menunavigationstack == null) menunavigationstack = new Stack();
+        GUIListItem currentitem = this.facadeFilms.SelectedListItem;
+        var dlg = (IDialogbox)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+        GUIListItem pItem; // menu entries
+        if (dlg == null) return;
+        dlg.Reset();
+
+        switch (menuaction)
+        {
+          case (int)Menu.MainMenu:
+            #region main menu
+            dlg.SetHeading(GUILocalizeStrings.Get(10799201)); // MyFilms Cover Manager
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10799204)); // Download Covers ...
+            pItem.ItemId = (int)Menu.SubmenuOptions;
+            dlg.Add(pItem);
+
+            #endregion
+            break;
+
+          case (int)Menu.SubmenuOptions:
+            #region submenu options ...
+            dlg.SetHeading(GUILocalizeStrings.Get(10799204)); // Download Covers ...
+
+            pItem = new GUIListItem(GUILocalizeStrings.Get(10798766));  // Load single Cover ...
+            pItem.ItemId = (int)Menu.ClearMovieCover;
+            dlg.Add(pItem);
+
+            #endregion
+            break;
+        }
+
+        dlg.DoModal(GUIWindowManager.ActiveWindow);
+
+        if (dlg.SelectedLabel == -1)
+        {
+          #region conditional return to main menu
+          if (!iscontextmenu) return;
+          else
+          {
+            if (menunavigationstack.Count > 0)
+            {
+              var obj = NavigationStack.Pop() as MyFilmsPlugin.Utils.MenuNavigationObject;
+              ShowContextMenu((int)obj.MenuItem, menunavigationstack, (int)(Menu)obj.Position, iscontextmenu);
+            }
+            else
+            {
+              switch (menuaction)
+              {
+                case (int)Menu.MainMenu:
+                  dlg.Reset();
+                  return;
+                case (int)Menu.SubmenuOptions:
+                  menunavigationstack = null;
+                  ShowContextMenu((int)Menu.MainMenu, menunavigationstack, -1, true);
+                  break;
+              }
+            }
+          }
+          #endregion
+        }
+
+        MyFilmsDetail.Searchtitles sTitles;
+        menunavigationstack.Push(new MyFilmsPlugin.Utils.MenuNavigationObject((Menu)menuaction, dlg.SelectedId));
+        switch (dlg.SelectedId) // what was chosen?
+        {
+          case (int)Menu.SubmenuOptions:
+            dlg.Reset();
+            ShowContextMenu((int)Menu.MainMenu, menunavigationstack, dlg.SelectedId, true);
+            break;
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("Exception in Menu Processor: " + ex.Message);
+      }
+    }
+
 
     //--------------------------------------------------------------------------------------------
     //   Display Context Menu for Movie 
