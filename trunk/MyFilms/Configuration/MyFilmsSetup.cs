@@ -116,6 +116,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         this.cbTrailerAutoregister.Visible = false;
         this.cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
         this.ShowTrailerWhenStartingMovie.Visible = false;
+        this.numUpDownTrailersInIntro.Visible = false;
         this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
         this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
         this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
