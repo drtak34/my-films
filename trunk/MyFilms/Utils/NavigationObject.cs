@@ -10,6 +10,23 @@ namespace MyFilmsPlugin.Utils
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
   using MyFilmsPlugin.MyFilmsGUI;
 
+  public class MenuNavigationObject
+  {
+    public MyFilms.Menu MenuItem { get; set; }
+    public int Position { get; set; }
+
+    public MenuNavigationObject()
+    {
+      MenuItem = MyFilms.Menu.MainMenu;
+      Position = -1;
+    }
+    public MenuNavigationObject(MyFilms.Menu menuitem, int menuposition)
+    {
+      MenuItem = menuitem;
+      Position = menuposition;
+    }
+  }
+
   public class NavigationObject
   {
     public List<GUIListItem> Items { get; set; }
