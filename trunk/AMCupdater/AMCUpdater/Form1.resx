@@ -157,10 +157,7 @@ Note: To set the behaviour for usage from within MyFilms plugin in background im
     <value>Continue processing and import files even when Internet lookup fails or similar.
 This is the preferred setting for silent background operation, if you
 prefer to have your media files imported, even if the internet lookup is failing.
-It gives you the possibility to update the internet infos interactively in MyFilms.
-To have this option active for silent background operation (e.g. global update from MyFilms GUI,
-but NOT active for AMCUpdater interactive GUI mode, you have to select the 
-option "Don't import file in interactive mode".</value>
+It gives you the possibility to update the internet infos interactively in MyFilms.</value>
   </data>
   <data name="cbInternetLookupBehaviour.ToolTip" xml:space="preserve">
     <value>Here you can choose how AMC Updater handles the import of your files, depending on the matching.

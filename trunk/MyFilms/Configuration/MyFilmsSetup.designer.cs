@@ -225,6 +225,7 @@
           this.scheduleAMCUpdater = new System.Windows.Forms.CheckBox();
           this.btnParameters = new System.Windows.Forms.Button();
           this.groupBox_AMCupdater_ExternalApplication = new System.Windows.Forms.GroupBox();
+          this.chkAMC_ImportOnInternetFail = new System.Windows.Forms.CheckBox();
           this.label56 = new System.Windows.Forms.Label();
           this.AmcTitleSearchHandling = new System.Windows.Forms.ComboBox();
           this.btnCreateAMCDefaultConfig = new System.Windows.Forms.Button();
@@ -368,6 +369,7 @@
           this.AntViewValue = new System.Windows.Forms.TextBox();
           this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
+          this.numUpDownTrailersInIntro = new System.Windows.Forms.NumericUpDown();
           this.cbCacheOnlineTrailer = new System.Windows.Forms.CheckBox();
           this.cbTrailerAutoregister = new System.Windows.Forms.CheckBox();
           this.labelTrailers = new System.Windows.Forms.Label();
@@ -619,7 +621,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.numUpDownTrailersInIntro = new System.Windows.Forms.NumericUpDown();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -671,6 +672,7 @@
           this.groupBox5.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).BeginInit();
           this.groupBox24.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).BeginInit();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox_PreLaunchingCommand.SuspendLayout();
@@ -717,7 +719,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).BeginInit();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2071,7 +2072,7 @@
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.btnParameters);
           this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(388, 71);
           this.groupBox_AMCupdaterScheduer.Name = "groupBox_AMCupdaterScheduer";
-          this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(332, 62);
+          this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(332, 52);
           this.groupBox_AMCupdaterScheduer.TabIndex = 2;
           this.groupBox_AMCupdaterScheduer.TabStop = false;
           this.groupBox_AMCupdaterScheduer.Text = "Scheduler for AMCupdater";
@@ -2081,7 +2082,7 @@
           // scheduleAMCUpdater
           // 
           this.scheduleAMCUpdater.AutoSize = true;
-          this.scheduleAMCUpdater.Location = new System.Drawing.Point(32, 28);
+          this.scheduleAMCUpdater.Location = new System.Drawing.Point(32, 21);
           this.scheduleAMCUpdater.Name = "scheduleAMCUpdater";
           this.scheduleAMCUpdater.Size = new System.Drawing.Size(71, 17);
           this.scheduleAMCUpdater.TabIndex = 0;
@@ -2092,7 +2093,7 @@
           // 
           // btnParameters
           // 
-          this.btnParameters.Location = new System.Drawing.Point(167, 23);
+          this.btnParameters.Location = new System.Drawing.Point(167, 16);
           this.btnParameters.Name = "btnParameters";
           this.btnParameters.Size = new System.Drawing.Size(143, 24);
           this.btnParameters.TabIndex = 0;
@@ -2102,6 +2103,7 @@
           // 
           // groupBox_AMCupdater_ExternalApplication
           // 
+          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.chkAMC_ImportOnInternetFail);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.label56);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AmcTitleSearchHandling);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDefaultConfig);
@@ -2111,12 +2113,23 @@
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AMCMovieScanPath);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDesktopIcon);
           this.groupBox_AMCupdater_ExternalApplication.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(12, 137);
+          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(12, 126);
           this.groupBox_AMCupdater_ExternalApplication.Name = "groupBox_AMCupdater_ExternalApplication";
-          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(709, 100);
+          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(709, 119);
           this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
           this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
           this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
+          // 
+          // chkAMC_ImportOnInternetFail
+          // 
+          this.chkAMC_ImportOnInternetFail.AutoSize = true;
+          this.chkAMC_ImportOnInternetFail.Location = new System.Drawing.Point(139, 96);
+          this.chkAMC_ImportOnInternetFail.Name = "chkAMC_ImportOnInternetFail";
+          this.chkAMC_ImportOnInternetFail.Size = new System.Drawing.Size(134, 17);
+          this.chkAMC_ImportOnInternetFail.TabIndex = 8;
+          this.chkAMC_ImportOnInternetFail.Text = "Import if no auto match";
+          this.ToolTip1.SetToolTip(this.chkAMC_ImportOnInternetFail, resources.GetString("chkAMC_ImportOnInternetFail.ToolTip"));
+          this.chkAMC_ImportOnInternetFail.UseVisualStyleBackColor = true;
           // 
           // label56
           // 
@@ -2146,7 +2159,7 @@
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(544, 51);
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(544, 63);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(143, 36);
           this.btnCreateAMCDefaultConfig.TabIndex = 7;
@@ -2200,7 +2213,7 @@
           // 
           // btnCreateAMCDesktopIcon
           // 
-          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(387, 51);
+          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(387, 63);
           this.btnCreateAMCDesktopIcon.Name = "btnCreateAMCDesktopIcon";
           this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(143, 36);
           this.btnCreateAMCDesktopIcon.TabIndex = 6;
@@ -3722,6 +3735,15 @@
           this.groupBox24.TabStop = false;
           this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
           this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
+          // 
+          // numUpDownTrailersInIntro
+          // 
+          this.numUpDownTrailersInIntro.Location = new System.Drawing.Point(283, 223);
+          this.numUpDownTrailersInIntro.Name = "numUpDownTrailersInIntro";
+          this.numUpDownTrailersInIntro.Size = new System.Drawing.Size(39, 20);
+          this.numUpDownTrailersInIntro.TabIndex = 10;
+          this.ToolTip1.SetToolTip(this.numUpDownTrailersInIntro, "You can set the number of trailers that will be played before the main movie star" +
+                  "ts.\r\nSet to \'0\' to disable trailer intro.");
           // 
           // cbCacheOnlineTrailer
           // 
@@ -6443,15 +6465,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // numUpDownTrailersInIntro
-          // 
-          this.numUpDownTrailersInIntro.Location = new System.Drawing.Point(283, 223);
-          this.numUpDownTrailersInIntro.Name = "numUpDownTrailersInIntro";
-          this.numUpDownTrailersInIntro.Size = new System.Drawing.Size(39, 20);
-          this.numUpDownTrailersInIntro.TabIndex = 10;
-          this.ToolTip1.SetToolTip(this.numUpDownTrailersInIntro, "You can set the number of trailers that will be played before the main movie star" +
-                  "ts.\r\nSet to \'0\' to disable trailer intro.");
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6544,6 +6557,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).EndInit();
           this.groupBox24.ResumeLayout(false);
           this.groupBox24.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).EndInit();
           this.groupBox_AntSelectedEnreg.ResumeLayout(false);
           this.groupBox_AntSelectedEnreg.PerformLayout();
           this.groupBox3.ResumeLayout(false);
@@ -6612,7 +6626,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -7126,5 +7139,6 @@
         private CheckBox Config_EnablePreload;
         private Button btnAMCimport;
         private NumericUpDown numUpDownTrailersInIntro;
+        private CheckBox chkAMC_ImportOnInternetFail;
     }
 }

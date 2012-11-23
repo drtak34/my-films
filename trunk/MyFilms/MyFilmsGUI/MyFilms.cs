@@ -8790,7 +8790,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Change_Menu_Action(string choiceView)
     {
       LogMyFilms.Debug("Change_View called with '" + choiceView + "'");
-      // XmlConfig XmlConfig = new XmlConfig(); // no more used - replaced by using ... (was not compatible to cached writing in other places)
+      var AmcXmlConfig = new XmlConfig(); // no more used - replaced by using ... (was not compatible to cached writing in other places), only used for AMCupdater settings
       switch (choiceView.ToLower())
       {
         case "config":
@@ -8940,6 +8940,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798628)));
           if (!MyFilms.conf.StrGrabber_Always) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079864), GUILocalizeStrings.Get(10798629)));
           choiceViewGlobalOptions.Add("findbestmatch");
+
+          // Change AMCupdater option "import if no auto match" in background mode for myfilms
+          bool importonfail = (AmcXmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Import_File_On_Internet_Lookup_Failure", "").ToLower() == "true");
+          if (importonfail) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079810), GUILocalizeStrings.Get(10798628))); // Import/Update AMCUpdater - import if internet lookup fails ({0})
+          if (!importonfail) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079810), GUILocalizeStrings.Get(10798629)));
+          choiceViewGlobalOptions.Add("amcimportifinternetlookupfails");
+
+          // Change AMCupdater option "purge missing files"
+          bool purgeorphans = (AmcXmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Purge_Missing_Files", "").ToLower() == "true");
+          if (purgeorphans) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079811), GUILocalizeStrings.Get(10798628))); // Import/Update AMCUpdater - purge mising db entries after import finished ({0})
+          if (!purgeorphans) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079811), GUILocalizeStrings.Get(10798629)));
+          choiceViewGlobalOptions.Add("amcpurgeorphans");
 
           if (MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798628)));
           if (!MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
@@ -9411,9 +9423,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlgprofile == null) return;
           dlgprofile.Reset();
           dlgprofile.SetHeading(GUILocalizeStrings.Get(1079843)); // Userdefined DB Update (AMCUpdater)
-          List<string> choiceAMCconfig = new List<string>();
+          var choiceAMCconfig = new List<string>();
 
-          DirectoryInfo dirsInf = new DirectoryInfo(MyFilms.conf.StrAMCUpd_cnf.Substring(0, MyFilms.conf.StrAMCUpd_cnf.LastIndexOf("\\")));
+          var dirsInf = new DirectoryInfo(MyFilms.conf.StrAMCUpd_cnf.Substring(0, MyFilms.conf.StrAMCUpd_cnf.LastIndexOf("\\")));
           bool isMePoDataDir = (MyFilms.conf.StrAMCUpd_cnf.Substring(0, MyFilms.conf.StrAMCUpd_cnf.LastIndexOf("\\")) == Config.GetDirectoryInfo(Config.Dir.Config).ToString());
           FileSystemInfo[] sfiles = dirsInf.GetFileSystemInfos();
 
@@ -9615,6 +9627,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Grabber Option 'try to find best match...' changed to " + MyFilms.conf.StrGrabber_Always.ToString());
+          //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          this.Change_Menu_Action("globaloptions");
+          #endregion
+          break;
+
+        case "amcimportifinternetlookupfails":
+          #region amcimportifinternetlookupfails
+          bool importonfailvalue = (AmcXmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Import_File_On_Internet_Lookup_Failure", "").ToLower() == "true");
+          importonfailvalue = !importonfailvalue;
+          AmcXmlConfig.WriteAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Import_File_On_Internet_Lookup_Failure", (importonfailvalue) ? "True" : "False");
+          LogMyFilms.Info("AMCupdater import option 'Import_File_On_Internet_Lookup_Failure' changed to " + importonfailvalue);
+          //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          this.Change_Menu_Action("globaloptions");
+          #endregion
+          break;
+
+        case "amcpurgeorphans":
+          #region amcpurgeorphans
+          bool amcpurgeorphans = (AmcXmlConfig.ReadAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Purge_Missing_Files", "").ToLower() == "true");
+          amcpurgeorphans = !amcpurgeorphans;
+          AmcXmlConfig.WriteAMCUXmlConfig(MyFilms.conf.StrAMCUpd_cnf, "Purge_Missing_Files", (amcpurgeorphans) ? "True" : "False");
+          LogMyFilms.Info("AMCupdater import option 'Purge_Missing_Files' changed to " + amcpurgeorphans);
           //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           this.Change_Menu_Action("globaloptions");
           #endregion
@@ -10310,7 +10344,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
         }
 
-        MyFilmsDetail.Searchtitles sTitles;
+        // MyFilmsDetail.Searchtitles sTitles;
         menunavigationstack.Push(new MyFilmsPlugin.Utils.MenuNavigationObject((Menu)menuaction, dlg.SelectedId));
         switch (dlg.SelectedId) // what was chosen?
         {
@@ -15197,8 +15231,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string exeName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCUpdater.exe";
       string amcConfig = (string.IsNullOrEmpty(e.Argument.ToString()))
                    ? "\"" + MyFilms.conf.StrAMCUpd_cnf + "\""
-                   : "\"" + e.Argument.ToString() + "\"";
-      string argsLine = amcConfig + " " + "\"" + MediaPortal.Configuration.Config.GetDirectoryInfo(Config.Dir.Log) + "\"";
+                   : "\"" + e.Argument + "\"";
+      string argsLine = amcConfig + " " + "\"" + Config.GetDirectoryInfo(Config.Dir.Log) + "\"";
       //static public void RunAMCupdater(string exeName, string argsLine)
       if (exeName.Length > 0)
       {
