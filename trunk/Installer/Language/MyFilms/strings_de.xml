@@ -82,8 +82,8 @@
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
     <String id="107988">Filme</String>
-    <String id="1079810">Umschalten 'Import AMCUpdater - Filme auch ohne Internetdaten importieren' ({0})</String>
-    <String id="1079811">Umschalten 'Import AMCUpdater - Lösche verwaiste DB Einträge nach dem Import' ({0})</String>
+    <String id="1079810">Umschalten 'Import - Filme auch ohne Internetdaten importieren' ({0})</String>
+    <String id="1079811">Umschalten 'Import - Lösche verwaiste DB Einträge' ({0})</String>
     <String id="1079816">Speichern von Layout und Sortierung als Start Default für Film Listen</String>
     <String id="1079817">Speichern von Layout und Sortierung als Start Default für Box-Sets</String>
     <String id="1079818">Lösche User Profil</String>
@@ -112,7 +112,7 @@
     <String id="1079841">Ändere Standardansicht ('{0}')</String>
     <String id="1079842">Ändere Standard Startkonfiguration ('{0}')</String>
     <String id="1079843">Benutzerdefinierte Aktualisierung (AMCupdater)</String>
-    <String id="1079844">Umschalten 'Zeige nur Anfangsbuchstaben ' ({0})</String>
+    <String id="1079844">Umschalten 'Zeige nur Anfangsbuchstaben' ({0})</String>
     <String id="1079845">Umschalten 'Zeige ganze Werte an' ({0})</String>
     <String id="1079846">Abgeschlossen ...</String>
     <String id="1079847">MyFilms lokale Fanart Erstellung</String>
@@ -148,7 +148,7 @@
     <String id="1079877">Bitte überprüfen Sie ihre Einstellungen !</String>
     <String id="1079878">Wollen Sie diese Auswahl treffen ?</String>
     <String id="1079879">Infos zu beteiligten Personen</String>
-    <String id="1079880">Umschalten 'Immer Standardansicht zeigen ({0})'</String>
+    <String id="1079880">Umschalten 'Immer Starteinstellungen anwenden' ({0})</String>
     <String id="1079881">Bitte wählen sie den globalen Wert für die Minimalbewertung</String>
     <String id="1079882">Update der aktuellen Person</String>
     <String id="1079883">Update aller beteiligten Personen</String>
@@ -178,10 +178,10 @@
     <String id="1079908">Film Sammlung</String>
     <String id="1079909">Wähle Rolle</String>
     <String id="1079910">Anzahl</String>
-    <String id="1079918">Umschalten 'Cache Trailers for Online Content ({0})'</String>
-    <String id="1079919">Umschalten 'Manuelle Wahl Wiedergabequalität ({0})'</String>
-    <String id="1079920">Umschalten 'Immer Standard Start Konfiguration ({0})'</String>
-    <String id="1079921">Umschalten 'Zeige Online Informationen ({0})'</String>
+    <String id="1079918">Umschalten 'Zwischenspeichern Online Trailer' ({0})</String>
+    <String id="1079919">Umschalten 'Manuelle Wahl Wiedergabequalität' ({0})</String>
+    <String id="1079920">Umschalten 'Immer Standard Start Konfiguration' ({0})</String>
+    <String id="1079921">Umschalten 'Zeige Online Informationen' ({0})</String>
     <String id="1079930">Personen zum Film (IMDB)</String>
     <String id="10798500">Spiele Film (externer Player)</String>
     <String id="10798600">Suche OnlineVideos ...</String>
