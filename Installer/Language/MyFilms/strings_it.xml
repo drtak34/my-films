@@ -82,6 +82,8 @@
     <String id="107986">My Films</String>
     <String id="107987">My Films</String>
     <String id="107988">My Films</String>
+    <String id="1079810">Import/Update AMCUpdater - import if internet lookup fails ({0})</String>
+    <String id="1079811">Import/Update AMCUpdater - purge orphans after import finished ({0})</String>
     <String id="1079816">Save current layout and sort as start default for film lists</String>
     <String id="1079817">Save current layout and sort as start default for box sets</String>
     <String id="1079818">Delete user profile</String>

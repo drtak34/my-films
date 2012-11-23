@@ -328,6 +328,35 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
       return Value;
     }
+
+    public void WriteAMCUXmlConfig(string FileName, string Option, string Value)
+    {
+      // Create file if doesn't exist
+      if (!File.Exists(EntireFilenameConfig(FileName)))
+      {
+        CreateXmlConfig(FileName);
+      }
+
+      //Open xml document
+      if (FileName != xmlFileName)
+      {
+        this.Load(FileName);
+      }
+
+      //Recover profile node
+      XmlElement profile = configxml.DocumentElement;
+
+      //Posit on value
+      String XPath = @"/NewDataSet/Values[@Option='" + Option + "']";
+      XmlNodeList ListEntry = configxml.SelectNodes(XPath);
+
+      // If value exist, select it and store new Value
+      if (ListEntry.Count > 0) ListEntry.Item(0).SelectSingleNodeFast("Value").InnerText = Value;
+
+      //Save xml config file  
+      configxml.Save(EntireFilenameConfig(FileName));
+    }
+
     #endregion
 
     #region <<private>>

@@ -1836,6 +1836,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkPersons.Checked = false;
       chkPersonsEnableDownloads.Checked = false;
       chkAMC_Purge_Missing_Files.Checked = false;
+      chkAMC_ImportOnInternetFail.Checked = false;
       AMCMovieScanPath.ResetText();
       AmcTitleSearchHandling.Text = string.Empty;
       //btnCreateAMCDesktopIcon.Enabled = false;
@@ -3219,12 +3220,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
         AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
-      {
         chkAMC_Purge_Missing_Files.Checked = AMCGetAttribute("Purge_Missing_Files").ToLower() == "true";
-      }
+      if (!string.IsNullOrEmpty(this.AMCGetAttribute("Import_File_On_Internet_Lookup_Failure")))
+        chkAMC_ImportOnInternetFail.Checked = AMCGetAttribute("Import_File_On_Internet_Lookup_Failure").ToLower() == "true";
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
         AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
-
     }
 
     private void Read_XML_AMCconfig(string currentconfig)
@@ -3289,9 +3289,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
         AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
-      {
         chkAMC_Purge_Missing_Files.Checked = AMCGetAttribute("Purge_Missing_Files").ToLower() == "true";
-      }
+      if (!string.IsNullOrEmpty(this.AMCGetAttribute("Import_File_On_Internet_Lookup_Failure")))
+        chkAMC_ImportOnInternetFail.Checked = AMCGetAttribute("Import_File_On_Internet_Lookup_Failure").ToLower() == "true";
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
         AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
 
@@ -4498,6 +4498,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
       }
 
+      AMCSetAttribute("Import_File_On_Internet_Lookup_Failure", chkAMC_ImportOnInternetFail.Checked ? "true" : "false");
+
       // Those Parameters already set via MyFilmsAMCSettings.xml (Defaultconfigfile):
       //Movie_Title_Handling	Default	Folder Name + Internet Lookup
       //Option	Status / Source	DefaultValue
@@ -4518,7 +4520,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       //Filter_Strings	Default	\([0-9][0-9][0-9][0-9]\)
       //Folder_Name_Is_Group_Name	Default	False
       //Group_Name_Applies_To	Default	Both Titles
-      //Import_File_On_Internet_Lookup_Failure	Default	True
       //Internet_Lookup_Always_Prompt	Default	False
       //Log_Level	Default	All Events
       //Manual_Internet_Lookup_Always_Prompt	Default	True
@@ -5084,6 +5085,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AMCMovieScanPath.Text = PathStorage.Text;
       AmcTitleSearchHandling.Text = "Folder Name + Internet Lookup"; // set this as default
       chkAMC_Purge_Missing_Files.Checked = false;
+      chkAMC_ImportOnInternetFail.Checked = true;
       txtPicturePrefix.Text = @"pictures\"; // txtPicturePrefix.Text = ""; // "Config_Name.Text + "_"; // Use configname as default prefix
       txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
       // Make controls visible:
