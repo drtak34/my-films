@@ -75,6 +75,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     public Configuration(string currentConfig, bool setcurrentconfig, bool createTemp, LoadParameterInfo loadParams)
     {
+      #region init variables
       CustomViews = new MFview();
       CurrentView = string.Empty;
       DbSelection = new string[] { string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty };
@@ -99,6 +100,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BoolSkipViewState = false;
       MenuSelectedId = -1;
       BoolEnableOnlineServices = false;
+      #endregion
 
       #region Load Config Parameters in MyFilms.xml file (section currentConfig)
 
@@ -232,6 +234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         #endregion
 
+        #region load customviews from config
         int index = 1;
         for (int i = 1; i < iCustomViews + 1; i++)
         {
@@ -255,6 +258,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             CustomViews.View.AddViewRow(view);
           index++;
         }
+        #endregion
 
         StrFileXml = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntCatalog", string.Empty);
         StrFileXmlTemp = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", string.Empty);
@@ -265,22 +269,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrPathViews = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ViewsPicture", string.Empty);
         StrPathArtist = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ArtistPicturePath", string.Empty);
 
-        StrLayOut = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "LayOut", 0);
-        WStrLayOut = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WLayOut", StrLayOut);
-        StrLayOutInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "LayOutInHierarchies", StrLayOut);
-
-        if (loadParams != null && !string.IsNullOrEmpty(loadParams.Layout))
-        {
-          int iLayout = 0;
-          if (int.TryParse(loadParams.Layout, out iLayout))
-            if (iLayout >= 0 && iLayout <= 4)
-            {
-              StrLayOut = iLayout;
-              WStrLayOut = iLayout;
-              StrLayOutInHierarchies = iLayout;
-            }
-        }
-
+        #region user defined display items
         Stritem1 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItem1", string.Empty);
         Stritem2 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItem2", string.Empty);
         Stritem3 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntItem3", string.Empty);
@@ -304,6 +293,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrlabelDetails4 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails4", BaseMesFilms.TranslateColumn(StritemDetails4));
         StrlabelDetails5 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails5", BaseMesFilms.TranslateColumn(StritemDetails5));
         StrlabelDetails6 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntLabelDetails6", BaseMesFilms.TranslateColumn(StritemDetails6));
+        #endregion
 
         StrIdentLabel = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntIdentLabel", string.Empty);
         StrLogos = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Logos", false);
@@ -523,18 +513,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrDfltSelect = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrDfltSelect", string.Empty);
         StrViewSelect = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrViewSelect", string.Empty);
 
-        #region Sort Settings
-        StrSorta = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSort", string.Empty);
-        StrSortSens = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSortSens", string.Empty);
-        StrSortaInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSortInHierarchies", string.Empty);
-        StrSortSensInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSortSensInHierarchies", string.Empty);
-        string wDfltSort = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSort", string.Empty);
-        string wDfltSortSens = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSortSens", string.Empty);
-
-        string wDfltSortInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
-        string wDfltSortSensInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
-        #endregion
-
         #region experimental Viewmanager settings
         //StartView.InitDefaults();
         //CurrentView.InitDefaults();
@@ -598,6 +576,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrViewsDflt = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ViewsDflt", false);
         StrViewsDfltAll = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ViewsDfltAll", false);
         StrViewsShowIndexedImgInIndViews = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ViewsShowIndexedImages", false);
+
+        #region WOL settings
         StrCheckWOLenable = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WOL-Enable", false);
         StrWOLtimeout = Convert.ToInt16(xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WOL-Timeout", "15"));
         StrCheckWOLuserdialog = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WOL-Userdialog", false);
@@ -607,12 +587,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrNasMAC2 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "NAS-MAC-2", string.Empty);
         StrNasName3 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "NAS-Name-3", string.Empty);
         StrNasMAC3 = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "NAS-MAC-3", string.Empty);
+        #endregion
 
+        #region external player
         ExternalPlayerPath = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ExternalPlayerPath", string.Empty);
         ExternalPlayerStartParams = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ExternalPlayerStartParams", string.Empty);
         ExternalPlayerExtensions = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ExternalPlayerExtensions", string.Empty);
+        #endregion
 
-        //// read states vars for each possible view - do we also need states for "userdefined views"?  
+        #region read states vars for each possible view - do we also need states for "userdefined views"? (disabled)
         //DataBase.AntMovieCatalog ds = new DataBase.AntMovieCatalog();
         //MyFilms.ViewStateCache.Clear();
         //foreach (DataColumn dc in ds.Movie.Columns)
@@ -631,14 +614,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //  //  CustomView.Add(tView);
         //  //}
         //}
+        #endregion
 
+        #region search history
         StrSearchHistory = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SearchHistory", string.Empty);
         MyFilms.SearchHistory.Clear();
         foreach (string s in this.StrSearchHistory.Split('|').Where(s => !string.IsNullOrEmpty(s.Trim())))
         {
           MyFilms.SearchHistory.Add(s);
         }
+        #endregion
 
+        #region list and role separators
         int j = 0;
         for (int i = 1; i <= 5; i++)
         {
@@ -657,26 +644,60 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             j++;
           }
         }
+        #endregion
 
-        CmdExe = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "CmdExe", string.Empty);
-        if (CmdExe == "(none)") CmdExe = "";
         CmdPar = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "CmdPar", string.Empty);
         if (CmdPar == "(none)") CmdPar = "";
         OnlyTitleList = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "OnlyTitleList", false);
         GlobalAvailableOnly = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "GlobalAvailableOnly", false);
         GlobalUnwatchedOnly = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "GlobalUnwatchedOnly", false);
         GlobalUnwatchedOnlyValue = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "GlobalUnwatchedOnlyValue", "false");
-
         ScanMediaOnStart = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "CheckMediaOnStart", false);
         BoolShowEmptyValuesInViews = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ShowEmpty", false);
         AllowTraktSync = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AllowTraktSync", false);
-        this.AllowRecentlyAddedApi = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AllowRecentAddedAPI", false);
+        AllowRecentlyAddedApi = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AllowRecentAddedAPI", false);
+
+        #region layout settings
+        StrLayOut = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "LayOut", 0);
+        StrLayOutInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "LayOutInHierarchies", StrLayOut);
+        WStrLayOut = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "WLayOut", StrLayOut);
+        int iDfltLayOut = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltLayOut", 0);
+        int iDfltLayOutInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltLayOutInHierarchies", 0);
+
+        if (loadParams != null && !string.IsNullOrEmpty(loadParams.Layout))
+        {
+          #region override layout with start params, if available
+          int iLayout = 0;
+          if (int.TryParse(loadParams.Layout, out iLayout))
+            if (iLayout >= 0 && iLayout <= 4)
+            {
+              StrLayOut = iLayout;
+              WStrLayOut = iLayout;
+              StrLayOutInHierarchies = iLayout;
+            }
+          #endregion
+        }
+        #endregion
+
+        #region Sort Settings
+        StrSorta = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSort", string.Empty);
+        StrSortSens = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSortSens", string.Empty);
+        StrSortaInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSortInHierarchies", string.Empty);
+        StrSortSensInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "StrSortSensInHierarchies", string.Empty);
+        string wDfltSort = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSort", string.Empty);
+        string wDfltSortSens = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSortSens", string.Empty);
+
+        string wDfltSortInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSortInHierarchies", string.Empty); // InHierarchies
+        string wDfltSortSensInHierarchies = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntDfltStrSortSensInHierarchies", string.Empty);
+        #endregion
 
         AlwaysDefaultView = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AlwaysDefaultView", false);
+        
         if (AlwaysDefaultView || MyFilms.InitialStart || (loadParams != null && (!string.IsNullOrEmpty(loadParams.View) || !string.IsNullOrEmpty(loadParams.MovieID))))
         {
-          this.ViewContext = MyFilms.ViewContext.StartView;
-          this.StrIndex = -1;
+          #region overrides for "AlwaysDefaultView"
+          ViewContext = MyFilms.ViewContext.StartView;
+          StrIndex = -1;
           LastID = -1;
           Wstar = "";
           Boolreturn = false;
@@ -687,9 +708,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Wselectedlabel = StrViewDfltText;
           if (loadParams == null || string.IsNullOrEmpty(loadParams.Layout))
           {
-            StrLayOut = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "LayOut", StrLayOut);
-            StrLayOutInHierarchies = StrLayOut;
-            this.WStrLayOut = StrLayOut;
+            StrLayOut = iDfltLayOut;
+            StrLayOutInHierarchies = iDfltLayOutInHierarchies;
+            WStrLayOut = iDfltLayOut; // also preset views layout to default - although it most probably will be overridden by views setting
           }
           if (Helper.FieldIsSet(wDfltSort))
           {
@@ -701,6 +722,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             StrSortaInHierarchies = wDfltSortInHierarchies;
             StrSortSensInHierarchies = wDfltSortSensInHierarchies;
           }
+          #endregion
         }
         xmlConfig.Dispose();
         #endregion

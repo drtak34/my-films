@@ -852,18 +852,22 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator4", RoleSeparator4.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator5", RoleSeparator5.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Selection", "");
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
+
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSort", wDfltSort);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", SortSens.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", wDfltSortInHierarchies); // InHierarchies
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", SortSensInHierarchies.Text);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOut", GetLayoutFromName(LayOut.Text));
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOutInHierarchies", GetLayoutFromName(LayoutInHierarchies.Text));
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSort", "");
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortSens", "");
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortInHierarchies", "");
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortSensInHierarchies", "");
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", GetLayoutFromName(LayOut.Text));
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOutInHierarchies", GetLayoutFromName(LayoutInHierarchies.Text));
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOutInHierarchies", 0);
+
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Dwp", crypto.Crypter(Dwp.Text));
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", SearchFileName.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", SearchSubDirs.Checked);
@@ -1036,7 +1040,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       // XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling"); // ToDo: can be removed in later release, when we don't support nonEnhanced/AMC3 anymore
     }
 
-    private int GetLayoutFromName(string layoutname)
+    internal int GetLayoutFromName(string layoutname)
     {
       int wLayout = 0;
       if (layoutname == "List") wLayout = 0;
@@ -1048,7 +1052,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       return wLayout;
     }
 
-    private string GetLayoutFromInt(int layoutnumber)
+    internal string GetLayoutFromInt(int layoutnumber)
     {
       string layoutname = "List";
       if (layoutnumber == 0) layoutname = "List";
@@ -1204,10 +1208,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AntTitle2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntTitle2", "");
       AntSTitle.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSTitle", "");
       if (AntSTitle.Text == "") AntSTitle.Text = AntTitle1.Text;
+
+      #region default values for film lists and groups
       Sort.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSort", "");
       SortInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", "");
       SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", " ASC");
       SortSensInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", " ASC");
+      LayOut.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOut", 0));
+      LayoutInHierarchies.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOutInHierarchies", 0));
+      #endregion
 
       AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterItem1", "");
       AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterSign1", "#");
@@ -1395,14 +1404,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       View_Dflt_Text.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewDfltText", "");
       Config_Dflt.Checked = (Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
       Config_EnablePreload.Checked = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PreCaching", false);
-
-      //if (!(AntViewItem1.Text == "Country") & !(AntViewItem1.Text == "Category") & !(AntViewItem1.Text == "Year") & !(AntViewItem1.Text == "(none)"))
-      //    View_Dflt_Item.Items.Add(AntViewItem1.Text);
-      //if (!(AntViewItem2.Text == "Country") & !(AntViewItem2.Text == "Category") & !(AntViewItem2.Text == "Year") & !(AntViewItem2.Text == "(none)"))
-      //    View_Dflt_Item.Items.Add(AntViewItem2.Text);
-
-      LayOut.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0));
-      LayoutInHierarchies.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOutInHierarchies", 0));
 
       AntViewText_Change();
       AntSort_Change();

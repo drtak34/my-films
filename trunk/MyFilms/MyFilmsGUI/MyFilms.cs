@@ -8184,11 +8184,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case ViewContext.Menu:
-          GetSelectFromMenuView(false); // load views into facade ...
-          break;
-
         case ViewContext.MenuAll:
-          GetSelectFromMenuView(true); // load views into facade ...
+          GetSelectFromMenuView(conf.ViewContext == ViewContext.MenuAll); // load views into facade ...
           break;
 
         case ViewContext.StartView:
@@ -8196,19 +8193,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region If LoadParams - Check and set single movie in current config ...
           {
             LogMyFilms.Debug("Fin_Charge_Init() - LoadParams - try override loading movieid: '" + loadParamInfo.MovieID + "', play: '" + loadParamInfo.Play + "'");
-            // load dataset with default filters
-            r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+            r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with default filters
             // facade index is set in filmlist loading - only launching details necessary !
-            this.Change_Layout_Action(MyFilms.conf.StrLayOut);
+            Change_Layout_Action(MyFilms.conf.StrLayOut);
             if (!string.IsNullOrEmpty(loadParamInfo.MovieID)) // if load params for movieid exist, set current index to the movie detected
             {
-              int index = -1;
-              foreach (DataRow sr in r)
+              for (int index = 0; index < r.Length; index++)
               {
-                index += 1;
-                // string movieNumber = sr["Number"].ToString();
-                // string movieName = sr[conf.StrTitle1].ToString();
-                if (loadParamInfo.MovieID == Int32.Parse(sr["Number"].ToString()).ToString())
+                DataRow sr = r[index];
+                if (this.loadParamInfo.MovieID == Int32.Parse(sr["Number"].ToString()).ToString())
                 {
                   // bool success = int.TryParse(loadParamInfo.MovieID, out index);
                   conf.StrIndex = index;
@@ -8283,7 +8276,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // TxtSelect.Label = conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
                 conf.StrTxtSelect = "[" + conf.StrViewDfltText + "]";
 
-                if (wStrViewDfltItem.Length > 0) SetLabelView(wStrViewDfltItem); // replaces st with localized set - old: MyFilmsDetail.setGUIProperty("view", conf.StrViewDfltItem); // set default view config to #myfilms.view
+                if (wStrViewDfltItem.Length > 0) SetLabelView(wStrViewDfltItem);
                 GetFilmList(conf.StrIndex);
               }
               #endregion
@@ -8307,7 +8300,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               this.Change_Layout_Action(MyFilms.conf.StrLayOut);
               SetLabelView(MyFilms.conf.StrTxtView); // Reload view name from configfile...
-              conf.ViewContext = ViewContext.Movie;
               GetFilmList(conf.StrIndex);
               if (this.facadeFilms.Count == 0)
               {
@@ -8496,6 +8488,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Change_View_Action(string selectedView)
     {
       LogMyFilms.Debug("Change_View_Action called with '" + selectedView + "'");
+
+      #region reset parameters 
       internalLoadParam = null; // clear internal start params
       conf.CurrentView = selectedView;
       conf.StrSelect = ""; // reset view filter
@@ -8504,8 +8498,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.IndexedChars = 0;
       conf.Boolindexed = false;
       conf.BoolSkipViewState = false;
+      #endregion
 
       MFview.ViewRow selectedCustomView = MyFilms.conf.CustomViews.View.NewViewRow();
+
+      //if (MyFilms.conf.CustomViews.View.Any(view => view.Label == selectedView)) // if it is a custom view ...
+      //{
+      //    selectedView = "CustomView"; // if a CustomView definition is found ...
+      //    selectedCustomView = MyFilms.conf.CustomViews.View.First(view => view.Label == selectedView);
+      //}
+      //else if (selectedView == GUILocalizeStrings.Get(1079819)) // "menu"
+      //{
+        
+      //}
+
       foreach (MFview.ViewRow customView in MyFilms.conf.CustomViews.View)
       {
         if (selectedView == customView.Label)
@@ -8515,6 +8521,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
         }
       }
+
       if (selectedView == GUILocalizeStrings.Get(1079819)) selectedView = "Menu"; // Views Menu
       switch (selectedView)
       {
@@ -10551,6 +10558,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         #endregion
 
+        #region add start settings save option (film list and group, saves current layout, sortfield and sort direction to start settings)
+        if (this.facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection))
+        {
+          if (conf.ViewContext == ViewContext.Movie)
+          {
+            dlg.Add(GUILocalizeStrings.Get(1079816)); // Save current settings as default layout and sort for film lists
+            choice.Add("savecurrentsettingsasstartsettings");
+          }
+
+          if (conf.ViewContext == ViewContext.MovieCollection)
+          {
+            dlg.Add(GUILocalizeStrings.Get(1079817)); // Save current settings as default layout and sort for box-sets
+            choice.Add("savecurrentsettingsasstartsettings");
+          }
+        }
+
+        #endregion
+
         #region View context
         if (conf.ViewContext == ViewContext.Group)
         {
@@ -11096,6 +11121,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilms.conf.BoolAskForPlaybackQuality = !MyFilms.conf.BoolAskForPlaybackQuality;
             LogMyFilms.Debug("Context_Menu_Movie() : Option 'Always ask for playback quality for online content...' changed to '" + MyFilms.conf.BoolAskForPlaybackQuality + "'");
             break;
+          }
+
+        case "savecurrentsettingsasstartsettings":
+          {
+            #region save current settingsas start settings for layout and sort (film list or groups)
+            LogMyFilms.Debug("Context_Menu_Movie() - Update default start settings from current view");
+            using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+            {
+              if (conf.ViewContext == ViewContext.Movie)
+              {
+                xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntDfltLayOut", conf.StrLayOut);
+                xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntDfltStrSort", conf.StrSorta);
+                xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntDfltStrSortSens", conf.StrSortSens);
+                LogMyFilms.Debug("Context_Menu_Movie() - saved default start settings for film lists: Layout = '" + conf.StrLayOut + "', Sort Field = '" + conf.StrSorta + "', Sort Direction = '" + conf.StrSortSens + "'");
+              }
+
+              if (conf.ViewContext == ViewContext.MovieCollection)
+              {
+                xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntDfltLayOutInHierarchies", conf.StrLayOutInHierarchies);
+                xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntDfltStrSortInHierarchies", conf.StrSortaInHierarchies);
+                xmlSettings.WriteXmlConfig("MyFilms", Configuration.CurrentConfig, "AntDfltStrSortSensInHierarchies", conf.StrSortSensInHierarchies);
+                LogMyFilms.Debug("Context_Menu_Movie() - saved default start settings for box sets: Layout = '" + conf.StrLayOutInHierarchies + "', Sort Field = '" + conf.StrSortaInHierarchies + "', Sort Direction = '" + conf.StrSortSensInHierarchies + "'");
+              }
+            }
+            // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
+            
+            // NavigationStack.Clear();
+            break;
+            #endregion
           }
 
         #region Views Menu Actions
