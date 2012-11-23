@@ -3274,12 +3274,10 @@
           this.AlwaysDefaultView.AutoSize = true;
           this.AlwaysDefaultView.Location = new System.Drawing.Point(67, 50);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
-          this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
+          this.AlwaysDefaultView.Size = new System.Drawing.Size(145, 17);
           this.AlwaysDefaultView.TabIndex = 4;
-          this.AlwaysDefaultView.Text = "Display always this View";
-          this.ToolTip1.SetToolTip(this.AlwaysDefaultView, "Enabling a DefaultView will disable \'remember last item/view\'\r\nTHis results in al" +
-                  "ways the selected view will be displayed, \r\nwhen starting the MyFilms plugin wit" +
-                  "h this config.");
+          this.AlwaysDefaultView.Text = "Always use Start Settings";
+          this.ToolTip1.SetToolTip(this.AlwaysDefaultView, resources.GetString("AlwaysDefaultView.ToolTip"));
           this.AlwaysDefaultView.UseVisualStyleBackColor = true;
           // 
           // View_Dflt_Item
