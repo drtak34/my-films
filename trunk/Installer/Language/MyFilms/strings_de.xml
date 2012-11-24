@@ -82,6 +82,8 @@
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
     <String id="107988">Filme</String>
+    <String id="1079801">Füge alle Filme zu Boxset hinzu ...</String>
+    <String id="1079802">Alle Filme aus Boxset entfernen</String>
     <String id="1079810">Umschalten 'Import - Filme auch ohne Internetdaten importieren' ({0})</String>
     <String id="1079811">Umschalten 'Import - Lösche verwaiste DB Einträge' ({0})</String>
     <String id="1079816">Speichern von Layout und Sortierung als Start Default für Film Listen</String>
@@ -202,7 +204,7 @@
     <String id="10798621">Zufällige Filmsuche</String>
     <String id="10798622">Alle</String>
     <String id="10798623">(keine Infos)</String>
-    <String id="10798624">MyFilms System Information ...</String>
+    <String id="10798624">Films System Info ...</String>
     <String id="10798625">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
     <String id="10798626">=> '{1}' ({0})</String>
     <String id="10798627">Einzelwort</String>
