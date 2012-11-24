@@ -21,7 +21,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
-namespace Importer
+namespace Grabber.Importer
 {
   using System;
   using System.Collections.Generic;

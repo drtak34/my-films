@@ -5,12 +5,11 @@ using MediaPortal.Configuration;
 using MediaPortal.Dialogs;
 using MediaPortal.GUI.Library;
 using System.Threading;
+using System.Collections;
+using System.Linq;
 
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
-  using System.Collections;
-  using System.Linq;
-  using System.Reflection;
 
   using MediaPortal.Video.Database;
 
@@ -20,27 +19,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger(); //log
 
-    private delegate bool ShowCustomYesNoDialogDelegate(
-      string heading, string lines, string yesLabel, string noLabel, bool defaultYes);
-
+    private delegate bool ShowCustomYesNoDialogDelegate(string heading, string lines, string yesLabel, string noLabel, bool defaultYes, int timeout);
     private delegate void ShowOKDialogDelegate(string heading, string lines);
-
-    private delegate void ShowNotifyDialogDelegate(
-      string heading, string text, string image, string buttonText, int timeOut);
-
+    private delegate void ShowNotifyDialogDelegate(string heading, string text, string image, string buttonText, int timeOut);
     private delegate int ShowMenuDialogDelegate(string heading, List<GUIListItem> items);
-
-    private delegate List<MultiSelectionItem> ShowMultiSelectionDialogDelegate(
-      string heading, List<MultiSelectionItem> items);
-
+    private delegate List<MultiSelectionItem> ShowMultiSelectionDialogDelegate(string heading, List<MultiSelectionItem> items);
     private delegate void ShowTextDialogDelegate(string heading, string text);
-
     private delegate string ShowRateDialogDelegate<T>(T rateObject);
-
     private delegate bool GetStringFromKeyboardDelegate(ref string strLine, bool isPassword);
-
     private delegate bool GetDirectoryDelegate(ref string strLine);
-
     public static readonly string MyFilmsLogo = GUIGraphicsContext.Skin + "\\Media\\MyFilms\\myfilms.png";
 
     public static string PluginName()
@@ -187,6 +174,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #endregion
 
     #region dialogs
+
+    #region YesNoDialogs
     /// <summary>
     /// Displays a yes/no dialog.
     /// </summary>
@@ -212,7 +201,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// <returns>True if yes was clicked, False if no was clicked</returns>
     public static bool ShowCustomYesNoDialog(string heading, string lines, string yesLabel, string noLabel)
     {
-      return ShowCustomYesNoDialog(heading, lines, yesLabel, noLabel, false);
+      return ShowCustomYesNoDialog(heading, lines, yesLabel, noLabel, false, 0);
     }
 
     /// <summary>
@@ -220,13 +209,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// This method may become obsolete in the future if media portal adds more dialogs.
     /// </summary>
     /// <returns>True if yes was clicked, False if no was clicked</returns>
-    public static bool ShowCustomYesNoDialog(
-      string heading, string lines, string yesLabel, string noLabel, bool defaultYes)
+    public static bool ShowCustomYesNoDialog(string heading, string lines, string yesLabel, string noLabel, bool defaultYes)
     {
+      return ShowCustomYesNoDialog(heading, lines, yesLabel, noLabel, defaultYes);
+    }
+    /// <summary>
+    /// Displays a yes/no dialog with custom labels for the buttons.
+    /// This method may become obsolete in the future if media portal adds more dialogs.
+    /// </summary>
+    /// <returns>True if yes was clicked, False if no was clicked</returns>
+    public static bool ShowCustomYesNoDialog(string heading, string lines, string yesLabel, string noLabel, bool defaultYes, int timeout)
+    {
+      bool result = false;
       if (GUIGraphicsContext.form.InvokeRequired)
       {
         ShowCustomYesNoDialogDelegate d = ShowCustomYesNoDialog;
-        return (bool)GUIGraphicsContext.form.Invoke(d, heading, lines, yesLabel, noLabel, defaultYes);
+        return (bool)GUIGraphicsContext.form.Invoke(d, heading, lines, yesLabel, noLabel, defaultYes, timeout);
       }
 
       GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
@@ -236,10 +234,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlgYesNo.Reset();
         dlgYesNo.SetHeading(heading);
         string[] linesArray = lines.Split(new string[] { "\\n", "\n" }, StringSplitOptions.None);
+        if (linesArray.Length == 1)
+        {
+          dlgYesNo.SetLine(1, string.Empty);
+          dlgYesNo.SetLine(2, linesArray[0]);
+          dlgYesNo.SetLine(3, string.Empty);
+        }
+        else
+        {
         if (linesArray.Length > 0) dlgYesNo.SetLine(1, linesArray[0]);
         if (linesArray.Length > 1) dlgYesNo.SetLine(2, linesArray[1]);
         if (linesArray.Length > 2) dlgYesNo.SetLine(3, linesArray[2]);
         if (linesArray.Length > 3) dlgYesNo.SetLine(4, linesArray[3]);
+        }
         dlgYesNo.SetDefaultToYes(defaultYes);
 
         foreach (GUIButtonControl btn in dlgYesNo.GetControlList().OfType<GUIButtonControl>())
@@ -249,8 +256,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else if (btn.GetID == 10 && !string.IsNullOrEmpty(noLabel)) // No button
             btn.Label = noLabel;
         }
+        if (timeout > 0) dlgYesNo.TimeOut = timeout;
         dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
-        return dlgYesNo.IsConfirmed;
+        result = dlgYesNo.IsConfirmed;
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("DialogYesNo - error: " + ex.Message);
+        LogMyFilms.Debug("DialogYesNo - error: " + ex.StackTrace);
       }
       finally
       {
@@ -260,8 +273,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgYesNo.ClearAll();
         }
       }
+      LogMyFilms.Debug("DialogYesNo returning result = '" + result + "'");
+      return result;
     }
-
     #endregion
 
     /// <summary>
@@ -274,7 +288,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       PropertyInfo property = GetPropertyInfo<GUIWindow>("Children", null);
       return (IEnumerable)property.GetValue(self, null);
     }
-
 
     private static Dictionary<string, PropertyInfo> propertyCache = new Dictionary<string, PropertyInfo>();
 
@@ -302,12 +315,39 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return property;
     }
 
+    #region ShowOKDialog
+    /// <summary>
+    /// Displays a OK dialog with heading set to default error message and 1 line on position line2.
+    /// </summary>
+    public static void ShowErrorDialog(string line)
+    {
+      ShowOKDialog(GUILocalizeStrings.Get(10798624) + " - Error", line);
+    }
+
+    /// <summary>
+    /// Displays a OK dialog with default heading and 1 line on position line2.
+    /// </summary>
+    public static void ShowOKDialog(string line)
+    {
+      ShowOKDialog(string.Empty, string.Empty, line, string.Empty, string.Empty);
+    }
+
+    /// <summary>
+    /// Displays a OK dialog with default heading and up to 4 lines.
+    /// </summary>
+    public static void ShowOKDialog(string line1, string line2, string line3, string line4)
+    {
+      // ShowOKDialog("", string.Concat(line1, line2, line3, line4));
+      ShowOKDialog("", (line1 + @"\n" + line2 + @"\n" + line3 + @"\n" + line4));
+    }
+
     /// <summary>
     /// Displays a OK dialog with heading and up to 4 lines.
     /// </summary>
     public static void ShowOKDialog(string heading, string line1, string line2, string line3, string line4)
     {
-      ShowOKDialog(heading, string.Concat(line1, line2, line3, line4));
+      // ShowOKDialog(heading, string.Concat(line1, line2, line3, line4));
+      ShowOKDialog(heading, (line1 + @"\n" + line2 + @"\n" + line3 + @"\n" + line4));
     }
 
     /// <summary>
@@ -315,6 +355,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowOKDialog(string heading, string lines)
     {
+      heading = (string.IsNullOrEmpty(heading) ? GUILocalizeStrings.Get(10798624) : heading); // use MyFilms default heading, if  none set - id="10798624" "MyFilms System Information"
+
       if (GUIGraphicsContext.form.InvokeRequired)
       {
         ShowOKDialogDelegate d = ShowOKDialog;
@@ -322,20 +364,48 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
 
-      GUIDialogOK dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
 
       dlgOK.Reset();
       dlgOK.SetHeading(heading);
 
-      int lineid = 1;
-      foreach (string line in lines.Split(new string[] { "\\n", "\n" }, StringSplitOptions.None))
+      string[] dialoglines = lines.Split(new string[] { "\\n", "\n" }, StringSplitOptions.None);
+      if (dialoglines.Length == 1)
       {
-        dlgOK.SetLine(lineid, line);
-        lineid++;
+          dlgOK.SetLine(1, string.Empty);
+          dlgOK.SetLine(2, dialoglines[0]);
+          dlgOK.SetLine(3, string.Empty);
+          dlgOK.SetLine(4, string.Empty);
       }
+      else if (dialoglines.Length == 2)
+      {
+          dlgOK.SetLine(1, string.Empty);
+          dlgOK.SetLine(2, dialoglines[0]);
+          dlgOK.SetLine(3, dialoglines[1]);
+          dlgOK.SetLine(4, string.Empty);
+      }
+      else
+      {
+        int lineid = 1;
+        foreach (string line in dialoglines)
+        {
+          dlgOK.SetLine(lineid, line);
+          lineid++;
+        }
       for (int i = lineid; i <= 4; i++) dlgOK.SetLine(i, string.Empty);
-
+      }
       dlgOK.DoModal(GUIWindowManager.ActiveWindow);
+    }
+    #endregion
+
+    #region ShowNotifyDialog
+    /// <summary>
+    /// Displays a notification dialog.
+    /// heading will be autoset to id="10798624" "MyFilms System Information"
+    /// </summary>
+    public static void ShowNotifyDialog(string text)
+    {
+      ShowNotifyDialog(string.Empty, text, MyFilmsLogo, MediaPortal.GUI.Library.GUILocalizeStrings.Get(186), -1); // "Ok" in MP Translation
     }
 
     /// <summary>
@@ -343,7 +413,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowNotifyDialog(string heading, string text)
     {
-      ShowNotifyDialog(heading, text, MyFilmsLogo, GUILocalizeStrings.Get(186), -1); // "Ok" in MP Translation
+      ShowNotifyDialog(heading, text, MyFilmsLogo, MediaPortal.GUI.Library.GUILocalizeStrings.Get(186), -1); // "Ok" in MP Translation
     }
 
     /// <summary>
@@ -351,7 +421,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowNotifyDialog(string heading, string text, int timeOut)
     {
-      ShowNotifyDialog(heading, text, MyFilmsLogo, GUILocalizeStrings.Get(186), timeOut);
+      ShowNotifyDialog(heading, text, MyFilmsLogo, MediaPortal.GUI.Library.GUILocalizeStrings.Get(186), timeOut);
     }
 
     /// <summary>
@@ -359,7 +429,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowNotifyDialog(string heading, string text, string image)
     {
-      ShowNotifyDialog(heading, text, image, GUILocalizeStrings.Get(186), -1);
+      ShowNotifyDialog(heading, text, image, MediaPortal.GUI.Library.GUILocalizeStrings.Get(186), -1);
     }
 
     /// <summary>
@@ -367,6 +437,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// </summary>
     public static void ShowNotifyDialog(string heading, string text, string image, string buttonText, int timeout)
     {
+      image = (string.IsNullOrEmpty(image) ? GetMyFilmsDefaultLogo() : image); // use MyFilms defult image, if  none set
+      heading = (string.IsNullOrEmpty(heading) ? GUILocalizeStrings.Get(10798624) : heading); // use MyFilms default heading, if  none set - id="10798624" "MyFilms System Information"
+
       if (GUIGraphicsContext.form.InvokeRequired)
       {
         ShowNotifyDialogDelegate d = ShowNotifyDialog;
@@ -374,8 +447,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
 
-      GUIDialogNotify pDlgNotify =
-        (GUIDialogNotify)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
+      var pDlgNotify = (GUIDialogNotify)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
       if (pDlgNotify == null) return;
 
       try
@@ -391,7 +463,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // Only if ID is 4 and we have our custom text and if button already has label (in case the skin "hides" the button by emtying the label)
           btn.Label = buttonText;
         }
-
         pDlgNotify.DoModal(GUIWindowManager.ActiveWindow);
       }
       finally
@@ -399,7 +470,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (pDlgNotify != null) pDlgNotify.ClearAll();
       }
     }
+    #endregion
 
+    #region ShowMenuDialogs
     /// <summary>
     /// Displays a menu dialog from list of items
     /// </summary>
@@ -442,7 +515,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       return dlgMenu.SelectedLabel;
     }
+    #endregion
 
+    #region MultiSelectMenuDialogs
     /// <summary>
     /// Displays a menu dialog from list of items
     /// </summary>
@@ -511,6 +586,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GUIWindowManager.Replace(2100, dlgMultiSelectOld);
       }
     }
+    #endregion
 
     /// <summary>
     /// Displays a text dialog.
@@ -606,6 +682,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       return false;
+    }
+    #endregion
+
+    private static string GetMyFilmsDefaultLogo()
+    {
+      // first check subfolder of current skin (allows skinners to use custom icons)
+      string image = string.Format(@"{0}\Media\MyFilms\MyFilms.png", GUIGraphicsContext.Skin);
+      if (!System.IO.File.Exists(image))
+      {
+        // use png in thumbs folder
+        image = string.Format(@"{0}\MyFilms\DefaultImages\MyFilms.png", Config.GetFolder(Config.Dir.Thumbs));
+      }
+      return image;
     }
 
 
