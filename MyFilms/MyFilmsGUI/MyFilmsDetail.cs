@@ -2980,9 +2980,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return lockfilename;
     }
 
-    public static bool AddMovieToCollection(string newGroupName)
+    public static bool AddMovieToCollection(DataRow movieRow, string newGroupName, bool save)
     {
-      string oldtitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
+      string oldtitle = movieRow[MyFilms.conf.StrTitle1].ToString();
       if (oldtitle.IndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) > 0) // already has a groupname
       {
         LogMyFilms.Debug("AddMovieToCollection() - cannot add movie to collection '" + newGroupName + "' - already part of collection - oldtitle = '" + oldtitle + "'");
@@ -2992,21 +2992,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         string newtitle = newGroupName + MyFilms.conf.TitleDelim + oldtitle;
         LogMyFilms.Debug("AddMovieToCollection() - changing title from '" + oldtitle + "' to '" + newtitle + "'");
-        MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1] = newtitle;
-        Update_XML_database();
+        movieRow[MyFilms.conf.StrTitle1] = newtitle;
+        if (save) Update_XML_database();
         return true;
       }
     }
 
-    public static bool RemoveMovieFromCollection()
+    public static bool RemoveMovieFromCollection(DataRow movieRow, bool save)
     {
-      string oldtitle = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString();
-      if (oldtitle.IndexOf(MyFilms.conf.TitleDelim, System.StringComparison.Ordinal) > 0)
+      string oldtitle = movieRow[MyFilms.conf.StrTitle1].ToString();
+      if (oldtitle.IndexOf(MyFilms.conf.TitleDelim, StringComparison.Ordinal) > 0)
       {
         string newtitle = oldtitle.Substring(oldtitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
         LogMyFilms.Debug("RemoveMovieFromCollection() - changing title from '" + oldtitle + "' to '" + newtitle + "'");
-        MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1] = newtitle;
-        Update_XML_database();
+        movieRow[MyFilms.conf.StrTitle1] = newtitle;
+        if (save) Update_XML_database();
         return true;
       }
       else

@@ -7062,6 +7062,80 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }) { Name = "MyFilmsPersonsUpdater", IsBackground = true }.Start();
     }
 
+    private void AddAllMoviesToCollection(string groupname)
+    {
+      LogMyFilms.Debug("AddAllMoviesToCollection() - movies to add: '" + facadeFilms.Count + "'");
+      try
+      {
+        if (facadeFilms != null)
+        {
+          for (int i = 0; i < facadeFilms.Count; i++)
+          {
+            try
+            {
+              GUIListItem item = facadeFilms[i];
+              if (!item.IsFolder)
+              {
+                MyFilmsDetail.AddMovieToCollection(MyFilms.r[item.ItemId], groupname, false);
+                LogMyFilms.Info("AddAllMoviesToCollection - adding movie '" + item.Label + "' to collection '" + groupname + "'");
+              }
+              else
+              {
+                LogMyFilms.Info("AddAllMoviesToCollection - skip movie '" + item.Label + "' - it is already grouped !");
+              }
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Warn("AddAllMoviesToCollection() - error setting facadelist item '" + i + "': " + ex.Message);
+              LogMyFilms.DebugException("AddAllMoviesToCollection() - error setting facadelist item '" + i + "': " + ex.Message, ex);
+            }
+          }
+          MyFilmsDetail.Update_XML_database();
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.DebugException("Thread 'AddAllMoviesToCollection' - exception! - ", ex);
+      }
+    }
+
+    private void RemoveAllMoviesFromCollection()
+    {
+      LogMyFilms.Debug("RemoveAllMoviesFromCollection() - movies to remove: '" + facadeFilms.Count + "'");
+      try
+      {
+        if (facadeFilms != null)
+        {
+          for (int i = 0; i < facadeFilms.Count; i++)
+          {
+            try
+            {
+              GUIListItem item = facadeFilms[i];
+              if (!item.IsFolder)
+              {
+                MyFilmsDetail.RemoveMovieFromCollection(MyFilms.r[item.ItemId], false);
+                LogMyFilms.Info("RemoveAllMoviesFromCollection() - removing movie '" + item.Label + "'");
+              }
+              else
+              {
+                LogMyFilms.Info("RemoveAllMoviesFromCollection() - skip entry '" + item.Label + "' - it is a sub-group !");
+              }
+            }
+            catch (Exception ex)
+            {
+              LogMyFilms.Warn("RemoveAllMoviesFromCollection() - error setting facadelist item '" + i + "': " + ex.Message);
+              LogMyFilms.DebugException("RemoveAllMoviesFromCollection() - error setting facadelist item '" + i + "': " + ex.Message, ex);
+            }
+          }
+          MyFilmsDetail.Update_XML_database();
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.DebugException("Thread 'RemoveAllMoviesFromCollection' - exception! - ", ex);
+      }
+    }
+
     private void UpdatePersons(ArrayList persons, bool showprogressdialog)
     {
       LogMyFilms.Debug("UpdatePersons() - persons to update: '" + persons.Count + "'");
@@ -10462,6 +10536,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlg.Add(GUILocalizeStrings.Get(1079836)); // Add to box set ...
               choice.Add("addtocollection");
             }
+
+            if (MyFilmsDetail.ExtendedStartmode("Context: remove or aedd all films from collection"))
+            {
+              if (facadeFilms.Count > 1) // options only available, if there is multiple entries in facade list
+              {
+                if (conf.ViewContext == ViewContext.MovieCollection)
+                {
+                  dlg.Add(GUILocalizeStrings.Get(1079802)); // Remove all films from box set
+                  choice.Add("removefromcollectionall");
+                }
+                else
+                {
+                  dlg.Add(GUILocalizeStrings.Get(1079801)); // Add all films to box set ...
+                  choice.Add("addtocollectionall");
+                }
+              }
+            }
           }
 
           if (MyFilms.conf.StrSuppressAutomatic || MyFilms.conf.StrSuppressManual) // delete options
@@ -11751,12 +11842,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "addtocollection":
           string groupname = Change_MovieGroupName(conf.StrTIndex);
           if (groupname == "") break;
-          MyFilmsDetail.AddMovieToCollection(groupname);
+          MyFilmsDetail.AddMovieToCollection(MyFilms.r[MyFilms.conf.StrIndex], groupname, true);
+          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          break;
+
+        case "addtocollectionall":
+          string groupnameall = Change_MovieGroupName(conf.StrTIndex);
+          if (groupnameall == "") break;
+          AddAllMoviesToCollection(groupnameall);
           Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 
         case "removefromcollection":
-          MyFilmsDetail.RemoveMovieFromCollection();
+          MyFilmsDetail.RemoveMovieFromCollection(MyFilms.r[MyFilms.conf.StrIndex], true);
+          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          break;
+
+        case "removefromcollectionall":
+          RemoveAllMoviesFromCollection();
           Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 
@@ -11792,7 +11895,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgYesNo.SetLine(1, "");
           dlgYesNo.SetLine(2, GUILocalizeStrings.Get(433)); //confirm suppression
           dlgYesNo.DoModal(GetID);
-          if (dlgYesNo.IsConfirmed)          {
+          if (dlgYesNo.IsConfirmed)
+          {
             //MyFilmsDetail.Remove_Backdrops_Fanart(MyFilms.r[facadeFilms.SelectedListItem.ItemId]["TranslatedTitle"].ToString(), false);
             //string fanartTitle = MyFilms.r[facadeFilms.SelectedListItem.ItemId][MyFilms.conf.StrTitle1].ToString();  // Fixed, as it should delete content of master title...
             string fanartTitle, personartworkpath = string.Empty, wtitle = string.Empty, wttitle = string.Empty, wftitle = string.Empty, wdirector = string.Empty; int wyear = 0;
