@@ -621,6 +621,10 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+          this.chkAMCUscanOnStartup = new System.Windows.Forms.CheckBox();
+          this.chkAMCUwatchScanFolders = new System.Windows.Forms.CheckBox();
+          this.numericUpDownAMCUscanStartDelay = new System.Windows.Forms.NumericUpDown();
+          this.labelAMCUstartdelay = new System.Windows.Forms.Label();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -719,6 +723,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
+          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).BeginInit();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2014,6 +2019,10 @@
           // groupBox_AMCupdater
           // 
           this.groupBox_AMCupdater.BackColor = System.Drawing.Color.Transparent;
+          this.groupBox_AMCupdater.Controls.Add(this.labelAMCUstartdelay);
+          this.groupBox_AMCupdater.Controls.Add(this.numericUpDownAMCUscanStartDelay);
+          this.groupBox_AMCupdater.Controls.Add(this.chkAMCUwatchScanFolders);
+          this.groupBox_AMCupdater.Controls.Add(this.chkAMCUscanOnStartup);
           this.groupBox_AMCupdater.Controls.Add(this.groupBoxAMCUpdaterConfigFile);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
@@ -6463,6 +6472,55 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
+          // chkAMCUscanOnStartup
+          // 
+          this.chkAMCUscanOnStartup.AutoSize = true;
+          this.chkAMCUscanOnStartup.Location = new System.Drawing.Point(62, 68);
+          this.chkAMCUscanOnStartup.Name = "chkAMCUscanOnStartup";
+          this.chkAMCUscanOnStartup.Size = new System.Drawing.Size(103, 17);
+          this.chkAMCUscanOnStartup.TabIndex = 4;
+          this.chkAMCUscanOnStartup.Text = "Scan on Startup";
+          this.ToolTip1.SetToolTip(this.chkAMCUscanOnStartup, resources.GetString("chkAMCUscanOnStartup.ToolTip"));
+          this.chkAMCUscanOnStartup.UseVisualStyleBackColor = true;
+          // 
+          // chkAMCUwatchScanFolders
+          // 
+          this.chkAMCUwatchScanFolders.AutoSize = true;
+          this.chkAMCUwatchScanFolders.Location = new System.Drawing.Point(62, 92);
+          this.chkAMCUwatchScanFolders.Name = "chkAMCUwatchScanFolders";
+          this.chkAMCUwatchScanFolders.Size = new System.Drawing.Size(122, 17);
+          this.chkAMCUwatchScanFolders.TabIndex = 5;
+          this.chkAMCUwatchScanFolders.Text = "Watch Scan Path(s)";
+          this.ToolTip1.SetToolTip(this.chkAMCUwatchScanFolders, resources.GetString("chkAMCUwatchScanFolders.ToolTip"));
+          this.chkAMCUwatchScanFolders.UseVisualStyleBackColor = true;
+          // 
+          // numericUpDownAMCUscanStartDelay
+          // 
+          this.numericUpDownAMCUscanStartDelay.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+          this.numericUpDownAMCUscanStartDelay.Location = new System.Drawing.Point(298, 67);
+          this.numericUpDownAMCUscanStartDelay.Name = "numericUpDownAMCUscanStartDelay";
+          this.numericUpDownAMCUscanStartDelay.Size = new System.Drawing.Size(53, 20);
+          this.numericUpDownAMCUscanStartDelay.TabIndex = 6;
+          this.ToolTip1.SetToolTip(this.numericUpDownAMCUscanStartDelay, "It is recommended to delay the Scan for new movies.\r\nSet the number of seconds.");
+          this.numericUpDownAMCUscanStartDelay.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+          // 
+          // labelAMCUstartdelay
+          // 
+          this.labelAMCUstartdelay.AutoSize = true;
+          this.labelAMCUstartdelay.Location = new System.Drawing.Point(227, 69);
+          this.labelAMCUstartdelay.Name = "labelAMCUstartdelay";
+          this.labelAMCUstartdelay.Size = new System.Drawing.Size(59, 13);
+          this.labelAMCUstartdelay.TabIndex = 7;
+          this.labelAMCUstartdelay.Text = "Start Delay";
+          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6624,6 +6682,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
+          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -7138,5 +7197,9 @@
         private Button btnAMCimport;
         private NumericUpDown numUpDownTrailersInIntro;
         private CheckBox chkAMC_ImportOnInternetFail;
+        private CheckBox chkAMCUwatchScanFolders;
+        private CheckBox chkAMCUscanOnStartup;
+        private NumericUpDown numericUpDownAMCUscanStartDelay;
+        private Label labelAMCUstartdelay;
     }
 }

@@ -563,6 +563,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrGrabber_Always = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Grabber_Always", false);
         StrGrabber_ChooseScript = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Grabber_ChooseScript", false);
         StrAMCUpd = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AMCUpd", false);
+        AMCUscanOnStartup = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AMCUscanOnStartup", false);
+        AMCUwatchScanFolders = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AMCUwatchScanFolders", false);
+        AMCUscanStartDelay = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AMCUscanStartDelay", 60);
+
         StrAMCUpd_cnf = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AMCUpd_cnf", string.Empty);
         StrFanart = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "Fanart", false);
         StrFanartDefaultViews = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "FanartDefaultViews", false);
@@ -935,6 +939,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public bool StrGrabber_Always { get; set; }
     public bool StrGrabber_ChooseScript { get; set; }
     public bool StrAMCUpd { get; set; }
+    public bool AMCUscanOnStartup { get; set; }
+    public bool AMCUwatchScanFolders { get; set; }
+    public int AMCUscanStartDelay { get; set; }
     public string StrAMCUpd_cnf { get; set; }
     public string StrSuppressPlayed { get; set; }
     public string StrSuppressAutomaticActionType { get; set; }

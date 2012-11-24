@@ -131,6 +131,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //CatalogType.Items.Add("test");
         Config_EnablePreload.Visible = false; // precaching of config and DB on Init phase
         butNew.Visible = false; // disable "new" button for normal mode for V6.0.1
+        // autostart settings for AMCupdater background Launcher:
+        chkAMCUscanOnStartup.Visible = false;
+        chkAMCUwatchScanFolders.Visible = false;
+        numericUpDownAMCUscanStartDelay.Visible = false;
       }
       //else
       //{
@@ -911,6 +915,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_Always", chkGrabber_Always.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", chkGrabber_ChooseScript.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", chkAMCUpd.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUscanOnStartup", chkAMCUscanOnStartup.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUwatchScanFolders", chkAMCUwatchScanFolders.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUscanStartDelay", numericUpDownAMCUscanStartDelay.Value);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", txtAMCUpd_cnf.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Fanart", chkFanart.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "FanartDefaultViews", chkFanartDefaultViews.Checked);
@@ -1318,6 +1325,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       txtPicturePrefix.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PicturePrefix", string.Empty);
       chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_Always", false);
       chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", false);
+      chkAMCUscanOnStartup.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUscanOnStartup", false);
+      chkAMCUwatchScanFolders.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUwatchScanFolders", false);
+      numericUpDownAMCUscanStartDelay.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUscanStartDelay", 60);
       chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", false);
       txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", string.Empty);
       chkSuppressAutomatic.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Suppress", false);
@@ -1821,6 +1831,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkGrabber_Always.Checked = false;
       chkGrabber_ChooseScript.Checked = false;
       chkAMCUpd.Checked = false;
+      chkAMCUscanOnStartup.Checked = false;
+      chkAMCUwatchScanFolders.Checked = false;
+      numericUpDownAMCUscanStartDelay.Value = 60;
       txtAMCUpd_cnf.ResetText();
       chkDfltFanart.Checked = false;
       chkDfltFanartImage.Checked = false;
@@ -2608,12 +2621,19 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         groupBoxAMCUpdaterConfigFile.Enabled = true;
         groupBox_AMCupdater_ExternalApplication.Enabled = true;
         groupBox_AMCupdaterScheduer.Enabled = true;
+        chkAMCUscanOnStartup.Enabled = true;
+        chkAMCUwatchScanFolders.Enabled = true;
+        numericUpDownAMCUscanStartDelay.Enabled = true;
+
       }
       else
       {
         groupBoxAMCUpdaterConfigFile.Enabled = false;
         groupBox_AMCupdater_ExternalApplication.Enabled = false;
         groupBox_AMCupdaterScheduer.Enabled = false;
+        chkAMCUscanOnStartup.Enabled = false;
+        chkAMCUwatchScanFolders.Enabled = false;
+        numericUpDownAMCUscanStartDelay.Enabled = false;
       }
     }
 
@@ -5082,6 +5102,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
       #region AMCUpdater settings
       chkAMCUpd.Checked = true; // Use AMCupdater
+      chkAMCUscanOnStartup.Checked = false;
+      chkAMCUwatchScanFolders.Checked = false;
+      numericUpDownAMCUscanStartDelay.Value = 90;
+
       AMCMovieScanPath.Text = PathStorage.Text;
       AmcTitleSearchHandling.Text = "Folder Name + Internet Lookup"; // set this as default
       chkAMC_Purge_Missing_Files.Checked = false;

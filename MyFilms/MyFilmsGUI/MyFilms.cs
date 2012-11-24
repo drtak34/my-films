@@ -488,6 +488,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private AsyncImageResource personcover = null;
     private AsyncImageResource groupcover = null;
 
+    private Watcher watcherUpdater = null; // updater for scan directory watchers
+
     //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
     private bool Context_Menu = false;
     //private string currentConfig;
@@ -941,7 +943,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         InitFSwatcher(); // load DB watcher for multiseat
-        InitAmcImporter(); // iload watcher for movie directories
+        if (InitialStart) InitAmcImporter(MyFilms.conf); // load watcher for movie directories
 
         #endregion
 
@@ -9952,7 +9954,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             // launch DB watcher for multiseat
             InitFSwatcher();
-            InitAmcImporter(); // iload watcher for movie directories
+            InitAmcImporter(MyFilms.conf); // load watcher for movie directories
 
             // Launch Background availability scanner, if configured in setup
             if (MyFilms.conf.ScanMediaOnStart && InitialStart)
@@ -14970,55 +14972,60 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //}
     }
 
-    private void InitAmcImporter()
+    private void InitAmcImporter(Configuration mfConf)
     {
-      const bool Import_ScanOnStartup = false;
-      const bool Import_FolderWatch = true;
-      const int importDelay = 30;
-      LogMyFilms.Debug("InitAmcImporter() - Starting initial import run in: {0} secs", importDelay);
+      LogMyFilms.Debug("InitAmcImporter() - Starting initial import run in: {0} secs", mfConf.AMCUscanStartDelay);
 
       // do a local scan when starting up the app if enabled - later on the watcher will monitor changes            
-      if (Import_ScanOnStartup)
+      if (mfConf.AMCUscanOnStartup)
       {
-        // ToDo: Launch AMCupdater here
+        new Thread(delegate(object o)
+        {
+          try
+          {
+            var startdelay = (int)o;
+            Thread.Sleep(startdelay * 1000);
+            AsynUpdateDatabase("");
+          }
+          catch (Exception ex) { LogMyFilms.Warn("InitAmcImporter - Error: {0}", ex.ToString()); }
+        }) { IsBackground = true, Name = "InitAmcImporter" }.Start(mfConf.AMCUscanStartDelay);
       }
+
       // Setup Disk Watcher (DeviceManager) and Folder/File Watcher
-      if (Import_FolderWatch)
+      if (mfConf.AMCUwatchScanFolders)
       {
-        setUpFolderWatches(MyFilms.conf);
+        // DeviceManager.StartMonitor(); // we disable device monitoring for now
+        setUpFolderWatches(mfConf);
       }
     }
-
-    private Watcher m_watcherUpdater = null;
 
     private void setUpFolderWatches(Configuration mfConf)
     {
       const int filescanintervalinminutes = 120;
       var splitRegex = new Regex(";");
       var importFolders = new List<String>();
-      XmlConfig amcXmlConfig = new XmlConfig();
-      string[] searchDir;
-      
+      var amcXmlConfig = new XmlConfig();
+
       //// Go through all myfilms search folders, and add a watchfolder on it - we should NOT watch them for imports !
       //searchDir = splitRegex.Split(MyFilms.conf.StrDirStor); // this is the MyFilms search directories - we shouldn't watch them for AMCU importer !
       //importFolders.AddRange(searchDir.Select(path => path.LastIndexOf(@"\", StringComparison.Ordinal) != path.Length - 1 ? path + "\\" : path).Where(Directory.Exists));
 
       // Go through all AMCU import folders, and add a watchfolder on it
-      searchDir = splitRegex.Split(amcXmlConfig.ReadAMCUXmlConfig(mfConf.StrAMCUpd_cnf, "Movie_Scan_Path", "")); // we read AMCU searchpathes for the watcher
+      string[] searchDir = splitRegex.Split(amcXmlConfig.ReadAMCUXmlConfig(mfConf.StrAMCUpd_cnf, "Movie_Scan_Path", ""));
       importFolders.AddRange(searchDir.Select(path => path.LastIndexOf(@"\", StringComparison.Ordinal) != path.Length - 1 ? path + "\\" : path).Where(Directory.Exists));
 
       LogMyFilms.Debug("setUpFolderWatches() - Found '{0}' folders to add to watcher", searchDir.Length);
 
-      m_watcherUpdater = new Watcher(importFolders, filescanintervalinminutes);
-      m_watcherUpdater.WatcherProgress += new Watcher.WatcherProgressHandler(watcherUpdater_WatcherProgress);
-      m_watcherUpdater.StartFolderWatch();
+      watcherUpdater = new Watcher(importFolders, filescanintervalinminutes);
+      watcherUpdater.WatcherProgress += new Watcher.WatcherProgressHandler(watcherUpdater_WatcherProgress);
+      watcherUpdater.StartFolderWatch();
     }
 
     private void stopFolderWatches()
     {
-      m_watcherUpdater.StopFolderWatch();
-      m_watcherUpdater.WatcherProgress -= new Watcher.WatcherProgressHandler(watcherUpdater_WatcherProgress);
-      m_watcherUpdater = null;
+      watcherUpdater.StopFolderWatch();
+      watcherUpdater.WatcherProgress -= new Watcher.WatcherProgressHandler(watcherUpdater_WatcherProgress);
+      watcherUpdater = null;
     }
 
     private void watcherUpdater_WatcherProgress(int nProgress, List<WatcherItem> modifiedFilesList)
@@ -15045,6 +15052,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (filesAdded.Count > 0)
       {
         GUIUtils.ShowNotifyDialog("MyFilms Media Watcher", "'" + filesAdded.Count + "' file(s) found !");
+        LogMyFilms.Debug("watcherUpdater_WatcherProgress() - '" + filesAdded.Count + "' file(s) found !");
         // queue it
         //lock (m_parserUpdaterQueue)
         //{
@@ -15055,11 +15063,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (filesRemoved.Count > 0)
       {
         GUIUtils.ShowNotifyDialog("MyFilms Media Watcher", "'" + filesRemoved.Count + "' file(s) removed !");
+        LogMyFilms.Debug("watcherUpdater_WatcherProgress() - '" + filesRemoved.Count + "' file(s) removed !");
         // queue it
         //lock (m_parserUpdaterQueue)
         //{
         //  m_parserUpdaterQueue.Add(new CParsingParameters(ParsingAction.List_Remove, filesRemoved, false, false));
         //}
+      }
+
+      if (filesAdded.Count > 0 || filesRemoved.Count > 0)
+      {
+        if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
+        {
+          LogMyFilms.Debug("watcherUpdater_WatcherProgress() - file changes detected - launching AMCUpdater !");
+          AsynUpdateDatabase("");
+        }
+        else
+        {
+          LogMyFilms.Debug("watcherUpdater_WatcherProgress() - AMCUpdater already running !");
+        }
       }
     }
 
@@ -15345,14 +15367,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.SetGlobalLock(true, MyFilms.conf.StrFileXml); // also disabled local FSwatcher
         bgUpdateDB.RunWorkerAsync(config); // bgUpdateDB.RunWorkerAsync(MyFilms.conf.StrTIndex);
         MyFilmsDetail.setGUIProperty("statusmessage", "global update active", false);
-        if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail)
-        {
-          GUIUtils.ShowNotifyDialog("Global Update started !");
-        }
+        if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail) GUIUtils.ShowNotifyDialog("Global Update started !");
         LogMyFilms.Info("AsynUpdateDatabase() - Launching AMCUpdater in batch mode");
       }
       else
+      {
+        if (GetID == ID_MyFilms || GetID == ID_MyFilmsDetail) GUIUtils.ShowNotifyDialog("Global Update already running !");
         LogMyFilms.Info("AsynUpdateDatabase() - AMCUpdater cannot be started in batch mode - either already running or cancellation pending");
+      }
     }
 
     void bgUpdateDB_DoWork(object sender, DoWorkEventArgs e)
