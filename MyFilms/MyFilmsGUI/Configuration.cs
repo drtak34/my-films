@@ -1092,12 +1092,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string catalog = xmlConfig.ReadXmlConfig("MyFilms", dlg.SelectedLabelText, "AntCatalog", string.Empty);
           if (!System.IO.File.Exists(catalog))
           {
-            var dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-            dlgOk.SetHeading(10798624);
-            dlgOk.SetLine(1, "Cannot load Configuration:");
-            dlgOk.SetLine(2, "'" + dlg.SelectedLabelText + "'");
-            dlgOk.SetLine(3, "Verify your settings !");
-            dlgOk.DoModal(MediaPortal.GUI.Library.GUIWindowManager.ActiveWindow);
+            GUIUtils.ShowOKDialog(
+              "Cannot load Configuration:",
+              "'" + dlg.SelectedLabelText + "'",
+              "Verify your settings !",
+              "");
             return string.Empty;
           }
           else
@@ -1124,12 +1123,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
         if (NbConfig == 0)
         {
-          var dlgOk = (MediaPortal.Dialogs.GUIDialogOK)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_DIALOG_OK);
-          dlgOk.SetHeading(GUILocalizeStrings.Get(107986)); //my films
-          dlgOk.SetLine(1, "No Configuration defined");
-          dlgOk.SetLine(2, "Please enter setup first");
-          dlgOk.DoModal(MyFilms.ID_MyFilms);
-          //MediaPortal.GUI.Library.GUIWindowManager.ShowPreviousWindow(); // doesn't work in this context - why?
+          GUIUtils.ShowOKDialog("No Configuration defined", "Please enter setup first", "", "");
           return false;
 
           // return NewConfigWizard();

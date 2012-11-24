@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Importer
+namespace Grabber.Importer
 {
 
   /// <summary>
