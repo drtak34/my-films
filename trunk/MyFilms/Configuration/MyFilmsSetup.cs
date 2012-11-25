@@ -1004,6 +1004,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", index), viewRow.DBfield);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), viewRow.Value);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), viewRow.Filter);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilterSaveString{0}", index), viewRow.FilterSaveString);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), viewRow.Index);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
@@ -1019,6 +1020,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       // XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewLabel2{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index));
+      XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewFilterSaveString{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index));
@@ -1255,6 +1257,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         // if (view.Label.Length == 0) view.Label = view.DBfield;
         view.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), string.Empty);
         view.Filter = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), string.Empty);
+        view.FilterSaveString = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilterSaveString{0}", index), string.Empty);
         view.Index = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), 0);
         view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), "Name");
         view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), " ASC");
@@ -6004,15 +6007,42 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void AntViewFilterEditButton_Click(object sender, EventArgs e)
     {
-      FilterEditor filterEditor = new FilterEditor();
+      var filterEditor = new FilterEditor();
       filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
       filterEditor.MasterTitle = AntTitle1.Text;
       filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
+
+      // preset the values
+      string[] filterSettings = AntViewFilterSaveString.Text.Split('|');
+      if (filterSettings.Length > 8)
+      {
+        filterEditor.FilterItem1 = filterSettings[0];
+        filterEditor.FilterSign1 = filterSettings[1];
+        filterEditor.FilterText1 = filterSettings[2];
+        filterEditor.FilterItem2 = filterSettings[3];
+        filterEditor.FilterSign2 = filterSettings[4];
+        filterEditor.FilterText2 = filterSettings[5];
+        filterEditor.FilterFreeText = filterSettings[6];
+        filterEditor.FilterComb = filterSettings[7];
+        filterEditor.ConfigString = filterSettings[8];
+      }
+      
       filterEditor.ShowDialog(this);
       if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK)
       {
         // AntViewFilter.Focus();
         AntViewFilter.Text = filterEditor.ConfigString;
+        string s = "";
+        s += filterEditor.FilterItem1;
+        s += "|" + filterEditor.FilterSign1;
+        s += "|" + filterEditor.FilterText1;
+        s += "|" + filterEditor.FilterItem2;
+        s += "|" + filterEditor.FilterSign2;
+        s += "|" + filterEditor.FilterText2;
+        s += "|" + filterEditor.FilterFreeText;
+        s += "|" + filterEditor.FilterComb;
+        s += "|" + filterEditor.ConfigString;
+        AntViewFilterSaveString.Text = s;
         viewBindingSource.EndEdit();
       }
       else
@@ -6101,7 +6131,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void btnCustomConfigFilter_Click(object sender, EventArgs e)
     {
-      FilterEditor filterEditor = new FilterEditor();
+      var filterEditor = new FilterEditor();
       filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
       filterEditor.MasterTitle = AntTitle1.Text;
       filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
@@ -6361,6 +6391,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     //  {
     //    LogMyFilms.Info("Processing Complete.");
     //  }
+    }
+
+    private void AntViewFilterSaveString_TextChanged(object sender, EventArgs e)
+    {
+
     }
   }
 

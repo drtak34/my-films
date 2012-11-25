@@ -217,6 +217,10 @@
           this.label_DefaultArtistImage = new System.Windows.Forms.Label();
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.groupBox_AMCupdater = new System.Windows.Forms.GroupBox();
+          this.labelAMCUstartdelay = new System.Windows.Forms.Label();
+          this.numericUpDownAMCUscanStartDelay = new System.Windows.Forms.NumericUpDown();
+          this.chkAMCUwatchScanFolders = new System.Windows.Forms.CheckBox();
+          this.chkAMCUscanOnStartup = new System.Windows.Forms.CheckBox();
           this.groupBoxAMCUpdaterConfigFile = new System.Windows.Forms.GroupBox();
           this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
           this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
@@ -332,9 +336,10 @@
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
-          this.labelViewLabel = new System.Windows.Forms.Label();
+          this.AntViewFilterSaveString = new System.Windows.Forms.TextBox();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
+          this.labelViewLabel = new System.Windows.Forms.Label();
           this.buttonResetImage = new System.Windows.Forms.Button();
           this.AntViewsImage = new System.Windows.Forms.PictureBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
@@ -621,10 +626,6 @@
           this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
           this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-          this.chkAMCUscanOnStartup = new System.Windows.Forms.CheckBox();
-          this.chkAMCUwatchScanFolders = new System.Windows.Forms.CheckBox();
-          this.numericUpDownAMCUscanStartDelay = new System.Windows.Forms.NumericUpDown();
-          this.labelAMCUstartdelay = new System.Windows.Forms.Label();
           ownerLabel = new System.Windows.Forms.Label();
           mailLabel = new System.Windows.Forms.Label();
           siteLabel = new System.Windows.Forms.Label();
@@ -653,6 +654,7 @@
           this.groupBox_ArtistImages.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).BeginInit();
           this.groupBox_AMCupdater.SuspendLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).BeginInit();
           this.groupBoxAMCUpdaterConfigFile.SuspendLayout();
           this.groupBox_AMCupdaterScheduer.SuspendLayout();
           this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
@@ -723,7 +725,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).BeginInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).BeginInit();
-          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).BeginInit();
           this.SuspendLayout();
           // 
           // ownerLabel
@@ -2035,6 +2036,55 @@
           this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
           this.ToolTip1.SetToolTip(this.groupBox_AMCupdater, resources.GetString("groupBox_AMCupdater.ToolTip"));
           // 
+          // labelAMCUstartdelay
+          // 
+          this.labelAMCUstartdelay.AutoSize = true;
+          this.labelAMCUstartdelay.Location = new System.Drawing.Point(227, 69);
+          this.labelAMCUstartdelay.Name = "labelAMCUstartdelay";
+          this.labelAMCUstartdelay.Size = new System.Drawing.Size(59, 13);
+          this.labelAMCUstartdelay.TabIndex = 7;
+          this.labelAMCUstartdelay.Text = "Start Delay";
+          // 
+          // numericUpDownAMCUscanStartDelay
+          // 
+          this.numericUpDownAMCUscanStartDelay.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+          this.numericUpDownAMCUscanStartDelay.Location = new System.Drawing.Point(298, 67);
+          this.numericUpDownAMCUscanStartDelay.Name = "numericUpDownAMCUscanStartDelay";
+          this.numericUpDownAMCUscanStartDelay.Size = new System.Drawing.Size(53, 20);
+          this.numericUpDownAMCUscanStartDelay.TabIndex = 6;
+          this.ToolTip1.SetToolTip(this.numericUpDownAMCUscanStartDelay, "It is recommended to delay the Scan for new movies.\r\nSet the number of seconds.");
+          this.numericUpDownAMCUscanStartDelay.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+          // 
+          // chkAMCUwatchScanFolders
+          // 
+          this.chkAMCUwatchScanFolders.AutoSize = true;
+          this.chkAMCUwatchScanFolders.Location = new System.Drawing.Point(62, 92);
+          this.chkAMCUwatchScanFolders.Name = "chkAMCUwatchScanFolders";
+          this.chkAMCUwatchScanFolders.Size = new System.Drawing.Size(122, 17);
+          this.chkAMCUwatchScanFolders.TabIndex = 5;
+          this.chkAMCUwatchScanFolders.Text = "Watch Scan Path(s)";
+          this.ToolTip1.SetToolTip(this.chkAMCUwatchScanFolders, resources.GetString("chkAMCUwatchScanFolders.ToolTip"));
+          this.chkAMCUwatchScanFolders.UseVisualStyleBackColor = true;
+          // 
+          // chkAMCUscanOnStartup
+          // 
+          this.chkAMCUscanOnStartup.AutoSize = true;
+          this.chkAMCUscanOnStartup.Location = new System.Drawing.Point(62, 68);
+          this.chkAMCUscanOnStartup.Name = "chkAMCUscanOnStartup";
+          this.chkAMCUscanOnStartup.Size = new System.Drawing.Size(103, 17);
+          this.chkAMCUscanOnStartup.TabIndex = 4;
+          this.chkAMCUscanOnStartup.Text = "Scan on Startup";
+          this.ToolTip1.SetToolTip(this.chkAMCUscanOnStartup, resources.GetString("chkAMCUscanOnStartup.ToolTip"));
+          this.chkAMCUscanOnStartup.UseVisualStyleBackColor = true;
+          // 
           // groupBoxAMCUpdaterConfigFile
           // 
           this.groupBoxAMCUpdaterConfigFile.Controls.Add(this.txtAMCUpd_cnf_Display);
@@ -3329,16 +3379,14 @@
           this.groupBoxView.Text = "Custom View Editor ...";
           this.ToolTip1.SetToolTip(this.groupBoxView, resources.GetString("groupBoxView.ToolTip"));
           // 
-          // labelViewLabel
+          // AntViewFilterSaveString
           // 
-          this.labelViewLabel.AutoSize = true;
-          this.labelViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
-          this.labelViewLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-          this.labelViewLabel.Location = new System.Drawing.Point(179, 48);
-          this.labelViewLabel.Name = "labelViewLabel";
-          this.labelViewLabel.Size = new System.Drawing.Size(99, 13);
-          this.labelViewLabel.TabIndex = 2;
-          this.labelViewLabel.Text = "Custom View Name";
+          this.AntViewFilterSaveString.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "FilterSaveString", true));
+          this.AntViewFilterSaveString.Location = new System.Drawing.Point(128, 16);
+          this.AntViewFilterSaveString.Name = "AntViewFilterSaveString";
+          this.AntViewFilterSaveString.Size = new System.Drawing.Size(42, 20);
+          this.AntViewFilterSaveString.TabIndex = 89;
+          this.AntViewFilterSaveString.TextChanged += new System.EventHandler(this.AntViewFilterSaveString_TextChanged);
           // 
           // viewBindingSource
           // 
@@ -3349,6 +3397,17 @@
           // 
           this.mFview.DataSetName = "MFview";
           this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+          // 
+          // labelViewLabel
+          // 
+          this.labelViewLabel.AutoSize = true;
+          this.labelViewLabel.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "Label", true));
+          this.labelViewLabel.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+          this.labelViewLabel.Location = new System.Drawing.Point(179, 48);
+          this.labelViewLabel.Name = "labelViewLabel";
+          this.labelViewLabel.Size = new System.Drawing.Size(99, 13);
+          this.labelViewLabel.TabIndex = 2;
+          this.labelViewLabel.Text = "Custom View Name";
           // 
           // buttonResetImage
           // 
@@ -3671,6 +3730,7 @@
           // 
           this.groupBox5.Controls.Add(this.AntViewFilter);
           this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
+          this.groupBox5.Controls.Add(this.AntViewFilterSaveString);
           this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.groupBox5.Location = new System.Drawing.Point(170, 145);
           this.groupBox5.Name = "groupBox5";
@@ -6472,55 +6532,6 @@
           this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
           this.layoutFilmsComboBox.TabIndex = 34;
           // 
-          // chkAMCUscanOnStartup
-          // 
-          this.chkAMCUscanOnStartup.AutoSize = true;
-          this.chkAMCUscanOnStartup.Location = new System.Drawing.Point(62, 68);
-          this.chkAMCUscanOnStartup.Name = "chkAMCUscanOnStartup";
-          this.chkAMCUscanOnStartup.Size = new System.Drawing.Size(103, 17);
-          this.chkAMCUscanOnStartup.TabIndex = 4;
-          this.chkAMCUscanOnStartup.Text = "Scan on Startup";
-          this.ToolTip1.SetToolTip(this.chkAMCUscanOnStartup, resources.GetString("chkAMCUscanOnStartup.ToolTip"));
-          this.chkAMCUscanOnStartup.UseVisualStyleBackColor = true;
-          // 
-          // chkAMCUwatchScanFolders
-          // 
-          this.chkAMCUwatchScanFolders.AutoSize = true;
-          this.chkAMCUwatchScanFolders.Location = new System.Drawing.Point(62, 92);
-          this.chkAMCUwatchScanFolders.Name = "chkAMCUwatchScanFolders";
-          this.chkAMCUwatchScanFolders.Size = new System.Drawing.Size(122, 17);
-          this.chkAMCUwatchScanFolders.TabIndex = 5;
-          this.chkAMCUwatchScanFolders.Text = "Watch Scan Path(s)";
-          this.ToolTip1.SetToolTip(this.chkAMCUwatchScanFolders, resources.GetString("chkAMCUwatchScanFolders.ToolTip"));
-          this.chkAMCUwatchScanFolders.UseVisualStyleBackColor = true;
-          // 
-          // numericUpDownAMCUscanStartDelay
-          // 
-          this.numericUpDownAMCUscanStartDelay.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-          this.numericUpDownAMCUscanStartDelay.Location = new System.Drawing.Point(298, 67);
-          this.numericUpDownAMCUscanStartDelay.Name = "numericUpDownAMCUscanStartDelay";
-          this.numericUpDownAMCUscanStartDelay.Size = new System.Drawing.Size(53, 20);
-          this.numericUpDownAMCUscanStartDelay.TabIndex = 6;
-          this.ToolTip1.SetToolTip(this.numericUpDownAMCUscanStartDelay, "It is recommended to delay the Scan for new movies.\r\nSet the number of seconds.");
-          this.numericUpDownAMCUscanStartDelay.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-          // 
-          // labelAMCUstartdelay
-          // 
-          this.labelAMCUstartdelay.AutoSize = true;
-          this.labelAMCUstartdelay.Location = new System.Drawing.Point(227, 69);
-          this.labelAMCUstartdelay.Name = "labelAMCUstartdelay";
-          this.labelAMCUstartdelay.Size = new System.Drawing.Size(59, 13);
-          this.labelAMCUstartdelay.TabIndex = 7;
-          this.labelAMCUstartdelay.Text = "Start Delay";
-          // 
           // MyFilmsSetup
           // 
           this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -6573,6 +6584,7 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).EndInit();
           this.groupBox_AMCupdater.ResumeLayout(false);
           this.groupBox_AMCupdater.PerformLayout();
+          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).EndInit();
           this.groupBoxAMCUpdaterConfigFile.ResumeLayout(false);
           this.groupBoxAMCUpdaterConfigFile.PerformLayout();
           this.groupBox_AMCupdaterScheduer.ResumeLayout(false);
@@ -6682,7 +6694,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMyFilms)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.customFieldsBindingSource)).EndInit();
           ((System.ComponentModel.ISupportInitialize)(this.indexNumericUpDown)).EndInit();
-          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).EndInit();
           this.ResumeLayout(false);
           this.PerformLayout();
 
@@ -7201,5 +7212,6 @@
         private CheckBox chkAMCUscanOnStartup;
         private NumericUpDown numericUpDownAMCUscanStartDelay;
         private Label labelAMCUstartdelay;
+        private TextBox AntViewFilterSaveString;
     }
 }
