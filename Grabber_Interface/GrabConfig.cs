@@ -2082,7 +2082,7 @@ namespace Grabber_Interface
           catch { textComplement.Text = string.Empty; }
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCountryIndex)._Value;
           break;
-        case 11: // Categories / Genre
+        case 11: // Category
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyGenrePage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Param2;
@@ -3210,7 +3210,7 @@ namespace Grabber_Interface
             break;
           case 10:
           case 50:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Genre" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Category" + mapped + Environment.NewLine;
             break;
           case 11:
           case 51:
@@ -4080,7 +4080,7 @@ namespace Grabber_Interface
         case "Country":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCountry)._Value;
           break;
-        case "Genre":
+        case "Category":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Value;
           break;
         case "Year":
