@@ -50,6 +50,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using Grabber.TMDBv3;
 
   using MediaPortal.Configuration;
+  using MediaPortal;
   using MediaPortal.Dialogs;
   using MediaPortal.GUI.Library;
   using MediaPortal.GUI.Video;
@@ -221,6 +222,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Photos,
       Person,
       Trailers
+    }
+
+    public enum PlayerOption
+    {
+      Internal,
+      External,
+      BluRayPlayerLauncher
     }
     #endregion
 
@@ -690,7 +698,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return;
         case MediaPortal.GUI.Library.Action.ActionType.ACTION_PLAY:
         case MediaPortal.GUI.Library.Action.ActionType.ACTION_MUSIC_PLAY:
-          Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
+          Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.Internal);
           return;
 
         case MediaPortal.GUI.Library.Action.ActionType.ACTION_PAGE_UP:
@@ -804,12 +812,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             case (int)Controls.CTRL_BtnPlay3Persons:
             case (int)Controls.CTRL_BtnPlay4TecDetails:
             case (int)Controls.CTRL_BtnPlay5ExtraDetails:
-              Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
+              Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.Internal);
               return true;
             case (int)Controls.CTRL_ViewFanart: // On Button goto MyFilmsThumbs // Changed to also launch player due to Ember Media Manager discontinued...
             case (int)Controls.CTRL_ViewMovieThumbs:
               //GUIWindowManager.ActivateWindow(ID_MyFilmsThumbs);
-              Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
+              Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.Internal);
               return true;
 
             case (int)Controls.CTRL_BtnPlayTrailer: // Search Trailer File to play
@@ -7423,7 +7431,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int GetID = GUIWindowManager.GetPreviousActiveWindow();
       try
       {
-        Launch_Movie(movieid, GetID, null, false);
+        Launch_Movie(movieid, GetID, null, MyFilmsDetail.PlayerOption.Internal);
       }
       catch (Exception ex)
       {
@@ -7432,12 +7440,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    public static void Launch_Movie(int select_item, int GetID, GUIAnimation m_SearchAnimation, bool bForceExternalPlayback)
+    public static void Launch_Movie(int select_item, int GetID, GUIAnimation m_SearchAnimation, PlayerOption playeroption)
     //-------------------------------------------------------------------------------------------
     // Play Movie
     //-------------------------------------------------------------------------------------------
     {
-      LogMyFilms.Debug("Launch_Movie() select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "', forceExternalPlayer = '" + bForceExternalPlayback + "'");
+      LogMyFilms.Debug("Launch_Movie() select_item = '" + select_item + "' - GetID = '" + GetID + "' - m_SearchAnimation = '" + m_SearchAnimation + "', playeroption = '" + Enum.GetName(typeof(PlayerOption), playeroption) + "'");
       //enableNativeAutoplay(); // in case, other plugin disabled it - removed, as we now do start external player ourselves ...
 
       #region Version Select Dialog
@@ -7593,68 +7601,76 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Check, if the content returned is a BR playlist to supress internal player and dialogs
         bool isBRcontent = false;
         string mediapath = filestorage;
-        LogMyFilms.Info("Launch_Movie() - SingleItem found ('" + newItems[0] + "'), filestorage = '" + filestorage + "'");
         if (newItems[0].ToString().ToLower().EndsWith("bdmv")) isBRcontent = true;
+        bool isMpVideo = Utils.IsVideo(newItems[0].ToString());
+        LogMyFilms.Info("Launch_Movie() - starting playback: isBRcontent = '" + isBRcontent + "', isMpVideo = '" + isMpVideo + "', #items = '" + newItems.Count + "', first item = '" + newItems[0] + "'), filestorage = '" + filestorage + "'");
 
-        if ((!isBRcontent || Helper.IsBdHandlerAvailableAndEnabled) && !bForceExternalPlayback)
+        switch (playeroption)
         {
-          #region internal playback
-          LogMyFilms.Info("Launch_Movie() - start internal playback");
-          playlistPlayer.Reset();
-          playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
-          PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
-          playlist.Clear();
-
-          foreach (object t in newItems)
-          {
-            var movieFileName = (string)t;
-            var newitem = new PlayListItem();
-            newitem.FileName = movieFileName;
-            newitem.Type = PlayListItem.PlayListItemType.Video;
-            playlist.Add(newitem);
-          }
-          // ask for start movie Index
-
-          // Set Playbackhandler to active
-          MyFilms.conf.MyFilmsPlaybackActive = true;
-          // play movie...
-          PlayMovieFromPlayList(noResumeMovie, movieIndex - 1);
-          #endregion
-        }
-        else if (MyFilms.conf.ExternalPlayerPath.Length > 0)
-        {
-          #region external player playback (myfilms)
-          LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath + "', argument (filestorage) = '" + filestorage + "'");
-
-          if (bForceExternalPlayback)
-          {
+          case PlayerOption.External:
             try
             {
+              LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath + "', argument (filestorage) = '" + filestorage + "'");
               LaunchExternalPlayer(filestorage);
               return;
-            }
-            catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
-          }
-          else
-          {
-            string[] split = MyFilms.conf.ExternalPlayerExtensions.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string s in split.Where(s => filestorage.ToLower().Contains(s.ToLower())))
+            } catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
+            break;
+          case PlayerOption.BluRayPlayerLauncher:
+            LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
+            GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
+            break;
+          case PlayerOption.Internal:
+            bool externalplayerextensiondetected = MyFilms.conf.ExternalPlayerExtensions.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Any(s => filestorage.ToLower().Contains(s.ToLower()));
+            if (externalplayerextensiondetected && MyFilms.conf.ExternalPlayerPath.Length > 0) // check, if this is configured to use external player via extensions in setup
             {
+              #region external player playback (myfilms)
+              LogMyFilms.Info("Launch_Movie() - extension for external player detected! - start external player - path = '" + MyFilms.conf.ExternalPlayerPath + "', argument (filestorage) = '" + filestorage + "'");
               try
               {
                 LaunchExternalPlayer(filestorage);
                 return;
-              }
-              catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
+              } catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
+              #endregion
             }
-          }
+            else if (isMpVideo || (isBRcontent && Helper.IsBdHandlerAvailableAndEnabled)) // use internal playback, if suppoerted or BD handler is installed
+            {
+              #region internal playback
+              LogMyFilms.Info("Launch_Movie() - start internal playback");
+              playlistPlayer.Reset();
+              playlistPlayer.CurrentPlaylistType = PlayListType.PLAYLIST_VIDEO_TEMP;
+              PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
+              playlist.Clear();
 
-          #endregion
-        }
-        else if (Helper.IsBluRayPlayerLauncherAvailableAndEnabled)
-        {
-          LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
-          GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
+              foreach (object t in newItems)
+              {
+                var movieFileName = (string)t;
+                // ToDo: Check, if that is necessary - from MP1.3.x to get e.g. Mediainfo registered AddFileToDatabase(movieFileName);
+                var newitem = new PlayListItem();
+                newitem.FileName = movieFileName;
+                newitem.Type = PlayListItem.PlayListItemType.Video;
+                playlist.Add(newitem);
+              }
+              // ask for start movie Index
+
+              MyFilms.conf.MyFilmsPlaybackActive = true; // Set Playbackhandler to active
+              PlayMovieFromPlayList(noResumeMovie, movieIndex - 1); // play movie...
+              #endregion
+            }
+            else if (isBRcontent && Helper.IsBluRayPlayerLauncherAvailableAndEnabled) // use BRplayerLauncher fir BR content, if installed
+            {
+              #region  BluRayPlayerLauncher playback
+              LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
+              GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
+              #endregion
+            }
+            else // playback not successful - notify user!
+            {
+              #region no playback option successful - notify user
+              LogMyFilms.Info("Launch_Movie() - Internal Playback not successful - playback not started!");
+              GUIUtils.ShowOKDialog("No playback possible, please check your setup. \nInstall BR Player Launcher, BDhandler or external player for unsupported media.");
+              #endregion
+            }
+            break;
         }
       }
       else
@@ -7673,7 +7689,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
           dlgYesNo.SetLine(2, "' disc n° = " + MyFilms.r[select_item]["Number"]); //ANT Number for Identification Media 
         dlgYesNo.DoModal(GetID);
-        if (dlgYesNo.IsConfirmed) Launch_Movie(select_item, GetID, m_SearchAnimation, bForceExternalPlayback);
+        if (dlgYesNo.IsConfirmed) 
+          Launch_Movie(select_item, GetID, m_SearchAnimation, playeroption);
         //}
         else
         {
@@ -7903,6 +7920,138 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         PlayMovieFromPlayListTrailer(0);
       }
+    }
+
+    /// <summary>
+    /// Adds file (full path) and it's stacked parts (method will search
+    /// for them inside strFile folder) into videodatabase (movie table)
+    /// This method will also fill mediaInfo data and file duration id
+    /// if they are not exists.
+    /// </summary>
+    /// <param name="strFile"></param>
+    /// <returns></returns>
+    private static ArrayList AddFileToDatabase(string strFile)
+    {
+      var files = new ArrayList();
+      // Stop is file is not video
+      if (!Utils.IsVideo(strFile))
+      {
+        return files;
+      }
+      // ??
+      if (PlayListFactory.IsPlayList(strFile))
+      {
+        return files;
+      }
+      // Don't add web streams (e.g.: from Online videos)
+      if (strFile.StartsWith("http:"))
+      {
+        return files;
+      }
+
+      var allFiles = new ArrayList();
+
+      // If this is database movie, get files and return
+      if (VideoDatabase.HasMovieInfo(strFile))
+      {
+        IMDBMovie movie = new IMDBMovie();
+        VideoDatabase.GetMovieInfo(strFile, ref movie);
+        GUIUtils.GetFilesForMovie(movie.ID, ref allFiles); // replace MP13 call : VideoDatabase.GetFilesForMovie(movie.ID, ref allFiles);
+
+        // Check if we have mediainfo for files and add it if necessary
+#if MP13
+        foreach (string file in allFiles)
+        {
+          if (!VideoDatabase.HasMediaInfo(file))
+          {
+            VideoDatabase.AddMovieFile(file);
+          }
+        }
+#endif
+        return allFiles;
+      }
+      // If file is not scanned (movie is not in the db ie. user video)
+      int movieId = VideoDatabase.AddMovieFile(strFile);
+      files.Add(strFile);
+
+      // Check if file is stackable and get rest of the stack
+#if MP13
+      if (IsFileStackable(strFile))
+      {
+        List<GUIListItem> items = _virtualDirectory.GetDirectoryUnProtectedExt(_currentFolder, true);
+
+        for (int i = 0; i < items.Count; ++i)
+        {
+          GUIListItem temporaryListItem = (GUIListItem)items[i];
+
+          if (temporaryListItem.IsFolder)
+          {
+            if (!IsMovieFolder(temporaryListItem.Path))
+            {
+              continue;
+            }
+            else
+            {
+              temporaryListItem.IsBdDvdFolder = true;
+            }
+          }
+
+          IMDBMovie movie = (IMDBMovie)temporaryListItem.AlbumInfoTag;
+
+          if (temporaryListItem.AlbumInfoTag == null)
+          {
+            IMDBMovie.SetMovieData(temporaryListItem);
+            movie = temporaryListItem.AlbumInfoTag as IMDBMovie;
+          }
+
+          if (movie == null)
+          {
+            continue;
+          }
+
+          if (movie.VideoFileName != strFile)
+          {
+            // Add rest of stackable items for main file (main file is already in array)
+            if (!temporaryListItem.IsBdDvdFolder)
+            {
+              if (Util.Utils.ShouldStack(movie.VideoFileName, strFile))
+              {
+                allFiles.Add(items[i]);
+              }
+            }
+            else
+            {
+              string strPath, strFileName;
+              Util.Utils.Split(strFile, out strPath, out strFileName);
+
+              if (Util.Utils.PathShouldStack(movie.VideoFilePath, strPath))
+              {
+                allFiles.Add(items[i]);
+              }
+            }
+          }
+        }
+
+      // Add rest of the stackable files
+        foreach (GUIListItem item in allFiles)
+        {
+          IMDBMovie movie = (IMDBMovie)item.AlbumInfoTag;
+          int idFile = VideoDatabase.GetFileId(movie.VideoFileName);
+
+          if (idFile == -1)
+          {
+            string path, filename;
+            DatabaseUtility.Split(movie.VideoFileName, out path, out filename);
+            int pathId = VideoDatabase.AddPath(path);
+            VideoDatabase.AddFile(movieId, pathId, filename);
+          }
+
+          files.Add(movie.VideoFileName);
+        }
+      }
+#endif
+
+      return files;
     }
 
     protected static void Search_parts(string fileName, DataRow row, bool delete, ref bool noResumeMovie, ref ArrayList newItems, ref int idMovie, ref int movieIndex, ref int timeMovieStopped)
@@ -8482,7 +8631,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
               if (dlgYesNo.IsConfirmed) // if (GUIUtils.ShowCustomYesNoDialog(GUILocalizeStrings.Get(10798981), GUILocalizeStrings.Get(10798985) + "\n" + "'" + MyFilms.currentTrailerPlayingItem.TranslatedTitle + "'" + "\n" + "(" + MyFilms.currentTrailerPlayingItem.Title + ") - " + MyFilms.currentTrailerPlayingItem.Year.ToString(), null, null, false, 10, wGetID)) // Trailer Scrobbling ... // Do you want to play the main movie ?
               {
-                Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, false);
+                Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.Internal);
                 return;
               }
               else

@@ -1085,7 +1085,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (r.Length == 0)
             GUIWindowManager.ShowPreviousWindow();
           if (loadParamInfo.Play == "true")
-            MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null, false);
+            MyFilmsDetail.Launch_Movie(conf.StrIndex, GetID, null, MyFilmsDetail.PlayerOption.Internal);
           else
             GUIWindowManager.ActivateWindow((int)ID_MyFilmsDetail, true);
         }
@@ -1482,7 +1482,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
             conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
-            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
+            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, MyFilmsDetail.PlayerOption.Internal);
           }
           base.OnAction(action);
           break;
@@ -1501,7 +1501,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
               conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
-              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
+              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, MyFilmsDetail.PlayerOption.Internal);
             }
             if ((action.m_key.KeyChar == 120) && Context_Menu)
             {
@@ -10480,8 +10480,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (MyFilms.conf.ExternalPlayerPath.Length > 0 && System.IO.File.Exists(MyFilms.conf.ExternalPlayerPath))
             {
-              dlg.Add(GUILocalizeStrings.Get(10798500)); //play movie external player)
+              dlg.Add(GUILocalizeStrings.Get(10798500)); //play movie external player
               choice.Add("playmovieexternal");
+            }
+            if (Helper.IsBluRayPlayerLauncherAvailableAndEnabled)
+            {
+              dlg.Add(GUILocalizeStrings.Get(10798501)); //play movie BD player launcher
+              choice.Add("playmoviebrplayerlauncher");
             }
           }
 
@@ -10993,11 +10998,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         #region Menu Actions
         case "playmovie":
-          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, false);
+          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.Internal);
           break;
 
         case "playmovieexternal":
-          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, true);
+          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.External);
+          break;
+
+        case "playmoviebrplayerlauncher":
+          MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.BluRayPlayerLauncher);
           break;
 
         case "playtrailer":
@@ -13322,7 +13331,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         switch (choiceSearch[dlg.SelectedLabel])
         {
           case "PlayMovie":
-            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
+            MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, MyFilmsDetail.PlayerOption.Internal);
             //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
             return;
           case "PlayMovieTrailer":
@@ -13345,7 +13354,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgYesNo.SetLine(1, MyFilms.r[Convert.ToInt32(currentTrailerMoviesList[currentNumber].ID)]["Originaltitle"].ToString());
             dlgYesNo.SetLine(2, "Current ID = '" + currentTrailerMoviesList[currentNumber].ID + "'");
             dlgYesNo.DoModal(GetID);
-            if (dlgYesNo.IsConfirmed)              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, false);
+            if (dlgYesNo.IsConfirmed)
+              MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.Internal);
             //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
             break;
           case "ShowMovieDetails":
@@ -13374,7 +13384,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg1YesNo.SetLine(2, "Zufällige Film ID = '" + currentTrailerMoviesList[currentNumber].ID + "'");
             dlg1YesNo.DoModal(ID_MyFilms);
             if (dlg1YesNo.IsConfirmed)              //Launch_Movie(select_item, GetID, m_SearchAnimation);
-              MyFilmsDetail.Launch_Movie(facadeFilms.SelectedListItem.ItemId, GetID, null, false);
+              MyFilmsDetail.Launch_Movie(facadeFilms.SelectedListItem.ItemId, GetID, null, MyFilmsDetail.PlayerOption.Internal);
             //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[currentNumber]), GetID, null);
             break;
           case "NewSearch":
@@ -13696,7 +13706,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             switch (choiceSearch[dlg.SelectedLabel])
             {
               case "PlayMovie":
-                MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
+                MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, MyFilmsDetail.PlayerOption.Internal);
                 //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
                 return;
               case "PlayMovieTrailer":
@@ -13750,7 +13760,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 dlg1YesNo.SetLine(2, "Zufällige Film ID = '" + w_index[randomNumber] + "'");
                 dlg1YesNo.DoModal(GetID);
                 if (dlg1YesNo.IsConfirmed)                  //Launch_Movie(select_item, GetID, m_SearchAnimation);
-                  MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, false);
+                  MyFilmsDetail.Launch_Movie(this.facadeFilms.SelectedListItem.ItemId, GetID, null, MyFilmsDetail.PlayerOption.Internal);
                 //MyFilmsDetail.Launch_Movie(Convert.ToInt32(w_index[RandomNumber]), GetID, null);
                 break;
               case "NewSearch":
