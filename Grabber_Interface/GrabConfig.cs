@@ -21,6 +21,7 @@ namespace Grabber_Interface
   using System.Linq;
 
   using MediaPortal.Configuration;
+  using MediaPortal.Util;
 
   public partial class GrabConfig : Form
   {
@@ -1819,7 +1820,7 @@ namespace Grabber_Interface
         int iLength = 0;
 
         string strTemp = String.Empty;
-        // HTMLUtil htmlUtil = new HTMLUtil(); // in MP Core.dll
+        HTMLUtil htmlUtil = new HTMLUtil();
         bool bregexs = false;
         bool bregexe = false;
         if (starttext.StartsWith("#REGEX#"))
@@ -2082,7 +2083,7 @@ namespace Grabber_Interface
           catch { textComplement.Text = string.Empty; }
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCountryIndex)._Value;
           break;
-        case 11: // Category
+        case 11: // Categories / Genre
           URLpage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyGenrePage)._Value;
           textDReplace.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Param1;
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Param2;
@@ -3210,7 +3211,7 @@ namespace Grabber_Interface
             break;
           case 10:
           case 50:
-            textPreview.SelectedText += "(" + i.ToString() + ") " + "Category" + mapped + Environment.NewLine;
+            textPreview.SelectedText += "(" + i.ToString() + ") " + "Genre" + mapped + Environment.NewLine;
             break;
           case 11:
           case 51:
@@ -4080,7 +4081,7 @@ namespace Grabber_Interface
         case "Country":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartCountry)._Value;
           break;
-        case "Category":
+        case "Genre":
           strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartGenre)._Value;
           break;
         case "Year":

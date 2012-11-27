@@ -93,8 +93,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (SelectionList.SelectedListItem != null)
               {
                 LogMyFilms.Debug("OnItemSelected - set '#myfilms.selectedthumb' to '" + (SelectionList.SelectedListItem.ThumbnailImage ?? "") + "'");
-                MyFilmsDetail.setGUIProperty("dialogimageselect.selectedlabel", SelectionList.SelectedListItem.Label);
-                MyFilmsDetail.setGUIProperty("dialogimageselect.selectedthumb", SelectionList.SelectedListItem.ThumbnailImage);
+                GUIPropertyManager.SetProperty("#myfilms.dialogimageselect.selectedlabel", SelectionList.SelectedListItem.Label);
+                GUIPropertyManager.SetProperty("#myfilms.dialogimageselect.selectedthumb", SelectionList.SelectedListItem.ThumbnailImage);
               }
             }
           }

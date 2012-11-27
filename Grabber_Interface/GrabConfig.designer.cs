@@ -112,8 +112,6 @@ namespace Grabber_Interface
           this.textUserAgent = new System.Windows.Forms.TextBox();
           this.textHeaders = new System.Windows.Forms.TextBox();
           this.EncodingSubPage = new System.Windows.Forms.TextBox();
-          this.cbIgnoreCase = new System.Windows.Forms.CheckBox();
-          this.cbIgnoreCaseDetails = new System.Windows.Forms.CheckBox();
           this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
           this.linkLabelMFwiki = new System.Windows.Forms.LinkLabel();
           this.tabPageDetailPage = new System.Windows.Forms.TabPage();
@@ -222,6 +220,8 @@ namespace Grabber_Interface
           this.pictureBoxUSFlag = new System.Windows.Forms.PictureBox();
           this.pictureBoxFranceFlag = new System.Windows.Forms.PictureBox();
           this.cbFileBasedReader = new System.Windows.Forms.CheckBox();
+          this.cbIgnoreCase = new System.Windows.Forms.CheckBox();
+          this.cbIgnoreCaseDetails = new System.Windows.Forms.CheckBox();
           this.groupBox8.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMapping)).BeginInit();
           this.groupBox10.SuspendLayout();
@@ -915,20 +915,6 @@ namespace Grabber_Interface
           this.EncodingSubPage.Name = "EncodingSubPage";
           this.toolTip1.SetToolTip(this.EncodingSubPage, resources.GetString("EncodingSubPage.ToolTip"));
           this.EncodingSubPage.TextChanged += new System.EventHandler(this.EncodingSubPage_TextChanged);
-          // 
-          // cbIgnoreCase
-          // 
-          resources.ApplyResources(this.cbIgnoreCase, "cbIgnoreCase");
-          this.cbIgnoreCase.Name = "cbIgnoreCase";
-          this.toolTip1.SetToolTip(this.cbIgnoreCase, resources.GetString("cbIgnoreCase.ToolTip"));
-          this.cbIgnoreCase.UseVisualStyleBackColor = true;
-          // 
-          // cbIgnoreCaseDetails
-          // 
-          resources.ApplyResources(this.cbIgnoreCaseDetails, "cbIgnoreCaseDetails");
-          this.cbIgnoreCaseDetails.Name = "cbIgnoreCaseDetails";
-          this.toolTip1.SetToolTip(this.cbIgnoreCaseDetails, resources.GetString("cbIgnoreCaseDetails.ToolTip"));
-          this.cbIgnoreCaseDetails.UseVisualStyleBackColor = true;
           // 
           // linkLabelMFwiki
           // 
@@ -1764,6 +1750,20 @@ namespace Grabber_Interface
           this.cbFileBasedReader.Name = "cbFileBasedReader";
           this.cbFileBasedReader.UseVisualStyleBackColor = true;
           this.cbFileBasedReader.CheckedChanged += new System.EventHandler(this.cbFileBasedReader_CheckedChanged);
+          // 
+          // cbIgnoreCase
+          // 
+          resources.ApplyResources(this.cbIgnoreCase, "cbIgnoreCase");
+          this.cbIgnoreCase.Name = "cbIgnoreCase";
+          this.toolTip1.SetToolTip(this.cbIgnoreCase, resources.GetString("cbIgnoreCase.ToolTip"));
+          this.cbIgnoreCase.UseVisualStyleBackColor = true;
+          // 
+          // cbIgnoreCaseDetails
+          // 
+          resources.ApplyResources(this.cbIgnoreCaseDetails, "cbIgnoreCaseDetails");
+          this.cbIgnoreCaseDetails.Name = "cbIgnoreCaseDetails";
+          this.toolTip1.SetToolTip(this.cbIgnoreCaseDetails, resources.GetString("cbIgnoreCaseDetails.ToolTip"));
+          this.cbIgnoreCaseDetails.UseVisualStyleBackColor = true;
           // 
           // GrabConfig
           // 

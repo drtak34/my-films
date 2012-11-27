@@ -53,8 +53,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
   using TaskScheduler;
 
-  using AntMovieCatalog = MyFilmsPlugin.DataBase.AntMovieCatalog;
-
   public partial class MyFilmsSetup : Form
   {
     //private WshShellClass WshShell; // Added for creating Desktop icon via wsh
@@ -116,7 +114,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         this.cbTrailerAutoregister.Visible = false;
         this.cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
         this.ShowTrailerWhenStartingMovie.Visible = false;
-        this.numUpDownTrailersInIntro.Visible = false;
         this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
         this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
         this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
@@ -131,10 +128,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //CatalogType.Items.Add("test");
         Config_EnablePreload.Visible = false; // precaching of config and DB on Init phase
         butNew.Visible = false; // disable "new" button for normal mode for V6.0.1
-        // autostart settings for AMCupdater background Launcher:
-        chkAMCUscanOnStartup.Visible = false;
-        chkAMCUwatchScanFolders.Visible = false;
-        numericUpDownAMCUscanStartDelay.Visible = false;
       }
       //else
       //{
@@ -856,22 +849,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator4", RoleSeparator4.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "RoleSeparator5", RoleSeparator5.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Selection", "");
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
-
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSort", wDfltSort);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", SortSens.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", wDfltSortInHierarchies); // InHierarchies
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", SortSensInHierarchies.Text);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOut", GetLayoutFromName(LayOut.Text));
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOutInHierarchies", GetLayoutFromName(LayoutInHierarchies.Text));
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSort", "");
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortSens", "");
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortInHierarchies", "");
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "StrSortSensInHierarchies", "");
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOutInHierarchies", 0);
-
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "IndexItem", "");
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "TitleDelim", TitleDelim.Text);
+      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "LayOut", GetLayoutFromName(LayOut.Text));
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Dwp", crypto.Crypter(Dwp.Text));
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchFileName", SearchFileName.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "SearchSubDirs", SearchSubDirs.Checked);
@@ -915,9 +903,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_Always", chkGrabber_Always.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", chkGrabber_ChooseScript.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", chkAMCUpd.Checked);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUscanOnStartup", chkAMCUscanOnStartup.Checked);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUwatchScanFolders", chkAMCUwatchScanFolders.Checked);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUscanStartDelay", numericUpDownAMCUscanStartDelay.Value);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", txtAMCUpd_cnf.Text);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Fanart", chkFanart.Checked);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "FanartDefaultViews", chkFanartDefaultViews.Checked);
@@ -1004,7 +989,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewItem{0}", index), viewRow.DBfield);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), viewRow.Value);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), viewRow.Filter);
-      XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilterSaveString{0}", index), viewRow.FilterSaveString);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), viewRow.Index);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), viewRow.SortFieldViewType);
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), viewRow.SortDirectionView);
@@ -1020,7 +1004,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       // XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewLabel2{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index));
-      XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewFilterSaveString{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index));
       XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index));
@@ -1049,7 +1032,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       // XmlConfig.RemoveEntry("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling"); // ToDo: can be removed in later release, when we don't support nonEnhanced/AMC3 anymore
     }
 
-    internal int GetLayoutFromName(string layoutname)
+    private int GetLayoutFromName(string layoutname)
     {
       int wLayout = 0;
       if (layoutname == "List") wLayout = 0;
@@ -1061,7 +1044,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       return wLayout;
     }
 
-    internal string GetLayoutFromInt(int layoutnumber)
+    private string GetLayoutFromInt(int layoutnumber)
     {
       string layoutname = "List";
       if (layoutnumber == 0) layoutname = "List";
@@ -1217,15 +1200,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AntTitle2.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntTitle2", "");
       AntSTitle.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntSTitle", "");
       if (AntSTitle.Text == "") AntSTitle.Text = AntTitle1.Text;
-
-      #region default values for film lists and groups
       Sort.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSort", "");
       SortInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortInHierarchies", "");
       SortSens.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSens", " ASC");
       SortSensInHierarchies.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltStrSortSensInHierarchies", " ASC");
-      LayOut.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOut", 0));
-      LayoutInHierarchies.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntDfltLayOutInHierarchies", 0));
-      #endregion
 
       AntFilterItem1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterItem1", "");
       AntFilterSign1.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntFilterSign1", "#");
@@ -1257,7 +1235,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         // if (view.Label.Length == 0) view.Label = view.DBfield;
         view.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewValue{0}", index), string.Empty);
         view.Filter = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilter{0}", index), string.Empty);
-        view.FilterSaveString = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewFilterSaveString{0}", index), string.Empty);
         view.Index = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewIndex{0}", index), 0);
         view.SortFieldViewType = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortFieldViewType{0}", index), "Name");
         view.SortDirectionView = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, string.Format("AntViewSortDirectionView{0}", index), " ASC");
@@ -1328,9 +1305,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       txtPicturePrefix.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "PicturePrefix", string.Empty);
       chkGrabber_Always.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_Always", false);
       chkAMCUpd.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd", false);
-      chkAMCUscanOnStartup.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUscanOnStartup", false);
-      chkAMCUwatchScanFolders.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUwatchScanFolders", false);
-      numericUpDownAMCUscanStartDelay.Value = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUscanStartDelay", 60);
       chkGrabber_ChooseScript.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Grabber_ChooseScript", false);
       txtAMCUpd_cnf.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AMCUpd_cnf", string.Empty);
       chkSuppressAutomatic.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "Suppress", false);
@@ -1417,6 +1391,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       View_Dflt_Text.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "ViewDfltText", "");
       Config_Dflt.Checked = (Config_Name.Text) == XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
       Config_EnablePreload.Checked = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PreCaching", false);
+
+      //if (!(AntViewItem1.Text == "Country") & !(AntViewItem1.Text == "Category") & !(AntViewItem1.Text == "Year") & !(AntViewItem1.Text == "(none)"))
+      //    View_Dflt_Item.Items.Add(AntViewItem1.Text);
+      //if (!(AntViewItem2.Text == "Country") & !(AntViewItem2.Text == "Category") & !(AntViewItem2.Text == "Year") & !(AntViewItem2.Text == "(none)"))
+      //    View_Dflt_Item.Items.Add(AntViewItem2.Text);
+
+      LayOut.Text = GetLayoutFromInt(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "LayOut", 0));
 
       AntViewText_Change();
       AntSort_Change();
@@ -1756,7 +1737,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       AntItemDetails6.ResetText();
       TitleDelim.ResetText();
       LayOut.ResetText();
-      LayoutInHierarchies.ResetText();
       ListSeparator1.ResetText();
       ListSeparator2.ResetText();
       ListSeparator3.ResetText();
@@ -1834,9 +1814,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkGrabber_Always.Checked = false;
       chkGrabber_ChooseScript.Checked = false;
       chkAMCUpd.Checked = false;
-      chkAMCUscanOnStartup.Checked = false;
-      chkAMCUwatchScanFolders.Checked = false;
-      numericUpDownAMCUscanStartDelay.Value = 60;
       txtAMCUpd_cnf.ResetText();
       chkDfltFanart.Checked = false;
       chkDfltFanartImage.Checked = false;
@@ -1852,7 +1829,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkPersons.Checked = false;
       chkPersonsEnableDownloads.Checked = false;
       chkAMC_Purge_Missing_Files.Checked = false;
-      chkAMC_ImportOnInternetFail.Checked = false;
       AMCMovieScanPath.ResetText();
       AmcTitleSearchHandling.Text = string.Empty;
       //btnCreateAMCDesktopIcon.Enabled = false;
@@ -2624,19 +2600,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         groupBoxAMCUpdaterConfigFile.Enabled = true;
         groupBox_AMCupdater_ExternalApplication.Enabled = true;
         groupBox_AMCupdaterScheduer.Enabled = true;
-        chkAMCUscanOnStartup.Enabled = true;
-        chkAMCUwatchScanFolders.Enabled = true;
-        numericUpDownAMCUscanStartDelay.Enabled = true;
-
       }
       else
       {
         groupBoxAMCUpdaterConfigFile.Enabled = false;
         groupBox_AMCupdater_ExternalApplication.Enabled = false;
         groupBox_AMCupdaterScheduer.Enabled = false;
-        chkAMCUscanOnStartup.Enabled = false;
-        chkAMCUwatchScanFolders.Enabled = false;
-        numericUpDownAMCUscanStartDelay.Enabled = false;
       }
     }
 
@@ -3243,11 +3212,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
         AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
+      {
         chkAMC_Purge_Missing_Files.Checked = AMCGetAttribute("Purge_Missing_Files").ToLower() == "true";
-      if (!string.IsNullOrEmpty(this.AMCGetAttribute("Import_File_On_Internet_Lookup_Failure")))
-        chkAMC_ImportOnInternetFail.Checked = AMCGetAttribute("Import_File_On_Internet_Lookup_Failure").ToLower() == "true";
+      }
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
         AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
+
     }
 
     private void Read_XML_AMCconfig(string currentconfig)
@@ -3312,9 +3282,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Scan_Path")))
         AMCMovieScanPath.Text = this.AMCGetAttribute("Movie_Scan_Path");
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Purge_Missing_Files")))
+      {
         chkAMC_Purge_Missing_Files.Checked = AMCGetAttribute("Purge_Missing_Files").ToLower() == "true";
-      if (!string.IsNullOrEmpty(this.AMCGetAttribute("Import_File_On_Internet_Lookup_Failure")))
-        chkAMC_ImportOnInternetFail.Checked = AMCGetAttribute("Import_File_On_Internet_Lookup_Failure").ToLower() == "true";
+      }
       if (!string.IsNullOrEmpty(this.AMCGetAttribute("Movie_Title_Handling")))
         AmcTitleSearchHandling.Text = this.AMCGetAttribute("Movie_Title_Handling");
 
@@ -4521,8 +4491,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
       }
 
-      AMCSetAttribute("Import_File_On_Internet_Lookup_Failure", chkAMC_ImportOnInternetFail.Checked ? "true" : "false");
-
       // Those Parameters already set via MyFilmsAMCSettings.xml (Defaultconfigfile):
       //Movie_Title_Handling	Default	Folder Name + Internet Lookup
       //Option	Status / Source	DefaultValue
@@ -4543,6 +4511,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       //Filter_Strings	Default	\([0-9][0-9][0-9][0-9]\)
       //Folder_Name_Is_Group_Name	Default	False
       //Group_Name_Applies_To	Default	Both Titles
+      //Import_File_On_Internet_Lookup_Failure	Default	True
       //Internet_Lookup_Always_Prompt	Default	False
       //Log_Level	Default	All Events
       //Manual_Internet_Lookup_Always_Prompt	Default	True
@@ -5105,14 +5074,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
       #region AMCUpdater settings
       chkAMCUpd.Checked = true; // Use AMCupdater
-      chkAMCUscanOnStartup.Checked = false;
-      chkAMCUwatchScanFolders.Checked = false;
-      numericUpDownAMCUscanStartDelay.Value = 90;
-
       AMCMovieScanPath.Text = PathStorage.Text;
       AmcTitleSearchHandling.Text = "Folder Name + Internet Lookup"; // set this as default
       chkAMC_Purge_Missing_Files.Checked = false;
-      chkAMC_ImportOnInternetFail.Checked = true;
       txtPicturePrefix.Text = @"pictures\"; // txtPicturePrefix.Text = ""; // "Config_Name.Text + "_"; // Use configname as default prefix
       txtAMCUpd_cnf.Text = Config.GetDirectoryInfo(Config.Dir.Config) + @"\MyFilmsAMCSettings" + "_" + Config_Name.Text + ".xml";
       // Make controls visible:
@@ -6007,42 +5971,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void AntViewFilterEditButton_Click(object sender, EventArgs e)
     {
-      var filterEditor = new FilterEditor();
+      FilterEditor filterEditor = new FilterEditor();
       filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
       filterEditor.MasterTitle = AntTitle1.Text;
       filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
-
-      // preset the values
-      string[] filterSettings = AntViewFilterSaveString.Text.Split('|');
-      if (filterSettings.Length > 8)
-      {
-        filterEditor.FilterItem1 = filterSettings[0];
-        filterEditor.FilterSign1 = filterSettings[1];
-        filterEditor.FilterText1 = filterSettings[2];
-        filterEditor.FilterItem2 = filterSettings[3];
-        filterEditor.FilterSign2 = filterSettings[4];
-        filterEditor.FilterText2 = filterSettings[5];
-        filterEditor.FilterFreeText = filterSettings[6];
-        filterEditor.FilterComb = filterSettings[7];
-        filterEditor.ConfigString = filterSettings[8];
-      }
-      
       filterEditor.ShowDialog(this);
       if (filterEditor.DialogResult == System.Windows.Forms.DialogResult.OK)
       {
         // AntViewFilter.Focus();
         AntViewFilter.Text = filterEditor.ConfigString;
-        string s = "";
-        s += filterEditor.FilterItem1;
-        s += "|" + filterEditor.FilterSign1;
-        s += "|" + filterEditor.FilterText1;
-        s += "|" + filterEditor.FilterItem2;
-        s += "|" + filterEditor.FilterSign2;
-        s += "|" + filterEditor.FilterText2;
-        s += "|" + filterEditor.FilterFreeText;
-        s += "|" + filterEditor.FilterComb;
-        s += "|" + filterEditor.ConfigString;
-        AntViewFilterSaveString.Text = s;
         viewBindingSource.EndEdit();
       }
       else
@@ -6131,7 +6068,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void btnCustomConfigFilter_Click(object sender, EventArgs e)
     {
-      var filterEditor = new FilterEditor();
+      FilterEditor filterEditor = new FilterEditor();
       filterEditor.Text = "MyFilms - View Filter Editor ('" + AntViewFilter.Text + "')";
       filterEditor.MasterTitle = AntTitle1.Text;
       filterEditor.ExtendedFields = (this.CatalogType.SelectedIndex != 0);
@@ -6345,55 +6282,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     }
 
     private void label41_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void btnAMCimport_Click(object sender, EventArgs e)
-    {
-    //  try
-    //  {
-    //    LogMyFilms.Info("ACMupdater - try loading CurrentSettings");
-    //    Module1.CurrentSettings.LoadUserSettings(txtAMCUpd_cnf.Text);
-
-    //    var f = new FileInfo(AMCUpdater.Module1.CurrentSettings.XML_File);
-    //    if (!f.Exists)
-    //    {
-    //      LogMyFilms.Info(((@"XML File '"  + (AMCUpdater.Module1.CurrentSettings.XML_File + @"' Not Found."))));
-    //      var destXml = new XmlTextWriter(AMCUpdater.Module1.CurrentSettings.XML_File, System.Text.Encoding.Default);
-    //      destXml.Formatting = Formatting.Indented;
-    //      destXml.WriteStartDocument(false);
-    //      destXml.WriteStartElement("AntMovieCatalog");
-    //      destXml.WriteStartElement("Catalog");
-    //      destXml.WriteElementString("Properties", "");
-    //      destXml.WriteStartElement("Contents");
-    //      destXml.WriteEndElement();
-    //      destXml.WriteEndElement();
-    //      destXml.WriteEndElement();
-    //      destXml.Close();
-    //      LogMyFilms.Info("Creating XML File - FilePath : " + Module1.CurrentSettings.XML_File);
-    //    }
-    //    var ant = new AntProcessor();
-    //    ant.InteractiveMode = false;
-    //    ant.ProcessXML("");
-    //    ant.ProcessMovieFolder();
-    //    ant.ProcessOrphanFiles();
-    //    if (ant.CountOrphanFiles > 0 || ant.CountOrphanRecords > 0)
-    //    {
-    //      ant.UpdateXMLFile();
-    //    }
-    //  }
-    //  catch (Exception ex)
-    //  {
-    //    LogMyFilms.Error("Error: " + ex.Message);
-    //  }
-    //  finally
-    //  {
-    //    LogMyFilms.Info("Processing Complete.");
-    //  }
-    }
-
-    private void AntViewFilterSaveString_TextChanged(object sender, EventArgs e)
     {
 
     }

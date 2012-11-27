@@ -253,6 +253,7 @@
     <Compile Include="Utils\OVplayer.cs" />
     <Compile Include="Utils\PerfWatch.cs" />
     <Compile Include="Utils\StringEnum.cs" />
+    <Compile Include="Utils\Translations.cs" />
     <Compile Include="Utils\XmlSettings.cs" />
     <Compile Include="Utils\Utility.cs" />
     <Compile Include="Utils\WakeOnLanManager.cs" />

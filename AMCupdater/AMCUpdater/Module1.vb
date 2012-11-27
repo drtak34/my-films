@@ -11,7 +11,7 @@ Imports System.Xml
 Imports System.Timers
 Imports System.Text
 
-Public Module Module1
+Module Module1
 
     Public WithEvents bgwFolderScanUpdate As New System.ComponentModel.BackgroundWorker
     Public CurrentSettings As New AntSettings
@@ -607,32 +607,32 @@ Public Module Module1
                 End Try
 
             Case "runtime"
-                Try
-                    If Directory Then
-                        ReturnValue = "ErrorEvent"
-                    Else
-                        MI = New MediaInfo
-                        MI.Open(FilePath)
-                        'PlayTime value is in miliseconds!
-                        TempString = MI.Get_(StreamKind.General, 0, "PlayTime")
-                        MI.Close()
+				Try
+					If Directory Then
+						ReturnValue = "ErrorEvent"
+					Else
+						MI = New MediaInfo
+						MI.Open(FilePath)
+						'PlayTime value is in miliseconds!
+						TempString = MI.Get_(StreamKind.General, 0, "PlayTime")
+						MI.Close()
 
-                        Dim r As Boolean = Integer.TryParse(TempString, TempInteger)
-                        If r Then
-                            If TempInteger <> 0 Then
-                                ReturnValue = CLng(TempInteger / 60000).ToString
-                            Else
-                                ReturnValue = ""
-                            End If
-                        Else
-                            ReturnValue = "ErrorEvent"
-                        End If
-                    End If
-                Catch ex As Exception
-                    'Console.WriteLine(ex.Message)
-                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
-                    ReturnValue = "ErrorEvent"
-                End Try
+						Dim r As Boolean = Integer.TryParse(TempString, TempInteger)
+						If r Then
+							If TempInteger <> 0 Then
+								ReturnValue = CLng(TempInteger / 60000).ToString
+							Else
+								ReturnValue = ""
+							End If
+						Else
+							ReturnValue = "ErrorEvent"
+						End If
+					End If
+				Catch ex As Exception
+					'Console.WriteLine(ex.Message)
+					LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
+					ReturnValue = "ErrorEvent"
+				End Try
             Case "videoformat"
                 Try
                     MI = New MediaInfo

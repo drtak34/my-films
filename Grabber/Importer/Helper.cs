@@ -36,8 +36,86 @@ using System.Net;
 using System.IO;
 using System.Xml;
 
-namespace Grabber.Importer.Helpers
+namespace Importer
 {
+  #region String Extension Methods
+  public static class StringExtensions
+  {
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
+    public static bool IsNumerical(this string number)
+    {
+      double isNumber = 0;
+      return System.Double.TryParse(number, out isNumber);
+    }
+
+    /// <summary>
+    /// ASCII chars that are considered "special" in the context of CleanStringOfSpecialChars
+    /// </summary>
+    static int[] specialCharsFromTo = new int[] { 0,  31, 
+                                                     33,  47, 
+                                                     58,  64, 
+                                                     91,  96, 
+                                                    123, 127 };
+    /// <summary>
+    /// Cleans a string of Punctuation and other Special Characters (removes them)
+    /// Leaves ASCII Chars: 0-9, a-z, A-Z, space
+    /// Leaves non-ASCII Chars
+    /// </summary>
+    /// <param name="input">The string to clean</param>
+    /// <returns>The cleaned string</returns>
+    public static string CleanStringOfSpecialChars(this string input)
+    {
+      char[] cInput = input.ToCharArray();
+      int removed = 0;
+      bool isRemoved = false;
+      for (int i = 0; i < cInput.Length; i++)
+      {
+        isRemoved = false;
+        for (int j = 0; j < specialCharsFromTo.Length; j += 2)
+        {
+          if (cInput[i] >= specialCharsFromTo[j] && cInput[i] <= specialCharsFromTo[j + 1])
+          {
+            removed++;
+            isRemoved = true;
+            break;
+          }
+        }
+        if (!isRemoved)
+          cInput[i - removed] = cInput[i];
+      }
+
+      // shrink the result
+      char[] newLenghtChars = new char[cInput.Length - removed];
+      for (int i = 0; i < newLenghtChars.Length; i++)
+        newLenghtChars[i] = cInput[i];
+
+      return new string(newLenghtChars);
+    }
+
+    /// <summary>
+    /// TitleCases a string
+    /// </summary>
+    /// <param name="input">The string to TitleCase</param>
+    /// <returns>The TitleCased String</returns>
+    public static string ToTitleCase(this string input)
+    {
+      return textInfo.ToTitleCase(input.ToLower());
+    }
+    static TextInfo textInfo = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo;
+
+    public static string ToSHA1Hash(this string password)
+    {
+      // don't store the hash if password is empty
+      if (string.IsNullOrEmpty(password)) return string.Empty;
+
+      byte[] buffer = Encoding.Default.GetBytes(password);
+      SHA1CryptoServiceProvider cryptoTransformSHA1 = new SHA1CryptoServiceProvider();
+      return BitConverter.ToString(cryptoTransformSHA1.ComputeHash(buffer)).Replace("-", "");
+    }
+
+  }
+  #endregion
 
   #region Date/Time extension Methods
 
@@ -266,8 +344,8 @@ namespace Grabber.Importer.Helpers
     /// <returns>A list with unique items</returns>
     public static List<string> RemoveDuplicates(List<string> inputList)
     {
-      var uniqueStore = new Dictionary<string, int>();
-      var finalList = new List<string>();
+      Dictionary<string, int> uniqueStore = new Dictionary<string, int>();
+      List<string> finalList = new List<string>();
       foreach (string currValue in inputList)
       {
         if (!uniqueStore.ContainsKey(currValue))

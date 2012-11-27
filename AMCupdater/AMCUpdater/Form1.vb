@@ -6,6 +6,7 @@ Imports System.Management
 Imports System.Windows.Forms
 Imports System.Windows.Forms.SystemInformation
 Imports System.Drawing
+Imports Importer
 Imports System.Xml
 
 Imports MediaPortal.Configuration
@@ -16,7 +17,7 @@ Imports NLog.Config
 Imports System.Timers
 Imports System.Security.Policy
 Imports ShareWatcherHelper.ShareWatcherHelper
-Imports Grabber.Importer
+
 'Imports MyFilmsPlugin
 
 Public Class Form1

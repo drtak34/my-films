@@ -402,18 +402,6 @@ You can use the browse button to find the correct path.</value>
 Works same way as cover images for movies.
 It is used for "person like" Views, like actors, director, producer, writer.</value>
   </data>
-  <data name="chkAMCUwatchScanFolders.ToolTip" xml:space="preserve">
-    <value>If checked, MyFilms will watch your scan pathes when it is running and launch AMCupdater, if a change is noticed.
-This allows to automatically let MyFilms launch AMCupdater in the background whenever a movie is added or removed to or from your 
-scan pathes.
-Note: If you add or remove movies while MyFilms is not running, it won't detect changes, so you have to either manually start an import or
-enable the "Scan on Startup".</value>
-  </data>
-  <data name="chkAMCUscanOnStartup.ToolTip" xml:space="preserve">
-    <value>If checked, MyFilms will launch AMCupdater in the backround when first started to
-check and import new movies.
-Note: It will use the dettings, you have made in AMCupdater setup for imports, so verify them if they match your needs.</value>
-  </data>
   <data name="txtAMCUpd_cnf.ToolTip" xml:space="preserve">
     <value>Choose the config file for AMCUpdater that should be used for the scheduled run.
 My Films will create such a file for each Configuration Name.
@@ -425,12 +413,6 @@ However, if you created your own configs in AMCUpdater GUI and saved it somewher
 Make sure the configuration you choose for this matches your needs.
 Note: You can always launch AMCUpdater from within My Films anytime you wish and let it import movies in the background.
 If you prefer that, you do NOT require to schedule a task via scheduler.</value>
-  </data>
-  <data name="chkAMC_ImportOnInternetFail.ToolTip" xml:space="preserve">
-    <value>when running global update/import, import files even when internet lookup fails.
-This is the preferred setting for background operation, if you
-prefer to have your media files imported, even if the internet lookup is failing.
-It gives you the possibility to update the internet infos interactively in MyFilms.</value>
   </data>
   <data name="AmcTitleSearchHandling.ToolTip" xml:space="preserve">
     <value>Options are:
@@ -671,21 +653,12 @@ So you should only activate this if you want to filter your views always when en
 AMC users can configure the field and value to identify unwatched films
 on "update" tab (Watched-Status Handling).</value>
   </data>
-  <data name="AlwaysDefaultView.ToolTip" xml:space="preserve">
-    <value>Enabling a Default Start View will disable 'remember last item/view', what is the normal behaviour.
-This results in always the selected view will be displayed, when starting the MyFilms plugin with this config.
-If you enable "Always use start settings", the Default Start View will be applied each time you enter My Films,
-otherwise only the first time, you enter - afterwards My Filoms would remember your last view and settings.
-
-Note: You can save the start settings for film lists and groups in the GUI, when you're in such a context - layout, 
-sort field and sort direction would then be updated.</value>
-  </data>
   <data name="groupBox_DefaultView.ToolTip" xml:space="preserve">
     <value>Select from the list, the view you want to see when first entering the plugin.  
-Select the option 'Always use Start Settings', if you always want to see this view and settings 
-for this configuration, when returning to My Films.  
-If you do not select the option 'Always use Start Settings', the last view used 
-before exiting the plugin will be shown next time when reentering.</value>
+Select the option 'Display Always that view when using this config', 
+if you always want to see this view for this configuration, when returning to My Films.  
+If you do not select the option 'Display Always that view when using this config', 
+the last view used before exiting the plugin will be shown next time.</value>
   </data>
   <metadata name="viewBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1245, 18</value>

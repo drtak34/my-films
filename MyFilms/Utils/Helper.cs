@@ -47,7 +47,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using TraktPlugin;
   using TraktPlugin.TraktAPI.DataStructures;
   using System.Xml;
-  using FileIO = Microsoft.VisualBasic;
 
   using ConnectionState = TraktPlugin.TraktAPI.ConnectionState;
 
@@ -517,23 +516,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
         strLimitedString = sName.Substring(0, iLength) + " [...]";
       }
       return strLimitedString;
-    }
-
-    /// <summary>
-    /// Returns true if only digits contained in the string
-    /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
-    static bool IsDigitsOnly(string s)
-    {
-      int len = s.Length;
-      for (int i = 0; i < len; ++i)
-      {
-        char c = s[i];
-        if (c < '0' || c > '9')
-          return false;
-      }
-      return true;
     }
 
     /// <summary>
@@ -1110,68 +1092,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
-
-
-    #region Directory and Drive utils
-
-    public struct Drive
-    {
-      public string Path;
-      public string TypeDescription;
-      public int Type;
-    }
-
-    public struct DriveTypes
-    {
-      public static readonly int REMOVEABLE = 2;
-      public static readonly int FIXED = 3;
-      public static readonly int REMOTEDISK = 4;
-      public static readonly int CD_DVD = 5;
-      public static readonly int RAMDISK = 6;
-    }
-
-
-    internal static ArrayList GetDrivesList()
-    {
-      var drives = new ArrayList();
-
-      foreach (string d in Environment.GetLogicalDrives())
-      {
-        var drv = new Drive();
-        drv.Path = d;
-        drv.Type = Utils.getDriveType(d);
-
-        if (drv.Type == DriveTypes.CD_DVD)
-        {
-          //					drv.TypeDescription = "CD/DVD Drive";
-          drv.TypeDescription = "CD";
-        }
-        else if (drv.Type == DriveTypes.FIXED)
-        {
-          //					drv.TypeDescription = "HDD";
-          drv.TypeDescription = "HDD";
-        }
-        else if (drv.Type == DriveTypes.RAMDISK)
-        {
-          //					drv.TypeDescription = "RamDisk";
-          drv.TypeDescription = "RAMDISK";
-        }
-        else if (drv.Type == DriveTypes.REMOTEDISK)
-        {
-          //					drv.TypeDescription = "Network Drive";
-          drv.TypeDescription = "NETWORK";
-        }
-        else if (drv.Type == DriveTypes.REMOVEABLE)
-        {
-          //					drv.TypeDescription = "Removeable";
-          drv.TypeDescription = "REMOVEABLE";
-        }
-        drives.Add(drv);
-      }
-      return drives;
-    }
-    #endregion
   }
+
 
   // usage: RetryUtility.RetryAction( () => SomeFunctionThatCanFail(), 3, 1000 );
   public static class RetryUtility
@@ -1294,6 +1216,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         First, Second, new DataColumn[] { First.Columns[FJC] }, new DataColumn[] { First.Columns[SJC] });
     }
   }
+
 
 }
 

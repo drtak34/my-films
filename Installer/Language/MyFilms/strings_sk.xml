@@ -82,12 +82,6 @@
     <String id="107986">Filmy</String>
     <String id="107987">Filmy</String>
     <String id="107988">Filmy</String>
-    <String id="1079801">Add all films to box set ...</String>
-    <String id="1079802">Remove all films from box set</String>
-    <String id="1079810">Import/Update AMCUpdater - import if internet lookup fails ({0})</String>
-    <String id="1079811">Import/Update AMCUpdater - purge orphans after import finished ({0})</String>
-    <String id="1079816">Save current layout and sort as start default for film lists</String>
-    <String id="1079817">Save current layout and sort as start default for box sets</String>
     <String id="1079818">Odstrániť užívateľský profil</String>
     <String id="1079819">Zobrazenie Menu</String>
     <String id="1079820">Zmazať položku menu</String>
@@ -170,6 +164,7 @@
     <String id="1079897">Použitie pohľadu Zoznam pre skupiny ({0})</String>
     <String id="1079898">Opýtať, či WOL by mala byť zaslaná ({0})</String>
     <String id="1079899">Získať na Internete info o osobe (Vybraná osoba)</String>
+    <String id="1079900">Stiahnuť obrázky osoby(Vybraný film)</String>
     <String id="1079901">Pohľad (usporiadanie) ...</String>
     <String id="1079902">Zoradiť podľa ...</String>
     <String id="1079903">Zmena zobrazenia ...</String>
@@ -186,7 +181,6 @@
     <String id="1079921">Získajte online informácie ({0})</String>
     <String id="1079930">Cast and Crew for selected film (IMDb)</String>
     <String id="10798500">Prehrať Film (externý prehrávač)</String>
-    <String id="10798501">Play film (BD player launcher)</String>
     <String id="10798600">Search OnlineVideos ...</String>
     <String id="10798601">Search MyFilms ...</String>
     <String id="10798608">Hľadať všetky osoby podľa role</String>

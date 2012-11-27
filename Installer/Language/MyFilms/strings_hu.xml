@@ -82,12 +82,6 @@
     <String id="107986">Filmek</String>
     <String id="107987">Filmek</String>
     <String id="107988">Filmek</String>
-    <String id="1079801">Add all films to box set ...</String>
-    <String id="1079802">Remove all films from box set</String>
-    <String id="1079810">Import/Update AMCUpdater - import if internet lookup fails ({0})</String>
-    <String id="1079811">Import/Update AMCUpdater - purge orphans after import finished ({0})</String>
-    <String id="1079816">Save current layout and sort as start default for film lists</String>
-    <String id="1079817">Save current layout and sort as start default for box sets</String>
     <String id="1079818">Profil törlése</String>
     <String id="1079819">Elrendezések</String>
     <String id="1079820">Menüelem törlése</String>
@@ -170,6 +164,7 @@
     <String id="1079897">Csoport listaszerű megjelenítése: ({0})</String>
     <String id="1079898">Rákérdezés WOL küldés előtt: ({0})</String>
     <String id="1079899">Információ letöltése a kijelölt személyről</String>
+    <String id="1079900">Arcképek letöltése (kiválasztott film)</String>
     <String id="1079901">Nézet (Elrendezés)...</String>
     <String id="1079902">Elrendezés...</String>
     <String id="1079903">Nézet váltás...</String>
@@ -186,7 +181,6 @@
     <String id="1079921">Online információkérés ({0})</String>
     <String id="1079930">Cast and Crew for selected film (IMDb)</String>
     <String id="10798500">Film lejátszása (külső programmal)</String>
-    <String id="10798501">Play film (BD player launcher)</String>
     <String id="10798600">Search OnlineVideos...</String>
     <String id="10798601">Search MyFilms...</String>
     <String id="10798608">Személy keresése</String>

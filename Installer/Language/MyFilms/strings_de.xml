@@ -82,12 +82,6 @@
     <String id="107986">Filme</String>
     <String id="107987">Filme</String>
     <String id="107988">Filme</String>
-    <String id="1079801">Füge alle Filme zu Boxset hinzu ...</String>
-    <String id="1079802">Alle Filme aus Boxset entfernen</String>
-    <String id="1079810">Umschalten 'Import - Filme auch ohne Internetdaten importieren' ({0})</String>
-    <String id="1079811">Umschalten 'Import - Lösche verwaiste DB Einträge' ({0})</String>
-    <String id="1079816">Speichern von Layout und Sortierung als Start Default für Film Listen</String>
-    <String id="1079817">Speichern von Layout und Sortierung als Start Default für Box-Sets</String>
     <String id="1079818">Lösche User Profil</String>
     <String id="1079819">Menü</String>
     <String id="1079820">Lösche Menü Eintrag</String>
@@ -114,7 +108,7 @@
     <String id="1079841">Ändere Standardansicht ('{0}')</String>
     <String id="1079842">Ändere Standard Startkonfiguration ('{0}')</String>
     <String id="1079843">Benutzerdefinierte Aktualisierung (AMCupdater)</String>
-    <String id="1079844">Umschalten 'Zeige nur Anfangsbuchstaben' ({0})</String>
+    <String id="1079844">Umschalten 'Zeige nur Anfangsbuchstaben ' ({0})</String>
     <String id="1079845">Umschalten 'Zeige ganze Werte an' ({0})</String>
     <String id="1079846">Abgeschlossen ...</String>
     <String id="1079847">MyFilms lokale Fanart Erstellung</String>
@@ -150,7 +144,7 @@
     <String id="1079877">Bitte überprüfen Sie ihre Einstellungen !</String>
     <String id="1079878">Wollen Sie diese Auswahl treffen ?</String>
     <String id="1079879">Infos zu beteiligten Personen</String>
-    <String id="1079880">Umschalten 'Immer Starteinstellungen anwenden' ({0})</String>
+    <String id="1079880">Umschalten 'Immer Standardansicht zeigen ({0})'</String>
     <String id="1079881">Bitte wählen sie den globalen Wert für die Minimalbewertung</String>
     <String id="1079882">Update der aktuellen Person</String>
     <String id="1079883">Update aller beteiligten Personen</String>
@@ -170,6 +164,7 @@
     <String id="1079897">Umschalten 'Immer Gruppen als Listen anzeigen' ({0})</String>
     <String id="1079898">Umschalten 'Immer fragen, ob WakeOnLan gesendet werden soll' ({0})</String>
     <String id="1079899">Lade Personeninformationen (online)</String>
+    <String id="1079900">Lade Personen Bilder (aktueller Film)</String>
     <String id="1079901">Ansicht (Layout) ...</String>
     <String id="1079902">Sortiere ...</String>
     <String id="1079903">Ansicht (Filme) ...</String>
@@ -180,13 +175,12 @@
     <String id="1079908">Film Sammlung</String>
     <String id="1079909">Wähle Rolle</String>
     <String id="1079910">Anzahl</String>
-    <String id="1079918">Umschalten 'Zwischenspeichern Online Trailer' ({0})</String>
-    <String id="1079919">Umschalten 'Manuelle Wahl Wiedergabequalität' ({0})</String>
-    <String id="1079920">Umschalten 'Immer Standard Start Konfiguration' ({0})</String>
-    <String id="1079921">Umschalten 'Zeige Online Informationen' ({0})</String>
+    <String id="1079918">Umschalten 'Cache Trailers for Online Content ({0})'</String>
+    <String id="1079919">Umschalten 'Manuelle Wahl Wiedergabequalität ({0})'</String>
+    <String id="1079920">Umschalten 'Immer Standard Start Konfiguration ({0})'</String>
+    <String id="1079921">Umschalten 'Zeige Online Informationen ({0})'</String>
     <String id="1079930">Personen zum Film (IMDB)</String>
     <String id="10798500">Spiele Film (externer Player)</String>
-    <String id="10798501">Spiele Film (BD Player Launcher)</String>
     <String id="10798600">Suche OnlineVideos ...</String>
     <String id="10798601">Suche MyFilms ...</String>
     <String id="10798608">Globale Suche (Personen)</String>
@@ -205,7 +199,7 @@
     <String id="10798621">Zufällige Filmsuche</String>
     <String id="10798622">Alle</String>
     <String id="10798623">(keine Infos)</String>
-    <String id="10798624">Films System Info ...</String>
+    <String id="10798624">MyFilms System Information</String>
     <String id="10798625">Kein Ergebnis zu dem gesuchten Wert gefunden!</String>
     <String id="10798626">=> '{1}' ({0})</String>
     <String id="10798627">Einzelwort</String>

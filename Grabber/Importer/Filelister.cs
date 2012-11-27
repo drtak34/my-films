@@ -26,7 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Grabber.Importer
+namespace Importer
 {
   public class PathPair
   {

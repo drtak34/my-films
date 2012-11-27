@@ -589,7 +589,7 @@ expert mode is not required.</value>
     <value>Country</value>
   </data>
   <data name="cb_ParamDetail.Items11" xml:space="preserve">
-    <value>Category</value>
+    <value>Genre</value>
   </data>
   <data name="cb_ParamDetail.Items12" xml:space="preserve">
     <value>Year</value>
@@ -2630,72 +2630,6 @@ If not set, default encoding will be used.</value>
   <data name="&gt;&gt;EncodingSubPage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="cbIgnoreCase.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cbIgnoreCase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 279</value>
-  </data>
-  <data name="cbIgnoreCase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 30</value>
-  </data>
-  <data name="cbIgnoreCase.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="cbIgnoreCase.Text" xml:space="preserve">
-    <value>ignore
-case</value>
-  </data>
-  <data name="cbIgnoreCase.ToolTip" xml:space="preserve">
-    <value>When checked, the search will be case insensitive.
-This makes searching easier, but be aware, that the final grabber WILL
-search case sensitive - so you should verify the result properly.</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCase.Name" xml:space="preserve">
-    <value>cbIgnoreCase</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCase.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCase.Parent" xml:space="preserve">
-    <value>tabPageSearchPage</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCase.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cbIgnoreCaseDetails.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="cbIgnoreCaseDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 278</value>
-  </data>
-  <data name="cbIgnoreCaseDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 30</value>
-  </data>
-  <data name="cbIgnoreCaseDetails.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="cbIgnoreCaseDetails.Text" xml:space="preserve">
-    <value>ignore
-case</value>
-  </data>
-  <data name="cbIgnoreCaseDetails.ToolTip" xml:space="preserve">
-    <value>When checked, the search will be case insensitive.
-This makes searching easier, but be aware, that the final grabber WILL
-search case sensitive - so you should verify the result properly.</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCaseDetails.Name" xml:space="preserve">
-    <value>cbIgnoreCaseDetails</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCaseDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCaseDetails.Parent" xml:space="preserve">
-    <value>tabPageDetailPage</value>
-  </data>
-  <data name="&gt;&gt;cbIgnoreCaseDetails.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
   </metadata>
@@ -2731,6 +2665,39 @@ search case sensitive - so you should verify the result properly.</value>
   </data>
   <data name="&gt;&gt;linkLabelMFwiki.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 278</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 30</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.Text" xml:space="preserve">
+    <value>ignore
+case</value>
+  </data>
+  <data name="cbIgnoreCaseDetails.ToolTip" xml:space="preserve">
+    <value>When checked, the search will be case insensitive.
+This makes searching easier, but be aware, that the final grabber WILL
+search case sensitive - so you should verify the result properly.</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.Name" xml:space="preserve">
+    <value>cbIgnoreCaseDetails</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.Parent" xml:space="preserve">
+    <value>tabPageDetailPage</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCaseDetails.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="pictureBoxPreviewCollection.Location" type="System.Drawing.Point, System.Drawing">
     <value>635, 276</value>
@@ -3633,6 +3600,39 @@ There you'll find both options when choosing edit - insert ...</value>
   </data>
   <data name="&gt;&gt;tabPageDetailPage.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="cbIgnoreCase.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbIgnoreCase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 279</value>
+  </data>
+  <data name="cbIgnoreCase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 30</value>
+  </data>
+  <data name="cbIgnoreCase.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="cbIgnoreCase.Text" xml:space="preserve">
+    <value>ignore
+case</value>
+  </data>
+  <data name="cbIgnoreCase.ToolTip" xml:space="preserve">
+    <value>When checked, the search will be case insensitive.
+This makes searching easier, but be aware, that the final grabber WILL
+search case sensitive - so you should verify the result properly.</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCase.Name" xml:space="preserve">
+    <value>cbIgnoreCase</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCase.Parent" xml:space="preserve">
+    <value>tabPageSearchPage</value>
+  </data>
+  <data name="&gt;&gt;cbIgnoreCase.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="label36.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

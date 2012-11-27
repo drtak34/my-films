@@ -217,10 +217,6 @@
           this.label_DefaultArtistImage = new System.Windows.Forms.Label();
           this.label_ArtistImagePath = new System.Windows.Forms.Label();
           this.groupBox_AMCupdater = new System.Windows.Forms.GroupBox();
-          this.labelAMCUstartdelay = new System.Windows.Forms.Label();
-          this.numericUpDownAMCUscanStartDelay = new System.Windows.Forms.NumericUpDown();
-          this.chkAMCUwatchScanFolders = new System.Windows.Forms.CheckBox();
-          this.chkAMCUscanOnStartup = new System.Windows.Forms.CheckBox();
           this.groupBoxAMCUpdaterConfigFile = new System.Windows.Forms.GroupBox();
           this.txtAMCUpd_cnf_Display = new System.Windows.Forms.TextBox();
           this.btnAMCUpd_cnf = new System.Windows.Forms.Button();
@@ -229,7 +225,6 @@
           this.scheduleAMCUpdater = new System.Windows.Forms.CheckBox();
           this.btnParameters = new System.Windows.Forms.Button();
           this.groupBox_AMCupdater_ExternalApplication = new System.Windows.Forms.GroupBox();
-          this.chkAMC_ImportOnInternetFail = new System.Windows.Forms.CheckBox();
           this.label56 = new System.Windows.Forms.Label();
           this.AmcTitleSearchHandling = new System.Windows.Forms.ComboBox();
           this.btnCreateAMCDefaultConfig = new System.Windows.Forms.Button();
@@ -336,10 +331,9 @@
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
-          this.AntViewFilterSaveString = new System.Windows.Forms.TextBox();
+          this.labelViewLabel = new System.Windows.Forms.Label();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
-          this.labelViewLabel = new System.Windows.Forms.Label();
           this.buttonResetImage = new System.Windows.Forms.Button();
           this.AntViewsImage = new System.Windows.Forms.PictureBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
@@ -374,7 +368,6 @@
           this.AntViewValue = new System.Windows.Forms.TextBox();
           this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
-          this.numUpDownTrailersInIntro = new System.Windows.Forms.NumericUpDown();
           this.cbCacheOnlineTrailer = new System.Windows.Forms.CheckBox();
           this.cbTrailerAutoregister = new System.Windows.Forms.CheckBox();
           this.labelTrailers = new System.Windows.Forms.Label();
@@ -595,7 +588,6 @@
           this.descriptionTextBox = new System.Windows.Forms.TextBox();
           this.lblAMCupdaterConfigPreview = new System.Windows.Forms.Label();
           this.Tab_OldStuff = new System.Windows.Forms.TabPage();
-          this.btnAMCimport = new System.Windows.Forms.Button();
           this.groupBox8 = new System.Windows.Forms.GroupBox();
           this.label25 = new System.Windows.Forms.Label();
           this.label7 = new System.Windows.Forms.Label();
@@ -654,7 +646,6 @@
           this.groupBox_ArtistImages.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).BeginInit();
           this.groupBox_AMCupdater.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).BeginInit();
           this.groupBoxAMCUpdaterConfigFile.SuspendLayout();
           this.groupBox_AMCupdaterScheduer.SuspendLayout();
           this.groupBox_AMCupdater_ExternalApplication.SuspendLayout();
@@ -678,7 +669,6 @@
           this.groupBox5.SuspendLayout();
           ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).BeginInit();
           this.groupBox24.SuspendLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).BeginInit();
           this.groupBox_AntSelectedEnreg.SuspendLayout();
           this.groupBox3.SuspendLayout();
           this.groupBox_PreLaunchingCommand.SuspendLayout();
@@ -2020,10 +2010,6 @@
           // groupBox_AMCupdater
           // 
           this.groupBox_AMCupdater.BackColor = System.Drawing.Color.Transparent;
-          this.groupBox_AMCupdater.Controls.Add(this.labelAMCUstartdelay);
-          this.groupBox_AMCupdater.Controls.Add(this.numericUpDownAMCUscanStartDelay);
-          this.groupBox_AMCupdater.Controls.Add(this.chkAMCUwatchScanFolders);
-          this.groupBox_AMCupdater.Controls.Add(this.chkAMCUscanOnStartup);
           this.groupBox_AMCupdater.Controls.Add(this.groupBoxAMCUpdaterConfigFile);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdaterScheduer);
           this.groupBox_AMCupdater.Controls.Add(this.groupBox_AMCupdater_ExternalApplication);
@@ -2035,55 +2021,6 @@
           this.groupBox_AMCupdater.TabStop = false;
           this.groupBox_AMCupdater.Text = "AMCUpdater Options (for global internet update functions)";
           this.ToolTip1.SetToolTip(this.groupBox_AMCupdater, resources.GetString("groupBox_AMCupdater.ToolTip"));
-          // 
-          // labelAMCUstartdelay
-          // 
-          this.labelAMCUstartdelay.AutoSize = true;
-          this.labelAMCUstartdelay.Location = new System.Drawing.Point(227, 69);
-          this.labelAMCUstartdelay.Name = "labelAMCUstartdelay";
-          this.labelAMCUstartdelay.Size = new System.Drawing.Size(59, 13);
-          this.labelAMCUstartdelay.TabIndex = 7;
-          this.labelAMCUstartdelay.Text = "Start Delay";
-          // 
-          // numericUpDownAMCUscanStartDelay
-          // 
-          this.numericUpDownAMCUscanStartDelay.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-          this.numericUpDownAMCUscanStartDelay.Location = new System.Drawing.Point(298, 67);
-          this.numericUpDownAMCUscanStartDelay.Name = "numericUpDownAMCUscanStartDelay";
-          this.numericUpDownAMCUscanStartDelay.Size = new System.Drawing.Size(53, 20);
-          this.numericUpDownAMCUscanStartDelay.TabIndex = 6;
-          this.ToolTip1.SetToolTip(this.numericUpDownAMCUscanStartDelay, "It is recommended to delay the Scan for new movies.\r\nSet the number of seconds.");
-          this.numericUpDownAMCUscanStartDelay.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-          // 
-          // chkAMCUwatchScanFolders
-          // 
-          this.chkAMCUwatchScanFolders.AutoSize = true;
-          this.chkAMCUwatchScanFolders.Location = new System.Drawing.Point(62, 92);
-          this.chkAMCUwatchScanFolders.Name = "chkAMCUwatchScanFolders";
-          this.chkAMCUwatchScanFolders.Size = new System.Drawing.Size(122, 17);
-          this.chkAMCUwatchScanFolders.TabIndex = 5;
-          this.chkAMCUwatchScanFolders.Text = "Watch Scan Path(s)";
-          this.ToolTip1.SetToolTip(this.chkAMCUwatchScanFolders, resources.GetString("chkAMCUwatchScanFolders.ToolTip"));
-          this.chkAMCUwatchScanFolders.UseVisualStyleBackColor = true;
-          // 
-          // chkAMCUscanOnStartup
-          // 
-          this.chkAMCUscanOnStartup.AutoSize = true;
-          this.chkAMCUscanOnStartup.Location = new System.Drawing.Point(62, 68);
-          this.chkAMCUscanOnStartup.Name = "chkAMCUscanOnStartup";
-          this.chkAMCUscanOnStartup.Size = new System.Drawing.Size(103, 17);
-          this.chkAMCUscanOnStartup.TabIndex = 4;
-          this.chkAMCUscanOnStartup.Text = "Scan on Startup";
-          this.ToolTip1.SetToolTip(this.chkAMCUscanOnStartup, resources.GetString("chkAMCUscanOnStartup.ToolTip"));
-          this.chkAMCUscanOnStartup.UseVisualStyleBackColor = true;
           // 
           // groupBoxAMCUpdaterConfigFile
           // 
@@ -2131,7 +2068,7 @@
           this.groupBox_AMCupdaterScheduer.Controls.Add(this.btnParameters);
           this.groupBox_AMCupdaterScheduer.Location = new System.Drawing.Point(388, 71);
           this.groupBox_AMCupdaterScheduer.Name = "groupBox_AMCupdaterScheduer";
-          this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(332, 52);
+          this.groupBox_AMCupdaterScheduer.Size = new System.Drawing.Size(332, 62);
           this.groupBox_AMCupdaterScheduer.TabIndex = 2;
           this.groupBox_AMCupdaterScheduer.TabStop = false;
           this.groupBox_AMCupdaterScheduer.Text = "Scheduler for AMCupdater";
@@ -2141,7 +2078,7 @@
           // scheduleAMCUpdater
           // 
           this.scheduleAMCUpdater.AutoSize = true;
-          this.scheduleAMCUpdater.Location = new System.Drawing.Point(32, 21);
+          this.scheduleAMCUpdater.Location = new System.Drawing.Point(32, 28);
           this.scheduleAMCUpdater.Name = "scheduleAMCUpdater";
           this.scheduleAMCUpdater.Size = new System.Drawing.Size(71, 17);
           this.scheduleAMCUpdater.TabIndex = 0;
@@ -2152,7 +2089,7 @@
           // 
           // btnParameters
           // 
-          this.btnParameters.Location = new System.Drawing.Point(167, 16);
+          this.btnParameters.Location = new System.Drawing.Point(167, 23);
           this.btnParameters.Name = "btnParameters";
           this.btnParameters.Size = new System.Drawing.Size(143, 24);
           this.btnParameters.TabIndex = 0;
@@ -2162,7 +2099,6 @@
           // 
           // groupBox_AMCupdater_ExternalApplication
           // 
-          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.chkAMC_ImportOnInternetFail);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.label56);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AmcTitleSearchHandling);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDefaultConfig);
@@ -2172,23 +2108,12 @@
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AMCMovieScanPath);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDesktopIcon);
           this.groupBox_AMCupdater_ExternalApplication.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(12, 126);
+          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(12, 137);
           this.groupBox_AMCupdater_ExternalApplication.Name = "groupBox_AMCupdater_ExternalApplication";
-          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(709, 119);
+          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(709, 100);
           this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
           this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
           this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
-          // 
-          // chkAMC_ImportOnInternetFail
-          // 
-          this.chkAMC_ImportOnInternetFail.AutoSize = true;
-          this.chkAMC_ImportOnInternetFail.Location = new System.Drawing.Point(139, 96);
-          this.chkAMC_ImportOnInternetFail.Name = "chkAMC_ImportOnInternetFail";
-          this.chkAMC_ImportOnInternetFail.Size = new System.Drawing.Size(134, 17);
-          this.chkAMC_ImportOnInternetFail.TabIndex = 8;
-          this.chkAMC_ImportOnInternetFail.Text = "Import if no auto match";
-          this.ToolTip1.SetToolTip(this.chkAMC_ImportOnInternetFail, resources.GetString("chkAMC_ImportOnInternetFail.ToolTip"));
-          this.chkAMC_ImportOnInternetFail.UseVisualStyleBackColor = true;
           // 
           // label56
           // 
@@ -2218,7 +2143,7 @@
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(544, 63);
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(544, 51);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(143, 36);
           this.btnCreateAMCDefaultConfig.TabIndex = 7;
@@ -2272,7 +2197,7 @@
           // 
           // btnCreateAMCDesktopIcon
           // 
-          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(387, 63);
+          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(387, 51);
           this.btnCreateAMCDesktopIcon.Name = "btnCreateAMCDesktopIcon";
           this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(143, 36);
           this.btnCreateAMCDesktopIcon.TabIndex = 6;
@@ -3333,10 +3258,12 @@
           this.AlwaysDefaultView.AutoSize = true;
           this.AlwaysDefaultView.Location = new System.Drawing.Point(67, 50);
           this.AlwaysDefaultView.Name = "AlwaysDefaultView";
-          this.AlwaysDefaultView.Size = new System.Drawing.Size(145, 17);
+          this.AlwaysDefaultView.Size = new System.Drawing.Size(140, 17);
           this.AlwaysDefaultView.TabIndex = 4;
-          this.AlwaysDefaultView.Text = "Always use Start Settings";
-          this.ToolTip1.SetToolTip(this.AlwaysDefaultView, resources.GetString("AlwaysDefaultView.ToolTip"));
+          this.AlwaysDefaultView.Text = "Display always this View";
+          this.ToolTip1.SetToolTip(this.AlwaysDefaultView, "Enabling a DefaultView will disable \'remember last item/view\'\r\nTHis results in al" +
+                  "ways the selected view will be displayed, \r\nwhen starting the MyFilms plugin wit" +
+                  "h this config.");
           this.AlwaysDefaultView.UseVisualStyleBackColor = true;
           // 
           // View_Dflt_Item
@@ -3379,25 +3306,6 @@
           this.groupBoxView.Text = "Custom View Editor ...";
           this.ToolTip1.SetToolTip(this.groupBoxView, resources.GetString("groupBoxView.ToolTip"));
           // 
-          // AntViewFilterSaveString
-          // 
-          this.AntViewFilterSaveString.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "FilterSaveString", true));
-          this.AntViewFilterSaveString.Location = new System.Drawing.Point(128, 16);
-          this.AntViewFilterSaveString.Name = "AntViewFilterSaveString";
-          this.AntViewFilterSaveString.Size = new System.Drawing.Size(42, 20);
-          this.AntViewFilterSaveString.TabIndex = 89;
-          this.AntViewFilterSaveString.TextChanged += new System.EventHandler(this.AntViewFilterSaveString_TextChanged);
-          // 
-          // viewBindingSource
-          // 
-          this.viewBindingSource.DataMember = "View";
-          this.viewBindingSource.DataSource = this.mFview;
-          // 
-          // mFview
-          // 
-          this.mFview.DataSetName = "MFview";
-          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-          // 
           // labelViewLabel
           // 
           this.labelViewLabel.AutoSize = true;
@@ -3408,6 +3316,16 @@
           this.labelViewLabel.Size = new System.Drawing.Size(99, 13);
           this.labelViewLabel.TabIndex = 2;
           this.labelViewLabel.Text = "Custom View Name";
+          // 
+          // viewBindingSource
+          // 
+          this.viewBindingSource.DataMember = "View";
+          this.viewBindingSource.DataSource = this.mFview;
+          // 
+          // mFview
+          // 
+          this.mFview.DataSetName = "MFview";
+          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
           // 
           // buttonResetImage
           // 
@@ -3730,7 +3648,6 @@
           // 
           this.groupBox5.Controls.Add(this.AntViewFilter);
           this.groupBox5.Controls.Add(this.AntViewFilterEditButton);
-          this.groupBox5.Controls.Add(this.AntViewFilterSaveString);
           this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
           this.groupBox5.Location = new System.Drawing.Point(170, 145);
           this.groupBox5.Name = "groupBox5";
@@ -3785,7 +3702,6 @@
           // 
           // groupBox24
           // 
-          this.groupBox24.Controls.Add(this.numUpDownTrailersInIntro);
           this.groupBox24.Controls.Add(this.cbCacheOnlineTrailer);
           this.groupBox24.Controls.Add(this.cbTrailerAutoregister);
           this.groupBox24.Controls.Add(this.labelTrailers);
@@ -3802,15 +3718,6 @@
           this.groupBox24.TabStop = false;
           this.groupBox24.Text = "DB Item for storing trailerinfo (borrower recommended)";
           this.ToolTip1.SetToolTip(this.groupBox24, resources.GetString("groupBox24.ToolTip"));
-          // 
-          // numUpDownTrailersInIntro
-          // 
-          this.numUpDownTrailersInIntro.Location = new System.Drawing.Point(283, 223);
-          this.numUpDownTrailersInIntro.Name = "numUpDownTrailersInIntro";
-          this.numUpDownTrailersInIntro.Size = new System.Drawing.Size(39, 20);
-          this.numUpDownTrailersInIntro.TabIndex = 10;
-          this.ToolTip1.SetToolTip(this.numUpDownTrailersInIntro, "You can set the number of trailers that will be played before the main movie star" +
-                  "ts.\r\nSet to \'0\' to disable trailer intro.");
           // 
           // cbCacheOnlineTrailer
           // 
@@ -6246,7 +6153,6 @@
           // 
           // Tab_OldStuff
           // 
-          this.Tab_OldStuff.Controls.Add(this.btnAMCimport);
           this.Tab_OldStuff.Controls.Add(this.groupBox8);
           this.Tab_OldStuff.Location = new System.Drawing.Point(4, 22);
           this.Tab_OldStuff.Name = "Tab_OldStuff";
@@ -6257,16 +6163,6 @@
           this.Tab_OldStuff.ToolTipText = "Temorary placed elements";
           this.Tab_OldStuff.UseVisualStyleBackColor = true;
           // 
-          // btnAMCimport
-          // 
-          this.btnAMCimport.Location = new System.Drawing.Point(37, 27);
-          this.btnAMCimport.Name = "btnAMCimport";
-          this.btnAMCimport.Size = new System.Drawing.Size(101, 46);
-          this.btnAMCimport.TabIndex = 1;
-          this.btnAMCimport.Text = "Import Movies";
-          this.btnAMCimport.UseVisualStyleBackColor = true;
-          this.btnAMCimport.Click += new System.EventHandler(this.btnAMCimport_Click);
-          // 
           // groupBox8
           // 
           this.groupBox8.Controls.Add(this.label25);
@@ -6275,7 +6171,7 @@
           this.groupBox8.Controls.Add(this.LayOutViewFilms);
           this.groupBox8.Controls.Add(this.SortSensViewFilms);
           this.groupBox8.Controls.Add(this.SortViewFilms);
-          this.groupBox8.Location = new System.Drawing.Point(436, 6);
+          this.groupBox8.Location = new System.Drawing.Point(228, 144);
           this.groupBox8.Name = "groupBox8";
           this.groupBox8.Size = new System.Drawing.Size(291, 66);
           this.groupBox8.TabIndex = 0;
@@ -6584,7 +6480,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDefaultPersonImage)).EndInit();
           this.groupBox_AMCupdater.ResumeLayout(false);
           this.groupBox_AMCupdater.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAMCUscanStartDelay)).EndInit();
           this.groupBoxAMCUpdaterConfigFile.ResumeLayout(false);
           this.groupBoxAMCUpdaterConfigFile.PerformLayout();
           this.groupBox_AMCupdaterScheduer.ResumeLayout(false);
@@ -6625,7 +6520,6 @@
           ((System.ComponentModel.ISupportInitialize)(this.AntViewIndex)).EndInit();
           this.groupBox24.ResumeLayout(false);
           this.groupBox24.PerformLayout();
-          ((System.ComponentModel.ISupportInitialize)(this.numUpDownTrailersInIntro)).EndInit();
           this.groupBox_AntSelectedEnreg.ResumeLayout(false);
           this.groupBox_AntSelectedEnreg.PerformLayout();
           this.groupBox3.ResumeLayout(false);
@@ -7205,13 +7099,5 @@
         private Label label28;
         private CheckBox cbCacheOnlineTrailer;
         private CheckBox Config_EnablePreload;
-        private Button btnAMCimport;
-        private NumericUpDown numUpDownTrailersInIntro;
-        private CheckBox chkAMC_ImportOnInternetFail;
-        private CheckBox chkAMCUwatchScanFolders;
-        private CheckBox chkAMCUscanOnStartup;
-        private NumericUpDown numericUpDownAMCUscanStartDelay;
-        private Label labelAMCUstartdelay;
-        private TextBox AntViewFilterSaveString;
     }
 }

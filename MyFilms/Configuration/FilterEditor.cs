@@ -17,7 +17,7 @@ namespace MyFilmsPlugin.Configuration
     public FilterEditor()
     {
       InitializeComponent();
-      using (var ds = new AntMovieCatalog())
+      using (AntMovieCatalog ds = new AntMovieCatalog())
       {
         AntFilterItem1.Items.Add("(none)");
         AntFilterItem2.Items.Add("(none)");

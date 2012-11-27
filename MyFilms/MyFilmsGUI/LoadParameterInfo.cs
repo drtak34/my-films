@@ -60,7 +60,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!string.IsNullOrEmpty(GUIPropertyManager.GetProperty("#myfilms.startparams.config")))
       {
         paramsFromGuiProps.Add("config:" + GUIPropertyManager.GetProperty("#myfilms.startparams.config"));
-        MyFilmsDetail.setGUIProperty("#myfilms.startparams.config", string.Empty);
+        GUIPropertyManager.SetProperty("#myfilms.startparams.config", string.Empty);
       }
       if (!string.IsNullOrEmpty(GUIPropertyManager.GetProperty("#myfilms.startparams.movieid")))
       {

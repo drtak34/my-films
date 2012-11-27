@@ -82,12 +82,6 @@
     <String id="107986">Films</String>
     <String id="107987">Films</String>
     <String id="107988">Films</String>
-    <String id="1079801">Add all films to box set ...</String>
-    <String id="1079802">Remove all films from box set</String>
-    <String id="1079810">Import/Update AMCUpdater - import if internet lookup fails ({0})</String>
-    <String id="1079811">Import/Update AMCUpdater - purge orphans after import finished ({0})</String>
-    <String id="1079816">Save current layout and sort as start default for film lists</String>
-    <String id="1079817">Save current layout and sort as start default for box sets</String>
     <String id="1079818">Delete user</String>
     <String id="1079819">Views Menu</String>
     <String id="1079820">Delete menu entry</String>
@@ -150,7 +144,7 @@
     <String id="1079877">Please check your settings!</String>
     <String id="1079878">Do you want to select it?</String>
     <String id="1079879">Info for related person(s)</String>
-    <String id="1079880">Always use start settings ({0})</String>
+    <String id="1079880">Always use default start view ({0})</String>
     <String id="1079881">Please select value for minimum rating</String>
     <String id="1079882">Update person info</String>
     <String id="1079883">Update info for all involved persons (IMDb)</String>
@@ -170,6 +164,7 @@
     <String id="1079897">Use list layout for groups ({0})</String>
     <String id="1079898">Ask if WOL should be sent ({0})</String>
     <String id="1079899">Get internet person info (selected person)</String>
+    <String id="1079900">Download person images (selected film)</String>
     <String id="1079901">Change layout</String>
     <String id="1079902">Sort by</String>
     <String id="1079903">Change view</String>
@@ -186,7 +181,6 @@
     <String id="1079921">Get online info ({0})</String>
     <String id="1079930">Cast and Crew for selected film (IMDb)</String>
     <String id="10798500">Play film (external player)</String>
-    <String id="10798501">Play film (BD player launcher)</String>
     <String id="10798600">Search OnlineVideos ...</String>
     <String id="10798601">Search MyFilms ...</String>
     <String id="10798608">Search all persons by role</String>
