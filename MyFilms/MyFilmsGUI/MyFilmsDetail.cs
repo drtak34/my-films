@@ -11016,8 +11016,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string filename1person = GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, person.ThumbnailUrl, personname, false, true, out filename);
           LogMyFilms.Debug("Person Image '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + personname + "', path = '" + filename1person + "', filename = '" + filename + "'");
 
-          string strThumb = MyFilms.conf.StrPathArtist + personname + ".png";
-          string strThumbSmall = MyFilms.conf.StrPathArtist + personname + "_s.png";
+          string strThumbDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Persons\";
+          string strThumb = strThumbDirectory + personname + ".png";
+          string strThumbSmall = strThumbDirectory + personname + "_s.png";
           if (File.Exists(filename) && (forceupdate || !File.Exists(strThumbSmall)))
           {
             if (item != null) item.Label3 = "Creating cache image ...";

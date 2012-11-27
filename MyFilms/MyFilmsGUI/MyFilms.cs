@@ -7029,18 +7029,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 GUIListItem item = facadeFilms[i];
                 string personname = (conf.BoolReverseNames && item.Label != EmptyFacadeValue) ? ReReverseName(item.Label) : item.Label.Replace(EmptyFacadeValue, "");
 
-
                 LogMyFilms.Info("MyFilmsPersonsUpdater - updating person '" + personname + "'");
                 bool success = MyFilmsDetail.UpdatePersonDetails(personname, item, showprogressdialog, StopLoadingViewDetails);
 
-                if (success) // create small thumbs and assign to facade icons ...
-                {
-                  //string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
-                  //item.IconImage = strActiveFacadeImages[1];
-                  //item.IconImageBig = strActiveFacadeImages[0];
-                  //item.ThumbnailImage = strActiveFacadeImages[0];
-                  //// item.NotifyPropertyChanged("ThumbnailImage");
-                }
+                //if (success) // create small thumbs and assign to facade icons ...
+                //{
+                //  //string[] strActiveFacadeImages = SetViewThumbs(wStrSort, item.Label, strThumbDirectory, isperson, currentCustomView, defaultViewImage, reversenames);
+                //  //item.IconImage = strActiveFacadeImages[1];
+                //  //item.IconImageBig = strActiveFacadeImages[0];
+                //  //item.ThumbnailImage = strActiveFacadeImages[0];
+                //  //// item.NotifyPropertyChanged("ThumbnailImage");
+                //}
                 Thread.Sleep(20); // sleep a bit to let CPU for the GUI
               }
               catch (Exception ex)
