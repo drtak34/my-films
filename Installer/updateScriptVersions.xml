@@ -35,7 +35,7 @@
   </scripts>
   <scripts>
     <name>IMDB-Full.xml</name>
-    <version>1.0</version>
+    <version>1.1</version>
   </scripts>
   <scripts>
     <name>IMDB-TMDBcover.xml</name>
@@ -43,23 +43,23 @@
   </scripts>
   <scripts>
     <name>IMDB.DE-OFDB.xml</name>
-    <version>1.0</version>
-  </scripts>
-  <scripts>
-    <name>IMDB.ES.xml</name>
     <version>1.1</version>
   </scripts>
   <scripts>
+    <name>IMDB.ES.xml</name>
+    <version>1.2.1</version>
+  </scripts>
+  <scripts>
     <name>IMDB.ES-TMDB.xml</name>
-    <version>1.2</version>
+    <version>1.2.1</version>
   </scripts>
   <scripts>
     <name>IMDB.FR.xml</name>
-    <version>1.0</version>
+    <version>1.1</version>
   </scripts>
   <scripts>
     <name>IMDB.IT.xml</name>
-    <version>1.0</version>
+    <version>1.1</version>
   </scripts>
   <scripts>
     <name>IMDB.PT.xml</name>
@@ -67,7 +67,7 @@
   </scripts>
   <scripts>
     <name>IMDB.xml</name>
-    <version>1.0</version>
+    <version>1.1</version>
   </scripts>
   <scripts>
     <name>kino.de.xml</name>
