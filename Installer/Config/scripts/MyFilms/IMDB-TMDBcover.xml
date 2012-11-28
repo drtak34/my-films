@@ -5,23 +5,24 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover|multicover|fanart</Type>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
     <UserAgent />
     <Headers />
+    <FileBasedReader>false</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_tt_x0026_q_x003D__x0023_Search_x0023_</URL>
-      <KeyStartList Param1="" Param2="">_x0023_REGEX_x0023_Exact.Matches_x007C_Popular.Titles_x007C_Partial.Matches_x007C_Approx.Matches</KeyStartList>
-      <KeyEndList>Suggestions_x0020_For_x0020_Improving_x0020_Your_x0020_Results</KeyEndList>
+      <KeyStartList Param1="" Param2="">_x003C_table_x0020_class_x003D__x0022_findList_x0022__x003E_</KeyStartList>
+      <KeyEndList>_x003C__x002F_div_x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
       <KeyNextPage />
-      <KeyStartTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_tr_x003E__x005B__x005C_s_x005D__x002A__x003C_td_x005B__x005E__x003E__x005D__x002A__x003E_._x002A__x003F__x003C__x002F_td_x003E__x005B__x005C_s_x005D__x002A__x003C_td_x005B__x005E__x003E__x005D__x002A__x003E_._x002A__x003F__x003C__x002F_td_x003E__x005B__x005C_s_x005D__x002A__x003C_td_x005B__x005E__x003E__x005D__x002A__x003E_._x002A__x003F__x003C_a_x005C_shref_x003D__x0022_._x002A__x003F__x005B__x005E__x003E__x005D__x002A__x003E_</KeyStartTitle>
-      <KeyEndTitle>_x0023_REGEX_x0023__x003C__x002F_a_x003E__x005B__x005C_s_x005D_</KeyEndTitle>
+      <KeyStartTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_td_x0020_class_x003D__x0022_result_text_x0022__x003E_</KeyStartTitle>
+      <KeyEndTitle>_x0023_REGEX_x0023__x003C__x002F_a_x003E_</KeyEndTitle>
       <KeyTitleIndex />
       <KeyStartYear Param1="_x0023_REGEX_x0023__x002F_._x002A_" Param2="">_x003C__x002F_a_x003E__x0020__x0028_</KeyStartYear>
       <KeyEndYear>_x0029_</KeyEndYear>
@@ -29,8 +30,8 @@
       <KeyStartDirector Param1="" Param2="" />
       <KeyEndDirector />
       <KeyDirectorIndex />
-      <KeyStartLink Param1="_x002F__x0022_" Param2="_x002F_">_x003C_td_x0020_valign_x003D__x0022_top_x0022__x003E__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
-      <KeyEndLink>_x0023_REGEX_x0023_on_x005B_Cc_x005D_lick</KeyEndLink>
+      <KeyStartLink Param1="_x002F__x0022_" Param2="_x002F_">_x003C_td_x0020_class_x003D__x0022_primary_photo_x0022__x003E__x0020__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
+      <KeyEndLink>_x003F_</KeyEndLink>
       <KeyLinkIndex />
       <KeyStartID Param1="_x002F__x0022__x0020_" Param2="">_x003C_td_x0020_valign_x003D__x0022_top_x0022__x003E__x003C_a_x0020_href_x003D__x0022__x002F_title_x002F_</KeyStartID>
       <KeyEndID>_x0023_REGEX_x0023__x002F__x0022_._x002A__x003F_on_x005B_Cc_x005D_lick</KeyEndID>
@@ -314,6 +315,11 @@
       <Field_32 source="PersonImages" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_35 source="TMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_37 source="Collection" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_38 source="CollectionImageURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_39 source="PictureURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
     </Mapping>
   </Section>
 </Profile>

@@ -5,7 +5,7 @@
     <URLPrefix>http://www.imdb.es</URLPrefix>
     <Language>es</Language>
     <Type>details|cover</Type>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <Encoding />
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -47,7 +47,7 @@
       <KeyStartOTitle Param1="" Param2="">_x0023_REGEX_x0023__x003C_h5_x003E_._x002A_Conocido_x0020_como._x002A__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h5_x003E_._x002A__x003F_content_x0022_._x002A__x003F__x0022_</KeyStartOTitle>
       <KeyEndOTitle>_x0022__x0026_nbsp</KeyEndOTitle>
       <KeyOTitleIndex />
-      <KeyOTitlePage>URL_x0020_Gateway</KeyOTitlePage>
+      <KeyOTitlePage />
       <KeyStartTTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x003C_title_x003E_</KeyStartTTitle>
       <KeyEndTTitle>_x003C__x002F_title_x003E_</KeyEndTTitle>
       <KeyTTitleRegExp>_x003C_td_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_</KeyTTitleRegExp>
