@@ -9575,8 +9575,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("(GlobalSearchTrailerLocal) - Number of Records found: " + w_index_count);
 
           bool doExtendedSearch = false;
-          if (GUIUtils.ShowYesNoDialog(GUILocalizeStrings.Get(10798940), GUILocalizeStrings.Get(10798803))) doExtendedSearch = true; // Trailer // Include extended directories ?
-          if (!(GUIUtils.ShowYesNoDialog(GUILocalizeStrings.Get(10798800), GUILocalizeStrings.Get(10798801) + "\n" + string.Format(GUILocalizeStrings.Get(10798802), wr.Length.ToString()), true))) break; // Warning: Long runtime ! // //should really the trailer search be started // for <xx> movies ?
+          // if (GUIUtils.ShowYesNoDialog(GUILocalizeStrings.Get(10798940), GUILocalizeStrings.Get(10798803))) doExtendedSearch = true; // Trailer // Include extended directories ?
+          // if (!(GUIUtils.ShowYesNoDialog(GUILocalizeStrings.Get(10798800), GUILocalizeStrings.Get(10798801) + "\n" + string.Format(GUILocalizeStrings.Get(10798802), wr.Length.ToString()), true))) break; // Warning: Long runtime ! // //should really the trailer search be started // for <xx> movies ?
+          GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+          dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798940)); // Trailer
+          dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798803)); // Include extended directories ?
+          dlgYesNo.DoModal(GetID);
+          if ((dlgYesNo.IsConfirmed)) doExtendedSearch = true;
+
+          dlgYesNo.Reset();
+          dlgYesNo.SetHeading(GUILocalizeStrings.Get(10798800)); // Warning: Long runtime !
+          dlgYesNo.SetLine(1, GUILocalizeStrings.Get(10798801)); //should really the trailer search be started
+          dlgYesNo.SetLine(2, string.Format(GUILocalizeStrings.Get(10798802), wr.Length.ToString())); // for <xx> movies ?
+          dlgYesNo.DoModal(GetID);
+          if (!(dlgYesNo.IsConfirmed)) break;
 
           GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
           if (dlgPrgrs != null)
