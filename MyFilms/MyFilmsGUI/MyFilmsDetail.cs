@@ -8265,12 +8265,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Handle all movie files from idMovie
         var movies = new ArrayList();
         int playTimePercentage = 0; // Set watched flag after 80% of total played time
-        double totalRuntimeMovie = 0;
+        double totalRuntimeMovie = 0.0;
+
+        PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
+        bool isLastPart = (g_Player.CurrentFile == playlist.LastOrDefault().FileName);
+
 
         int iidMovie = VideoDatabase.GetMovieId(filename);
         if (iidMovie >= 0)
         {
-          #region update myvideo DB
+          #region get files from myvideo DB and update if necessary
           //#if MP1X
           //                    VideoDatabase.GetFiles(iidMovie, ref movies);
           //#else
@@ -8309,50 +8313,42 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           //try
           //{
-          //  //if (file != string.Empty)
-          //  //{
-          //  //  // Set new data
-          //  //  MediaInfoWrapper x = new MediaInfoWrapper(file);
-          //  //  x.VideoDuration
-          //  //  //GUIPropertyManager.SetProperty("#VideoCodec", Util.Utils.MakeFileName(x.VideoCodec));
-          //  //  //GUIPropertyManager.SetProperty("#VideoResolution", x.VideoResolution);
-          //  //  //GUIPropertyManager.SetProperty("#AudioCodec", Util.Utils.MakeFileName(x.AudioCodec));
-          //  //  //GUIPropertyManager.SetProperty("#AudioChannels", x.AudioChannelsFriendly);
-          //  //  //GUIPropertyManager.SetProperty("#HasSubtitles", x.HasSubtitles.ToString());
-          //  //  //GUIPropertyManager.SetProperty("#AspectRatio", x.AspectRatio);
-          //  //}
+          //  if (file != string.Empty)
+          //  {
+          //    // Set new data
+          //    MediaInfoWrapper x = new MediaInfoWrapper(file);
+          //    x.VideoDuration
+          //    //GUIPropertyManager.SetProperty("#VideoCodec", Util.Utils.MakeFileName(x.VideoCodec));
+          //    //GUIPropertyManager.SetProperty("#VideoResolution", x.VideoResolution);
+          //    //GUIPropertyManager.SetProperty("#AudioCodec", Util.Utils.MakeFileName(x.AudioCodec));
+          //    //GUIPropertyManager.SetProperty("#AudioChannels", x.AudioChannelsFriendly);
+          //    //GUIPropertyManager.SetProperty("#HasSubtitles", x.HasSubtitles.ToString());
+          //    //GUIPropertyManager.SetProperty("#AspectRatio", x.AspectRatio);
+          //  }
           //}
           //catch (Exception)
           //{
-
           //  throw;
           //}
-          //if (movies.Count > 0)
-          //{
-          //  foreach (IMDBMovie movie in movies) // Get Total movie length
-          //  {
-          //    LogMyFilms.Debug("Partial Movie Runtime = '" + movie.RunTime.ToString() + "'");
-          //    if (movie.RunTime > 0)
-          //      TotalRuntimeMovie += movie.RunTime;
-          //  }
-          //  LogMyFilms.Debug("TotalRuntimeMovie = '" + TotalRuntimeMovie.ToString() + "'");
-          //}
+          #endregion
+
+          #region get runtime from MyFilms DB
+          string runtimeFromDb = MyFilms.conf.StrPlayedRow["Length"].ToString();
+          try
+          {
+            totalRuntimeMovie = 60 * double.Parse(runtimeFromDb);
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("TotalRuntimeMovie - Parsing runtime from catalog failed: " + ex.Message);
+            totalRuntimeMovie = 0.0;
+          }
+          LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', Runtime from DB = '" + runtimeFromDb + "'");
           #endregion
 
           if (g_Player.Player.Duration >= 1)
           {
             LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', g_player.Player.Duration = '" + g_Player.Player.Duration.ToString() + "'");
-            string runtimeFromDb = MyFilms.conf.StrPlayedRow["Length"].ToString();
-            try
-            {
-              totalRuntimeMovie = 60 * double.Parse(runtimeFromDb);
-            }
-            catch (Exception)
-            {
-              totalRuntimeMovie = 0;
-            }
-            LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', Runtime from DB = '" + runtimeFromDb + "'");
-
             if (totalRuntimeMovie > g_Player.Player.Duration)
               playTimePercentage = (int)Math.Ceiling((timeMovieStopped / totalRuntimeMovie) * 100);
             else
@@ -8360,8 +8356,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("Calculated playtimepercentage: '" + playTimePercentage + "' - g_player.Duration: '" + g_Player.Duration.ToString() + "' - playlistPlayer.g_Player.Duration: '" + playlistPlayer.g_Player.Duration.ToString() + "'");
           }
 
-          if (movies.Count <= 0)
-            return;
+          if (movies.Count <= 0) return;
+
           for (int i = 0; i < movies.Count; i++)
           {
             string strFilePath = (string)movies[i];
@@ -8372,7 +8368,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (g_Player.IsDVDMenu)
             {
               VideoDatabase.SetMovieStopTimeAndResumeData(idFile, 0, null);
-              //watchedMovies.Add(strFilePath);
+              // watchedMovies.Add(strFilePath);
             }
 
             else if (filename.Trim().ToLower().Equals(strFilePath.Trim().ToLower()) && timeMovieStopped > 0)
@@ -8442,7 +8438,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return;
         }
 
-        if (MyFilms.conf.CheckWatched || (MyFilms.conf.CheckWatchedPlayerStopped && (ended || (stopped && playTimePercentage >= 80))))
+        if (MyFilms.conf.CheckWatched || (MyFilms.conf.CheckWatchedPlayerStopped && ((ended && isLastPart) || (stopped && playTimePercentage >= 80))))
         {
           #region update watched status
           if (MyFilms.conf.EnhancedWatchedStatusHandling)
@@ -8459,7 +8455,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         #region tell any listeners that movie is watched
         MFMovie movie = GetMovieFromRecord(MyFilms.conf.StrPlayedRow); // create movie before DB record is deleted ...
-        if (ended || (stopped && playTimePercentage >= 80))
+        if ((ended && isLastPart) || (stopped && playTimePercentage >= 80))
         {
           if (MovieWatched != null && MyFilms.conf.AllowTraktSync)
           {
