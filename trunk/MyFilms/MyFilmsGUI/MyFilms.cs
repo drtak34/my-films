@@ -6878,7 +6878,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             bool isReversed = conf.BoolReverseNames;
             var facadeLabel = new string[facadeFilms.Count];
             var facadeCounts = new int[facadeFilms.Count];
-            string label2NamePrefix = BaseMesFilms.TranslateColumn(wStrSort);
+            // string label2NamePrefix = BaseMesFilms.TranslateColumn(wStrSort);
             
             try
             {
@@ -6900,7 +6900,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     continue;
                   }
                   facadeCounts[i]++;
-                  this.facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
+                  facadeFilms[i].Label2 = facadeCounts[i].ToString(); // facadeFilms[i].Label2 = label2NamePrefix + " (" + facadeCounts[i] + ")";
                 }
                 if (this.StopLoadingViewDetails) return;
               }
