@@ -12107,17 +12107,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               case "person":
                 {
-                  var imdb = new IMDB();
-                  imdb.FindActor(searchexpression);
-                  if (imdb.Count > 0)
+                  //var imdb = new IMDB();
+                  //imdb.FindActor(searchexpression);
+                  //if (imdb.Count > 0)
+                  //{
+                  //  IMDB.IMDBUrl wurl = imdb[0];
+                  //  if (wurl.URL.Length != 0)
+                  //  {
+                  //    url = wurl.URL + extension; // Assign proper Webpage for Actorinfos
+                  //    url = ImdbBaseUrl + url.Substring(url.IndexOf("name", StringComparison.Ordinal)); // redirect to base www.imdb.com server and remove localized returns...
+                  //  }
+                  //  //_imdb.GetActorDetails(_imdb[0], false, out imdbActor); // Details here not needed - we just want the URL !
+                  //}
+                  string grabberscript = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB-Person.xml";
+                  if (File.Exists(grabberscript))
                   {
-                    IMDB.IMDBUrl wurl = imdb[0];
-                    if (wurl.URL.Length != 0)
+                    ArrayList personUrls = MyFilmsDetail.FindActor(searchexpression, grabberscript);
+                    if (personUrls.Count > 0)
                     {
-                      url = wurl.URL + extension; // Assign proper Webpage for Actorinfos
-                      url = ImdbBaseUrl + url.Substring(url.IndexOf("name", StringComparison.Ordinal)); // redirect to base www.imdb.com server and remove localized returns...
+                      var wurl = (Grabber_URLClass.IMDBUrl)personUrls[0];
+                      if (wurl.URL.Length != 0)
+                      {
+                        url = wurl.URL + extension; // Assign proper Webpage for Actorinfos
+                        url = ImdbBaseUrl + url.Substring(url.IndexOf("name", StringComparison.Ordinal)); // redirect to base www.imdb.com server and remove localized returns...
+                      }
                     }
-                    //_imdb.GetActorDetails(_imdb[0], false, out imdbActor); // Details here not needed - we just want the URL !
                   }
                   break;
                 }
@@ -12450,23 +12464,38 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void GetAndStorePersonInfo(string personName, ref IMDBActor imdbActor)
     {
-      var imdb = new IMDB();
-      var imdbfetcher = new IMDBFetcher(null);
-      // bool fetchActors = imdbfetcher.FetchActors();
-      imdb.FindActor(personName);
-      foreach (var t in imdb)
+      //var imdb = new IMDB();
+      //// var imdbfetcher = new IMDBFetcher(null);
+      //// bool fetchActors = imdbfetcher.FetchActors();
+      //imdb.FindActor(personName);
+      //foreach (var t in imdb)
+      //{
+      //  //#if MP1X
+      //  //        imdb.GetActorDetails(imdb[i], false, out imdbActor);
+      //  //#else
+      //  //        imdb.GetActorDetails(imdb[i], out imdbActor);
+      //  //#endif
+      //  GUIUtils.GetActorDetails(imdb, t, false, out imdbActor);
+      //  if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
+      //  {
+      //    break;
+      //  }
+      //}
+      string grabberscript = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB-Person.xml";
+      if (File.Exists(grabberscript))
       {
-        //#if MP1X
-        //        imdb.GetActorDetails(imdb[i], false, out imdbActor);
-        //#else
-        //        imdb.GetActorDetails(imdb[i], out imdbActor);
-        //#endif
-        GUIUtils.GetActorDetails(imdb, t, false, out imdbActor);
-        if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
+        ArrayList personUrls = MyFilmsDetail.FindActor(personName, grabberscript);
+        LogMyFilms.Debug("IMDB - " + personUrls.Count + " person(s) found for '" + personName + "' with person grabber script '" + grabberscript + "'");
+        if (personUrls.Count > 0)
         {
-          break;
+          var wurl = (Grabber_URLClass.IMDBUrl)personUrls[0];
+          if (wurl.URL.Length != 0)
+          {
+            MyFilmsDetail.GrabActorDetails(wurl.URL, grabberscript, out imdbActor);
+          }
         }
       }
+
       if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
       {
         if (!string.IsNullOrEmpty(conf.StrPathArtist))
