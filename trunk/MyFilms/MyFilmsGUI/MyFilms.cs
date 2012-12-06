@@ -8582,6 +8582,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.IndexedChars = 0;
       conf.Boolindexed = false;
       conf.BoolSkipViewState = false;
+      MyFilmsDetail.clearGUIProperty("moviecontext.value");
       #endregion
 
       MFview.ViewRow selectedCustomView = MyFilms.conf.CustomViews.View.NewViewRow();
