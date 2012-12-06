@@ -12165,6 +12165,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.ViewContext = ViewContext.Person;
       conf.CurrentView = "MoviePersons";
 
+      MyFilmsDetail.setGUIProperty("moviecontext.value", conf.StrTIndex, true);
+
       // Change_View_Action(persontype);
       // getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, "*", true, string.Empty);
       // getSelectFromDivxThreaded();
@@ -16443,6 +16445,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("details.downloads.name");
       // MyFilmsDetail.clearGUIProperty(guiProperty.statusmessage);
 
+      MyFilmsDetail.clearGUIProperty("moviecontext.value");
+
       // init Details GUIproperties
       MyFilmsDetail.setGUIProperty("menu.overview", GUILocalizeStrings.Get(10798751));
       MyFilmsDetail.setGUIProperty("menu.description", GUILocalizeStrings.Get(10798752));
@@ -16451,7 +16455,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("menu.techinfos", GUILocalizeStrings.Get(10798755));
       MyFilmsDetail.setGUIProperty("menu.extradetails", GUILocalizeStrings.Get(10798756));
       MyFilmsDetail.setGUIProperty("menu.fanart", GUILocalizeStrings.Get(10798757));
-
     }
 
     private void Clear_Logos()
@@ -16606,6 +16609,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (indexed && !dummyFacadeIndex.Visible) dummyFacadeIndex.Visible = true;
         // LogMyFilms.Debug("SetDummyControlsForFacade() setting dummyFacadeIndex to '" + indexed + "'");
       }
+      if (viewContext != ViewContext.Person) MyFilmsDetail.clearGUIProperty("moviecontext.value");
     }
 
     #endregion
