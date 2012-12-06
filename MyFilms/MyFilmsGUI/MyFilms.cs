@@ -3316,14 +3316,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     bool GetMoviesInGroup(ref ArrayList fanartItems)
     {
       LogMyFilms.Debug("GetRandomFanartForGroups started ...");
-
       fanartItems.Clear();
       Type columnType = GetColumnType(conf.WStrSort);
       string s = "";
       string strSelect = string.Empty;
       if (conf.Boolselect)
       {
-        string sLabel = this.facadeFilms.SelectedListItem.Label;
+        // string sLabel = facadeFilms.SelectedListItem.Label; // string sLabel = this.facadeFilms.SelectedListItem.Label;
+        string sLabel = (conf.BoolReverseNames && facadeFilms.SelectedListItem.Label != EmptyFacadeValue) ? ReReverseName(facadeFilms.SelectedListItem.Label) : facadeFilms.SelectedListItem.Label.Replace(EmptyFacadeValue, ""); // Replace "pseudolabel" with empty value
+
         bool labelNotEmpty = sLabel.Length > 0;
 
         if (columnType != typeof(string))
@@ -8508,6 +8509,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void Change_Layout_Action(int wLayout)
     {
       LogMyFilms.Debug("Change_Layout_Action() - change facade layout to '" + wLayout + "'");
+      if (facadeFilms == null)
+      {
+        LogMyFilms.Error("Change_Layout_Action() - facade control is null - return without action");
+        return;
+      }
       int itemIndex = facadeFilms.SelectedListItemIndex;
       switch (wLayout)
       {
