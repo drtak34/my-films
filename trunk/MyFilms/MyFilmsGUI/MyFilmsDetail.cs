@@ -4510,6 +4510,60 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    public static ArrayList FindActor(string personname, string wscript)
+    {
+      var listUrl = new ArrayList();
+      if (string.IsNullOrEmpty(wscript)) return listUrl;
+      LogMyFilms.Debug("FindActor() with name = '" + personname + "', grabberfile = '" + wscript + "'");
+      var grab = new Grabber_URLClass();
+      try
+      {
+        listUrl = grab.ReturnURL(personname, wscript, 1, false, "");
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.ErrorException("FindActor() - exception = '" + ex.Message + "'", ex);
+      }
+      return listUrl;
+    }
+
+    public static bool GrabActorDetails(string url, string wscript, out IMDBActor person)
+    {
+      LogMyFilms.Debug("launching (GrabActorDetails) with url = '" + url + "', wscript = '" + wscript + "'");
+
+      person = new IMDBActor();
+      var Grab = new Grabber_URLClass();
+      var Result = new string[80];
+
+      #region load internet data
+      try
+      {
+        Result = Grab.GetDetail(url, "", wscript, false, null, null, null, null);
+        // Result = Grab.GetDetail(url, downLoadPath, wscript, true, MyFilms.conf.GrabberOverrideLanguage, MyFilms.conf.GrabberOverridePersonLimit, MyFilms.conf.GrabberOverrideTitleLimit, MyFilms.conf.GrabberOverrideGetRoles, null);
+        for (int i = 0; i < 40; i++) // copy mapped values to original values
+        {
+          Result[i] = Result[i + 40];
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.ErrorException("GrabActorDetails() - exception = '" + ex.Message + "'", ex);
+        return false;
+      }
+      #endregion
+
+      #region load details data for person
+      person.Name = Result[(int)Grabber_URLClass.Grabber_Output.OriginalTitle];
+      person.DateOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Comments];
+      person.PlaceOfBirth = Result[(int)Grabber_URLClass.Grabber_Output.Country];
+      person.Biography = Result[(int)Grabber_URLClass.Grabber_Output.Description];
+      person.ThumbnailUrl = Result[(int)Grabber_URLClass.Grabber_Output.PictureURL];
+      #endregion
+      LogMyFilms.Debug("GrabActorDetails() done for person : '" + person.Name + "'");
+      return true;
+    }
+
+
     //-------------------------------------------------------------------------------------------
     //  Create Thumb via MTN (MovieThumbNailer) from movie itself
     //-------------------------------------------------------------------------------------------        
@@ -10832,26 +10886,52 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         #region IMDB internet search
         if (item != null) item.Label3 = "Searching IMDB ...";
-        var imdb = new IMDB();
-        imdb.FindActor(personname);
 
-        if (imdb.Count > 0)
+        string grabberscript = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB-Person.xml";
+        if (File.Exists(grabberscript))
         {
-          LogMyFilms.Debug("IMDB - " + imdb.Count + " persons found for '" + personname + "'");
-          if (imdb[0].URL.Length != 0)
+          ArrayList personUrls = FindActor(personname, grabberscript);
+          LogMyFilms.Debug("IMDB - " + personUrls.Count + " person(s) found for '" + personname + "' with person grabber script '" + grabberscript + "'"); 
+          if (personUrls.Count > 0)
           {
-            if (item != null) item.Label3 = "Loading IMDB details ...";
-            //#if MP1X
-            // _imdb.GetActorDetails(_imdb[0], out person);
-            //#else
-            // _imdb.GetActorDetails(_imdb[0], false, out person);
-            //#endif
-            GUIUtils.GetActorDetails(imdb, imdb[0], false, out person);
-            LogMyFilms.Debug("IMDB - Value found - birthday   = '" + (person.DateOfBirth ?? "") + "'");
-            LogMyFilms.Debug("IMDB - Value found - birthplace = '" + (person.PlaceOfBirth ?? "") + "'");
-            LogMyFilms.Debug("IMDB - Value found - biography  = '" + (person.Biography.Substring(0, Math.Min(person.Biography.Length, 100)) ?? "") + "'");
+            var wurl = (Grabber_URLClass.IMDBUrl)personUrls[0];
+            if (wurl.URL.Length != 0)
+            {
+              if (item != null) item.Label3 = "Loading IMDB details ...";
+              GrabActorDetails(wurl.URL, grabberscript, out person);
+              LogMyFilms.Debug("IMDB - Value found - name       = '" + (person.Name ?? "") + "'");
+              LogMyFilms.Debug("IMDB - Value found - birthday   = '" + (person.DateOfBirth ?? "") + "'");
+              LogMyFilms.Debug("IMDB - Value found - birthplace = '" + (person.PlaceOfBirth ?? "") + "'");
+              LogMyFilms.Debug("IMDB - Value found - biography  = '" + (person.Biography.Substring(0, Math.Min(person.Biography.Length, 100)) ?? "") + "'");
+              LogMyFilms.Debug("IMDB - Value found - thumb url  = '" + (person.ThumbnailUrl ?? "") + "'");
+            }
           }
         }
+        else
+        {
+          LogMyFilms.Debug("IMDB - Default person grabber script not found (" + grabberscript + ")");
+        }
+        
+        //var imdb = new IMDB();
+        //imdb.FindActor(personname);
+        //LogMyFilms.Debug("IMDB - " + imdb.Count + " person(s) found for '" + personname + "' with IMDB API");
+        //if (imdb.Count > 0)
+        //{
+        //  if (imdb[0].URL.Length != 0)
+        //  {
+        //    if (item != null) item.Label3 = "Loading IMDB details ...";
+        //    //#if MP1X
+        //    // _imdb.GetActorDetails(_imdb[0], out person);
+        //    //#else
+        //    // _imdb.GetActorDetails(_imdb[0], false, out person);
+        //    //#endif
+        //    GUIUtils.GetActorDetails(imdb, imdb[0], false, out person);
+        //    LogMyFilms.Debug("IMDB - Value found - name       = '" + (person.Name ?? "") + "'");
+        //    LogMyFilms.Debug("IMDB - Value found - birthday   = '" + (person.DateOfBirth ?? "") + "'");
+        //    LogMyFilms.Debug("IMDB - Value found - birthplace = '" + (person.PlaceOfBirth ?? "") + "'");
+        //    LogMyFilms.Debug("IMDB - Value found - biography  = '" + (person.Biography.Substring(0, Math.Min(person.Biography.Length, 100)) ?? "") + "'");
+        //  }
+        //}
 
         if (stopLoadingViewDetails && item != null && !forceupdate) return false; // stop download if we have exited window
 
@@ -10917,9 +10997,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           TmdbConfiguration tmdbConf = api.GetConfiguration();
           TmdbPersonSearch tmdbPerson = api.SearchPerson(personname, 1);
           List<PersonResult> persons = tmdbPerson.results;
+          LogMyFilms.Debug("TMDB - " + persons.Count + " person(s) found for '" + personname + "' with TMDB API");
           if (persons != null && persons.Count > 0)
           {
-            LogMyFilms.Debug("TMDB - " + persons.Count + " persons found for '" + personname + "'");
             PersonResult pinfo = persons[0];
             if (item != null) item.Label3 = "Loading TMDB details ...";
             TmdbPerson singleperson = api.GetPersonInfo(pinfo.id);
