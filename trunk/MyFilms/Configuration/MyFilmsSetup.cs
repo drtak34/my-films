@@ -134,6 +134,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         // autostart settings for AMCupdater background Launcher:
         chkAMCUscanOnStartup.Visible = false;
         chkAMCUwatchScanFolders.Visible = false;
+        labelAMCUstartdelay.Visible = false;
         numericUpDownAMCUscanStartDelay.Visible = false;
       }
       //else
