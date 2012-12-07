@@ -336,10 +336,9 @@
           this.View_Dflt_Item = new System.Windows.Forms.ComboBox();
           this.View_Dflt_Text = new System.Windows.Forms.TextBox();
           this.groupBoxView = new System.Windows.Forms.GroupBox();
-          this.AntViewFilterSaveString = new System.Windows.Forms.TextBox();
+          this.labelViewLabel = new System.Windows.Forms.Label();
           this.viewBindingSource = new System.Windows.Forms.BindingSource(this.components);
           this.mFview = new MyFilmsPlugin.DataBase.MFview();
-          this.labelViewLabel = new System.Windows.Forms.Label();
           this.buttonResetImage = new System.Windows.Forms.Button();
           this.AntViewsImage = new System.Windows.Forms.PictureBox();
           this.lblAntViewIndex = new System.Windows.Forms.Label();
@@ -371,6 +370,7 @@
           this.groupBox5 = new System.Windows.Forms.GroupBox();
           this.AntViewFilter = new System.Windows.Forms.TextBox();
           this.AntViewFilterEditButton = new System.Windows.Forms.Button();
+          this.AntViewFilterSaveString = new System.Windows.Forms.TextBox();
           this.AntViewValue = new System.Windows.Forms.TextBox();
           this.AntViewIndex = new System.Windows.Forms.NumericUpDown();
           this.groupBox24 = new System.Windows.Forms.GroupBox();
@@ -2020,6 +2020,7 @@
           // groupBox_AMCupdater
           // 
           this.groupBox_AMCupdater.BackColor = System.Drawing.Color.Transparent;
+          this.groupBox_AMCupdater.Controls.Add(this.chkAMC_ImportOnInternetFail);
           this.groupBox_AMCupdater.Controls.Add(this.labelAMCUstartdelay);
           this.groupBox_AMCupdater.Controls.Add(this.numericUpDownAMCUscanStartDelay);
           this.groupBox_AMCupdater.Controls.Add(this.chkAMCUwatchScanFolders);
@@ -2039,7 +2040,7 @@
           // labelAMCUstartdelay
           // 
           this.labelAMCUstartdelay.AutoSize = true;
-          this.labelAMCUstartdelay.Location = new System.Drawing.Point(227, 69);
+          this.labelAMCUstartdelay.Location = new System.Drawing.Point(221, 83);
           this.labelAMCUstartdelay.Name = "labelAMCUstartdelay";
           this.labelAMCUstartdelay.Size = new System.Drawing.Size(59, 13);
           this.labelAMCUstartdelay.TabIndex = 7;
@@ -2052,7 +2053,7 @@
             0,
             0,
             0});
-          this.numericUpDownAMCUscanStartDelay.Location = new System.Drawing.Point(298, 67);
+          this.numericUpDownAMCUscanStartDelay.Location = new System.Drawing.Point(286, 81);
           this.numericUpDownAMCUscanStartDelay.Name = "numericUpDownAMCUscanStartDelay";
           this.numericUpDownAMCUscanStartDelay.Size = new System.Drawing.Size(53, 20);
           this.numericUpDownAMCUscanStartDelay.TabIndex = 6;
@@ -2066,7 +2067,7 @@
           // chkAMCUwatchScanFolders
           // 
           this.chkAMCUwatchScanFolders.AutoSize = true;
-          this.chkAMCUwatchScanFolders.Location = new System.Drawing.Point(62, 92);
+          this.chkAMCUwatchScanFolders.Location = new System.Drawing.Point(62, 105);
           this.chkAMCUwatchScanFolders.Name = "chkAMCUwatchScanFolders";
           this.chkAMCUwatchScanFolders.Size = new System.Drawing.Size(122, 17);
           this.chkAMCUwatchScanFolders.TabIndex = 5;
@@ -2077,7 +2078,7 @@
           // chkAMCUscanOnStartup
           // 
           this.chkAMCUscanOnStartup.AutoSize = true;
-          this.chkAMCUscanOnStartup.Location = new System.Drawing.Point(62, 68);
+          this.chkAMCUscanOnStartup.Location = new System.Drawing.Point(62, 82);
           this.chkAMCUscanOnStartup.Name = "chkAMCUscanOnStartup";
           this.chkAMCUscanOnStartup.Size = new System.Drawing.Size(103, 17);
           this.chkAMCUscanOnStartup.TabIndex = 4;
@@ -2162,7 +2163,6 @@
           // 
           // groupBox_AMCupdater_ExternalApplication
           // 
-          this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.chkAMC_ImportOnInternetFail);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.label56);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AmcTitleSearchHandling);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDefaultConfig);
@@ -2172,9 +2172,9 @@
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.AMCMovieScanPath);
           this.groupBox_AMCupdater_ExternalApplication.Controls.Add(this.btnCreateAMCDesktopIcon);
           this.groupBox_AMCupdater_ExternalApplication.ImeMode = System.Windows.Forms.ImeMode.Off;
-          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(12, 126);
+          this.groupBox_AMCupdater_ExternalApplication.Location = new System.Drawing.Point(12, 137);
           this.groupBox_AMCupdater_ExternalApplication.Name = "groupBox_AMCupdater_ExternalApplication";
-          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(709, 119);
+          this.groupBox_AMCupdater_ExternalApplication.Size = new System.Drawing.Size(709, 105);
           this.groupBox_AMCupdater_ExternalApplication.TabIndex = 3;
           this.groupBox_AMCupdater_ExternalApplication.TabStop = false;
           this.groupBox_AMCupdater_ExternalApplication.Text = "AMC Updater external application";
@@ -2182,7 +2182,7 @@
           // chkAMC_ImportOnInternetFail
           // 
           this.chkAMC_ImportOnInternetFail.AutoSize = true;
-          this.chkAMC_ImportOnInternetFail.Location = new System.Drawing.Point(139, 96);
+          this.chkAMC_ImportOnInternetFail.Location = new System.Drawing.Point(62, 59);
           this.chkAMC_ImportOnInternetFail.Name = "chkAMC_ImportOnInternetFail";
           this.chkAMC_ImportOnInternetFail.Size = new System.Drawing.Size(134, 17);
           this.chkAMC_ImportOnInternetFail.TabIndex = 8;
@@ -2211,14 +2211,14 @@
             "Relative Name + Internet Lookup"});
           this.AmcTitleSearchHandling.Location = new System.Drawing.Point(139, 48);
           this.AmcTitleSearchHandling.Name = "AmcTitleSearchHandling";
-          this.AmcTitleSearchHandling.Size = new System.Drawing.Size(200, 21);
+          this.AmcTitleSearchHandling.Size = new System.Drawing.Size(188, 21);
           this.AmcTitleSearchHandling.TabIndex = 4;
           this.ToolTip1.SetToolTip(this.AmcTitleSearchHandling, resources.GetString("AmcTitleSearchHandling.ToolTip"));
           // 
           // btnCreateAMCDefaultConfig
           // 
           this.btnCreateAMCDefaultConfig.AllowDrop = true;
-          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(544, 63);
+          this.btnCreateAMCDefaultConfig.Location = new System.Drawing.Point(544, 55);
           this.btnCreateAMCDefaultConfig.Name = "btnCreateAMCDefaultConfig";
           this.btnCreateAMCDefaultConfig.Size = new System.Drawing.Size(143, 36);
           this.btnCreateAMCDefaultConfig.TabIndex = 7;
@@ -2272,7 +2272,7 @@
           // 
           // btnCreateAMCDesktopIcon
           // 
-          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(387, 63);
+          this.btnCreateAMCDesktopIcon.Location = new System.Drawing.Point(387, 55);
           this.btnCreateAMCDesktopIcon.Name = "btnCreateAMCDesktopIcon";
           this.btnCreateAMCDesktopIcon.Size = new System.Drawing.Size(143, 36);
           this.btnCreateAMCDesktopIcon.TabIndex = 6;
@@ -2286,7 +2286,7 @@
           // 
           this.chkAMCUpd.AutoSize = true;
           this.chkAMCUpd.BackColor = System.Drawing.Color.Transparent;
-          this.chkAMCUpd.Location = new System.Drawing.Point(24, 36);
+          this.chkAMCUpd.Location = new System.Drawing.Point(24, 31);
           this.chkAMCUpd.Name = "chkAMCUpd";
           this.chkAMCUpd.Size = new System.Drawing.Size(123, 17);
           this.chkAMCUpd.TabIndex = 0;
@@ -3379,25 +3379,6 @@
           this.groupBoxView.Text = "Custom View Editor ...";
           this.ToolTip1.SetToolTip(this.groupBoxView, resources.GetString("groupBoxView.ToolTip"));
           // 
-          // AntViewFilterSaveString
-          // 
-          this.AntViewFilterSaveString.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "FilterSaveString", true));
-          this.AntViewFilterSaveString.Location = new System.Drawing.Point(128, 16);
-          this.AntViewFilterSaveString.Name = "AntViewFilterSaveString";
-          this.AntViewFilterSaveString.Size = new System.Drawing.Size(42, 20);
-          this.AntViewFilterSaveString.TabIndex = 89;
-          this.AntViewFilterSaveString.TextChanged += new System.EventHandler(this.AntViewFilterSaveString_TextChanged);
-          // 
-          // viewBindingSource
-          // 
-          this.viewBindingSource.DataMember = "View";
-          this.viewBindingSource.DataSource = this.mFview;
-          // 
-          // mFview
-          // 
-          this.mFview.DataSetName = "MFview";
-          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-          // 
           // labelViewLabel
           // 
           this.labelViewLabel.AutoSize = true;
@@ -3408,6 +3389,16 @@
           this.labelViewLabel.Size = new System.Drawing.Size(99, 13);
           this.labelViewLabel.TabIndex = 2;
           this.labelViewLabel.Text = "Custom View Name";
+          // 
+          // viewBindingSource
+          // 
+          this.viewBindingSource.DataMember = "View";
+          this.viewBindingSource.DataSource = this.mFview;
+          // 
+          // mFview
+          // 
+          this.mFview.DataSetName = "MFview";
+          this.mFview.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
           // 
           // buttonResetImage
           // 
@@ -3758,6 +3749,15 @@
           this.AntViewFilterEditButton.Text = "...";
           this.AntViewFilterEditButton.UseVisualStyleBackColor = true;
           this.AntViewFilterEditButton.Click += new System.EventHandler(this.AntViewFilterEditButton_Click);
+          // 
+          // AntViewFilterSaveString
+          // 
+          this.AntViewFilterSaveString.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.viewBindingSource, "FilterSaveString", true));
+          this.AntViewFilterSaveString.Location = new System.Drawing.Point(128, 16);
+          this.AntViewFilterSaveString.Name = "AntViewFilterSaveString";
+          this.AntViewFilterSaveString.Size = new System.Drawing.Size(42, 20);
+          this.AntViewFilterSaveString.TabIndex = 89;
+          this.AntViewFilterSaveString.TextChanged += new System.EventHandler(this.AntViewFilterSaveString_TextChanged);
           // 
           // AntViewValue
           // 

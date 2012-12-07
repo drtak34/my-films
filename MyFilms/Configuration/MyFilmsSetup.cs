@@ -2627,8 +2627,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         groupBox_AMCupdaterScheduer.Enabled = true;
         chkAMCUscanOnStartup.Enabled = true;
         chkAMCUwatchScanFolders.Enabled = true;
+        labelAMCUstartdelay.Enabled = true;
         numericUpDownAMCUscanStartDelay.Enabled = true;
-
+        chkAMC_ImportOnInternetFail.Enabled = true;
       }
       else
       {
@@ -2637,7 +2638,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         groupBox_AMCupdaterScheduer.Enabled = false;
         chkAMCUscanOnStartup.Enabled = false;
         chkAMCUwatchScanFolders.Enabled = false;
+        labelAMCUstartdelay.Enabled = false;
         numericUpDownAMCUscanStartDelay.Enabled = false;
+        chkAMC_ImportOnInternetFail.Enabled = false;
       }
     }
 
