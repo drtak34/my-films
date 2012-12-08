@@ -29,7 +29,7 @@
       <type>label</type>
       <id>1</id>
       <posX>690</posX>
-      <posY>35</posY>
+      <posY>32</posY>
       <label>#selectedindex/#myfilms.nbobjects.value #itemtype</label>
       <align>right</align>
       <textcolor>ivory</textcolor>
