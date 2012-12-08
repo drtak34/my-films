@@ -672,6 +672,19 @@
     </control>-->
     <import>MyFilms.ListView.Cover.xml</import>
     <!-- PERSON INFO - will only show up in respective views  -->
+	<control>
+      <type>fadelabel</type>
+      <description>Related Movie Title</description>
+      <id>1</id>
+	  <posX>484</posX>
+      <posY>60</posY> 
+      <align>left</align>
+      <font>font16</font>
+      <width>600</width>
+      <textcolor>ff6FAFE1</textcolor>
+      <label>#myfilms.moviecontext.value</label>
+      <visible>Control.isvisible(38)</visible>
+    </control>
     <control>
       <description>Current person name</description>
       <type>fadelabel</type>
