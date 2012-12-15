@@ -3481,9 +3481,7 @@ Public Class AntProcessor
         If ds.Tables(TableName) IsNot Nothing Then
             LogEvent(TableName & " : " & ds.Tables(TableName).Rows.Count.ToString & " rows.", EventLogLevel.ImportantEvent)
             If ds.Tables(TableName).Rows.Count > 0 Then
-                For Each col As DataColumn In ds.Tables(TableName).Columns
-                    ColumnNames += col.ColumnName & " | "
-                Next
+                ColumnNames = ds.Tables(TableName).Columns.Cast(Of DataColumn)().Aggregate(ColumnNames, Function(current, col) current + (col.ColumnName & " | "))
                 LogEvent(ColumnNames.Substring(0, ColumnNames.Length - 1), EventLogLevel.ImportantEvent)
                 For Each row As DataRow In ds.Tables(TableName).Rows
                     For i As Integer = 0 To ds.Tables(TableName).Columns.Count - 1

@@ -370,29 +370,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlgOK.SetHeading(heading);
 
       string[] dialoglines = lines.Split(new string[] { "\\n", "\n" }, StringSplitOptions.None);
-      if (dialoglines.Length == 1)
+      switch (dialoglines.Length)
       {
+        case 1:
           dlgOK.SetLine(1, string.Empty);
           dlgOK.SetLine(2, dialoglines[0]);
           dlgOK.SetLine(3, string.Empty);
           dlgOK.SetLine(4, string.Empty);
-      }
-      else if (dialoglines.Length == 2)
-      {
+          break;
+        case 2:
           dlgOK.SetLine(1, string.Empty);
           dlgOK.SetLine(2, dialoglines[0]);
           dlgOK.SetLine(3, dialoglines[1]);
           dlgOK.SetLine(4, string.Empty);
-      }
-      else
-      {
-        int lineid = 1;
-        foreach (string line in dialoglines)
-        {
-          dlgOK.SetLine(lineid, line);
-          lineid++;
-        }
-      for (int i = lineid; i <= 4; i++) dlgOK.SetLine(i, string.Empty);
+          break;
+        default:
+          {
+            int lineid = 1;
+            foreach (string line in dialoglines)
+            {
+              dlgOK.SetLine(lineid, line);
+              lineid++;
+            }
+            for (int i = lineid; i <= 4; i++) dlgOK.SetLine(i, string.Empty);
+          }
+          break;
       }
       dlgOK.DoModal(GUIWindowManager.ActiveWindow);
     }

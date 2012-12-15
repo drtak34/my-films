@@ -641,7 +641,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       catch (Exception ex)
       {
         LogMyFilms.Debug("Exception in Artwork Chooser Context Menu: " + ex.Message);
-        return;
       }
     }
     #endregion
@@ -1067,7 +1066,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       NewArtworkFileName = !File.Exists(cover.FullPath) ? "" : cover.FullPath;
       MyFilmsDetail.setGUIProperty("picture", NewArtworkFileName);
-      return;
 
       //MyFilmsDetail.Searchtitles sTitles = MyFilmsDetail.GetSearchTitles(MyFilms.r[MyFilms.conf.StrIndex], "");
       //string currentPicture = MyFilmsDetail.getGUIProperty("picture");

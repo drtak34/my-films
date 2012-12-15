@@ -1491,12 +1491,8 @@ Public Module Module1
             '   MediaData.Add("originaltitle")
             'End If
 
-            For Each blah As String In MediaData
-                If DatabaseFields.ContainsKey(blah) Then
-                    If DatabaseFields(blah) = True Then
-                        ReturnValue = True
-                    End If
-                End If
+            For Each blah In From blah1 As String In MediaData Where DatabaseFields.ContainsKey(blah1) Where DatabaseFields(blah1) = True
+                ReturnValue = True
             Next
         End If
 
@@ -1549,12 +1545,8 @@ Public Module Module1
                 End If
             Next
 
-            For Each blah As String In InternetData
-                If DatabaseFields.ContainsKey(blah) Then
-                    If DatabaseFields(blah) = True Then
-                        ReturnValue = True
-                    End If
-                End If
+            For Each blah In From blah1 As String In InternetData Where DatabaseFields.ContainsKey(blah1) Where DatabaseFields(blah1) = True
+                ReturnValue = True
             Next
 
         End If

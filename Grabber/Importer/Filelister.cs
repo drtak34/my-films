@@ -28,6 +28,8 @@ using System.Text;
 
 namespace Grabber.Importer
 {
+  using System.Linq;
+
   public class PathPair
   {
     public String m_sMatch_FileName;
@@ -62,15 +64,7 @@ namespace Grabber.Importer
         if (System.IO.Directory.Exists(folder))
         {
           string[] sfiles = System.IO.Directory.GetFiles(folder, "*", System.IO.SearchOption.AllDirectories);
-          for (int i = 0; i < sfiles.Length; i++)
-          {
-            // check if extension is supported by mediaportal
-            if (MediaPortal.Util.Utils.VideoExtensions.Contains(System.IO.Path.GetExtension(sfiles[i]).ToLowerInvariant()))
-            {
-              // remove uneeded data by trimming the import path root from the filenames
-              outList.Add(new PathPair(sfiles[i].Substring(importPathLength).TrimStart('\\'), sfiles[i]));
-            }
-          }
+          outList.AddRange(from t in sfiles where MediaPortal.Util.Utils.VideoExtensions.Contains(System.IO.Path.GetExtension(t).ToLowerInvariant()) select new PathPair(t.Substring(importPathLength).TrimStart('\\'), t));
         }
       }
       catch (Exception ex)

@@ -1528,9 +1528,7 @@ Public Class AntRecord
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 Dim Diskcount As Integer = 0
                 If _allFilesPath <> "" Then
-                    For Each wfile As String In _allFilesPath.Split(";")
-                        Diskcount += 1
-                    Next
+                    Diskcount += _allFilesPath.Split(";").Count()
                 Else
                     Diskcount = 1
                 End If

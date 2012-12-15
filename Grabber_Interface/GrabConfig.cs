@@ -493,7 +493,7 @@ namespace Grabber_Interface
         if (!cbTtitlePreferredLanguage.Items.Contains(strDroptext.Trim()))
           cbTtitlePreferredLanguage.Items.Add(strDroptext.Trim());
       }
-      this.cbTtitlePreferredLanguage.Enabled = this.cbTtitlePreferredLanguage.Items.Count > 0;
+      cbTtitlePreferredLanguage.Enabled = cbTtitlePreferredLanguage.Items.Count > 0;
 
       cbCertificationPreferredLanguage.Items.Clear();
       try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }

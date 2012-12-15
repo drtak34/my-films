@@ -116,7 +116,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (this.Rating < 10)
           this.Rating = this.Rating + (decimal)0.1;
         UpdateRating();
-        return;
       }
     }
 

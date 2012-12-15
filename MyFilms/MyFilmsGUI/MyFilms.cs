@@ -61,6 +61,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using WatTmdb.V3;
 
+  using grabber;
+
   using Action = MediaPortal.GUI.Library.Action;
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
@@ -1217,7 +1219,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         for (var i = 0; i < mesFilmsNbConfig; i++)
           configs.Add(xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "ConfigName" + i, string.Empty));
         XmlSettings xmlSettings = xmlConfig;
-        foreach (string strFileXml in from string config in configs where xmlSettings != null select xmlSettings.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty))
+        foreach (string strFileXml in configs.Select(config => xmlSettings.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty)))
         {
           MyFilmsDetail.SetGlobalLock(false, strFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
         }
@@ -4036,7 +4038,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // Load_Lstdetail(itemToPublish, false);
         // Load_Lstdetail(ItemId, wlabel); 
-        return;
       }
       else // Publish on timer using delay specified
       {
@@ -4134,21 +4135,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Change_View_Action(choiceView[dlg.SelectedLabel]);
     }
 
-    private int CountViewItems(DataRow[] filmrows, string WStrSort)
+    private int CountViewItems(IEnumerable<DataRow> filmrows, string wStrSort)
     {
       int count = 0;
-      HashSet<string> set = new HashSet<string>(StringComparer.OrdinalIgnoreCase); //List<string> itemList = new List<string>();
+      var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase); //List<string> itemList = new List<string>();
 
-      bool issplitfield = IsSplittableField(WStrSort);
+      bool issplitfield = IsSplittableField(wStrSort);
       bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
       bool showEmptyValues = MyFilms.conf.BoolShowEmptyValuesInViews;
 
       watch.Reset(); watch.Start();
-      foreach (string champselect in filmrows.Select(row => row[WStrSort].ToString().Trim()))
+      foreach (string champselect in filmrows.Select(row => row[wStrSort].ToString().Trim()))
       {
         if (issplitfield && !dontsplitvalues)
         {
-          ArrayList wtab = Search_String(champselect, false);
+          var wtab = Search_String(champselect, false);
           if (wtab.Count > 0) // itemList.AddRange(wtab);
           {
             count += wtab.Cast<object>().Count(t => set.Add((string)t));
@@ -4167,7 +4168,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       watch.Stop();
-      LogMyFilms.Debug("CountViewItems - Finished Count ('" + count + "') (" + (watch.ElapsedMilliseconds) + " ms)  - Read View Names for '" + WStrSort + "' finished (splittable items = '" + issplitfield + "', dontsplitvalues = '" + dontsplitvalues + "')");
+      LogMyFilms.Debug("CountViewItems - Finished Count ('" + count + "') (" + (watch.ElapsedMilliseconds) + " ms)  - Read View Names for '" + wStrSort + "' finished (splittable items = '" + issplitfield + "', dontsplitvalues = '" + dontsplitvalues + "')");
       return count;
 
       // int count = itemList.Distinct().Count();
@@ -5347,7 +5348,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return wtab;
     }
 
-    public static List<grabber.DbPersonInfo> Search_String_Persons(string champselect, bool reverseNames)
+    public static IEnumerable<DbPersonInfo> Search_String_Persons(string champselect, bool reverseNames)
     {
 
       MatchCollection oMatches = oRegex.Matches(champselect);
@@ -5355,11 +5356,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var wtab = new List<grabber.DbPersonInfo>();
 
       int wi;
-      string[] Sep = conf.ListSeparator;
+      string[] sep = conf.ListSeparator;
       string[] roleSep = conf.RoleSeparator;
       //char[] SepAsChars; string tS = String.Empty; for (int i = 0; i <= Sep.Length; i++) tS += Sep[i]; SepAsChars = tS.ToCharArray(); string[] arSplit = champselect.Split(SepAsChars, StringSplitOptions.RemoveEmptyEntries);
-      string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
-      string wzone = string.Empty;
+      string[] arSplit = champselect.Split(sep, StringSplitOptions.RemoveEmptyEntries);
       string wzoneRole = string.Empty;
       int wzoneIndexPosition;
       for (wi = 0; wi < arSplit.Length; wi++)
@@ -5367,7 +5367,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (arSplit[wi].Length > 0)
         {
           // wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim()); // Replaced for performancereasons - HTML cleanup was not necessary and was VERY slow!
-          wzone = arSplit[wi].Replace("  ", " ").Trim();
+          string wzone = arSplit[wi].Replace("  ", " ").Trim();
           for (int i = 0; i <= 4; i++)
           {
             if (roleSep[i].Length > 0)
@@ -5394,9 +5394,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (wzone.Length > 0)
           {
-            grabber.DbPersonInfo person = new grabber.DbPersonInfo();
-            person.Name = wzone;
-            person.Job = wzoneRole;
+            var person = new DbPersonInfo { Name = wzone, Job = wzoneRole };
             wtab.Add(person);
           }
         }
@@ -5404,7 +5402,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return wtab;
     }
 
-    public static ArrayList SubItemGrabbing(string champselect)
+    private static ArrayList SubItemGrabbing(string champselect)
     {
       var oRegex = new Regex("\\([^\\)]*?[,;].*?[\\(\\)]");
       MatchCollection oMatches = oRegex.Matches(champselect);
@@ -5415,15 +5413,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       ArrayList wtab = new ArrayList();
 
-      int wi = 0;
-      string[] Sep = conf.ListSeparator;
-      string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
-      string wzone = string.Empty;
+      int wi;
+      string[] sep = conf.ListSeparator;
+      string[] arSplit = champselect.Split(sep, StringSplitOptions.RemoveEmptyEntries);
       for (wi = 0; wi < arSplit.Length; wi++)
       {
         if (arSplit[wi].Length > 0)
         {
-          wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim());
+          string wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim());
           for (int i = 0; i <= 4; i++)
           {
             if (conf.RoleSeparator[i].Length > 0)
@@ -5457,16 +5454,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       var wtab = new ArrayList();
 
-      int wi = 0;
+      int wi;
       string[] Sep = { " - ", ":" }; //Only Dash as Separator for Movietitles !!!
       //string[] CleanerList = new string[] { "Der ", "der ", "Die ", "die ", "Das ", "das", "des", " so", "sich", " a ", " A ", "The ", "the ","- "," -"," AT "};
       string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
-      string wzone = string.Empty;
       for (wi = 0; wi < arSplit.Length; wi++)
       {
         if (arSplit[wi].Length > 0)
         {
-          wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim());
+          string wzone = MediaPortal.Util.HTMLParser.removeHtml(arSplit[wi].Trim());
           for (int i = 0; i <= 4; i++)
           {
             if (conf.RoleSeparator[i].Length > 0)
@@ -5496,27 +5492,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MatchCollection oMatches = oRegex.Matches(champselect);
       foreach (Match oMatch in oMatches)
       {
-        Regex oRegexReplace = new Regex("[,;]");
+        var oRegexReplace = new Regex("[,;]");
         champselect = champselect.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, ""));
         LogMyFilms.Debug("(SubWordGrabbing): RegExReplace: '" + champselect + "'");
       }
 
-      string[] CleanerList = new string[] { "Der ", "der ", "Die ", "die ", "Das ", "das", "des", " so", "sich", " a ", " A ", "The ", "the ", "- ", " -", " AT ", "in " };
+      var cleanerList = new string[] { "Der ", "der ", "Die ", "die ", "Das ", "das", "des", " so", "sich", " a ", " A ", "The ", "the ", "- ", " -", " AT ", "in " };
       int i = 0;
       for (i = 0; i < 13; i++)
       {
-        if ((CleanerList[i].Length > 0) && (filter = true))
+        if ((cleanerList[i].Length > 0) && (filter = true))
         {
-          champselect = champselect.Replace(CleanerList[i], " ");
+          champselect = champselect.Replace(cleanerList[i], " ");
           //LogMyFilms.Debug("(SubWordGrabbing): CleanerListItem: '" + CleanerList[i] + "'");
         }
       }
 
-      ArrayList wtab = new ArrayList();
+      var wtab = new ArrayList();
 
-      int wi = 0;
+      int wi;
       //string[] Sep = conf.ListSeparator;
-      string[] Sep = new string[] { " ", ",", ";", "|", "/", "(", ")", ".", @"\", ":" };
+      var Sep = new string[] { " ", ",", ";", "|", "/", "(", ")", ".", @"\", ":" };
       string[] arSplit = champselect.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
       string wzone = string.Empty;
       for (wi = 0; wi < arSplit.Length; wi++)
@@ -6726,7 +6722,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (filterlist.IndexOf(',') >= 0) // comma separated list ... so process it ...
       {
         // string[] split = filterlist.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-        ArrayList split = Search_String(filterlist, reversenames);
+        var split = Search_String(filterlist, reversenames);
         foreach (string s in split)
         {
           if (indexedview)
@@ -6746,18 +6742,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (indexedview) // if (filterlist.Length == 1) // if it's single character compare, use it as "first character"
         {
-          if (champselect.StartsWith(filterlist, StringComparison.OrdinalIgnoreCase))
-            return true;
-          else
-            return false;
+          return champselect.StartsWith(filterlist, StringComparison.OrdinalIgnoreCase);
         }
         else
         {
           // if (champselect.ToUpper().Contains(filterlist.ToUpper()))
-          if (champselect.IndexOf(filterlist, StringComparison.OrdinalIgnoreCase) >= 0)
-            return true;
-          else
-            return false;
+          return champselect.IndexOf(filterlist, StringComparison.OrdinalIgnoreCase) >= 0;
         }
       }
       return false;
@@ -7397,9 +7387,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // Check, if default person cover is present
         if (conf.StrArtistDflt)
         {
-          string strPathArtist;
-          if (conf.StrPathArtist.Substring(conf.StrPathArtist.Length - 1) == "\\") strPathArtist = conf.StrPathArtist;
-          else strPathArtist = conf.StrPathArtist + "\\";
+          string strPathArtist = conf.StrPathArtist.Substring(conf.StrPathArtist.Length - 1) == "\\"
+                                   ? conf.StrPathArtist
+                                   : conf.StrPathArtist + "\\";
 
           //ImageFast.CreateImage(strThumb, item.Label); // this is to create a pseudo cover with name of label added to it
           //Picture.CreateThumbnail(conf.DefaultCoverArtist, strThumbDirectory + itemlabel + "_s.png", 100, 150, 0, Thumbs.SpeedThumbsSmall);
@@ -8067,12 +8057,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
-      var watch = new Stopwatch(); watch.Reset(); watch.Start();
+      var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
       string oldXmlDb = (conf != null) ? conf.StrFileXml : "";
       conf = new Configuration(CurrentConfig, true, create_temp, loadParams);
       conf.IsDbReloadRequired = (oldXmlDb != conf.StrFileXml); // set reload flag, if the underlying DB has changed (it might not, if user switches config using the same DB)
-      watch.Stop();
-      LogMyFilms.Debug("Load_Config(): Finished loading config '" + CurrentConfig + "' (" + (watch.ElapsedMilliseconds) + " ms)");
+      stopwatch.Stop();
+      LogMyFilms.Debug("Load_Config(): Finished loading config '" + CurrentConfig + "' (" + (stopwatch.ElapsedMilliseconds) + " ms)");
 
       if (conf.Boolreturn && conf.Wselectedlabel == string.Empty)
       {
@@ -10819,10 +10809,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #endregion
 
             dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1)
-              Context_Menu_Movie(selecteditem, string.Empty);
-            else
-              Context_Menu_Movie(selecteditem, choice[dlg.SelectedLabel].ToLower());
+            Context_Menu_Movie(selecteditem, dlg.SelectedLabel == -1 ? string.Empty : choice[dlg.SelectedLabel].ToLower());
             return;
             //Change_Menu_Action(updChoice[dlg.SelectedLabel].ToLower());
             #endregion
@@ -10903,10 +10890,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #endregion
 
             dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1)
-              Context_Menu_Movie(selecteditem, string.Empty);
-            else
-              Context_Menu_Movie(selecteditem, choice[dlg.SelectedLabel].ToLower());
+            Context_Menu_Movie(selecteditem, dlg.SelectedLabel == -1 ? string.Empty : choice[dlg.SelectedLabel].ToLower());
             return;
             #endregion
           }
@@ -10925,10 +10909,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("deletefanart");
 
             dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1)
-              Context_Menu_Movie(selecteditem, string.Empty);
-            else
-              Context_Menu_Movie(selecteditem, choice[dlg.SelectedLabel].ToLower());
+            Context_Menu_Movie(selecteditem, dlg.SelectedLabel == -1 ? string.Empty : choice[dlg.SelectedLabel].ToLower());
             return;
             #endregion
           }
@@ -11005,10 +10986,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #endregion
 
             dlg.DoModal(GetID);
-            if (dlg.SelectedLabel == -1)
-              Context_Menu_Movie(selecteditem, string.Empty);
-            else
-              Context_Menu_Movie(selecteditem, choice[dlg.SelectedLabel].ToLower());
+            Context_Menu_Movie(selecteditem, dlg.SelectedLabel == -1 ? string.Empty : choice[dlg.SelectedLabel].ToLower());
             return;
             #endregion
           }
@@ -13142,8 +13120,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       PlayRandomTrailer(false);
-
-      return;
 
       //////Choose Random Movie from Resultlist
       ////System.Random rnd = new System.Random();

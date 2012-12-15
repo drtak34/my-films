@@ -60,16 +60,10 @@ Public Class DialogRename
         Try
             Dim fileName = Path.GetFileName(fileNameAndPath)
             Dim directory = Path.GetDirectoryName(fileNameAndPath)
-            For Each c As Char In Path.GetInvalidFileNameChars()
-                If fileName.Contains(c) Then
-                    Return False
-                End If
-            Next
-            For Each c As Char In Path.GetInvalidPathChars()
-                If directory.Contains(c) Then
-                    Return False
-                End If
-            Next
+            If Path.GetInvalidFileNameChars().Any(Function(c) fileName.Contains(c)) Then
+                Return False
+            End If
+            Return Path.GetInvalidPathChars().All(Function(c) Not directory.Contains(c))
         Catch ex As Exception
             Return False
         End Try
