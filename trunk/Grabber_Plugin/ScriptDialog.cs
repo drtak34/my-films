@@ -32,7 +32,7 @@ namespace MyVideoGrabber
 
     private void button1_Click(object sender, EventArgs e)
     {
-      XmlTextWriter tw = new XmlTextWriter(Config.GetFolder(Config.Dir.Config) + "\\MyVideoGrabber.xml", UTF8Encoding.UTF8);
+      var tw = new XmlTextWriter(Config.GetFolder(Config.Dir.Config) + "\\MyVideoGrabber.xml", UTF8Encoding.UTF8);
       tw.Formatting = Formatting.Indented;
       tw.WriteStartDocument(true);
       tw.WriteStartElement("Profile");

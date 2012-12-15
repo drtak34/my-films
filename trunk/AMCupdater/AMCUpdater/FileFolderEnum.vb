@@ -168,10 +168,7 @@ Public Class FileFolderEnum
             Next
         Catch ex As Exception
         End Try
-
         myDirectoryRoot = Nothing
-
-
     End Sub
 
     Private Function fnMatchExclusions(ByVal ItemName As String, ByVal ExclusionList As Hashtable) As Boolean
@@ -189,12 +186,8 @@ Public Class FileFolderEnum
         '        End If
         '    End If
         'Next
-        For Each blah As String In ExclusionList.Keys
-            If blah.Length > 0 Then
-                If ItemName.ToLower.Contains(blah.ToLower) Then
-                    ReturnValue = True
-                End If
-            End If
+        For Each blah In From blah1 As String In ExclusionList.Keys Where blah1.Length > 0 Where ItemName.ToLower.Contains(blah1.ToLower)
+            ReturnValue = True
         Next
 
         Return ReturnValue

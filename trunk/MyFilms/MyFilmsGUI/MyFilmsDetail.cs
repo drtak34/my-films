@@ -1487,7 +1487,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (!TraktInternalMenu(MyFilms.currentMovie))
           {
             Change_Menu("mainmenu");
-            return;
           }
           #endregion
           break;
@@ -1642,10 +1641,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #region file selection (source)
           string wfile = string.Empty;
           string wdirectory = string.Empty;
-          if (System.IO.File.Exists(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Check if Sourcefile exists
+          if (File.Exists(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString())) // Check if Sourcefile exists
           {
             wfile = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
-            wdirectory = System.IO.Path.GetDirectoryName(wfile);
+            wdirectory = Path.GetDirectoryName(wfile);
           }
           keyboard.Reset();
           keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
@@ -1716,7 +1715,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlgYesNo.SelectedLabel == -1)
           {
             Change_Menu("delete");
-            return;
           }
           #endregion
           break;
@@ -1740,7 +1738,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlgYesNo.SelectedLabel == -1)
           {
             Change_Menu("delete");
-            return;
           }
           #endregion
           break;
@@ -1764,7 +1761,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlgYesNo.SelectedLabel == -1)
           {
             Change_Menu("delete");
-            return;
           }
           #endregion
           break;
@@ -2430,7 +2426,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return 0;
           }, 0, 0, null);
         }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
-        return;
       }
       else
       {
@@ -2490,7 +2485,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return 0;
             }, 0, 0, null);
           }) { Name = "MyFilmsFanartCreator", IsBackground = true }.Start();
-        return;
       }
     }
 
@@ -2893,7 +2887,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return 0;
         }, 0, 0, null);
       }) { Name = "MyFilmsUpdateXML", IsBackground = true }.Start();
-      return;
     }
 
     //-------------------------------------------------------------------------------------------
@@ -3387,14 +3380,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string strChoice = choiceViewMenu[dlg.SelectedLabel];
                 LogMyFilms.Debug("grabb_Internet_Informations_Search(): (re)search with new search expression: '" + strChoice + "'");
                 grabb_Internet_Informations_Search(strChoice, GetID, wscript, moviePath, grabtype, sTitles, searchanimation);
-                break;
               }
               break;
               #endregion
           }
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) => { return 0; }, 0, 0, null);
         }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
-      return;
     }
 
     //-------------------------------------------------------------------------------------------
@@ -3838,14 +3829,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // int actorID = (strActor[0].Length > 0 && strActor.Count() > 1) ? Convert.ToInt32(strActor[0]) : 0; // string actorname = strActor[1];
                 int actorId;
                 int.TryParse(strActor[0], out actorId);
-                if (actorId > 0)
-                {
-                  person = VideoDatabase.GetActorInfo(actorId);
-                }
-                else
-                {
-                  person = new IMDBActor();
-                }
+                person = actorId > 0 ? VideoDatabase.GetActorInfo(actorId) : new IMDBActor();
               }
               #endregion
 
@@ -4171,7 +4155,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   return 0;
                 }, 0, 0, null);
           }) { Name = "MyFilmsDetailsLoader", IsBackground = true }.Start();
-      return;
     }
 
     private static void grabb_Internet_Details_Informations_Cover(string[] Result, bool interactive, int GetID, string wscript, GrabType grabtype, Searchtitles sTitles)
@@ -7160,7 +7143,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         clearGUIProperty("db.actors.actor" + j + ".image");
       }
 
-      List<DbPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
+      IEnumerable<DbPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
       int i = 1;
       foreach (DbPersonInfo t in wTableau)
       {
@@ -7198,7 +7181,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIControl.ClearControl(GetID, facadePersons.GetID);
 
       string personartworkpath = MyFilms.conf.StrPathArtist;
-      List<DbPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
+      IEnumerable<DbPersonInfo> wTableau = MyFilms.Search_String_Persons(personscontent, false);
       foreach (DbPersonInfo actor in wTableau)
       {
         var item = new GUIListItem();
@@ -7666,7 +7649,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               LogMyFilms.Info("Launch_Movie() - start external player - path = '" + MyFilms.conf.ExternalPlayerPath + "', argument (filestorage) = '" + filestorage + "'");
               LaunchExternalPlayer(filestorage);
-              return;
             } catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
             break;
           case PlayerOption.BluRayPlayerLauncher:
@@ -7682,7 +7664,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               try
               {
                 LaunchExternalPlayer(filestorage);
-                return;
               } catch (Exception ex) { LogMyFilms.Info("Launch_Movie() - calling external player ended with exception: " + ex); }
               #endregion
             }
@@ -7927,7 +7908,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             // GUIUtils.ShowNotifyDialog("OnlineVideo plugin not installed or wrong version");
             GUIUtils.ShowOKDialog("OnlineVideo plugin not installed or wrong version", "Minimum Version required: " + MyFilmsSettings.GetRequiredMinimumVersion(MyFilmsSettings.MinimumVersion.OnlineVideos), "", "");
-            return;
           }
         }
       }
@@ -8123,13 +8103,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (delete)
           {
             delete_movie(wfile, ref newItems);
-            continue;
           }
           else
           {
             idMovie = -1;
             add_update_movie(wfile, row, ref noResumeMovie, ref newItems, ref idMovie, ref movieIndex, ref timeMovieStopped);
-            continue;
           }
         }
       }
@@ -8682,7 +8660,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (dlgYesNo.IsConfirmed) // if (GUIUtils.ShowCustomYesNoDialog(GUILocalizeStrings.Get(10798981), GUILocalizeStrings.Get(10798985) + "\n" + "'" + MyFilms.currentTrailerPlayingItem.TranslatedTitle + "'" + "\n" + "(" + MyFilms.currentTrailerPlayingItem.Title + ") - " + MyFilms.currentTrailerPlayingItem.Year.ToString(), null, null, false, 10, wGetID)) // Trailer Scrobbling ... // Do you want to play the main movie ?
               {
                 Launch_Movie(MyFilms.conf.StrIndex, GetID, m_SearchAnimation, MyFilmsDetail.PlayerOption.Internal);
-                return;
               }
               else
                 dlgYesNo.DeInit();
@@ -9072,14 +9049,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   delete_movie(fi.FullName, ref newItems);
                   Search_parts(fi.FullName, row, delete, ref noResumeMovie, ref newItems, ref idMovie, ref movieIndex, ref timeMovieStopped);
-                  continue;
                 }
                 else
                 {
                   idMovie = -1;
                   add_update_movie(fi.FullName, row, ref noResumeMovie, ref newItems, ref idMovie, ref movieIndex, ref timeMovieStopped);
                   Search_parts(fi.FullName, row, delete, ref noResumeMovie, ref newItems, ref idMovie, ref movieIndex, ref timeMovieStopped);
-                  continue;
                 }
               }
             }

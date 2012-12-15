@@ -284,15 +284,10 @@ namespace Grabber.Importer
 
     void RemoveFromModifiedFilesList(string filePath, WatcherItemType type, bool isFolder)
     {
-      var watcherItemsRemove = new List<WatcherItem>();
       string completeFilePath = filePath;
       if (isFolder) completeFilePath = completeFilePath + "\\";
 
-      foreach (WatcherItem watcherItem in m_modifiedFilesList)
-      {
-        if (watcherItem.m_sFullPathFileName.StartsWith(filePath) && watcherItem.m_type == type)
-          watcherItemsRemove.Add(watcherItem);
-      }
+      var watcherItemsRemove = this.m_modifiedFilesList.Where(watcherItem => watcherItem.m_sFullPathFileName.StartsWith(filePath) && watcherItem.m_type == type).ToList();
       foreach (WatcherItem watcherItem in watcherItemsRemove)
         m_modifiedFilesList.Remove(watcherItem);
     }
@@ -406,11 +401,7 @@ namespace Grabber.Importer
           String sExtention = Path.GetExtension(e.FullPath);
           if (MediaPortal.Util.Utils.VideoExtensions.IndexOf(sExtention) != -1)
           {
-            if (e.ChangeType == WatcherChangeTypes.Deleted)
-              this.RemoveFromModifiedFilesList(e.FullPath, WatcherItemType.Added, false);
-            else
-              this.RemoveFromModifiedFilesList(e.FullPath, WatcherItemType.Deleted, false);
-
+            this.RemoveFromModifiedFilesList(e.FullPath, e.ChangeType == WatcherChangeTypes.Deleted ? WatcherItemType.Added : WatcherItemType.Deleted, false);
             m_modifiedFilesList.Add(new WatcherItem(sender as FileSystemWatcher, e));
           }
         }

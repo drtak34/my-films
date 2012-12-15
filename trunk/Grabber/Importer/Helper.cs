@@ -38,6 +38,7 @@ using System.Xml;
 
 namespace Grabber.Importer.Helpers
 {
+  using System.Linq;
 
   #region Date/Time extension Methods
 
@@ -250,13 +251,12 @@ namespace Grabber.Importer.Helpers
     /// <returns></returns>
     public static string cleanLocalPath(string path)
     {
-      foreach (char c in System.IO.Path.GetInvalidFileNameChars())
-      {
-        path = path.Replace(c, invalidCharReplacement);
-      }
+      path = Path.GetInvalidFileNameChars().Aggregate(path, (current, c) => current.Replace(c, invalidCharReplacement));
       // Also remove trailing dots and spaces            
       return path.TrimEnd(new char[] { '.' }).Trim();
-    } const char invalidCharReplacement = '_';
+    }
+
+    const char invalidCharReplacement = '_';
 
 
     /// <summary>
@@ -264,7 +264,7 @@ namespace Grabber.Importer.Helpers
     /// </summary>
     /// <param name="inputList"></param>
     /// <returns>A list with unique items</returns>
-    public static List<string> RemoveDuplicates(List<string> inputList)
+    public static List<string> RemoveDuplicates(IEnumerable<string> inputList)
     {
       var uniqueStore = new Dictionary<string, int>();
       var finalList = new List<string>();

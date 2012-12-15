@@ -2707,7 +2707,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         {
           MessageBox.Show("File choosen isn't a Picture !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
           SPicture.Focus();
-          return;
         }
       }
     }
@@ -2957,28 +2956,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     {
       Update_Svalue(SField2, SOp2, ref SValue2);
     }
-    private void Update_Svalue(ComboBox SField, ComboBox SOp, ref ComboBox SValue)
+    private void Update_Svalue(ComboBox sField, ComboBox sOp, ref ComboBox sValue)
     {
       string WSelect = string.Empty;
-      switch (SOp.Text.ToLower())
+      switch (sOp.Text.ToLower())
       {
         case "equal":
-          WSelect = SField.Text + " = " + SValue.Text;
+          WSelect = sField.Text + " = " + sValue.Text;
           break;
         case "not equal":
-          WSelect = SField.Text + " # " + SValue.Text;
+          WSelect = sField.Text + " # " + sValue.Text;
           break;
         case "contains":
-          WSelect = SField.Text + " like '*" + SValue.Text + "*'";
+          WSelect = sField.Text + " like '*" + sValue.Text + "*'";
           break;
         case "not contains":
-          WSelect = SField.Text + " not like '*" + SValue.Text + "*'";
+          WSelect = sField.Text + " not like '*" + sValue.Text + "*'";
           break;
         case "greater":
-          WSelect = SField.Text + " greater than '*" + SValue.Text + "*'";
+          WSelect = sField.Text + " greater than '*" + sValue.Text + "*'";
           break;
         case "lower":
-          WSelect = SField.Text + " lower than '*" + SValue.Text + "*'";
+          WSelect = sField.Text + " lower than '*" + sValue.Text + "*'";
           break;
       }
       //if (WSelect.Length > 0)
@@ -2993,15 +2992,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //Read_XML_Logos(Config_Name.Text);
         Read_XML_Logos();
       }
-      DataRow[] movies = mydivx.Tables["Movie"].Select(SField.Text + " is not null", SField.Text.ToString() + " ASC");
+      DataRow[] movies = mydivx.Tables["Movie"].Select(sField.Text + " is not null", sField.Text.ToString() + " ASC");
       string wsfield = null;
-      SValue.Items.Clear();
+      sValue.Items.Clear();
       foreach (DataRow enr in movies)
       {
-        if (enr[SField.Text].ToString().ToLower() != wsfield)
+        if (enr[sField.Text].ToString().ToLower() != wsfield)
         {
-          wsfield = enr[SField.Text].ToString().ToLower();
-          SValue.Items.Add(wsfield);
+          wsfield = enr[sField.Text].ToString().ToLower();
+          sValue.Items.Add(wsfield);
         }
       }
     }

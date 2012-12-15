@@ -239,7 +239,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
         //Save xml config file   
         if (immideateWrite) configxml.Save(EntireFilenameConfig(FileName));
       }
-      return;
     }
 
     // Called with bool type

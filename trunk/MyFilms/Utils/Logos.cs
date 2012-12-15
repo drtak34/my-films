@@ -264,7 +264,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
               listelogos.Add(wtab[7]);
               fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
             }
-            continue;
           }
         }
       }

@@ -50,7 +50,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Info("Aborting background thread: {0}", _CurrentTaskDescription);
         backgroundThread.Abort();
         abortedByUser = byUserRequest;
-        return;
       }
     }
 

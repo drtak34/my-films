@@ -340,13 +340,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     #region Other Public Methods
 
-    /// <summary>
-    /// Resolves skin\\ and thumbs\\ relative paths to absolute.
-    /// Other relative paths are resolved using MediaPortal installation directory.
-    /// Absolute paths are just cleaned.
-    /// </summary>
-    /// <param name="file">Relative or absolute path to resolve</param>
-    /// <returns></returns>
+    ///// <summary>
+    ///// Resolves skin\\ and thumbs\\ relative paths to absolute.
+    ///// Other relative paths are resolved using MediaPortal installation directory.
+    ///// Absolute paths are just cleaned.
+    ///// </summary>
+    ///// <param name="file">Relative or absolute path to resolve</param>
+    ///// <returns></returns>
     //public static string getCleanAbsolutePath(string file) {
     //    if (!System.IO.Path.IsPathRooted(file)) {
     //        // Respect custom skin folders
@@ -1257,7 +1257,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         {
           //Get "joined" rows
           var childrows = firstrow.GetChildRows(r);
-          if (childrows != null && childrows.Length > 0)
+          if (childrows.Length > 0)
           {
             object[] parentarray = firstrow.ItemArray;
             foreach (DataRow secondrow in childrows)

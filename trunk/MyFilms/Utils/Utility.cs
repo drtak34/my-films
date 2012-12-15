@@ -530,7 +530,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Checks if the directory is a logical drive root
     /// </summary>
-    /// <param name="path"></param>
+    /// <param name="directory"></param>
     /// <returns>True if this is a root</returns>
     public static bool IsDriveRoot(DirectoryInfo directory)
     {
@@ -564,11 +564,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return dirLevel;
     }
 
-    /// <summary>
-    /// Check if the file is classified as sample
-    /// </summary>
-    /// <param name="file">file to check</param>
-    /// <returns>True if file is a sample file</returns>
+    ///// <summary>
+    ///// Check if the file is classified as sample
+    ///// </summary>
+    ///// <param name="file">file to check</param>
+    ///// <returns>True if file is a sample file</returns>
     //public static bool isSampleFile(FileInfo file) {
     //    // Set sample max size in bytes
     //    long sampleMaxSize = long.Parse(MovingPicturesCore.SettingsManager["importer_sample_maxsize"].Value.ToString()) * 1024 * 1024;
