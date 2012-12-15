@@ -16997,8 +16997,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, obj.Position);
         GUIPropertyManager.SetProperty("#currentmodule", obj.Title);
         GUIPropertyManager.SetProperty("#itemtype", obj.ItemType);
-        GUIPropertyManager.SetProperty("#itemcount", facadeFilms.Count.ToString());
+        GUIPropertyManager.SetProperty("#itemcount", (facadeFilms != null) ? facadeFilms.Count.ToString() : "");
         GUIPropertyManager.SetProperty("#myfilms.nbobjects.value", obj.NbObjects);
+        GUIPropertyManager.SetProperty("#myfilms.moviecontext.value", obj.MovieContext);
 
         SetLabelView(conf.StrTxtView);
         SetLabelSelect(conf.StrTxtSelect);
@@ -17147,6 +17148,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIPropertyManager.GetProperty("#currentmodule"),
             GUIPropertyManager.GetProperty("#itemtype"),
             GUIPropertyManager.GetProperty("#myfilms.nbobjects.value"),
+            GUIPropertyManager.GetProperty("#myfilms.moviecontext.value"),
             facadeFilms.SelectedListItemIndex,
             (Layout)mapSettings.ViewAs,
             conf,

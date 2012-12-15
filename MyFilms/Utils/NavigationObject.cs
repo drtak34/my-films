@@ -36,6 +36,7 @@ namespace MyFilmsPlugin.Utils
     public string Title { get; set; }
     public string ItemType { get; set; }
     public string NbObjects { get; set; }
+    public string MovieContext { get; set; }
 
     // images
     public CoverState CoverStatus { get; set; }
@@ -66,7 +67,7 @@ namespace MyFilmsPlugin.Utils
 
     public MyFilms.Layout CurrentView { get; set; }
 
-    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, int pos, 
+    public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, string moviecontext, int pos, 
       MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, GUIButtonControl viewButton,
       CoverState coverstate, DateTime lastDBupdate)
     {
@@ -85,6 +86,7 @@ namespace MyFilmsPlugin.Utils
       DbExtraSort = (Boolean.TryParse(curconf.DbSelection[4], out extrasort)) && extrasort;
 
       NbObjects = nbobjects;
+      MovieContext = moviecontext;
 
       CurrentView = curview;
 

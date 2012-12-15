@@ -4,6 +4,25 @@
 
     <!-- LIST and BIG ICON LIST VIEW -->
 
+    <!-- Related Movie Title for those search views -->
+    <control>
+      <type>fadelabel</type>
+      <description>Related Movie Title</description>
+      <id>1</id>
+      <posX>330</posX>
+      <posY>88</posY> 
+      <align>left</align>
+      <font>font16</font>
+      <textcolor>90FFFFFF</textcolor>
+      <width>450</width>
+      <label>#(iif(neq(#myfilms.moviecontext.value,''),'(#myfilms.moviecontext.value)',''))</label>
+      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(38)|Control.isvisible(36)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="30,30" center="450,90" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+    </control>
+
     <!-- PERSON INFO - will only show up in respective views  -->
     <control>
       <description>Current person name</description>
@@ -13,6 +32,7 @@
       <posY>455</posY>
       <width>750</width>
       <font>font22</font>
+      <!-- <label>#(iif(neq(#myfilms.person.name.value,''),#myfilms.person.name.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]','')) #(iif(neq(#myfilms.moviecontext.value,''),'(#myfilms.moviecontext.value)',''))</label> -->
       <label>#(iif(neq(#myfilms.person.name.value,''),#myfilms.person.name.value,'#selecteditem')) #(iif(neq(#myfilms.user.mastertitle.groupcount,''),'[#myfilms.user.mastertitle.groupcount]',''))</label>
       <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(38)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
