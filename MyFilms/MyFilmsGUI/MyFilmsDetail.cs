@@ -8271,16 +8271,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void UpdateOnPlayEnd(MediaPortal.Player.g_Player.MediaType type, int timeMovieStopped, string filename, bool ended, bool stopped)
     {
-      LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "'");
+      LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - ended = '" + ended + "', stopped = '" + stopped + "', trailerPlayed = '" + trailerPlayed + "', filename: '" + filename + "'");
 
       // indicate to skin, that MyFilms isn't playing anymore
       setGUIProperty("isplaying", "false", true);
       MyFilms.conf.MyFilmsPlaybackActive = false;
+
       // detach from global action event, to handle remote keys during playback - e.g. trailer previews
-      try
-      {
-        GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction);
-      }
+      try { GUIWindowManager.OnNewAction -= new OnActionHandler(this.GUIWindowManager_OnNewAction); }
       catch (Exception) { }
 
       if (MyFilms.conf.StrPlayedRow == null) return;
@@ -8290,18 +8288,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       try
       {
+        PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
+        PlayListItem listItem = playlist.LastOrDefault();
+        bool isLastPart = (listItem != null) ? (filename == listItem.FileName) : true;
+
         string otitle = MyFilms.conf.StrPlayedRow["OriginalTitle"].ToString();
         string ttitle = MyFilms.conf.StrPlayedRow["TranslatedTitle"].ToString();
-        LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - otitle = '" + otitle + "', ttitle = '" + ttitle + "'");
+        LogMyFilms.Debug("UpdateOnPlayEnd() was initiated - isLastPart = '" + isLastPart + "',  = '" + otitle + "', ttitle = '" + ttitle + "'");
 
         // Handle all movie files from idMovie
         var movies = new ArrayList();
         int playTimePercentage = 0; // Set watched flag after 80% of total played time
-        double totalRuntimeMovie = 0.0;
-
-        PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
-        bool isLastPart = (g_Player.CurrentFile == playlist.LastOrDefault().FileName);
-
 
         int iidMovie = VideoDatabase.GetMovieId(filename);
         if (iidMovie >= 0)
@@ -8315,33 +8312,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           GUIUtils.GetFilesForMovie(iidMovie, ref movies);
 
+          if (movies.Count <= 0) return;
+
           #region disabled code
           //HashSet<string> watchedMovies = new HashSet<string>();
-
-          //// Stacked movies duration -- taken from Deda, MyVideos
-          //if (_isStacked && _totalMovieDuration != 0)
-          //{
-          //  int duration = 0;
-
-          //  for (int i = 0; i < _stackedMovieFiles.Count; i++)
-          //  {
-          //    int fileID = VideoDatabase.GetFileId((string)_stackedMovieFiles[i]);
-
-          //    if (g_Player.CurrentFile != (string)_stackedMovieFiles[i])
-          //    {
-          //      //(int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
-          //      duration += VideoDatabase.GetMovieDuration(fileID);
-          //      continue;
-          //    }
-          //    playTimePercentage = (100 * (duration + timeMovieStopped) / _totalMovieDuration);
-          //    break;
-          //  }
-          //}
-          //else
-          //{
-          //  if (g_Player.Player.Duration >= 1)
-          //    playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
-          //}
 
           //try
           //{
@@ -8366,6 +8340,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           #region get runtime from MyFilms DB
           string runtimeFromDb = MyFilms.conf.StrPlayedRow["Length"].ToString();
+          double totalRuntimeMovie;
           try
           {
             totalRuntimeMovie = 60 * double.Parse(runtimeFromDb);
@@ -8375,34 +8350,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             LogMyFilms.Debug("TotalRuntimeMovie - Parsing runtime from catalog failed: " + ex.Message);
             totalRuntimeMovie = 0.0;
           }
-          LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', Runtime from DB = '" + runtimeFromDb + "'");
+          LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', Runtime from DB = '" + runtimeFromDb + "', timeMovieStopped = '" + timeMovieStopped + "'");
           #endregion
 
           if (g_Player.Player.Duration >= 1)
           {
-            LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', g_player.Player.Duration = '" + g_Player.Player.Duration.ToString() + "'");
+            int duration = 0;
+            foreach (PlayListItem playListItem in playlist)
+            {
+              if (filename != playListItem.FileName)
+              {
+                int fileId = VideoDatabase.GetFileId(playListItem.FileName);
+                duration += VideoDatabase.GetMovieDuration(fileId);
+                continue;
+              }
+              break;
+            }
+
+            LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', g_player.Player.Duration = '" + g_Player.Player.Duration.ToString() + "', Duration of former playlist items = '" + duration.ToString() + "'");
             if (totalRuntimeMovie > g_Player.Player.Duration)
-              playTimePercentage = (int)Math.Ceiling((timeMovieStopped / totalRuntimeMovie) * 100);
+              playTimePercentage = (int)Math.Ceiling(((duration + timeMovieStopped) / totalRuntimeMovie) * 100);
             else
-              playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
+              playTimePercentage = (int)Math.Ceiling(((duration + timeMovieStopped) / g_Player.Player.Duration) * 100);
             LogMyFilms.Debug("Calculated playtimepercentage: '" + playTimePercentage + "' - g_player.Duration: '" + g_Player.Duration.ToString() + "' - playlistPlayer.g_Player.Duration: '" + playlistPlayer.g_Player.Duration.ToString() + "'");
           }
 
-          if (movies.Count <= 0) return;
-
-          for (int i = 0; i < movies.Count; i++)
+          foreach (object moviepart in movies)
           {
-            string strFilePath = (string)movies[i];
+            string strFilePath = (string)moviepart;
             int idFile = VideoDatabase.GetFileId(strFilePath);
-            byte[] resumeData = null;
-            if (idFile < 0)
-              break;
+            byte[] resumeData;
+            if (idFile < 0) break;
+
             if (g_Player.IsDVDMenu)
             {
               VideoDatabase.SetMovieStopTimeAndResumeData(idFile, 0, null);
               // watchedMovies.Add(strFilePath);
             }
-
             else if (filename.Trim().ToLower().Equals(strFilePath.Trim().ToLower()) && timeMovieStopped > 0)
             {
               g_Player.Player.GetResumeState(out resumeData);
@@ -8434,7 +8418,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //if (g_Player.Player.Duration >= 1)
               //  playTimePercentage = (int)Math.Ceiling((timeMovieStopped / g_Player.Player.Duration) * 100);
 
-              if ((filename == strFilePath) && (timeMovieStopped > 0))
+              if (filename == strFilePath && timeMovieStopped > 0)
               {
                 g_Player.Player.GetResumeState(out resumeData);
                 LogMyFilms.Info("GUIVideoFiles: OnPlayBackStopped idFile={0} timeMovieStopped={1} resumeData={2}", idFile, timeMovieStopped, resumeData);
