@@ -2386,6 +2386,20 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{b81acf59-aab3-4b70-8ca8-2d8156b674e5}-Port.hu-IMDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\Port.hu-IMDB.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\Media-Passion.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{827f3d55-1235-4a61-aa88-dc9d2c458e08}-Media-Passion.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\Media-Passion.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\IMDB-Person.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6a1f912c-e780-43a2-8498-b2fdebf86fc0}-IMDB-Person.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Person.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -7223,10 +7237,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.DB" />
             <SubSystemItem Name="MP.SkinEngine" />
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.Players.Video" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -7242,20 +7256,40 @@ Please refer to the Wiki online documentation.</Value>
     <Version>
       <Major>6</Major>
       <Minor>0</Minor>
-      <Build>1</Build>
-      <Revision>2738</Revision>
+      <Build>2</Build>
+      <Revision>2791</Revision>
     </Version>
-    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
-
-The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
 My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
-    <VersionDescription>This version is the final release of MyFilms 6.0.
+    <VersionDescription>This version is a maintenance release of MyFilms 6.0.
 
-Please report bugs in MyFilms forum.</VersionDescription>
+Please report bugs in MyFilms forum.
+
+Changes &amp; Fixes:
+- With multi part movies a "watched" event is send after each part
+- person role should be removed from label2 in related persons view
+- Add new property to show info about related context
+- Internal IMDB person info grabber stopped working due to IMDB changes
+- Random Fanart does not display when Reverse Person Names is enabled
+- Some Person Image files being saved in wrong directory
+- Bluray from folder do not natively play with MP1.3alpha
+- '&amp;' not correctly displayed in Movie Titles and cover does not display in facade
+- Rework of internal dialog handling
+- Navigation engine does have inconsistant behaviour for start settings
+- Custom Movie Group Settings are not applied in GUI and Layout is not saved.
+- Back navigation sets visibility condition too late
+- MP language is not properly detected and used
+- View Options context menu options do not work correctly for Group lists
+- Download Person Images (selected film) displays on Main window context menu under Updates
+- Move 'Import if no auto match' setting from AMCU to MF Setup and add to MF GUI options
+- Allow edition of previously created filter expressions for views
+- Grabber Interface - Detail tab : "Genre" should be "Category"</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
-    <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.1.2738.mpe1</OnlineLocation>
-    <ReleaseDate>2012-11-18T03:21:38.2659766+01:00</ReleaseDate>
+    <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
+    <ReleaseDate>2012-12-15T17:13:57.342823+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -9636,6 +9670,20 @@ Please report bugs in MyFilms forum.</VersionDescription>
         <LocalFileName>Config\scripts\MyFilms\Port.hu-IMDB.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{b81acf59-aab3-4b70-8ca8-2d8156b674e5}-Port.hu-IMDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\Port.hu-IMDB.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\Media-Passion.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{827f3d55-1235-4a61-aa88-dc9d2c458e08}-Media-Passion.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\Media-Passion.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\IMDB-Person.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6a1f912c-e780-43a2-8498-b2fdebf86fc0}-IMDB-Person.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Person.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
