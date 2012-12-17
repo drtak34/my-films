@@ -830,7 +830,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // GUIPropertyManager.SetProperty("#currentmodule", GUILocalizeStrings.Get(MyFilms.ID_MyFilms));
 
-      CheckSkinInterfaceVersion();
+      if (!CheckSkinInterfaceVersion())
+      {
+        GUIWindowManager.ShowPreviousWindow();
+        return;
+      }
 
       if (InitialStart)
       {
@@ -1231,7 +1235,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("MyFilms.OnPageDestroy(" + newWindowId.ToString() + ") started.");
 
       // save current GUIlist in navigation cache, also stops any remaining facade background worker
-      SaveListState(false);
+      if (facadeFilms != null) SaveListState(false);
 
       GUIBackgroundTask.Instance.StopBackgroundTask();
 
@@ -16626,75 +16630,87 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     #endregion
 
-    private void CheckSkinInterfaceVersion()
+    private bool CheckSkinInterfaceVersion() // returns false, if plugin should not start, true, if start can continue
     {
-      //if (!File.Exists(GUIGraphicsContext.Skin + @"\MyFilms.xml"))
-      //{
-      //  ShowMessageDialog(GUILocalizeStrings.Get(10798624), "Your Skin does not support MyFilms!", "Please ask skin author to add MyFilms support.", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
-      //  GUIWindowManager.ShowPreviousWindow(); // leave plugin
-      //}
-
       string skin = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
       if (currentSkin == null || currentSkin != skin)
       {
-        int VersionMajor = 0;
-        int VersionMinor = 0;
-        int VersionBuild = 0;
-        int VersionRevision = 0;
-        currentSkin = skin;
-        bool success = GetSkinInterfaceVersion(ref VersionMajor, ref VersionMinor, ref VersionBuild, ref VersionRevision);
+        #region check skin version and existance
+        int versionMajor;
+        int versionMinor;
+        int versionBuild;
+        int versionRevision;
+        bool success = GetSkinInterfaceVersion(skin, out versionMajor, out versionMinor, out versionBuild, out versionRevision);
         if (success)
         {
-          LogMyFilms.Info("CheckSkinInterfaceVersion(): Current  Skin Interface Version = 'V" + VersionMajor + "." + VersionMinor + "' for skin '" + currentSkin + "'");
+          LogMyFilms.Info("CheckSkinInterfaceVersion(): Current  Skin Interface Version = 'V" + versionMajor + "." + versionMinor + "' for skin '" + skin + "'");
           LogMyFilms.Info("CheckSkinInterfaceVersion(): Required Skin Interface Version = 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
-          if (VersionMajor != SkinInterfaceVersionMajor || VersionMajor == 0)
+          if (versionMajor != SkinInterfaceVersionMajor || versionMajor == 0)
           {
             InitMainScreen(false);
             GUIUtils.ShowOKDialog(
-              "Your MyFilms skin is not compatible!", 
-              "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", 
-              "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'", 
+              GUILocalizeStrings.Get(10799611), // Your MyFilms skin is not compatible!
+              GUILocalizeStrings.Get(10799612) + "'V" + versionMajor + "." + versionMinor + "'", // Current Version: 
+              GUILocalizeStrings.Get(10799613) + "'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'", // Required Version: 
               "");
-            if (VersionMajor > 0) GUIWindowManager.ShowPreviousWindow(); // leave plugin
+            if (versionMajor > 0)
+            {
+              return false; // leave plugin
+            }
           }
-          else if (VersionMinor != SkinInterfaceVersionMinor)
+          else if (versionMinor != SkinInterfaceVersionMinor)
           {
             InitMainScreen(false);
             GUIUtils.ShowOKDialog(
-              "",
-              VersionMinor < SkinInterfaceVersionMinor ? "Your MyFilms skin should be updated to support all features !" : "Your MyFilms skin should be downgraded to properly work with this version !",
-              "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'",
+              versionMinor < SkinInterfaceVersionMinor ? GUILocalizeStrings.Get(10799614) : GUILocalizeStrings.Get(10799615), // "Your MyFilms skin should be updated to support all features !" : "Your MyFilms skin should be downgraded to properly work with this version !",
+              GUILocalizeStrings.Get(10799612) + "'V" + versionMajor + "." + versionMinor + "'", // Current Version: 
+              GUILocalizeStrings.Get(10799613) + "'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'", // Required Version: 
               "");
           }
         }
         else
         {
-          LogMyFilms.Info("CheckSkinInterfaceVersion(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "'");
-          InitMainScreen(false);
-          GUIUtils.ShowOKDialog(
-            "Your MyFilms skin should be updated to support all features !", 
-            "Current Version: 'V" + VersionMajor + "." + VersionMinor + "'", 
-            "Required Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'",
-            "");
+          if (!File.Exists(GUIGraphicsContext.Skin + @"\MyFilms.xml"))
+          {
+            GUIUtils.ShowOKDialog(
+              GUILocalizeStrings.Get(10799616), // "Your current skin does not support MyFilms!"
+              GUILocalizeStrings.Get(10799617), // "Please ask skin author to add MyFilms support."
+              GUILocalizeStrings.Get(10799613) + "'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'", // Required Version: 
+              "");
+            return false; // leave plugin
+          }
+          else
+          {
+            LogMyFilms.Info("CheckSkinInterfaceVersion(): Cannot read Current Skin Interface Version for skin '" + skin + "'");
+            InitMainScreen(false);
+            GUIUtils.ShowOKDialog(
+              GUILocalizeStrings.Get(10799614), // "Your MyFilms skin should be updated to support all features !"
+              "",
+              GUILocalizeStrings.Get(10799613) + "'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'", // Required Version: 
+              "");
+          }
         }
+        currentSkin = skin; // all ok, so make sure this is remembered for next time
+        #endregion
       }
       else
       {
         LogMyFilms.Info("CheckSkinInterfaceVersion(): skipping check - no skin change - Current Skin is still '" + currentSkin + "'");
       }
+      return true;
     }
 
-    private bool GetSkinInterfaceVersion(ref int VersionMajor, ref int VersionMinor, ref int VersionBuild, ref int VersionRevision)
+    private bool GetSkinInterfaceVersion(string currentskin, out int iVersionMajor, out int iVersionMinor, out int iVersionBuild, out int iVersionRevision)
     {
-      string _versionMajor = "";
-      string _versionMinor = "";
-      string _versionBuild = "";
-      string _versionRevision = "";
+      string versionMajor = "";
+      string versionMinor = "";
+      string versionBuild = "";
+      string versionRevision = "";
       bool success = true;
-      VersionMajor = 0;
-      VersionMinor = 0;
-      VersionBuild = 0;
-      VersionRevision = 0;
+      iVersionMajor = 0;
+      iVersionMinor = 0;
+      iVersionBuild = 0;
+      iVersionRevision = 0;
       string name = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
       var doc = new XmlDocument();
       try
@@ -16719,16 +16735,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   XmlNode majorVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "major");
                   if (majorVersionNode != null)
-                    _versionMajor = majorVersionNode.InnerText;
+                    versionMajor = majorVersionNode.InnerText;
                   XmlNode minorVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "minor");
                   if (minorVersionNode != null)
-                    _versionMinor = minorVersionNode.InnerText;
+                    versionMinor = minorVersionNode.InnerText;
                   XmlNode buildVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "build");
                   if (buildVersionNode != null)
-                    _versionBuild = buildVersionNode.InnerText;
+                    versionBuild = buildVersionNode.InnerText;
                   XmlNode revisionVersionNode = GenericExtensions.SelectSingleNodeFast(versionNode, "revision");
                   if (revisionVersionNode != null)
-                    _versionRevision = revisionVersionNode.InnerText;
+                    versionRevision = revisionVersionNode.InnerText;
                 }
               }
             }
@@ -16737,15 +16753,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       catch (Exception ex)
       {
-        LogMyFilms.Debug("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentSkin + "' - exception: " + ex.Message + ", Stacktrace: " + ex.StackTrace);
-        _versionMajor = "";
-        _versionMinor = "";
-        _versionBuild = "";
-        _versionRevision = "";
-        VersionMajor = 0;
-        VersionMinor = 0;
-        VersionBuild = 0;
-        VersionRevision = 0;
+        LogMyFilms.Debug("OnPageLoad(): Cannot read Current Skin Interface Version for skin '" + currentskin + "' - exception: " + ex.Message);
+        versionMajor = "";
+        versionMinor = "";
+        versionBuild = "";
+        versionRevision = "";
+        iVersionMajor = 0;
+        iVersionMinor = 0;
+        iVersionBuild = 0;
+        iVersionRevision = 0;
         success = false;
       }
       finally
@@ -16753,12 +16769,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         doc = null;
       }
       if (!success) return false;
-      success = int.TryParse(_versionMajor.Trim(), out VersionMajor);
-      if (!success) return false;
-      success = int.TryParse(_versionMinor.Trim(), out VersionMinor);
-      if (!success) return false;
-      success = int.TryParse(_versionBuild.Trim(), out VersionBuild);
-      success = int.TryParse(_versionRevision.Trim(), out VersionRevision);
+      if (!int.TryParse(versionMajor.Trim(), out iVersionMajor) || !int.TryParse(versionMinor.Trim(), out iVersionMinor)) return false;
+      success = int.TryParse(versionBuild.Trim(), out iVersionBuild);
+      success = int.TryParse(versionRevision.Trim(), out iVersionRevision);
       return true;
     }
 
