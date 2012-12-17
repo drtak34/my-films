@@ -464,6 +464,14 @@
     <String id="10799501">Internet Details ...</String>
     <String id="10799502">Ansichts Optionen ...</String>
     <String id="10799601">MyFilms ist noch nicht konfiguriert !</String>
-    <String id="10799602">Bitte erst Setup ausf체hren um eine Konfiguration zu erstellen.</String>
+    <String id="10799602">Bitte erst Setup ausf체hren,</String>
+    <String id="10799603">um eine Konfiguration zu erstellen.</String>
+    <String id="10799611">Die MyFilms Skindateien sind nicht kompatibel !</String>
+    <String id="10799612">Aktuelle Version: </String>
+    <String id="10799613">Ben철tigte Version: </String>
+    <String id="10799614">Die MyFilms Skindateien sollten aktualisiert werden um alle Features zu unterst걎zen !</String>
+    <String id="10799615">Verwenden Sie 채ltere MyFilms Skindateien um diese Version zu nutzen !</String>
+    <String id="10799616">Der aktuelle Skin unterst체tzt MyFilms nicht !</String>
+    <String id="10799617">Fragen Sie den Skin Autor nach einem Update f체r MyFilms.</String>
   </Section>
 </Language>

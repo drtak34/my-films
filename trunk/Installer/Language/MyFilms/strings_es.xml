@@ -464,6 +464,14 @@
     <String id="10799501">Detalles de web ...</String>
     <String id="10799502">Ver opciones ...</String>
     <String id="10799601">No Configuration found !</String>
-    <String id="10799602">Please enter setup first to create a MyFilms config.</String>
+    <String id="10799602">Please enter setup first</String>
+    <String id="10799603">to create a MyFilms config.</String>
+    <String id="10799611">Your MyFilms skin is not compatible!</String>
+    <String id="10799612">Current Version: </String>
+    <String id="10799613">Required Version: </String>
+    <String id="10799614">Your MyFilms skin should be updated to support all features !</String>
+    <String id="10799615">Your MyFilms skin should be downgraded to properly work with this version !</String>
+    <String id="10799616">Your current skin does not support MyFilms !</String>
+    <String id="10799617">Please ask skin author to add MyFilms support.</String>
   </Section>
 </Language>
