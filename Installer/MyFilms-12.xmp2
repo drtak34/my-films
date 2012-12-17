@@ -7237,10 +7237,10 @@ Please refer to the Wiki online documentation.</Value>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
-            <SubSystemItem Name="MP.DB" />
             <SubSystemItem Name="MP.SkinEngine" />
             <SubSystemItem Name="MP.Config" />
             <SubSystemItem Name="MP.Players.Video" />
+            <SubSystemItem Name="MP.DB" />
           </Items>
         </SubSystemsUsed>
       </PluginDependencyItem>
@@ -7256,15 +7256,20 @@ Please refer to the Wiki online documentation.</Value>
     <Version>
       <Major>6</Major>
       <Minor>0</Minor>
-      <Build>2</Build>
-      <Revision>2791</Revision>
+      <Build>3</Build>
+      <Revision>2795</Revision>
     </Version>
-    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
-
-The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+
+
+
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+
 My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
-    <VersionDescription>This version is a maintenance release of MyFilms 6.0.
+    <VersionDescription>This version is a maintenance release of MyFilms 6.0.
+
 
 Please report bugs in MyFilms forum.
 
@@ -7289,7 +7294,7 @@ Changes &amp; Fixes:
 - Grabber Interface - Detail tab : "Genre" should be "Category"</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
-    <ReleaseDate>2012-12-15T17:13:57.342823+01:00</ReleaseDate>
+    <ReleaseDate>2012-12-17T16:46:07.80109+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
