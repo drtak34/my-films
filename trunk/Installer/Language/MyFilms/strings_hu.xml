@@ -463,5 +463,7 @@
     <String id="10799402">Globális szűrők</String>
     <String id="10799501">Web Details ...</String>
     <String id="10799502">View Options ...</String>
+    <String id="10799601">No Configuration found !</String>
+    <String id="10799602">Please enter setup first to create a MyFilms config.</String>
   </Section>
 </Language>

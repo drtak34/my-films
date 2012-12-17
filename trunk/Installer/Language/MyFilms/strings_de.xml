@@ -463,5 +463,7 @@
     <String id="10799402">Globale Filter</String>
     <String id="10799501">Internet Details ...</String>
     <String id="10799502">Ansichts Optionen ...</String>
+    <String id="10799601">MyFilms ist noch nicht konfiguriert !</String>
+    <String id="10799602">Bitte erst Setup ausführen um eine Konfiguration zu erstellen.</String>
   </Section>
 </Language>

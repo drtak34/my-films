@@ -1130,7 +1130,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Info("MyFilms ********** OperationsMode (PluginMode): '" + PluginMode + "' **********");
         if (NbConfig == 0)
         {
-          GUIUtils.ShowOKDialog("No Configuration defined", "Please enter setup first", "", "");
+          GUIUtils.ShowOKDialog(GUILocalizeStrings.Get(10799601), GUILocalizeStrings.Get(10799602), "", ""); // No configuration found ! // please enter setup to define a MyFilms config first.
           return false;
 
           // return NewConfigWizard();
