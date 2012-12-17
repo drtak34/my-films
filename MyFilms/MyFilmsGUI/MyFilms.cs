@@ -935,14 +935,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
         }
 
-        Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
-
         if (string.IsNullOrEmpty(Configuration.CurrentConfig))
         {
           LogMyFilms.Error("OnPageLoad(): Config is empty - returning calling ShowPreviousWindow() !");
           GUIWindowManager.ShowPreviousWindow();
           return;
         }
+
+        Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
 
         InitFSwatcher(); // load DB watcher for multiseat
         if (InitialStart) InitAmcImporter(MyFilms.conf); // load watcher for movie directories
@@ -1248,7 +1248,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the next start to fix "visibility animations" ....
 
-      if (Configuration.CurrentConfig != "")
+      if (!string.IsNullOrEmpty(Configuration.CurrentConfig))
       {
         if (this.facadeFilms == null || this.facadeFilms.SelectedListItemIndex == -1)
           Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");

@@ -463,5 +463,7 @@
     <String id="10799402">Filtri Globali</String>
     <String id="10799501">Dettagli Web ...</String>
     <String id="10799502">Opzioni vista ...</String>
+    <String id="10799601">No Configuration found !</String>
+    <String id="10799602">Please enter setup first to create a MyFilms config.</String>
   </Section>
 </Language>
