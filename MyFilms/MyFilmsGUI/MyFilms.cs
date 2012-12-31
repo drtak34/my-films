@@ -2348,7 +2348,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bool labelNotEmpty = (sLabel != "");
         Type columnType = GetColumnType(conf.WStrSort);
         string datatype = "";
-        using (var ds = new AntMovieCatalog())
+        using (AntMovieCatalog ds = new AntMovieCatalog())
         {
           datatype = ds.Movie.Columns[conf.WStrSort].DataType.Name; // == "string"
         }
@@ -11283,8 +11283,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 switch (conf.ViewContext)
                 {
                   case ViewContext.Movie:
-                    //newRow.Value = Prev_Label;
-                    newRow.Value = conf.Wselectedlabel;
+                    // newRow.Value = Prev_Label;
+                    // newRow.Value = conf.Wselectedlabel;
+                    newRow.Value = "*";
                     newRow.Filter = conf.StrSelect;
                     if (IsPersonField(newRow.DBfield))
                       newRow.ImagePath = (!string.IsNullOrEmpty(personcover.Filename)) ? personcover.Filename : conf.DefaultCoverArtist;
