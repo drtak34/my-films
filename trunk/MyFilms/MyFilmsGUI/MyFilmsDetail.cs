@@ -10474,26 +10474,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (message.Message)
       {
         case GUIMessage.MessageType.GUI_MSG_AUTOPLAY_VOLUME:
-          LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received ! - MessageType = '" + message.Message.ToString() + "', Param1 = '" + message.Param1 + "', Param2 = '" + message.Param2 + "', message label = '" + message.Label + "'");
+          LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received ! - MessageType = '" + message.Message.ToString() + "', Param1 = '" + message.Param1.ToString() + "', Param2 = '" + message.Param2.ToString() + "', message label = '" + message.Label.ToString() + "'");
           if (message.Param1 == (int)MediaPortal.Ripper.AutoPlay.MediaType.VIDEO)
           {
             switch (message.Param2)
             {
               case (int)AutoPlay.MediaSubType.AUDIO_CD:
               case (int)AutoPlay.MediaSubType.BLURAY:
-                LogMyFilms.Debug(
-                  "GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.BLURAY'");
+                LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.BLURAY'");
                 // GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
                 break;
               case (int)AutoPlay.MediaSubType.DVD:
-                LogMyFilms.Debug(
-                  "GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.DVD'");
+                LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.DVD'");
                 // OnPlayDVD(message.Label, GetID);
                 break;
               case (int)AutoPlay.MediaSubType.FILES:
               case (int)AutoPlay.MediaSubType.VCD:
-                LogMyFilms.Debug(
-                  "GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.VCD' or 'AutoPlay.MediaSubType.FILES'");
+                LogMyFilms.Debug("GUIWindowManager_OnNewMessage() - New Message received - 'AutoPlay.MediaSubType.VCD' or 'AutoPlay.MediaSubType.FILES'");
                 // OnPlayFiles((System.Collections.ArrayList)message.Object);
                 break;
               case (int)AutoPlay.MediaSubType.HDDVD:
