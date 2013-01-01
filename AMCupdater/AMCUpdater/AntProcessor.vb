@@ -810,7 +810,9 @@ Public Class AntProcessor
         'TO SWITCH FROM SINGLE-THREAD to MULTI-THREAD, CHANGE HERE!
         'bgwManualMovieUpdate.RunWorkerAsync(smuc)
         smuc.RunUpdate()
-        bgwManualUpdate_PostProcessing()
+        If smuc.DoSave = True Then
+            bgwManualUpdate_PostProcessing()
+        End If
 
     End Sub
 
@@ -1415,6 +1417,7 @@ Public Class AntProcessor
     Private Class SingleMovieUpdateClass
 
         Public XmlDoc As XmlDocument
+        Public DoSave As Boolean = False
 
         Public Sub RunUpdate()
             ' Check, if it is a valid movie number
@@ -1570,7 +1573,10 @@ Public Class AntProcessor
                 .ProcessFile(AntRecord.ProcessModeNames.Update)
 
                 Dim UpdateMovieDialog As New frmMovieUpdate()
+
                 With UpdateMovieDialog
+                    .PictureBoxOld.ImageLocation = ""
+                    .PictureBoxNew.ImageLocation = ""
                     Dim item As Object
                     Dim FieldName As String
                     Dim FieldChecked As Boolean
@@ -1593,7 +1599,7 @@ Public Class AntProcessor
                                     ValueNew = Nothing
                                 End If
                             End If
-                            .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
+
                             If FieldName = "Picture" Then
                                 Dim OldImage As String = ValueOld
                                 If ValueOld Is Nothing Then
@@ -1609,15 +1615,22 @@ Public Class AntProcessor
                                     NewImage = ValueNew.Substring(ValueNew.LastIndexOf("\") + 1)
                                 End If
 
+                                If Not File.Exists(NewImage) Then
+                                    NewImage = Nothing
+                                    ValueNew = ""
+                                End If
                                 .PictureBoxOld.ImageLocation = If((Path.Combine(ImagePath, OldImage)), "")
                                 .PictureBoxNew.ImageLocation = If((Path.Combine(ImagePathTemp, NewImage)), "")
                             End If
+
+                            .DgvUpdateMovie.Rows.Add(New Object() {FieldChecked, FieldName, ValueOld, ValueNew})
                         Catch ex As Exception
                             MsgBox("Error adding data ('" + FieldName + "') to Movie Update Dialog: " + ex.Message, MsgBoxStyle.OkOnly)
                         End Try
                     Next
 
                     If .ShowDialog = Windows.Forms.DialogResult.OK Then
+                        DoSave = True
                         For i As Integer = 0 To .DgvUpdateMovie.RowCount - 1
                             Dim itemName As String = ""
                             Dim itemValue As String = ""
@@ -1625,15 +1638,25 @@ Public Class AntProcessor
                                 itemName = .DgvUpdateMovie(1, i).Value
                                 If .DgvUpdateMovie(0, i).Value = True Then
                                     itemValue = .DgvUpdateMovie(3, i).Value
-                                    If itemName = "Picture" Then
-                                        Dim TmpImage As String = itemValue
-                                        If itemValue.Contains("\") Then
-                                            TmpImage = itemValue.Substring(itemValue.LastIndexOf("\") + 1)
-                                        End If
-                                        File.Copy(Path.Combine(ImagePathTemp, TmpImage), Path.Combine(ImagePath, TmpImage), True)
-                                        Thread.Sleep(20)
-                                        File.Delete(Path.Combine(ImagePathTemp, TmpImage))
-                                    End If
+
+                                    Select Case itemName
+                                        Case "Picture"
+                                            Dim TmpImage As String = itemValue
+                                            If itemValue.Contains("\") Then
+                                                TmpImage = itemValue.Substring(itemValue.LastIndexOf("\") + 1)
+                                            End If
+                                            If File.Exists(Path.Combine(ImagePathTemp, TmpImage)) Then
+                                                File.Copy(Path.Combine(ImagePathTemp, TmpImage), Path.Combine(ImagePath, TmpImage), True)
+                                                Thread.Sleep(20)
+                                                File.Delete(Path.Combine(ImagePathTemp, TmpImage))
+                                            Else
+                                                itemValue = Nothing
+                                            End If
+                                        Case "Rating", "Picture", "Date"
+                                            If String.IsNullOrEmpty(itemValue) Then
+                                                itemValue = Nothing
+                                            End If
+                                    End Select
                                 Else
                                     itemValue = .DgvUpdateMovie(2, i).Value
                                 End If
@@ -1649,7 +1672,12 @@ Public Class AntProcessor
                             End Try
                             Try
                                 If CurrentNode.Attributes(itemName) IsNot Nothing Then
-                                    CurrentNode.Attributes(itemName).Value = itemValue
+
+                                    If itemValue IsNot Nothing Then
+                                        CurrentNode.Attributes(itemName).Value = itemValue
+                                    Else
+                                        RemoveValue(CurrentNode, itemName)
+                                    End If
                                 Else
                                     If CurrentNode.Item("CustomFields") IsNot Nothing Then
                                         Dim customfieldselement As Xml.XmlElement = CurrentNode.Item("CustomFields")
@@ -1670,7 +1698,9 @@ Public Class AntProcessor
                     End If
                 End With
 
-                Ant.SaveProgress()
+                If DoSave Then
+                    Ant.SaveProgress()
+                End If
                 'If frmMovieUpdate.DialogResult = DialogResult.OK Then
                 '    .SaveProgress()
                 'End If

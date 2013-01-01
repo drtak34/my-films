@@ -302,8 +302,11 @@ Partial Class Form1
         Me.txtSampleFile = New System.Windows.Forms.TextBox
         Me.ViewCollection = New System.Windows.Forms.TabPage
         Me.GroupBoxMovieDetails = New System.Windows.Forms.GroupBox
-        Me.TextBox37 = New System.Windows.Forms.TextBox
+        Me.TextBox40 = New System.Windows.Forms.TextBox
         Me.MovieBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.TextBox39 = New System.Windows.Forms.TextBox
+        Me.TextBox38 = New System.Windows.Forms.TextBox
+        Me.TextBox37 = New System.Windows.Forms.TextBox
         Me.Label103 = New System.Windows.Forms.Label
         Me.Label102 = New System.Windows.Forms.Label
         Me.TextBox33 = New System.Windows.Forms.TextBox
@@ -318,9 +321,7 @@ Partial Class Form1
         Me.Label81 = New System.Windows.Forms.Label
         Me.Label50 = New System.Windows.Forms.Label
         Me.Label80 = New System.Windows.Forms.Label
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox
         Me.TextBox29 = New System.Windows.Forms.TextBox
-        Me.RichTextBox2 = New System.Windows.Forms.RichTextBox
         Me.GroupBox14 = New System.Windows.Forms.GroupBox
         Me.TextBox36 = New System.Windows.Forms.TextBox
         Me.Label53 = New System.Windows.Forms.Label
@@ -330,7 +331,6 @@ Partial Class Form1
         Me.TextBox6 = New System.Windows.Forms.TextBox
         Me.TextBox1 = New System.Windows.Forms.TextBox
         Me.Label78 = New System.Windows.Forms.Label
-        Me.RichTextBox3 = New System.Windows.Forms.RichTextBox
         Me.TextBox28 = New System.Windows.Forms.TextBox
         Me.TextBox3 = New System.Windows.Forms.TextBox
         Me.Label77 = New System.Windows.Forms.Label
@@ -3531,8 +3531,8 @@ Partial Class Form1
         '
         Me.ViewCollection.Controls.Add(Me.GroupBoxMovieDetails)
         Me.ViewCollection.Controls.Add(Me.XionPanel1)
-        Me.ViewCollection.Controls.Add(Me.Label59)
         Me.ViewCollection.Controls.Add(Me.MovieBindingNavigator)
+        Me.ViewCollection.Controls.Add(Me.Label59)
         Me.ViewCollection.Location = New System.Drawing.Point(4, 22)
         Me.ViewCollection.Name = "ViewCollection"
         Me.ViewCollection.Padding = New System.Windows.Forms.Padding(3)
@@ -3543,6 +3543,9 @@ Partial Class Form1
         '
         'GroupBoxMovieDetails
         '
+        Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox40)
+        Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox39)
+        Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox38)
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox37)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label103)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label102)
@@ -3558,12 +3561,9 @@ Partial Class Form1
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label81)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label50)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label80)
-        Me.GroupBoxMovieDetails.Controls.Add(Me.RichTextBox1)
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox29)
-        Me.GroupBoxMovieDetails.Controls.Add(Me.RichTextBox2)
         Me.GroupBoxMovieDetails.Controls.Add(Me.GroupBox14)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label78)
-        Me.GroupBoxMovieDetails.Controls.Add(Me.RichTextBox3)
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox28)
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox3)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label77)
@@ -3597,12 +3597,46 @@ Partial Class Form1
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox15)
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox12)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label62)
-        Me.GroupBoxMovieDetails.Dock = System.Windows.Forms.DockStyle.Right
-        Me.GroupBoxMovieDetails.Location = New System.Drawing.Point(93, 28)
+        Me.GroupBoxMovieDetails.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBoxMovieDetails.Location = New System.Drawing.Point(87, 28)
         Me.GroupBoxMovieDetails.Name = "GroupBoxMovieDetails"
-        Me.GroupBoxMovieDetails.Size = New System.Drawing.Size(504, 549)
+        Me.GroupBoxMovieDetails.Size = New System.Drawing.Size(510, 549)
         Me.GroupBoxMovieDetails.TabIndex = 1
         Me.GroupBoxMovieDetails.TabStop = False
+        '
+        'TextBox40
+        '
+        Me.TextBox40.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Comments", True))
+        Me.TextBox40.Location = New System.Drawing.Point(187, 430)
+        Me.TextBox40.Multiline = True
+        Me.TextBox40.Name = "TextBox40"
+        Me.TextBox40.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox40.Size = New System.Drawing.Size(310, 56)
+        Me.TextBox40.TabIndex = 55
+        '
+        'MovieBindingSource
+        '
+        Me.MovieBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.MovieDataTable)
+        '
+        'TextBox39
+        '
+        Me.TextBox39.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Description", True))
+        Me.TextBox39.Location = New System.Drawing.Point(187, 329)
+        Me.TextBox39.Multiline = True
+        Me.TextBox39.Name = "TextBox39"
+        Me.TextBox39.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox39.Size = New System.Drawing.Size(310, 93)
+        Me.TextBox39.TabIndex = 54
+        '
+        'TextBox38
+        '
+        Me.TextBox38.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Actors", True))
+        Me.TextBox38.Location = New System.Drawing.Point(227, 266)
+        Me.TextBox38.Multiline = True
+        Me.TextBox38.Name = "TextBox38"
+        Me.TextBox38.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox38.Size = New System.Drawing.Size(270, 57)
+        Me.TextBox38.TabIndex = 53
         '
         'TextBox37
         '
@@ -3611,10 +3645,6 @@ Partial Class Form1
         Me.TextBox37.Name = "TextBox37"
         Me.TextBox37.Size = New System.Drawing.Size(63, 20)
         Me.TextBox37.TabIndex = 2
-        '
-        'MovieBindingSource
-        '
-        Me.MovieBindingSource.DataSource = GetType(AMCUpdater.AntMovieCatalog.MovieDataTable)
         '
         'Label103
         '
@@ -3738,17 +3768,6 @@ Partial Class Form1
         Me.Label80.TabIndex = 28
         Me.Label80.Text = "Writer"
         '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Description", True))
-        Me.RichTextBox1.Location = New System.Drawing.Point(187, 329)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(310, 93)
-        Me.RichTextBox1.TabIndex = 36
-        Me.RichTextBox1.Text = ""
-        '
         'TextBox29
         '
         Me.TextBox29.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Writer", True))
@@ -3756,17 +3775,6 @@ Partial Class Form1
         Me.TextBox29.Name = "TextBox29"
         Me.TextBox29.Size = New System.Drawing.Size(121, 20)
         Me.TextBox29.TabIndex = 29
-        '
-        'RichTextBox2
-        '
-        Me.RichTextBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.RichTextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Comments", True))
-        Me.RichTextBox2.Location = New System.Drawing.Point(187, 430)
-        Me.RichTextBox2.Name = "RichTextBox2"
-        Me.RichTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical
-        Me.RichTextBox2.Size = New System.Drawing.Size(310, 56)
-        Me.RichTextBox2.TabIndex = 37
-        Me.RichTextBox2.Text = ""
         '
         'GroupBox14
         '
@@ -3856,15 +3864,6 @@ Partial Class Form1
         Me.Label78.Size = New System.Drawing.Size(33, 13)
         Me.Label78.TabIndex = 42
         Me.Label78.Text = "Disks"
-        '
-        'RichTextBox3
-        '
-        Me.RichTextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Actors", True))
-        Me.RichTextBox3.Location = New System.Drawing.Point(227, 266)
-        Me.RichTextBox3.Name = "RichTextBox3"
-        Me.RichTextBox3.Size = New System.Drawing.Size(270, 59)
-        Me.RichTextBox3.TabIndex = 35
-        Me.RichTextBox3.Text = ""
         '
         'TextBox28
         '
@@ -4343,18 +4342,16 @@ Partial Class Form1
         '
         'XionPanel1
         '
-        Me.XionPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.XionPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.XionPanel1.Controls.Add(Me.DataGridViewMovie)
-        Me.XionPanel1.Location = New System.Drawing.Point(3, 31)
+        Me.XionPanel1.Dock = System.Windows.Forms.DockStyle.Left
+        Me.XionPanel1.Location = New System.Drawing.Point(3, 28)
         Me.XionPanel1.Movable = False
         Me.XionPanel1.Name = "XionPanel1"
         Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 22, 0, 0)
         Me.XionPanel1.Sizable = True
-        Me.XionPanel1.Size = New System.Drawing.Size(84, 546)
+        Me.XionPanel1.Size = New System.Drawing.Size(84, 549)
         Me.XionPanel1.State = XionControls.XionPanel.PanelState.Expand
         Me.XionPanel1.TabIndex = 0
         Me.XionPanel1.Text = "Movie List"
@@ -4395,7 +4392,7 @@ Partial Class Form1
         Me.DataGridViewMovie.RowHeadersWidth = 20
         Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridViewMovie.RowTemplate.Height = 16
-        Me.DataGridViewMovie.Size = New System.Drawing.Size(80, 520)
+        Me.DataGridViewMovie.Size = New System.Drawing.Size(80, 523)
         Me.DataGridViewMovie.TabIndex = 0
         '
         'DataGridViewTextBoxColumn1
@@ -6107,12 +6104,9 @@ Partial Class Form1
     Friend WithEvents Label50 As System.Windows.Forms.Label
     Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
     Friend WithEvents Label49 As System.Windows.Forms.Label
-    Friend WithEvents RichTextBox2 As System.Windows.Forms.RichTextBox
-    Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
     Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
     Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents RichTextBox3 As System.Windows.Forms.RichTextBox
     Friend WithEvents Label53 As System.Windows.Forms.Label
     Friend WithEvents Label52 As System.Windows.Forms.Label
     Friend WithEvents Label51 As System.Windows.Forms.Label
@@ -6440,4 +6434,7 @@ Partial Class Form1
     Friend WithEvents lblInternetLookupCaseExplanation As System.Windows.Forms.Label
     Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
     Friend WithEvents cbManualInternetLookupAlwaysPrompt As System.Windows.Forms.CheckBox
+    Friend WithEvents TextBox38 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox39 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox40 As System.Windows.Forms.TextBox
 End Class
