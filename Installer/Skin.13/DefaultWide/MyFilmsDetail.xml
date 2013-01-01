@@ -14,6 +14,20 @@
       <texture>background.png</texture>
     </control>
     <import>MyFilms.common.window.xml</import>        
+
+    <!-- DUMMY LABEL (Movie Thumbs) -->
+    <control>
+      <description>Dummy Label for Movie Thumbs available</description>
+      <type>label</type>
+      <id>45</id>
+      <posX>-50</posX>
+      <posY>-50</posY>
+      <visible>false</visible>
+      <focusable>no</focusable>
+      <!-- to make a control visible only when movie thumbs are available do this: <visible>control.isvisible(45)</visible> -->
+      <!-- to make a control invisible when movie thumbs are available do this: <visible>!control.isvisible(45)</visible> -->
+    </control>
+
     <!-- DUMMY LABEL (Fanart) -->
     <control>
       <type>label</type>
@@ -65,7 +79,7 @@
       <height>140</height>
       <texture>blue.png</texture>
       <colordiffuse>afffffff</colordiffuse>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10100)+Control.HasFocus(10099)</visible>
       <animation effect="fade" time="200">visible</animation>      
     </control>
     <control>
@@ -93,6 +107,20 @@
       <texture>black.png</texture>
       <colordiffuse>80ffffff</colordiffuse>
       <visible>Control.isvisible(35)+!Control.HasFocus(10099)</visible>
+      <animation effect="fade" time="70">visible</animation>
+      <animation effect="fade" time="70" delay="300">hidden</animation>
+    </control>     
+    <control>
+      <description>Overlay to more darken Movie Thumbs View</description>
+      <id>0</id>
+      <type>image</type>
+      <posX>0</posX>
+      <posY>0</posY>
+      <width>1280</width>
+      <height>720</height>
+      <texture>black.png</texture>
+      <colordiffuse>60ffffff</colordiffuse>
+      <visible>Control.HasFocus(10100)</visible>
       <animation effect="fade" time="70">visible</animation>
       <animation effect="fade" time="70" delay="300">hidden</animation>
     </control>     
@@ -265,7 +293,7 @@
       <width>275</width>
       <height>500</height>
       <dimColor>00ffffff</dimColor>
-      <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>      
+      <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>      
       <control>
         <description>Menu Background</description>
         <type>image</type>
@@ -276,7 +304,7 @@
         <height>480</height>
         <texture>Backslide.png</texture>
         <colordiffuse>ffffffff</colordiffuse>
-        <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
+        <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
         <animation effect="slide" time="70" start="-300,0" reversible="false">visible</animation>
         <animation effect="slide" time="70" end="-300,0" reversible="false">hidden</animation>
       </control>
@@ -286,7 +314,7 @@
         <posX>71</posX>
         <posY>121</posY>
         <layout>StackLayout(0,Vertical,True)</layout>
-        <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)</visible>
+        <visible>!control.hasfocus(10000)+!control.hasfocus(10001)+!control.hasfocus(10002)+!control.hasfocus(10003)+!control.hasfocus(10004)+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
         <animation effect="slide" time="70" start="-300,0" reversible="false">visible</animation>
         <animation effect="slide" time="70" end="-300,0" reversible="false">hidden</animation>
         <control>
@@ -394,7 +422,7 @@
       <textXOff>25</textXOff>
       <textureFocus>MyFilms\ledon.png</textureFocus>
       <textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
-      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -417,7 +445,7 @@
       <textXOff>25</textXOff>
       <textureFocus>MyFilms\ledon.png</textureFocus>
       <textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
-      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -440,7 +468,7 @@
       <textXOff>25</textXOff>
       <textureFocus>MyFilms\ledon.png</textureFocus>
       <textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
-      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -463,7 +491,7 @@
       <textXOff>25</textXOff>
       <textureFocus>MyFilms\ledon.png</textureFocus>
       <textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
-      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -486,7 +514,7 @@
       <textXOff>25</textXOff>
       <textureFocus>MyFilms\ledon.png</textureFocus>
       <textureNoFocus>MyFilms\ledoff.png</textureNoFocus>
-      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!player.hasmedia</visible>
+      <visible allowhiddenfocus="true">!Control.HasFocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -499,7 +527,24 @@
       <onup>10000</onup>
       <ondown>10000</ondown>
       <onleft>10000</onleft>
-      <onright>10099</onright>
+      <onright>10100</onright>
+      <label>-</label>
+      <font>font10</font>
+      <align>left</align>
+      <textureFocus>-</textureFocus>
+      <textureNoFocus>-</textureNoFocus>
+      <visible>Control.isvisible(35)</visible>
+    </control>
+    <control>
+      <type>button</type>
+      <description>Movie Thumbs View</description>
+      <posX>2000</posX>
+      <posY>1</posY>
+      <id>10100</id>
+      <onup>10000</onup>
+      <ondown>10000</ondown>
+      <onleft>10099</onleft>
+      <onright>10100</onright>
       <label>-</label>
       <font>font10</font>
       <align>left</align>
@@ -519,7 +564,7 @@
       <width>730</width>
       <font>font17</font>
       <label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)+!Control.HasFocus(10100)</visible>
     </control>
     <!-- Watched/Unwatched Icon -->
     <control>
@@ -531,7 +576,7 @@
       <width>16</width>
       <height>16</height>
       <texture>MyFilms\overlayunwatched.png</texture>
-      <visible>!Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+!string.contains(#myfilms.user.watched.value)</visible>
     </control>
     <control>
       <type>image</type>
@@ -542,7 +587,7 @@
       <width>16</width>
       <height>16</height>
       <texture>MyFilms\overlaywatched.png</texture>
-      <visible>!Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.contains(#myfilms.user.watched.value)</visible>
     </control>
     <control>
       <type>imagelist</type>
@@ -561,7 +606,7 @@
       <orientation>horizontal</orientation>
       <percentage>#myfilms.db.rating.value</percentage>
       <imagesToDraw>10</imagesToDraw>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Rating Value</description>
@@ -573,7 +618,7 @@
       <font>font10</font>
       <align>left</align>
       <textcolor>ffffcc00</textcolor>
-      <visible>string.equals(#myfilms.db.rating.value)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.db.rating.value)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>User Rating</description>
@@ -586,7 +631,7 @@
       <font>font10</font>
       <width>460</width>
       <align>left</align>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.rating.value)</visible>         
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.rating.value)</visible>         
     </control>
     <control>
       <description>Year - Length Value</description>
@@ -598,7 +643,7 @@
       <font>font13</font>
       <align>left</align>
       <textcolor>ivory</textcolor>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Secondary Title</description>
@@ -610,7 +655,7 @@
       <width>480</width>
       <font>font13</font>
       <textcolor>ff6FAFE1</textcolor>
-      <visible>!Control.HasFocus(10099)+!string.equals(#myfilms.user.secondarytitle.value,#myfilms.user.mastertitle.value)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+!string.equals(#myfilms.user.secondarytitle.value,#myfilms.user.mastertitle.value)</visible>
     </control>
     <!-- OVERVIEW -->
     <control>
@@ -623,7 +668,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>string.equals(#myfilms.user.detailsitem1.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem1.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 1 Value</description>
@@ -635,7 +680,7 @@
       <width>550</width>
       <font>font12</font>
       <textcolor>ivory</textcolor>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 2 Label</description>
@@ -647,7 +692,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>string.equals(#myfilms.user.detailsitem2.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem2.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 2 Value</description>
@@ -659,7 +704,7 @@
       <width>550</width>
       <font>font12</font>
       <textcolor>ivory</textcolor>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 3 Label</description>
@@ -671,7 +716,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>string.equals(#myfilms.user.detailsitem3.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem3.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 3 Value</description>
@@ -683,7 +728,7 @@
       <width>550</width>
       <font>font12</font>
       <textcolor>ivory</textcolor>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 4 Label</description>
@@ -695,7 +740,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>string.equals(#myfilms.user.detailsitem4.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem4.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 4 Value</description>
@@ -707,7 +752,7 @@
       <width>550</width>
       <font>font12</font>
       <textcolor>ivory</textcolor>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 5 Label</description>
@@ -719,7 +764,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>string.equals(#myfilms.user.detailsitem5.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem5.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 5 Value</description>
@@ -731,7 +776,7 @@
       <width>550</width>
       <textcolor>ivory</textcolor>
       <font>font12</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 6 Label</description>
@@ -743,7 +788,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>string.equals(#myfilms.user.detailsitem6.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.detailsitem6.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Details User Item 6 Value</description>
@@ -755,7 +800,7 @@
       <width>550</width>
       <textcolor>ivory</textcolor>
       <font>font12</font>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Watched Label</description>
@@ -767,7 +812,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>125</width>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Watched Date</description>
@@ -779,7 +824,7 @@
       <width>235</width>
       <textcolor>ivory</textcolor>
       <font>font11</font>
-      <visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Watched Count Label </description>
@@ -791,7 +836,7 @@
       <width>236</width>
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
-      <visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Watched Count</description>
@@ -803,7 +848,7 @@
       <width>236</width>
       <textcolor>ivory</textcolor>
       <font>font11</font>
-      <visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.watchedcount.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors Label</description>
@@ -815,7 +860,7 @@
       <textcolor>ff6FAFE1</textcolor>
       <font>font11</font>
       <width>160</width>
-      <visible>string.equals(#myfilms.db.actors.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#myfilms.db.actors.value)+!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control Style="NoShadow">
       <description>Actors (Overview)</description>
@@ -830,7 +875,7 @@
       <font>font11</font>
       <seperator>: : :</seperator>
       <lineSpacing>.9</lineSpacing>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control Style="NoShadow">
       <description>Description (Overview)</description>
@@ -845,7 +890,7 @@
       <seperator>: : :</seperator>
       <font>font11</font>
       <lineSpacing>.9</lineSpacing>
-      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10001)+!Control.HasFocus(10002)+!Control.HasFocus(10003)+!Control.HasFocus(10004)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <!-- Description Virtual View -->
     <control>
@@ -957,7 +1002,7 @@
       <font>font9</font>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.actor1.name</label>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!string.equals(#myfilms.db.actors.actor1.image,)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)+!string.equals(#myfilms.db.actors.actor1.image,)</visible>
     </control>
     <control>
       <description>Actors 1 image</description>
@@ -972,7 +1017,7 @@
       <zoom>yes</zoom>
       <keepaspectratio>yes</keepaspectratio>
       <texture mask="videothumbmask.png">#myfilms.db.actors.actor1.image</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 1 image frame</description>
@@ -983,7 +1028,7 @@
       <width>100</width>
       <height>150</height>
       <texture>Videothumbframe.png</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 2 Label</description>
@@ -996,7 +1041,7 @@
       <font>font9</font>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.actor2.name</label>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 2 image</description>
@@ -1011,7 +1056,7 @@
       <zoom>yes</zoom>
       <keepaspectratio>yes</keepaspectratio>
       <texture mask="videothumbmask.png">#myfilms.db.actors.actor2.image</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 2 image frame</description>
@@ -1022,7 +1067,7 @@
       <width>100</width>
       <height>150</height>
       <texture>Videothumbframe.png</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 3 Label</description>
@@ -1035,7 +1080,7 @@
       <font>font9</font>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.actor3.name</label>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 3 image</description>
@@ -1050,7 +1095,7 @@
       <zoom>yes</zoom>
       <keepaspectratio>yes</keepaspectratio>
       <texture mask="videothumbmask.png">#myfilms.db.actors.actor3.image</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 3 image frame</description>
@@ -1061,7 +1106,7 @@
       <width>100</width>
       <height>150</height>
       <texture>Videothumbframe.png</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 4 Label</description>
@@ -1074,7 +1119,7 @@
       <font>font9</font>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.actor4.name</label>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 4 image</description>
@@ -1089,7 +1134,7 @@
       <zoom>yes</zoom>
       <keepaspectratio>yes</keepaspectratio>
       <texture mask="videothumbmask.png">#myfilms.db.actors.actor4.image</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 4 image frame</description>
@@ -1100,7 +1145,7 @@
       <width>100</width>
       <height>150</height>
       <texture>Videothumbframe.png</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 5 Label</description>
@@ -1113,7 +1158,7 @@
       <font>font9</font>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.actor5.name</label>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 5 image</description>
@@ -1128,7 +1173,7 @@
       <zoom>yes</zoom>
       <keepaspectratio>yes</keepaspectratio>
       <texture mask="videothumbmask.png">#myfilms.db.actors.actor5.image</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Actors 5 image frame</description>
@@ -1139,7 +1184,7 @@
       <width>100</width>
       <height>150</height>
       <texture>Videothumbframe.png</texture>
-      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10003)+!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <!-- Technical Details Virtual View -->
     <control>
@@ -1574,7 +1619,9 @@
       <font>font12</font>
       <visible>Control.HasFocus(10004)</visible>
     </control>
+
     <!-- Images section -->
+
     <control>
       <type>image</type>
       <description>Main Cover Image</description>
@@ -1588,6 +1635,7 @@
       <animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
       <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="250">Visible</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="65,65" center="15,628" reversible="true" condition="Control.isvisible(45)+Control.hasfocus(10001)">conditional</animation>
     </control>
     <control>
       <description>Main Cover Frame</description>
@@ -1598,10 +1646,11 @@
       <width>340</width>
       <height>510</height>
       <texture>Videothumbframe.png</texture>
-      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
       <animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
       <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="250">Visible</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="65,65" center="15,628" reversible="true" condition="Control.isvisible(45)+Control.hasfocus(10001)">conditional</animation>
     </control>
     <control>
       <type>image</type>
@@ -1614,7 +1663,7 @@
       <texture mask="videothumbmask.png">#myfilms.viewcoverimage</texture>
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
-      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
       <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="250">Visible</animation>
     </control>
@@ -1629,7 +1678,7 @@
       <texture mask="videothumbmask.png">#myfilms.personcoverimage</texture>
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
-      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
       <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="250">Visible</animation>
     </control>
@@ -1643,7 +1692,7 @@
       <width>70</width>
       <height>115</height>
       <texture>Videothumbframe.png</texture>
-      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)]+[string.contains(#myfilms.viewcoverimage,\)|string.contains(#myfilms.personcoverimage,\)]</visible>
+      <visible>[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)+!control.hasfocus(10100)]+[string.contains(#myfilms.viewcoverimage,\)|string.contains(#myfilms.personcoverimage,\)]</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -1655,7 +1704,7 @@
       <width>70</width>
       <height>115</height>
       <texture mask="videothumbmask.png">#myfilms.groupcoverimage</texture>
-      <visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)]</visible>
+      <visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)+!control.hasfocus(10100)]</visible>
       <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="250">Visible</animation>
     </control>
@@ -1668,7 +1717,7 @@
       <width>70</width>
       <height>115</height>
       <texture>Videothumbframe.png</texture>
-      <visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <control>
@@ -1680,7 +1729,7 @@
       <width>40</width>
       <height>40</height>
       <texture>myfilms\collection.png</texture>
-      <visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)</visible>
+      <visible>string.equals(#myfilms.user.mastertitle.groupname)+[control.hasfocus(10000)|control.hasfocus(10001)|control.hasfocus(10002)|control.hasfocus(10003)|control.hasfocus(10004)]+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
       <animation effect="fade" time="250">visiblechange</animation>
     </control>
     <!-- Common Elements for Bottom -->    
@@ -1694,7 +1743,7 @@
       <font>font10</font>
       <width>740</width>
       <textcolor>ff6FAFE1</textcolor>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>No. Date Languages Subtitles</description>
@@ -1706,7 +1755,7 @@
       <font>font10</font>
       <textcolor>ff6FAFE1</textcolor>
       <width>740</width>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <type>image</type>
@@ -1719,7 +1768,7 @@
       <texture>#myfilms.logos_id2012</texture>
       <keepaspectratio>yes</keepaspectratio>
       <spaceBetweenItems>4</spaceBetweenItems>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <!--<control>
       <type>image</type>
@@ -1732,7 +1781,7 @@
       <texture>#myfilms.logos_id2003</texture>
       <keepaspectratio>yes</keepaspectratio>
       <spaceBetweenItems>2</spaceBetweenItems>
-      <visible>!Control.HasFocus(10099)</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>-->
     <!-- FULL FANART VIEW START -->
     <control>
@@ -1746,7 +1795,7 @@
       <font>font16</font>
       <textcolor>ff6FAFE1</textcolor>
       <label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.user.mastertitle.groupcount,''),' #myfilms.user.mastertitle.groupcount',''))#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
-      <visible>Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <type>image</type>
@@ -1758,7 +1807,7 @@
       <height>14</height>
       <texture>MyFilms\overlayunwatched.png</texture>
       <keepaspectratio>yes</keepaspectratio>
-      <visible>Control.HasFocus(10099)+!string.contains(#myfilms.user.watched.value)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)+!string.contains(#myfilms.user.watched.value)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
     <control>
       <type>image</type>
@@ -1770,7 +1819,7 @@
       <height>14</height>
       <texture>MyFilms\overlaywatched.png</texture>
       <keepaspectratio>yes</keepaspectratio>
-      <visible>Control.HasFocus(10099)+string.contains(#myfilms.user.watched.value)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)+string.contains(#myfilms.user.watched.value)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
     <control>
       <description>Rating stars (Full Fanart View)</description>
@@ -1791,7 +1840,7 @@
       <align>left</align>
       <imagesToDraw>10</imagesToDraw>
       <percentage>#myfilms.db.rating.value</percentage>
-      <visible>Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Rating Value (Full Fanart View)</description>
@@ -1803,7 +1852,7 @@
       <font>font9</font>
       <align>left</align>
       <textcolor>ffffcc00</textcolor>
-      <visible>Control.HasFocus(10099)+string.equals(#myfilms.db.rating.value)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.db.rating.value)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
     <control>
       <type>label</type>
@@ -1816,7 +1865,7 @@
       <font>font10</font>
       <textcolor>ff6FAFE1</textcolor>
       <label>#(iif(neq(#myfilms.db.category.value,''),'#myfilms.db.category.value',''))</label>
-      <visible>Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <type>label</type>
@@ -1829,7 +1878,7 @@
       <font>font12</font>
       <textcolor>ffffcc00</textcolor>
       <label>971</label>
-      <visible>Control.HasFocus(10099)+string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
     <control>
       <type>image</type>
@@ -1843,7 +1892,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <spaceBetweenItems>3</spaceBetweenItems>
       <colordiffuse>ffffffff</colordiffuse>
-      <visible>Control.HasFocus(10099)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
     <control>
       <type>label</type>
@@ -1856,7 +1905,7 @@
       <font>font11</font>
       <textcolor>ivory</textcolor>
       <label>#(iif(neq(#myfilms.db.year.value,''),'#myfilms.db.year.value',''))#(iif(neq(#myfilms.db.length.value,''),' - #myfilms.db.length.value #myfilms.db.length.unit',''))</label>
-      <visible>Control.HasFocus(10099)</visible>
+      <visible>Control.HasFocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <!-- End Special View for FullFanart -->
     <!-- Additional Display for Info Movie available -->
@@ -1871,7 +1920,7 @@
       <font>font10</font>
       <align>right</align>
       <textcolor>ff6FAFE1</textcolor>
-      <visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
     </control>
     <control>
       <description>Movie unavailable Icon</description>
@@ -1885,7 +1934,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>c0ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unavailable)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.source.isonline,unavailable)+!player.hasmedia</visible>
     </control>
     <control>
       <description>Movie available Icon</description>
@@ -1899,7 +1948,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>ffffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,available)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.source.isonline,available)+!player.hasmedia</visible>
     </control>
     <control>
       <description>Movie offline Icon</description>
@@ -1913,7 +1962,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>c0ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,offline)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.source.isonline,offline)+!player.hasmedia</visible>
     </control>
     <control>
       <description>Movie unknown Icon</description>
@@ -1927,7 +1976,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>c0ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.source.isonline,unknown)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.source.isonline,unknown)+!player.hasmedia</visible>
     </control>
     <!-- Trailer Available Info -->
     <control>
@@ -1941,7 +1990,7 @@
       <font>font10</font>
       <align>right</align>
       <textcolor>ff6FAFE1</textcolor>
-      <visible>!Control.HasFocus(10099)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -1957,7 +2006,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>c0ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.sourcetrailer.isonline,unavailable)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -1973,7 +2022,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>ffffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,available)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.sourcetrailer.isonline,available)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -1989,7 +2038,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>c0ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,offline)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.sourcetrailer.isonline,offline)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -2005,7 +2054,7 @@
       <keepaspectratio>yes</keepaspectratio>
       <centered>yes</centered>
       <colordiffuse>c0ffffff</colordiffuse>
-      <visible>!Control.HasFocus(10099)+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)+!player.hasmedia</visible>
+      <visible>!Control.HasFocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)+!player.hasmedia</visible>
       <animation effect="fade" start="100" end="0" time="500">Hidden</animation>
       <animation effect="fade" start="0" end="100" time="500">Visible</animation>
     </control>
@@ -2021,5 +2070,114 @@
       <Duration>0:0:01.5</Duration>
       <keepaspectratio>yes</keepaspectratio>
     </control>
+
+    <!-- Movie Thumbnails -->
+    <control>
+      <description>Movie Thumbs - composite control consisting of a list control and a thumbnail panel</description>
+      <type>facadeview</type>
+      <id>51</id>
+      <control>
+        <type>listcontrol</type>
+        <description>listcontrol</description>
+        <onleft>10099</onleft>
+        <posX>847</posX>
+        <width>433</width>
+        <height>590</height>
+        <visible>Control.HasFocus(10100)</visible>
+      </control>
+      <control>
+        <description>Thumbnail Panel</description>
+        <type>thumbnailpanel</type>
+        <onleft>10099</onleft>
+        <posX>30</posX>
+        <posY>70</posY>
+        <width>1280</width>
+        <height>680</height>
+        <scrollOffset>1</scrollOffset>
+        <itemWidth>98</itemWidth>
+        <itemHeight>86</itemHeight>
+        <textureWidth>83</textureWidth>
+        <textureHeight>63</textureHeight>
+        <thumbWidth>77</thumbWidth>
+        <thumbHeight>56</thumbHeight>
+        <thumbPosX>3</thumbPosX>
+        <thumbPosY>3</thumbPosY>
+
+        <itemWidthBig>250</itemWidthBig>
+        <itemHeightBig>195</itemHeightBig>
+
+        <textureWidthBig>230</textureWidthBig>
+        <textureHeightBig>170</textureHeightBig>
+
+        <thumbWidthBig>218</thumbWidthBig>
+        <thumbHeightBig>160</thumbHeightBig>
+
+        <thumbPosXBig>6</thumbPosXBig>
+        <thumbPosYBig>5</thumbPosYBig>
+
+        <unfocusedAlpha>120</unfocusedAlpha>
+        <hideUnfocusTexture>no</hideUnfocusTexture>
+        <renderFocusText>no</renderFocusText>
+        <renderUnfocusText>no</renderUnfocusText>
+        <imageFolder>-</imageFolder>
+        <imageFolderFocus>-</imageFolderFocus>
+        <thumbZoom>no</thumbZoom>
+        <keepaspectratio>yes</keepaspectratio>
+        <enableFocusZoom>no</enableFocusZoom>
+        <spinCanFocus>no</spinCanFocus>
+        <spinPosX>2815</spinPosX>
+
+
+        <textureMask>Videothumbmask.png</textureMask>
+
+
+        <showFrame>true</showFrame>
+        <frameNoFocus>Videothumbframe.png</frameNoFocus>
+        <frameFocus>Videothumbframe.png</frameFocus>
+        <thumbs mask="DVDCase_coverflow.png" flipY="true" />
+        <visible>Control.HasFocus(10100)</visible>
+        <animation effect="fade" time="250">visiblechange</animation>
+        <animation effect="fade" time="250">WindowClose</animation>
+        <animation effect="fade" time="200">WindowOpen</animation>
+      </control>
+    </control>
+    <control>
+      <description>MultiImage Movie Thumbs</description>
+      <type>multiimage</type>
+      <id>1002</id>
+      <posX>30</posX>
+      <posY>81</posY>
+      <width>265</width>
+      <height>170</height>
+      <imagepath></imagepath>
+      <timeperimage>2000</timeperimage>
+      <fadetime>1000</fadetime>
+      <loop>yes</loop>
+      <align>center</align>
+      <valign>center</valign>
+      <randomize>true</randomize>
+      <visible>Control.isvisible(45)+Control.HasFocus(10001)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
+    </control>
+
+    <control>
+      <description>Movie Thumb multiimage Cover Frame</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>29</posX>
+      <posY>80</posY>
+      <width>267</width>
+      <height>172</height>
+      <texture>Videothumbframe.png</texture>
+      <visible>Control.isvisible(45)+Control.HasFocus(10001)</visible>
+      <animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
+      <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
+      <animation effect="fade" start="0" end="100" time="250">Visible</animation>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
+    </control>
+
   </controls>
 </window>
