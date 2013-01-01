@@ -3078,7 +3078,17 @@ Public Class Form1
             LogEvent("Finished loading xml file from disk  - movies: '" & myMovieCatalog.Movie.Count() & "', Size = '" & length & "' bytes.", EventLogLevel.Informational)
         Catch e As Exception
             success = False
-            MessageBox.Show("Error reading xml database after " & myMovieCatalog.Movie.Count & " records; movie: '" & myMovieCatalog.Movie(myMovieCatalog.Movie.Count - 1).OriginalTitle & "'; error : " & e.Message, "AMC Updater - DB Reader", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim Message As String = "Error reading xml database after " & myMovieCatalog.Movie.Count & " records; "
+            If myMovieCatalog.Movie.Count > 0 Then
+                Message = Message & "movie: '" & myMovieCatalog.Movie(myMovieCatalog.Movie.Count - 1).OriginalTitle & "'; "
+            End If
+            Message = Message & "error : " & e.Message
+            MessageBox.Show(Message, "AMC Updater - DB Reader", MessageBoxButtons.OK, MessageBoxIcon.Error)
+#If Config = "Release" Then
+#Else
+            MessageBox.Show(e.StackTrace, "Exception Details (Debug only)", MessageBoxButtons.OK, MessageBoxIcon.Error)
+#End If
+
         Finally
         End Try
 
