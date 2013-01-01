@@ -1325,13 +1325,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             return;
           }
 
-          if (ViewHistory.Count > 0)
-          {
-            RestoreLastView();
-            r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with restored former filters to get proper counts ...
-            Refreshfacade();
-            return;
-          }
+          //if (ViewHistory.Count > 0)
+          //{
+          //  RestoreLastView();
+          //  r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with restored former filters to get proper counts ...
+          //  Refreshfacade();
+          //  return;
+          //}
+
           switch (conf.ViewContext)
           {
             case ViewContext.None: // do nothing, if no valid context is there (e.g. because there is still backgroundloading of menu active...)
@@ -1375,6 +1376,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             default:
               #region default backnavigation
+
+              base.OnAction(action); // return to previous window, if no backnavigation rule applies
+              return;
+
               if (GetPrevFilmList()) // try moving up in film list hierarchy - is false, when already on top
                 return;
 
@@ -8546,6 +8551,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       internalLoadParam = null; // clear internal start params
       conf.CurrentView = selectedView;
       conf.StrSelect = ""; // reset view filter
+      conf.StrFilmSelect = ""; // reset film list filter
       conf.StrViewSelect = "";
       conf.StrPersons = ""; // reset person filter
       conf.IndexedChars = 0;
