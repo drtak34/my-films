@@ -2116,6 +2116,7 @@ Public Class AntRecord
             'If (regex.IsMatch(currentValue)) Then
             '    currentValue = regex.Replace(currentValue, String.Empty)
             'End If
+            'Dim encodedXml As String = System.Security.SecurityElement.Escape(currentValue)
         End If
     End Sub
 
