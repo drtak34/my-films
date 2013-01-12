@@ -5042,6 +5042,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         case "Peru":
         case "Spain":
         case "Chile":
+        case "Portugal":
           txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.ES.xml";
           ItemSearchGrabberScriptsFilter.Text = "es, all";
           break;
@@ -5056,10 +5057,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         case "Italy":
           txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.IT.xml";
           ItemSearchGrabberScriptsFilter.Text = "it, all";
-          break;
-        case "Portugal":
-          txtGrabber.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB.PT.xml";
-          ItemSearchGrabberScriptsFilter.Text = "pt, all";
           break;
 
         #region No country specific settings:

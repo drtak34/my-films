@@ -66,10 +66,6 @@
     <version>1.2</version>
   </scripts>
   <scripts>
-    <name>IMDB.PT.xml</name>
-    <version>1.0</version>
-  </scripts>
-  <scripts>
     <name>IMDB.xml</name>
     <version>1.2</version>
   </scripts>
