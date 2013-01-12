@@ -2312,13 +2312,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB.PT.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{01babcff-4770-462a-927c-c534f3757233}-IMDB.PT.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.PT.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\TMDB-ZH.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{2da77b48-ea06-4346-a005-147d83dd763b}-TMDB-ZH.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ZH.xml</DestinationFilename>
@@ -7257,7 +7250,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>2795</Revision>
+      <Revision>2802</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -7294,7 +7287,7 @@ Changes &amp; Fixes:
 - Grabber Interface - Detail tab : "Genre" should be "Category"</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
-    <ReleaseDate>2012-12-17T16:46:07.80109+01:00</ReleaseDate>
+    <ReleaseDate>2013-01-03T10:53:06.6900156+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -9598,13 +9591,6 @@ Changes &amp; Fixes:
         <LocalFileName>Config\scripts\MyFilms\WorldOfVideo.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{464c667b-169a-405e-8fad-e0f61c434454}-WorldOfVideo.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\WorldOfVideo.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB.PT.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{01babcff-4770-462a-927c-c534f3757233}-IMDB.PT.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.PT.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
