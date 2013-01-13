@@ -4499,7 +4499,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region count items
             bool success = false;
             GUIListItem countitem = this.facadeFilms[i];
-            if (countitem.Label == GUILocalizeStrings.Get(10798765) || countitem.Label == "*** Online Informationen ***") continue; // skip the menu only entry "showall" and "onlineinfo"
+            if (countitem.Label == GUILocalizeStrings.Get(10798765) || countitem.Label == ("*** " + GUILocalizeStrings.Get(10798825) + " ***")) continue; // skip the menu only entry "showall" and "onlineinfo" // 10798825
             if (!conf.OnlyTitleList && string.IsNullOrEmpty(countitem.Label2)) // first try to get info for custom views ...
             {
               #region get counts for menu item
@@ -4510,16 +4510,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (string.IsNullOrEmpty(mfView.Value)) // no "Value" filter
                 {
                   if (string.IsNullOrEmpty(mfView.Filter))
-                    newLabel = this.CountViewItems(r, mfView.DBfield).ToString(); // newLabel = r.Select(p => (string)p[conf.StrViewItem[ii]]).Distinct(MfStringComparer).Count().ToString(); // StringComparer.CurrentCultureIgnoreCase
+                    newLabel = CountViewItems(r, mfView.DBfield).ToString(); // newLabel = r.Select(p => (string)p[conf.StrViewItem[ii]]).Distinct(MfStringComparer).Count().ToString(); // StringComparer.CurrentCultureIgnoreCase
                   else
-                    newLabel = "* " + this.CountViewItems(BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens), mfView.DBfield).ToString();
+                    newLabel = CountViewItems(BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens), mfView.DBfield).ToString();
                 }
                 else if (mfView.Value == "*") // filmlist show all (possible "Value" filter) -> Count films, as it jumps directly to films
                 {
                   if (string.IsNullOrEmpty(mfView.Filter))
                     newLabel = r.Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();  // Select(row => row.Field<int?>("F1")).Where(val => val.HasValue).Select(val => val.Value).Distinct() // newLabel = r.Length.ToString(); 
                   else
-                    newLabel = "* " + BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
+                    newLabel = BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, "", conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
                 }
                 else // "Value" filter present - use it !
                 {
@@ -4536,7 +4536,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   if (string.IsNullOrEmpty(mfView.Filter))
                     newLabel = "(" + mfView.Value + ") " + BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + conf.StrDfltSelect, valueFilter, conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
                   else
-                    newLabel = "* " + "(" + mfView.Value + ") " + BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, valueFilter, conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
+                    newLabel = "(" + mfView.Value + ") " + BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + mfView.Filter + " AND " + conf.StrDfltSelect, valueFilter, conf.StrSorta, conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count().ToString();
 
                   //newLabel = "(" + viewRow.Value + ")";
                   //newLabel = "(" + viewRow.Value + ") " + r.Select(p => p[viewRow.DBfield].Equals(viewRow.Value)).Count().ToString();
