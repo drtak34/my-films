@@ -11194,6 +11194,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string titlename = Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
           string titlename2 = (Helper.FieldIsSet(MyFilms.conf.StrTitle2)) ? Helper.TitleWithoutGroupName(r1[index][MyFilms.conf.StrTitle2].ToString()) : "";
           string collectionname = Helper.TitleFirstGroupName(r1[index][MyFilms.conf.StrTitle1].ToString());
+          string collectionSafeName = GrabUtil.CreateFilename(collectionname);
 
           string path;
           #region Retrieve original directory of mediafiles
@@ -11219,7 +11220,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           #endregion
 
           string imdb = "";
-          #region get imdb number sor better search match
+          #region get imdb number for better search match
           if (!string.IsNullOrEmpty(r1[index]["IMDB_Id"].ToString()))
             imdb = r1[index]["IMDB_Id"].ToString();
           else if (!string.IsNullOrEmpty(r1[index]["URL"].ToString()))
@@ -11233,7 +11234,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           int year;
 
-          LogMyFilms.Debug("LoadCollectionImages() - movietitle = '" + titlename + "', collectionname = '" + collectionname + "', interactive = '" + interactive + "'");
+          LogMyFilms.Debug("LoadCollectionImages() - movietitle = '" + titlename + "', collectionname = '" + collectionSafeName + "', collectionSafeName = '" + collectionSafeName + "', interactive = '" + interactive + "'");
 
           string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
           var api = new Tmdb(MyFilms.TmdbApiKey, language); // language is optional, default is "en"
@@ -11391,8 +11392,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               #region Poster
 
               string localThumb = MyFilms.conf.StrPicturePrefix.Length > 0
-                             ? MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + collectionname + ".jpg"
-                             : Path.Combine(MyFilms.conf.StrPathImg, collectionname + ".jpg");
+                             ? MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + collectionSafeName + ".jpg"
+                             : Path.Combine(MyFilms.conf.StrPathImg, collectionSafeName + ".jpg");
               string remoteThumb = tmdbConf.images.base_url + "w500" + selectedPoster.file_path;
               LogMyFilms.Debug("GetImagesTMDB() - localThumb = '" + localThumb + "'");
               LogMyFilms.Debug("GetImagesTMDB() - remoteThumb = '" + remoteThumb + "'");
@@ -11405,7 +11406,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 if (GrabUtil.DownloadImage(remoteThumb, localThumb))
                 {
                   string coverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies";
-                  string strThumb = MediaPortal.Util.Utils.GetCoverArtName(coverThumbDir, collectionname); // cached cover
+                  string strThumb = MediaPortal.Util.Utils.GetCoverArtName(coverThumbDir, collectionSafeName); // cached cover
                   if (!string.IsNullOrEmpty(strThumb) && strThumb.Contains("."))
                   {
                     string strThumbSmall = strThumb.Substring(0, strThumb.LastIndexOf(".", StringComparison.Ordinal)) + "_s" + Path.GetExtension(strThumb);  // cached cover for Icons - small resolution

@@ -3293,34 +3293,37 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private string GetGroupImage(GUIListItem item)
     {
       // LogMyFilms.Debug("GetGroupImage() - item.Label = '" + (item.Label ?? "") + "', conf.StrTitleSelect = '" + conf.StrTitleSelect + "'");
+
+      string collectionSafeName = GrabUtil.CreateFilename(item.Label);
+
       string strThumbGroup = ""; // thumbnail for Groups/collections
-      if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg")) // check for longnames for nested groups
+      if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + collectionSafeName + ".jpg")) // check for longnames for nested groups
       {
-        strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + item.Label + ".jpg";
+        strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect.Replace(conf.TitleDelim, ".") + "." + collectionSafeName + ".jpg";
       }
-      else if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect + "." + item.Label + ".jpg")) // check for nested directories
+      else if (File.Exists(conf.StrPathImg + "\\" + conf.StrTitleSelect + "." + collectionSafeName + ".jpg")) // check for nested directories
       {
-        strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect + "." + item.Label + ".jpg";
+        strThumbGroup = conf.StrPathImg + "\\" + conf.StrTitleSelect + "." + collectionSafeName + ".jpg";
       }
-      else if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".jpg"))
+      else if (File.Exists(conf.StrPathImg + "\\" + collectionSafeName + ".jpg"))
       {
-        strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".jpg";
+        strThumbGroup = conf.StrPathImg + "\\" + collectionSafeName + ".jpg";
       }
-      else if (File.Exists(conf.StrPathImg + "\\" + item.Label + ".png"))
+      else if (File.Exists(conf.StrPathImg + "\\" + collectionSafeName + ".png"))
       {
-        strThumbGroup = conf.StrPathImg + "\\" + item.Label + ".png";
+        strThumbGroup = conf.StrPathImg + "\\" + collectionSafeName + ".png";
       }
-      else if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg")) // if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
+      else if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + collectionSafeName + ".jpg")) // if (MyFilms.conf.PictureHandling == "Relative Path" || string.IsNullOrEmpty(MyFilms.conf.PictureHandling))
       {
-        strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + item.Label + ".jpg";
+        strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix + collectionSafeName + ".jpg";
       }
       else if (MyFilms.conf.StrPicturePrefix.Contains("\\"))
       {
-        if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg"))
-          strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + item.Label + ".jpg";
+        if (File.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + collectionSafeName + ".jpg"))
+          strThumbGroup = MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix.Substring(0, MyFilms.conf.StrPicturePrefix.LastIndexOf("\\")) + "\\" + collectionSafeName + ".jpg";
         // if (strThumbGroup == "") strThumbGroup = MyFilms.conf.DefaultCover; // ToDo: Add default cover for hierarchies / box sets
       }
-      LogMyFilms.Debug("GetGroupImage() - returning image = '" + strThumbGroup + "' for item.Label = '" + (item.Label ?? "") + "', conf.StrTitleSelect = '" + conf.StrTitleSelect + "'");
+      LogMyFilms.Debug("GetGroupImage() - item.Label = '" + (item.Label ?? "") + "', conf.StrTitleSelect = '" + conf.StrTitleSelect + "', collectionSafeName = '" + collectionSafeName + "' - returning image = '" + strThumbGroup + "'");
       return strThumbGroup;
     }
 
