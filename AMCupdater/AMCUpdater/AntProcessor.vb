@@ -838,7 +838,7 @@ Public Class AntProcessor
                 Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
                 Dim i As Integer = 0
                 Do While sr.Peek() >= 0
-                    XMLExclTable.Add(i, sr.ReadLine)
+                    XMLExclTable.Add(i, sr.ReadLine.ToLower)
                     i += 1
                 Loop
                 sr.Close()
@@ -2006,7 +2006,7 @@ Public Class AntProcessor
             Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
             Dim i As Integer = 0
             Do While sr.Peek() >= 0
-                XMLExclTable.Add(i, sr.ReadLine)
+                XMLExclTable.Add(i, sr.ReadLine.ToLower)
                 i += 1
             Loop
             sr.Close()
@@ -2145,7 +2145,7 @@ Public Class AntProcessor
             Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
             Dim i As Integer = 0
             Do While sr.Peek() >= 0
-                XMLExclTable.Add(i, sr.ReadLine)
+                XMLExclTable.Add(i, sr.ReadLine.ToLower)
                 i += 1
             Loop
             sr.Close()
@@ -2826,7 +2826,7 @@ Public Class AntProcessor
                 Dim sr As StreamReader = File.OpenText(CurrentSettings.Excluded_Movies_File)
                 Dim i As Integer = 0
                 Do While sr.Peek() >= 0
-                    XMLExclTable.Add(i, sr.ReadLine)
+                    XMLExclTable.Add(i, sr.ReadLine.ToLower)
                     i += 1
                 Loop
                 sr.Close()
@@ -3340,6 +3340,10 @@ Public Class AntProcessor
 
 
         End Function
+
+        Public Sub New()
+
+        End Sub
     End Class
 
 
