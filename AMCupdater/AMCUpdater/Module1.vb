@@ -32,7 +32,13 @@ Public Module Module1
         WriteBuffer
     End Enum
 
-    Public Function GetDVDFolderPath(ByVal FileName As String) As String
+    Public Function GetFolderPath(ByVal FileName As String) As String
+        ' returns the directory containing the file
+        Dim ReturnValue As New DirectoryInfo(FileName)
+        Return ReturnValue.Parent.FullName
+    End Function
+
+    Public Function GetMovieNameFromDVDFolderPath(ByVal FileName As String) As String
         'Function to try and guess the correct movie name for a DVD image stored in a folder.
         'DVD files may be stored directly in a folder with the name of the movie.
         'DVD files may also retain their structure so .vob files will be in \VIDEO_TS\ - assume parent of that is movie name.
@@ -551,12 +557,12 @@ Public Module Module1
         Dim DirectoryPath As String = ""
         If FilePath.ToLower.EndsWith("video_ts.ifo") = True Then
             Directory = True
-            DirectoryPath = GetDVDFolderPath(FilePath)
+            DirectoryPath = GetFolderPath(FilePath)
             FilePath = GetDVDMovieFile(FilePath)
         End If
         If FilePath.ToLower.EndsWith("index.bdmv") = True Then
             Directory = True
-            DirectoryPath = GetBRFolderPath(FilePath)
+            DirectoryPath = GetFolderPath(FilePath)
             FilePath = GetBRMovieFile(FilePath)
         End If
 
