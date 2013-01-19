@@ -124,9 +124,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
     public static string EscapeLikeValue(string valueWithoutWildcards)
     {
       var sb = new StringBuilder();
-      for (int i = 0; i < valueWithoutWildcards.Length; i++)
+      foreach (char c in valueWithoutWildcards)
       {
-        char c = valueWithoutWildcards[i];
         switch (c)
         {
           case ']':
@@ -149,26 +148,21 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Returns cleaned string valid for XML
     /// </summary>
-    /// <param name="in_string">The string to clean</param>
+    /// <param name="inString">The string to clean</param>
     /// <returns>The Whitelisted String</returns>
-    public static string XmlCharacterWhitelist(string in_string)
+    public static string XmlCharacterWhitelist(string inString)
     {
-      if (in_string == null) return null;
+      if (inString == null) return null;
 
       StringBuilder sbOutput = new StringBuilder();
-      char ch;
 
-      for (int i = 0; i < in_string.Length; i++)
+      foreach (char ch in inString.Where(ch => (ch >= 0x0020 && ch <= 0xD7FF) ||
+                                               (ch >= 0xE000 && ch <= 0xFFFD) ||
+                                               ch == 0x0009 ||
+                                               ch == 0x000A ||
+                                               ch == 0x000D))
       {
-        ch = in_string[i];
-        if ((ch >= 0x0020 && ch <= 0xD7FF) ||
-          (ch >= 0xE000 && ch <= 0xFFFD) ||
-          ch == 0x0009 ||
-          ch == 0x000A ||
-          ch == 0x000D)
-        {
-          sbOutput.Append(ch);
-        }
+        sbOutput.Append(ch);
       }
       return sbOutput.ToString();
     }
@@ -176,7 +170,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Remove illegal XML characters from a string.
     /// </summary>
-    public static string SanitizeXmlString(string xml)
+    public static string SanitizeXmlString(this string xml)
     {
       // if (xml == null) throw new ArgumentNullException("xml");
       if (xml == null) return "";
@@ -194,7 +188,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Whether a given character is allowed by XML 1.0.
     /// </summary>
-    public static bool IsLegalXmlChar(int character)
+    private static bool IsLegalXmlChar(int character)
     {
       return
       (
@@ -237,7 +231,51 @@ namespace MyFilmsPlugin.MyFilms.Utils
       //return output.ToArray(new String[output.size()]);
     }
 
+    public static string RemapHighOrderChars(this string input)
+    {
+      if (string.IsNullOrEmpty(input)) return string.Empty;
+
+      // hack to remap high order unicode characters with a low order equivalents
+      // for now allows better usage of clipping. Can be removed, once the skin engine can properly render unicode without falling back to sprites
+      // as unicode is more widely used, this will hit us more with existing font rendering only allowing cached font textures with clipping
+
+      input = input.Replace((char)8211, '-');  //	–
+      input = input.Replace((char)8212, '-');  //	—
+      input = input.Replace((char)8216, '\''); //	‘
+      input = input.Replace((char)8217, '\''); //	’
+      // input = input.Replace((char)8218, ','); //8218	130	'
+      input = input.Replace((char)8220, '"');  //	“
+      input = input.Replace((char)8221, '"');  //	”
+      input = input.Replace((char)8222, '"'); //8222	132	"
+      input = input.Replace((char)8223, '"');  // ?
+      input = input.Replace((char)8226, '*');  //	•
+      input = input.Replace(((char)8230).ToString(), "...");  //	…
+      //input = input.Replace((char)8364, '?'); //8364	128	?
+      //input = input.Replace((char)8240, '%'); //8240	137	%
+      //input = input.Replace((char)8249, '<'); //8249	139	<
+      //input = input.Replace((char)8250, '>'); //8250	155	>
+      //input = input.Replace((char)8482, 'T'); //8482	153	T
+
+      foreach (char c in input.Where(c => c >= 255 && c != '\n'))
+      {
+        Log.Warn("RemapHighOrderChars: remaining high order char = '{0}', TypeCode = '{1}'", c.ToString(), (int)c);
+      }
+      return input;
+    }
+
+    private static readonly HashSet<char> BadChars = new HashSet<char> { '!', '@', '#', '$', '%', '_' };
+    public static string CleanString(this string str)
+    {
+      var result = new StringBuilder(str.Length);
+      foreach (char t in str.Where(t => !BadChars.Contains(t)))
+      {
+        result.Append(t);
+      }
+      return result.ToString();
+    }
+
   }
+
   #endregion
 
   public class Helper

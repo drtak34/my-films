@@ -10126,20 +10126,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public static void setGUIProperty(string name, string value, bool log)
     {
       string property = "#myfilms." + name;
-      if (log) LogMyFilms.Debug("setGuiProperty [{0}]: '{1}' - nonsanitized input: '{2}'", property, StringExtensions.SanitizeXmlString(value), value);
-      GUIPropertyManager.SetProperty(property, StringExtensions.SanitizeXmlString(value));
-    }
+      string finalvalue = value.SanitizeXmlString().RemapHighOrderChars();
+      if (log) LogMyFilms.Debug("setGuiProperty [{0}]: '{1}' - nonsanitized input: '{2}'", property, finalvalue, value);
 
-    private static readonly HashSet<char> badChars = new HashSet<char> { '!', '@', '#', '$', '%', '_' };
-    public static string CleanString(string str)
-    {
-      var result = new StringBuilder(str.Length);
-      for (int i = 0; i < str.Length; i++)
-      {
-        if (!badChars.Contains(str[i]))
-          result.Append(str[i]);
-      }
-      return result.ToString();
+      GUIPropertyManager.SetProperty(property, finalvalue);
     }
 
     public static void clearGUIProperty(string name)
