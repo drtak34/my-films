@@ -1,6 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{E84B5580-81E7-4DF0-B9F3-0B2F7BD76242}"
+	ProjectSection(SolutionItems) = preProject
+		Installer\MyFilms-12.xmp2 = Installer\MyFilms-12.xmp2
+		Installer\update.xml = Installer\update.xml
+		Installer\updateScriptVersions.xml = Installer\updateScriptVersions.xml
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber", "Grabber\Grabber.csproj", "{92C183EE-636F-4A55-A6AB-363CDA606110}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grabber_Interface", "Grabber_Interface\Grabber_Interface.csproj", "{CFA9C7A2-D09D-409C-9E50-862D72CB9F48}"
@@ -24,13 +31,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Build-All", "Build-All\Buil
 		{307F46D7-0620-4EA0-BBA8-8A27037CA75D} = {307F46D7-0620-4EA0-BBA8-8A27037CA75D}
 		{20BCDBE0-0812-4235-9330-40B8E570DAE1} = {20BCDBE0-0812-4235-9330-40B8E570DAE1}
 		{92C183EE-636F-4A55-A6AB-363CDA606110} = {92C183EE-636F-4A55-A6AB-363CDA606110}
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer", "Installer", "{E84B5580-81E7-4DF0-B9F3-0B2F7BD76242}"
-	ProjectSection(SolutionItems) = preProject
-		Installer\MyFilms-12.xmp2 = Installer\MyFilms-12.xmp2
-		Installer\update.xml = Installer\update.xml
-		Installer\updateScriptVersions.xml = Installer\updateScriptVersions.xml
 	EndProjectSection
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AMCupdaterLib", "AMCupdater\AMCupdaterLib\AMCupdaterLib.vbproj", "{94285972-1DAD-43A3-BB2C-2BA01E30BE4D}"
