@@ -5829,11 +5829,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIListItem item = facadeFilms[i];
             itemlist.Add(item);
             OnlineMovie movie = item.TVTag as OnlineMovie;
-            int year = DateTime.Parse(movie.MovieSearchResult.release_date).Year;
-            // iMoviesLocally = rtemp.Select("Year like '" + year + "' AND TranslatedTitle like '*" + item.Label + "*'", conf.StrSorta + conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count();
-            int iMoviesLocally = rtemp.Count(x => x["Year"].ToString().Contains(year.ToString()) && x["TranslatedTitle"].ToString().Contains(movie.MovieSearchResult.title));
-            item.IsRemote = (iMoviesLocally == 0);
-            // LogMyFilms.Debug("CountLocalItems - found '" + iMoviesLocally + "' items for (" + year.ToString() + ") '" + movie.MovieSearchResult.title + "' !");
+            if (movie != null)
+            {
+              // iMoviesLocally = rtemp.Select("Year like '" + year + "' AND TranslatedTitle like '*" + item.Label + "*'", conf.StrSorta + conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count();
+              int year = DateTime.Parse(movie.MovieSearchResult.release_date).Year;
+              item.IsRemote = rtemp.Any(x => (x["TranslatedTitle"].ToString().Contains(movie.MovieSearchResult.title) && (string.IsNullOrEmpty(x["Year"].ToString()) || year == 0 || x["Year"].ToString().Contains(year.ToString()))) || (!string.IsNullOrEmpty(x["TMDB_Id"].ToString()) && int.Parse(x["TMDB_Id"].ToString()) == movie.MovieSearchResult.id));
+              // LogMyFilms.Debug("CountLocalItems - found '" + iMoviesLocally + "' items for (" + year.ToString() + ") '" + movie.MovieSearchResult.title + "' !");
+            }
           }
           catch (Exception ex) 
           {
