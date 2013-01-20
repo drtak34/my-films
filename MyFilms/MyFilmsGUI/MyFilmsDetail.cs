@@ -8290,7 +8290,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         PlayList playlist = playlistPlayer.GetPlaylist(PlayListType.PLAYLIST_VIDEO_TEMP);
         PlayListItem listItem = playlist.LastOrDefault();
-        bool isLastPart = (listItem != null) ? (filename == listItem.FileName) : true;
+        bool isLastPart = (listItem == null) || (filename == listItem.FileName);
 
         string otitle = MyFilms.conf.StrPlayedRow["OriginalTitle"].ToString();
         string ttitle = MyFilms.conf.StrPlayedRow["TranslatedTitle"].ToString();

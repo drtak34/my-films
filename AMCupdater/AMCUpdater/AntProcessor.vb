@@ -2053,12 +2053,7 @@ Public Class AntProcessor
                             Dim extension As String = foundFile.Substring(InStrRev(foundFile, ".")).ToLower
                             If Array.Exists(ValidMediaExtensions, Function(s) s.ToString.ToLower.Equals(extension)) = True Then
                                 'Check, if it's a trailer
-                                Dim isTrailer As Boolean = False
-                                For Each TrailerProp As String In ValidTrailerExtensions
-                                    If FoundFileName.ToLower.Contains(TrailerProp.ToLower) Then
-                                        isTrailer = True
-                                    End If
-                                Next
+                                Dim isTrailer As Boolean = ValidTrailerExtensions.Any(Function(TrailerProp) FoundFileName.ToLower.Contains(TrailerProp.ToLower))
                                 If isTrailer = True Then
                                     LogEvent("  File Found (trailer) - " & FoundFileName, EventLogLevel.Informational)
 
@@ -2177,12 +2172,7 @@ Public Class AntProcessor
                     Dim extension As String = foundFile.Substring(InStrRev(foundFile, ".")).ToLower
                     If Array.Exists(ValidMediaExtensions, Function(s) s.ToString.ToLower.Equals(extension)) = True Then
                         'Check, if it's a trailer
-                        Dim isTrailer As Boolean = False
-                        For Each TrailerProp As String In ValidTrailerExtensions
-                            If FoundFileName.ToLower.Contains(TrailerProp.ToLower) Then
-                                isTrailer = True
-                            End If
-                        Next
+                        Dim isTrailer As Boolean = ValidTrailerExtensions.Any(Function(TrailerProp) FoundFileName.ToLower.Contains(TrailerProp.ToLower))
                         If isTrailer = True Then
                             LogEvent("  File Found (trailer) - " & FoundFileName, EventLogLevel.Informational)
 

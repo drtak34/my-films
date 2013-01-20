@@ -224,7 +224,7 @@ namespace Cornerstone.Tools
       }
       catch (Exception e)
       {
-        if (e.GetType() == typeof(ThreadAbortException))
+        if (e is ThreadAbortException)
           throw e;
 
         // There was an error reading the stream
