@@ -1240,6 +1240,14 @@ namespace MyFilmsPlugin.MyFilms
                         LogMyFilms.Debug("UpdateMovies() - Updating 'IMDB_Id' from '" + oldImdb + "' to '" + newImdb + "'");
                       #endregion
 
+                      #region tmdb number
+                      string oldTmdb = (sr.IsTMDB_IdNull() ? "" : sr.TMDB_Id);
+                      string newTmdb = (!string.IsNullOrEmpty(movie.TMDBNumber) ? movie.TMDBNumber : "");
+                      sr.TMDB_Id = newTmdb;
+                      if (newTmdb != oldTmdb)
+                        LogMyFilms.Debug("UpdateMovies() - Updating 'TMDB_Id' from '" + oldTmdb + "' to '" + newTmdb + "'");
+                      #endregion
+
                       #region copy data to customfields ...
                       foreach (var dc in commonColumns)
                       {
