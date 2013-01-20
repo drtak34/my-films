@@ -22,25 +22,29 @@ Partial Class frmMovieUpdate
     'Das Bearbeiten mit dem Code-Editor ist nicht möglich.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMovieUpdate))
-        Me.DgvUpdateMovie = New System.Windows.Forms.DataGridView
-        Me.cbUpdate = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.tbItem = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.tbCurrent = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.tbNew = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
+        Me.DgvUpdateMovie = New System.Windows.Forms.DataGridView()
+        Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog()
         Me.MovieBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.ButtonOK = New System.Windows.Forms.Button
-        Me.ButtonCancel = New System.Windows.Forms.Button
-        Me.PictureBoxOld = New System.Windows.Forms.PictureBox
-        Me.PictureBoxNew = New System.Windows.Forms.PictureBox
-        Me.ButtonSelectOnlyMissingData = New System.Windows.Forms.Button
-        Me.ButtonSelectOnlyNonEmptyData = New System.Windows.Forms.Button
-        Me.ButtonSelectAll = New System.Windows.Forms.Button
-        Me.ButtonSelectNone = New System.Windows.Forms.Button
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.ButtonOK = New System.Windows.Forms.Button()
+        Me.ButtonCancel = New System.Windows.Forms.Button()
+        Me.PictureBoxOld = New System.Windows.Forms.PictureBox()
+        Me.PictureBoxNew = New System.Windows.Forms.PictureBox()
+        Me.ButtonSelectOnlyMissingData = New System.Windows.Forms.Button()
+        Me.ButtonSelectOnlyNonEmptyData = New System.Windows.Forms.Button()
+        Me.ButtonSelectAll = New System.Windows.Forms.Button()
+        Me.ButtonSelectNone = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cbUpdate = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.tbItem = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tbCurrent = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tbNew = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.DgvUpdateMovie, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MovieBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,52 +58,26 @@ Partial Class frmMovieUpdate
         Me.DgvUpdateMovie.AllowUserToAddRows = False
         Me.DgvUpdateMovie.AllowUserToDeleteRows = False
         Me.DgvUpdateMovie.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DgvUpdateMovie.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DgvUpdateMovie.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DgvUpdateMovie.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DgvUpdateMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvUpdateMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.cbUpdate, Me.tbItem, Me.tbCurrent, Me.tbNew})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DgvUpdateMovie.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DgvUpdateMovie.DefaultCellStyle = DataGridViewCellStyle5
         Me.DgvUpdateMovie.Location = New System.Drawing.Point(3, 4)
         Me.DgvUpdateMovie.Name = "DgvUpdateMovie"
         Me.DgvUpdateMovie.RowHeadersVisible = False
         Me.DgvUpdateMovie.Size = New System.Drawing.Size(904, 433)
         Me.DgvUpdateMovie.TabIndex = 0
-        '
-        'cbUpdate
-        '
-        Me.cbUpdate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.cbUpdate.HeaderText = "Update"
-        Me.cbUpdate.Name = "cbUpdate"
-        Me.cbUpdate.Width = 48
-        '
-        'tbItem
-        '
-        Me.tbItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.tbItem.HeaderText = "Item"
-        Me.tbItem.Name = "tbItem"
-        Me.tbItem.Width = 52
-        '
-        'tbCurrent
-        '
-        Me.tbCurrent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.tbCurrent.HeaderText = "Current Value"
-        Me.tbCurrent.Name = "tbCurrent"
-        '
-        'tbNew
-        '
-        Me.tbNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.tbNew.HeaderText = "New Value"
-        Me.tbNew.Name = "tbNew"
         '
         'AntMovieCatalog
         '
@@ -203,6 +181,41 @@ Partial Class frmMovieUpdate
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Field Selection ..."
         '
+        'cbUpdate
+        '
+        Me.cbUpdate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopCenter
+        DataGridViewCellStyle1.NullValue = False
+        Me.cbUpdate.DefaultCellStyle = DataGridViewCellStyle1
+        Me.cbUpdate.HeaderText = "Update"
+        Me.cbUpdate.Name = "cbUpdate"
+        Me.cbUpdate.Width = 48
+        '
+        'tbItem
+        '
+        Me.tbItem.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.tbItem.DefaultCellStyle = DataGridViewCellStyle2
+        Me.tbItem.HeaderText = "Item"
+        Me.tbItem.Name = "tbItem"
+        Me.tbItem.Width = 52
+        '
+        'tbCurrent
+        '
+        Me.tbCurrent.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.tbCurrent.DefaultCellStyle = DataGridViewCellStyle3
+        Me.tbCurrent.HeaderText = "Current Value"
+        Me.tbCurrent.Name = "tbCurrent"
+        '
+        'tbNew
+        '
+        Me.tbNew.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
+        Me.tbNew.DefaultCellStyle = DataGridViewCellStyle4
+        Me.tbNew.HeaderText = "New Value"
+        Me.tbNew.Name = "tbNew"
+        '
         'frmMovieUpdate
         '
         Me.AcceptButton = Me.ButtonOK
@@ -233,10 +246,6 @@ Partial Class frmMovieUpdate
     Friend WithEvents MovieBindingSource As System.Windows.Forms.BindingSource
     Friend WithEvents ButtonOK As System.Windows.Forms.Button
     Friend WithEvents ButtonCancel As System.Windows.Forms.Button
-    Friend WithEvents cbUpdate As System.Windows.Forms.DataGridViewCheckBoxColumn
-    Friend WithEvents tbItem As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents tbCurrent As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents tbNew As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PictureBoxOld As System.Windows.Forms.PictureBox
     Friend WithEvents PictureBoxNew As System.Windows.Forms.PictureBox
     Friend WithEvents ButtonSelectOnlyMissingData As System.Windows.Forms.Button
@@ -244,4 +253,8 @@ Partial Class frmMovieUpdate
     Friend WithEvents ButtonSelectAll As System.Windows.Forms.Button
     Friend WithEvents ButtonSelectNone As System.Windows.Forms.Button
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents cbUpdate As System.Windows.Forms.DataGridViewCheckBoxColumn
+    Friend WithEvents tbItem As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents tbCurrent As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents tbNew As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class
