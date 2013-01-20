@@ -27,532 +27,532 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim OwnerLabel As System.Windows.Forms.Label
         Dim MailLabel As System.Windows.Forms.Label
         Dim SiteLabel As System.Windows.Forms.Label
         Dim DescriptionLabel As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.Import_Movies = New System.Windows.Forms.TabPage
-        Me.btnOpenLog = New System.Windows.Forms.Button
-        Me.Label_VersionNumber = New System.Windows.Forms.Label
-        Me.LinkLabelMyFilmsWiki = New System.Windows.Forms.LinkLabel
-        Me.Label88 = New System.Windows.Forms.Label
-        Me.GroupBox27 = New System.Windows.Forms.GroupBox
-        Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox
-        Me.chkImportOnInternetFailInGuiMode = New System.Windows.Forms.CheckBox
-        Me.cbInternetLookupAlwaysPrompt = New System.Windows.Forms.CheckBox
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox
-        Me.chkImportOnInternetFail = New System.Windows.Forms.CheckBox
-        Me.lblInternetLookupCaseExplanation = New System.Windows.Forms.Label
-        Me.Label24 = New System.Windows.Forms.Label
-        Me.cbInternetLookupBehaviour = New System.Windows.Forms.ComboBox
-        Me.GroupBox23 = New System.Windows.Forms.GroupBox
-        Me.txtParserFilePathDisplay = New System.Windows.Forms.TextBox
-        Me.cbTitleHandling = New System.Windows.Forms.ComboBox
-        Me.Label43 = New System.Windows.Forms.Label
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.btnSelectParserFile = New System.Windows.Forms.Button
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.txtParserFilePath = New System.Windows.Forms.TextBox
-        Me.GroupBox17 = New System.Windows.Forms.GroupBox
-        Me.chkPurgeMissingAlways = New System.Windows.Forms.CheckBox
-        Me.chkRescanMovedFiles = New System.Windows.Forms.CheckBox
-        Me.chkProhibitInternetLookup = New System.Windows.Forms.CheckBox
-        Me.chkPurgeMissing = New System.Windows.Forms.CheckBox
-        Me.chkOverwriteXML = New System.Windows.Forms.CheckBox
-        Me.chkBackupXMLFirst = New System.Windows.Forms.CheckBox
-        Me.ToolStripProgressMessage = New System.Windows.Forms.Label
-        Me.btnShowHideLog = New System.Windows.Forms.Button
-        Me.GroupBox8 = New System.Windows.Forms.GroupBox
-        Me.BtnImportWatcher = New System.Windows.Forms.Button
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.btnParseXML = New System.Windows.Forms.Button
-        Me.btnFindOrphans = New System.Windows.Forms.Button
-        Me.btnCancelProcessing = New System.Windows.Forms.Button
-        Me.btnUpdateXML = New System.Windows.Forms.Button
-        Me.btnProcessMovieList = New System.Windows.Forms.Button
-        Me.btnJustDoIt = New System.Windows.Forms.Button
-        Me.Update_Movies = New System.Windows.Forms.TabPage
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.GroupBox32 = New System.Windows.Forms.GroupBox
-        Me.btnManualCancel = New System.Windows.Forms.Button
-        Me.btnManualDoTest = New System.Windows.Forms.Button
-        Me.btnManualApplyChanges = New System.Windows.Forms.Button
-        Me.grpManualInternetLookupSettings = New System.Windows.Forms.GroupBox
-        Me.cbManualInternetLookupAlwaysPrompt = New System.Windows.Forms.CheckBox
-        Me.chkManualDontAskInteractive = New System.Windows.Forms.CheckBox
-        Me.txtManualInternetParserPathDisplay = New System.Windows.Forms.TextBox
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Label42 = New System.Windows.Forms.Label
-        Me.btnManualSelectInternetParserPath = New System.Windows.Forms.Button
-        Me.cbManualInternetLookupBehaviour = New System.Windows.Forms.ComboBox
-        Me.txtManualInternetParserPath = New System.Windows.Forms.TextBox
-        Me.Label41 = New System.Windows.Forms.Label
-        Me.btnShowHideLogTest = New System.Windows.Forms.Button
-        Me.grpManualUpdatesParameters = New System.Windows.Forms.GroupBox
-        Me.cbSkipExcludedMovieFiles = New System.Windows.Forms.CheckBox
-        Me.cbManualParameterAndOr = New System.Windows.Forms.ComboBox
-        Me.lblManualParametersValue2 = New System.Windows.Forms.Label
-        Me.lblManualParametersOperator2 = New System.Windows.Forms.Label
-        Me.txtManualParameterValue2 = New System.Windows.Forms.TextBox
-        Me.cbManualParameterOperator2 = New System.Windows.Forms.ComboBox
-        Me.lblManualParametersField2 = New System.Windows.Forms.Label
-        Me.cbManualParameterFieldList2 = New System.Windows.Forms.ComboBox
-        Me.Label21 = New System.Windows.Forms.Label
-        Me.chkManualParametersUpdateAll = New System.Windows.Forms.CheckBox
-        Me.lblManualParametersValue1 = New System.Windows.Forms.Label
-        Me.Label19 = New System.Windows.Forms.Label
-        Me.txtManualParameterValue1 = New System.Windows.Forms.TextBox
-        Me.cbManualParameterOperator1 = New System.Windows.Forms.ComboBox
-        Me.Label18 = New System.Windows.Forms.Label
-        Me.cbManualParameterFieldList1 = New System.Windows.Forms.ComboBox
-        Me.GroupBox10 = New System.Windows.Forms.GroupBox
-        Me.chkManualNfoFilesOnlyAddMissing = New System.Windows.Forms.CheckBox
-        Me.cbManualNfoFileHandling = New System.Windows.Forms.ComboBox
-        Me.lblManualNfoFileHandling = New System.Windows.Forms.Label
-        Me.lblManualSelectFieldDestination = New System.Windows.Forms.Label
-        Me.cbManualSelectFieldDestination = New System.Windows.Forms.ComboBox
-        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData = New System.Windows.Forms.CheckBox
-        Me.chkManualUpdateRecordsOnlyMissingData = New System.Windows.Forms.CheckBox
-        Me.txtManualOldValue = New System.Windows.Forms.TextBox
-        Me.lblManualEnterOldValue = New System.Windows.Forms.Label
-        Me.chkManualMissingFanartDownload = New System.Windows.Forms.CheckBox
-        Me.lblManualDatabaseFieldsPrompt = New System.Windows.Forms.Label
-        Me.lblManualSelectField = New System.Windows.Forms.Label
-        Me.cbManualSelectField = New System.Windows.Forms.ComboBox
-        Me.txtManualNewValue = New System.Windows.Forms.TextBox
-        Me.lblManualEnterNewValue = New System.Windows.Forms.Label
-        Me.cbManualSelectOperation = New System.Windows.Forms.ComboBox
-        Me.DatabaseFields = New System.Windows.Forms.TabPage
-        Me.GroupBox_FanartHandling = New System.Windows.Forms.GroupBox
-        Me.chkLoadPersonImagesWithFanart = New System.Windows.Forms.CheckBox
-        Me.chkUseGrabberForFanart = New System.Windows.Forms.CheckBox
-        Me.cbFanartLimitResolutionMin = New System.Windows.Forms.ComboBox
-        Me.lblFanartLimits = New System.Windows.Forms.Label
-        Me.cbFanartLimitResolutionMax = New System.Windows.Forms.ComboBox
-        Me.cbNumFanartLimitNumber = New System.Windows.Forms.NumericUpDown
-        Me.GroupBox_TitleHandling = New System.Windows.Forms.GroupBox
-        Me.Label101 = New System.Windows.Forms.Label
-        Me.cbEditionNameAppliesTo = New System.Windows.Forms.ComboBox
-        Me.txtSeriesNameIdentifier = New System.Windows.Forms.TextBox
-        Me.Label106 = New System.Windows.Forms.Label
-        Me.Label89 = New System.Windows.Forms.Label
-        Me.txtGroupNameIdentifier = New System.Windows.Forms.TextBox
-        Me.cbGroupNameAppliesTo = New System.Windows.Forms.ComboBox
-        Me.chkFolderNameIsGroupName = New System.Windows.Forms.CheckBox
-        Me.lblGroupNameAppliesTo = New System.Windows.Forms.Label
-        Me.cbMasterTitle = New System.Windows.Forms.ComboBox
-        Me.lblMasterTitle = New System.Windows.Forms.Label
-        Me.GroupBox_StorageFieldHandling = New System.Windows.Forms.GroupBox
-        Me.chkShortNames = New System.Windows.Forms.CheckBox
-        Me.Label26 = New System.Windows.Forms.Label
-        Me.txtDefaultSourceField = New System.Windows.Forms.TextBox
-        Me.GroupBox_MediaLabelFieldHandling = New System.Windows.Forms.GroupBox
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.chkReadDVDLabel = New System.Windows.Forms.CheckBox
-        Me.txtMediaLabel = New System.Windows.Forms.TextBox
-        Me.GroupBox_OtherFieldHandling = New System.Windows.Forms.GroupBox
-        Me.chkUseInternetDataForLanguagesField = New System.Windows.Forms.CheckBox
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.txtMediaType = New System.Windows.Forms.TextBox
-        Me.lblCheckFieldHandling = New System.Windows.Forms.Label
-        Me.Label30 = New System.Windows.Forms.Label
-        Me.cbDateHandling = New System.Windows.Forms.ComboBox
-        Me.cbCheckHandling = New System.Windows.Forms.ComboBox
-        Me.GroupBox_PictureHandling = New System.Windows.Forms.GroupBox
-        Me.txtPictureFilenameSuffix = New System.Windows.Forms.TextBox
-        Me.lblPicturePrefix = New System.Windows.Forms.Label
-        Me.lblPictureHandling = New System.Windows.Forms.Label
-        Me.cbPictureHandling = New System.Windows.Forms.ComboBox
-        Me.txtPictureFilenamePrefix = New System.Windows.Forms.TextBox
-        Me.lblInternetLookupRequired = New System.Windows.Forms.Label
-        Me.GroupBox16 = New System.Windows.Forms.GroupBox
-        Me.Label33 = New System.Windows.Forms.Label
-        Me.Label32 = New System.Windows.Forms.Label
-        Me.Label31 = New System.Windows.Forms.Label
-        Me.btnDBFieldsSelectNoMedia = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectNoInternet = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectNone = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectAllMedia = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectAllInternet = New System.Windows.Forms.Button
-        Me.btnDBFieldsSelectAll = New System.Windows.Forms.Button
-        Me.cbDatabaseFields = New System.Windows.Forms.CheckedListBox
-        Me.Label34 = New System.Windows.Forms.Label
-        Me.ScanFilters = New System.Windows.Forms.TabPage
-        Me.GroupBox28 = New System.Windows.Forms.GroupBox
-        Me.dgEditionStrings = New System.Windows.Forms.DataGridView
-        Me.EditorSearchExpression = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.EditorReplacementString = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.GroupBox24 = New System.Windows.Forms.GroupBox
-        Me.txtOverridePath = New System.Windows.Forms.TextBox
-        Me.lblOverridePath = New System.Windows.Forms.Label
-        Me.btnSelectMovieFolder = New System.Windows.Forms.Button
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.txtMovieFolder = New System.Windows.Forms.TextBox
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox
-        Me.Label25 = New System.Windows.Forms.Label
-        Me.txtRegExSearchMultiPart = New System.Windows.Forms.TextBox
-        Me.Label46 = New System.Windows.Forms.Label
-        Me.GroupBox20 = New System.Windows.Forms.GroupBox
-        Me.Label83 = New System.Windows.Forms.Label
-        Me.dgFilterStrings = New System.Windows.Forms.DataGridView
-        Me.GroupBox19 = New System.Windows.Forms.GroupBox
-        Me.dgExcludedFolderStrings = New System.Windows.Forms.DataGridView
-        Me.Label44 = New System.Windows.Forms.Label
-        Me.Label45 = New System.Windows.Forms.Label
-        Me.dgExcludedFileStrings = New System.Windows.Forms.DataGridView
-        Me.Options = New System.Windows.Forms.TabPage
-        Me.GroupBox26 = New System.Windows.Forms.GroupBox
-        Me.Label87 = New System.Windows.Forms.Label
-        Me.Label86 = New System.Windows.Forms.Label
-        Me.Label85 = New System.Windows.Forms.Label
-        Me.Label84 = New System.Windows.Forms.Label
-        Me.chkGrabberOverrideTitleLimit = New System.Windows.Forms.ComboBox
-        Me.chkGrabberOverridePersonLimit = New System.Windows.Forms.ComboBox
-        Me.chkGrabberOverrideGetRoles = New System.Windows.Forms.ComboBox
-        Me.chkGrabberOverrideLanguage = New System.Windows.Forms.ComboBox
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox
-        Me.btnExcludeFileDelete = New System.Windows.Forms.Button
-        Me.btnExcludeFileShow = New System.Windows.Forms.Button
-        Me.txtExcludeFilePath = New System.Windows.Forms.TextBox
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.btnSelectExcludeFile = New System.Windows.Forms.Button
-        Me.txtConfigFilePath = New System.Windows.Forms.TextBox
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.btnSelectConfigFile = New System.Windows.Forms.Button
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox
-        Me.chkParseTrailers = New System.Windows.Forms.CheckBox
-        Me.GroupBox25 = New System.Windows.Forms.GroupBox
-        Me.chkCheckDVDFolders = New System.Windows.Forms.CheckBox
-        Me.chkParseSubtitleFiles = New System.Windows.Forms.CheckBox
-        Me.chkParsePlaylistFiles = New System.Windows.Forms.CheckBox
-        Me.txtTrailerIentificationStrings = New System.Windows.Forms.TextBox
-        Me.Label79 = New System.Windows.Forms.Label
-        Me.txtDefaultFileTypesNonMedia = New System.Windows.Forms.TextBox
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.txtDefaultFileTypes = New System.Windows.Forms.TextBox
-        Me.Label15 = New System.Windows.Forms.Label
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox
-        Me.btnSelectPersonArtworkFolder = New System.Windows.Forms.Button
-        Me.Label28 = New System.Windows.Forms.Label
-        Me.txtPersonArtworkFolder = New System.Windows.Forms.TextBox
-        Me.btnSelectFanartFolder = New System.Windows.Forms.Button
-        Me.txtFanartFolder = New System.Windows.Forms.TextBox
-        Me.Label48 = New System.Windows.Forms.Label
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox
-        Me.cbLogLevel = New System.Windows.Forms.ComboBox
-        Me.Label29 = New System.Windows.Forms.Label
-        Me.GroupBox12 = New System.Windows.Forms.GroupBox
-        Me.chkExecuteOnlyForOrphans = New System.Windows.Forms.CheckBox
-        Me.btnExecuteProgramSelectPath = New System.Windows.Forms.Button
-        Me.txtExecuteProgramPath = New System.Windows.Forms.TextBox
-        Me.chkExecuteProgram = New System.Windows.Forms.CheckBox
-        Me.Label27 = New System.Windows.Forms.Label
-        Me.Mediainfo = New System.Windows.Forms.TabPage
-        Me.Label47 = New System.Windows.Forms.Label
-        Me.GroupBox18 = New System.Windows.Forms.GroupBox
-        Me.txtSampleTextLanguageList = New System.Windows.Forms.TextBox
-        Me.txtSampleTextCodecList = New System.Windows.Forms.TextBox
-        Me.Label39 = New System.Windows.Forms.Label
-        Me.Label38 = New System.Windows.Forms.Label
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.txtSampleFileLength = New System.Windows.Forms.TextBox
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.txtSampleFileSize = New System.Windows.Forms.TextBox
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.Label100 = New System.Windows.Forms.Label
-        Me.txtSampleAudioChannelCount = New System.Windows.Forms.TextBox
-        Me.Label37 = New System.Windows.Forms.Label
-        Me.Label36 = New System.Windows.Forms.Label
-        Me.txtSampleAudioLanguageList = New System.Windows.Forms.TextBox
-        Me.txtSampleAudioStreamList = New System.Windows.Forms.TextBox
-        Me.txtSampleAudioStreamCount = New System.Windows.Forms.TextBox
-        Me.Label35 = New System.Windows.Forms.Label
-        Me.txtSampleAudioBitrate = New System.Windows.Forms.TextBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.txtSampleAudioCodec = New System.Windows.Forms.TextBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.btnTestAnalyse = New System.Windows.Forms.Button
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.txtSampleAspectRatio = New System.Windows.Forms.TextBox
-        Me.Label107 = New System.Windows.Forms.Label
-        Me.txtSampleVideoResolution = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.txtSampleVideoFramerate = New System.Windows.Forms.TextBox
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.txtSampleVideoBitrate = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.txtSampleVideoCodec = New System.Windows.Forms.TextBox
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.btnGetSampleFile = New System.Windows.Forms.Button
-        Me.txtSampleFile = New System.Windows.Forms.TextBox
-        Me.ViewCollection = New System.Windows.Forms.TabPage
-        Me.GroupBoxMovieDetails = New System.Windows.Forms.GroupBox
-        Me.TextBox40 = New System.Windows.Forms.TextBox
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.Import_Movies = New System.Windows.Forms.TabPage()
+        Me.btnOpenLog = New System.Windows.Forms.Button()
+        Me.Label_VersionNumber = New System.Windows.Forms.Label()
+        Me.LinkLabelMyFilmsWiki = New System.Windows.Forms.LinkLabel()
+        Me.Label88 = New System.Windows.Forms.Label()
+        Me.GroupBox27 = New System.Windows.Forms.GroupBox()
+        Me.chkDontAskInteractive = New System.Windows.Forms.CheckBox()
+        Me.chkImportOnInternetFailInGuiMode = New System.Windows.Forms.CheckBox()
+        Me.cbInternetLookupAlwaysPrompt = New System.Windows.Forms.CheckBox()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.chkImportOnInternetFail = New System.Windows.Forms.CheckBox()
+        Me.lblInternetLookupCaseExplanation = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.cbInternetLookupBehaviour = New System.Windows.Forms.ComboBox()
+        Me.GroupBox23 = New System.Windows.Forms.GroupBox()
+        Me.txtParserFilePathDisplay = New System.Windows.Forms.TextBox()
+        Me.cbTitleHandling = New System.Windows.Forms.ComboBox()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSelectParserFile = New System.Windows.Forms.Button()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.txtParserFilePath = New System.Windows.Forms.TextBox()
+        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.chkPurgeMissingAlways = New System.Windows.Forms.CheckBox()
+        Me.chkRescanMovedFiles = New System.Windows.Forms.CheckBox()
+        Me.chkProhibitInternetLookup = New System.Windows.Forms.CheckBox()
+        Me.chkPurgeMissing = New System.Windows.Forms.CheckBox()
+        Me.chkOverwriteXML = New System.Windows.Forms.CheckBox()
+        Me.chkBackupXMLFirst = New System.Windows.Forms.CheckBox()
+        Me.ToolStripProgressMessage = New System.Windows.Forms.Label()
+        Me.btnShowHideLog = New System.Windows.Forms.Button()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.BtnImportWatcher = New System.Windows.Forms.Button()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.btnParseXML = New System.Windows.Forms.Button()
+        Me.btnFindOrphans = New System.Windows.Forms.Button()
+        Me.btnCancelProcessing = New System.Windows.Forms.Button()
+        Me.btnUpdateXML = New System.Windows.Forms.Button()
+        Me.btnProcessMovieList = New System.Windows.Forms.Button()
+        Me.btnJustDoIt = New System.Windows.Forms.Button()
+        Me.Update_Movies = New System.Windows.Forms.TabPage()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.GroupBox32 = New System.Windows.Forms.GroupBox()
+        Me.btnManualCancel = New System.Windows.Forms.Button()
+        Me.btnManualDoTest = New System.Windows.Forms.Button()
+        Me.btnManualApplyChanges = New System.Windows.Forms.Button()
+        Me.grpManualInternetLookupSettings = New System.Windows.Forms.GroupBox()
+        Me.cbManualInternetLookupAlwaysPrompt = New System.Windows.Forms.CheckBox()
+        Me.chkManualDontAskInteractive = New System.Windows.Forms.CheckBox()
+        Me.txtManualInternetParserPathDisplay = New System.Windows.Forms.TextBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.btnManualSelectInternetParserPath = New System.Windows.Forms.Button()
+        Me.cbManualInternetLookupBehaviour = New System.Windows.Forms.ComboBox()
+        Me.txtManualInternetParserPath = New System.Windows.Forms.TextBox()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.btnShowHideLogTest = New System.Windows.Forms.Button()
+        Me.grpManualUpdatesParameters = New System.Windows.Forms.GroupBox()
+        Me.cbSkipExcludedMovieFiles = New System.Windows.Forms.CheckBox()
+        Me.cbManualParameterAndOr = New System.Windows.Forms.ComboBox()
+        Me.lblManualParametersValue2 = New System.Windows.Forms.Label()
+        Me.lblManualParametersOperator2 = New System.Windows.Forms.Label()
+        Me.txtManualParameterValue2 = New System.Windows.Forms.TextBox()
+        Me.cbManualParameterOperator2 = New System.Windows.Forms.ComboBox()
+        Me.lblManualParametersField2 = New System.Windows.Forms.Label()
+        Me.cbManualParameterFieldList2 = New System.Windows.Forms.ComboBox()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.chkManualParametersUpdateAll = New System.Windows.Forms.CheckBox()
+        Me.lblManualParametersValue1 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.txtManualParameterValue1 = New System.Windows.Forms.TextBox()
+        Me.cbManualParameterOperator1 = New System.Windows.Forms.ComboBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.cbManualParameterFieldList1 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.chkManualNfoFilesOnlyAddMissing = New System.Windows.Forms.CheckBox()
+        Me.cbManualNfoFileHandling = New System.Windows.Forms.ComboBox()
+        Me.lblManualNfoFileHandling = New System.Windows.Forms.Label()
+        Me.lblManualSelectFieldDestination = New System.Windows.Forms.Label()
+        Me.cbManualSelectFieldDestination = New System.Windows.Forms.ComboBox()
+        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData = New System.Windows.Forms.CheckBox()
+        Me.chkManualUpdateRecordsOnlyMissingData = New System.Windows.Forms.CheckBox()
+        Me.txtManualOldValue = New System.Windows.Forms.TextBox()
+        Me.lblManualEnterOldValue = New System.Windows.Forms.Label()
+        Me.chkManualMissingFanartDownload = New System.Windows.Forms.CheckBox()
+        Me.lblManualDatabaseFieldsPrompt = New System.Windows.Forms.Label()
+        Me.lblManualSelectField = New System.Windows.Forms.Label()
+        Me.cbManualSelectField = New System.Windows.Forms.ComboBox()
+        Me.txtManualNewValue = New System.Windows.Forms.TextBox()
+        Me.lblManualEnterNewValue = New System.Windows.Forms.Label()
+        Me.cbManualSelectOperation = New System.Windows.Forms.ComboBox()
+        Me.DatabaseFields = New System.Windows.Forms.TabPage()
+        Me.GroupBox_FanartHandling = New System.Windows.Forms.GroupBox()
+        Me.chkLoadPersonImagesWithFanart = New System.Windows.Forms.CheckBox()
+        Me.chkUseGrabberForFanart = New System.Windows.Forms.CheckBox()
+        Me.cbFanartLimitResolutionMin = New System.Windows.Forms.ComboBox()
+        Me.lblFanartLimits = New System.Windows.Forms.Label()
+        Me.cbFanartLimitResolutionMax = New System.Windows.Forms.ComboBox()
+        Me.cbNumFanartLimitNumber = New System.Windows.Forms.NumericUpDown()
+        Me.GroupBox_TitleHandling = New System.Windows.Forms.GroupBox()
+        Me.Label101 = New System.Windows.Forms.Label()
+        Me.cbEditionNameAppliesTo = New System.Windows.Forms.ComboBox()
+        Me.txtSeriesNameIdentifier = New System.Windows.Forms.TextBox()
+        Me.Label106 = New System.Windows.Forms.Label()
+        Me.Label89 = New System.Windows.Forms.Label()
+        Me.txtGroupNameIdentifier = New System.Windows.Forms.TextBox()
+        Me.cbGroupNameAppliesTo = New System.Windows.Forms.ComboBox()
+        Me.chkFolderNameIsGroupName = New System.Windows.Forms.CheckBox()
+        Me.lblGroupNameAppliesTo = New System.Windows.Forms.Label()
+        Me.cbMasterTitle = New System.Windows.Forms.ComboBox()
+        Me.lblMasterTitle = New System.Windows.Forms.Label()
+        Me.GroupBox_StorageFieldHandling = New System.Windows.Forms.GroupBox()
+        Me.chkShortNames = New System.Windows.Forms.CheckBox()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtDefaultSourceField = New System.Windows.Forms.TextBox()
+        Me.GroupBox_MediaLabelFieldHandling = New System.Windows.Forms.GroupBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.chkReadDVDLabel = New System.Windows.Forms.CheckBox()
+        Me.txtMediaLabel = New System.Windows.Forms.TextBox()
+        Me.GroupBox_OtherFieldHandling = New System.Windows.Forms.GroupBox()
+        Me.chkUseInternetDataForLanguagesField = New System.Windows.Forms.CheckBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtMediaType = New System.Windows.Forms.TextBox()
+        Me.lblCheckFieldHandling = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.cbDateHandling = New System.Windows.Forms.ComboBox()
+        Me.cbCheckHandling = New System.Windows.Forms.ComboBox()
+        Me.GroupBox_PictureHandling = New System.Windows.Forms.GroupBox()
+        Me.txtPictureFilenameSuffix = New System.Windows.Forms.TextBox()
+        Me.lblPicturePrefix = New System.Windows.Forms.Label()
+        Me.lblPictureHandling = New System.Windows.Forms.Label()
+        Me.cbPictureHandling = New System.Windows.Forms.ComboBox()
+        Me.txtPictureFilenamePrefix = New System.Windows.Forms.TextBox()
+        Me.lblInternetLookupRequired = New System.Windows.Forms.Label()
+        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.btnDBFieldsSelectNoMedia = New System.Windows.Forms.Button()
+        Me.btnDBFieldsSelectNoInternet = New System.Windows.Forms.Button()
+        Me.btnDBFieldsSelectNone = New System.Windows.Forms.Button()
+        Me.btnDBFieldsSelectAllMedia = New System.Windows.Forms.Button()
+        Me.btnDBFieldsSelectAllInternet = New System.Windows.Forms.Button()
+        Me.btnDBFieldsSelectAll = New System.Windows.Forms.Button()
+        Me.cbDatabaseFields = New System.Windows.Forms.CheckedListBox()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.ScanFilters = New System.Windows.Forms.TabPage()
+        Me.GroupBox28 = New System.Windows.Forms.GroupBox()
+        Me.dgEditionStrings = New System.Windows.Forms.DataGridView()
+        Me.EditorSearchExpression = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EditorReplacementString = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox24 = New System.Windows.Forms.GroupBox()
+        Me.txtOverridePath = New System.Windows.Forms.TextBox()
+        Me.lblOverridePath = New System.Windows.Forms.Label()
+        Me.btnSelectMovieFolder = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtMovieFolder = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.txtRegExSearchMultiPart = New System.Windows.Forms.TextBox()
+        Me.Label46 = New System.Windows.Forms.Label()
+        Me.GroupBox20 = New System.Windows.Forms.GroupBox()
+        Me.Label83 = New System.Windows.Forms.Label()
+        Me.dgFilterStrings = New System.Windows.Forms.DataGridView()
+        Me.GroupBox19 = New System.Windows.Forms.GroupBox()
+        Me.dgExcludedFolderStrings = New System.Windows.Forms.DataGridView()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.dgExcludedFileStrings = New System.Windows.Forms.DataGridView()
+        Me.Options = New System.Windows.Forms.TabPage()
+        Me.GroupBox26 = New System.Windows.Forms.GroupBox()
+        Me.Label87 = New System.Windows.Forms.Label()
+        Me.Label86 = New System.Windows.Forms.Label()
+        Me.Label85 = New System.Windows.Forms.Label()
+        Me.Label84 = New System.Windows.Forms.Label()
+        Me.chkGrabberOverrideTitleLimit = New System.Windows.Forms.ComboBox()
+        Me.chkGrabberOverridePersonLimit = New System.Windows.Forms.ComboBox()
+        Me.chkGrabberOverrideGetRoles = New System.Windows.Forms.ComboBox()
+        Me.chkGrabberOverrideLanguage = New System.Windows.Forms.ComboBox()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.btnExcludeFileDelete = New System.Windows.Forms.Button()
+        Me.btnExcludeFileShow = New System.Windows.Forms.Button()
+        Me.txtExcludeFilePath = New System.Windows.Forms.TextBox()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.btnSelectExcludeFile = New System.Windows.Forms.Button()
+        Me.txtConfigFilePath = New System.Windows.Forms.TextBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.btnSelectConfigFile = New System.Windows.Forms.Button()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chkParseTrailers = New System.Windows.Forms.CheckBox()
+        Me.GroupBox25 = New System.Windows.Forms.GroupBox()
+        Me.chkCheckDVDFolders = New System.Windows.Forms.CheckBox()
+        Me.chkParseSubtitleFiles = New System.Windows.Forms.CheckBox()
+        Me.chkParsePlaylistFiles = New System.Windows.Forms.CheckBox()
+        Me.txtTrailerIentificationStrings = New System.Windows.Forms.TextBox()
+        Me.Label79 = New System.Windows.Forms.Label()
+        Me.txtDefaultFileTypesNonMedia = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtDefaultFileTypes = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.btnSelectPersonArtworkFolder = New System.Windows.Forms.Button()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.txtPersonArtworkFolder = New System.Windows.Forms.TextBox()
+        Me.btnSelectFanartFolder = New System.Windows.Forms.Button()
+        Me.txtFanartFolder = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.cbLogLevel = New System.Windows.Forms.ComboBox()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.chkExecuteOnlyForOrphans = New System.Windows.Forms.CheckBox()
+        Me.btnExecuteProgramSelectPath = New System.Windows.Forms.Button()
+        Me.txtExecuteProgramPath = New System.Windows.Forms.TextBox()
+        Me.chkExecuteProgram = New System.Windows.Forms.CheckBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Mediainfo = New System.Windows.Forms.TabPage()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.GroupBox18 = New System.Windows.Forms.GroupBox()
+        Me.txtSampleTextLanguageList = New System.Windows.Forms.TextBox()
+        Me.txtSampleTextCodecList = New System.Windows.Forms.TextBox()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.txtSampleFileLength = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtSampleFileSize = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label100 = New System.Windows.Forms.Label()
+        Me.txtSampleAudioChannelCount = New System.Windows.Forms.TextBox()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.txtSampleAudioLanguageList = New System.Windows.Forms.TextBox()
+        Me.txtSampleAudioStreamList = New System.Windows.Forms.TextBox()
+        Me.txtSampleAudioStreamCount = New System.Windows.Forms.TextBox()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.txtSampleAudioBitrate = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtSampleAudioCodec = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnTestAnalyse = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.txtSampleAspectRatio = New System.Windows.Forms.TextBox()
+        Me.Label107 = New System.Windows.Forms.Label()
+        Me.txtSampleVideoResolution = New System.Windows.Forms.TextBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtSampleVideoFramerate = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtSampleVideoBitrate = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtSampleVideoCodec = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnGetSampleFile = New System.Windows.Forms.Button()
+        Me.txtSampleFile = New System.Windows.Forms.TextBox()
+        Me.ViewCollection = New System.Windows.Forms.TabPage()
+        Me.GroupBoxMovieDetails = New System.Windows.Forms.GroupBox()
+        Me.TextBox40 = New System.Windows.Forms.TextBox()
         Me.MovieBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.TextBox39 = New System.Windows.Forms.TextBox
-        Me.TextBox38 = New System.Windows.Forms.TextBox
-        Me.TextBox37 = New System.Windows.Forms.TextBox
-        Me.Label103 = New System.Windows.Forms.Label
-        Me.Label102 = New System.Windows.Forms.Label
-        Me.TextBox33 = New System.Windows.Forms.TextBox
-        Me.TextBox32 = New System.Windows.Forms.TextBox
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
-        Me.TextBox31 = New System.Windows.Forms.TextBox
-        Me.TextBox2 = New System.Windows.Forms.TextBox
-        Me.Label82 = New System.Windows.Forms.Label
-        Me.Label49 = New System.Windows.Forms.Label
-        Me.TextBox30 = New System.Windows.Forms.TextBox
-        Me.TextBox5 = New System.Windows.Forms.TextBox
-        Me.Label81 = New System.Windows.Forms.Label
-        Me.Label50 = New System.Windows.Forms.Label
-        Me.Label80 = New System.Windows.Forms.Label
-        Me.TextBox29 = New System.Windows.Forms.TextBox
-        Me.GroupBox14 = New System.Windows.Forms.GroupBox
-        Me.TextBox36 = New System.Windows.Forms.TextBox
-        Me.Label53 = New System.Windows.Forms.Label
-        Me.Label52 = New System.Windows.Forms.Label
-        Me.Label51 = New System.Windows.Forms.Label
-        Me.TextBox7 = New System.Windows.Forms.TextBox
-        Me.TextBox6 = New System.Windows.Forms.TextBox
-        Me.TextBox1 = New System.Windows.Forms.TextBox
-        Me.Label78 = New System.Windows.Forms.Label
-        Me.TextBox28 = New System.Windows.Forms.TextBox
-        Me.TextBox3 = New System.Windows.Forms.TextBox
-        Me.Label77 = New System.Windows.Forms.Label
-        Me.Label54 = New System.Windows.Forms.Label
-        Me.TextBox27 = New System.Windows.Forms.TextBox
-        Me.TextBox4 = New System.Windows.Forms.TextBox
-        Me.Label74 = New System.Windows.Forms.Label
-        Me.Label55 = New System.Windows.Forms.Label
-        Me.TextBox24 = New System.Windows.Forms.TextBox
-        Me.TextBox9 = New System.Windows.Forms.TextBox
-        Me.Label73 = New System.Windows.Forms.Label
-        Me.Label57 = New System.Windows.Forms.Label
-        Me.TextBox23 = New System.Windows.Forms.TextBox
-        Me.TextBox8 = New System.Windows.Forms.TextBox
-        Me.GroupBox22 = New System.Windows.Forms.GroupBox
-        Me.Label75 = New System.Windows.Forms.Label
-        Me.Label76 = New System.Windows.Forms.Label
-        Me.TextBox25 = New System.Windows.Forms.TextBox
-        Me.TextBox26 = New System.Windows.Forms.TextBox
-        Me.Label56 = New System.Windows.Forms.Label
-        Me.GroupBox21 = New System.Windows.Forms.GroupBox
-        Me.Label72 = New System.Windows.Forms.Label
-        Me.TextBox22 = New System.Windows.Forms.TextBox
-        Me.Label71 = New System.Windows.Forms.Label
-        Me.TextBox21 = New System.Windows.Forms.TextBox
-        Me.Label69 = New System.Windows.Forms.Label
-        Me.Label70 = New System.Windows.Forms.Label
-        Me.TextBox19 = New System.Windows.Forms.TextBox
-        Me.TextBox20 = New System.Windows.Forms.TextBox
-        Me.Label58 = New System.Windows.Forms.Label
-        Me.GroupBox15 = New System.Windows.Forms.GroupBox
-        Me.Label68 = New System.Windows.Forms.Label
-        Me.Label67 = New System.Windows.Forms.Label
-        Me.TextBox17 = New System.Windows.Forms.TextBox
-        Me.TextBox18 = New System.Windows.Forms.TextBox
-        Me.TextBox10 = New System.Windows.Forms.TextBox
-        Me.Label66 = New System.Windows.Forms.Label
-        Me.Label60 = New System.Windows.Forms.Label
-        Me.TextBox16 = New System.Windows.Forms.TextBox
-        Me.TextBox11 = New System.Windows.Forms.TextBox
-        Me.Label64 = New System.Windows.Forms.Label
-        Me.Label61 = New System.Windows.Forms.Label
-        Me.TextBox14 = New System.Windows.Forms.TextBox
-        Me.TextBox13 = New System.Windows.Forms.TextBox
-        Me.Label65 = New System.Windows.Forms.Label
-        Me.Label63 = New System.Windows.Forms.Label
-        Me.TextBox15 = New System.Windows.Forms.TextBox
-        Me.TextBox12 = New System.Windows.Forms.TextBox
-        Me.Label62 = New System.Windows.Forms.Label
-        Me.XionPanel1 = New XionControls.XionPanel
-        Me.DataGridViewMovie = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Country = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Rating = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Label59 = New System.Windows.Forms.Label
+        Me.TextBox39 = New System.Windows.Forms.TextBox()
+        Me.TextBox38 = New System.Windows.Forms.TextBox()
+        Me.TextBox37 = New System.Windows.Forms.TextBox()
+        Me.Label103 = New System.Windows.Forms.Label()
+        Me.Label102 = New System.Windows.Forms.Label()
+        Me.TextBox33 = New System.Windows.Forms.TextBox()
+        Me.TextBox32 = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.TextBox31 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label82 = New System.Windows.Forms.Label()
+        Me.Label49 = New System.Windows.Forms.Label()
+        Me.TextBox30 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label81 = New System.Windows.Forms.Label()
+        Me.Label50 = New System.Windows.Forms.Label()
+        Me.Label80 = New System.Windows.Forms.Label()
+        Me.TextBox29 = New System.Windows.Forms.TextBox()
+        Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+        Me.TextBox36 = New System.Windows.Forms.TextBox()
+        Me.Label53 = New System.Windows.Forms.Label()
+        Me.Label52 = New System.Windows.Forms.Label()
+        Me.Label51 = New System.Windows.Forms.Label()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label78 = New System.Windows.Forms.Label()
+        Me.TextBox28 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label77 = New System.Windows.Forms.Label()
+        Me.Label54 = New System.Windows.Forms.Label()
+        Me.TextBox27 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label74 = New System.Windows.Forms.Label()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.TextBox24 = New System.Windows.Forms.TextBox()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.Label73 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.TextBox23 = New System.Windows.Forms.TextBox()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.GroupBox22 = New System.Windows.Forms.GroupBox()
+        Me.Label75 = New System.Windows.Forms.Label()
+        Me.Label76 = New System.Windows.Forms.Label()
+        Me.TextBox25 = New System.Windows.Forms.TextBox()
+        Me.TextBox26 = New System.Windows.Forms.TextBox()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.GroupBox21 = New System.Windows.Forms.GroupBox()
+        Me.Label72 = New System.Windows.Forms.Label()
+        Me.TextBox22 = New System.Windows.Forms.TextBox()
+        Me.Label71 = New System.Windows.Forms.Label()
+        Me.TextBox21 = New System.Windows.Forms.TextBox()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.TextBox19 = New System.Windows.Forms.TextBox()
+        Me.TextBox20 = New System.Windows.Forms.TextBox()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.TextBox17 = New System.Windows.Forms.TextBox()
+        Me.TextBox18 = New System.Windows.Forms.TextBox()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.TextBox16 = New System.Windows.Forms.TextBox()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.TextBox14 = New System.Windows.Forms.TextBox()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.TextBox15 = New System.Windows.Forms.TextBox()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.Label62 = New System.Windows.Forms.Label()
+        Me.XionPanel1 = New XionControls.XionPanel()
+        Me.DataGridViewMovie = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Category = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Country = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Rating = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.MovieBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
-        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
-        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.VidéoBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorUpdate = New System.Windows.Forms.ToolStripButton
-        Me.ViewPersons = New System.Windows.Forms.TabPage
-        Me.GroupBoxPersonInfo = New System.Windows.Forms.GroupBox
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox
-        Me.TextBox34 = New System.Windows.Forms.TextBox
-        Me.Button3 = New System.Windows.Forms.Button
-        Me.Label104 = New System.Windows.Forms.Label
-        Me.Button4 = New System.Windows.Forms.Button
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox
-        Me.TextBox35 = New System.Windows.Forms.TextBox
-        Me.Label105 = New System.Windows.Forms.Label
-        Me.CheckBoxWriter = New System.Windows.Forms.CheckBox
+        Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
+        Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox()
+        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.VidéoBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorUpdate = New System.Windows.Forms.ToolStripButton()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.ViewPersons = New System.Windows.Forms.TabPage()
+        Me.GroupBoxPersonInfo = New System.Windows.Forms.GroupBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.TextBox34 = New System.Windows.Forms.TextBox()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label104 = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.TextBox35 = New System.Windows.Forms.TextBox()
+        Me.Label105 = New System.Windows.Forms.Label()
+        Me.CheckBoxWriter = New System.Windows.Forms.CheckBox()
         Me.PersonBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.CheckBoxDirector = New System.Windows.Forms.CheckBox
-        Me.CheckBoxProducer = New System.Windows.Forms.CheckBox
-        Me.CheckBoxActor = New System.Windows.Forms.CheckBox
-        Me.Label99 = New System.Windows.Forms.Label
-        Me.Label98 = New System.Windows.Forms.Label
-        Me.Label97 = New System.Windows.Forms.Label
-        Me.Label96 = New System.Windows.Forms.Label
-        Me.ViewPersons_Photos = New System.Windows.Forms.TextBox
-        Me.ViewPersons_URL = New System.Windows.Forms.TextBox
-        Me.ViewPersons_TMDB_Id = New System.Windows.Forms.TextBox
-        Me.ViewPersons_IMDB_Id = New System.Windows.Forms.TextBox
-        Me.Label95 = New System.Windows.Forms.Label
-        Me.Label94 = New System.Windows.Forms.Label
-        Me.Label93 = New System.Windows.Forms.Label
-        Me.ViewPersons_Birthplace = New System.Windows.Forms.TextBox
-        Me.ViewPersons_Birthday = New System.Windows.Forms.TextBox
-        Me.ViewPersons_MiniBio = New System.Windows.Forms.RichTextBox
-        Me.ViewPersons_Name = New System.Windows.Forms.TextBox
-        Me.ViewPersons_Biography = New System.Windows.Forms.RichTextBox
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox
-        Me.Label91 = New System.Windows.Forms.Label
-        Me.Label92 = New System.Windows.Forms.Label
-        Me.Label90 = New System.Windows.Forms.Label
-        Me.ViewPersons_OtherName = New System.Windows.Forms.TextBox
-        Me.XionPanelPerson = New XionControls.XionPanel
-        Me.DataGridViewPerson = New System.Windows.Forms.DataGridView
-        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.AlternateNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.BornDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.BirthPlaceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.MiniBiographyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.BiographyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.URLDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.IMDBIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TMDBIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.PictureDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.PhotosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.IsActor = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.IsProducer = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.IsDirector = New System.Windows.Forms.DataGridViewCheckBoxColumn
-        Me.IsWriter = New System.Windows.Forms.DataGridViewCheckBoxColumn
+        Me.CheckBoxDirector = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxProducer = New System.Windows.Forms.CheckBox()
+        Me.CheckBoxActor = New System.Windows.Forms.CheckBox()
+        Me.Label99 = New System.Windows.Forms.Label()
+        Me.Label98 = New System.Windows.Forms.Label()
+        Me.Label97 = New System.Windows.Forms.Label()
+        Me.Label96 = New System.Windows.Forms.Label()
+        Me.ViewPersons_Photos = New System.Windows.Forms.TextBox()
+        Me.ViewPersons_URL = New System.Windows.Forms.TextBox()
+        Me.ViewPersons_TMDB_Id = New System.Windows.Forms.TextBox()
+        Me.ViewPersons_IMDB_Id = New System.Windows.Forms.TextBox()
+        Me.Label95 = New System.Windows.Forms.Label()
+        Me.Label94 = New System.Windows.Forms.Label()
+        Me.Label93 = New System.Windows.Forms.Label()
+        Me.ViewPersons_Birthplace = New System.Windows.Forms.TextBox()
+        Me.ViewPersons_Birthday = New System.Windows.Forms.TextBox()
+        Me.ViewPersons_MiniBio = New System.Windows.Forms.RichTextBox()
+        Me.ViewPersons_Name = New System.Windows.Forms.TextBox()
+        Me.ViewPersons_Biography = New System.Windows.Forms.RichTextBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.Label91 = New System.Windows.Forms.Label()
+        Me.Label92 = New System.Windows.Forms.Label()
+        Me.Label90 = New System.Windows.Forms.Label()
+        Me.ViewPersons_OtherName = New System.Windows.Forms.TextBox()
+        Me.XionPanelPerson = New XionControls.XionPanel()
+        Me.DataGridViewPerson = New System.Windows.Forms.DataGridView()
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AlternateNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BornDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BirthPlaceDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MiniBiographyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BiographyDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.URLDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IMDBIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TMDBIdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PictureDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PhotosDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.IsActor = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.IsProducer = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.IsDirector = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.IsWriter = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.PersonBindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
-        Me.BindingNavigatorAddNewItemPerson = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorCountItem1 = New System.Windows.Forms.ToolStripLabel
-        Me.BindingNavigatorDeleteItemPerson = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveFirstItem1 = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMovePreviousItem1 = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorPositionItem1 = New System.Windows.Forms.ToolStripTextBox
-        Me.BindingNavigatorSeparator4 = New System.Windows.Forms.ToolStripSeparator
-        Me.BindingNavigatorMoveNextItem1 = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorMoveLastItem1 = New System.Windows.Forms.ToolStripButton
-        Me.BindingNavigatorSeparator5 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.SpeichernToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripButtonAddMissingPersons = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripButtonGrabPersons = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripTextBoxSearch = New System.Windows.Forms.ToolStripTextBox
-        Me.ViewCatalog = New System.Windows.Forms.TabPage
-        Me.UserDataGridView = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn15 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.BindingNavigatorAddNewItemPerson = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorCountItem1 = New System.Windows.Forms.ToolStripLabel()
+        Me.BindingNavigatorDeleteItemPerson = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveFirstItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMovePreviousItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorPositionItem1 = New System.Windows.Forms.ToolStripTextBox()
+        Me.BindingNavigatorSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorMoveNextItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveLastItem1 = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.SpeichernToolStripButton = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripButtonAddMissingPersons = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripButtonGrabPersons = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ToolStripTextBoxSearch = New System.Windows.Forms.ToolStripTextBox()
+        Me.ViewCatalog = New System.Windows.Forms.TabPage()
+        Me.UserDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn16 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn17 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UserBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog
-        Me.CustomFieldDataGridView = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.AntMovieCatalog = New AMCUpdater.AntMovieCatalog()
+        Me.CustomFieldDataGridView = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CustomFieldBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.OwnerTextBox = New System.Windows.Forms.TextBox
+        Me.OwnerTextBox = New System.Windows.Forms.TextBox()
         Me.PropertiesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.MailTextBox = New System.Windows.Forms.TextBox
-        Me.SiteTextBox = New System.Windows.Forms.TextBox
-        Me.DescriptionTextBox = New System.Windows.Forms.TextBox
-        Me.mnuFile = New System.Windows.Forms.MenuStrip
-        Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.LoadConfigurationFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.SaveConfigFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.SaveConfigFileAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMenuItemOptions = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMenuItemScanPath = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMenuItemsScanFilter = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.InternetLinksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MyFilmsWikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AntMovieCatalogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MediaInfodllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripMenuItemDebug = New System.Windows.Forms.ToolStripMenuItem
-        Me.XMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MediaFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.NonMediaFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TrailerFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.OrphanMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.OrphanNonMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.OrphanTrailerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MultiPartFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.OrphanAntToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MultiPartProcessedFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AntFieldsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.NodesToProcessToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ListMediaInfoParamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip
-        Me.ToolStripFixedText = New System.Windows.Forms.ToolStripStatusLabel
-        Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel
-        Me.ToolStripProgressBar = New System.Windows.Forms.ToolStripProgressBar
+        Me.MailTextBox = New System.Windows.Forms.TextBox()
+        Me.SiteTextBox = New System.Windows.Forms.TextBox()
+        Me.DescriptionTextBox = New System.Windows.Forms.TextBox()
+        Me.mnuFile = New System.Windows.Forms.MenuStrip()
+        Me.ToolStripMenuItemFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadConfigurationFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveConfigFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveConfigFileAsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemScanPath = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemsScanFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InternetLinksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MyFilmsWikiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AntMovieCatalogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MediaInfodllToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItemDebug = New System.Windows.Forms.ToolStripMenuItem()
+        Me.XMLToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MediaFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NonMediaFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TrailerFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrphanMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrphanNonMediaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrphanTrailerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultiPartFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OrphanAntToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MultiPartProcessedFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AntFieldsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NodesToProcessToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListMediaInfoParamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripFixedText = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripProgressBar = New System.Windows.Forms.ToolStripProgressBar()
         Me.epInteractive = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.epManualUpdater = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.epOptions = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ListVideos = New System.Windows.Forms.DataGridView
-        Me.NumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.OriginalTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ListVideos = New System.Windows.Forms.DataGridView()
+        Me.NumberDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OriginalTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TranslatedTitleDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
-        OwnerLabel = New System.Windows.Forms.Label
-        MailLabel = New System.Windows.Forms.Label
-        SiteLabel = New System.Windows.Forms.Label
-        DescriptionLabel = New System.Windows.Forms.Label
+        OwnerLabel = New System.Windows.Forms.Label()
+        MailLabel = New System.Windows.Forms.Label()
+        SiteLabel = New System.Windows.Forms.Label()
+        DescriptionLabel = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.Import_Movies.SuspendLayout()
         Me.GroupBox27.SuspendLayout()
@@ -676,8 +676,8 @@ Partial Class Form1
         'TabControl1
         '
         Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.Import_Movies)
         Me.TabControl1.Controls.Add(Me.Update_Movies)
         Me.TabControl1.Controls.Add(Me.DatabaseFields)
@@ -809,7 +809,7 @@ Partial Class Form1
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "Import behaviour in MyFilms ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox9, "This is the import behaviour used when you run AMCU in MyFilms plugin " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "via Globa" & _
-                "l Updates > Import/Update all movies from the My Films main menu.")
+        "l Updates > Import/Update all movies from the My Films main menu.")
         '
         'chkImportOnInternetFail
         '
@@ -968,7 +968,7 @@ Partial Class Form1
         Me.chkRescanMovedFiles.TabIndex = 5
         Me.chkRescanMovedFiles.Text = "Re-Scan Moved Files"
         Me.ToolTip1.SetToolTip(Me.chkRescanMovedFiles, "Forces a refresh of file-based and online data for a file when it is found to hav" & _
-                "e moved.")
+        "e moved.")
         Me.chkRescanMovedFiles.UseVisualStyleBackColor = True
         '
         'chkProhibitInternetLookup
@@ -1612,7 +1612,7 @@ Partial Class Form1
         Me.chkManualUpdateRecordsOnlyMissingData.TabIndex = 6
         Me.chkManualUpdateRecordsOnlyMissingData.Text = "Only add missing data"
         Me.ToolTip1.SetToolTip(Me.chkManualUpdateRecordsOnlyMissingData, "If checked, instead of owerwriting all fields selected on ""Database Fields"" tab w" & _
-                "ith the new grabbed data," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "only fields that are empty are filled with data.")
+        "ith the new grabbed data," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "only fields that are empty are filled with data.")
         Me.chkManualUpdateRecordsOnlyMissingData.UseVisualStyleBackColor = True
         Me.chkManualUpdateRecordsOnlyMissingData.Visible = False
         '
@@ -1655,7 +1655,7 @@ Partial Class Form1
         Me.lblManualDatabaseFieldsPrompt.Size = New System.Drawing.Size(205, 26)
         Me.lblManualDatabaseFieldsPrompt.TabIndex = 4
         Me.lblManualDatabaseFieldsPrompt.Text = "Note : Ensure the fields you want updated" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "are selected on the Database Fields ta" & _
-            "b." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+    "b." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         Me.lblManualDatabaseFieldsPrompt.Visible = False
         '
         'lblManualSelectField
@@ -1920,7 +1920,7 @@ Partial Class Form1
         Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
         Me.cbMasterTitle.TabIndex = 10
         Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for internet data search." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "It is used for both inte" & _
-                "rnet data (e.g. update records) and" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "fanart search and creation.")
+        "rnet data (e.g. update records) and" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "fanart search and creation.")
         '
         'lblMasterTitle
         '
@@ -1953,7 +1953,7 @@ Partial Class Form1
         Me.chkShortNames.TabIndex = 0
         Me.chkShortNames.Text = "Name Only"
         Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
-                "les in your setup.")
+        "les in your setup.")
         Me.chkShortNames.UseVisualStyleBackColor = True
         '
         'Label26
@@ -1972,8 +1972,8 @@ Partial Class Form1
         Me.txtDefaultSourceField.Size = New System.Drawing.Size(109, 20)
         Me.txtDefaultSourceField.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel " & _
-                "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
-                "d to!")
+        "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
+        "d to!")
         '
         'GroupBox_MediaLabelFieldHandling
         '
@@ -2015,7 +2015,7 @@ Partial Class Form1
         Me.txtMediaLabel.Size = New System.Drawing.Size(174, 20)
         Me.txtMediaLabel.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
-                ".")
+        ".")
         '
         'GroupBox_OtherFieldHandling
         '
@@ -2043,8 +2043,8 @@ Partial Class Form1
         Me.chkUseInternetDataForLanguagesField.TabIndex = 4
         Me.chkUseInternetDataForLanguagesField.Text = "Use Internet Data " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for Languages Field"
         Me.ToolTip1.SetToolTip(Me.chkUseInternetDataForLanguagesField, "If checked, the internet data from the grabber will be used to populate the ""Lang" & _
-                "uages"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If unchecked, mediainfo audio stream languages list will be used." & _
-                "")
+        "uages"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If unchecked, mediainfo audio stream languages list will be used." & _
+        "")
         Me.chkUseInternetDataForLanguagesField.UseVisualStyleBackColor = True
         '
         'Label12
@@ -2056,7 +2056,7 @@ Partial Class Form1
         Me.Label12.TabIndex = 5
         Me.Label12.Text = "Media Type"
         Me.ToolTip1.SetToolTip(Me.Label12, "You can enter a value that will be imported " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "into the ""MediaType"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This a" & _
-                "cts as a ""preset"".")
+        "cts as a ""preset"".")
         '
         'txtMediaType
         '
@@ -2065,7 +2065,7 @@ Partial Class Form1
         Me.txtMediaType.Size = New System.Drawing.Size(90, 20)
         Me.txtMediaType.TabIndex = 6
         Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
-                "")
+        "")
         '
         'lblCheckFieldHandling
         '
@@ -2096,8 +2096,8 @@ Partial Class Form1
         Me.cbDateHandling.Size = New System.Drawing.Size(174, 21)
         Me.cbDateHandling.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.cbDateHandling, "When using ""file creation date"", the result is depending on your setting " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for ""T" & _
-                "itle Search Handling"" - it will be the file date or " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the directory date, depend" & _
-                "ing on your choice.")
+        "itle Search Handling"" - it will be the file date or " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the directory date, depend" & _
+        "ing on your choice.")
         '
         'cbCheckHandling
         '
@@ -2110,8 +2110,8 @@ Partial Class Form1
         Me.cbCheckHandling.Size = New System.Drawing.Size(174, 21)
         Me.cbCheckHandling.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.cbCheckHandling, "The Ant Movie Catalog database includes a boolean 'Checked' field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you select" & _
-                " this option in the Database Fields list you can choose " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "whether to set it to '" & _
-                "True' or 'False'.")
+        " this option in the Database Fields list you can choose " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "whether to set it to '" & _
+        "True' or 'False'.")
         '
         'GroupBox_PictureHandling
         '
@@ -2289,8 +2289,8 @@ Partial Class Form1
         'cbDatabaseFields
         '
         Me.cbDatabaseFields.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cbDatabaseFields.CheckOnClick = True
         Me.cbDatabaseFields.ColumnWidth = 140
         Me.cbDatabaseFields.FormattingEnabled = True
@@ -2327,8 +2327,8 @@ Partial Class Form1
         'GroupBox28
         '
         Me.GroupBox28.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox28.Controls.Add(Me.dgEditionStrings)
         Me.GroupBox28.Location = New System.Drawing.Point(8, 375)
         Me.GroupBox28.Name = "GroupBox28"
@@ -2342,8 +2342,8 @@ Partial Class Form1
         '
         Me.dgEditionStrings.AllowUserToResizeRows = False
         Me.dgEditionStrings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgEditionStrings.BackgroundColor = System.Drawing.SystemColors.Window
         Me.dgEditionStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgEditionStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
@@ -2372,7 +2372,7 @@ Partial Class Form1
         'GroupBox24
         '
         Me.GroupBox24.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox24.Controls.Add(Me.txtOverridePath)
         Me.GroupBox24.Controls.Add(Me.lblOverridePath)
         Me.GroupBox24.Controls.Add(Me.btnSelectMovieFolder)
@@ -2389,7 +2389,7 @@ Partial Class Form1
         'txtOverridePath
         '
         Me.txtOverridePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtOverridePath.Location = New System.Drawing.Point(103, 60)
         Me.txtOverridePath.Name = "txtOverridePath"
         Me.txtOverridePath.Size = New System.Drawing.Size(410, 20)
@@ -2428,13 +2428,13 @@ Partial Class Form1
         'txtMovieFolder
         '
         Me.txtMovieFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMovieFolder.Location = New System.Drawing.Point(12, 34)
         Me.txtMovieFolder.Name = "txtMovieFolder"
         Me.txtMovieFolder.Size = New System.Drawing.Size(501, 20)
         Me.txtMovieFolder.TabIndex = 2
         Me.ToolTip1.SetToolTip(Me.txtMovieFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
-                "e folders with semi-colons.")
+        "e folders with semi-colons.")
         '
         'Label17
         '
@@ -2450,7 +2450,7 @@ Partial Class Form1
         'GroupBox6
         '
         Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.Controls.Add(Me.Label25)
         Me.GroupBox6.Controls.Add(Me.txtRegExSearchMultiPart)
         Me.GroupBox6.Location = New System.Drawing.Point(8, 162)
@@ -2472,13 +2472,13 @@ Partial Class Form1
         'txtRegExSearchMultiPart
         '
         Me.txtRegExSearchMultiPart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtRegExSearchMultiPart.Location = New System.Drawing.Point(14, 32)
         Me.txtRegExSearchMultiPart.Name = "txtRegExSearchMultiPart"
         Me.txtRegExSearchMultiPart.Size = New System.Drawing.Size(546, 20)
         Me.txtRegExSearchMultiPart.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtRegExSearchMultiPart, "AMCUpdater uses this Regular Expression to detect multi-part movies." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example: 'm" & _
-                "oviename - CD1.avi;'moviename - CD2.avi '")
+        "oviename - CD1.avi;'moviename - CD2.avi '")
         '
         'Label46
         '
@@ -2491,8 +2491,8 @@ Partial Class Form1
         'GroupBox20
         '
         Me.GroupBox20.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox20.Controls.Add(Me.Label83)
         Me.GroupBox20.Controls.Add(Me.dgFilterStrings)
         Me.GroupBox20.Location = New System.Drawing.Point(8, 231)
@@ -2502,7 +2502,7 @@ Partial Class Form1
         Me.GroupBox20.TabStop = False
         Me.GroupBox20.Text = "Strip Characters From Title ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox20, "You can define expressions to clean up the (media) names to get a clean title for" & _
-                " internet searches." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Both normal and RegEx search expressi0ons are allowed.")
+        " internet searches." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Both normal and RegEx search expressi0ons are allowed.")
         '
         'Label83
         '
@@ -2517,8 +2517,8 @@ Partial Class Form1
         '
         Me.dgFilterStrings.AllowUserToResizeRows = False
         Me.dgFilterStrings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dgFilterStrings.BackgroundColor = System.Drawing.SystemColors.Window
         Me.dgFilterStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgFilterStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
@@ -2535,7 +2535,7 @@ Partial Class Form1
         'GroupBox19
         '
         Me.GroupBox19.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox19.Controls.Add(Me.dgExcludedFolderStrings)
         Me.GroupBox19.Controls.Add(Me.Label44)
         Me.GroupBox19.Controls.Add(Me.Label45)
@@ -2614,7 +2614,7 @@ Partial Class Form1
         'GroupBox26
         '
         Me.GroupBox26.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox26.Controls.Add(Me.Label87)
         Me.GroupBox26.Controls.Add(Me.Label86)
         Me.GroupBox26.Controls.Add(Me.Label85)
@@ -2680,7 +2680,7 @@ Partial Class Form1
         Me.chkGrabberOverrideTitleLimit.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverrideTitleLimit.TabIndex = 7
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You may also set a preferred lan" & _
-                "guage/country " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for grabbing in the override options.")
+        "guage/country " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for grabbing in the override options.")
         '
         'chkGrabberOverridePersonLimit
         '
@@ -2692,7 +2692,7 @@ Partial Class Form1
         Me.chkGrabberOverridePersonLimit.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverridePersonLimit.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverridePersonLimit, "Limits the number of person names grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This settings applies to all fields t" & _
-                "hat grab person names, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like actors, producers, writers, directors.")
+        "hat grab person names, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like actors, producers, writers, directors.")
         '
         'chkGrabberOverrideGetRoles
         '
@@ -2704,7 +2704,7 @@ Partial Class Form1
         Me.chkGrabberOverrideGetRoles.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverrideGetRoles.TabIndex = 3
         Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideGetRoles, "If checked, add Roles to actor infos." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Depends on the grabber script supporting t" & _
-                "hat option.")
+        "hat option.")
         '
         'chkGrabberOverrideLanguage
         '
@@ -2719,7 +2719,7 @@ Partial Class Form1
         'GroupBox11
         '
         Me.GroupBox11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox11.Controls.Add(Me.btnExcludeFileDelete)
         Me.GroupBox11.Controls.Add(Me.btnExcludeFileShow)
         Me.GroupBox11.Controls.Add(Me.txtExcludeFilePath)
@@ -2759,7 +2759,7 @@ Partial Class Form1
         'txtExcludeFilePath
         '
         Me.txtExcludeFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtExcludeFilePath.Location = New System.Drawing.Point(12, 72)
         Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
         Me.txtExcludeFilePath.Size = New System.Drawing.Size(296, 20)
@@ -2789,14 +2789,14 @@ Partial Class Form1
         'txtConfigFilePath
         '
         Me.txtConfigFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtConfigFilePath.Location = New System.Drawing.Point(12, 32)
         Me.txtConfigFilePath.Name = "txtConfigFilePath"
         Me.txtConfigFilePath.Size = New System.Drawing.Size(501, 20)
         Me.txtConfigFilePath.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This must be saved in .xml f" & _
-                "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
-                "le will be created for you.")
+        "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
+        "le will be created for you.")
         '
         'Label2
         '
@@ -2821,7 +2821,7 @@ Partial Class Form1
         'GroupBox4
         '
         Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.chkParseTrailers)
         Me.GroupBox4.Controls.Add(Me.GroupBox25)
         Me.GroupBox4.Controls.Add(Me.txtTrailerIentificationStrings)
@@ -2872,7 +2872,7 @@ Partial Class Form1
         Me.chkCheckDVDFolders.TabIndex = 0
         Me.chkCheckDVDFolders.Text = "Check for DVD / BR folders"
         Me.ToolTip1.SetToolTip(Me.chkCheckDVDFolders, "Enable this option to search for DVD rips." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The system looks for a VIDEO_TS.IFO f" & _
-                "ile and attempts to work out" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the movie title from the folder structure.")
+        "ile and attempts to work out" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the movie title from the folder structure.")
         Me.chkCheckDVDFolders.UseVisualStyleBackColor = True
         '
         'chkParseSubtitleFiles
@@ -2900,13 +2900,13 @@ Partial Class Form1
         'txtTrailerIentificationStrings
         '
         Me.txtTrailerIentificationStrings.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(12, 110)
         Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
         Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(296, 20)
         Me.txtTrailerIentificationStrings.TabIndex = 5
         Me.ToolTip1.SetToolTip(Me.txtTrailerIentificationStrings, "if a file contains one of these strings, it will be identified as trailer instead" & _
-                " of movie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "several values are possible - use "";"" as delimiter.")
+        " of movie" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "several values are possible - use "";"" as delimiter.")
         '
         'Label79
         '
@@ -2920,7 +2920,7 @@ Partial Class Form1
         'txtDefaultFileTypesNonMedia
         '
         Me.txtDefaultFileTypesNonMedia.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDefaultFileTypesNonMedia.Location = New System.Drawing.Point(12, 71)
         Me.txtDefaultFileTypesNonMedia.Name = "txtDefaultFileTypesNonMedia"
         Me.txtDefaultFileTypesNonMedia.Size = New System.Drawing.Size(296, 20)
@@ -2938,7 +2938,7 @@ Partial Class Form1
         'txtDefaultFileTypes
         '
         Me.txtDefaultFileTypes.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDefaultFileTypes.Location = New System.Drawing.Point(12, 32)
         Me.txtDefaultFileTypes.Name = "txtDefaultFileTypes"
         Me.txtDefaultFileTypes.Size = New System.Drawing.Size(296, 20)
@@ -2957,7 +2957,7 @@ Partial Class Form1
         'GroupBox7
         '
         Me.GroupBox7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox7.Controls.Add(Me.btnSelectPersonArtworkFolder)
         Me.GroupBox7.Controls.Add(Me.Label28)
         Me.GroupBox7.Controls.Add(Me.txtPersonArtworkFolder)
@@ -2993,7 +2993,7 @@ Partial Class Form1
         'txtPersonArtworkFolder
         '
         Me.txtPersonArtworkFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPersonArtworkFolder.Location = New System.Drawing.Point(10, 74)
         Me.txtPersonArtworkFolder.Name = "txtPersonArtworkFolder"
         Me.txtPersonArtworkFolder.Size = New System.Drawing.Size(503, 20)
@@ -3013,13 +3013,13 @@ Partial Class Form1
         'txtFanartFolder
         '
         Me.txtFanartFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFanartFolder.Location = New System.Drawing.Point(10, 33)
         Me.txtFanartFolder.Name = "txtFanartFolder"
         Me.txtFanartFolder.Size = New System.Drawing.Size(503, 20)
         Me.txtFanartFolder.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.txtFanartFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
-                "e folders with semi-colons.")
+        "e folders with semi-colons.")
         '
         'Label48
         '
@@ -3033,7 +3033,7 @@ Partial Class Form1
         'GroupBox13
         '
         Me.GroupBox13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox13.Controls.Add(Me.cbLogLevel)
         Me.GroupBox13.Controls.Add(Me.Label29)
         Me.GroupBox13.Location = New System.Drawing.Point(13, 534)
@@ -3067,7 +3067,7 @@ Partial Class Form1
         'GroupBox12
         '
         Me.GroupBox12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox12.Controls.Add(Me.chkExecuteOnlyForOrphans)
         Me.GroupBox12.Controls.Add(Me.btnExecuteProgramSelectPath)
         Me.GroupBox12.Controls.Add(Me.txtExecuteProgramPath)
@@ -3103,7 +3103,7 @@ Partial Class Form1
         'txtExecuteProgramPath
         '
         Me.txtExecuteProgramPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtExecuteProgramPath.Location = New System.Drawing.Point(112, 39)
         Me.txtExecuteProgramPath.Name = "txtExecuteProgramPath"
         Me.txtExecuteProgramPath.Size = New System.Drawing.Size(401, 20)
@@ -3154,8 +3154,8 @@ Partial Class Form1
         Me.Label47.Size = New System.Drawing.Size(495, 43)
         Me.Label47.TabIndex = 0
         Me.Label47.Text = "This page allows you to test that the MediaInfo dll is able to read your movie fi" & _
-            "le correctly.  Relevant information from the file will be displayed below if pos" & _
-            "sible."
+    "le correctly.  Relevant information from the file will be displayed below if pos" & _
+    "sible."
         '
         'GroupBox18
         '
@@ -3597,7 +3597,7 @@ Partial Class Form1
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox15)
         Me.GroupBoxMovieDetails.Controls.Add(Me.TextBox12)
         Me.GroupBoxMovieDetails.Controls.Add(Me.Label62)
-        Me.GroupBoxMovieDetails.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBoxMovieDetails.Dock = System.Windows.Forms.DockStyle.Right
         Me.GroupBoxMovieDetails.Location = New System.Drawing.Point(87, 28)
         Me.GroupBoxMovieDetails.Name = "GroupBoxMovieDetails"
         Me.GroupBoxMovieDetails.Size = New System.Drawing.Size(510, 549)
@@ -4342,9 +4342,11 @@ Partial Class Form1
         '
         'XionPanel1
         '
+        Me.XionPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.XionPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.XionPanel1.Controls.Add(Me.DataGridViewMovie)
-        Me.XionPanel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.XionPanel1.Location = New System.Drawing.Point(3, 28)
         Me.XionPanel1.Movable = False
         Me.XionPanel1.Name = "XionPanel1"
@@ -4462,15 +4464,6 @@ Partial Class Form1
         Me.Rating.Name = "Rating"
         Me.Rating.ReadOnly = True
         Me.Rating.Width = 50
-        '
-        'Label59
-        '
-        Me.Label59.AutoSize = True
-        Me.Label59.Location = New System.Drawing.Point(-55, 223)
-        Me.Label59.Name = "Label59"
-        Me.Label59.Size = New System.Drawing.Size(42, 13)
-        Me.Label59.TabIndex = 28
-        Me.Label59.Text = "Original"
         '
         'MovieBindingNavigator
         '
@@ -4605,6 +4598,15 @@ Partial Class Form1
         Me.BindingNavigatorUpdate.Size = New System.Drawing.Size(77, 22)
         Me.BindingNavigatorUpdate.Text = "Update Movie"
         '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Location = New System.Drawing.Point(-55, 223)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(42, 13)
+        Me.Label59.TabIndex = 28
+        Me.Label59.Text = "Original"
+        '
         'ViewPersons
         '
         Me.ViewPersons.Controls.Add(Me.GroupBoxPersonInfo)
@@ -4620,7 +4622,7 @@ Partial Class Form1
         'GroupBoxPersonInfo
         '
         Me.GroupBoxPersonInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBoxPersonInfo.Controls.Add(Me.GroupBox5)
         Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxWriter)
         Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxDirector)
@@ -4995,8 +4997,8 @@ Partial Class Form1
         '
         Me.DataGridViewPerson.AllowUserToOrderColumns = True
         Me.DataGridViewPerson.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridViewPerson.AutoGenerateColumns = False
         Me.DataGridViewPerson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DataGridViewPerson.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
