@@ -106,7 +106,7 @@
     </Reference>
     <Reference Include="RemotePlugins, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\RemotePlugins.dll</HintPath>
+      <HintPath>..\Externals\Mediaportal\RemotePlugins.dll</HintPath>
     </Reference>
     <Reference Include="SubCentral, Version=1.0.0.203, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
