@@ -323,11 +323,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     internal const int ID_MyFilmsTrailerOSD = 7996;
     internal const int ID_MyFilmsDialogImageSelect = 7997;
 
-    internal const int ID_BrowseTheWeb = 54537689;
-    internal const int ID_OnlineVideos = 4755;
-    internal const int ID_SubCentral = 84623;
-    internal const int ID_BluRayPlayerLauncher = 8080;
-
     internal const int cacheThumbWith = 400;
     internal const int cacheThumbHeight = 600;
 
@@ -352,6 +347,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_BtnGlobalOverlayFilter = 7,
       CTRL_BtnGlobalUpdates = 8,
       CTRL_BtnToggleGlobalUnwatchedStatus = 9,
+      CTRL_BtnOnlineMovieLists = 10,
       //CTRL_TxtSelect = 12,
       CTRL_Fanart = 11,
       CTRL_Fanart2 = 21,
@@ -393,6 +389,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     //[SkinControlAttribute((int)Controls.CTRL_BtnToggleGlobalUnwatchedStatus)]
     //protected GUIButtonControl BtnToggleGlobalWatched;
+
+    //[SkinControlAttribute((int)Controls.CTRL_BtnOnlineMovieLists)]
+    //protected GUIButtonControl BtnOnlineMovieLists;
 
     [SkinControlAttribute((int)Controls.CTRL_ListFilms)]
     protected GUIFacadeControl facadeFilms;
@@ -597,7 +596,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       BrowseTheWeb = 54537689,
       OnlineVideos = 4755,
-      SubCentral = 84623
+      SubCentral = 84623,
+      BluRayPlayerLauncher = 8080
     }
 
     public enum ViewContext
@@ -872,6 +872,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       //MyFilmsDetail.clearGUIProperty("picture");
 
+      base.OnPageLoad(); // let animations run
+
       #region init buttons and register sort button handler ...
       GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnSearch, GUILocalizeStrings.Get(137));
       if (BtnSrtBy != null)
@@ -882,6 +884,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnGlobalOverlayFilter, GUILocalizeStrings.Get(10799402)); // BtnGlobalOverlayFilter.Label = GUILocalizeStrings.Get(10798714); // Global Filters
       GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnGlobalUpdates, GUILocalizeStrings.Get(10799401)); // global updates
+      GUIButtonControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnOnlineMovieLists, GUILocalizeStrings.Get(10798825)); // online information
 
       //try { BtnGlobalUpdates.Label = GUILocalizeStrings.Get(10798690); } // Global Updates ...  
       //catch (Exception) { LogMyFilms.Warn("(InitMainScreen) - 'Global Updates' button label cannot be set - not defined in skin?"); }
@@ -899,8 +902,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (!groupcover.Active) groupcover.Active = true;
       #endregion
 
-      if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != ID_OnlineVideos 
-        && PreviousWindowId != ID_BrowseTheWeb && PreviousWindowId != (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO) // Fullscreen is ID 2005
+      if (PreviousWindowId != ID_MyFilmsDetail && PreviousWindowId != ID_MyFilmsActors && PreviousWindowId != (int)ExternalPluginWindows.OnlineVideos
+        && PreviousWindowId != (int)ExternalPluginWindows.BrowseTheWeb && PreviousWindowId != (int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO) // Fullscreen is ID 2005
       {
         #region Load or change MyFilms Config
 
@@ -966,7 +969,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           groupcover.Filename = "";
         }
       }
-      base.OnPageLoad(); // let animations run
+      // base.OnPageLoad(); // let animations run
 
       if (internalLoadParam != null) // internal option call, just do it
       {
@@ -1811,6 +1814,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               GUIControl.UnfocusControl(GetID, (int)Controls.CTRL_BtnGlobalUpdates);
               GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
               break;
+            case (int)Controls.CTRL_BtnOnlineMovieLists:
+              GetSelectFromOnlineMenuView();
+              GUIControl.UnfocusControl(GetID, (int)Controls.CTRL_BtnOnlineMovieLists);
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              break;
             case (int)Controls.CTRL_BtnGlobalOverlayFilter:
               Change_Global_Filters();
               GUIControl.UnfocusControl(GetID, (int)Controls.CTRL_BtnGlobalOverlayFilter);
@@ -2027,24 +2035,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       Change_Layout_Action(dlg.SelectedLabel);
 
-      if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll)
+      switch (conf.ViewContext)
       {
-        MyFilms.conf.WStrLayOut = dlg.SelectedLabel; // we share Layout for menu with Views ...
+        case ViewContext.TmdbMovies:
+        case ViewContext.MenuAll:
+        case ViewContext.Menu:
+          MyFilms.conf.WStrLayOut = dlg.SelectedLabel; // we share Layout for menu with Views ...
+          break;
+
+        default:
+          if (conf.Boolselect)
+            MyFilms.conf.WStrLayOut = dlg.SelectedLabel;
+          else if (conf.BoolCollection)
+            MyFilms.conf.StrLayOutInHierarchies = dlg.SelectedLabel;
+          else
+            MyFilms.conf.StrLayOut = dlg.SelectedLabel;
+          break;
       }
-      else if (conf.Boolselect)
-        MyFilms.conf.WStrLayOut = dlg.SelectedLabel;
-      else if (conf.BoolCollection)
-        MyFilms.conf.StrLayOutInHierarchies = dlg.SelectedLabel;
-      else
-        MyFilms.conf.StrLayOut = dlg.SelectedLabel;
       dlg.DeInit();
 
-      if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll)
-        GetSelectFromMenuView(conf.BoolMenuShowAll);
-      else if (conf.Boolselect)
-        getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
-      else
-        GetFilmList();
+      switch (conf.ViewContext)
+      {
+        case ViewContext.TmdbMovies:
+          break;
+        case ViewContext.MenuAll:
+        case ViewContext.Menu:
+          GetSelectFromMenuView(conf.BoolMenuShowAll);
+          break;
+
+        default:
+          if (conf.Boolselect)
+            getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
+          else
+            GetFilmList();
+          break;
+      }
       GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, (int)wselectindex);
     }
 
@@ -3940,47 +3965,59 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     void SortChanged(object sender, SortEventArgs e)
     {
-      if (conf.ViewContext == ViewContext.Menu || conf.ViewContext == ViewContext.MenuAll) return; // no sorting for menu types !
-      LogMyFilms.Debug("SortChanged() - handler called with order = '" + e.Order + "'");
-      LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - WStrSortSensCount        : '{0}'", conf.WStrSortSensCount));
-      LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - WStrSortSens             : '{0}'", conf.WStrSortSens));
-      LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - StrSortSensInHierarchies : '{0}'", conf.StrSortSensInHierarchies));
-      LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - StrSortSens              : '{0}'", conf.StrSortSens));
-      if (conf.Boolselect) //in Views / Groupviews
+      switch (conf.ViewContext)
       {
-        if (conf.BoolSortCountinViews)
-        {
-          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.WStrSortSensCount.Trim().Substring(0, 3).ToLower())
-            return;
-          conf.WStrSortSensCount = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
-        }
-        else // normal sort direction for views/groups
-        {
-          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.WStrSortSens.Trim().Substring(0, 3).ToLower())
-            return;
-          conf.WStrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
-        }
-      }
-      else
-      {
-        if (conf.BoolCollection) // film groups/collections
-        {
-          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInHierarchies.Trim().Substring(0, 3).ToLower())
-            return;
-          conf.StrSortSensInHierarchies = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
-        }
-        else // normal sortdirection in film groups/collections
-        {
-          if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
-            return;
-          conf.StrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
-        }
+        case ViewContext.MenuAll:
+        case ViewContext.Menu:
+          return; // no sorting for menu types !
+
+        case ViewContext.TmdbMovies:
+          return; // no sorting for tmdb movie lists
+
+        default:
+          LogMyFilms.Debug("SortChanged() - handler called with order = '" + e.Order + "'");
+          LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - WStrSortSensCount        : '{0}'", conf.WStrSortSensCount));
+          LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - WStrSortSens             : '{0}'", conf.WStrSortSens));
+          LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - StrSortSensInHierarchies : '{0}'", conf.StrSortSensInHierarchies));
+          LogMyFilms.Debug(string.Format("SortChanged() - current sort orders - StrSortSens              : '{0}'", conf.StrSortSens));
+          if (conf.Boolselect) //in Views / Groupviews
+          {
+            if (conf.BoolSortCountinViews)
+            {
+              if (e.Order.ToString().Substring(0, 3).ToLower() == conf.WStrSortSensCount.Trim().Substring(0, 3).ToLower())
+                return;
+              conf.WStrSortSensCount = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
+            }
+            else // normal sort direction for views/groups
+            {
+              if (e.Order.ToString().Substring(0, 3).ToLower() == conf.WStrSortSens.Trim().Substring(0, 3).ToLower())
+                return;
+              conf.WStrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
+            }
+          }
+          else
+          {
+            if (conf.BoolCollection) // film groups/collections
+            {
+              if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSensInHierarchies.Trim().Substring(0, 3).ToLower())
+                return;
+              conf.StrSortSensInHierarchies = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
+            }
+            else // normal sortdirection in film groups/collections
+            {
+              if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
+                return;
+              conf.StrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
+            }
+          }
+
+          if (conf.Boolselect)
+            getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
+          else
+            GetFilmList();
+          break;
       }
 
-      if (conf.Boolselect)
-        getSelectFromDivx(conf.StrSelect, conf.WStrSort, conf.WStrSortSens, conf.Wstar, true, "");
-      else
-        GetFilmList();
     }
 
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
@@ -4117,6 +4154,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         dlg.Add(GUILocalizeStrings.Get(924)); // menu
         choiceView.Add("Menu");
 
+        // add online movie lists as option
+
+        if (MyFilmsDetail.ExtendedStartmode("Menu: add online movie lists to selection"))
+        {
+          dlg.Add("*** " + GUILocalizeStrings.Get(10798825) + " ***"); // 10798825 online information
+          choiceView.Add("onlineinfo");
+        }
+
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1) return;
       }
@@ -4147,7 +4192,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Change_View_Action(choiceView[dlg.SelectedLabel]);
     }
 
-    private int CountViewItems(IEnumerable<DataRow> filmrows, string wStrSort)
+    private static int CountViewItems(IEnumerable<DataRow> filmrows, string wStrSort)
     {
       int count = 0;
       var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase); //List<string> itemList = new List<string>();
@@ -5665,9 +5710,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the start ....
       GUIPropertyManager.SetProperty("#itemcount", "0");
 
-      BtnSrtBy.IsEnabled = true;
-      BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
-      BtnSrtBy.IsAscending = (conf.BoolSortCountinViews) ? (conf.WStrSortSensCount == " ASC") : (conf.WStrSortSens == " ASC");
+      BtnSrtBy.IsEnabled = false;
+      BtnSrtBy.Label = (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(103)); // sort: name
+      BtnSrtBy.IsAscending = (conf.WStrSortSens == " ASC");
 
       conf.Boolselect = false;
       conf.Wselectedlabel = "";
@@ -8624,6 +8669,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           conf.Boolselect = false;
           conf.Boolreturn = false;
           GetSelectFromMenuView(conf.BoolMenuShowAll); // load views into facade ...
+          break;
+
+        case "onlineinfo":
+          GetSelectFromOnlineMenuView();
           break;
 
         case "CustomView":

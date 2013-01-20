@@ -7653,7 +7653,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           case PlayerOption.BluRayPlayerLauncher:
             LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
-            GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
+            GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.BluRayPlayerLauncher);
             break;
           case PlayerOption.Internal:
             bool externalplayerextensiondetected = MyFilms.conf.ExternalPlayerExtensions.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries).Any(s => filestorage.ToLower().Contains(s.ToLower()));
@@ -7695,7 +7695,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               #region  BluRayPlayerLauncher playback
               LogMyFilms.Info("Launch_Movie() - activate blurayplayer plugin");
-              GUIWindowManager.ActivateWindow(MyFilms.ID_BluRayPlayerLauncher);
+              GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.BluRayPlayerLauncher);
               #endregion
             }
             else // playback not successful - notify user!
@@ -11519,7 +11519,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Subscribe to Event
       try
       {
-        GUIOnlineVideos OV = (GUIOnlineVideos)GUIWindowManager.GetWindow(MyFilms.ID_OnlineVideos);
+        GUIOnlineVideos OV = (GUIOnlineVideos)GUIWindowManager.GetWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos);
         OV.VideoDownloaded -= new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
         OV.VideoDownloaded += new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
         LogMyFilms.Info("Subscribed 'VideoDownloaded' event from OnlineVideos ...");
