@@ -1615,7 +1615,7 @@ Public Class AntProcessor
                                     NewImage = ValueNew.Substring(ValueNew.LastIndexOf("\") + 1)
                                 End If
 
-                                If Not File.Exists(NewImage) Then
+                                If Not File.Exists(Path.Combine(ImagePathTemp, NewImage)) Then
                                     NewImage = Nothing
                                     ValueNew = ""
                                 End If
