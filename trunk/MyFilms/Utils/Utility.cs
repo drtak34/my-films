@@ -336,6 +336,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// Returns true, if all strings or delimited parts of checkExpressions are contained in input
     /// </summary>
     /// <param name="input"></param>
+    /// <param name="checkExpression"></param>
+    /// <param name="delimiter"></param>
     /// <returns></returns>
     public static bool ContainsAll(string input, string checkExpression, string delimiter)
     {
@@ -764,7 +766,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Gets all the files in the given folder path and all its subdirectories.
     /// </summary>
+    /// <param name="path"></param>
     /// <param name="searchPatterns">search patterns (ie, "*.exe")</param>
+    /// <param name="includeSubFolders"></param>
     public static string[] GetFiles(string path, string[] searchPatterns, bool includeSubFolders)
     {
       ArrayList files = new ArrayList();
@@ -792,8 +796,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Gets all the files in the given folder path and all its subdirectories.
     /// </summary>
+    /// <param name="path"></param>
     /// <param name="searchPattern">A series of valid search patterns, separated
     /// by ";". For example "*.jpg;prog*.exe"</param>
+    /// <param name="includeSubFolders"></param>
     public static string[] GetFiles(string path, string searchPattern, bool includeSubFolders)
     {
       string[] patterns = searchPattern.Split(';');

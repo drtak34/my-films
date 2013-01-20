@@ -1384,106 +1384,109 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               base.OnAction(action); // return to previous window, if no backnavigation rule applies
               return;
 
-              if (GetPrevFilmList()) // try moving up in film list hierarchy - is false, when already on top
-                return;
+              // following code was deactivated to use "simplified" backnavigation, instead "enhanced" backnavigation on user request
+              #region deactivatged backnavigation code
+              //if (GetPrevFilmList()) // try moving up in film list hierarchy - is false, when already on top
+              //  return;
 
-              if (conf.StrTxtSelect == "" || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) //"All" or "Global Filter"
-              {
-                #region this was already "root" view - so jumping back should leave the plugin !
-                base.OnAction(action); // GUIWindowManager.ShowPreviousWindow();
-                return;
-                #endregion
-              }
+              //if (conf.StrTxtSelect == "" || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798622)) || conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(10798632))) //"All" or "Global Filter"
+              //{
+              //  #region this was already "root" view - so jumping back should leave the plugin !
+              //  base.OnAction(action); // GUIWindowManager.ShowPreviousWindow();
+              //  return;
+              //  #endregion
+              //}
 
-              // if (conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect)) //original code block refactored // 1079870 = "Selection" 
-              if (conf.StrTxtSelect == (GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect) || (conf.Boolreturn && IsPersonField(conf.WStrSort)))
-              {
-                #region switch to selected root node here ... full list or menu
-                if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.StrViewDfltItem != GUILocalizeStrings.Get(1079819) && conf.AlwaysDefaultView) // 1079819 = Menu
-                {
-                  // DisplayAllMovies();
+              //// if (conf.StrTxtSelect.StartsWith(GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect)) //original code block refactored // 1079870 = "Selection" 
+              //if (conf.StrTxtSelect == (GUILocalizeStrings.Get(1079870)) || (conf.StrTxtSelect == "" && conf.Boolselect) || (conf.Boolreturn && IsPersonField(conf.WStrSort)))
+              //{
+              //  #region switch to selected root node here ... full list or menu
+              //  if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.StrViewDfltItem != GUILocalizeStrings.Get(1079819) && conf.AlwaysDefaultView) // 1079819 = Menu
+              //  {
+              //    // DisplayAllMovies();
 
-                  conf.Boolselect = false;
-                  conf.Boolreturn = false;
-                  conf.StrSelect = conf.StrTxtSelect = conf.StrFilmSelect = "";
-                  conf.StrIndex = 0;
-                  conf.Boolindexed = false;
-                  conf.Boolindexedreturn = false;
+              //    conf.Boolselect = false;
+              //    conf.Boolreturn = false;
+              //    conf.StrSelect = conf.StrTxtSelect = conf.StrFilmSelect = "";
+              //    conf.StrIndex = 0;
+              //    conf.Boolindexed = false;
+              //    conf.Boolindexedreturn = false;
 
-                  viewcover.Filename = "";
-                  personcover.Filename = "";
-                  groupcover.Filename = "";
+              //    viewcover.Filename = "";
+              //    personcover.Filename = "";
+              //    groupcover.Filename = "";
 
-                  GetFilmList();
-                  SetLabelView("all");
-                  // SetDummyControlsForFacade(conf.ViewContext);
+              //    GetFilmList();
+              //    SetLabelView("all");
+              //    // SetDummyControlsForFacade(conf.ViewContext);
 
-                  // base.OnAction(action); // return to previous window ... // GUIWindowManager.ShowPreviousWindow(); 
-                }
-                else
-                {
-                  GetSelectFromMenuView(conf.BoolMenuShowAll);  // Call Menu with last detail state ...
-                }
-                return;
-                #endregion
-              }
+              //    // base.OnAction(action); // return to previous window ... // GUIWindowManager.ShowPreviousWindow(); 
+              //  }
+              //  else
+              //  {
+              //    GetSelectFromMenuView(conf.BoolMenuShowAll);  // Call Menu with last detail state ...
+              //  }
+              //  return;
+              //  #endregion
+              //}
 
-              if (conf.Boolreturn)
-              #region boolreturn returns to view here
-              {
-                conf.Boolreturn = false;
-                Change_View_Action(conf.WStrSort);
-                return;
-              }
+              //if (conf.Boolreturn)
+              //#region boolreturn returns to view here
+              //{
+              //  conf.Boolreturn = false;
+              //  Change_View_Action(conf.WStrSort);
+              //  return;
+              //}
+              //#endregion
+
+              //if (conf.Boolselect)
+              //#region boolselect returns to defaultview or menu here
+              //{
+              //  {
+              //    // switch to selected root node here ...
+              //    if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.AlwaysDefaultView)
+              //    {
+              //      SetLabelView("all");
+
+              //      conf.ViewContext = MyFilms.ViewContext.StartView;
+              //      conf.StrIndex = -1;
+              //      conf.LastID = -1;
+              //      conf.Wstar = "";
+              //      conf.Boolreturn = false;
+              //      conf.Boolselect = true;
+              //      conf.Boolindexed = false;
+              //      conf.Boolindexedreturn = false;
+
+              //      viewcover.Filename = "";
+              //      personcover.Filename = "";
+              //      groupcover.Filename = "";
+
+              //      conf.Wselectedlabel = conf.StrViewDfltText;
+              //      Change_View_Action(conf.StrViewDfltItem);
+              //    }
+              //    else
+              //    {
+              //      GetSelectFromMenuView(conf.BoolMenuShowAll);
+              //    }
+              //    return;
+              //  }
+              //}
+              //#endregion
+
+              //// switch to selected root node here ...
+              //if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.StrViewDfltItem != GUILocalizeStrings.Get(1079819) && conf.AlwaysDefaultView) // 1079819 = Menu
+              //{
+              //  base.OnAction(action); // return to previous window ... // GUIWindowManager.ShowPreviousWindow(); 
+              //}
+              //else
+              //{
+              //  GetSelectFromMenuView(conf.BoolMenuShowAll);  // Call Menu with last detail state ...
+              //}
+              //return;
+
+              //// GetSelectFromMenuView(conf.BoolMenuShowAll);  // Call Menu with last detail state ...
+              //// base.OnAction(action); // return to previous window, if no backnavigation rule applies
               #endregion
-
-              if (conf.Boolselect)
-              #region boolselect returns to defaultview or menu here
-              {
-                {
-                  // switch to selected root node here ...
-                  if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.AlwaysDefaultView)
-                  {
-                    SetLabelView("all");
-
-                    conf.ViewContext = MyFilms.ViewContext.StartView;
-                    conf.StrIndex = -1;
-                    conf.LastID = -1;
-                    conf.Wstar = "";
-                    conf.Boolreturn = false;
-                    conf.Boolselect = true;
-                    conf.Boolindexed = false;
-                    conf.Boolindexedreturn = false;
-
-                    viewcover.Filename = "";
-                    personcover.Filename = "";
-                    groupcover.Filename = "";
-
-                    conf.Wselectedlabel = conf.StrViewDfltText;
-                    Change_View_Action(conf.StrViewDfltItem);
-                  }
-                  else
-                  {
-                    GetSelectFromMenuView(conf.BoolMenuShowAll);
-                  }
-                  return;
-                }
-              }
-              #endregion
-
-              // switch to selected root node here ...
-              if (Helper.FieldIsSet(conf.StrViewDfltItem) && conf.StrViewDfltItem != GUILocalizeStrings.Get(1079819) && conf.AlwaysDefaultView) // 1079819 = Menu
-              {
-                base.OnAction(action); // return to previous window ... // GUIWindowManager.ShowPreviousWindow(); 
-              }
-              else
-              {
-                GetSelectFromMenuView(conf.BoolMenuShowAll);  // Call Menu with last detail state ...
-              }
-              return;
-
-            // GetSelectFromMenuView(conf.BoolMenuShowAll);  // Call Menu with last detail state ...
-            // base.OnAction(action); // return to previous window, if no backnavigation rule applies
               #endregion
           }
           break;
