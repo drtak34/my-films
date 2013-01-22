@@ -5636,7 +5636,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return true;
     }
 
-    private bool LoadIndexSkinThumbs(GUIListItem item)
+    private static bool LoadIndexSkinThumbs(GUIListItem item)
     {
       if (!File.Exists(GUIGraphicsContext.Skin + @"\Media\alpha\a.png")) return false; // return, if skin does not support index thumbs
 
@@ -5762,6 +5762,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (!success) DoBack();
         else
         {
+          IEnumerable<TmdbMovieSearchResult> movies = result as IEnumerable<TmdbMovieSearchResult>;
+
           // clear facade
           GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
@@ -6138,11 +6140,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   continue;
                 }
-                string[] wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", false, item.ThumbnailImage, string.Empty);
-                if (!string.IsNullOrEmpty(wfanart[0]) && wfanart[0] != " " && File.Exists(wfanart[0]))
-                {
-                  continue;
-                }
+
+                //string[] wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", false, item.ThumbnailImage, string.Empty);
+                //if (!string.IsNullOrEmpty(wfanart[0]) && wfanart[0] != " " && File.Exists(wfanart[0]))
+                //{
+                //  continue;
+                //}
 
                 #region sanity checks
                 OnlineMovie movie = item.TVTag as OnlineMovie;
