@@ -1994,8 +1994,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void Change_Layout()
     {
-      var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
-      var choiceLayoutMenu = new List<GUIFacadeControl.Layout>();
+      GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+      List<GUIFacadeControl.Layout> choiceLayoutMenu = new List<GUIFacadeControl.Layout>();
 
       if (dlg == null) return;
       dlg.Reset();
@@ -2043,6 +2043,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (conf.ViewContext)
       {
         case ViewContext.TmdbMovies:
+          MyFilms.conf.StrLayOut = dlg.SelectedLabel; // we share Layout for menu with Views ...
+          break;
         case ViewContext.MenuAll:
         case ViewContext.Menu:
           MyFilms.conf.WStrLayOut = dlg.SelectedLabel; // we share Layout for menu with Views ...
@@ -5738,7 +5740,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       SetLabelSelect(tmdBfunction);
       GUIControl.ClearControl(GetID, facadeFilms.GetID);
       // ClearFacade(); // facadeFilms.Clear();
-      Change_Layout_Action(MyFilms.conf.WStrLayOut);
+      Change_Layout_Action(MyFilms.conf.StrLayOut); // Change_Layout_Action(MyFilms.conf.WStrLayOut);
       #endregion
 
       #region get movie lists from TMDB ...
