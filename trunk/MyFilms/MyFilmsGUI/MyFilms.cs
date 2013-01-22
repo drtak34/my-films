@@ -29,6 +29,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using System.ComponentModel;
   using System.Data;
   using System.Diagnostics;
+  using System.Drawing;
   using System.Globalization;
   using System.IO;
   using System.Linq;
@@ -125,12 +126,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       get
       {
-        if (this.popularMovies == null || this.lastRequestPopularMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        if (popularMovies == null || lastRequestPopularMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
         {
-          this.popularMovies = GetPopularMovies(true);
-          this.lastRequestPopularMovies = DateTime.UtcNow;
+          popularMovies = GetPopularMovies(true);
+          lastRequestPopularMovies = DateTime.UtcNow;
         }
-        return this.popularMovies;
+        return popularMovies;
       }
     }
     private IEnumerable<TmdbMovieSearchResult> popularMovies;
@@ -5745,7 +5746,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
       {
-        if (tmdBfunction == GUILocalizeStrings.Get(10798826)) // Popular Movies
+        if (tmdBfunction == GUILocalizeStrings.Get(10798826))  // Popular Movies
           return PopularMovies;
         if (tmdBfunction == GUILocalizeStrings.Get(10798827))  // Now Playing
           return NowPlayingMovies;
@@ -5754,15 +5755,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (tmdBfunction == GUILocalizeStrings.Get(10798829))  // Upcoming Movies
           return UpcomingMovies;
 
-        if (!string.IsNullOrEmpty(tmdBfunction)) return GetPersonMovies(tmdBfunction, true);
-        return null;
+        return !string.IsNullOrEmpty(tmdBfunction) ? GetPersonMovies(tmdBfunction, true) : null;
       },
       delegate(bool success, object result)
       {
         if (!success) DoBack();
         else
         {
-          var movies = result as IEnumerable<TmdbMovieSearchResult>;
           // clear facade
           GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
@@ -5776,9 +5775,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           int itemId = 0;
           foreach (TmdbMovieSearchResult movie in movies)
           {
-            var item = new GUIListItem();
-            var ovMovie = new OnlineMovie();
-            ovMovie.MovieSearchResult = movie;
+            #region populate facade item
+            GUIListItem item = new GUIListItem();
+            OnlineMovie ovMovie = new OnlineMovie { MovieSearchResult = movie };
             // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
             string[] split = movie.original_title.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
             bool ispersoninfo = (split.Length > 1);
@@ -5808,6 +5807,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
             facadeFilms.Add(item);
             itemId++;
+            #endregion
           }
           #endregion
 
@@ -5846,14 +5846,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GUIListItem item = facadeFilms[i];
             itemlist.Add(item);
             OnlineMovie movie = item.TVTag as OnlineMovie;
-            if (movie != null)
+            if (movie == null)
             {
-              // iMoviesLocally = rtemp.Select("Year like '" + year + "' AND TranslatedTitle like '*" + item.Label + "*'", conf.StrSorta + conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count();
-              int year = DateTime.Parse(movie.MovieSearchResult.release_date).Year;
-              bool any = rtemp.Any(x => (x[MyFilms.conf.StrTitle1].ToString().Contains(movie.MovieSearchResult.title) && (string.IsNullOrEmpty(x["Year"].ToString()) || year == 0 || x["Year"].ToString().Contains(year.ToString()))) || (!string.IsNullOrEmpty(x["TMDB_Id"].ToString()) && int.Parse(x["TMDB_Id"].ToString()) == movie.MovieSearchResult.id));
-              item.IsRemote = !any;
-              // LogMyFilms.Debug("CountLocalItems - found '" + iMoviesLocally + "' items for (" + year.ToString() + ") '" + movie.MovieSearchResult.title + "' !");
+              continue;
             }
+            // iMoviesLocally = rtemp.Select("Year like '" + year + "' AND TranslatedTitle like '*" + item.Label + "*'", conf.StrSorta + conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count();
+            int year = DateTime.Parse(movie.MovieSearchResult.release_date).Year;
+            bool any = rtemp.Any(x => (x[MyFilms.conf.StrTitle1].ToString().Contains(movie.MovieSearchResult.title) && (string.IsNullOrEmpty(x["Year"].ToString()) || year == 0 || x["Year"].ToString().Contains(year.ToString()))) || (!string.IsNullOrEmpty(x["TMDB_Id"].ToString()) && int.Parse(x["TMDB_Id"].ToString()) == movie.MovieSearchResult.id));
+            item.IsRemote = !any;
+            // LogMyFilms.Debug("CountLocalItems - found '" + iMoviesLocally + "' items for (" + year.ToString() + ") '" + movie.MovieSearchResult.title + "' !");
           }
           catch (Exception ex) 
           {
@@ -6065,7 +6066,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   items.SafeDispose();
                   return;
                 }
-                var movie = item.TVTag as OnlineMovie;
+                OnlineMovie movie = item.TVTag as OnlineMovie;
                 if (movie == null)
                 {
                   LogMyFilms.Warn("GetImagesforTMDBFilmList() - OnlineMovie object is 'null' for movie '" + item.Label + "'");
@@ -6133,45 +6134,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 #region Fanart
                 if (StopLoadingFilmlistDetails) return;
-                if (conf.StrFanart)
+                if (!conf.StrFanart)
                 {
-                string[] wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", false, item.ThumbnailImage, string.Empty);
-                  if (string.IsNullOrEmpty(wfanart[0]) || wfanart[0] == " " || !File.Exists(wfanart[0]))
-                  {
-                    #region sanity checks
-                    var movie = item.TVTag as OnlineMovie;
-                    if (movie == null)
-                    {
-                      LogMyFilms.Warn("GetImagesforTMDBFilmList() - OnlineMovie object is 'null' for movie '" + item.Label + "'");
-                      continue;
-                    }
-                    #endregion
-
-                    string fanartUrl = tmdbConf.images.base_url + "original" + movie.MovieSearchResult.backdrop_path;
-                    string filename;
-                    string filename1 = GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, fanartUrl, item.Label, true, true, out filename);
-                    // LogMyFilms.Debug("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + item.Label);
-
-                    //movie.MovieImages = api.GetMovieImages(movie.MovieSearchResult.id, language);
-                    //if (movie.MovieImages.posters.Count == 0)
-                    //{
-                    //  movie.MovieImages = api.GetMovieImages(movie.MovieSearchResult.id, null);
-                    //  LogMyFilms.Debug("GetImagesTMDB() - no '" + language + "' posters found - used default and found '" + movie.MovieImages.posters.Count + "'");
-                    //}
-                    //int ii = 0;
-                    //foreach (Backdrop fanart in movie.MovieImages.backdrops)
-                    //{
-                    //  if (ii == 0)
-                    //  {
-                    //    string fanartUrl = tmdbConf.images.base_url + "original" + fanart.file_path;
-                    //    string filename;
-                    //    string filename1 = GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, fanartUrl, item.Label, true, (i == 0), out filename);
-                    //    LogMyFilms.Debug("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + item.Label);
-                    //  }
-                    //  ii++;
-                    //}
-                  }
+                  continue;
                 }
+                string[] wfanart = MyFilmsDetail.Search_Fanart(item.Label, true, "file", false, item.ThumbnailImage, string.Empty);
+                if (!string.IsNullOrEmpty(wfanart[0]) && wfanart[0] != " " && File.Exists(wfanart[0]))
+                {
+                  continue;
+                }
+
+                #region sanity checks
+                OnlineMovie movie = item.TVTag as OnlineMovie;
+                if (movie == null)
+                {
+                  LogMyFilms.Warn("GetImagesforTMDBFilmList() - OnlineMovie object is 'null' for movie '" + item.Label + "'");
+                  continue;
+                }
+                #endregion
+
+                string fanartUrl = tmdbConf.images.base_url + "original" + movie.MovieSearchResult.backdrop_path;
+                LogMyFilms.Debug("GetImagesforTMDBFilmList - start loading fanart for '{0}' from url = '{1}'", item.Label, fanartUrl);
+                string filename;
+                string filename1 = GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, fanartUrl, item.Label, true, true, out filename);
+                LogMyFilms.Debug("GetImagesforTMDBFilmList - Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + item.Label);
+
+                //movie.MovieImages = api.GetMovieImages(movie.MovieSearchResult.id, language);
+                //if (movie.MovieImages.posters.Count == 0)
+                //{
+                //  movie.MovieImages = api.GetMovieImages(movie.MovieSearchResult.id, null);
+                //  LogMyFilms.Debug("GetImagesTMDB() - no '" + language + "' posters found - used default and found '" + movie.MovieImages.posters.Count + "'");
+                //}
+                //int ii = 0;
+                //foreach (Backdrop fanart in movie.MovieImages.backdrops)
+                //{
+                //  if (ii == 0)
+                //  {
+                //    string fanartUrl = tmdbConf.images.base_url + "original" + fanart.file_path;
+                //    string filename;
+                //    string filename1 = GrabUtil.DownloadBacdropArt(MyFilms.conf.StrPathFanart, fanartUrl, item.Label, true, (i == 0), out filename);
+                //    LogMyFilms.Debug("Fanart " + filename1.Substring(filename1.LastIndexOf("\\") + 1) + " downloaded for " + item.Label);
+                //  }
+                //  ii++;
+                //}
+
                 #endregion
               }
               catch (Exception ex)
@@ -6206,8 +6212,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             // MyFilmsPlugin.Utils.OVplayer.Play(facadeFilms.SelectedListItem.Path);
             string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
-            var api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
-            var movie = facadeFilms.SelectedListItem.TVTag as OnlineMovie;
+            Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+            OnlineMovie movie = facadeFilms.SelectedListItem.TVTag as OnlineMovie;
             if (movie == null) return;
 
             MyFilmsDetail.SetProcessAnimationStatus(true, m_SearchAnimation);
@@ -7587,21 +7593,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     internal static void CreateCacheThumb(string thumbSource, string thumbTarget, int thumbWidth, int thumbHeight, string speedThumbSize)
     {
-      var bmp = new System.Drawing.Bitmap(thumbSource);
-      LogMyFilms.Debug("(SetViewThumb) - Image Width x Height = '" + bmp.Width + "x" + bmp.Height + "' (" + thumbSource + ")");
-      if (bmp.Width < thumbWidth && bmp.Height < thumbHeight)
+      if (thumbSource == null) return;
+
+      try
       {
-        if (!SaveThumbnailFile(thumbSource, thumbTarget)) // if copy unsuccessful, try to create speedthumb
+        Bitmap bmp = new System.Drawing.Bitmap(thumbSource);
+        LogMyFilms.Debug("(SetViewThumb) - Image Width x Height = '" + bmp.Width + "x" + bmp.Height + "' (" + thumbSource + ")");
+        if (bmp.Width < thumbWidth && bmp.Height < thumbHeight)
         {
-          Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, speedThumbSize == "small" ? Thumbs.SpeedThumbsSmall : Thumbs.SpeedThumbsLarge);
+          if (!SaveThumbnailFile(thumbSource, thumbTarget)) // if copy unsuccessful, try to create speedthumb
+          {
+            Picture.CreateThumbnail(
+              thumbSource,
+              thumbTarget,
+              thumbWidth,
+              thumbHeight,
+              0,
+              speedThumbSize == "small" ? Thumbs.SpeedThumbsSmall : Thumbs.SpeedThumbsLarge);
+          }
         }
+        else if (speedThumbSize == "small") Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, Thumbs.SpeedThumbsSmall);
+        else Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, Thumbs.SpeedThumbsLarge);
+        bmp.SafeDispose();
       }
-      else
-        if (speedThumbSize == "small")
-          Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, Thumbs.SpeedThumbsSmall);
-        else
-          Picture.CreateThumbnail(thumbSource, thumbTarget, thumbWidth, thumbHeight, 0, Thumbs.SpeedThumbsLarge);
-      bmp.SafeDispose();
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("CreateCacheThumb() - Error creating thumb file: {0}", ex.Message);
+      }
     }
 
     internal static bool SaveThumbnailFile(string thumbSource, string thumbTarget)

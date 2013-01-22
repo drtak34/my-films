@@ -6374,10 +6374,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
       string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
       LogMyFilms.Debug("GetImagesForTMDB - detected language = '" + language + "'");
-      var api = new Tmdb(MyFilms.TmdbApiKey, language); // language is optional, default is "en"
+      Tmdb api = new Tmdb(MyFilms.TmdbApiKey, language); // language is optional, default is "en"
       // TmdbConfiguration tmdbConf = api.GetConfiguration();
       string wstring = "";
-      var movie = item.TVTag as OnlineMovie;
+      OnlineMovie movie = item.TVTag as OnlineMovie;
 
       if (movie == null)
       {
