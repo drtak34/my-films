@@ -4441,9 +4441,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           item = new GUIListItem();
           item.DVDLabel = customView.Label; // (string.Format("View{0}", i));
+          item.MusicTag = customView.DBfield;
           item.Label = (string.IsNullOrEmpty(customView.Label)) ? customView.DBfield : customView.Label;
-          //item.Label2 = customView.Label2 ?? "";
-          //item.Label3 = customView.Label3 ?? "";
           item.IsFolder = true;
           if (!string.IsNullOrEmpty(customView.ImagePath))
           {
@@ -4453,7 +4452,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           else
           {
-            string menuimage = this.GetImageforMenu(item);
+            string menuimage = GetImageforMenu(item);
             item.ThumbnailImage = menuimage;
             item.IconImage = menuimage;
             item.IconImageBig = menuimage;
@@ -4466,7 +4465,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         item.Label = GUILocalizeStrings.Get(10798765); // *** show all ***
         item.DVDLabel = "showall";
         item.IsFolder = true;
-
         item.ThumbnailImage = GetImageforMenu(item);
         item.IconImage = item.ThumbnailImage;
         item.IconImageBig = item.ThumbnailImage;
@@ -4492,12 +4490,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
       {
         #region show all view options, if selected ...
-        ArrayList DisplayItems = GetDisplayItems("view");
-        foreach (string[] displayItem in DisplayItems)
+        ArrayList displayItems = GetDisplayItems("view");
+        foreach (string[] displayItem in displayItems)
         {
           item = new GUIListItem();
           item.Label = (string.IsNullOrEmpty(displayItem[1])) ? displayItem[0] : displayItem[1];
           item.DVDLabel = displayItem[0];
+          item.MusicTag = displayItem[0];
           // item.Label2 = (!conf.OnlyTitleList) ? r.Select(p => (string)p[item.DVDLabel]).Distinct(StringComparer.CurrentCultureIgnoreCase).Count().ToString() : "";
           // item.Label2 = CountViewItems(item.DVDLabel).ToString(); 
           item.IsFolder = true;
@@ -4506,7 +4505,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           item.IconImage = menuimage;
           item.IconImageBig = menuimage;
           item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-          if (facadeFilms != null) this.facadeFilms.Add(item);
+          if (facadeFilms != null) facadeFilms.Add(item);
         }
         #endregion
       }
@@ -4543,6 +4542,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         r = BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + conf.StrDfltSelect, conf.StrSelect, conf.StrSorta, conf.StrSortSens);
         // r = BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, conf.StrFilmSelect, sortfield, sortascending, false, true); 
         // DataRow[] r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // load dataset with filters
+
         for (int i = 0; i < this.facadeFilms.Count; i++)
         {
           if (StopLoadingMenuDetails) break;
@@ -4550,8 +4550,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             #region count items
             bool success = false;
-            GUIListItem countitem = this.facadeFilms[i];
-            if (countitem.Label == GUILocalizeStrings.Get(10798765) || countitem.Label == ("*** " + GUILocalizeStrings.Get(10798825) + " ***")) continue; // skip the menu only entry "showall" and "onlineinfo" // 10798825
+            GUIListItem countitem = facadeFilms[i];
+            
+            // make sure, only valid DB fields are passing counting
+            if (countitem.MusicTag == null || !IsMyFilmsDbColumn(countitem.MusicTag.ToString())) continue;
+
             if (!conf.OnlyTitleList && string.IsNullOrEmpty(countitem.Label2)) // first try to get info for custom views ...
             {
               #region get counts for menu item
@@ -5196,6 +5199,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       return null;
+    }
+
+    private static bool IsMyFilmsDbColumn(string fieldname)
+    {
+      if (string.IsNullOrEmpty(fieldname)) return false;
+
+      using (var ds = new AntMovieCatalog())
+      {
+        return ds.Movie.Columns.Cast<DataColumn>().Any(dc => dc.ColumnName == fieldname);
+      }
     }
 
     internal string Equalexpression(string columnname, string comparevalue)
