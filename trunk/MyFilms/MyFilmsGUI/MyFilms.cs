@@ -141,12 +141,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       get
       {
-        if (this.nowPlayingMovies == null || this.lastRequestNowPlayingMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        if (nowPlayingMovies == null || lastRequestNowPlayingMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
         {
-          this.nowPlayingMovies = GetNowPlayingMovies(true);
-          this.lastRequestNowPlayingMovies = DateTime.UtcNow;
+          nowPlayingMovies = GetNowPlayingMovies(true);
+          lastRequestNowPlayingMovies = DateTime.UtcNow;
         }
-        return this.nowPlayingMovies;
+        return nowPlayingMovies;
       }
     }
     private IEnumerable<TmdbMovieSearchResult> nowPlayingMovies;
@@ -156,12 +156,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       get
       {
-        if (this.topRatedMovies == null || this.lastRequestTopRatedMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        if (topRatedMovies == null || lastRequestTopRatedMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
         {
-          this.topRatedMovies = GetTopRatedMovies(true);
-          this.lastRequestTopRatedMovies = DateTime.UtcNow;
+          topRatedMovies = GetTopRatedMovies(true);
+          lastRequestTopRatedMovies = DateTime.UtcNow;
         }
-        return this.topRatedMovies;
+        return topRatedMovies;
       }
     }
     private IEnumerable<TmdbMovieSearchResult> topRatedMovies;
@@ -171,12 +171,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       get
       {
-        if (this.upcomingMovies == null || this.lastRequestUpcomingMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        if (upcomingMovies == null || lastRequestUpcomingMovies < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
         {
-          this.upcomingMovies = GetUpcomingMovies(true);
-          this.lastRequestUpcomingMovies = DateTime.UtcNow;
+          upcomingMovies = GetUpcomingMovies(true);
+          lastRequestUpcomingMovies = DateTime.UtcNow;
         }
-        return this.upcomingMovies;
+        return upcomingMovies;
       }
     }
     private IEnumerable<TmdbMovieSearchResult> upcomingMovies;
@@ -6413,44 +6413,56 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 #endregion
 
-                #region load trailer info from TMDB
-                movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, language);
-                if (movie.Trailers.youtube.Count == 0)
+                if (movie.MovieSearchResult.TrailerStatus == TmdbMovieSearchResult.TrailerState.Unknown) // check trailers only, if not yet done in this session
                 {
-                  // LogMyFilms.Debug("GetTrailers - no trailer found for language '" + language + "' - try default");
-                  movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null);
-                }
-                // LogMyFilms.Debug("SearchTrailers - found '" + movie.Trailers.youtube.Count + "' YouTube Trailers");
-
-                DateTime releasedate;
-                string year = DateTime.TryParse(movie.MovieSearchResult.release_date, out releasedate) ? releasedate.Year.ToString() : "";
-                
-                for (int j = 0; j < movie.Trailers.youtube.Count; j++)
-                {
-                  LogMyFilms.Debug("GetTrailers - Trailer #'" + j + "', name = '" + movie.Trailers.youtube[j].name + "', size = '" + movie.Trailers.youtube[j].size + "', source = '" + movie.Trailers.youtube[j].source + "'");
-                  if (j == 0)
+                  #region load trailer info from TMDB
+                  movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, language);
+                  if (movie.Trailers.youtube.Count == 0)
                   {
-                    item.Path = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source; // http://www.youtube.com/watch?v=KwPTIEWTYEI
-                    item.IsDownloading = true;
+                    // LogMyFilms.Debug("GetTrailers - no trailer found for language '" + language + "' - try default");
+                    movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, null);
                   }
+                  // LogMyFilms.Debug("SearchTrailers - found '" + movie.Trailers.youtube.Count + "' YouTube Trailers");
 
-                  #region add trailers to trailer download queue for caching
-                  if (MyFilms.conf.CacheOnlineTrailer && MyFilms.conf.StrDirStorTrailer.Length > 0) // if (MyFilms.conf.BoolEnableOnlineServices)
+                  DateTime releasedate;
+                  string year = DateTime.TryParse(movie.MovieSearchResult.release_date, out releasedate)
+                                  ? releasedate.Year.ToString()
+                                  : "";
+
+                  for (int j = 0; j < movie.Trailers.youtube.Count; j++)
                   {
-                    string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
-                    var trailer = new Trailer();
-                    trailer.MovieTitle = item.Label;
-                    trailer.Trailername = movie.Trailers.youtube[j].name;
-                    trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source;
-                    trailer.SourceUrl = null;
-                    trailer.Quality = null;
-                    trailer.DestinationDirectory = destinationDirectory;
-                    LogMyFilms.Debug("GetImagesForTmdbFilmList() - trailer caching - add trailer '#" + j + "', path '" + destinationDirectory + "'");
-                    AddTrailerToDownloadQueue(trailer);
+                    LogMyFilms.Debug("GetTrailers - Trailer #'" + j + "', name = '" + movie.Trailers.youtube[j].name + "', size = '" + movie.Trailers.youtube[j].size + "', source = '" + movie.Trailers.youtube[j].source + "'");
+                    if (j == 0)
+                    {
+                      item.Path = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source; // http://www.youtube.com/watch?v=KwPTIEWTYEI
+                      movie.MovieSearchResult.TrailerStatus = TmdbMovieSearchResult.TrailerState.Remote;
+                    }
+
+                    #region add trailers to trailer download queue for caching
+
+                    if (MyFilms.conf.CacheOnlineTrailer && MyFilms.conf.StrDirStorTrailer.Length > 0) // if (MyFilms.conf.BoolEnableOnlineServices)
+                    {
+                      string destinationDirectory = Path.Combine(
+                        MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\",
+                        (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
+                      var trailer = new Trailer();
+                      trailer.MovieTitle = item.Label;
+                      trailer.Trailername = movie.Trailers.youtube[j].name;
+                      trailer.OriginalUrl = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source;
+                      trailer.SourceUrl = null;
+                      trailer.Quality = null;
+                      trailer.DestinationDirectory = destinationDirectory;
+                      LogMyFilms.Debug(
+                        "GetImagesForTmdbFilmList() - trailer caching - add trailer '#" + j + "', path '" +
+                        destinationDirectory + "'");
+                      AddTrailerToDownloadQueue(trailer);
+                    }
+
+                    #endregion
                   }
                   #endregion
                 }
-                #endregion
+                item.IsDownloading = (movie.MovieSearchResult.TrailerStatus == TmdbMovieSearchResult.TrailerState.Remote);
               }
               catch (Exception ex)
               {
@@ -6527,8 +6539,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               #endregion
             }
-          
-          
           }
           catch (Exception e) { LogMyFilms.DebugException("GetImagesforTMDBFilmList() - Exception", e); }
           LogMyFilms.Debug("GetImagesforTMDBFilmList() - Finished Thread for loading TMDB Details");

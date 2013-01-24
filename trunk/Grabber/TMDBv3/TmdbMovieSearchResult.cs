@@ -7,6 +7,11 @@ namespace WatTmdb.V3
 {
   public class TmdbMovieSearchResult
   {
+    public TmdbMovieSearchResult()
+    {
+      TrailerStatus = TrailerState.Unknown;
+    }
+
     public string backdrop_path { get; set; }
     public int id { get; set; }
     public string original_title { get; set; }
@@ -15,10 +20,19 @@ namespace WatTmdb.V3
     public string title { get; set; }
     public double vote_average { get; set; }
     public int vote_count { get; set; }
+    public TrailerState TrailerStatus { get; set; }
 
     public override string ToString()
     {
       return title;
+    }
+
+    public enum TrailerState
+    {
+      Unknown,
+      Remote,
+      Local,
+      LocalAndRemote
     }
   }
 }
