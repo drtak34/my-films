@@ -80,7 +80,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   //[PluginIcons("MesFilms.MyFilms.Resources.logo_mesfilms.png", "MesFilms.MyFilms.Resources.logo_mesfilms-faded.png")]
   [PluginIcons("MyFilmsPlugin.Resources.film-reel-128x128.png", "MyFilmsPlugin.Resources.film-reel-128x128-faded.png")]
 
-  public class MyFilms : GUIWindow, ISetupForm
+  public class MyFilms : GUIWindow, ISetupForm, IComparer<GUIListItem>
   {
     #region Constructor
     public MyFilms()
@@ -574,10 +574,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // last update to catalog - used to know, if the backnavigation needs to reload the facade -  LoadFacade();
     public static DateTime LastDbUpdate { get; set; }
 
+    // TMDB sort method
+    private SortMethod _currentSortMethod = SortMethod.Date;
 
     #endregion
 
     #region Enums
+    private enum SortMethod
+    {
+      Name = 0,
+      Date = 1,
+      Rating = 2,
+      Votes = 3
+    }
+
     private enum MenuAction : int
     {
       Config,
@@ -2720,7 +2730,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 catch { }
                 break;
               case "Rating":
-                item.Label2 = sr["Rating"].ToString();
+                try
+                {
+                  item.Label2 = decimal.Parse(sr["Rating"].ToString()).ToString("0.0");
+                }
+                catch (Exception)
+                {
+                  item.Label2 = sr["Rating"].ToString();
+                }
                 break;
               default:
                 string label2 = sr[sortfield].ToString(); // string label2 = sr[conf.WStrSort].ToString();
@@ -3979,7 +3996,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return; // no sorting for menu types !
 
         case ViewContext.TmdbMovies:
-          return; // no sorting for tmdb movie lists
+          try
+          {
+            //BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSorta)));
+            //BtnSrtBy.IsAscending = (conf.BoolCollection) ? (conf.StrSortSensInHierarchies == " ASC") : (conf.StrSortSens == " ASC");
+            if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
+              return;
+            conf.StrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
+
+            SetLabels();
+            facadeFilms.Sort(this);
+            UpdateButtonStates();
+          }
+          catch (Exception ex)
+          {
+            Log.Error("TvRecorded: Error sorting items - {0}", ex.ToString());
+          }
+          return;
 
         default:
           LogMyFilms.Debug("SortChanged() - handler called with order = '" + e.Order + "'");
@@ -4024,7 +4057,124 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             GetFilmList();
           break;
       }
+    }
 
+    private void UpdateButtonStates()
+    {
+      try
+      {
+        string strLine = string.Empty;
+        if (BtnSrtBy != null)
+        {
+          switch (_currentSortMethod)
+          {
+            case SortMethod.Name:
+              strLine = (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); //Sort by: Title
+              break;
+            case SortMethod.Date:
+              strLine = (GUILocalizeStrings.Get(96) + BaseMesFilms.TranslateColumn("Date")); //Sort by: Date
+              break;
+            case SortMethod.Rating:
+              strLine = (GUILocalizeStrings.Get(96) + BaseMesFilms.TranslateColumn("Rating")); //Sort by: Rating
+              break;
+            case SortMethod.Votes:
+              strLine = (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(205)); //Sort by: Votes
+              break;
+          }
+          GUIControl.SetControlLabel(GetID, BtnSrtBy.GetID, strLine);
+        }
+
+        // if (null != facadeFilms) facadeFilms.EnableScrollLabel = _currentSortMethod == SortMethod.Name;
+
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Warn("UpdateButtonStates: Error updating button states - {0}", ex.ToString());
+      }
+    }
+
+    private void SetLabels()
+    {
+      SortMethod method = _currentSortMethod;
+      bool bAscending = (conf.StrSortSens == " ASC");
+
+      for (int i = 0; i < facadeFilms.Count; ++i)
+      {
+        try
+        {
+          GUIListItem item1 = facadeFilms[i];
+          OnlineMovie onlineMovie = (OnlineMovie)item1.TVTag;
+
+          if (onlineMovie == null) continue;
+
+          if (conf.StrLayOut == 0) // if list layout
+          {
+            item1.Label2 = "";
+            item1.Label3 = "";
+          }
+
+          switch (_currentSortMethod)
+          {
+            case SortMethod.Date:
+              try
+              {
+                string label = DateTime.Parse(onlineMovie.MovieSearchResult.release_date.ToString()).ToShortDateString();
+                if (!String.IsNullOrEmpty(label))
+                {
+                  item1.Label2 = label;
+                }
+              }
+              catch (Exception) { }
+              break;
+            case SortMethod.Rating:
+              try
+              {
+                string label = onlineMovie.MovieSearchResult.vote_average.ToString("0.0");
+                if (!String.IsNullOrEmpty(label))
+                {
+                  item1.Label2 = label;
+                }
+              }
+              catch (Exception) { }
+              break;
+            case SortMethod.Votes:
+              try
+              {
+                string label = onlineMovie.MovieSearchResult.vote_count.ToString();
+                if (!String.IsNullOrEmpty(label))
+                {
+                  item1.Label2 = label;
+                }
+              }
+              catch (Exception) { }
+              break;
+
+            default:
+              try
+              {
+                string label = DateTime.Parse(onlineMovie.MovieSearchResult.release_date.ToString()).ToShortDateString();
+                if (!String.IsNullOrEmpty(label))
+                {
+                  item1.Label2 = label;
+                }
+                label = onlineMovie.MovieSearchResult.vote_average.ToString("0.0") + " (" + onlineMovie.MovieSearchResult.vote_count + ")";
+                if (!String.IsNullOrEmpty(label))
+                {
+                  item1.Label3 = label;
+                }
+              }
+              catch (Exception) { }
+              break;
+
+          }
+
+          //Log.Debug("SetLabels: SetLabels - 1: {0}, 2: {1}, 3: {2}", item1.Label, item1.Label2, item1.Label3);
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Warn("SetLabels: error in SetLabels - {0}", ex.Message);
+        }
+      }
     }
 
     private void item_OnItemSelected(GUIListItem item, GUIControl parent)
@@ -4710,10 +4860,56 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //--------------------------------------------------------------------------------------------
     private void Change_Sort_Option_Menu()
     {
+      if (conf.ViewContext == ViewContext.TmdbMovies)
+      {
+        #region sort for Online Movie Lists
+        GUIDialogMenu dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)Window.WINDOW_DIALOG_MENU);
+        if (dlg == null)
+        {
+          return;
+        }
+
+        dlg.Reset();
+        dlg.SetHeading(495); // Sort options
+        dlg.Add(GUILocalizeStrings.Get(103)); // title / name
+        dlg.Add(BaseMesFilms.TranslateColumn("Date")); // date
+        dlg.Add(BaseMesFilms.TranslateColumn("Rating")); // rating
+        dlg.Add(GUILocalizeStrings.Get(205)); // votes
+
+        // set the focus to currently used sort method
+        dlg.SelectedLabel = (int)_currentSortMethod;
+
+        // show dialog and wait for result
+        dlg.DoModal(GetID);
+        if (dlg.SelectedId == -1)
+        {
+          return;
+        }
+
+        _currentSortMethod = (SortMethod)dlg.SelectedLabel;
+        BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
+
+        try
+        {
+          SetLabels();
+
+          facadeFilms.Sort(this);
+
+          UpdateButtonStates();
+
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.Error("Change_Sort_Option_Menu: Error sorting items - {0}", ex.ToString());
+        }
+        return;
+        #endregion
+      }
+
       if (conf.Boolselect) // view sort (grouping) // No change of normal filmlist sort method and no searchs in grouped views (views, e.g. country, year, etc.) - change count sorting instead ...
       {
         #region sorting by counts
-        //       BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
+        // BtnSrtBy.Label = (conf.BoolSortCountinViews) ? (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(1079910)) : (GUILocalizeStrings.Get(96) + GUILocalizeStrings.Get(103)); // sort: count / sort: name
 
         var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
         if (dlg == null) return;
@@ -4861,6 +5057,144 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
       }
     }
+
+    public int Compare(GUIListItem item1, GUIListItem item2)
+    {
+      try
+      {
+        if (item1 == item2)
+        {
+          return 0;
+        }
+        if (item1 == null || item2 == null)
+        {
+          return -1;
+        }
+        if (item1.TVTag == null || item2.TVTag == null)
+        {
+          return -1;
+        }
+        int iComp = 0;
+
+        OnlineMovie movie1 = item1.TVTag as OnlineMovie;
+        OnlineMovie movie2 = item2.TVTag as OnlineMovie;
+
+        if (movie1 == null || movie2 == null)
+        {
+          return -1;
+        }
+        switch (_currentSortMethod)
+        {
+          case SortMethod.Name:
+            if (conf.StrSortSens == " ASC") // ToDo: replace with sortdirection variable
+            {
+              iComp = string.Compare(item1.Label, item2.Label, true);
+              if (iComp == 0)
+              {
+                goto case SortMethod.Date;
+              }
+              else
+              {
+                return iComp;
+              }
+            }
+            else
+            {
+              iComp = string.Compare(item2.Label, item1.Label, true);
+              if (iComp == 0)
+              {
+                goto case SortMethod.Date;
+              }
+              else
+              {
+                return iComp;
+              }
+            }
+          case SortMethod.Date:
+            if (conf.StrSortSens == " ASC")
+            {
+              if (movie1.MovieSearchResult.release_date == movie2.MovieSearchResult.release_date)
+              {
+                return 0;
+              }
+              if (DateTime.Parse(movie1.MovieSearchResult.release_date) < DateTime.Parse(movie2.MovieSearchResult.release_date))
+              {
+                return 1;
+              }
+              return -1;
+            }
+            else
+            {
+              if (movie1.MovieSearchResult.release_date == movie2.MovieSearchResult.release_date)
+              {
+                return 0;
+              }
+              if (DateTime.Parse(movie1.MovieSearchResult.release_date) > DateTime.Parse(movie2.MovieSearchResult.release_date))
+              {
+                return 1;
+              }
+              return -1;
+            }
+          case SortMethod.Rating:
+            if (conf.StrSortSens == " ASC")
+            {
+              if (movie1.MovieSearchResult.vote_average == movie2.MovieSearchResult.vote_average)
+              {
+                return 0;
+              }
+              if (movie1.MovieSearchResult.vote_average < movie2.MovieSearchResult.vote_average)
+              {
+                return 1;
+              }
+              return -1;
+            }
+            else
+            {
+              if (movie1.MovieSearchResult.vote_average == movie2.MovieSearchResult.vote_average)
+              {
+                return 0;
+              }
+              if (movie1.MovieSearchResult.vote_average > movie2.MovieSearchResult.vote_average)
+              {
+                return 1;
+              }
+              return -1;
+            }
+          case SortMethod.Votes:
+            if (conf.StrSortSens == " ASC")
+            {
+              if (movie1.MovieSearchResult.vote_count == movie2.MovieSearchResult.vote_count)
+              {
+                return 0;
+              }
+              if (movie1.MovieSearchResult.vote_count < movie2.MovieSearchResult.vote_count)
+              {
+                return 1;
+              }
+              return -1;
+            }
+            else
+            {
+              if (movie1.MovieSearchResult.vote_count == movie2.MovieSearchResult.vote_count)
+              {
+                return 0;
+              }
+              if (movie1.MovieSearchResult.vote_count > movie2.MovieSearchResult.vote_count)
+              {
+                return 1;
+              }
+              return -1;
+            }
+        }
+        return 0;
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Error("MyFilms Sort(): Error comparing GUIListitems - {0}", ex.ToString());
+        return 0;
+      }
+    }
+
 
     //--------------------------------------------------------------------------------------------
     //  Select main Options
@@ -5730,9 +6064,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the start ....
       GUIPropertyManager.SetProperty("#itemcount", "0");
 
-      BtnSrtBy.IsEnabled = false;
-      BtnSrtBy.Label = (GUILocalizeStrings.Get(98) + GUILocalizeStrings.Get(103)); // sort: name
-      BtnSrtBy.IsAscending = (conf.WStrSortSens == " ASC");
+      BtnSrtBy.IsEnabled = true;
+      _currentSortMethod = SortMethod.Date;
+      BtnSrtBy.IsAscending = false; // (conf.StrSortSens == " ASC");
+      UpdateButtonStates();
 
       conf.Boolselect = false;
       conf.Wselectedlabel = "";
@@ -7670,6 +8005,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       return string.Compare(x.ToString(), y.ToString(), StringComparison.OrdinalIgnoreCase); // StringComparison.CurrentCultureIgnoreCase
     }
+
 
     //----------------------------------------------------------------------------------------------
     //  Forward Sort
