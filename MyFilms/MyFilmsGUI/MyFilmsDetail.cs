@@ -6407,14 +6407,34 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       setGUIProperty("db.description.value", movie.Movie.overview);
       setGUIProperty("db.year.value", movie.Movie.release_date);
       setGUIProperty("db.length.value", movie.Movie.runtime.ToString());
-      setGUIProperty("user.source.isonline", "available");
-      int trailers = 0;
-      try
+      setGUIProperty("user.source.isonline", item.IsRemote ? "unavailable" : "available");
+      
+      //int trailers = 0;
+      //try
+      //{
+      //  trailers = movie.Trailers.youtube.Count;
+      //}
+      //catch (Exception) {}
+      //setGUIProperty("user.sourcetrailer.isonline", (trailers > 0) ? "available" : "unavailable");
+
+      string trailerstatus = "unknown";
+      switch (movie.MovieSearchResult.TrailerStatus)
       {
-        trailers = movie.Trailers.youtube.Count;
+        case TmdbMovieSearchResult.TrailerState.Unknown:
+          trailerstatus = "unknown";;
+          break;
+        case TmdbMovieSearchResult.TrailerState.Local:
+        case TmdbMovieSearchResult.TrailerState.LocalAndRemote:
+          trailerstatus = "available";
+          break;
+        case TmdbMovieSearchResult.TrailerState.Remote:
+          trailerstatus = "offline";
+          break;
+        case TmdbMovieSearchResult.TrailerState.None:
+          trailerstatus = "unavailable";
+          break;
       }
-      catch (Exception) {}
-      setGUIProperty("user.sourcetrailer.isonline", (trailers > 0) ? "available" : "unavailable");
+      setGUIProperty("user.sourcetrailer.isonline", trailerstatus);
 
       wstring = "";
       foreach (MovieGenre genre in movie.Movie.genres)

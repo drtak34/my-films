@@ -32,7 +32,8 @@ namespace WatTmdb.V3
       Unknown,
       Remote,
       Local,
-      LocalAndRemote
+      LocalAndRemote,
+      None
     }
   }
 }
