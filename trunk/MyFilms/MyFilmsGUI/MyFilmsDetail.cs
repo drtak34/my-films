@@ -553,8 +553,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       // if (ImgMovieThumbsDir != null && ImgMovieThumbsDir.Visible) ImgMovieThumbsDir.Visible = false;
 
-      BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
-      BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
+      if (BtnFirst != null) BtnFirst.Label = GUILocalizeStrings.Get(1079872); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnFirst, GUILocalizeStrings.Get(1079872));
+      if (BtnLast != null) BtnLast.Label = GUILocalizeStrings.Get(1079873); //GUIControl.SetControlLabel(GetID, (int)Controls.CTRL_BtnLast, GUILocalizeStrings.Get(1079873));
 
       wGetID = GetID;
       GUIControl.ShowControl(GetID, 35);
