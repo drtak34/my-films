@@ -6476,7 +6476,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       SetTmdbProperties("Actors", wstring);
 
-      SetTmdbProperties("Rating", Math.Round(movie.Movie.vote_average, 1).ToString());
+      SetTmdbProperties("Rating", Math.Round(movie.Movie.vote_average, 1).ToString("0.0"));
 
       stopwatch.Stop();
       LogMyFilms.Debug("Load_Detailed_TMDB() - load details finished (" + stopwatch.ElapsedMilliseconds + " ms).");
@@ -6946,7 +6946,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //catch { MyFilms.conf.W_rating = 0; }
                 try
                 {
-                  wstring = ((decimal)MyFilms.r[itemId][dc.ColumnName]).ToString();
+                  wstring = ((decimal)MyFilms.r[itemId][dc.ColumnName]).ToString("0.0");
                 }
                 catch
                 {
