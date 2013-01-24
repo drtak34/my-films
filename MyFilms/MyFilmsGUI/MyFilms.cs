@@ -1954,11 +1954,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static IEnumerable<TmdbMovieSearchResult> GetPersonMovies(string personname, bool all)
     {
-      var movies = new List<TmdbMovieSearchResult>();
+      List<TmdbMovieSearchResult> movies = new List<TmdbMovieSearchResult>();
       string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
       LogMyFilms.Debug("GetUpcomingMovies - detected language = '" + language + "', all = '" + all + "'");
       watch.Reset(); watch.Start();
-      var api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+      Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
       // TmdbConfiguration tmdbConf = api.GetConfiguration();
 
       TmdbPersonSearch tmdbPerson = api.SearchPerson(personname, 1);
@@ -6064,7 +6064,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the start ....
       GUIPropertyManager.SetProperty("#itemcount", "0");
 
-      BtnSrtBy.IsEnabled = true;
+      bool allowSortchanges = !(tmdBfunction != GUILocalizeStrings.Get(10798826) && tmdBfunction != GUILocalizeStrings.Get(10798827) &&
+                                tmdBfunction != GUILocalizeStrings.Get(10798828) && tmdBfunction != GUILocalizeStrings.Get(10798829) &&
+                                !string.IsNullOrEmpty(tmdBfunction));
+
+      BtnSrtBy.IsEnabled = allowSortchanges;
       _currentSortMethod = SortMethod.Date;
       BtnSrtBy.IsAscending = false; // (conf.StrSortSens == " ASC");
       UpdateButtonStates();
