@@ -6419,6 +6419,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
                 if (movie.MovieSearchResult.TrailerStatus == TmdbMovieSearchResult.TrailerState.Unknown) // check trailers only, if not yet done in this session
                 {
+                  bool remotetraileravailable = false;
+                  bool localtraileravailable = false;
                   #region load trailer info from TMDB
                   movie.Trailers = api.GetMovieTrailers(movie.MovieSearchResult.id, language);
                   if (movie.Trailers.youtube.Count == 0)
@@ -6439,7 +6441,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (j == 0)
                     {
                       item.Path = "http://www.youtube.com/watch?v=" + movie.Trailers.youtube[j].source; // http://www.youtube.com/watch?v=KwPTIEWTYEI
-                      movie.MovieSearchResult.TrailerStatus = TmdbMovieSearchResult.TrailerState.Remote;
+                      remotetraileravailable = true;
                     }
 
                     #region add trailers to trailer download queue for caching
@@ -6465,8 +6467,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     #endregion
                   }
                   #endregion
+
+                  #region search locally cached trailers
+                  if (MyFilms.conf.StrDirStorTrailer.Length > 0)
+                  {
+                    try
+                    {
+                      string directoryname = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (movie.MovieSearchResult.title + ((year.Length > 0) ? (" (" + year + ")") : ""))); // string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
+                      if (!string.IsNullOrEmpty(directoryname) && Directory.Exists(directoryname))
+                      {
+                        localtraileravailable = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories).Where(Utils.IsVideo).Count() > 0;
+                      }
+                    }
+                    catch (Exception ex) { LogMyFilms.Error("GetImagesForTmdbFilmList - error searching cached trailer files: '" + ex.Message); }
+                  }
+                  #endregion
+                  if (localtraileravailable)
+                  {
+                    movie.MovieSearchResult.TrailerStatus = remotetraileravailable ? TmdbMovieSearchResult.TrailerState.LocalAndRemote : TmdbMovieSearchResult.TrailerState.Local;
+                  }
+                  else
+                  {
+                    movie.MovieSearchResult.TrailerStatus = remotetraileravailable ? TmdbMovieSearchResult.TrailerState.Remote : TmdbMovieSearchResult.TrailerState.None;
+                  }
                 }
-                item.IsDownloading = (movie.MovieSearchResult.TrailerStatus == TmdbMovieSearchResult.TrailerState.Remote);
+                item.IsDownloading = (movie.MovieSearchResult.TrailerStatus == TmdbMovieSearchResult.TrailerState.Remote || movie.MovieSearchResult.TrailerStatus == TmdbMovieSearchResult.TrailerState.LocalAndRemote);
               }
               catch (Exception ex)
               {
