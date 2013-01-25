@@ -6476,7 +6476,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       string directoryname = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (movie.MovieSearchResult.title + ((year.Length > 0) ? (" (" + year + ")") : ""))); // string destinationDirectory = Path.Combine(MyFilms.conf.StrDirStorTrailer + @"OnlineTrailerCache\", (item.Label + ((year.Length > 0) ? (" (" + year + ")") : "")));
                       if (!string.IsNullOrEmpty(directoryname) && Directory.Exists(directoryname))
                       {
-                        localtraileravailable = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories).Where(Utils.IsVideo).Count() > 0;
+                        localtraileravailable = Directory.GetFiles(directoryname, "*.*", SearchOption.AllDirectories).Where(Utils.IsVideo).Any();
                       }
                     }
                     catch (Exception ex) { LogMyFilms.Error("GetImagesForTmdbFilmList - error searching cached trailer files: '" + ex.Message); }

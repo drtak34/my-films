@@ -305,8 +305,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         StrSuppressField = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressField", string.Empty);
         StrSuppressValue = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "SuppressValue", string.Empty);
 
-        EnhancedWatchedStatusHandling = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "EnhancedWatchedStatusHandling", false);
-        if (StrFileType == CatalogType.AntMovieCatalog4Xtended) EnhancedWatchedStatusHandling = true; // always force MUS/EWS on AMC4 Catalog types
+        EnhancedWatchedStatusHandling = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "EnhancedWatchedStatusHandling", false) || StrFileType == CatalogType.AntMovieCatalog4Xtended;  // always force MUS/EWS on AMC4 Catalog types
         StrUserProfileName = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "UserProfileName", MyFilms.DefaultUsername); // MyFilms.DefaultUsername
 
         StrECoptionStoreTaglineInDescription = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ECoptionStoreTaglineInDescription", false);

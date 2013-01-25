@@ -1190,9 +1190,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       Refresh_Tabs(true); // enable Tabs
       Refresh_Items(false);
       CatalogType.SelectedIndex = Convert.ToInt16(XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "CatalogType", "0"));
-      chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false);
-      if (CatalogType.SelectedIndex == 10) chkEnhancedWatchedStatusHandling.Checked = true;
-
+      chkEnhancedWatchedStatusHandling.Checked = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "EnhancedWatchedStatusHandling", false) || CatalogType.SelectedIndex == 10;
       UserProfileName.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "UserProfileName", ""); // MyFilms.DefaultUsername
       MesFilmsCat.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalog", "");
       AMCexePath.Text = XmlConfig.ReadXmlConfig("MyFilms", Config_Name.Text, "AntCatalogExecutable", "");
@@ -2992,7 +2990,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //Read_XML_Logos(Config_Name.Text);
         Read_XML_Logos();
       }
-      DataRow[] movies = mydivx.Tables["Movie"].Select(sField.Text + " is not null", sField.Text.ToString() + " ASC");
+      DataRow[] movies = mydivx.Tables["Movie"].Select(sField.Text + " is not null", sField.Text + " ASC");
       string wsfield = null;
       sValue.Items.Clear();
       foreach (DataRow enr in movies)
