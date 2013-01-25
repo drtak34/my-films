@@ -176,7 +176,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     static VirtualDirectory m_directory = new VirtualDirectory();
     BackgroundWorker bgPicture = new BackgroundWorker();
 
-    static System.Windows.Forms.OpenFileDialog openFileDialog1 = new OpenFileDialog();
     static bool m_askBeforePlayingDVDImage = false;
     public static ArrayList result;
     public static string wsearchfile;
@@ -9318,8 +9317,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           g_Player.Player.SetResumeState(resumeData);
         else
         {
-          var msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_SEEK_POSITION, 0, 0, 0, 0, 0, null);
-          msg.Param1 = (int)timeMovieStopped;
+          GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_SEEK_POSITION, 0, 0, 0, 0, 0, null)
+            {
+              Param1 = (int)timeMovieStopped
+            };
           GUIGraphicsContext.SendMessage(msg);
         }
       }

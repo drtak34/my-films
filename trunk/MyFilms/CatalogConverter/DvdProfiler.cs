@@ -106,16 +106,10 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
 
           string mediatype = String.Empty;
           XmlNode mediaTypes = nodeDvd.SelectSingleNodeFast("MediaTypes");
-          foreach (XmlElement type in mediaTypes)
+          foreach (XmlElement type in mediaTypes.Cast<XmlElement>().Where(type => type.InnerText == "true"))
           {
-            if (type.InnerText != null && type.InnerText == "true")
-            {
-              if (mediatype.Length > 0)
-              {
-                mediatype += ", ";
-              }
-              mediatype += type.Name;
-            }
+            if (mediatype.Length > 0) mediatype += ", ";
+            mediatype += type.Name;
           }
 
           string medialabel = String.Empty;
