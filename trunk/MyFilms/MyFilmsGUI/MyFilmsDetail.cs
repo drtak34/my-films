@@ -658,7 +658,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("SaveLastActiveModule - module {0}", currentmoduleid);
         LogMyFilms.Debug("SaveLastActiveModule - fullscreen {0}", currentmodulefullscreen);
       }
-      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + newWindowId.ToString() + ") completed.");
+      LogMyFilms.Debug("MyFilms.OnPageDestroy(" + newWindowId + ") completed.");
       base.OnPageDestroy(newWindowId);
     }
 
@@ -2308,23 +2308,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("Starting OnlineVideos with '" + oVstartparams + "'");
         // trailerPlayed = true; // should this be set here to make original movie doesn't get set to watched??
 
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", site);
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", title + titleextension);
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "Locked");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", path);
-        ////GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", GUILocalizeStrings.Get(10798749) + " (" + title + ")"); // download to movie directory
-
         GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos, oVstartparams);
-
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Site", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloaddir", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadfilename", "");
-        //GUIPropertyManager.SetProperty("#OnlineVideos.startparams.downloadmenuentry", "");
       }
       else
       {
@@ -2432,7 +2416,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private void Menu_CreateFanart(GrabUtil.ArtworkFanartType FanartType)
+    private void Menu_CreateFanart(GrabUtil.ArtworkFanartType fanartType)
     {
       {
         GUIDialogProgress dlgPrgrs = (GUIDialogProgress)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_PROGRESS);
@@ -2458,7 +2442,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               // Remove_Backdrops_Fanart(fanartTitle, false); // old: Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false);
               // Thread.Sleep(50);
               bool success;
-              switch (FanartType)
+              switch (fanartType)
               {
 
                 case GrabUtil.ArtworkFanartType.MultiImageWithMultipleSingleImages:
@@ -2893,27 +2877,26 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     public static bool GlobalLockIsActive(string config)
     {
-      string DB = "";
-      DB = string.IsNullOrEmpty(config) ? MyFilms.conf.StrFileXml : config;
-      if (string.IsNullOrEmpty(DB))
+      string db = string.IsNullOrEmpty(config) ? MyFilms.conf.StrFileXml : config;
+      if (string.IsNullOrEmpty(db))
       {
-        DB = "";
-        LogMyFilms.Debug("GlobalLockIsActive() - No valid DB - returning 'false' (DB-Config: '" + DB + "')");
+        db = "";
+        LogMyFilms.Debug("GlobalLockIsActive() - No valid DB - returning 'false' (DB-Config: '" + db + "')");
         return false;
       }
 
-      string path = Path.GetDirectoryName(DB);
-      string filename = Path.GetFileNameWithoutExtension(DB);
+      string path = Path.GetDirectoryName(db);
+      string filename = Path.GetFileNameWithoutExtension(db);
       string machineName = System.Environment.MachineName;
       string[] files = Directory.GetFiles(path, filename + @"*.lck", SearchOption.TopDirectoryOnly);
       if (files.Length > 0)
       {
-        LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! (DB-Config: '" + DB + "') - First LockFile: '" + files[0] + "', Number LockFiles: '" + files.Length + "', Local MachineName: '" + machineName + "'");
+        LogMyFilms.Debug("GlobalLockIsActive() - Global Lock detected ! (DB-Config: '" + db + "') - First LockFile: '" + files[0] + "', Number LockFiles: '" + files.Length + "', Local MachineName: '" + machineName + "'");
         return true;
       }
       else
       {
-        LogMyFilms.Debug("GlobalLockIsActive() - No Global Lock detected ! (DB-Config: '" + DB + "')");
+        LogMyFilms.Debug("GlobalLockIsActive() - No Global Lock detected ! (DB-Config: '" + db + "')");
         return false;
       }
     }
@@ -2971,11 +2954,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     private static string LockFilename(string config)
     {
-      string lockfilename = "";
       string path = Path.GetDirectoryName(config);
       string filename = Path.GetFileNameWithoutExtension(config);
       string machineName = Environment.MachineName;
-      lockfilename = path + @"\" + filename + "_" + machineName + ".lck";
+      string lockfilename = path + @"\" + filename + "_" + machineName + ".lck";
       // LogMyFilms.Debug("LockFilename() - created lock file name is: '" + lockfilename + "'");
       return lockfilename;
     }
@@ -3094,7 +3076,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string currentlanguagefilter = "";
       if (!string.IsNullOrEmpty(MyFilms.conf.ItemSearchGrabberScriptsFilter))
         currentlanguagefilter = MyFilms.conf.ItemSearchGrabberScriptsFilter;
-      string[] Sep = new string[] { ",", ";", "|", "/", ".", @"\", ":" };
+      string[] sep = new string[] { ",", ";", "|", "/", ".", @"\", ":" };
       switch (grabtype)
       {
         case GrabType.All:
@@ -3109,9 +3091,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       // check, if it meets filter criteria
-      string[] allowedlanguages = currentlanguagefilter.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
-      string[] supportedlanguages = script.Language.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
-      string[] supportedfunctions = script.Type.Split(Sep, StringSplitOptions.RemoveEmptyEntries);
+      string[] allowedlanguages = currentlanguagefilter.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+      string[] supportedlanguages = script.Language.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+      string[] supportedfunctions = script.Type.Split(sep, StringSplitOptions.RemoveEmptyEntries);
 
       if (string.IsNullOrEmpty(currentlanguagefilter) || currentlanguagefilter.Contains("*")) // if there is no filter set in config or override add script anyway...
       {
@@ -4804,7 +4786,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string oldPicture = MyFilmsDetail.getGUIProperty("picture");
       string newPicture = ""; // full path to new picture
       string newPictureCatalogname = ""; // entry to be stored in catalog
-      if (string.IsNullOrEmpty(oldPicture))
+      if (string.IsNullOrEmpty(oldPicture)) 
         oldPicture = "";
 
       if (!Directory.Exists(MyFilms.conf.StrPathImg + "\\" + MyFilms.conf.StrPicturePrefix))
@@ -5018,7 +5000,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
             {
-              // enter here what to load after background thread has finished !
               if (DetailsUpdated != null) DetailsUpdated(true);
               return 0;
             }, 0, 0, null);
