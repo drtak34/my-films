@@ -749,6 +749,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Info("MediaPortal Version: 'V" + MyFilmsSettings.MPVersion + "',    BuildDate: '" + MyFilmsSettings.MPBuildDate + "'");
       LogMyFilms.Info("MyFilms Skin Interface Version: 'V" + SkinInterfaceVersionMajor + "." + SkinInterfaceVersionMinor + "'");
 
+      bool result = Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
+
       // check, if remote config file should be copied to local MP data dir (MyFilms Server Setup)
       SyncConfigFromRemoteServer();
 
@@ -812,7 +814,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // preload config and dataset
       InitConfigPreload();
       
-      bool result = Load(GUIGraphicsContext.Skin + @"\MyFilms.xml");
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
     }
