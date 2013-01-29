@@ -1661,7 +1661,7 @@ Public Module Module1
 
         Dim settings As XmlWriterSettings = New XmlWriterSettings()
         settings.Indent = True
-        settings.Encoding = System.Text.Encoding.Default
+        settings.Encoding = System.Text.Encoding.UTF8
 
         ' Delete existing nfo file, if any
         If (System.IO.File.Exists(OutFileName)) Then
