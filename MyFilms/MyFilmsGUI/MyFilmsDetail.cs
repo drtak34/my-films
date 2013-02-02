@@ -2787,7 +2787,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Update_XML_database();
 
       // tell any listeners that user rated the movie
-      var movie = GetMovieFromRecord(row);
+      MFMovie movie = GetMovieFromRecord(row);
       if (WatchedItem != null)
         WatchedItem(movie, watched, ((watched) ? 1 : 0));
     }
@@ -2803,10 +2803,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       row[BaseMesFilms.MultiUserStateField] = userData.ResultValueString();
       SyncMusToExtendedFields(row, userData, userprofilename);
 
-      // tell any listeners that user watched the movie
-      var movie = GetMovieFromRecord(row);
-      if (WatchedItem != null && MyFilms.conf.AllowTraktSync)
-        WatchedItem(movie, true, userData.GetUserState(userprofilename).WatchedCount);
+      // following is disabled, as we already send MovieWatched message, that is used by registered apps. We loose setting the number of watches for the external apps though
+      //// tell any listeners that user watched the movie
+      //MFMovie movie = GetMovieFromRecord(row);
+      //if (WatchedItem != null && MyFilms.conf.AllowTraktSync)
+      //  WatchedItem(movie, true, userData.GetUserState(userprofilename).WatchedCount);
     }
 
     private static void SyncMusToExtendedFields(DataRow row, MultiUserData userData, string userprofilename)
