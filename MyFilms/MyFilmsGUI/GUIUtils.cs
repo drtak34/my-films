@@ -699,6 +699,36 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return image;
     }
 
+    public static void SetImageToGui(this GUIListItem item, string imageFilePath)
+    {
+      if (item == null) return;
+      if (string.IsNullOrEmpty(imageFilePath)) return;
+
+      string texture = GetTextureFromFile(imageFilePath);
+
+      if (GUITextureManager.LoadFromMemory(MediaPortal.Util.ImageFast.FromFile(imageFilePath), texture, 0, 0, 0) > 0)
+      {
+        item.ThumbnailImage = texture;
+        item.IconImage = texture;
+        item.IconImageBig = texture;
+      }
+
+      //// if selected and GUIActors is current window force an update of thumbnail
+      //GUIActors actorWindow = GUIWindowManager.GetWindow(GUIWindowManager.ActiveWindow) as GUIActors;
+      //if (actorWindow != null)
+      //{
+      //  GUIListItem selectedItem = GUIControl.GetSelectedListItem(9816, 50);
+      //  if (selectedItem == this)
+      //  {
+      //    GUIWindowManager.SendThreadMessage(new GUIMessage(GUIMessage.MessageType.GUI_MSG_ITEM_SELECT, GUIWindowManager.ActiveWindow, 0, 50, ItemId, 0, null));
+      //  }
+      //}
+    }
+
+    private static string GetTextureFromFile(string filename)
+    {
+      return "[MyFilms:" + filename.GetHashCode() + "]";
+    }
 
   }
 
