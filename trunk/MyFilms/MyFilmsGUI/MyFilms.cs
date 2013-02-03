@@ -2881,9 +2881,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       #region post facade settings ...
       if (this.facadeFilms.Count == 0)
       {
-        item = new GUIListItem();
-        item.Label = GUILocalizeStrings.Get(10798639);
-        item.IsRemote = true;
+        item = new GUIListItem { Label = GUILocalizeStrings.Get(10798639), IsRemote = true };
         this.facadeFilms.Add(item);
         GUIUtils.ShowOKDialog(GUILocalizeStrings.Get(10798639));
         conf.ViewContext = ViewContext.Menu;
@@ -9524,7 +9522,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (!MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798629)));
             choiceViewGlobalOptions.Add("alwaysdefaultconfig");
 
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079842), conf.StrViewDfltItem)); // change default start config
+            string cDefaultConfig = "";
+            using (XmlSettings xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+            {
+              cDefaultConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
+            }
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079842), cDefaultConfig)); // change default start config
             choiceViewGlobalOptions.Add("changedefaultconfig");
 
             if (MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798628))); // Always ask for playback quality for online content ({0})
@@ -10239,15 +10242,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           else
             dlgdef.Add(GUILocalizeStrings.Get(1079819)); // menu
           choiceViewDefaultItems.Add(GUILocalizeStrings.Get(1079819));
+          int position = 0;
           foreach (MFview.ViewRow customView in conf.CustomViews.View)
           {
-            if (conf.StrViewDfltItem == customView.Label)
-              dlgdef.Add(customView.Label + " (*)");
-            else
-              dlgdef.Add(customView.Label);
+            dlgdef.Add(customView.Label);
             choiceViewDefaultItems.Add(customView.Label);
-
+            position++;
+            if (conf.StrViewDfltItem == customView.Label)
+              dlgdef.SelectedLabel = position;
           }
+          
           dlgdef.DoModal(GetID);
           if (dlgdef.SelectedLabel == -1) return;
 
@@ -10320,7 +10324,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "changedefaultconfig":
           #region changedefaultconfig
           string currentDefaultConfig = "";
-          using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+          using (XmlSettings xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
             currentDefaultConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
           }
@@ -10338,9 +10342,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               if (dlgcfg.SelectedLabelText == currentDefaultConfig) dlgcfg.SelectedLabel = i;
             }
 
+            // add empty value to be able to remove start config
+            dlgcfg.Add("<" + GUILocalizeStrings.Get(10798774) + ">"); // empty
+
             dlgcfg.DoModal(GetID);
             if (dlgcfg.SelectedLabel == -1) return;
-            if (dlgcfg.SelectedLabelText.Length > 0)
+
+            if (dlgcfg.SelectedLabelText == ("<" + GUILocalizeStrings.Get(10798774) + ">"))
+            {
+              currentDefaultConfig = "";
+            }
+            else if (dlgcfg.SelectedLabelText.Length > 0)
             {
               string catalog = xmlConfig.ReadXmlConfig("MyFilms", dlgcfg.SelectedLabelText, "AntCatalog", string.Empty);
               if (!File.Exists(catalog))
@@ -10355,12 +10367,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          using (var xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
+          using (XmlSettings xmlSettings = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml"), true))
           {
-            xmlSettings.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", currentDefaultConfig);
+            if (string.IsNullOrEmpty(currentDefaultConfig))
+            {
+              xmlSettings.RemoveEntry("MyFilms", "MyFilms", "Default_Config");
+            }
+            else
+            {
+              xmlSettings.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", currentDefaultConfig);
+            }
           }
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
-          LogMyFilms.Info("Update Option 'change default config' changed to " + currentDefaultConfig);
+          LogMyFilms.Info("Update Option 'change default config' changed to '" + currentDefaultConfig + "'");
           Change_Menu_Action("globaloptions");
           #endregion
           break;
