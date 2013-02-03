@@ -3797,36 +3797,35 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             #region fanart
             new Thread(delegate()
-            {
               {
-                LogMyFilms.Debug("Load_Lstdetail() - Sleep 500 ms to let animations go ...");
-                Thread.Sleep(conf.ViewContext == ViewContext.Person ? 750 : 500);
-                try
+                string[] wfanart = new string[2];
                 {
-                  string[] wfanart = MyFilmsDetail.Search_Fanart(currentItem.Label, true, "file", true, currentItem.ThumbnailImage, currentItem.Path);
-                  if (conf.StrFanartDefaultViewsUseRandom)
+                  LogMyFilms.Debug("Load_Lstdetail() - Sleep 500 ms to let animations go ...");
+                  Thread.Sleep(conf.ViewContext == ViewContext.Person ? 750 : 500);
+                  try
                   {
-                    string groupFanart = GetNewRandomFanart(true, false); // resets and populates fanart list and selects a random one
-                    if (groupFanart != " ") wfanart[0] = groupFanart;
+                    wfanart = MyFilmsDetail.Search_Fanart(
+                      currentItem.Label, true, "file", true, currentItem.ThumbnailImage, currentItem.Path);
+                    if (conf.StrFanartDefaultViewsUseRandom)
+                    {
+                      string groupFanart = GetNewRandomFanart(true, false);
+                        // resets and populates fanart list and selects a random one
+                      if (groupFanart != " ") wfanart[0] = groupFanart;
+                    }
+                    Fanartstatus(wfanart[0] != " ");
+                    backdrop.Filename = wfanart[0];
+                    MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
+                    LogMyFilms.Debug("Load_Lstdetail() - Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
                   }
-                  Fanartstatus(wfanart[0] != " ");
-                  backdrop.Filename = wfanart[0];
-                  MyFilmsDetail.setGUIProperty("currentfanart", wfanart[0]);
-                  LogMyFilms.Debug("Load_Lstdetail() - Backdrop status: '" + backdrop.Active + "', backdrop.Filename = wfanart[0]: '" + wfanart[0] + "', '" + wfanart[1] + "'");
+                  catch (Exception ex)
+                  {
+                    LogMyFilms.Warn("Load_Lstdetail() - Fanart-exception: '" + ex.Message + "'");
+                  }
                 }
-                catch (Exception ex)
-                {
-                  LogMyFilms.Warn("Load_Lstdetail() - Fanart-exception: '" + ex.Message + "'");
-                }
-              }
-              GUIWindowManager.SendThreadCallbackAndWait((p1, p2, data) =>
+              })
               {
-                {
-                  // after thread is finished ...
-                }
-                return 0;
-              }, 0, 0, null);
-            }) { Name = "MyFilmsSetFanartOnPageLoadWorker", IsBackground = true, Priority = ThreadPriority.BelowNormal }.Start();
+                Name = "MyFilmsSetFanartOnPageLoadWorker", IsBackground = true, Priority = ThreadPriority.BelowNormal
+              }.Start();
             #endregion
 
             // Load_Rating(0); // old method - nor more used
@@ -16683,11 +16682,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           _fanartTimer.Change(0, RandomFanartDelay); //default 15000 = 15 secs
         else
           _fanartTimer.Change(Timeout.Infinite, Timeout.Infinite);
-        GUIControl.ShowControl(GetID, 35);
+
+        GUIWindowManager.SendThreadCallback((p1, p2, o) =>
+        {
+          GUIControl.ShowControl(GetID, 35);
+          return 0;
+        }, 0, 0, null);
       }
       else
       {
-        GUIControl.HideControl(GetID, 35);
+        GUIWindowManager.SendThreadCallback((p1, p2, o) =>
+        {
+          GUIControl.HideControl(GetID, 35);
+          MyFilmsDetail.clearGUIProperty("currentfanart");
+          return 0;
+        }, 0, 0, null);
+
         if (backdrop.Active)
           backdrop.Active = false;
         // Disable Random Fanart Timer
@@ -16696,7 +16706,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         currentFanartList.Clear();
         // Disable Fanart                
         backdrop.Filename = String.Empty;
-        MyFilmsDetail.clearGUIProperty("currentfanart");
       }
       LogMyFilms.Debug("Fanartstatus switched to '" + status + "'");
     }
