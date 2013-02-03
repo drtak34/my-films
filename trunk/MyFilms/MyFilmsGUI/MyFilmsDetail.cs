@@ -8182,13 +8182,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (MyFilms.conf != null && MyFilms.currentMovie != null && type == g_Player.MediaType.Video && (MyFilms.currentMovie.File.Contains(filename) || MyFilms.conf.MyFilmsPlaybackActive))
         return true;
       
-      // check, if an inserted disc matches the current movie
-      string currentDiscId = Utility.GetDiscIdString(filename);
-      string catalogDiscId = (MyFilms.conf != null) ? MyFilms.r[MyFilms.conf.StrIndex]["MediaLabel"].ToString() : "";
-      LogMyFilms.Debug("PlayBackEventIsOfConcern: check for matching discIDs: - currentDiscId = '{0}',  catalogDiscId (MediaLabel) = '{1}'", currentDiscId, catalogDiscId);
-      if (g_Player.IsDVD && !string.IsNullOrEmpty(catalogDiscId) && currentDiscId == catalogDiscId) 
-        return true;
-
+      // check, if an inserted disc matches the current movie for DVDs
+      if (g_Player.IsDVD && MyFilms.conf != null && MyFilms.r != null && MyFilms.conf.StrIndex < MyFilms.r.Length)
+      {
+        string currentDiscId = Utility.GetDiscIdString(filename);
+        string catalogDiscId = MyFilms.r[MyFilms.conf.StrIndex]["MediaLabel"].ToString();
+        LogMyFilms.Debug("PlayBackEventIsOfConcern: check for matching discIDs: - currentDiscId = '{0}',  catalogDiscId (MediaLabel) = '{1}'", currentDiscId, catalogDiscId);
+        if (!string.IsNullOrEmpty(catalogDiscId) && currentDiscId == catalogDiscId)
+          return true;
+      }
       return false;
     }
 
