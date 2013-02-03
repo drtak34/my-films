@@ -37,6 +37,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
   using MediaPortal.GUI.Library;
 
+  using DirectShowLib;
+  using DirectShowLib.Dvd;
+
   class Utility
   {
     #region Ctor / Private variables
@@ -44,6 +47,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
 
     }
+
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
+
     #endregion
 
     #region Enums
@@ -58,6 +64,22 @@ namespace MyFilmsPlugin.MyFilms.Utils
       [Description("")]
       UnknownFormat
     }
+
+    /// <summary>
+    /// Video Formats
+    /// </summary>
+    public enum VideoFormat
+    {
+      NotSupported, // used for file types that are not supported
+      Unknown, // used for images
+      DVD,
+      Bluray,
+      HDDVD,
+      SVCD,
+      File, // used for all valid 'standalone' video files that do not have a specific video format
+    }
+
+
     #endregion
 
     #region Enum Helper Methods
@@ -629,40 +651,99 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     #endregion
 
-    //#region DirectShowLib
+    #region DirectShowLib
 
-    ///// <summary>
-    ///// Get Disc ID as a string
-    ///// </summary>
-    ///// <param name="path">CD/DVD path</param>
-    ///// <returns>Disc ID</returns>
-    //public static string GetDiscIdString(string path) {
-    //    long id = GetDiscId(path);
-    //    if (id != 0)
-    //        return Convert.ToString(id, 16); // HEX
+    /// <summary>
+    /// Get Disc ID as a string
+    /// </summary>
+    /// <param name="path">CD/DVD path</param>
+    /// <returns>Disc ID</returns>
+    public static string GetDiscIdString(string path)
+    {
+      long id = GetDiscId(path);
+      return id != 0 ? Convert.ToString(id, 16) : "";
+    }
 
-    //    return null;
-    //}
+    /// <summary>
+    /// Get Disc ID as 64-bit signed integer
+    /// </summary>
+    /// <param name="path">CD/DVD path</param>
+    /// <returns>Disc ID</returns>
+    public static long GetDiscId(string path)
+    {
+      long discID = 0;
+      LogMyFilms.Debug("Generating DiscId for: " + path);
+      try
+      {
+        // get the path to the video_ts folder
+        string vtsPath = path.ToLower().Replace(@"\video_ts.ifo", @"\");
+        // This will get the microsoft generated DVD Disc ID
+        IDvdInfo2 dvdInfo = (IDvdInfo2)new DVDNavigator();
+        dvdInfo.GetDiscID(vtsPath, out discID);
+      }
+      catch (Exception e)
+      {
+        LogMyFilms.Error("Error while retrieving disc id for: " + path, e);
+      }
+      return discID;
+    }
 
-    ///// <summary>
-    ///// Get Disc ID as 64-bit signed integer
-    ///// </summary>
-    ///// <param name="path">CD/DVD path</param>
-    ///// <returns>Disc ID</returns>
-    //public static long GetDiscId(string path) {
-    //    long discID = 0;
-    //    Log.Debug("Generating DiscId for: " + path);
-    //    try {
-    //        IDvdInfo2 dvdInfo = (IDvdInfo2)new DVDNavigator();
-    //        dvdInfo.GetDiscID(path, out discID);
-    //    }
-    //    catch (Exception e) {
-    //        Log.Error("Error while retrieving disc id for: " + path, e);
-    //    }
-    //    return discID;
-    //}
+    #endregion
 
-    //#endregion
+
+    /// <summary>
+    /// Get a hash representing the standard identifier for this format.
+    /// Currently supported are the DVD/Bluray Disc ID and the OpenSubtitles.org Movie Hash.
+    /// </summary>
+    /// <param name="self"></param>
+    /// <param name="videoPath">path to the main video file</param>
+    /// <returns>Hexadecimal string representing the identifier or NULL</returns>
+    public static string GetIdentifier(VideoFormat self, string videoPath)
+    {
+      string hashID = null;
+      switch (self)
+      {
+        case VideoFormat.DVD:
+          {
+            // get the path to the video_ts folder
+            string vtsPath = videoPath.ToLower().Replace(@"\video_ts.ifo", @"\");
+            // This will get the microsoft generated DVD Disc ID
+            try
+            {
+              // get the disc id using the DirectShowLib method
+              IDvdInfo2 dvdInfo = (IDvdInfo2)new DVDNavigator();
+              long discID = 0;
+              dvdInfo.GetDiscID(vtsPath, out discID);
+              // if we got a disc id, we convert it to a hexadecimal string
+              if (discID != 0) hashID = Convert.ToString(discID, 16);
+            }
+            catch (Exception e)
+            {
+              if (e.GetType() == typeof(ThreadAbortException))
+                throw e;
+
+              LogMyFilms.DebugException("Disc ID: Failed, Path='" + vtsPath + "', Format='" + self.ToString() + "' ", e);
+            }
+          }
+          break;
+        case VideoFormat.Bluray:
+          break;
+        case VideoFormat.File:
+          break;
+      }
+
+      if (String.IsNullOrEmpty(hashID))
+      {
+        LogMyFilms.Debug("Failed Identifier: Path='{0}', Format='{1}' ", videoPath, self);
+      }
+      else
+      {
+        LogMyFilms.Debug("Identifier: Path='{0}', Format='{1}', Hash='{2}' ", videoPath, self, hashID);
+      }
+
+      // Return the result
+      return hashID;
+    }
 
     #region MovieHash
 
