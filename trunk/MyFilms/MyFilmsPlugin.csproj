@@ -92,6 +92,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Dialogs.dll</HintPath>
     </Reference>
+    <Reference Include="DirectShowLib">
+      <HintPath>..\Externals\Mediaportal\DirectShowLib.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\NLog.dll</HintPath>

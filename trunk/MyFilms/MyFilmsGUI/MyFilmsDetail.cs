@@ -8177,20 +8177,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     bool PlayBackEventIsOfConcern(g_Player.MediaType type, string filename)
     {
-      bool playbackeventIsOfConcern = false;
       if (string.IsNullOrEmpty(filename)) return false;
+
       if (MyFilms.conf != null && MyFilms.currentMovie != null && type == g_Player.MediaType.Video && (MyFilms.currentMovie.File.Contains(filename) || MyFilms.conf.MyFilmsPlaybackActive))
-        playbackeventIsOfConcern = true;
-      return playbackeventIsOfConcern;
+        return true;
+      
+      // check, if an inserted disc matches the current movie
+      string currentDiscId = Utility.GetDiscIdString(filename);
+      string catalogDiscId = (MyFilms.conf != null) ? MyFilms.r[MyFilms.conf.StrIndex]["MediaLabel"].ToString() : "";
+      LogMyFilms.Debug("PlayBackEventIsOfConcern: check for matching discIDs: - currentDiscId = '{0}',  catalogDiscId (MediaLabel) = '{1}'", currentDiscId, catalogDiscId);
+      if (g_Player.IsDVD && !string.IsNullOrEmpty(catalogDiscId) && currentDiscId == catalogDiscId) 
+        return true;
+
+      return false;
     }
 
     bool PlayBackEventIsOfConcernAsTrailer(g_Player.MediaType type, string filename)
     {
-      bool playbackeventIsOfConcern = false;
-      if (string.IsNullOrEmpty(filename)) return false;
+      if (string.IsNullOrEmpty(filename)) 
+        return false;
       if (MyFilms.conf != null && MyFilms.currentTrailerPlayingItem != null && type == g_Player.MediaType.Video && MyFilms.currentTrailerPlayingItem.Trailer.Contains(filename)) // if (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.Trailer.Contains(filename)) // 
-        playbackeventIsOfConcern = true;
-      return playbackeventIsOfConcern;
+        return true;
+      return false;
     }
 
     private void OnPlayBackStarted(MediaPortal.Player.g_Player.MediaType type, string filename)
@@ -8459,7 +8467,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return;
         }
 
-        if (MyFilms.conf.CheckWatched || (MyFilms.conf.CheckWatchedPlayerStopped && ((ended && isLastPart) || (stopped && playTimePercentage >= 80))))
+        if (MyFilms.conf.CheckWatched || (MyFilms.conf.CheckWatchedPlayerStopped && ((ended && isLastPart) || (stopped && (playTimePercentage >= 80 || g_Player.IsDVDMenu)))))
         {
           #region update watched status
           if (MyFilms.conf.EnhancedWatchedStatusHandling)
@@ -8473,10 +8481,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
           #endregion
         }
-
         #region tell any listeners that movie is watched
         MFMovie movie = GetMovieFromRecord(MyFilms.conf.StrPlayedRow); // create movie before DB record is deleted ...
-        if ((ended && isLastPart) || (stopped && playTimePercentage >= 80))
+        if ((ended && isLastPart) || (stopped && (playTimePercentage >= 80 || g_Player.IsDVDMenu)))
         {
           if (MovieWatched != null && MyFilms.conf.AllowTraktSync)
           {
