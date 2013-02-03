@@ -20,7 +20,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger(); //log
 
     private delegate bool ShowCustomYesNoDialogDelegate(string heading, string lines, string yesLabel, string noLabel, bool defaultYes, int timeout);
-    private delegate void ShowOKDialogDelegate(string heading, string lines);
+    private delegate void ShowOkDialogDelegate(string heading, string lines);
     private delegate void ShowNotifyDialogDelegate(string heading, string text, string image, string buttonText, int timeOut);
     private delegate int ShowMenuDialogDelegate(string heading, List<GUIListItem> items);
     private delegate List<MultiSelectionItem> ShowMultiSelectionDialogDelegate(string heading, List<MultiSelectionItem> items);
@@ -28,7 +28,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private delegate string ShowRateDialogDelegate<T>(T rateObject);
     private delegate bool GetStringFromKeyboardDelegate(ref string strLine, bool isPassword);
     private delegate bool GetDirectoryDelegate(ref string strLine);
-    public static readonly string MyFilmsLogo = GUIGraphicsContext.Skin + "\\Media\\MyFilms\\myfilms.png";
+
+    private static readonly string MyFilmsLogo = GUIGraphicsContext.Skin + "\\Media\\MyFilms\\myfilms.png";
 
     public static string PluginName()
     {
@@ -153,12 +154,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #endregion
 
     #region GUI property setter
-    public static void SetProperty(string property, string value)
-    {
-      SetProperty(property, value, false);
-    }
 
-    public static void SetProperty(string property, string value, bool log)
+    public static void SetProperty(string property, string value, bool log = false)
     {
       // prevent ugly display of property names
       if (string.IsNullOrEmpty(value)) value = " ";
@@ -172,6 +169,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
     #endregion
+
+    // sample code from offbyone to launch GUI activities in main thread via message queue
+    //public void SetFanartToGUI(string header, string message, string value, bool isImportant)
+    //{
+    //  GUIWindowManager.SendThreadCallback((p1, p2, o) =>
+    //  {
+    //    string[] inputData = o as string[];
+
+    //    // code to create a Dialog or do UI stuff goes here
+    //    var dlgNotificationDialog = CreateNotificationDialog();
+    //    if (dlgNotificationDialog != null)
+    //    {
+    //      dlgNotificationDialog.SetHeading(inputData[0]);
+    //      dlgNotificationDialog.SetText(inputData[2] != null ? inputData[1].Replace("%1", inputData[2]) : inputData[1]);
+    //      dlgNotificationDialog.TimeOut = showNotificationTimeout;
+    //      dlgNotificationDialog.DoModal(GetActiveWindow());
+    //    }
+    //    // return an integer (required)
+    //    return 0;
+    //  }, 0, 0, new string[3] { header, message, value });
+    //}
 
     #region dialogs
 
@@ -359,44 +377,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (GUIGraphicsContext.form.InvokeRequired)
       {
-        ShowOKDialogDelegate d = ShowOKDialog;
+        ShowOkDialogDelegate d = ShowOKDialog;
         GUIGraphicsContext.form.Invoke(d, heading, lines);
         return;
       }
 
-      var dlgOK = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+      GUIDialogOK dlgOk = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
 
-      dlgOK.Reset();
-      dlgOK.SetHeading(heading);
+      dlgOk.Reset();
+      dlgOk.SetHeading(heading);
 
       string[] dialoglines = lines.Split(new string[] { "\\n", "\n" }, StringSplitOptions.None);
       switch (dialoglines.Length)
       {
         case 1:
-          dlgOK.SetLine(1, string.Empty);
-          dlgOK.SetLine(2, dialoglines[0]);
-          dlgOK.SetLine(3, string.Empty);
-          dlgOK.SetLine(4, string.Empty);
+          dlgOk.SetLine(1, string.Empty);
+          dlgOk.SetLine(2, dialoglines[0]);
+          dlgOk.SetLine(3, string.Empty);
+          dlgOk.SetLine(4, string.Empty);
           break;
         case 2:
-          dlgOK.SetLine(1, string.Empty);
-          dlgOK.SetLine(2, dialoglines[0]);
-          dlgOK.SetLine(3, dialoglines[1]);
-          dlgOK.SetLine(4, string.Empty);
+          dlgOk.SetLine(1, string.Empty);
+          dlgOk.SetLine(2, dialoglines[0]);
+          dlgOk.SetLine(3, dialoglines[1]);
+          dlgOk.SetLine(4, string.Empty);
           break;
         default:
           {
             int lineid = 1;
             foreach (string line in dialoglines)
             {
-              dlgOK.SetLine(lineid, line);
+              dlgOk.SetLine(lineid, line);
               lineid++;
             }
-            for (int i = lineid; i <= 4; i++) dlgOK.SetLine(i, string.Empty);
+            for (int i = lineid; i <= 4; i++) dlgOk.SetLine(i, string.Empty);
           }
           break;
       }
-      dlgOK.DoModal(GUIWindowManager.ActiveWindow);
+      dlgOk.DoModal(GUIWindowManager.ActiveWindow);
     }
     #endregion
 
