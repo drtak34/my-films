@@ -26,6 +26,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System;
   using System.Collections;
   using System.Data;
+  using System.Drawing.Imaging;
   using System.IO;
   using System.Collections.Generic;
   using System.Linq;
@@ -50,6 +51,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using FileIO = Microsoft.VisualBasic;
 
   using ConnectionState = TraktPlugin.TraktAPI.ConnectionState;
+  using System.Drawing;
 
   #region String Extension Methods
   public static class StringExtensions

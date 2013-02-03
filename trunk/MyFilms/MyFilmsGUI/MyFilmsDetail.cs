@@ -66,6 +66,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MyFilmsPlugin.MyFilms.Utils;
   using SQLite.NET;
 
+  using Action = MediaPortal.GUI.Library.Action;
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using MediaInfo = Grabber.MediaInfo;
   using Utils = MediaPortal.Util.Utils;
@@ -517,12 +518,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (!PlayBackEvents_Subscribed)
       {
-        ////g_Player.PlayBackStarted -= new g_Player.StartedHandler(OnPlayBackStarted);
-        ////g_Player.PlayBackEnded -= new g_Player.EndedHandler(OnPlayBackEnded);
-        ////g_Player.PlayBackStopped -= new g_Player.StoppedHandler(OnPlayBackStopped);
-        //g_Player.PlayBackStarted += new g_Player.StartedHandler(OnPlayBackStarted);
-        //g_Player.PlayBackEnded += new g_Player.EndedHandler(OnPlayBackEnded);
-        //g_Player.PlayBackStopped += new g_Player.StoppedHandler(OnPlayBackStopped);
         // Subscribe to GUI Events
         MyFilmsDetail.DetailsUpdated += new MyFilmsDetail.DetailsUpdatedEventDelegate(OnDetailsUpdated);
         PlayBackEvents_Subscribed = true;
@@ -6048,8 +6043,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (MyFilms.conf.StrIndex == -1)
       {
-        var actionType = new MediaPortal.GUI.Library.Action();
-        actionType.wID = MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU;
+        Action actionType = new MediaPortal.GUI.Library.Action
+          {
+            wID = MediaPortal.GUI.Library.Action.ActionType.ACTION_PREVIOUS_MENU
+          };
         base.OnAction(actionType);
         return;
       }
@@ -6068,36 +6065,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       int year = 1900;
       Int32.TryParse(MyFilms.r[MyFilms.conf.StrIndex]["Year"].ToString(), out year);
       MyFilms.currentMovie.Year = year;
-      string IMDB = "";
+      string imdb = "";
       if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString()))
-        IMDB = MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString();
-      if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString()) && string.IsNullOrEmpty(IMDB))
+        imdb = MyFilms.r[MyFilms.conf.StrIndex]["IMDB_Id"].ToString();
+      if (!string.IsNullOrEmpty(MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString()) && string.IsNullOrEmpty(imdb))
       {
         string cleanString = MyFilms.r[MyFilms.conf.StrIndex]["URL"].ToString();
         var cutText = new Regex("" + @"tt\d{7}" + "");
         var m = cutText.Match(cleanString);
         if (m.Success)
-          IMDB = m.Value;
+          imdb = m.Value;
       }
-      MyFilms.currentMovie.IMDBNumber = IMDB;
+      MyFilms.currentMovie.IMDBNumber = imdb;
 
-      string file = "false";
-      if (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Length > 0)
+      string file = "";
+      string strThumb = MediaPortal.Util.Utils.GetCoverArtName((MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies"), MyFilms.conf.StrTIndex); // cached cover
+      if (File.Exists(strThumb))
       {
-        if (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\", System.StringComparison.Ordinal) == -1 && MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\")
-          file = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Picture"];
-        else
-          file = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
+        file = strThumb;
       }
       else
-        file = string.Empty;
-      if (!File.Exists(file) || string.IsNullOrEmpty(file))
-        file = MyFilms.conf.DefaultCover;
-      //Should not Disable because of SpeedThumbs - Not working here .....
+      {
+        if (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Length > 0)
+        {
+          if (MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().IndexOf(":\\", System.StringComparison.Ordinal) == -1 && MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString().Substring(0, 2) != "\\\\")
+            file = MyFilms.conf.StrPathImg + "\\" + MyFilms.r[MyFilms.conf.StrIndex]["Picture"];
+          else
+            file = MyFilms.r[MyFilms.conf.StrIndex]["Picture"].ToString();
+        }
+        else
+          file = string.Empty;
+        if (!File.Exists(file) || string.IsNullOrEmpty(file))
+          file = MyFilms.conf.DefaultCover;
+      }
+
       setGUIProperty("picture", file);
       MyFilms.currentMovie.Picture = file;
-      //if (ImgDetFilm != null)
-      //  ImgDetFilm.FileName = file;
+      // if (ImgDetFilm != null) ImgDetFilm.FileName = file;
 
       // load the rest threaded - logos and fanart might take a bit ...
       new Thread(delegate()
