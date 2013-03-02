@@ -10,44 +10,178 @@
       <width>1280</width>
       <height>270</height>
       <texture>overlay_top.png</texture>
-      <colordiffuse>80ffffff</colordiffuse>
+      <colordiffuse>ccffffff</colordiffuse>
     </control>
+    <!--  Current Module, Number of Files, Config/DB name, User name (if set)  -->
     <control>
-      <type>fadelabel</type>      
+      <type>label</type>
       <id>1</id>
       <posX>30</posX>
       <posY>10</posY>
-      <width>750</width>
-      <label>#(iif(and(neq(L(102012), #currentmodule), neq(L(102002), #currentmodule), neq(L(100100), #currentmodule), neq(L(102015), #currentmodule)), #currentmodule, ' '))</label>
-      <font>font13</font>
+      <width>950</width>
+      <label>#myfilms.config.pluginname/#myfilms.view/#myfilms.select</label>
+      <font>font11</font>
       <align>left</align>
-      <textcolor>ivory</textcolor> 
-      <visible>!Control.HasFocus(10099)</visible>     
+      <textcolor>ff6FAFE1</textcolor>
     </control>
     <control>
       <description>Number of Files Label</description>
       <type>label</type>
       <id>1</id>
-      <posX>1244</posX>
-      <posY>40</posY>
+      <posX>30</posX>
+      <posY>35</posY>
       <label>#selectedindex/#myfilms.nbobjects.value #itemtype</label>
-      <align>right</align>
+      <align>left</align>
       <textcolor>ivory</textcolor>
       <font>font10</font>
-      <visible>string.equals(#selectedindex)+string.equals(#itemcount)+!Control.HasFocus(10099)</visible>
+      <visible>string.equals(#selectedindex)+string.equals(#itemcount)</visible>
     </control>
-    <control>
+	<control>
       <description>Config and User Name</description>
       <type>fadelabel</type>      
       <id>1</id>
-      <posX>30</posX>
-      <posY>40</posY> 
-      <width>330</width>
+      <posX>1244</posX>
+      <posY>35</posY>
+      <align>right</align>
       <font>font10</font>
-      <align>left</align>
-      <textcolor>ff6FAFE1</textcolor>      
+      <textcolor>ivory</textcolor>
       <label>#myfilms.config.currentconfig#(iif(neq(#myfilms.user.name.value,''),': #myfilms.user.name.value',''))#(iif(eq(#myfilms.user.onlinestatus,'online'),' (Trakt)',''))</label>
-      <visible>!Control.HasFocus(10099)</visible>
     </control>
+	
+    <!-- GLOBAL FILTERS -->
+    <control>
+      <description>Global Filter Icons group</description>
+      <type>group</type>
+      <posX>30</posX>
+      <posY>60</posY>
+      <layout>StackLayout(5,Horizontal,true)</layout>
+      <dimColor>ffffffff</dimColor>
+      <control>
+        <type>image</type>
+        <description>UnWatched Global Filter Icon</description>
+        <id>0</id>
+        <width>19</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>MyFilms\overlayunwatched.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+      </control>
+      <control>
+        <type>image</type>
+        <description>Media Available Global Filter Icon</description>
+        <id>0</id>
+        <width>20</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>MyFilms\online.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.isonline,True)</visible>
+      </control>
+      <control>
+        <type>image</type>
+        <description>Trailer Global Filter Icon</description>
+        <id>0</id>
+        <width>27</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>MyFilms\Trailer.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.trailersonly,True)</visible>
+      </control>
+      <control>
+        <type>image</type>
+        <description>Rating Global Filter Icon</description>
+        <id>0</id>
+        <width>22</width>
+        <keepaspectratio>yes</keepaspectratio>
+        <texture>stargood.png</texture>
+        <visible>string.contains(#myfilms.globalfilter.minrating,True)</visible>
+      </control>
+      <!-- <control>
+        <type>label</type>
+        <description>Rating Global Filter Value</description>
+        <id>1</id>
+        <label>#myfilms.globalfilter.minratingvalue</label>
+        <visible>string.contains(#myfilms.globalfilter.minratingvalue)</visible>
+      </control> -->
+    </control>
+    <!-- END GLOBAL FILTER SECTION -->
+
+    <!-- DOWNLOAD/STATUS INDICATORS/Message -->
+    <control>
+      <description>Download Icon - whenever background downloading is in process</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>625</posX>
+      <posY>33</posY>
+      <width>30</width>
+      <texture>MyFilms\download.png</texture>
+      <keepaspectratio>yes</keepaspectratio>
+	  <visible>[string.equals(#myfilms.statusmessage)|string.equals(#myfilms.details.downloads.count)|[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]]</visible>
+      <animation effect="zoom" start="100,100" end="105,105" time="500" condition="true" pulse="true">conditional</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Global Updates Status Message</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>693</posX>
+      <posY>38</posY>
+      <width>401</width>
+      <align>left</align>
+      <font>font10</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.statusmessage</label>
+      <!-- "Global update active" message -->
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Persons icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>580</posX>
+      <posY>36</posY>
+      <width>25</width>
+      <keepaspectratio>yes</keepaspectratio>
+      <texture>MyFilms\Persons.png</texture>
+	  <visible>string.equals(#myfilms.details.downloads.count)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>Person Image/Info Download Status Messages</description>
+      <type>label</type>
+      <id>0</id>
+      <posX>570</posX>
+      <posY>38</posY>
+      <width>412</width>
+      <align>right</align>
+      <font>font10</font>
+      <textcolor>90ffffff</textcolor>
+      <label>#myfilms.details.downloads.count - #myfilms.details.downloads.name</label>
+	  <visible>string.equals(#myfilms.details.downloads.count)</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <!-- OnlineVideos Trailer download indicator -->
+    <control>
+      <description>OnlineVideos icon</description>
+      <type>image</type>
+      <id>0</id>
+      <posX>663</posX>
+      <posY>25</posY>
+      <width>45</width>
+      <height>60</height>
+      <texture>hover_onlinevideos.png</texture>
+      <visible>!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <control>
+      <description>OnlineVideos Trailer downloads count</description>
+      <type>label</type>
+      <id>47016</id>
+      <posX>710</posX>
+      <posY>38</posY>
+      <align>left</align>
+      <font>font10</font>
+      <label>#OnlineVideos.currentDownloads</label>
+      <textcolor>90ffffff</textcolor>
+      <visible>!string.equals(#myfilms.statusmessage)+[plugin.isenabled(OnlineVideos)+!string.equals(#OnlineVideos.currentDownloads,0)]</visible>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+    <!-- END DOWNLOAD/STATUS INDICATORS/Message -->
   </controls>
 </window>
