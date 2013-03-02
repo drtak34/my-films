@@ -9,8 +9,8 @@
                 <type>group</type>
                 <animation effect="fade" start="0" end="100" time="100">WindowOpen</animation>
                 <animation effect="fade" start="100" end="0" time="100">WindowClose</animation>
-                <visible>Control.isvisible(40)+[string.equals(#latestMediaHandler.myfilms.latest1.title)|string.equals(#latestMediaHandler.myfilms.latest2.title)|string.equals(#latestMediaHandler.myfilms.latest3.title)]</visible>
-                <!-- <control Style="BasicHomeFade">
+                <visible>Control.isvisible(40)+plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)+[string.equals(#latestMediaHandler.myfilms.latest1.title)|string.equals(#latestMediaHandler.myfilms.latest2.title)|string.equals(#latestMediaHandler.myfilms.latest3.title)]</visible>
+                <!-- <control>
                   <description>background for recently added files</description>
                   <type>image</type>
                   <id>0</id>
@@ -22,165 +22,164 @@
                   <colordiffuse>ccffffff</colordiffuse>
                   <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)+!Player.hasmedia</visible>
                 </control> -->
-                <control Style="BasicHomeFade">
-                  <description>Updates label</description>
-                  <type>label</type>
+                <control>
+                  <description>Recently Added label</description>
+                  <type>fadelabel</type>
                   <id>0</id>
-                  <posX>340</posX>
-                  <posY>580</posY>
-                  <width>800</width>
+                  <posX>730</posX>
+                  <posY>430</posY>
+                  <width>520</width>
                   <label>#(L(4558)):</label>
                   <align>left</align>
                   <font>font12</font>
-                  <visible>Control.isvisible(40)+plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)</visible>
                   <textcolor>ff6FAFE1</textcolor>
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>MyFilms Latest Title 1</description>
-                  <type>label</type>
+                  <type>fadelabel</type>
                   <id>0</id>
-                  <posX>340</posX>
-                  <posY>610</posY>
-                  <width>900</width>
+                  <posX>730</posX>
+                  <posY>470</posY>
+                  <width>520</width>
                   <label>#latestMediaHandler.myfilms.latest1.dateAdded: #latestMediaHandler.myfilms.latest1.title (#latestMediaHandler.myfilms.latest1.year) - #latestMediaHandler.myfilms.latest1.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest1.genre</label>
                   <align>left</align>
                   <font>font11</font>
-                  <visible>plugin.isenabled(Latest Media Handler)+plugin.isenabled(MyFilms)+string.equals(#latestMediaHandler.myfilms.latest.enabled,True)+string.equals(#latestMediaHandler.myfilms.latest1.title)</visible>
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest1.title)</visible>
                   <textcolor>ivory</textcolor>
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>MyFilms Latest Title 2</description>
-                  <type>label</type>
+                  <type>fadelabel</type>
                   <id>0</id>
-                  <posX>340</posX>
-                  <posY>637</posY>
-                  <width>900</width>
+                  <posX>730</posX>
+                  <posY>500</posY>
+                  <width>520</width>
                   <label>#latestMediaHandler.myfilms.latest2.dateAdded: #latestMediaHandler.myfilms.latest2.title (#latestMediaHandler.myfilms.latest2.year) - #latestMediaHandler.myfilms.latest2.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest2.genre</label>
                   <align>left</align>
                   <font>font11</font>
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)</visible>
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest2.title)</visible>
                   <textcolor>ivory</textcolor>
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>MyFilms Latest Title 3</description>
-                  <type>label</type>
+                  <type>fadelabel</type>
                   <id>0</id>
-                  <posX>340</posX>
-                  <posY>664</posY>
-                  <width>900</width>
+                  <posX>730</posX>
+                  <posY>530</posY>
+                  <width>520</width>
                   <label>#latestMediaHandler.myfilms.latest3.dateAdded: #latestMediaHandler.myfilms.latest3.title (#latestMediaHandler.myfilms.latest3.year) - #latestMediaHandler.myfilms.latest3.runtime #myfilms.db.length.unit - #latestMediaHandler.myfilms.latest3.genre</label>
                   <align>left</align>
                   <font>font11</font>
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)</visible>
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest3.title)</visible>
                   <textcolor>ivory</textcolor>
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Missing Cover1</description>
                   <type>image</type>
                   <id>0</id>
-                  <posX>50</posX>
-                  <posY>580</posY>
+                  <posX>730</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>            
                   <texture mask="videothumbmask.png">MyFilms\myfilms_latest_nocover.png</texture>
                   <shouldCache>true</shouldCache>
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest1.title)+!Player.hasmedia</visible>            
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest1.title)</visible>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Cover1</description>
                   <type>image</type>
                   <id>1</id>
-                  <posX>50</posX>
-                  <posY>580</posY>
+                  <posX>730</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>            
                   <texture mask="videothumbmask.png">#latestMediaHandler.myfilms.latest1.poster</texture>
                   <shouldCache>true</shouldCache>
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest1.title)+!Player.hasmedia</visible>            
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest1.title)</visible>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Frame Cover 1</description>
                   <type>image</type>
                   <id>0</id>
-                  <posX>50</posX>
-                  <posY>580</posY>
+                  <posX>730</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>
                   <texture>Videothumbframe.png</texture>
                   <align>left</align>
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest1.title)+!Player.hasmedia</visible>
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest1.title)</visible>
                   <textcolor>ivory</textcolor>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Missing Cover2</description>
                   <type>image</type>
                   <id>1</id>
-                  <posX>142</posX>
-                  <posY>580</posY>
+                  <posX>830</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>            
                   <texture mask="videothumbmask.png">MyFilms\myfilms_latest_nocover.png</texture>                 
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)+!Player.hasmedia</visible>            
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest2.title)</visible>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Cover2</description>
                   <type>image</type>
                   <id>1</id>
-                  <posX>142</posX>
-                  <posY>580</posY>
+                  <posX>830</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>            
                   <texture mask="videothumbmask.png">#latestMediaHandler.myfilms.latest2.poster</texture>                 
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)+!Player.hasmedia</visible>            
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest2.title)</visible>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Overlay Cover 2</description>
                   <type>image</type>
                   <id>0</id>
-                  <posX>142</posX>
-                  <posY>580</posY>
+                  <posX>830</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>
                   <texture>Videothumbframe.png</texture>
                   <align>left</align>             
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest2.title)+!Player.hasmedia</visible>
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest2.title)</visible>            
                   <textcolor>ivory</textcolor>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Missing Cover3</description>
                   <type>image</type>
                   <id>1</id>
-                  <posX>234</posX>
-                  <posY>580</posY>
+                  <posX>930</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>            
                   <texture mask="videothumbmask.png">MyFilms\myfilms_latest_nocover.png</texture>
                   <shouldCache>true</shouldCache>
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)+!Player.hasmedia</visible>            
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest3.title)</visible>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Cover3</description>
                   <type>image</type>
                   <id>1</id>
-                  <posX>234</posX>
-                  <posY>580</posY>
+                  <posX>930</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>            
                   <texture mask="videothumbmask.png">#latestMediaHandler.myfilms.latest3.poster</texture>
                   <shouldCache>true</shouldCache>
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)+!Player.hasmedia</visible>            
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest3.title)</visible>            
                 </control>
-                <control Style="BasicHomeFade">
+                <control>
                   <description>Frame Cover 3</description>
                   <type>image</type>
                   <id>0</id>
-                  <posX>234</posX>
-                  <posY>580</posY>
+                  <posX>930</posX>
+                  <posY>280</posY>
                   <width>80</width>
                   <height>116</height>
                   <texture>Videothumbframe.png</texture>
                   <align>left</align>             
-                  <visible>plugin.isenabled(MyFilms)+plugin.isenabled(Latest Media Handler)+string.equals(#latestMediaHandler.myfilms.latest.enabled,true)+string.equals(#latestMediaHandler.myfilms.latest3.title)+!Player.hasmedia</visible>
+                  <visible>string.equals(#latestMediaHandler.myfilms.latest3.title)</visible>            
                   <textcolor>ivory</textcolor>            
                 </control>
         </control>
