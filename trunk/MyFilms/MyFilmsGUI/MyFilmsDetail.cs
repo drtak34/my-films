@@ -7838,7 +7838,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       else
       {
         LogMyFilms.Info("File not found for movie '" + MyFilms.r[selectItem][MyFilms.conf.StrSTitle] + "'");
-        if (GUIUtils.ShowYesNoDialog(GUILocalizeStrings.Get(107986) + " " + MyFilms.r[selectItem][MyFilms.conf.StrSTitle], GUILocalizeStrings.Get(10798737) + "\n" + GUILocalizeStrings.Get(10798738))) //my films & Titel //no video found locally // Try Youtube?
+        bool tryOther = false;
+        GUIDialogYesNo dlgYesNo = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+        dlgYesNo.Reset();
+        dlgYesNo.SetHeading(GUILocalizeStrings.Get(107986) + " " + MyFilms.r[selectItem][MyFilms.conf.StrSTitle]);
+        dlgYesNo.SetLine(2, GUILocalizeStrings.Get(10798737));
+        dlgYesNo.SetLine(3, GUILocalizeStrings.Get(10798738));
+        dlgYesNo.DoModal(GUIWindowManager.ActiveWindow);
+        if (dlgYesNo.IsConfirmed) tryOther = true;
+
+        if (tryOther) //if (GUIUtils.ShowYesNoDialog(GUILocalizeStrings.Get(107986) + " " + MyFilms.r[selectItem][MyFilms.conf.StrSTitle], GUILocalizeStrings.Get(10798737) + "\n" + GUILocalizeStrings.Get(10798738))) //my films & Titel //no video found locally // Try Youtube?
         {
           var dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
           var choiceViewMenu = new List<string>();
@@ -7858,7 +7867,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgmenu.DoModal(GetID);
           if (dlgmenu.SelectedLabel == -1) return;
 
-          string site = string.Empty;
+          string site;
           string titleextension = string.Empty;
           string path = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
           if (path.Contains(";"))
