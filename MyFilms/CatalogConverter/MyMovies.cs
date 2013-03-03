@@ -315,7 +315,7 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
           WriteAntAtribute(destXml, "TTitle", !string.IsNullOrEmpty(title) ? title : otitle);
 
           if (nodeSTitle != null && nodeSTitle.InnerText.Length > 0)
-            WriteAntAtribute(destXml, "STitle", title);
+            WriteAntAtribute(destXml, "STitle", nodeSTitle.InnerText);
           else
             WriteAntAtribute(destXml, "STitle", title);
           XmlNode nodeDate = nodeDVD.SelectSingleNodeFast("Added");

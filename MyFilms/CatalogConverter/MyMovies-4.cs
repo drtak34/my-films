@@ -284,15 +284,19 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
             WriteAntAtribute(destXml, "CollectionNumber", nodeNumber.Value);
           else
             WriteAntAtribute(destXml, "CollectionNumber", "9999");
+          
           if (nodeOTitle != null && nodeOTitle.Value.Length > 0)
             WriteAntAtribute(destXml, "Title", nodeOTitle.Value);
           else
             WriteAntAtribute(destXml, "Title", nodeTitle.Value);
+          
           WriteAntAtribute(destXml, "TTitle", nodeTitle.Value);
+          
           if (nodeSTitle != null && nodeSTitle.Value.Length > 0)
             WriteAntAtribute(destXml, "STitle", nodeSTitle.Value);
           else
             WriteAntAtribute(destXml, "STitle", nodeTitle.Value);
+          
           XElement nodeDate = nodeDVD.Element("Added");
 
           string strDateAdded = string.Empty;
