@@ -229,10 +229,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (strPluginName == null)
       {
+        string wPluginName;
         using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
         {
-          strPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
+          wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
         }
+        strPluginName = wPluginName;
       }
       return strPluginName;
     }
@@ -293,11 +295,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     ///          false : plugin does not need its own button on home</returns>
     public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
     {
-      string wPluginName = PluginName();
+      string wPluginName;
       using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
         wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
       }
+      
+      strPluginName = wPluginName;
+
       strButtonText = wPluginName;
       strButtonImage = String.Empty;
       strButtonImageFocus = String.Empty;
