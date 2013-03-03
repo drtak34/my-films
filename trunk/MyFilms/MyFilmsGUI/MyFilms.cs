@@ -227,7 +227,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // Returns the name of the plugin which is shown in the plugin menu
     public string PluginName()
     {
-      return "MyFilms";
+      if (strPluginName == null)
+      {
+        using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
+        {
+          strPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
+        }
+      }
+      return strPluginName;
     }
 
     // Returns the description of the plugin is shown in the plugin menu
@@ -286,7 +293,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     ///          false : plugin does not need its own button on home</returns>
     public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
     {
-      string wPluginName = strPluginName;
+      string wPluginName = PluginName();
       using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
         wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
@@ -451,14 +458,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     #region Private/Public Properties
 
     private bool StopLoadingMenuDetails { get; set; } // to cancel menu counts, if user makes selection before it's finished ....
-    internal bool StopLoadingViewDetails { get; set; }
+    private bool StopLoadingViewDetails { get; set; }
     private bool StopLoadingFilmlistDetails { get; set; }
 
     private bool StopAddingTrailers { get; set; }
 
     private bool doUpdateMainViewByFinishEvent = false;
 
-    //private Layout CurrentLayout { get; set; }
+    // private Layout CurrentLayout { get; set; }
 
     // public static ReaderWriterLockSlim _rw = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
 
@@ -496,7 +503,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //Added to jump back to correct Menu (Either Basichome or MyHome - or others...)
     private bool Context_Menu = false;
     //private string currentConfig;
-    private const string strPluginName = "MyFilms";
+    private string strPluginName = null;
 
     private System.Threading.Timer _fanartTimer = null;
 
