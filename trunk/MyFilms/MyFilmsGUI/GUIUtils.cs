@@ -661,6 +661,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (keyboard == null) return false;
 
       keyboard.Reset();
+      keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
       keyboard.Text = strLine;
       keyboard.Password = isPassword;
       keyboard.DoModal(GUIWindowManager.ActiveWindow);

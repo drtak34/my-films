@@ -899,6 +899,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
       if (null == keyboard) return;
       keyboard.Reset();
+      keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
 
       string title = string.Empty; // variable for searchtitle creation
       string mediapath = string.Empty; // variable for searchpath creation (for nfo/xml/xbmc reader)
@@ -1641,6 +1642,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             wdirectory = Path.GetDirectoryName(wfile);
           }
           keyboard.Reset();
+          keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
           keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrStorage].ToString();
           keyboard.DoModal(GetID);
           wfile = keyboard.IsConfirmed ? keyboard.Text : string.Empty;
@@ -1818,6 +1820,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             dlgmenu.Reset();
             keyboard.Reset();
+            keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
             keyboard.Text = MyFilms.r[MyFilms.conf.StrIndex][wproperty].ToString();
             keyboard.DoModal(GetID);
             if (keyboard.IsConfirmed)
@@ -3332,6 +3335,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
                 if (null == keyboard) return;
                 keyboard.Reset();
+                keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
                 keyboard.Text = movieName;
                 keyboard.DoModal(GetID);
                 if (keyboard.IsConfirmed && keyboard.Text.Length > 0)
@@ -4884,6 +4888,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
                     if (null == keyboard) return;
                     keyboard.Reset();
+                    keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
                     keyboard.Text = wtitle;
                     keyboard.DoModal(wGetID);
                     if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -5519,6 +5524,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
                   if (null == keyboard) return;
                   keyboard.Reset();
+                  keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
                   keyboard.Text = wtitle;
                   keyboard.DoModal(wGetID);
                   if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -9852,6 +9858,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
           if (null == keyboard) return -1;
           keyboard.Reset();
+          keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
           keyboard.Text = title;
           keyboard.DoModal(wGetID);
           if (keyboard.IsConfirmed && keyboard.Text.Length > 0) return SearchTmdbMovie(keyboard.Text, title, title2, year, language, collectionsearch);

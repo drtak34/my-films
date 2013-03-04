@@ -5437,6 +5437,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
           if (null == keyboard) return; //if (null == keyboard) return true;
           keyboard.Reset();
+          keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
           keyboard.Text = choiceSearch[dlg.SelectedLabel];
           keyboard.DoModal(GetID);
 
@@ -10575,6 +10576,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
           if (null == keyboard) return;
           keyboard.Reset();
+          keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
           keyboard.Text = ""; // Default string is empty
           keyboard.DoModal(GetID);
           if (keyboard.IsConfirmed && !string.IsNullOrEmpty(keyboard.Text))
@@ -10816,6 +10818,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
         if (null == keyboard) return "";
         keyboard.Reset();
+        keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
         keyboard.Text = ""; // Default string is empty
         keyboard.DoModal(GetID);
         if (keyboard.IsConfirmed && (!string.IsNullOrEmpty(keyboard.Text))) return keyboard.Text;
@@ -11863,6 +11866,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
             if (null == keyboard) return;
             keyboard.Reset();
+            keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
             keyboard.Text = newRow.Label;
             keyboard.DoModal(GetID);
             if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -12000,6 +12004,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
                 if (null == keyboard) return;
                 keyboard.Reset();
+                keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
                 keyboard.Text = viewRow.Label;
                 keyboard.DoModal(GetID);
                 if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -12026,6 +12031,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
                 if (null == keyboard) return;
                 keyboard.Reset();
+                keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
                 keyboard.Text = viewRow.Value;
                 keyboard.DoModal(GetID);
                 if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -12056,6 +12062,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
                 if (null == keyboard) return;
                 keyboard.Reset();
+                keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
                 keyboard.Text = viewRow.Filter;
                 keyboard.DoModal(GetID);
                 if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -13981,8 +13988,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       string wproperty = choiceSearch[dlg.SelectedLabel];
       var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-      //            if (null == keyboard) return;
+      if (null == keyboard) return;
       keyboard.Reset();
+      keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
       keyboard.Text = "";
       //            keyboard.DoModal(GetID);
       //            if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
@@ -14541,6 +14549,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if (null == keyboard) return;
       keyboard.Reset();
+      keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
       keyboard.Text = choiceSearch[dlg.SelectedLabel];
       keyboard.DoModal(GetID);
       if (!keyboard.IsConfirmed || keyboard.Text.Length == 0) return;
@@ -14751,6 +14760,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // load search string into keyboard
         if (keyboard == null) return;
         keyboard.Reset();
+        keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
         keyboard.Text = searchstring;
         keyboard.DoModal(GetID);
         if (keyboard.IsConfirmed) searchstring = keyboard.Text;
