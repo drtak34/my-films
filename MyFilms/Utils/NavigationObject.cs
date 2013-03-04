@@ -47,6 +47,8 @@ namespace MyFilmsPlugin.Utils
 
     public string ViewAsButtonLabel { get; set; }
 
+    public string LayoutButtonLabel { get; set; }
+
     public string DbDfltSelect { get; set; }
     public string DbSelect { get; set; }
     public string DbField { get; set; }
@@ -68,7 +70,7 @@ namespace MyFilmsPlugin.Utils
     public MyFilms.Layout CurrentView { get; set; }
 
     public NavigationObject(GUIListControl control, string title, string itemtype, string nbobjects, string moviecontext, int pos, 
-      MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, GUIButtonControl viewButton,
+      MyFilms.Layout curview, Configuration curconf, GUISortButtonControl srtButton, GUIButtonControl viewButton, GUIButtonControl layoutButton,
       CoverState coverstate, DateTime lastDBupdate)
     {
       Items = new List<GUIListItem>();
@@ -94,6 +96,7 @@ namespace MyFilmsPlugin.Utils
       SortButtonAsc = srtButton.IsAscending;
       SortButtonLabel = srtButton.Label;
       ViewAsButtonLabel = viewButton.Label;
+      LayoutButtonLabel = layoutButton.Label;
       CoverStatus = coverstate;
       LastDbUpdate = lastDBupdate;
     }

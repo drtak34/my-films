@@ -17539,6 +17539,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         BtnViewAs.Label = obj.ViewAsButtonLabel;
 
+        BtnLayout.Label = obj.LayoutButtonLabel;
+
         SetDummyControlsForFacade(conf.ViewContext); // set here in advance to make visibility conditions cahnge faster on back navigation
 
         facadeFilms.SelectedListItemIndex = obj.Position;
@@ -17708,6 +17710,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             conf,
             BtnSrtBy,
             BtnViewAs,
+            BtnLayout,
             new CoverState(menucover.Filename, filmcover.Filename, viewcover.Filename, personcover.Filename, groupcover.Filename),
             LastDbUpdate
             ));
