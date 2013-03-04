@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>IMDB</DBName>
+    <DBName>IMDB person info grabber</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en|all</Language>
     <Type>person</Type>
