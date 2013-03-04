@@ -111,6 +111,8 @@
       <height>250</height>
       <texture mask="videothumbmask.png">#myfilms.groupcoverimage</texture>
       <visible>[facadeview.list|facadeview.album]+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="1020,320" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
     <control>
       <description>Collection Banner</description>
@@ -122,6 +124,8 @@
       <height>122</height>
       <texture>myfilms\collection.png</texture>
       <visible>[facadeview.list|facadeview.album]+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="1020,320" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
     <!-- FILMS COLLECTIONS FRAME -->
     <control>
@@ -134,6 +138,8 @@
       <height>250</height>
       <texture>Videothumbframe.png</texture>
       <visible>[facadeview.list|facadeview.album]+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="1020,320" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
   </controls>
 </window>
