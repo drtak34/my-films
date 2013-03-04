@@ -1049,6 +1049,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         var keyboard = (MediaPortal.Dialogs.VirtualKeyboard)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
         if (null == keyboard) return string.Empty;
         keyboard.Reset();
+        keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
         keyboard.Text = string.Empty;
         keyboard.Password = true;
         keyboard.DoModal(GetID);
