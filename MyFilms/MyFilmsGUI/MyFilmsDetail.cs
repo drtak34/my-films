@@ -8198,13 +8198,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return true;
       
       // check, if an inserted disc matches the current movie for DVDs
-      if (g_Player.IsDVD && MyFilms.conf != null && MyFilms.r != null && MyFilms.conf.StrIndex < MyFilms.r.Length)
+      try
       {
-        string currentDiscId = Utility.GetDiscIdString(filename);
-        string catalogDiscId = MyFilms.r[MyFilms.conf.StrIndex]["MediaLabel"].ToString();
-        LogMyFilms.Debug("PlayBackEventIsOfConcern: check for matching discIDs: - currentDiscId = '{0}',  catalogDiscId (MediaLabel) = '{1}'", currentDiscId, catalogDiscId);
-        if (!string.IsNullOrEmpty(catalogDiscId) && currentDiscId == catalogDiscId)
-          return true;
+        if (g_Player.IsDVD && MyFilms.conf != null && MyFilms.r != null && MyFilms.conf.StrIndex < MyFilms.r.Length)
+        {
+          string currentDiscId = Utility.GetDiscIdString(filename);
+          string catalogDiscId = MyFilms.r[MyFilms.conf.StrIndex]["MediaLabel"].ToString();
+          LogMyFilms.Debug("PlayBackEventIsOfConcern: check for matching discIDs: - currentDiscId = '{0}',  catalogDiscId (MediaLabel) = '{1}'", currentDiscId, catalogDiscId);
+          if (!string.IsNullOrEmpty(catalogDiscId) && currentDiscId == catalogDiscId)
+            return true;
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("PlayBackEventIsOfConcern: error checking discID: '{0}',  '{1}'", ex.Message, ex.StackTrace);
+        return false;
       }
       return false;
     }
@@ -8213,8 +8221,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       if (string.IsNullOrEmpty(filename)) 
         return false;
-      if (MyFilms.conf != null && MyFilms.currentTrailerPlayingItem != null && type == g_Player.MediaType.Video && MyFilms.currentTrailerPlayingItem.Trailer.Contains(filename)) // if (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.Trailer.Contains(filename)) // 
-        return true;
+
+      try
+      {
+        if (MyFilms.conf != null && MyFilms.currentTrailerPlayingItem != null && type == g_Player.MediaType.Video && MyFilms.currentTrailerPlayingItem.Trailer.Contains(filename)) // if (MyFilms.currentMovie != null && type == g_Player.MediaType.Video && MyFilms.currentMovie.Trailer.Contains(filename)) // 
+          return true;
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("PlayBackEventIsOfConcernAsTrailer: error : '{0}',  '{1}'", ex.Message, ex.StackTrace);
+        return false;
+      }
+
       return false;
     }
 
