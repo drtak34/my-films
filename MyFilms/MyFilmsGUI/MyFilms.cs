@@ -6272,7 +6272,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       StopLoadingFilmlistDetails = false;
       const string wStrSort = "TMDB";
       //  string CoverThumbDir = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies";
-      string strThumbDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\" + wStrSort.ToLower() + @"\";
+      string strThumbDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Views\" + wStrSort.ToLower(); // +@"\";
       if (!Directory.Exists(strThumbDirectory)) Directory.CreateDirectory(strThumbDirectory);
 
       // split the downloads in X+ groups and do multithreaded downloading
