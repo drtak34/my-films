@@ -7,7 +7,7 @@
   </scripts>
   <scripts>
     <name>AlloCine.xml</name>
-    <version>0.9.1</version>
+    <version>0.9.2</version>
   </scripts>
   <scripts>
     <name>Cinefacts-BluRay.xml</name>
@@ -27,7 +27,7 @@
   </scripts>
   <scripts>
     <name>CSFD.xml</name>
-    <version>1.0</version>
+    <version>1.1</version>
   </scripts>
   <scripts>
     <name>Filmstarts.de.xml</name>
