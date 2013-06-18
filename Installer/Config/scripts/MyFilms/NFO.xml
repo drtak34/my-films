@@ -5,7 +5,7 @@
     <URLPrefix />
     <Language>all</Language>
     <Type>details|cover|fanart</Type>
-    <Version>0.9.1</Version>
+    <Version>0.9.2</Version>
     <Encoding>UTF-8</Encoding>
     <FileBasedReader>true</FileBasedReader>
     <SearchCleanup />
@@ -107,9 +107,9 @@
       <KeyCountryRegExp />
       <KeyCountryIndex />
       <KeyCountryPage />
-      <KeyStartGenre Param1="_x0023_REGEX_x0023__x0020__x002F_" Param2="_x002C_">_x003C_genre_x003E_</KeyStartGenre>
-      <KeyEndGenre>_x003C__x002F_genre_x003E_</KeyEndGenre>
-      <KeyGenreRegExp />
+      <KeyStartGenre Param1="_x0023_REGEX_x0023__x0020__x002F_" Param2="_x002C_">_x003C_movie</KeyStartGenre>
+      <KeyEndGenre>_x003C__x002F_movie</KeyEndGenre>
+      <KeyGenreRegExp>_x003C_genre_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_genre_x003E_</KeyGenreRegExp>
       <KeyGenreIndex />
       <KeyGenrePage />
       <KeyStartYear Param1="" Param2="">_x003C_year_x003E_</KeyStartYear>
@@ -125,8 +125,8 @@
       <KeyCommentRegExp />
       <KeyCommentIndex />
       <KeyCommentPage />
-      <KeyStartLanguage Param1="" Param2="" />
-      <KeyEndLanguage />
+      <KeyStartLanguage Param1="" Param2="">_x003C_longlanguage_x003E_</KeyStartLanguage>
+      <KeyEndLanguage>_x003C__x002F_</KeyEndLanguage>
       <KeyLanguageIndex />
       <KeyLanguagePage />
       <KeyStartTagline Param1="" Param2="">_x003C_tagline_x003E_</KeyStartTagline>
