@@ -1,15 +1,16 @@
-﻿using System;
+﻿extern alias ExternalPlugins;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using OnlineVideos;
-using OnlineVideos.Hoster.Base;
-using OnlineVideos.MediaPortal1;
-using OnlineVideos.MediaPortal1.Player;
-using PlayerFactory = OnlineVideos.MediaPortal1.Player.PlayerFactory;
+using ExternalPlugins::OnlineVideos;
+using ExternalPlugins::OnlineVideos.Hoster.Base;
+using ExternalPlugins::OnlineVideos.MediaPortal1;
+using ExternalPlugins::OnlineVideos.MediaPortal1.Player;
+using PlayerFactory = ExternalPlugins::OnlineVideos.MediaPortal1.Player.PlayerFactory;
 using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using MediaPortal.Player;
@@ -22,7 +23,7 @@ namespace MyFilmsPlugin.Utils
 {
   using MyFilmsPlugin.MyFilms.MyFilmsGUI;
 
-  using PlayerFactory = OnlineVideos.MediaPortal1.Player.PlayerFactory;
+  using PlayerFactory = ExternalPlugins::OnlineVideos.MediaPortal1.Player.PlayerFactory;
 
   public class OVplayer
   {

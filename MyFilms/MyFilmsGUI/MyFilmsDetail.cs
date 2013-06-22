@@ -23,6 +23,8 @@
 
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
+  extern alias ExternalPlugins;
+
   using System;
   using System.Collections;
   using System.Collections.Generic;
@@ -40,8 +42,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using MediaPortal.Ripper;
 
-  using OnlineVideos;
-  using OnlineVideos.MediaPortal1;
+  using ExternalPlugins::OnlineVideos;
+  using ExternalPlugins::OnlineVideos.MediaPortal1;
 
   using WatTmdb.V3;
 
@@ -71,6 +73,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaInfo = Grabber.MediaInfo;
   using Utils = MediaPortal.Util.Utils;
 
+  
   /// <summary>
   /// Summary description for GUIMesFilms.
   /// </summary>
@@ -2334,7 +2337,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         OnlineVideoSettings.Instance.ConfigDir = Config.GetDirectoryInfo(Config.Dir.Config).ToString();
 
         // load list of sites
-        OnlineVideoSettings onlineVideos = OnlineVideos.OnlineVideoSettings.Instance;
+        OnlineVideoSettings onlineVideos = ExternalPlugins::OnlineVideos.OnlineVideoSettings.Instance;
         onlineVideos.LoadSites();
 
         foreach (var view in from site in onlineVideos.SiteSettingsList where site.IsEnabled select new KeyValuePair<string, string>(site.Name, site.Name))
@@ -2511,7 +2514,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void TraktShout(MFMovie movie)
     {
       LogMyFilms.Debug("TraktShout(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
-      TraktPlugin.TraktHelper.ShowMovieShouts(movie.IMDBNumber, movie.Title, movie.Year.ToString(), movie.Fanart);
+      ExternalPlugins::TraktPlugin.TraktHelper.ShowMovieShouts(movie.IMDBNumber, movie.Title, movie.Year.ToString(), movie.Fanart);
       // replaced by helper call
       //TraktPlugin.GUI.GUIShouts.ShoutType = TraktPlugin.GUI.GUIShouts.ShoutTypeEnum.movie;
       //TraktPlugin.GUI.GUIShouts.MovieInfo = new TraktPlugin.GUI.MovieShout { IMDbId = movie.IMDBNumber, TMDbId = "", Title = movie.Title, Year = movie.Year.ToString() };
@@ -2537,17 +2540,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void TraktRate(MFMovie movie)
     {
       LogMyFilms.Debug("TraktRate(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', tmdb = '" + movie.TMDBNumber + "'");
-      TraktPlugin.TraktAPI.DataStructures.TraktRateMovie rateObject = new TraktPlugin.TraktAPI.DataStructures.TraktRateMovie
+      ExternalPlugins::TraktPlugin.TraktAPI.DataStructures.TraktRateMovie rateObject = new ExternalPlugins::TraktPlugin.TraktAPI.DataStructures.TraktRateMovie
       {
         IMDBID = movie.IMDBNumber,
         TMDBID = movie.TMDBNumber,
         Title = movie.Title,
         Year = movie.Year.ToString(),
         Rating = "5",
-        UserName = TraktPlugin.TraktSettings.Username,
-        Password = TraktPlugin.TraktSettings.Password
+        UserName = ExternalPlugins::TraktPlugin.TraktSettings.Username,
+        Password = ExternalPlugins::TraktPlugin.TraktSettings.Password
       };
-      TraktPlugin.GUI.GUIUtils.ShowRateDialog<TraktPlugin.TraktAPI.DataStructures.TraktRateMovie>(rateObject);
+      ExternalPlugins::TraktPlugin.GUI.GUIUtils.ShowRateDialog<ExternalPlugins::TraktPlugin.TraktAPI.DataStructures.TraktRateMovie>(rateObject);
     }
 
     private void TraktAddToWatchedList(MFMovie movie)
@@ -2557,8 +2560,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
-          TraktPlugin.GUI.GUIWatchListMovies.ClearCache(TraktPlugin.TraktSettings.Username);
+          ExternalPlugins::TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(ExternalPlugins::TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), ExternalPlugins::TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
+          ExternalPlugins::TraktPlugin.GUI.GUIWatchListMovies.ClearCache(ExternalPlugins::TraktPlugin.TraktSettings.Username);
         }
         catch (Exception ex)
         {
@@ -2570,13 +2573,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void TraktRelatedMovies(MFMovie movie)
     {
       LogMyFilms.Debug("TraktRelatedMovies(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
-      TraktPlugin.TraktHelper.ShowRelatedMovies(movie.IMDBNumber, movie.Title, movie.Year.ToString());
+      ExternalPlugins::TraktPlugin.TraktHelper.ShowRelatedMovies(movie.IMDBNumber, movie.Title, movie.Year.ToString());
     }
 
     private void TraktAddRemoveMovieInUserlist(MFMovie movie, bool remove)
     {
       LogMyFilms.Debug("TraktAddRemoveMovieInUserlist(): Call with 'remove = " + remove + "' - Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', file = '" + movie.File + "', path = '" + movie.Path + "'");
-      TraktPlugin.TraktHelper.AddRemoveMovieInUserList(movie.Title, movie.Year.ToString(), movie.IMDBNumber, remove);
+      ExternalPlugins::TraktPlugin.TraktHelper.AddRemoveMovieInUserList(movie.Title, movie.Year.ToString(), movie.IMDBNumber, remove);
     }
 
     private static MFMovie GetMovieFromRecord(DataRow sr)
@@ -10462,7 +10465,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug(string.Format("Using SubCentral for checkHasSubtitles(), useMediaInfo = {0}, textCount = {1}", useMediaInfo.ToString(), textCount.ToString()));
       List<FileInfo> fiFiles = files.Select(file => new FileInfo(file)).ToList();
-      bool result = SubCentral.Utils.SubCentralUtils.MediaHasSubtitles(fiFiles, false, textCount, !useMediaInfo);
+      bool result = ExternalPlugins::SubCentral.Utils.SubCentralUtils.MediaHasSubtitles(fiFiles, false, textCount, !useMediaInfo);
       LogMyFilms.Debug(string.Format("SubCentral returned {0}", result));
       return result;
     }
@@ -11570,8 +11573,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       try
       {
         GUIOnlineVideos OV = (GUIOnlineVideos)GUIWindowManager.GetWindow((int)MyFilms.ExternalPluginWindows.OnlineVideos);
-        OV.VideoDownloaded -= new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
-        OV.VideoDownloaded += new OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
+        OV.VideoDownloaded -= new ExternalPlugins::OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
+        OV.VideoDownloaded += new ExternalPlugins::OnlineVideos.MediaPortal1.GUIOnlineVideos.VideoDownloadedHandler(OnVideoDownloaded);
         LogMyFilms.Info("Subscribed 'VideoDownloaded' event from OnlineVideos ...");
       }
       catch (Exception ex)
