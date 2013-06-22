@@ -23,6 +23,7 @@
 
 namespace MyFilmsPlugin.MyFilms.Utils
 {
+  extern alias ExternalPlugins;
   using System;
   using System.Collections;
   using System.Data;
@@ -45,12 +46,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Reflection;
   using System.Security.Cryptography;
 
-  using TraktPlugin;
-  using TraktPlugin.TraktAPI.DataStructures;
+  using ExternalPlugins::TraktPlugin;
+  using ExternalPlugins::TraktPlugin.TraktAPI.DataStructures;
   using System.Xml;
   using FileIO = Microsoft.VisualBasic;
 
-  using ConnectionState = TraktPlugin.TraktAPI.ConnectionState;
+  using ConnectionState = ExternalPlugins::TraktPlugin.TraktAPI.ConnectionState;
   using System.Drawing;
 
   #region String Extension Methods
