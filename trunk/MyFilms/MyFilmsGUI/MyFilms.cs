@@ -933,7 +933,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region Load or change MyFilms Config
 
         PreviousConfig = Configuration.CurrentConfig;
-        bool IsDefaultConfig = Configuration.Current_Config(true);
+        bool isDefaultConfig = false;
+        
 
         if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.Config)) // config given in load params
         {
@@ -946,12 +947,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (Configuration.CurrentConfig != newConfig)
             {
-              if (!string.IsNullOrEmpty(Configuration.CurrentConfig)) // if there is an active config, save it !
+              if (!string.IsNullOrEmpty(Configuration.CurrentConfig) && MyFilms.conf != null && MyFilms.conf.StrSelect != null) // if there is an active config, save it !
               {
-                if (this.facadeFilms.SelectedListItem != null)
-                  Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
-                else
+                if (this.facadeFilms == null || this.facadeFilms.SelectedListItemIndex == -1)
                   Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
+                else
+                  Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
               }
               // set new config
               Configuration.CurrentConfig = newConfig;
@@ -963,8 +964,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               //Set to true to make sure initial View is initialized for new DB view
             }
           }
-
           #endregion
+        }
+        else
+        {
+          isDefaultConfig = Configuration.Current_Config(true);
         }
 
         if (string.IsNullOrEmpty(Configuration.CurrentConfig))
@@ -982,7 +986,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         Fanartstatus(MyFilms.conf.StrFanart);
-        if (!InitialStart && IsDefaultConfig) InitMainScreen(false); // clear all properties, if a defaultconfig is loaded - otherwise we might run into display problems due to old properties remaining
+        if (!InitialStart && isDefaultConfig) InitMainScreen(false); // clear all properties, if a defaultconfig is loaded - otherwise we might run into display problems due to old properties remaining
         if (Configuration.CurrentConfig != PreviousConfig) InitialStart = true; // if a default config is set, otherwise the DB gets not proerly initialized
         if (conf.AlwaysDefaultView) 
         {
@@ -1280,7 +1284,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       MyFilmsDetail.clearGUIProperty("nbobjects.value"); // clear counts for the next start to fix "visibility animations" ....
 
-      if (!string.IsNullOrEmpty(Configuration.CurrentConfig))
+      if (!string.IsNullOrEmpty(Configuration.CurrentConfig) && MyFilms.conf.StrSelect != null)
       {
         if (this.facadeFilms == null || this.facadeFilms.SelectedListItemIndex == -1)
           Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, "");
@@ -8817,6 +8821,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   foreach (MFview.ViewRow customView in Enumerable.Where(conf.CustomViews.View, customView => conf.StrViewDfltItem == customView.Label || conf.StrViewDfltItem == customView.DBfield))
                   {
                     Change_View_Action(customView.Label);
+                    break; // stop, if match was found - avoids reprocessing, if multiple matches
                   }
                 }
               }
@@ -10448,8 +10453,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         InitMainScreen(false); // reset all properties and values
         InitGlobalFilters(false); // reset global filters, when loading new config !
         //Change "Config":
-        if (this.facadeFilms.SelectedListItem != null) Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
-        else Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
+        if (this.facadeFilms.SelectedListItem != null) 
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
+        else 
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
         Configuration.CurrentConfig = newConfig;
         ClearFacade(); // facadeFilms.Clear();        facadeFilms.ListLayout.Clear();
         InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!

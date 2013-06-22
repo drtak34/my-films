@@ -393,14 +393,14 @@ namespace MyFilmsPlugin.MyFilms.Utils
     #endregion
 
     #region Conversion functions
-    /// <summary>Convert String to ProperCase</summary>
-    /// <param name="source">String to be converted to ProperCase</param>
-    /// <returns>The ProperCase String</returns>
     public string ProperCase()
     {
       return ProperCase(myString);
     }
 
+    /// <summary>Convert String to ProperCase</summary>
+    /// <param name="source">String to be converted to ProperCase</param>
+    /// <returns>The ProperCase String</returns>
     public static string ProperCase(string source)
     {
       char[] sFindArray = { ' ', '\t', '\n', '.' };
@@ -420,14 +420,14 @@ namespace MyFilmsPlugin.MyFilms.Utils
     }
 
 
-    /// <summary>Recursion Reverse function to Reverse a given String</summary>
-    /// <param name="source">String to be Reversed</param>
-    /// <returns>The Reversed string</returns>
     public string Reverse()
     {
       return Reverse(myString);
     }
 
+    /// <summary>Recursion Reverse function to Reverse a given String</summary>
+    /// <param name="source">String to be Reversed</param>
+    /// <returns>The Reversed string</returns>
     public static string Reverse(string source)
     {
       if (source == null) throw new ArgumentNullException("source");
