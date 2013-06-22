@@ -84,6 +84,8 @@ namespace MyFilmsPlugin.Utils
     /// </summary>
     /// <param name="image">The System.Drawing.Bitmap to be loaded</param>
     /// <param name="identifier">A unique identifier for the image so it can be retrieved later on</param>
+    /// <param name="size">Dimensions of the image</param>
+    /// <param name="buildIdentifier">switch if new identifier should be created</param>
     /// <returns>memory identifier</returns>
     public static string buildMemoryImage(Image image, string identifier, System.Drawing.Size size, bool buildIdentifier)
     {

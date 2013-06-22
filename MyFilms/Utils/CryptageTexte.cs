@@ -50,11 +50,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     public string Crypter(string TexteBrut)
     {
-      if (TexteBrut.Length == 0)
-        return string.Empty;
-      var cypherTexteMem = new MemoryStream();
+      if (TexteBrut.Length == 0) return string.Empty;
+      MemoryStream cypherTexteMem = new MemoryStream();
 
-      var cStream = new CryptoStream(cypherTexteMem,
+      CryptoStream cStream = new CryptoStream(cypherTexteMem,
       rj.CreateEncryptor(this.clef, this.vect), CryptoStreamMode.Write);
 
       byte[] textebrutByte = new UnicodeEncoding().GetBytes(TexteBrut);
@@ -65,9 +64,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
       byte[] cypherTexteByte = cypherTexteMem.ToArray();
 
       cypherTexteMem.Close();
-      string CypherTexte = new UnicodeEncoding().GetString(cypherTexteByte);
+      string cypherTexte = new UnicodeEncoding().GetString(cypherTexteByte);
 
-      return CypherTexte;
+      return cypherTexte;
     }
 
 
@@ -75,18 +74,18 @@ namespace MyFilmsPlugin.MyFilms.Utils
     /// <summary>
     /// Fonction de décryptage : elle necessite en argument une chaîne de 
     /// caractères cryptés (cipher-text) et renvoie une chaîne de caractères.
-    /// <param name="CypherTexte"></param>
+    /// <param name="cypherTexte"></param>
     /// <returns name="Textebrut"></returns>
     /// </summary>
     // ***************************************************************************
 
-    public string Decrypter(string CypherTexte)
+    public string Decrypter(string cypherTexte)
     {
-      if (CypherTexte.Length == 0)
+      if (cypherTexte.Length == 0)
         return string.Empty;
-      var cypherTexteMem = new MemoryStream(new UnicodeEncoding().GetBytes(CypherTexte));
-      var cStream = new CryptoStream(cypherTexteMem, rj.CreateDecryptor(this.clef, this.vect), CryptoStreamMode.Read);
-      var textebrutMem = new MemoryStream();
+      MemoryStream cypherTexteMem = new MemoryStream(new UnicodeEncoding().GetBytes(cypherTexte));
+      CryptoStream cStream = new CryptoStream(cypherTexteMem, rj.CreateDecryptor(this.clef, this.vect), CryptoStreamMode.Read);
+      MemoryStream textebrutMem = new MemoryStream();
 
       do
       {
@@ -108,8 +107,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
       textebrutMem.Close();
 
-      string Textebrut = new UnicodeEncoding().GetString(textebrutByte);
-      return Textebrut;
+      string textebrut = new UnicodeEncoding().GetString(textebrutByte);
+      return textebrut;
     }
   }
 }

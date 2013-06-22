@@ -6415,7 +6415,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       switch (movie.MovieSearchResult.TrailerStatus)
       {
         case TmdbMovieSearchResult.TrailerState.Unknown:
-          trailerstatus = "unknown";;
+          trailerstatus = "unknown";
           break;
         case TmdbMovieSearchResult.TrailerState.Local:
         case TmdbMovieSearchResult.TrailerState.LocalAndRemote:
