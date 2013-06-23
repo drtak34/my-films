@@ -349,13 +349,13 @@
       <description>DB Rating</description>
       <type>label</type>
       <id>1</id>
-      <posX>940</posX>
+      <posX>934</posX>
       <posY>160</posY>
       <width>200</width>
       <align>left</align>
       <font>font11</font>
       <textcolor>ivory</textcolor>
-      <label>(#myfilms.db.rating.value/10)</label>
+      <label>#myfilms.db.rating.value/10</label>
       <visible>string.equals(#myfilms.db.rating.value)+!control.isvisible(34)+!Control.isvisible(40)+[facadeview.list|facadeview.album]+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
     <control>
@@ -380,7 +380,7 @@
       <align>left</align>
       <font>font11</font>
       <textcolor>ivory</textcolor>
-      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)',''))</label>
+      <label>#(iif(neq(#myfilms.user.rating.value,''),'#myfilms.user.rating.value/10',''))</label>
       <visible>string.equals(#myfilms.user.rating.value)+[control.isvisible(36)|control.isvisible(39)]+[facadeview.list|facadeview.album]</visible>
     </control>
 
@@ -645,7 +645,7 @@
       <posY>175</posY>
       <width>24</width>
       <height>24</height>
-      <texture>MyFilms\overlaywatched.png</texture>
+      <texture>MyFilms\overlayunwatched.png</texture>
       <keepaspectratio>yes</keepaspectratio>
       <colordiffuse>ff6FAFE1</colordiffuse>
       <visible>[Control.isvisible(36)|control.isvisible(39)]+[facadeview.list|facadeview.album]+!string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
@@ -658,7 +658,7 @@
       <posY>175</posY>
       <width>24</width>
       <height>24</height>
-      <texture>MyFilms\overlayunwatched.png</texture>
+      <texture>MyFilms\overlaywatched.png</texture>
       <keepaspectratio>yes</keepaspectratio>
       <visible>[Control.isvisible(36)|control.isvisible(39)]+[facadeview.list|facadeview.album]+string.contains(#myfilms.user.watched.value)+!string.contains(#myfilms.globalfilter.unwatched,True)+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
@@ -676,8 +676,8 @@
 	  <shadowDistance>2</shadowDistance>
 	  <shadowColor>ff083556</shadowColor>
 	  <align>center</align>
-	  <label>#(iif(neq(#myfilms.user.watchedcount.value,'0'),'(#myfilms.user.watchedcount.value/#myfilms.user.watchedcountglobal.value)',''))</label>
-	  <visible>[Control.isvisible(36)|control.isvisible(39)]+string.equals(#myfilms.user.watchedcount.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
+	  <label>#(iif(neq(#myfilms.user.watchedcount.value,'0'),'#myfilms.user.watchedcount.value/#myfilms.user.watchedcountglobal.value',''))</label>
+	  <visible>[Control.isvisible(36)|control.isvisible(39)]+[facadeview.list|facadeview.album]+string.equals(#myfilms.user.watchedcount.value)+!string.contains(#myfilms.globalfilter.unwatched,True)</visible>
 	</control>
 
     <!-- PERSON INFO - only displays in respective views  -->

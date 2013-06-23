@@ -15,18 +15,18 @@
           <description>listcontrol</description>
           <type>listcontrol</type>
           <id>50</id>
-		  <posX>80</posX>
-          <width>550</width>
+		  <posX>60</posX>
+          <width>412</width>
           <playedColor>ffffffff</playedColor>
           <playedColor2>ffffffff</playedColor2>
           <textcolor>ff6FAFE1</textcolor>
           <textcolorNoFocus>ff6FAFE1</textcolorNoFocus>
-          <textXOff2>550</textXOff2>
+          <textXOff2>412</textXOff2>
           <textYOff2>2</textYOff2>
-          <textXOff3>2545</textXOff3>
+          <textXOff3>1908</textXOff3>
           <textYOff3>8</textYOff3>
           <textvisible3>no</textvisible3>
-          <PinIconXOff>2000</PinIconXOff>
+          <PinIconXOff>1500</PinIconXOff>
           <textalign3>right</textalign3>
           <font3>font9</font3>
           <scrollOffset>2</scrollOffset>
@@ -39,8 +39,8 @@
           <type>listcontrol</type>
           <subtype>album</subtype>
           <id>50</id>
-		  <posX>80</posX>
-          <width>550</width>
+		  <posX>60</posX>
+          <width>412</width>
           <height>500</height>
           <selectedColor>ff009900</selectedColor>
           <textcolor>ffffffff</textcolor>
@@ -51,13 +51,13 @@
           <textcolorNoFocus>ff6FAFE1</textcolorNoFocus>
           <textXOff>0</textXOff>
           <textYOff>6</textYOff>
-          <textXOff2>540</textXOff2>
+          <textXOff2>405</textXOff2>
           <textYOff2>45</textYOff2>
-          <textXOff3>120</textXOff3>
+          <textXOff3>90</textXOff3>
           <textYOff3>45</textYOff3>
-          <itemWidth>68</itemWidth>
+          <itemWidth>51</itemWidth>
           <itemHeight>68</itemHeight>
-          <IconXOff>6</IconXOff>
+          <IconXOff>4</IconXOff>
           <IconYOff>6</IconYOff>
           <spaceBetweenItems>0</spaceBetweenItems>
           <textureHeight>80</textureHeight>
@@ -67,36 +67,36 @@
           <onleft>2</onleft>
           <onright>2</onright>
           <textvisible3>yes</textvisible3>
-		  <PinIconWidth>20</PinIconWidth>
+		  <PinIconWidth>15</PinIconWidth>
 		  <PinIconHeight>20</PinIconHeight>
-          <PinIconXOff>80</PinIconXOff>
+          <PinIconXOff>60</PinIconXOff>
 		  <PinIconYOff>50</PinIconYOff>
         </control>
         <control>
           <description>Thumbnail Panel</description>
           <type>thumbnailpanel</type>
           <id>50</id>
-          <posX>80</posX>
+          <posX>60</posX>
           <posY>165</posY>
-          <width>1200</width>
+          <width>900</width>
           <height>588</height>
           <scrollOffset>1</scrollOffset>
           <onleft>2</onleft>
           <onright>2</onright>
-          <itemWidth>127</itemWidth>
+          <itemWidth>112</itemWidth>
           <itemHeight>152</itemHeight>
-          <textureWidth>105</textureWidth>
+          <textureWidth>100</textureWidth>
           <textureHeight>145</textureHeight>
-          <thumbWidth>105</thumbWidth>
+          <thumbWidth>100</thumbWidth>
           <thumbHeight>145</thumbHeight>
           <thumbPosX>0</thumbPosX>
           <thumbPosY>0</thumbPosY>
-          <itemWidthBig>170</itemWidthBig>
-          <itemHeightBig>225</itemHeightBig>
-          <thumbWidthBig>145</thumbWidthBig>
-          <thumbHeightBig>205</thumbHeightBig>
-          <textureWidthBig>145</textureWidthBig>
-          <textureHeightBig>205</textureHeightBig>
+          <itemWidthBig>145</itemWidthBig>
+          <itemHeightBig>235</itemHeightBig>
+          <thumbWidthBig>132</thumbWidthBig>
+          <thumbHeightBig>190</thumbHeightBig>
+          <textureWidthBig>132</textureWidthBig>
+          <textureHeightBig>190</textureHeightBig>
           <thumbPosXBig>0</thumbPosXBig>
           <thumbPosYBig>0</thumbPosYBig>
           <zoomXPixels>30</zoomXPixels>
@@ -119,9 +119,9 @@
           <description>Filmstrip view</description>
           <type>filmstrip</type>
           <id>50</id>
-          <posX>80</posX>
+          <posX>60</posX>
           <posY>240</posY>
-          <width>1180</width>
+          <width>885</width>
           <height>500</height>
           <spinPosX>-800</spinPosX>
           <spinPosY>555</spinPosY>
@@ -131,7 +131,7 @@
           <ondown>2</ondown>
           <frame>videothumbframe.png</frame>
           <frameFocus>videothumbframe.png</frameFocus>
-          <itemWidth>160</itemWidth>
+          <itemWidth>170</itemWidth>
           <itemHeight>400</itemHeight>
           <textureWidth>167</textureWidth>
           <textureHeight>241</textureHeight>
@@ -155,7 +155,8 @@
           <scrollbarRight>mouse_right_horizontal.png</scrollbarRight>
           <scrollbarYOff>320</scrollbarYOff>
           <showScrollbar>yes</showScrollbar>
-          <thumbs mask="Videothumbmask.png"></thumbs>
+          <thumbs mask="Videothumbmask.png">
+          </thumbs>
           <thumbAnimation effect="zoom" start="100,100" end="150,150" time="200" tween="circle" ease="inout">focus</thumbAnimation>
           <thumbAnimation effect="zoom" start="150,150" end="100,100" time="200" tween="back" ease="inout">unfocus</thumbAnimation>
         </control>
@@ -167,7 +168,7 @@
           <id>50</id>
           <posX>0</posX>
           <posY>200</posY>
-          <width>1280</width>
+          <width>960</width>
           <height>720</height>
           <onup>2</onup>
           <onleft>2</onleft>
@@ -183,7 +184,7 @@
           <speed>8</speed>
           <backgroundColor>000000FF</backgroundColor>
           <backgroundHeight>100</backgroundHeight>
-          <backgroundWidth>1366</backgroundWidth>
+          <backgroundWidth>1024</backgroundWidth>
           <backgroundX>0</backgroundX>
           <backgroundY>400</backgroundY>
           <backgroundDiffuse>60000000</backgroundDiffuse>
@@ -207,8 +208,8 @@
           <folderSuffix>]</folderSuffix>
           <font1>font13</font1>
           <font2>font10</font2>
-          <label1>-</label1>
-          <label2>-</label2>
+          <label1></label1>
+          <label2></label2>
           <textColor>FFFFFFFF</textColor>
           <remoteColor>ffcc9900</remoteColor>
           <playedColor>ff6FAFE1</playedColor>
@@ -258,7 +259,7 @@
                 <posX>15</posX>
                 <posY>37</posY>
                 <width>230</width>
-                <height>88</height>
+                <height>75</height>
                 <label>#myfilms.db.actors.value</label>
                 <font>font9</font>
                 <lineSpacing>2.5</lineSpacing>
@@ -283,7 +284,7 @@
                 <posX>15</posX>
                 <posY>160</posY>
                 <width>230</width>
-                <height>188</height>
+                <height>180</height>
                 <label>#(iif(neq(#myfilms.db.tagline.value,''),'#myfilms.db.tagline.value ',''))#myfilms.db.description.value</label>
                 <font>font9</font>
                 <lineSpacing>2.5</lineSpacing>
@@ -292,28 +293,28 @@
               </control>
             </controls>]]></subitem>
         </subitems>
-      </control>
-      <control>
-        <description>playlist listcontrol</description>
-        <type>playlistcontrol</type>
-        <id>50</id>
-        <posX>602</posX>
-        <posY>200</posY>
-        <width>642</width>
-        <height>500</height>
-        <upBtnXOffset>510</upBtnXOffset>
-        <downBtnXOffset>550</downBtnXOffset>
-        <deleteBtnXOffset>590</deleteBtnXOffset>
-        <onleft>2</onleft>
-        <onright>2</onright>
-        <scrollOffset>2</scrollOffset>
-        <itemWidth>32</itemWidth>
-        <itemHeight>32</itemHeight>
-        <IconXOff>12</IconXOff>
-        <IconYOff>4</IconYOff>
-        <keepaspectratio>yes</keepaspectratio>
+        </control>
+        <control>
+          <description>playlist listcontrol</description>
+          <type>playlistcontrol</type>
+          <id>50</id>
+          <posX>451</posX>
+          <posY>200</posY>
+          <width>481</width>
+          <height>500</height>
+          <upBtnXOffset>382</upBtnXOffset>
+          <downBtnXOffset>412</downBtnXOffset>
+          <deleteBtnXOffset>442</deleteBtnXOffset>
+          <onleft>2</onleft>
+          <onright>2</onright>
+          <scrollOffset>2</scrollOffset>
+          <itemWidth>24</itemWidth>
+          <itemHeight>32</itemHeight>
+          <IconXOff>9</IconXOff>
+          <IconYOff>4</IconYOff>
+          <keepaspectratio>yes</keepaspectratio>
+        </control>
       </control>
     </control>
-  </control>
-</controls>
+  </controls>
 </window>

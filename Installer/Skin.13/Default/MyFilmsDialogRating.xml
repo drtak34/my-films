@@ -7,10 +7,10 @@
         <control>
             <type>image</type>
             <id>0</id>
-            <posX>200</posX>
-            <posY>120</posY>
-            <width>400</width>
-            <height>200</height>
+            <posX>369</posX>
+            <posY>220</posY>
+            <width>375</width>
+            <height>300</height>
             <texture>dialog_background.png</texture>
             <animation effect="fade" time="250">WindowOpen</animation>
             <animation effect="fade" time="250">WindowClose</animation>
@@ -19,8 +19,8 @@
             <description>dialog Heading</description>
             <type>fadelabel</type>
             <id>2</id>
-            <posX>250</posX>
-            <posY>145</posY>
+            <posX>412</posX>
+            <posY>257</posY>
             <label>934</label>
             <font>font13</font>
             <textcolor>ffffffff</textcolor>
@@ -31,7 +31,7 @@
             <description>Rating label</description>
             <type>label</type>
             <id>3</id>
-            <posX>407</posX>
+            <posX>530</posX>
             <posY>360</posY>
             <label>#myfilms.db.rating.label</label>
             <font>font13</font>
@@ -43,8 +43,8 @@
             <description>Rating value</description>
             <type>label</type>
             <id>4</id>
-            <posX>370</posX>
-            <posY>200</posY>
+            <posX>525</posX>
+            <posY>320</posY>
             <label>#myfilms.rating</label>
             <font>font18</font>            
             <textcolor>ff6FAFE1</textcolor>
@@ -55,12 +55,13 @@
             <description>right button</description>
             <type>button</type>
             <id>10</id>
-            <posX>520</posX>
-            <posY>250</posY>
-            <width>28</width>
-            <height>29</height>
+            <posX>645</posX>
+            <posY>369</posY>
+            <width>26</width>
+            <height>35</height>
             <textureFocus>arrow_round_right_focus.png</textureFocus>
-            <textureNoFocus>arrow_round_right_nofocus.png</textureNoFocus>            
+            <textureNoFocus>arrow_round_right_nofocus.png</textureNoFocus>
+            <label />
             <onleft>11</onleft>
             <onright>12</onright>
             <onup>12</onup>
@@ -72,12 +73,13 @@
             <description>left button</description>
             <type>button</type>
             <id>11</id>
-            <posX>250</posX>
-            <posY>250</posY>
-            <width>28</width>
-            <height>29</height>
+            <posX>442</posX>
+            <posY>369</posY>
+            <width>26</width>
+            <height>35</height>
             <textureFocus>arrow_round_left_focus.png</textureFocus>
-            <textureNoFocus>arrow_round_left_nofocus.png</textureNoFocus>            
+            <textureNoFocus>arrow_round_left_nofocus.png</textureNoFocus>
+            <label />
             <onleft>12</onleft>
             <onright>10</onright>
             <onup>12</onup>
@@ -89,11 +91,11 @@
             <description>OK button</description>
             <type>button</type>
             <id>12</id>
-            <posX>530</posX>
-            <posY>140</posY>
+            <posX>671</posX>
+            <posY>257</posY>
             <textYOff>9</textYOff>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
             <textureFocus>dialogue_ok_focus.png</textureFocus>
             <textureNoFocus>dialogue_ok_nofocus.png</textureNoFocus>
             <label>-</label>
@@ -107,15 +109,15 @@
         <control>
             <type>imagelist</type>
             <id>100</id>
-            <posX>290</posX>
-            <posY>254</posY>
-            <width>42</width>
+            <posX>472</posX>
+            <posY>378</posY>
+            <width>31</width>
             <height>320</height>
-            <textureWidth>22</textureWidth>
+            <textureWidth>16</textureWidth>
             <textureHeight>22</textureHeight>
             <subitems>
-                     <subitem>greystar.png</subitem>
-                     <subitem>stargood.png</subitem>
+                      <subitem>greystar.png</subitem>
+                      <subitem>stargood.png</subitem>
             </subitems>
             <orientation>horizontal</orientation>
             <percentage>#myfilms.rating</percentage>
