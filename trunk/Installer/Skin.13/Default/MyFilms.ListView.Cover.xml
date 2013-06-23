@@ -1,170 +1,145 @@
 <window>
   <controls>
-
-    <!-- MENU COVER -->    
+    <!-- MENU COVER -->
     <control>
       <description>Art for Menu</description>
       <type>image</type>
       <id>0</id>
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
-      <texture mask="videothumbmask.png">#myfilms.menuimage</texture>      
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(40)</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="10,10" reversible="true" condition="!Control.isvisible(40)">conditional</animation>      
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
+      <texture mask="videothumbmask.png">#myfilms.menuimage</texture>
+      <visible>[facadeview.list|facadeview.album]+Control.isvisible(40)</visible>
+      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="10,10" reversible="true" condition="!Control.isvisible(40)">conditional</animation>
     </control>
-
-    <control>
-      <description>Frame for Menu</description>
-      <type>image</type>
-      <id>0</id>      
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
-      <texture>Videothumbframe.png</texture>      
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(40)</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-    </control>
-
     <control>
       <description>Frame2 for Menu</description>
       <type>image</type>
-      <id>0</id>      
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
-      <texture>Videothumbframe.png</texture>    
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+Control.isvisible(40)</visible>      
+      <id>0</id>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
+      <texture>Videothumbframe.png</texture>
+      <visible>[facadeview.list|facadeview.album]+Control.isvisible(40)</visible>
     </control>
-
     <!-- FILMS COVER -->
     <control>
       <description>Cover Art for Films</description>
       <type>image</type>
       <id>0</id>
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
-      <texture mask="videothumbmask.png">#myfilms.coverimage</texture>            
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(36)|Control.isvisible(39)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
+      <texture mask="videothumbmask.png">#myfilms.coverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.isvisible(36)|Control.isvisible(39)]</visible>
     </control>
-
     <control>
       <description>Collection Banner</description>
       <id>0</id>
       <type>image</type>
-      <posX>120</posX>
-      <posY>76</posY>
+      <posX>838</posX>
+      <posY>200</posY>
+      <width>91</width>
+      <height>102</height>
       <texture>myfilms\collection.png</texture>
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(36)|Control.isvisible(39)]+!string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
+      <visible>[facadeview.list|facadeview.album]+[Control.isvisible(36)|Control.isvisible(39)]+!string.equals(#myfilms.user.mastertitle.groupcount,)+!control.isvisible(34)</visible>
     </control>
-
     <control>
       <description>Frame for Films</description>
       <type>image</type>
-      <id>0</id>      
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
-      <texture>Videothumbframe.png</texture>     
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[control.isvisible(36)|control.isvisible(39)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
+      <id>0</id>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
+      <texture>Videothumbframe.png</texture>
+      <visible>[facadeview.list|facadeview.album]+[control.isvisible(36)|control.isvisible(39)]</visible>
     </control>
-
     <!-- VIEWS COVER -->
     <control>
       <description>Cover Art for Views</description>
       <type>image</type>
-      <id>0</id>      
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
+      <id>0</id>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
       <texture mask="videothumbmask.png">#myfilms.viewcoverimage</texture>
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(37)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="28,28" center="340,78" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+      <visible>[facadeview.list|facadeview.album]+[Control.isvisible(37)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="925,480" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
-
     <!-- PERSONS COVER -->
-
     <control>
       <description>Cover Art for Persons</description>
       <type>image</type>
-      <id>0</id>      
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
-      <texture mask="videothumbmask.png">#myfilms.personcoverimage</texture>      
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(38)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="28,28" center="340,78" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+      <id>0</id>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
+      <texture mask="videothumbmask.png">#myfilms.personcoverimage</texture>
+      <visible>[facadeview.list|facadeview.album]+[Control.isvisible(38)|Control.isvisible(36)|string.equals(#myfilms.groupcoverimage)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="925,480" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
-
-    <!-- VIEWS and PERSONS GLASS OVERLAY -->
+    <!-- VIEWS and PERSONS Frames -->
     <control>
       <description>Frame for views</description>
       <type>image</type>
-      <id>0</id>      
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
+      <id>0</id>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
       <texture>Videothumbframe.png</texture>
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+!control.isvisible(40)+[Control.isvisible(37)|Control.isvisible(38)|string.contains(#myfilms.viewcoverimage,\)|string.contains(#myfilms.personcoverimage,\)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="28,28" center="340,78" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+      <visible>[facadeview.list|facadeview.album]+!control.isvisible(40)+[Control.isvisible(37)|Control.isvisible(38)|string.contains(#myfilms.viewcoverimage,\)|string.contains(#myfilms.personcoverimage,\)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="925,480" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
-
-    <!-- FILMS GROUP/COLLECTIONS COVER -->
+    <!-- FILMS COLLECTIONS COVER -->
     <control>
       <description>Cover Art for Groups or Hierarchies or Collections</description>
       <type>image</type>
       <id>0</id>
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
       <texture mask="videothumbmask.png">#myfilms.groupcoverimage</texture>
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(39)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="28,28" center="340,398" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+      <visible>[facadeview.list|facadeview.album]+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="925,480" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
-
     <control>
       <description>Collection Banner</description>
       <id>0</id>
       <type>image</type>
-      <posX>120</posX>
-      <posY>76</posY>
+      <posX>838</posX>
+      <posY>200</posY>
+      <width>91</width>
+      <height>102</height>
       <texture>myfilms\collection.png</texture>
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(39)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="28,28" center="340,398" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+      <visible>[facadeview.list|facadeview.album]+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="925,480" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
-
     <!-- FILMS COLLECTIONS FRAME -->
     <control>
       <description>Frame for Groups or Hierarchies or Collections</description>
       <type>image</type>
-      <id>0</id>      
-      <posX>30</posX>
-      <posY>75</posY>
-      <width>220</width>
-      <height>330</height>
+      <id>0</id>
+      <posX>795</posX>
+      <posY>200</posY>
+      <width>135</width>
+      <height>194</height>
       <texture>Videothumbframe.png</texture>
-      <visible>[facadeview.list|facadeview.album]+control.hasfocus(50)+[Control.isvisible(39)]</visible>
-      <animation effect="fade" time="250">visiblechange</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="100,100" end="28,28" center="340,398" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
+      <visible>[facadeview.list|facadeview.album]+[Control.isvisible(39)]</visible>
+      <animation effect="fade" time="0">visiblechange</animation>
+      <animation effect="zoom" time="0" tween="cubic" easing="inout" start="100,100" end="30,30" center="925,480" reversible="true" condition="Control.isvisible(36)|Control.isvisible(39)">conditional</animation>
     </control>
   </controls>
 </window>

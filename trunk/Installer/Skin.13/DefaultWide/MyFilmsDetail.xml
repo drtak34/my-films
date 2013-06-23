@@ -300,7 +300,7 @@
       <onleft>107</onleft>
       <onright>10099</onright>
       <label>#myfilms.menu.techinfos</label>
-      <visible allowhiddenfocus="true">!control.hasfocus(10099)+!control.hasfocus(10100)+!player.hasmedia</visible>
+      <visible allowhiddenfocus="true">!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <type>button</type>
@@ -359,7 +359,7 @@
       <posY>175</posY>
       <width>24</width>
       <height>24</height>
-      <texture>MyFilms\overlaywatched.png</texture>
+      <texture>MyFilms\overlayunwatched.png</texture>
       <keepaspectratio>yes</keepaspectratio>
       <colordiffuse>ff6FAFE1</colordiffuse>
       <visible>!control.hasfocus(10099)+!control.hasfocus(10100)+!string.contains(#myfilms.user.watched.value)</visible>
@@ -372,7 +372,7 @@
       <posY>175</posY>
       <width>24</width>
       <height>24</height>
-      <texture>MyFilms\overlayunwatched.png</texture>
+      <texture>MyFilms\overlaywatched.png</texture>
       <keepaspectratio>yes</keepaspectratio>
       <visible>!control.hasfocus(10099)+!control.hasfocus(10100)+string.contains(#myfilms.user.watched.value)</visible>
     </control>
@@ -423,20 +423,20 @@
       <align>left</align>
       <font>font11</font>
       <textcolor>ffFFFFFF</textcolor>
-      <label>(#myfilms.db.rating.value/10)</label>
+      <label>(#myfilms.db.rating.value)</label>
       <visible>string.equals(#myfilms.db.rating.value)+!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>User Rating</description>
       <type>label</type>
       <id>1</id>
-      <posX>1000</posX>
+      <posX>970</posX>
       <posY>163</posY>
       <width>200</width>
       <align>left</align>
       <font>font10</font>
       <textcolor>ff6FAFE1</textcolor>
-      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value/10)',''))</label>
+      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value)',''))</label>
       <align>left</align>
       <visible>!control.hasfocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.rating.value)</visible>
     </control>
@@ -1847,10 +1847,9 @@
       <height>172</height>
       <texture>Videothumbframe.png</texture>
       <visible>Control.isvisible(45)+Control.HasFocus(10001)</visible>
-      <animation effect="zoom" time="450" end="75,75" condition="Player.hasmedia">conditional</animation>
-      <animation effect="fade" start="100" end="0" time="250">Hidden</animation>
-      <animation effect="fade" start="0" end="100" time="250">Visible</animation>
-      <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
     </control>
   </controls>
 </window>
