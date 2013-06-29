@@ -4425,6 +4425,27 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
               <ZipFileName>Installer{CopyFile}\{3b58f3cc-fabe-4277-80e5-83efb064a4e5}-MyFilmsDialogImageSelect.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilmsDialogImageSelect.xml</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\DefaultWide\MyFilmsFanartManager.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1110e007-69e2-4f0a-ae97-46275fd9a5fd}-MyFilmsFanartManager.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilmsFanartManager.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilms.facade.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{51bb2ba7-b0b1-46e7-a327-cd8757bd99bb}-MyFilms.facade.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.facade.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Skin.13\Default\MyFilmsFanartManager.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{51881362-2a34-446a-830d-d37eece07eb5}-MyFilmsFanartManager.xml</ZipFileName>
+              <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsFanartManager.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -6314,6 +6335,94 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
           </Items>
         </Files>
       </GroupItem>
+      <GroupItem Name="MTN">
+        <ParentGroup>Default</ParentGroup>
+        <DisplayName>Movie Thumb Nailer (MTN)</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Movie Thumb Nailer (MTN) is used to create fanarts from movies and thumbs for image slides.
+It was removed from MP since V1.4</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avcodec-52.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b159db50-4aaa-42ce-aab6-7e092acdc311}-avcodec-52.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avcodec-52.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avcore-0.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e35b21cd-a426-420d-827e-a9fac63c80b1}-avcore-0.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avcore-0.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avdevice-52.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7b6337c1-7cb0-4596-ad68-9beeb74dc01b}-avdevice-52.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avdevice-52.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avfilter-1.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1ba6b5fe-e5bd-48b0-83bb-0c48722e4791}-avfilter-1.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avfilter-1.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avformat-52.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{bb7f64db-8fb5-4209-9c32-93830b3941a6}-avformat-52.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avformat-52.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avutil-50.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{29f4b151-3d5b-4884-8e0f-29455fb2452f}-avutil-50.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avutil-50.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\bgd.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{85a3e787-cf59-4c41-be4a-2d000bf1b61f}-bgd.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\bgd.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\gpl-2.0.txt</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{dc4d049e-64cf-435d-b86d-be7bd68025b7}-gpl-2.0.txt</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\gpl-2.0.txt</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\mtn.c</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{8b314f09-6730-48dd-a376-27807b3173f0}-mtn.c</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\mtn.c</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\mtn.exe</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{38f29bc9-9ef9-43d5-9bd5-6dbe46a56e0f}-mtn.exe</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\mtn.exe</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\swscale-0.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0615b705-2b95-4b96-9332-a22c9065e878}-swscale-0.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\swscale-0.dll</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
     </Items>
   </Groups>
   <Sections>
@@ -7293,7 +7402,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>2865</Revision>
+      <Revision>2874</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -7330,7 +7439,7 @@ Changes &amp; Fixes:
 - Grabber Interface - Detail tab : "Genre" should be "Category"</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
-    <ReleaseDate>2013-06-22T11:05:37.1448744+02:00</ReleaseDate>
+    <ReleaseDate>2013-06-29T17:24:41.6697746+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -11598,6 +11707,27 @@ Changes &amp; Fixes:
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\DefaultWide\MyFilmsFanartManager.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1110e007-69e2-4f0a-ae97-46275fd9a5fd}-MyFilmsFanartManager.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\DefaultWide\MyFilmsFanartManager.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilms.facade.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{51bb2ba7-b0b1-46e7-a327-cd8757bd99bb}-MyFilms.facade.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilms.facade.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Skin.13\Default\MyFilmsFanartManager.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{51881362-2a34-446a-830d-d37eece07eb5}-MyFilmsFanartManager.xml</ZipFileName>
+        <DestinationFilename>%Config%\MyFilms\Skin.13\Default\MyFilmsFanartManager.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Skin.12\Black Glass\MyFilms.Common.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{d8f7f490-a736-40c2-bd8e-c602a46510cc}-MyFilms.Common.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilms.Common.xml</DestinationFilename>
@@ -12190,6 +12320,83 @@ Changes &amp; Fixes:
         <ZipFileName>Installer{CopyFile}\{9ea6ae07-34ed-4655-b808-92d29c9e0f52}-MyFilmsDialogImageSelect.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsDialogImageSelect.xml</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avcodec-52.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b159db50-4aaa-42ce-aab6-7e092acdc311}-avcodec-52.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avcodec-52.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avcore-0.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e35b21cd-a426-420d-827e-a9fac63c80b1}-avcore-0.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avcore-0.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avdevice-52.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7b6337c1-7cb0-4596-ad68-9beeb74dc01b}-avdevice-52.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avdevice-52.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avfilter-1.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1ba6b5fe-e5bd-48b0-83bb-0c48722e4791}-avfilter-1.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avfilter-1.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avformat-52.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{bb7f64db-8fb5-4209-9c32-93830b3941a6}-avformat-52.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avformat-52.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avutil-50.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{29f4b151-3d5b-4884-8e0f-29455fb2452f}-avutil-50.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avutil-50.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\bgd.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{85a3e787-cf59-4c41-be4a-2d000bf1b61f}-bgd.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\bgd.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\gpl-2.0.txt</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{dc4d049e-64cf-435d-b86d-be7bd68025b7}-gpl-2.0.txt</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\gpl-2.0.txt</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\mtn.c</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{8b314f09-6730-48dd-a376-27807b3173f0}-mtn.c</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\mtn.c</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\mtn.exe</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{38f29bc9-9ef9-43d5-9bd5-6dbe46a56e0f}-mtn.exe</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\mtn.exe</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\swscale-0.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0615b705-2b95-4b96-9332-a22c9065e878}-swscale-0.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\swscale-0.dll</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
@@ -12336,6 +12543,16 @@ Changes &amp; Fixes:
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos</DestinationFilename>
         <Folder>Thumbs\MyFilms\DefaultLogos</Folder>
         <Group>Logos</Group>
+        <Recursive>true</Recursive>
+      </FolderGroup>
+      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName />
+        <ZipFileName>Installer{CopyFile}\{889cbea9-bfa7-4196-837c-ca61df0e1d83}-</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer</DestinationFilename>
+        <Folder>Tools\MTN</Folder>
+        <Group>MTN</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
     </FolderGroups>

@@ -22,6 +22,7 @@ namespace Grabber
     private const string ExtractApp = "mtn.exe";
 
     private static string ExtractorPath = Config.GetFile(Config.Dir.Base, "MovieThumbnailer", ExtractApp);
+    // private static string ExtractorPath = Config.GetFolder(Config.Dir.Base) + @"\MyFilms\MTN\" + ExtractApp;
     private static int PreviewColumns = 2;
     private static int PreviewRows = 3;
     private static bool LeaveShareThumb = false;
