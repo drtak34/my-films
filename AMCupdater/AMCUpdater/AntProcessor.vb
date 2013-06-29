@@ -2172,7 +2172,10 @@ Public Class AntProcessor
                     Dim extension As String = foundFile.Substring(InStrRev(foundFile, ".")).ToLower
                     If Array.Exists(ValidMediaExtensions, Function(s) s.ToString.ToLower.Equals(extension)) = True Then
                         'Check, if it's a trailer
-                        Dim isTrailer As Boolean = ValidTrailerExtensions.Any(Function(TrailerProp) FoundFileName.ToLower.Contains(TrailerProp.ToLower))
+                        Dim isTrailer As Boolean = 
+                            (ValidTrailerExtensions.Any(Function(TrailerProp) FoundFileName.ToLower.Contains(TrailerProp.ToLower))) OrElse 
+                            ((From s In ValidTrailerExtensions Select r = new Regex(s, RegexOptions.IgnoreCase) Select r.Match(FoundFileName)).Any(Function(m) m.Success = True))
+
                         If isTrailer = True Then
                             LogEvent("  File Found (trailer) - " & FoundFileName, EventLogLevel.Informational)
 
