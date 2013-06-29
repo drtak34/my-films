@@ -227,6 +227,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // Returns the name of the plugin which is shown in the plugin menu
     public string PluginName()
     {
+      return "MyFilms";
+    }
+
+    private string PluginNameSetup()
+    {
       if (strPluginName == null)
       {
         string wPluginName;
@@ -295,15 +300,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     ///          false : plugin does not need its own button on home</returns>
     public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
     {
-      string wPluginName;
-      using (MediaPortal.Profile.Settings xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-      {
-        wPluginName = xmlreader.GetValueAsString("MyFilms", "PluginName", "MyFilms");
-      }
-      
-      strPluginName = wPluginName;
-
-      strButtonText = wPluginName;
+      strButtonText = PluginNameSetup();
       strButtonImage = String.Empty;
       strButtonImageFocus = String.Empty;
       strPictureImage = String.Format("hover_{0}.png", "MyFilms");
