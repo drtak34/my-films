@@ -28,7 +28,7 @@
     <Value>iso;img</Value>
   </Values>
   <Values Option="File_Types_Trailer">
-    <Value>trl;trailer;clip</Value>
+    <Value>trl;trailer;\Wclip</Value>
   </Values>
   <Values Option="Backup_XML_First">
     <Value>True</Value>
