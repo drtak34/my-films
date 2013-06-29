@@ -592,7 +592,7 @@ namespace MyFilmsPlugin.MyFilms
       return success;
     }
 
-    private static ArrayList GetMoviesGlobal(string expression, string sort, bool traktOnly)
+    private static ArrayList GetMoviesGlobal(string expression, string sort, bool traktOnly, bool mostRecentOnly)
     {
       var moviesGlobal = new ArrayList();
       moviesGlobal.Clear();
@@ -620,7 +620,8 @@ namespace MyFilmsPlugin.MyFilms
               LogMyFilms.Debug("Trakt|LMH = '" + AllowTraktSync + "|" + AllowRecentlyAddedAPI + "', Config = '" + config + "', CatalogType = '" + StrFileType + "|" + catalogname + "', DBFile = '" + StrFileXml + "'");
             else
               LogMyFilms.Debug("Trakt|LMH = '" + AllowTraktSync + "|" + AllowRecentlyAddedAPI + "', Config = '" + config + "', CatalogType = '" + StrFileType + "|" + catalogname + "'");
-            if (File.Exists(StrFileXml) && (AllowTraktSync || (!traktOnly && AllowRecentlyAddedAPI)))
+
+            if (File.Exists(StrFileXml) && ((!mostRecentOnly && AllowTraktSync) || (!traktOnly && AllowRecentlyAddedAPI)))
             {
               var tmpconf = new MyFilmsGUI.Configuration(config, false, true, null);
               if (StrFileType != "0") tmpconf.EnhancedWatchedStatusHandling = true;
@@ -1678,7 +1679,7 @@ namespace MyFilmsPlugin.MyFilms
 
     public static void GetMovies(ref ArrayList movies)
     {
-      movies = GetMoviesGlobal("", "", true);
+      movies = GetMoviesGlobal("", "", true, false);
       LogMyFilms.Debug("GetMovies() - movies matched: '" + movies.Count + "'");
     }
 
@@ -1900,7 +1901,7 @@ namespace MyFilmsPlugin.MyFilms
       //string date = dateCompare.ToString("yyyy'-'MM'-'dd HH':'mm':'ss");
 
       // get all movies
-      List<MFMovie> movielist = (from MFMovie movie in GetMoviesGlobal("", "", false) select movie).ToList();
+      List<MFMovie> movielist = (from MFMovie movie in GetMoviesGlobal("", "", false, true) select movie).ToList();
 
       switch (type)
       {
