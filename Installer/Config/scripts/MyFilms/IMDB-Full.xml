@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.3</Version>
+    <Version>1.2.4</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -162,7 +162,7 @@
       <KeyDetails2Index />
       <KeyDetails2Page />
       <KeyEncodingDetails2 />
-      <KeyStartStudio Param1="" Param2="">_x0023_REGEX_x0023__x003C_h3_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Production_x0020_Co_x005B_s_x005D__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartStudio>
+      <KeyStartStudio Param1="_x0023_REGEX_x0023__x003C__x002F_span_x003E__x002C_._x002A__x003F__x005C_n._x002A__x003F_name_x0022__x003E_" Param2="_x002C__x0020_">_x0023_REGEX_x0023__x003C_h3_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Production_x0020_Co_x005B_s_x005D__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartStudio>
       <KeyEndStudio>_x0023_REGEX_x0023__x0022__x003E__x003C_a_x0020_href_x003D__x0022_companycredits_x0022__x003E__x007C__x003C_a_x0020_href_x003D__x0022_companycredits</KeyEndStudio>
       <KeyStudioIndex />
       <KeyStudioPage />
