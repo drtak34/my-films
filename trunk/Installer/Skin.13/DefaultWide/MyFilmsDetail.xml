@@ -73,7 +73,7 @@
       <height>60</height>
       <texture>general_overlay_selecteditem.png</texture>
       <colordiffuse>bbffffff</colordiffuse>
-      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
+      <visible>!control.hasfocus(10099)|control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>Film Title</description>
@@ -97,7 +97,7 @@
       <width>1280</width>
       <height>720</height>
       <texture>general_overlay.png</texture>
-      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
+      <visible>!control.hasfocus(10099)|control.hasfocus(10100)</visible>
     </control>
     <control>
       <description>General Overlay</description>
@@ -109,7 +109,7 @@
       <height>720</height>
       <texture>general_overlay.png</texture>
       <colordiffuse>90ffffff</colordiffuse>
-      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
+      <visible>!control.hasfocus(10099)|control.hasfocus(10100)</visible>
     </control>
     <!-- Windows Info -->
     <!-- Hidden Side Menu -->
