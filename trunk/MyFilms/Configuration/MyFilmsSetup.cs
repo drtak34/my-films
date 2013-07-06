@@ -1892,7 +1892,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void ButCopy_Click(object sender, EventArgs e)
     {
-      var input = new MyFilmsInputBox();
+      MyFilmsInputBox input = new MyFilmsInputBox();
       input.Text = "MyFilms - Copy Config";
       input.CatalogTypeSelectedIndex = CatalogType.SelectedIndex; // preset to currently chosen catalog type 
       input.CatalogType = CatalogType.Text; // preset to currently chosen catalog name
@@ -4670,18 +4670,120 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     private void newCatalogWizard()
     {
       bool newCatalog = true;
+      MyFilms.SetupType setupType = MyFilms.SetupType.Local; // set local install as default
+
       if (Config_Name.Text.Length != 0 || RunWizardAfterInstall)
       {
         if (MessageBox.Show("Do you want to create a new MyFilms Configuration ? \n\nThis wizard helps you to setup a new configuration with default settings. \nIf you select 'yes', enter a name for the configuration.\nIf you select 'no' you can relaunch the wizard later with the 'Setup Wizard' button.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
           return;
       }
-      var input = new MyFilmsInputBox();
-      input.Text = "MyFilms - Setup Wizard";
-      input.UseNfoGrabber = false;
-      input.CatalogTypeSelectedIndex = 10; // preset to ANT MC  version 4.x
-      input.CatalogType = "Ant Movie Catalog Xtended (V4.1)"; // preset to Ant Movie Catalog Xtended (V4.1) // input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2) 
-      input.Country = "USA (Full Detail Grabbing)"; // preset for sample movies for skinners
+
+      #region ask for setup type - local, central master, central client
+      MyFilmsInputBox input = new MyFilmsInputBox
+        {
+          SetupType = (MyFilms_PluginMode == "normal") ? (int)MyFilms.SetupType.Local : (int)MyFilms.SetupType.CentralClient,
+          Text = "MyFilms - Setup Wizard",
+          UseNfoGrabber = false,
+          CatalogTypeSelectedIndex = 10,
+          CatalogType = "Ant Movie Catalog Xtended (V4.1)",
+          Country = "USA (Full Detail Grabbing)",
+          ShowOnlyName =  false,
+          TestMode = (MyFilms_PluginMode != "normal")
+        };
       input.ShowDialog();
+      #endregion
+
+      if (input.DialogResult != DialogResult.OK) return; // stop, of user did not confirm new configuration
+
+      if (input.SetupType == (int)MyFilms.SetupType.CentralClient)
+      {
+        #region setup for network client
+        #region load central server config, if it already exists
+        XmlConfig MyFilmsServer = new XmlConfig();
+        string myFilmsCentralConfigDir = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
+        #endregion
+
+        #region choose server location
+        FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog
+          {
+            Description = "Choose the network folder where you have stored your central MyFilms config before ...",
+            ShowNewFolderButton = false
+          };
+        if (!String.IsNullOrEmpty(myFilmsCentralConfigDir))
+        {
+          folderBrowserDialog1.SelectedPath = myFilmsCentralConfigDir;
+          if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
+            folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
+        }
+        else
+          folderBrowserDialog1.SelectedPath = String.Empty;
+        if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+        {
+          if (folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") != folderBrowserDialog1.SelectedPath.Length - 1) folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+          myFilmsCentralConfigDir = folderBrowserDialog1.SelectedPath;
+        }
+        else return;
+        #endregion
+
+        #region load server config for client
+        string serverConfigFile = myFilmsCentralConfigDir + @"\MyFilms.xml";
+        string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
+        if (!Directory.Exists(myFilmsCentralConfigDir))
+        {
+          MessageBox.Show("Your remote directory does not exist - cannot continue !\nPlease make sure the path is existing and accessible.", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+        if (!System.IO.File.Exists(serverConfigFile))
+        {
+          MessageBox.Show("Remote MyFilms.xml not found - cannot continue !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+
+        if (MessageBox.Show("Are you sure you want to copy remote config to local config ?\n\nIf you select 'yes', your local config file will be overwritten, MyFilms setup will reload and you loose your local configuration.\n(A backup will be autocreated)",
+            "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+          return;
+
+        if (System.IO.File.Exists(localConfigFile))
+        {
+          try
+          {
+            System.IO.File.Copy(localConfigFile, localConfigFile + "_" + System.DateTime.Now.ToString("yyyy-mm-dd hh_mm"), true);
+          }
+          catch (Exception ex)
+          {
+            //MessageBox.Show("Error: " + ex.StackTrace, "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Cannot write to local directory - cannot continue !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+          }
+
+          #region save central server config
+          MyFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", myFilmsCentralConfigDir);
+          MyFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
+          MyFilmsServer.Save();
+          #endregion
+        }
+        try
+        {
+          System.IO.File.Copy(serverConfigFile, localConfigFile, true);
+          MessageBox.Show("Successfully copied remote config to local directory !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+          if (MessageBox.Show("MyFilms Setup will now reload the updated local MyFilms.xml config file !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Warning) == DialogResult.OK)
+            MesFilmsSetup_Load(null, null); // reload setup config
+          // this.DialogResult = DialogResult.OK;
+          // this.Close(); // close the setup app
+        }
+        catch (Exception)
+        {
+          MessageBox.Show("Cannot copy to local directory - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        #endregion
+
+        // need to reload config here?
+        #endregion
+        return;
+      }
+      
+      #region preset the configuration !!!
+
       string newConfigName = input.ConfigName;
       string newCatalogType = input.CatalogType;
       string newCountry = input.Country;
@@ -5159,7 +5261,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       switch (newCatalogSelectedIndex)
       {
         case 0:
-          // MessageBox.Show("Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog. \nAMCUpdater will be autostarted, if you created an empty catalog.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           MessageBox.Show("Successfully created a new Configuration with default settings ! \n\nPlease review your settings in MyFilms and AMC Updater to match your personal needs. \n You may run AMCupdater to populate or update your catalog.", "MyFilms Configuration Wizard - Finished !", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
           break;
         default:
@@ -5169,9 +5270,88 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           break;
       }
 
-      if (newCatalog && IsAMCcatalogType(CatalogType.SelectedIndex))
+      #endregion
+
+      if (input.SetupType == (int)MyFilms.SetupType.CentralMaster)
       {
-        launchAMCmanager();
+        #region upload to network if "central master" setup was chosen
+        #region load central server config, if it already exists
+        XmlConfig myFilmsServer = new XmlConfig();
+        string myFilmsCentralConfigDir = myFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
+        #endregion
+
+        #region choose server location
+        FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+        if (!String.IsNullOrEmpty(myFilmsCentralConfigDir))
+        {
+          folderBrowserDialog1.SelectedPath = myFilmsCentralConfigDir;
+          if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
+            folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
+        }
+        else
+          folderBrowserDialog1.SelectedPath = String.Empty;
+        folderBrowserDialog1.Description = "Path for Central Config File";
+        if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+        {
+          if (folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") != folderBrowserDialog1.SelectedPath.Length - 1)
+            folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+          myFilmsCentralConfigDir = folderBrowserDialog1.SelectedPath;
+        }
+        #endregion
+
+        #region upload server config for client
+        string serverConfigFile = myFilmsCentralConfigDir + @"\MyFilms.xml";
+        string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
+        if (!System.IO.Directory.Exists(myFilmsCentralConfigDir))
+        {
+          MessageBox.Show("Your remote directory does not exist - cannot continue !\nPlease make sure the path is existing and accessible.", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+        if (!System.IO.File.Exists(localConfigFile))
+        {
+          MessageBox.Show("Local MyFilms.xml not found - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+        if (System.IO.File.Exists(serverConfigFile))
+        {
+          try
+          {
+            string backupfile = serverConfigFile.Replace(".xml", " - " + DateTime.Now.ToString("u").Replace(":", "-") + ".xml").Replace("/", "-");
+            System.IO.File.Copy(serverConfigFile, backupfile, true);
+          }
+          catch (Exception)
+          {
+            MessageBox.Show("Cannot write to Server directory - Missing access rights? - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+          }
+        }
+        try
+        {
+          System.IO.File.Copy(localConfigFile, serverConfigFile, true);
+          MessageBox.Show("Successfully copied local config to remote directory !\nYou can use the 'Central Client' setup to install your clients using this config now.", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        catch (Exception)
+        {
+          MessageBox.Show("Cannot write to Server directory - Missing access rights? - cannot continue !", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        #endregion
+
+        #endregion
+      }
+
+      switch (input.SetupType)
+      {
+        case (int)MyFilms.SetupType.Local:
+        case (int)MyFilms.SetupType.CentralMaster:
+          if (newCatalog && IsAMCcatalogType(CatalogType.SelectedIndex))
+          {
+            launchAMCmanager();
+          }
+          break;
+        case (int)MyFilms.SetupType.CentralClient:
+          break;
+        default:
+          break;
       }
 
     }

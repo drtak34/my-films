@@ -126,7 +126,7 @@ namespace MyFilmsPlugin.Configuration
       {
         try
         {
-          System.IO.File.Copy(localConfigFile, localConfigFile + "_" + System.DateTime.Now.ToLongTimeString(), true);
+          System.IO.File.Copy(localConfigFile, localConfigFile + "_" + System.DateTime.Now.ToString("yyyy-mm-dd hh_mm"), true);
         }
         catch (Exception)
         {

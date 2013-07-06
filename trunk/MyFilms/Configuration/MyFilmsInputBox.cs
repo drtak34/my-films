@@ -9,7 +9,13 @@
     {
         public MyFilmsInputBox()
         {
-            InitializeComponent();
+          InitializeComponent();
+        }
+
+        public int SetupType
+        {
+          get { return cbSetupType.SelectedIndex; }
+          set { cbSetupType.SelectedIndex = value; }
         }
 
         public string ConfigName
@@ -63,17 +69,32 @@
               cbCountry.Enabled = false;
               cbCatalogType.Enabled = false;
               cbUseNfoGrabber.Enabled = false;
+              lblSetupType.Visible = false;
+              cbSetupType.Visible = false;
             }
             else
             {
               cbCountry.Enabled = true;
               cbCatalogType.Enabled = true;
               cbUseNfoGrabber.Enabled = true;
+              lblSetupType.Visible = testMode;
+              cbSetupType.Visible = testMode;
             }
           }
         }
         private bool showOnlyName = false;
 
+        public bool TestMode
+        {
+          get { return testMode; }
+          set
+          {
+            testMode = value;
+            lblSetupType.Visible = testMode;
+            cbSetupType.Visible = testMode;
+          }
+        }
+        private bool testMode = false;
 
         private void textBoxNewName_TextChanged(object sender, EventArgs e)
         {
@@ -102,7 +123,50 @@
 
         private void cbCatalogType_SelectedIndexChanged(object sender, EventArgs e)
         {
-          this.cbUseNfoGrabber.Visible = this.cbCatalogType.Text.Contains("Ant Movie Catalog");
+            switch (cbSetupType.SelectedIndex)
+            {
+              case 0: // local config
+              case 1: // network master
+                cbUseNfoGrabber.Visible = cbCatalogType.Text.Contains("Ant Movie Catalog");
+                break;
+              case 2: // network client
+                cbUseNfoGrabber.Visible = false;
+                break;
+            }
+        }
+
+        private void cbSetupType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          switch (cbSetupType.SelectedIndex)
+          {
+            case 0: // local config
+            case 1: // network master
+              label1.Visible = true;
+              label2.Visible = true;
+              label3.Visible = true;
+              label4.Visible = true;
+              lblCountry.Visible = true;
+              cbCatalogType.Visible = true;
+              cbCountry.Visible = true;
+              cbUseNfoGrabber.Visible = cbCatalogType.Text.Contains("Ant Movie Catalog");
+              textBoxNewName.Visible = true;
+              lblNetworkClientInfo.Visible = false;
+              break;
+            case 2: // network client
+              label1.Visible = false;
+              label2.Visible = false;
+              label3.Visible = false;
+              label4.Visible = false;
+              lblCountry.Visible = false;
+              cbCatalogType.Visible = false;
+              cbCountry.Visible = false;
+              cbUseNfoGrabber.Visible = false;
+              textBoxNewName.Visible = false;
+              lblNetworkClientInfo.Visible = true;
+              break;
+            default:
+              break;
+          }
         }
     }
 }
