@@ -662,6 +662,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //  CoverFlow = 5
     //}
 
+    public enum SetupType
+    {
+      Local = 0,
+      CentralMaster = 1,
+      CentralClient = 2
+    }
     #endregion
 
     #endregion
@@ -1188,7 +1194,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    private void SyncConfigFromRemoteServer()
+    private static void SyncConfigFromRemoteServer()
     {
       if (!File.Exists(Config.GetFolder(Config.Dir.Config) + @"\MyFilmsServer.xml"))
       {

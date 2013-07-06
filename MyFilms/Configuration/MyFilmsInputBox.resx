@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>19, 11</value>
   </metadata>
   <data name="cbCountry.ToolTip" xml:space="preserve">
     <value>The country selection influences the presets, that MyFilms will do for you.
@@ -129,6 +129,15 @@ This is mainly the following items:
 - Title Limit Override (e.g. 0)
 - Grabber Script Filter (e.g. "en, all")
 All those settings can be changed by the user afterwards any time, e.g. if a different grabber script is preferred.</value>
+  </data>
+  <data name="cbSetupType.ToolTip" xml:space="preserve">
+    <value>Select the type of setup you want:
+local client: 
+-&gt; all data local
+network mkaster
+-&gt; create initial config and upload to your central server sirectory
+network client 
+-&gt; no setup, only tell the client the central myfilms directory on your server</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
