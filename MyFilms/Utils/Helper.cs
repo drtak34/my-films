@@ -1049,6 +1049,29 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return size;
     }
 
+    /// 
+    /// Copy folder to another folder recursively
+    /// 
+    public static void CopyFolder(string sourceFolder, string destFolder, bool overwrite)
+    {
+        if (!Directory.Exists(destFolder))
+            Directory.CreateDirectory(destFolder);
+        string[] files = Directory.GetFiles(sourceFolder);
+        foreach (string file in files)
+        {
+            string name = Path.GetFileName(file);
+            string dest = Path.Combine(destFolder, name);
+            File.Copy(file, dest, overwrite);
+        }
+        string[] folders = Directory.GetDirectories(sourceFolder);
+        foreach (string folder in folders)
+        {
+            string name = Path.GetFileName(folder);
+            string dest = Path.Combine(destFolder, name);
+            CopyFolder(folder, dest, overwrite);
+        }
+    }
+
     public static bool PersonUpdateAllowed(string path, string person) // default 7 days
     {
       return PersonUpdateAllowed(path, person, 30);
