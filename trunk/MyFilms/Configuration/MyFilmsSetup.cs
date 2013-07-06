@@ -4672,6 +4672,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       bool newCatalog = true;
       MyFilms.SetupType setupType = MyFilms.SetupType.Local; // set local install as default
 
+      // load central server config, if it already exists
+      XmlConfig myFilmsServer = new XmlConfig();
+      string myFilmsCentralConfigDir = myFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
+
+
       if (Config_Name.Text.Length != 0 || RunWizardAfterInstall)
       {
         if (MessageBox.Show("Do you want to create a new MyFilms Configuration ? \n\nThis wizard helps you to setup a new configuration with default settings. \nIf you select 'yes', enter a name for the configuration.\nIf you select 'no' you can relaunch the wizard later with the 'Setup Wizard' button.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -4698,10 +4703,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (input.SetupType == (int)MyFilms.SetupType.CentralClient)
       {
         #region setup for network client
-        #region load central server config, if it already exists
-        XmlConfig MyFilmsServer = new XmlConfig();
-        string myFilmsCentralConfigDir = MyFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
-        #endregion
 
         #region choose server location
         FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog
@@ -4756,15 +4757,17 @@ namespace MyFilmsPlugin.MyFilms.Configuration
             return;
           }
 
-          #region save central server config
-          MyFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", myFilmsCentralConfigDir);
-          MyFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
-          MyFilmsServer.Save();
-          #endregion
         }
         try
         {
           System.IO.File.Copy(serverConfigFile, localConfigFile, true);
+          
+          #region save central server config locally
+          myFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", myFilmsCentralConfigDir);
+          myFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
+          myFilmsServer.Save();
+          #endregion
+
           MessageBox.Show("Successfully copied remote config to local directory !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
           if (MessageBox.Show("MyFilms Setup will now reload the updated local MyFilms.xml config file !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Warning) == DialogResult.OK)
             MesFilmsSetup_Load(null, null); // reload setup config
@@ -4781,7 +4784,51 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         #endregion
         return;
       }
-      
+
+      if (input.SetupType == (int)MyFilms.SetupType.CentralMaster)
+      {
+        #region ask the user for the network location for the myfilms server directory
+
+        #region choose server share location
+        MessageBox.Show("Next, you need to choose the network path for your central MyFilms files.\nUse UNC path and make sure, it can be accessed from all your clients with the same name.\nAlso make sure, you have write access to the directory.\n\nExample: \n\\\\MyServer\\Mediashare\\MyFilms\n", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog
+          {
+            Description = "Select the network path for the central files (MyFilms root dir) \nThis will be used for folder presets and central config file. \nMake sure, you use UNC path that is acessible from all your clients ...",
+            ShowNewFolderButton = true
+          };
+        if (!String.IsNullOrEmpty(myFilmsCentralConfigDir))
+        {
+          folderBrowserDialog1.SelectedPath = myFilmsCentralConfigDir;
+          if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
+            folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
+        }
+        else
+          folderBrowserDialog1.SelectedPath = String.Empty;
+        if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
+        {
+          if (folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") != folderBrowserDialog1.SelectedPath.Length - 1)
+            folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
+          myFilmsCentralConfigDir = folderBrowserDialog1.SelectedPath;
+        }
+        #endregion
+
+        if (!System.IO.Directory.Exists(myFilmsCentralConfigDir))
+        {
+          MessageBox.Show("Your remote directory does not exist - cannot continue !\nPlease make sure the path is existing and accessible.", "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
+          return;
+        }
+        else
+        {
+          #region save central server config locally
+          myFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", myFilmsCentralConfigDir);
+          myFilmsServer.WriteXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
+          myFilmsServer.Save();
+          #endregion
+        }
+
+        #endregion
+      }
+
       #region preset the configuration !!!
 
       string newConfigName = input.ConfigName;
@@ -4826,13 +4873,33 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       {
         MessageBox.Show("Please select the path to your existing catalog file. \n (You have to export your movie collection to xml format in your catalog manager first to use it in myfilms.)", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
       }
+
+      string catalogDirectory = "";
+      switch (input.SetupType)
+      {
+        case (int)MyFilms.SetupType.Local:
+          catalogDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\Catalog";
+          break;
+        case (int)MyFilms.SetupType.CentralMaster:
+          catalogDirectory = Path.Combine(myFilmsCentralConfigDir, "Catalog");
+          if (!Directory.Exists(catalogDirectory))
+          {
+            try { Directory.CreateDirectory(catalogDirectory); }
+            catch { }
+          }
+          break;
+        case (int)MyFilms.SetupType.CentralClient:
+          break;
+        default:
+          break;
+      }
+      
       if (useExistingCatalog)
       {
-        string CatalogDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\Catalog";
         // Ask User for existing database file
         newCatalog = false;
         openFileDialog1.FileName = String.Empty;
-        openFileDialog1.InitialDirectory = Directory.Exists(CatalogDirectory) ? CatalogDirectory : "";
+        openFileDialog1.InitialDirectory = Directory.Exists(catalogDirectory) ? catalogDirectory : "";
         if (!string.IsNullOrEmpty(MesFilmsCat.Text) && MesFilmsCat.Text.Contains("\\"))
           openFileDialog1.InitialDirectory = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.LastIndexOf("\\") + 1);
         openFileDialog1.RestoreDirectory = true;
@@ -4848,17 +4915,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       }
       else
       {
-        string catalogDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\Catalog";
-        if (!Directory.Exists(catalogDirectory))
-        {
-          try { Directory.CreateDirectory(catalogDirectory); }
-          catch { }
-        }
-        string catalogName = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\Catalog\" + Config_Name.Text + ".xml";
+        string catalogName = catalogDirectory + @"\" + Config_Name.Text + ".xml";
         if (!System.IO.File.Exists(catalogName))
         {
-          var destXml = new XmlTextWriter(catalogName, System.Text.Encoding.Default);
-          destXml.Formatting = Formatting.Indented;
+          XmlTextWriter destXml = new XmlTextWriter(catalogName, System.Text.Encoding.Default)
+            {
+              Formatting = Formatting.Indented
+            };
           destXml.WriteStartDocument();
           destXml.WriteStartElement("AntMovieCatalog");
           destXml.WriteStartElement("Catalog");
@@ -4939,20 +5002,30 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       View_Dflt_Item.Text = GUILocalizeStrings.Get(1079819);
 
 
-      string fanartDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\Fanart";
-      if (!Directory.Exists(fanartDirectory))
+      string fanartDirectory = "";
+      switch (input.SetupType)
       {
-        try { Directory.CreateDirectory(fanartDirectory); }
-        catch { }
+        case (int)MyFilms.SetupType.Local:
+          fanartDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\Fanart";
+          break;
+        case (int)MyFilms.SetupType.CentralMaster:
+          fanartDirectory = Path.Combine(myFilmsCentralConfigDir, "Fanart");
+          break;
       }
+      if (!Directory.Exists(fanartDirectory)) { try { Directory.CreateDirectory(fanartDirectory); } catch { } }
       MesFilmsFanart.Text = fanartDirectory;
 
-      string artistImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\PersonImages";
-      if (!Directory.Exists(artistImagesDirectory))
+      string artistImagesDirectory = "";
+      switch (input.SetupType)
       {
-        try { Directory.CreateDirectory(artistImagesDirectory); }
-        catch { }
+        case (int)MyFilms.SetupType.Local:
+          artistImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsThumbsPath) + @"\PersonImages";
+          break;
+        case (int)MyFilms.SetupType.CentralMaster:
+          artistImagesDirectory = Path.Combine(myFilmsCentralConfigDir, "PersonImages");
+          break;
       }
+      if (!Directory.Exists(artistImagesDirectory)) { try { Directory.CreateDirectory(artistImagesDirectory); } catch { } }
       MesFilmsImgArtist.Text = artistImagesDirectory;
       pictureBoxDefaultCover.ImageLocation = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Cover2.jpg"; //DefaultCover.Text = MyFilmsSettings.GetPath(MyFilmsSettings.Path.DefaultImages) + @"\Cover.jpg";
 
@@ -4962,10 +5035,23 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       chkDfltArtist.Checked = true; // Use default person cover if missing artwork...
 
       string viewImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ViewImages);
-      if (!Directory.Exists(viewImagesDirectory))
+      switch (input.SetupType)
       {
-        try { Directory.CreateDirectory(viewImagesDirectory); }
-        catch { }
+        case (int)MyFilms.SetupType.Local:
+          viewImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ViewImages);
+          if (!Directory.Exists(viewImagesDirectory)) { try { Directory.CreateDirectory(viewImagesDirectory); } catch { } }
+          break;
+        case (int)MyFilms.SetupType.CentralMaster:
+          viewImagesDirectory = Path.Combine(myFilmsCentralConfigDir, "ViewImages");
+          try
+          {
+            if (!Directory.Exists(viewImagesDirectory)) { try { Directory.CreateDirectory(viewImagesDirectory); } catch { } }
+            // copy local viewimages to server
+            string localViewImagesDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ViewImages);
+            Helper.CopyFolder(localViewImagesDirectory, viewImagesDirectory, false); // copy files only, if missing in destination dir
+          }
+          catch (Exception) { }
+          break;
       }
 
       MesFilmsViews.Text = viewImagesDirectory;
@@ -5073,9 +5159,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         case 10:
           MessageBox.Show("Now choose the folder containing your movies.", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-          string samplemovies = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\SampleMovies";
-          if (System.IO.Directory.Exists(samplemovies))
-            folderBrowserDialog1.SelectedPath = samplemovies;
+          string moviepath = "";
+          switch (input.SetupType)
+          {
+            case (int)MyFilms.SetupType.Local:
+              moviepath = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\SampleMovies";
+              break;
+            case (int)MyFilms.SetupType.CentralMaster:
+              moviepath = Path.Combine(myFilmsCentralConfigDir, "Movies");
+              break;
+          }
+          if (!Directory.Exists(moviepath)) { try { Directory.CreateDirectory(moviepath); } catch { } }
+
+          if (System.IO.Directory.Exists(moviepath))
+            folderBrowserDialog1.SelectedPath = moviepath;
 
           if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
           {
@@ -5275,29 +5372,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (input.SetupType == (int)MyFilms.SetupType.CentralMaster)
       {
         #region upload to network if "central master" setup was chosen
-        #region load central server config, if it already exists
-        XmlConfig myFilmsServer = new XmlConfig();
-        string myFilmsCentralConfigDir = myFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
-        #endregion
-
-        #region choose server location
-        FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
-        if (!String.IsNullOrEmpty(myFilmsCentralConfigDir))
-        {
-          folderBrowserDialog1.SelectedPath = myFilmsCentralConfigDir;
-          if (folderBrowserDialog1.SelectedPath.LastIndexOf("\\") == folderBrowserDialog1.SelectedPath.Length)
-            folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath.Substring(folderBrowserDialog1.SelectedPath.Length - 1);
-        }
-        else
-          folderBrowserDialog1.SelectedPath = String.Empty;
-        folderBrowserDialog1.Description = "Path for Central Config File";
-        if (folderBrowserDialog1.ShowDialog(this) == DialogResult.OK)
-        {
-          if (folderBrowserDialog1.SelectedPath.LastIndexOf(@"\") != folderBrowserDialog1.SelectedPath.Length - 1)
-            folderBrowserDialog1.SelectedPath = folderBrowserDialog1.SelectedPath + "\\";
-          myFilmsCentralConfigDir = folderBrowserDialog1.SelectedPath;
-        }
-        #endregion
 
         #region upload server config for client
         string serverConfigFile = myFilmsCentralConfigDir + @"\MyFilms.xml";
@@ -5358,10 +5432,12 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void butNew_Click(object sender, EventArgs e)
     {
-      var input = new MyFilmsInputBox();
-      input.Text = "MyFilms - New Catalog";
-      input.CatalogTypeSelectedIndex = 0; // preset to ANT MC 
-      input.CatalogType = "Ant Movie Catalog (V3.5.1.2)"; // preset to Ant Movie Catalog (V3.5.1.2)
+      MyFilmsInputBox input = new MyFilmsInputBox
+        {
+          Text = "MyFilms - New Catalog",
+          CatalogTypeSelectedIndex = 0,
+          CatalogType = "Ant Movie Catalog (V3.5.1.2)"
+        };
       input.ShowDialog(this);
       string newConfig_Name = input.ConfigName;
       string newCatalogType = input.CatalogType;
