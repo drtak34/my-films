@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <profile>
   <section name="ID0000">
-    <entry name="LogosPath">C:\ProgramData\Team MediaPortal\MediaPortal\Skin\defaultwide\media\logos</entry>
-    <entry name="LogoPresets">Use MP logos</entry>
+    <entry name="LogosPath">C:\ProgramData\Team MediaPortal\MediaPortal\Thumbs\MyFilms\DefaultLogos</entry>
+    <entry name="LogoPresets">Use MyFilms Logo Pack</entry>
     <entry name="Spacing">2</entry>
   </section>
   <section name="ID2001">
@@ -56,6 +56,21 @@
     <entry name="ID2001_47">Subtitles;filled;;;;;;Subtitles.png</entry>
     <entry name="ID2001_48">Subtitles;filled;;;;;;Subtitles.png</entry>
     <entry name="ID2001_49">Subtitles;not filled;;;;;;NoSubtitles.png</entry>
+    <entry name="ID2001_50">Certification;contains;0;;;;;0.png</entry>
+    <entry name="ID2001_51">Certification;contains;6;;;;;6.png</entry>
+    <entry name="ID2001_52">Certification;contains;12;and;Certification;not contains;12a;12.png</entry>
+    <entry name="ID2001_53">Certification;contains;12a;;;;;12A.png</entry>
+    <entry name="ID2001_54">Certification;contains;15;;;;;15.png</entry>
+    <entry name="ID2001_55">Certification;contains;16;;;;;16.png</entry>
+    <entry name="ID2001_56">Certification;contains;18;;;;;18.png</entry>
+    <entry name="ID2001_57">Certification;contains;g;and;Certification;certification;pg;G.png</entry>
+    <entry name="ID2001_58">Certification;contains;nc-17;;;;;NC-17.png</entry>
+    <entry name="ID2001_59">Certification;contains;pg;and;Certification;certification; pg-13 ;PG.png</entry>
+    <entry name="ID2001_60">Certification;contains;pg-13;;;;;PG-13.png</entry>
+    <entry name="ID2001_61">Certification;contains;r;and;Certification;certification;r18;R.png</entry>
+    <entry name="ID2001_62">Certification;contains;r18;;;;;R18.png</entry>
+    <entry name="ID2001_63">Certification;contains;u;and;Certification;not contains;uc;U.png</entry>
+    <entry name="ID2001_64">Certification;contains;uc;;;;;Uc.png</entry>
   </section>
   <section name="ID2002">
     <entry name="ID2002_0">Category;contains;action;;;;;Action.png</entry>
