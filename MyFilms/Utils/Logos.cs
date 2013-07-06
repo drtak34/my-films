@@ -29,6 +29,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Data;
   using System.Drawing;
   using System.Linq;
+  using System.Text.RegularExpressions;
 
   using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
@@ -274,6 +275,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       switch (compar)
       {
+        case "regex":
+          Match match = Regex.Match(r[field].ToString(), value, RegexOptions.IgnoreCase);
+          if (match.Success) return true;
+          break;
         case "equal":
           if (r[field].ToString().ToLower() == value.ToLower())
             return true;
