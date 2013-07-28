@@ -72,6 +72,7 @@
     <entry name="ID2001_62">AudioChannelCount;contains;8;;;;;7.1.png</entry>
     <entry name="ID2001_63">Subtitles;filled;;;;;;Subtitles.png</entry>
     <entry name="ID2001_64">Subtitles;not filled;;;;;;NoSubtitles.png</entry>
+    <entry name="ID2001_65">Edition;contains;3D;or;Source;regex;\(3D Edition\);3D.png</entry>
   </section>
   <section name="ID2002">
     <entry name="ID2002_0">Category;contains;action;;;;;Action.png</entry>
