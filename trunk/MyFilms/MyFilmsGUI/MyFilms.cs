@@ -6550,6 +6550,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   LogMyFilms.Warn("GetImagesforTMDBFilmList() - OnlineMovie object is 'null' for movie '" + item.Label + "'");
                   continue;
                 }
+                if (string.IsNullOrEmpty(movie.MovieSearchResult.backdrop_path))
+                {
+                  LogMyFilms.Warn("GetImagesforTMDBFilmList() - backdrop_path is 'empty' for movie '" + item.Label + "'");
+                  continue;
+                }
                 #endregion
 
                 string fanartUrl = tmdbConf.images.base_url + "original" + movie.MovieSearchResult.backdrop_path;
