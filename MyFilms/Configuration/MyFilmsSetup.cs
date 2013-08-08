@@ -4587,7 +4587,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     private void LogosPresetSelect()
     {
       //"Use Logos of currently selected skin",
-      //"Use MP logos",
       //"Use MyFilms Logo Pack",
       //"Define your path to logo image files"});
       switch (this.comboBoxLogoPresets.Text)
@@ -4615,7 +4614,6 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           this.btnLogosPath.Visible = false;
           this.lblLogosPath.Visible = false;
           break;
-        case "Use MP logos":
         case "Use Blue3Wide logos":
           this.txtLogosPath.Text = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\defaultwide\media\logos";
           this.StoreFullLogoPath = false;

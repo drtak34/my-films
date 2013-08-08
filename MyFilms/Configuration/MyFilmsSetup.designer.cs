@@ -1431,7 +1431,6 @@
       this.comboBoxLogoPresets.FormattingEnabled = true;
       this.comboBoxLogoPresets.Items.AddRange(new object[] {
             "Use Logos of currently selected skin",
-            "Use MP logos",
             "Use MyFilms Logo Pack",
             "Define your path to logo image files"});
       this.comboBoxLogoPresets.Location = new System.Drawing.Point(220, 8);
@@ -3476,7 +3475,7 @@
       // 
       this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 1);
       this.toolStripLabel1.Name = "toolStripLabel1";
-      this.toolStripLabel1.Size = new System.Drawing.Size(44, 13);
+      this.toolStripLabel1.Size = new System.Drawing.Size(44, 15);
       this.toolStripLabel1.Text = "von {0}";
       this.toolStripLabel1.ToolTipText = "Total number of Items.";
       // 
