@@ -75,10 +75,12 @@ Public Class Form1
         chkImportOnInternetFailInGuiMode.Visible = False
         cbManualInternetLookupAlwaysPrompt.Visible = False
         chkManualDontAskInteractive.Visible = False
+        btnImportFromDrive.Visible = False
 #Else
         ToolStripMenuItemDebug.Visible = True
         ToolStripMenuItemOptions.Visible = True
         BtnImportWatcher.Visible = True
+        btnImportFromDrive.Visible = True
 #End If
 
 
@@ -3605,6 +3607,12 @@ Public Class Form1
 
     Private Sub cbManualInternetLookupBehaviour_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbManualInternetLookupBehaviour.SelectedIndexChanged
         ApplyManualUseCasesToSettings()
+    End Sub
+
+    Private Sub btnImportFromDrive_Click(sender As System.Object, e As System.EventArgs) Handles btnImportFromDrive.Click
+        Dim DriveLabel As String = DrvLabel("")
+        Dim DiscID As String = GetIdentifier(VideoFormat.DVD, "")
+        MsgBox(("DriveLabel = '" + DriveLabel + "', DiscID = '" & "'" & DiscID), MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 End Class
 

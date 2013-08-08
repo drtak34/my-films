@@ -6,6 +6,10 @@ Imports System.Globalization
 Imports System.ComponentModel
 Imports System.Threading
 Imports System.Windows.Forms
+Imports System.Security.Cryptography
+Imports DirectShowLib
+Imports DirectShowLib.Dvd
+Imports Microsoft.VisualBasic.Logging
 Imports MediaPortal.Configuration
 Imports System.Xml
 Imports System.Timers
@@ -32,12 +36,205 @@ Public Module Module1
         WriteBuffer
     End Enum
 
-    Public Function GetFolderPath(ByVal FileName As String) As String
+    Private Function GetFolderPath(ByVal FileName As String) As String
         ' returns the directory containing the file
         Dim ReturnValue As New DirectoryInfo(FileName)
         Return ReturnValue.Parent.FullName
     End Function
 
+    Public Function DrvLabel(ByVal MediaPath As String) As String
+        Dim Label As String = ""
+
+        ' Try to get DVD-Drive-Label
+        Dim _FilePath As String = MediaPath
+        Dim DriveLetter As String = String.Empty
+        If _FilePath.IndexOf(":") > 0 Then
+            'We're scanning a drive not a UNC, check what drive:
+            DriveLetter = _FilePath.Substring(0, _FilePath.IndexOf(":") + 1) ' e.g. C:
+            Dim myObjectSearcher As System.Management.ManagementObjectSearcher
+            Dim myObject As System.Management.ManagementObject
+            myObjectSearcher = New System.Management.ManagementObjectSearcher("SELECT * FROM Win32_CDROMDrive")
+            For Each myObject In myObjectSearcher.Get
+                If myObject("MediaLoaded") = "True" Then
+                    If myObject("Drive").ToString.ToLower = DriveLetter.ToLower Then
+                        Label = myObject("VolumeName").ToString
+                    End If
+                End If
+            Next
+
+            If Label = String.Empty Then ' Try to get Volumelabel from Disk Drive
+                DriveLetter = DriveLetter.Substring(0, 2) ' e.g. C:\
+                Dim allDrives() As DriveInfo = DriveInfo.GetDrives()
+                Dim d As DriveInfo
+                For Each d In allDrives
+                    If d.IsReady = True Then
+                        If d.Name.ToString.ToLower.Substring(0, 2) = DriveLetter.ToLower Then
+                            Label = d.VolumeLabel ' d.DriveFormat, d.DriveType
+                        End If
+                    End If
+                Next
+            End If
+        Else ' not a drive name, but UNC path - so populate with UNC server name
+            If _FilePath.StartsWith("\\") Then
+                Dim tString As String
+                tString = _FilePath.Substring(2)
+                If tString.IndexOf("\") > 0 Then
+                    Label = _FilePath.Substring(0, tString.IndexOf("\"))
+                End If
+            End If
+        End If
+        Return Label
+    End Function
+
+    Public Enum VideoFormat
+        DVD = 0
+        Bluray = 1
+        File = 2
+    End Enum
+
+    Public Function GetIdentifier(self As VideoFormat, videoPath As String) As String
+        Dim hashID As String = Nothing
+        If self = VideoFormat.DVD Then
+            ' get the path to the video_ts folder
+            Dim vtsPath As String = videoPath.ToLower().Replace("\video_ts.ifo", "\")
+            ' This will get the microsoft generated DVD Disc ID
+            Try
+                ' get the disc id using the DirectShowLib method
+                Dim dvdInfo As IDvdInfo2 = DirectCast(New DVDNavigator(), IDvdInfo2)
+                Dim discID As Long = 0
+                dvdInfo.GetDiscID(vtsPath, discID)
+                ' if we got a disc id, we convert it to a hexadecimal string
+                If discID <> 0 Then
+                    hashID = Convert.ToString(discID, 16)
+                End If
+            Catch e As Exception
+                'If e.[GetType]() = GetType(ThreadAbortException) Then
+                'Throw e
+                'End If
+                'Log("Disc ID: Failed, Path='" & vtsPath & "', Format='" & self.ToString() & "' ", e)
+            End Try
+        ElseIf self = VideoFormat.Bluray Then
+            ' Standard for the Bluray Disc ID is to compute a SHA1 hash from the key file (will only work for retail disks)
+            Dim path As String = videoPath.ToLower()
+            If path.EndsWith("bdmv\index.bdmv") Then
+                Dim keyFilePath As String = path.Replace("bdmv\index.bdmv", "AACS\Unit_Key_RO.inf")
+                If File.Exists(keyFilePath) Then
+                    Dim keyFile As New FileInfo(keyFilePath)
+                    hashID = keyFile.ComputeSHA1Hash()
+                ElseIf File.Exists(videoPath) Then
+                    hashID = String.Empty
+                End If
+            End If
+        ElseIf self = VideoFormat.File Then
+            Dim file__1 As New FileInfo(videoPath)
+            hashID = file__1.ComputeSmartHash()
+        End If
+
+        ' Log the result
+        If [String].IsNullOrEmpty(hashID) Then
+            'logger.Debug("Failed Identifier: Path='{0}', Format='{1}' ", videoPath, self)
+        Else
+            'logger.Debug("Identifier: Path='{0}', Format='{1}', Hash='{2}' ", videoPath, self, hashID)
+        End If
+
+        ' Return the result
+        Return hashID
+    End Function
+
+    ''' <summary>
+    ''' Generates a SHA1-Hash from a given filepath
+    ''' </summary>
+    ''' <param name="filePath">path to the file</param>
+    ''' <returns>hash as an hexadecimal string </returns>
+    <System.Runtime.CompilerServices.Extension()>
+    Private Function ComputeSHA1Hash(self As FileInfo) As String
+        Dim hashHex As String = Nothing
+        If self.Exists Then
+            Dim file As Stream = Nothing
+            Try
+                file = self.OpenRead()
+                Dim hashObj As HashAlgorithm = New SHA1Managed()
+                Dim hash As Byte() = hashObj.ComputeHash(file)
+                hashHex = hash.ToHexString()
+                'logger.Debug("SHA1: Success, File='{0}', Hash='{1}'", self.FullName, hashHex)
+            Catch e As Exception
+                'If e.[GetType]() = GetType(ThreadAbortException) Then
+                'Throw e
+                'End If
+
+                'logger.DebugException("SHA1: Failed, File='" & Convert.ToString(self.FullName) & "' ", e)
+            Finally
+                If file IsNot Nothing Then
+                    file.Close()
+                End If
+            End Try
+        Else
+            ' File does not exist
+            'logger.Debug("SHA1: Failed, File='{0}', Reason='File is not available'", self.FullName)
+        End If
+
+        ' Return
+        Return hashHex
+    End Function
+
+    ''' <summary>
+    ''' Converts a byte array to a hexadecimal string (hash)
+    ''' </summary>
+    ''' <param name="self"></param>
+    ''' <returns>hexadecimal string</returns>
+    <System.Runtime.CompilerServices.Extension()>
+    Private Function ToHexString(self As Byte()) As String
+        Dim hexBuilder As New StringBuilder()
+        For i As Integer = 0 To self.Length - 1
+            hexBuilder.Append(self(i).ToString("x2"))
+        Next
+        Return hexBuilder.ToString()
+    End Function
+
+    ''' <summary>
+    ''' Calculates a unique hash for the contents of the file.
+    ''' Use this method to compute hashes of large files.
+    ''' </summary>
+    ''' <param name="self"></param>
+    ''' <returns>a unique hash or null when error</returns>
+    <System.Runtime.CompilerServices.Extension()> _
+    Private Function ComputeSmartHash(self As FileInfo) As String
+        Dim hexHash As String = Nothing
+        Dim bytes As Byte() = Nothing
+        Try
+            Using input As Stream = self.OpenRead()
+                Dim lhash As ULong
+                Dim streamsize As Long
+                streamsize = input.Length
+                lhash = CULng(streamsize)
+
+                Dim i As Long = 0
+                Dim buffer As Byte() = New Byte(8 - 1) {}
+                input.Position = 0
+                While i < 65536 \ 8 AndAlso (input.Read(buffer, 0, 8) > 0)
+                    i += 1
+                    lhash += BitConverter.ToUInt64(buffer, 0)
+
+                End While
+
+                input.Position = Math.Max(0, streamsize - 65536)
+                i = 0
+                While i < 65536 \ 8 AndAlso (input.Read(buffer, 0, 8) > 0)
+                    i += 1
+                    lhash += BitConverter.ToUInt64(buffer, 0)
+
+                End While
+                bytes = BitConverter.GetBytes(lhash)
+                Array.Reverse(bytes)
+
+                ' convert to hexadecimal string
+                hexHash = bytes.ToHexString()
+            End Using
+        Catch e As Exception
+            'logger.DebugException("Error computing smart hash: ", e)
+        End Try
+        Return hexHash
+    End Function
     Public Function GetMovieNameFromDVDFolderPath(ByVal FileName As String) As String
         'Function to try and guess the correct movie name for a DVD image stored in a folder.
         'DVD files may be stored directly in a folder with the name of the movie.
