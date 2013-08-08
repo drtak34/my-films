@@ -618,7 +618,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       BrowseTheWeb = 54537689,
       OnlineVideos = 4755,
       SubCentral = 84623,
-      BluRayPlayerLauncher = 8080
+      BluRayPlayerLauncher = 8080,
+      MpNzb = 3847
     }
 
     public enum ViewContext
@@ -11014,7 +11015,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               choice.Add("searchmyfilms");
             }
           }
+        
+          if (MyFilmsDetail.ExtendedStartmode("Context: NZB Context Search for MyFilms (local)"))
+          {
+            if (Helper.IsMpNzbAvailableAndEnabled)
+            {
+              dlg.Add("Search NZBs ... "); // Search NZBs ... 
+              choice.Add("searchnzbs");
+            }
+          }
         }
+
         #endregion
 
         #region Moviecontext
@@ -12139,6 +12150,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             SearchMoviesbyProperties(true, dlgmenu.SelectedLabelText, null);
 
+            GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+            dlg.DeInit();
+            break;
+            #endregion
+          }
+
+        case "searchnzbs":
+          {
+            #region NZB Menu
+            string searchObj = facadeFilms.SelectedListItem.Label;
+            LogMyFilms.Debug("Starting mpNZB with '" + searchObj + "'");
+            GUIWindowManager.ActivateWindow((int)MyFilms.ExternalPluginWindows.MpNzb, searchObj);
             GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
             dlg.DeInit();
             break;
