@@ -889,6 +889,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
     }
 
+    internal static bool IsMpNzbAvailableAndEnabled
+    {
+      get
+      {
+        bool status = Helper.IsAssemblyAvailable("mpNZB", new Version(1, 5, 5, 0), true) && IsPluginEnabled("mpNZB");
+        // LogMyFilms.Debug("Helper() - mpNZB available and enabled = '" + status + "'");
+        return status;
+      }
+    }
+
+
     internal static string GetTraktUser()
     {
       if (IsTraktAvailableAndEnabled) 
