@@ -53,7 +53,7 @@
       <description>Global Filter Icons group</description>
       <type>group</type>
       <posX>22</posX>
-      <posY>60</posY>
+      <posY>80</posY>
       <layout>StackLayout(5,Horizontal,true)</layout>
       <dimColor>ffffffff</dimColor>
       <control>

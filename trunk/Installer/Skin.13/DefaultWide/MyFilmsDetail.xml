@@ -4,8 +4,6 @@
   <defaultcontrol>10000</defaultcontrol>
   <allowoverlay>player.hasmedia+!control.hasfocus(10099)+!control.hasfocus(10100)</allowoverlay>
   <controls>
-  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
-    <import>MyFilms.common.window.xml</import>        
 
     <!-- DUMMY LABEL (Movie Thumbs) - MyFilms 6.1.0  -->
     <control>
@@ -1851,5 +1849,7 @@
       <animation effect="fade" time="250">WindowOpen</animation>
       <animation effect="fade" time="250">WindowClose</animation>
     </control>
+  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
+    <import>MyFilms.common.window.xml</import>        
   </controls>
 </window>
