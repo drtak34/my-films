@@ -132,9 +132,6 @@
       <animation effect="fade" time="300">hidden</animation>
     </control>
 	
-  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
-    <import>MyFilms.common.window.xml</import>
-    <import>common.time.xml</import>
     <control>
       <description>General Overlay</description>
       <id>0</id>
@@ -644,7 +641,7 @@
       <description>UnWatched Icon</description>
       <id>1</id>
       <posX>493</posX>
-      <posY>175</posY>
+      <posY>165</posY>
       <width>18</width>
       <height>18</height>
       <texture>MyFilms\overlayunwatched.png</texture>
@@ -657,7 +654,7 @@
       <description>Watched Icon</description>
       <id>1</id>
       <posX>493</posX>
-      <posY>175</posY>
+      <posY>165</posY>
       <width>18</width>
       <height>18</height>
       <texture>MyFilms\overlaywatched.png</texture>
@@ -669,10 +666,10 @@
 	  <description>User Watched Count</description>
 	  <id>1</id>
       <posX>475</posX>
-      <posY>190</posY>
+      <posY>180</posY>
       <width>54</width>
       <height>40</height>
-      <textcolor>ff6FAFE1</textcolor>
+      <colordiffuse>ff6FAFE1</colordiffuse>
       <font>font10</font>
 	  <shadowAngle>45</shadowAngle>
 	  <shadowDistance>2</shadowDistance>
@@ -899,6 +896,10 @@
       <colordiffuse>ffffffff</colordiffuse>
       <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
     </control>
+    
+  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
+    <import>MyFilms.common.window.xml</import>
+    <import>common.time.xml</import>
 
     <!-- Facade Layouts (keep after cover/view image controls for correct display of images) -->
     <import>MyFilms.facade.xml</import>

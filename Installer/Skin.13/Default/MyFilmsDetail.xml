@@ -4,8 +4,6 @@
   <defaultcontrol>10000</defaultcontrol>
   <allowoverlay>player.hasmedia+!control.hasfocus(10099)+!control.hasfocus(10100)</allowoverlay>
   <controls>
-  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
-    <import>MyFilms.common.window.xml</import>        
 
     <!-- DUMMY LABEL (Movie Thumbs) - MyFilms 6.1.0  -->
     <control>
@@ -363,7 +361,7 @@
       <description>UnWatched Icon</description>
       <id>1</id>
       <posX>493</posX>
-      <posY>175</posY>
+      <posY>165</posY>
       <width>18</width>
       <height>18</height>
       <texture>MyFilms\overlayunwatched.png</texture>
@@ -376,19 +374,19 @@
       <description>Watched Icon</description>
       <id>1</id>
       <posX>493</posX>
-      <posY>175</posY>
+      <posY>165</posY>
       <width>18</width>
       <height>18</height>
       <texture>MyFilms\overlaywatched.png</texture>
       <keepaspectratio>yes</keepaspectratio>
-      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)+!string.contains(#myfilms.user.watched.value)</visible>
+      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)+string.contains(#myfilms.user.watched.value)</visible>
     </control>
 	<control>
 	  <type>label</type>
 	  <description>User Watched Count</description>
 	  <id>1</id>
       <posX>475</posX>
-      <posY>190</posY>
+      <posY>180</posY>
       <width>54</width>
       <height>40</height>
       <textcolor>ivory</textcolor>
@@ -1859,6 +1857,8 @@
       <animation effect="fade" time="250">WindowClose</animation>
       <animation effect="zoom" time="250" tween="cubic" easing="inout" start="1,1" end="100,100" reversible="true" condition="Control.HasFocus(10001)+Control.IsVisible(45)">conditional</animation>
     </control>
+  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
+    <import>MyFilms.common.window.xml</import>        
   </controls>
 </window>
 

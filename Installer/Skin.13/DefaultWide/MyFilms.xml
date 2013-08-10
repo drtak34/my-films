@@ -132,9 +132,6 @@
       <animation effect="fade" time="300">hidden</animation>
     </control>
 	
-  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
-    <import>MyFilms.common.window.xml</import>
-    <import>common.time.xml</import>
     <control>
       <description>General Overlay</description>
       <id>0</id>
@@ -168,7 +165,7 @@
       <colordiffuse>60ffffff</colordiffuse>
       <visible>facadeview.list</visible>
     </control>
-
+    
     <!-- HIDDEN SIDE MENU -->
     <control>
       <type>actiongroup</type>
@@ -898,7 +895,11 @@
       <visible>!control.isvisible(34)+[facadeview.list|facadeview.album]+string.equals(#myfilms.user.sourcetrailer.isonline,unknown)</visible>
     </control>
 
-    <!-- Facade Layouts (keep after cover/view image controls for correct display of images) -->
+  <!-- MyFilms Common Window is required to support unique itemcounts/skin properties etc.  -->
+    <import>MyFilms.common.window.xml</import>
+    <import>common.time.xml</import>
+    
+<!-- Facade Layouts (keep after cover/view image controls for correct display of images) -->
     <import>MyFilms.facade.xml</import>
     <import>MyFilmsLatestMedia.xml</import>
     <control>
