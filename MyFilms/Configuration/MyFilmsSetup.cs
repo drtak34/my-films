@@ -98,7 +98,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml"))
         RunWizardAfterInstall = true;
       textBoxPluginName.Text = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginName", "Films");
-      MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/anable normal vs. testfeatures
+      MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/enable normal vs. testfeatures
       LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
 
       if (MyFilms_PluginMode == "normal") // disable Trakt and other controls in standardmode
@@ -136,16 +136,21 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         chkAMCUwatchScanFolders.Visible = false;
         labelAMCUstartdelay.Visible = false;
         numericUpDownAMCUscanStartDelay.Visible = false;
+        btnTestMode.Enabled = false;
+        btnTestMode.ResetBackColor();
+
       }
-      //else
-      //{
-      //  //show a tab by adding it to the TabPages collection
-      //  if (this.tabPageSave != null)
-      //  {
-      //    int loc = General.SelectedIndex;
-      //    this.General.TabPages.Insert(loc, this.tabPageSave);
-      //  }
-      //}
+      else
+      {
+        btnTestMode.Enabled = true;
+        btnTestMode.BackColor = System.Drawing.Color.OrangeRed;
+        //  //show a tab by adding it to the TabPages collection
+        //  if (this.tabPageSave != null)
+        //  {
+        //    int loc = General.SelectedIndex;
+        //    this.General.TabPages.Insert(loc, this.tabPageSave);
+        //  }
+      }
       #endregion
 
       //// load about labels
@@ -767,6 +772,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (Config_Menu.Checked) XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Default_Config", "");
 
       XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "Menu_Config", Config_Menu.Checked);
+      XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PluginMode", MyFilms_PluginMode);
       XmlConfig.WriteXmlConfig("MyFilms", "MyFilms", "PreCaching", Config_EnablePreload.Checked);
 
       XmlConfig.WriteXmlConfig("MyFilms", Config_Name.Text, "Logos", chkLogos.Checked);
@@ -6648,6 +6654,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     private void AntViewFilterSaveString_TextChanged(object sender, EventArgs e)
     {
 
+    }
+
+    private void btnTestMode_Click(object sender, EventArgs e)
+    {
+      if (btnTestMode.Enabled)
+      {
+        btnTestMode.BackColor = System.Drawing.Color.OrangeRed;
+        MyFilms_PluginMode = "test";
+      }
+      else
+      {
+        btnTestMode.ResetBackColor();
+        MyFilms_PluginMode = "normal";
+      }
     }
   }
 

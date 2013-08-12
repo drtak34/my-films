@@ -233,6 +233,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       External,
       BluRayPlayerLauncher
     }
+
+    public enum PluginMode
+    {
+      Normal = 0,
+      Test = 1,
+      Extended = 2
+    }
     #endregion
 
     public static event WatchedEventDelegate WatchedItem;
@@ -950,7 +957,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewMenu.Add("delete");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Detail context menu - moviepersonlisst"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Detail context menu - moviepersonlisst"))
           {
             dlgmenu.Add(GUILocalizeStrings.Get(1079879)); //Search Infos to related persons (load persons in facadeview) - only available in filmlist
             choiceViewMenu.Add("moviepersonlist");
@@ -980,7 +987,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
             choiceViewMenu.Add("trakt");
 
-            if (MyFilmsDetail.ExtendedStartmode("Detail ontext menu - new Trakt internal menu"))
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Detail ontext menu - new Trakt internal menu"))
             {
               dlgmenu.Add(GUILocalizeStrings.Get(10798775) + " (test internal menu)"); // Trakt ...
               choiceViewMenu.Add("traktinternal");
@@ -1042,7 +1049,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
           choiceViewMenu.Add("playtraileronlinevideosimdbtrailer");
 
-          if (ExtendedStartmode("Details context: FilmStarts.de und alll OnlineVideoSites menu ..."))
+          if (ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: FilmStarts.de und all OnlineVideoSites menu ..."))
           {
             dlgmenu.Add("FilmStarts.de (OnlineVideos)");
             choiceViewMenu.Add("playtraileronlinevideosfilmstarts");
@@ -1059,7 +1066,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgmenu.Add(GUILocalizeStrings.Get(10798725)); //delete Trailer entries from DB record
             choiceViewMenu.Add("trailer-delete");
 
-            if (ExtendedStartmode("Details context: Trailer Download"))
+            if (ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: Trailer Download"))
             {
               dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
               choiceViewMenu.Add("trailer-imdb");
@@ -1270,7 +1277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgmenu.Add(GUILocalizeStrings.Get(10798642)); // Update by Property (choosen within the UPdate List Property
           choiceViewMenu.Add("updproperty");
 
-          if (ExtendedStartmode("Details context: remove all details"))
+          if (ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: remove all details"))
           {
             dlgmenu.Add(GUILocalizeStrings.Get(10798795)); // remove all movie details (selected film)
             choiceViewMenu.Add("updremovealldetails");
@@ -1283,7 +1290,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewMenu.Add("fileselect");
           }
 
-          if (ExtendedStartmode("Details context: update mediainfos"))
+          if (ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Details context: update mediainfos"))
           {
             dlgmenu.Add(GUILocalizeStrings.Get(10798708)); //update mediainfos
             choiceViewMenu.Add("updmediainfos");
@@ -1431,7 +1438,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgmenu.Add(GUILocalizeStrings.Get(10798761)); // Load Covers (TMDB)
           choiceViewMenu.Add("tmdbposter");
 
-          if (ExtendedStartmode("Details context: Thumb creator)"))
+          if (ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Details context: Thumb creator)"))
           {
             dlgmenu.Add(GUILocalizeStrings.Get(10798728));
             //Create Thumb from movie - if no cover available, e.g. with documentaries
@@ -1440,7 +1447,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (MyFilms.conf.StrFanart)
           {
-            if (ExtendedStartmode("Details context: Fanart Manager ..."))
+            if (ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Details context: Fanart Manager ..."))
             {
               dlgmenu.Add(GUILocalizeStrings.Get(10798766)); // Fanart Manager ...
               choiceViewMenu.Add("fanartmanager");
@@ -7900,7 +7907,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return;
           }
           // Load OnlineVideo Plugin with Searchparameters for YouTube and movie to Search ... OV reference for parameters: site:<sitename>|category:<categoryname>|search:<searchstring>|VKonfail:<true,false>|return:<Locked,Root>
-          //if (PluginManager.IsPluginNameEnabled2("OnlineVideos"))
           if (Helper.IsOnlineVideosAvailableAndEnabled)
           {
             string title = GetSearchTitle(MyFilms.r, MyFilms.conf.StrIndex, "");
@@ -10195,11 +10201,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       setGUIProperty(name, string.Empty, log);
     }
 
-    public static bool ExtendedStartmode(string disabledfeature)
+    public static bool ExtendedStartmode(PluginMode pluginMode, string disabledfeature)
     {
-      if (Configuration.PluginMode != "normal") return true;
-      else LogMyFilms.Debug("Disabled feature due to startmode 'normal': '" + disabledfeature + "'");
-      return false;
+      switch (pluginMode)
+      {
+        case (PluginMode.Test): // for public user testing
+          if (Configuration.PluginMode == "extended") return true; 
+          if (Configuration.PluginMode == "test") return true;
+          else LogMyFilms.Debug("PluginMode: '{0}', disabled feature: '{1}", Configuration.PluginMode, disabledfeature);
+          return false;
+
+        case (PluginMode.Extended): // for developer features only - set manually in config
+          if (Configuration.PluginMode == "extended") return true;
+          else LogMyFilms.Debug("PluginMode: '{0}', disabled feature: '{1}", Configuration.PluginMode, disabledfeature);
+          return false;
+
+        case (PluginMode.Normal):
+        default:
+          return true;
+      }
     }
 
     public static bool IsInternetConnectionAvailable()
