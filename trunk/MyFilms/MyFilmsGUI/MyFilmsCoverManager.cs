@@ -401,7 +401,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlg.Add(pItem);
             pItem.ItemId = (int)MenuAction.MenuDownload;
 
-            if (MyFilmsDetail.ExtendedStartmode("CoverManager: Submenu 'create covers ...'"))
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "CoverManager: Submenu 'create covers ...'"))
             {
               pItem = new GUIListItem(GUILocalizeStrings.Get(10799208)); // Create Covers ...
               dlg.Add(pItem);
@@ -443,7 +443,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region submenu create covers ...
             dlg.SetHeading(GUILocalizeStrings.Get(10799208));  // Create Covers ...
 
-            if (MyFilmsDetail.ExtendedStartmode("CoverManager: Creation of Covers from Movie not yet supported"))
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "CoverManager: Creation of Covers from Movie not yet supported"))
             {
               pItem = new GUIListItem(GUILocalizeStrings.Get(10798728)); // create cover from movie ...
               dlg.Add(pItem);

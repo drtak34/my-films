@@ -2161,7 +2161,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               (dc.ColumnName != null && dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" &&
                dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition" && dc.ColumnName != BaseMesFilms.MultiUserStateField && dc.ColumnName != "VirtualPathTitle")
               &&
-              ((conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || MyFilmsDetail.ExtendedStartmode("Restrict DB field Selection for AMC3")) ||
+              ((conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Restrict DB field Selection for AMC3")) ||
               (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
                dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" &&
                dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio" && dc.ColumnName != "AudioChannelCount" && dc.ColumnName != "CategoryTrakt" &&
@@ -2949,7 +2949,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private void GetOnlineMoviesFromTMDBforFilmList()
     {
       #region add online movies from TMDB
-      if (MyFilmsDetail.ExtendedStartmode("GetFilmlist() - Online info on person film list") && facadeFilms.Count < 200 && IsPersonsField(conf.WStrSort)) // only in "related display"
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "GetFilmlist() - Online info on person film list") && facadeFilms.Count < 200 && IsPersonsField(conf.WStrSort)) // only in "related display"
       {
         var facadeDownloadItems = new List<GUIListItem>();
         bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
@@ -4331,7 +4331,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         // add online movie lists as option
 
-        if (MyFilmsDetail.ExtendedStartmode("Menu: add online movie lists to selection"))
+        if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Menu: add online movie lists to selection"))
         {
           dlg.Add("*** " + GUILocalizeStrings.Get(10798825) + " ***"); // 10798825 online information
           choiceView.Add("onlineinfo");
@@ -4644,7 +4644,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         #region add online info entry
-        if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
+        if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
         {
           item = new GUIListItem();
           item.Label = "*** " + GUILocalizeStrings.Get(10798825) + " ***"; // 10798825 online information
@@ -5343,14 +5343,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Add(GUILocalizeStrings.Get(10798608)); //Search global persons by role
       choiceSearch.Add("globalpersons");
 
-      if (MyFilmsDetail.ExtendedStartmode("Global Random Movie Search"))
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Global Random Movie Search"))
       {
         //Guzzi: RandomMovie Search added
         dlg.Add(GUILocalizeStrings.Get(10798621)); //Search global movies by randomsearch (singlesearch, areasearch)
         choiceSearch.Add("randomsearch");
       }
 
-      if (MyFilmsDetail.ExtendedStartmode("Global Search Movies by Areas"))
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Global Search Movies by Areas"))
       {
         dlg.Add(GUILocalizeStrings.Get(10798645)); //Search global movies by areas
         choiceSearch.Add("globalareas");
@@ -9542,7 +9542,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg1.Add(string.Format(GUILocalizeStrings.Get(1079841), conf.StrViewDfltItem)); // change default view
           choiceViewGlobalOptions.Add("changedefaultview");
 
-          if (MyFilmsDetail.ExtendedStartmode("Global Settings for default config and always default config"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Settings for default config and always default config"))
           {
             if (MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798628)));
             if (!MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798629)));
@@ -9609,7 +9609,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlg2.Add(GUILocalizeStrings.Get(1079861)); // Update Database with external AMCupdater
               choiceViewGlobalUpdates.Add("updatedb");
 
-              if (MyFilmsDetail.ExtendedStartmode("Global AMCU Custom Update")) // check if specialmode is configured for disabled features
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global AMCU Custom Update")) // check if specialmode is configured for disabled features
               {
                 dlg2.Add(GUILocalizeStrings.Get(1079843)); // Userdefined DB Update (AMCUpdater)
                 // Search all personinfos
@@ -9625,7 +9625,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewGlobalUpdates.Add("downfanart");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Global Update all PersonInfos")) // check if specialmode is configured for disabled features
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Update all PersonInfos")) // check if specialmode is configured for disabled features
           {
             dlg2.Add(GUILocalizeStrings.Get(10798715)); // Load Person infos - all persons
             // Search all personinfos
@@ -9638,7 +9638,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewGlobalUpdates.Add("trailer-all");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Global Update - Download all (missing) trailers"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Update - Download all (missing) trailers"))
           {
             if (MyFilms.conf.BoolEnableOnlineServices)
             {
@@ -10998,7 +10998,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region Moviecontext and Groupcontext and TMDBonline context - add OnlineVideos and MyFilms search
         if (facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll && conf.ViewContext != ViewContext.Group))
         {
-          if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Context Search for OnlineVideos"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Context Search for OnlineVideos"))
           {
             if (Helper.IsOnlineVideosAvailableAndEnabled)
             {
@@ -11007,7 +11007,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Context Search for MyFilms (local)"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Context Search for MyFilms (local)"))
           {
             if (conf.ViewContext == ViewContext.TmdbMovies || conf.ViewContext == ViewContext.Person)
             {
@@ -11015,8 +11015,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               choice.Add("searchmyfilms");
             }
           }
-        
-          if (MyFilmsDetail.ExtendedStartmode("Context: NZB Context Search for MyFilms (local)"))
+
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: NZB Context Search for MyFilms (local)"))
           {
             if (Helper.IsMpNzbAvailableAndEnabled)
             {
@@ -11068,7 +11068,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             // play random movies or trailers in "view context" (selected group)
-            if (MyFilmsDetail.ExtendedStartmode("Context: random trailer scrobbling in views context"))
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: random trailer scrobbling in views context"))
             {
               dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
               choice.Add("playrandomtrailers");
@@ -11082,7 +11082,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("togglewatchedstatus");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Context: TMDB API play trailer")) // if (conf.ViewContext != ViewContext.TmdbMovies)
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: TMDB API play trailer")) // if (conf.ViewContext != ViewContext.TmdbMovies)
           {
             //// not yet implemented
             //dlg.Add(GUILocalizeStrings.Get(10798710) + " (TMDB)");//play trailer
@@ -11105,7 +11105,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               choice.Add("addtocollection");
             }
 
-            if (MyFilmsDetail.ExtendedStartmode("Context: remove or aedd all films from collection"))
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: remove or add all films from collection"))
             {
               if (facadeFilms.Count > 1) // options only available, if there is multiple entries in facade list
               {
@@ -11152,7 +11152,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("submenufanartmanager");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Context: Fanartmanager (new) -> new window!"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: Fanartmanager (new) -> new window!"))
           {
             if (File.Exists(GUIGraphicsContext.Skin + @"\MyFilmsFanartManager.xml"))
             {
@@ -11161,7 +11161,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Context: Movies - show view options - only enabled when test features are enabled"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Movies - show view options - only enabled when test features are enabled"))
           {
             dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
             choice.Add("submenuoptions");
@@ -11169,13 +11169,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else if (this.facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // when films with active movie facade
         {
-          if (MyFilmsDetail.ExtendedStartmode("Context: Movies with current collection selected -> update submenu!"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Movies with current collection selected -> update submenu!"))
           {
             dlg.Add(GUILocalizeStrings.Get(10798702)); // "Updates ..."
             choice.Add("submenuupdates");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode("Context: Movies - show view options - only enabled when test features are enabled"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Movies - show view options - only enabled when test features are enabled"))
           {
             dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
             choice.Add("submenuoptions");
@@ -11186,7 +11186,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region Personcontext
         if (this.facadeFilms.SelectedListItemIndex > -1 && this.facadeFilms.SelectedListItem.IsFolder && IsPersonField(conf.WStrSort) && (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll))
         {
-          if (MyFilmsDetail.ExtendedStartmode("Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
           {
             dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
             choice.Add("artistdetail");
@@ -11277,7 +11277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("menumovedown");
             dlg.Add(GUILocalizeStrings.Get(1079824)); // Rename Menu Entry
             choice.Add("menurename");
-            if (MyFilmsDetail.ExtendedStartmode("Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
             {
               dlg.Add(GUILocalizeStrings.Get(1079825)); // Set Film Filter Value
               choice.Add("menusetvalue");
@@ -11379,7 +11379,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Moviecontext
             if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
             {
-              if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Collection images download"))
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Collection images download"))
               {
                 if (!this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext == ViewContext.MovieCollection) // inside a collection a selected collection movie
                 {
@@ -11388,7 +11388,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
               }
 
-              if (MyFilmsDetail.ExtendedStartmode("Context: TMDB trailer downloads"))
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB trailer downloads"))
               {
                 dlg.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
                 choice.Add("downloadtrailertmdb");
@@ -11411,7 +11411,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else if (this.facadeFilms.SelectedListItem.IsFolder && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // in a film list, a "collection folder"
             {
-              if (MyFilmsDetail.ExtendedStartmode("Context: TMDB Collection images download"))
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Collection images download"))
               {
                 dlg.Add(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
                 choice.Add("collectionimages");
@@ -11431,7 +11431,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 choice.Add("updatepersonfacadelist");
               }
 
-              if (MyFilmsDetail.ExtendedStartmode("Context Artist: grabber scripts based person info update"))
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Artist: grabber scripts based person info update"))
               {
                 if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended)
                 {
@@ -11499,7 +11499,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Moviecontext
             if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
             {
-              if (MyFilmsDetail.ExtendedStartmode("Context: TMDB API trailer and download entries")) // if (conf.ViewContext != ViewContext.TmdbMovies)
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB API trailer and download entries")) // if (conf.ViewContext != ViewContext.TmdbMovies)
               {
                 if (MyFilms.conf.BoolEnableOnlineServices) dlg.Add(string.Format(GUILocalizeStrings.Get(1079921), GUILocalizeStrings.Get(10798628))); // Get Online Info
                 if (!MyFilms.conf.BoolEnableOnlineServices) dlg.Add(string.Format(GUILocalizeStrings.Get(1079921), GUILocalizeStrings.Get(10798629)));
@@ -11520,7 +11520,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Moviecontext or Views
             if (facadeFilms.SelectedListItemIndex > -1 && conf.ViewContext != ViewContext.TmdbMovies)
             {
-              if (MyFilmsDetail.ExtendedStartmode("Context: Use Virtual Path Browsing"))
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Use Virtual Path Browsing"))
               {
                 if (MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628))); // virtual path browsing
                 if (!MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));
@@ -12595,7 +12595,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
       choiceViewMenu.Add("IMDb Movie Trailers");
 
-      if (MyFilmsDetail.ExtendedStartmode("Details context: FilmStarts.de and optional all OnlineVideoSites menu ..."))
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: FilmStarts.de and optional all OnlineVideoSites menu ..."))
       {
         dlgmenu.Add("FilmStarts.de (OnlineVideos)");
         choiceViewMenu.Add("FilmStarts.de Trailer");
@@ -12875,7 +12875,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               dlgPrgrs.SetLine(1, "search person on IMDB ...");
             }
 
-            if (MyFilmsDetail.ExtendedStartmode("relatedpersonsearch: add person option to dialog menu for personinfodialog"))
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "relatedpersonsearch: add person option to dialog menu for personinfodialog"))
             {
               // First check if actor exists... - this only works with MePo V1.1.5+
               LogMyFilms.Debug("Check, if Person is found in IMDB-DB (using MP actors DB)");
@@ -16965,12 +16965,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       using (var xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
-        MyFilmsDetail.setGUIProperty("config.pluginname", xmlreader.GetValueAsString("MyFilms", "PluginName", "Films"));
-        MyFilmsDetail.setGUIProperty("config.pluginmode", xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal"));
+        string pluginname = xmlreader.GetValueAsString("MyFilms", "PluginName", "Films");
+        string pluginmode = xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal");
+        if (pluginmode != "normal") pluginname += " (" + pluginmode + ")";
+
+        MyFilmsDetail.setGUIProperty("config.pluginname", pluginname);
+        MyFilmsDetail.setGUIProperty("config.pluginmode", pluginmode);
         MyFilmsDetail.setGUIProperty("config.version", MyFilmsSettings.Version.ToString());
         MyFilmsDetail.setGUIProperty("config.mpversion", MyFilmsSettings.MPVersion.ToString());
 
-        LogMyFilms.Info("Startmode: '" + xmlreader.GetValueAsString("MyFilms", "PluginMode", "normal") + "'");
+        LogMyFilms.Info("Startmode: '" + pluginmode + "'");
         DebugPropertyLogging = (xmlreader.GetValueAsString("MyFilms", "PropertyLogging", "false").ToLower() == "true");
         LogMyFilms.Info("Property Logging: '" + DebugPropertyLogging + "'");
       }

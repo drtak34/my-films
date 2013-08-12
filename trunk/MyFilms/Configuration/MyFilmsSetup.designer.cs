@@ -626,6 +626,7 @@
       this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+      this.btnTestMode = new System.Windows.Forms.Button();
       ownerLabel = new System.Windows.Forms.Label();
       mailLabel = new System.Windows.Forms.Label();
       siteLabel = new System.Windows.Forms.Label();
@@ -920,7 +921,7 @@
       // 
       // ButQuit
       // 
-      this.ButQuit.Location = new System.Drawing.Point(679, 466);
+      this.ButQuit.Location = new System.Drawing.Point(692, 466);
       this.ButQuit.Name = "ButQuit";
       this.ButQuit.Size = new System.Drawing.Size(64, 31);
       this.ButQuit.TabIndex = 19;
@@ -931,7 +932,7 @@
       // 
       // ButDelet
       // 
-      this.ButDelet.Location = new System.Drawing.Point(599, 466);
+      this.ButDelet.Location = new System.Drawing.Point(622, 466);
       this.ButDelet.Name = "ButDelet";
       this.ButDelet.Size = new System.Drawing.Size(64, 31);
       this.ButDelet.TabIndex = 18;
@@ -975,7 +976,7 @@
       // 
       // ButCopy
       // 
-      this.ButCopy.Location = new System.Drawing.Point(521, 466);
+      this.ButCopy.Location = new System.Drawing.Point(552, 466);
       this.ButCopy.Name = "ButCopy";
       this.ButCopy.Size = new System.Drawing.Size(64, 31);
       this.ButCopy.TabIndex = 17;
@@ -4416,7 +4417,7 @@
       // 
       // butNew
       // 
-      this.butNew.Location = new System.Drawing.Point(367, 466);
+      this.butNew.Location = new System.Drawing.Point(412, 466);
       this.butNew.Name = "butNew";
       this.butNew.Size = new System.Drawing.Size(64, 31);
       this.butNew.TabIndex = 15;
@@ -4556,7 +4557,7 @@
       // 
       this.btnLaunchAMCglobal.Image = ((System.Drawing.Image)(resources.GetObject("btnLaunchAMCglobal.Image")));
       this.btnLaunchAMCglobal.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.btnLaunchAMCglobal.Location = new System.Drawing.Point(103, 466);
+      this.btnLaunchAMCglobal.Location = new System.Drawing.Point(99, 466);
       this.btnLaunchAMCglobal.Name = "btnLaunchAMCglobal";
       this.btnLaunchAMCglobal.Size = new System.Drawing.Size(72, 31);
       this.btnLaunchAMCglobal.TabIndex = 13;
@@ -4975,9 +4976,9 @@
       // 
       // btnFirstTimeSetup
       // 
-      this.btnFirstTimeSetup.Location = new System.Drawing.Point(198, 466);
+      this.btnFirstTimeSetup.Location = new System.Drawing.Point(195, 466);
       this.btnFirstTimeSetup.Name = "btnFirstTimeSetup";
-      this.btnFirstTimeSetup.Size = new System.Drawing.Size(114, 31);
+      this.btnFirstTimeSetup.Size = new System.Drawing.Size(107, 31);
       this.btnFirstTimeSetup.TabIndex = 14;
       this.btnFirstTimeSetup.Text = " Setup Wizard ...";
       this.ToolTip1.SetToolTip(this.btnFirstTimeSetup, resources.GetString("btnFirstTimeSetup.ToolTip"));
@@ -4988,7 +4989,7 @@
       // 
       this.buttonWikiHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.buttonWikiHelp.ForeColor = System.Drawing.SystemColors.HotTrack;
-      this.buttonWikiHelp.Location = new System.Drawing.Point(22, 466);
+      this.buttonWikiHelp.Location = new System.Drawing.Point(18, 466);
       this.buttonWikiHelp.Name = "buttonWikiHelp";
       this.buttonWikiHelp.Size = new System.Drawing.Size(64, 31);
       this.buttonWikiHelp.TabIndex = 12;
@@ -5435,7 +5436,7 @@
       // 
       // ButSave
       // 
-      this.ButSave.Location = new System.Drawing.Point(442, 466);
+      this.ButSave.Location = new System.Drawing.Point(482, 466);
       this.ButSave.Name = "ButSave";
       this.ButSave.Size = new System.Drawing.Size(64, 31);
       this.ButSave.TabIndex = 16;
@@ -6533,11 +6534,23 @@
       this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
       this.layoutFilmsComboBox.TabIndex = 34;
       // 
+      // btnTestMode
+      // 
+      this.btnTestMode.Location = new System.Drawing.Point(320, 466);
+      this.btnTestMode.Name = "btnTestMode";
+      this.btnTestMode.Size = new System.Drawing.Size(75, 31);
+      this.btnTestMode.TabIndex = 77;
+      this.btnTestMode.Text = "Test Mode";
+      this.ToolTip1.SetToolTip(this.btnTestMode, resources.GetString("btnTestMode.ToolTip"));
+      this.btnTestMode.UseVisualStyleBackColor = true;
+      this.btnTestMode.Click += new System.EventHandler(this.btnTestMode_Click);
+      // 
       // MyFilmsSetup
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(779, 506);
+      this.Controls.Add(this.btnTestMode);
       this.Controls.Add(this.Config_EnablePreload);
       this.Controls.Add(this.btnServerSync);
       this.Controls.Add(this.buttonWikiHelp);
@@ -7214,5 +7227,6 @@
         private NumericUpDown numericUpDownAMCUscanStartDelay;
         private Label labelAMCUstartdelay;
         private TextBox AntViewFilterSaveString;
+        private Button btnTestMode;
     }
 }
