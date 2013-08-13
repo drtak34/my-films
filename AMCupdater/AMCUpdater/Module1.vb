@@ -1554,14 +1554,14 @@ Public Module Module1
             If watch.Elapsed.TotalMilliseconds > 200 Then
                 dgLogWindow.txtLogWindow.AppendText(BufferedLogEvents.ToString())
                 BufferedLogEvents.Length = 0 '.Remove(0, BufferedLogEvents.Length)
-                If LogLevel = EventLogLevel.ImportantEvent Then
-                    Form1.ToolStripStatusLabel.Text = EventString
-                End If
                 watch.Reset()
                 watch.Start()
                 'Form1.aTimer.Change(Timeout.Infinite, Timeout.Infinite)
             Else
                 'Form1.aTimer.Change(1000, Timeout.Infinite) ' call buffercheck once in 1 second, if nothing else happens ...
+            End If
+            If LogLevel = EventLogLevel.ImportantEvent Then
+                Form1.ToolStripStatusLabel.Text = EventString
             End If
         End If
     End Sub
