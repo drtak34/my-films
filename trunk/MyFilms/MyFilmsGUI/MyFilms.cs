@@ -1025,6 +1025,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
 
       if (InitialStart) NavigationStack.Clear();
+      if (loadParamInfo != null && !string.IsNullOrEmpty(loadParamInfo.MovieID)) NavigationStack.Clear(); // clear navigation stack, if called via load params
 
       if (NavigationStack.Count > 0)
       {
