@@ -12438,7 +12438,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "removefromcollectionall":
           RemoveAllMoviesFromCollection();
-          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          GetPrevFilmList(); // go up in hierarchy, as collection is empty anyway ...
+          // Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           break;
 
         case "fanart":
