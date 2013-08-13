@@ -136,13 +136,10 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         chkAMCUwatchScanFolders.Visible = false;
         labelAMCUstartdelay.Visible = false;
         numericUpDownAMCUscanStartDelay.Visible = false;
-        btnTestMode.Enabled = false;
         btnTestMode.ResetBackColor();
-
       }
       else
       {
-        btnTestMode.Enabled = true;
         btnTestMode.BackColor = System.Drawing.Color.OrangeRed;
         //  //show a tab by adding it to the TabPages collection
         //  if (this.tabPageSave != null)
@@ -6658,15 +6655,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void btnTestMode_Click(object sender, EventArgs e)
     {
-      if (btnTestMode.Enabled)
+      MyFilms_PluginMode = MyFilms_PluginMode == "normal" ? "test" : "normal";
+
+      if (MyFilms_PluginMode == "normal")
       {
-        btnTestMode.BackColor = System.Drawing.Color.OrangeRed;
-        MyFilms_PluginMode = "test";
+        btnTestMode.ResetBackColor();
       }
       else
       {
-        btnTestMode.ResetBackColor();
-        MyFilms_PluginMode = "normal";
+        btnTestMode.BackColor = System.Drawing.Color.OrangeRed;
       }
     }
   }
