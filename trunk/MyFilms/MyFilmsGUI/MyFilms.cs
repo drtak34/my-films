@@ -326,7 +326,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     internal const int ID_MyFilmsDialogRating = 7988;
     internal const int ID_MyFilmsActors = 7989;
     // internal const int ID_MyFilmsThumbs = 7990;
-    internal const int ID_MyFilmsActorsInfo = 7991;
+    // internal const int ID_MyFilmsActorsInfo = 7991; // has been removed
     internal const int ID_MyFilmsCoverManager = 7992;
     internal const int ID_MyFilmsDialogMultiSelect = 7993;
     internal const int ID_MyFilmsFanartManager = 7994;
@@ -12996,9 +12996,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void OnVideoArtistInfoGuzzi(IMDBActor actor)
     {
-      // MediaPortal.GUI.Video.GUIVideoArtistInfo infoDlg = (MediaPortal.GUI.Video.GUIVideoArtistInfo)GUIWindowManager.GetWindow((int)Window.WINDOW_VIDEO_ARTIST_INFO);
-      var infoDlg = (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo);
-      LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): Creating (MyFilmsActorInfo)GUIWindowManager.GetWindow(ID_MyFilmsActorsInfo)");
+      MediaPortal.GUI.Video.GUIVideoArtistInfo infoDlg = (MediaPortal.GUI.Video.GUIVideoArtistInfo)GUIWindowManager.GetWindow((int)Window.WINDOW_VIDEO_ARTIST_INFO);
       if (infoDlg == null)
       {
         LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): infoDlg == null -> returning without action");
@@ -13009,8 +13007,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): actor == null -> returning without action");
         return;
       }
+
       infoDlg.Actor = actor;
-      infoDlg.DoModal(GetID); //infoDlg.DoModal(GUIWindowManager.ActiveWindow);
+      // ArrayList movies = new ArrayList();
+      IMDBMovie movie = new IMDBMovie();
+      // VideoDatabase.GetMoviesByActor(actor.Name, ref movies);
+
+      //if (movies.Count > 0)
+      //{
+      //  Random rnd = new Random();
+
+      //  for (int i = movies.Count - 1; i > 0; i--)
+      //  {
+      //    int position = rnd.Next(i + 1);
+      //    object temp = movies[i];
+      //    movies[i] = movies[position];
+      //    movies[position] = temp;
+      //  }
+
+      //  movie = (IMDBMovie)movies[0];
+      //}
+      infoDlg.Movie = movie;
+      //infoDlg.DoModal(GetID); //infoDlg.DoModal(GUIWindowManager.ActiveWindow);
+      GUIWindowManager.ActivateWindow((int)Window.WINDOW_VIDEO_ARTIST_INFO);
     }
 
     private void GetAndStorePersonInfo(string personName, ref IMDBActor imdbActor)
