@@ -101,22 +101,28 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       MyFilms_PluginMode = XmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "PluginMode", "normal"); // Read Plugin Start Mode to diable/enable normal vs. testfeatures
       LogMyFilms.Info("MyFilms Setup ********** OperationsMode (PluginMode): '" + MyFilms_PluginMode + "' **********");
 
-      if (MyFilms_PluginMode == "normal") // disable Trakt and other controls in standardmode
       #region hide elements from GUI for test mode
+      if (MyFilms_PluginMode == "normal" || MyFilms_PluginMode == "test") // 'extended' or dev settings
       {
         //hide a tab by removing it from the TabPages collection
         this.tabPageSave = General.TabPages[13];
         this.General.TabPages.Remove(tabPageSave); // Disable "Old Stuff" Tab, as it has stuff not for public
         this.tabPageSave = General.TabPages[12];
         this.General.TabPages.Remove(tabPageSave); // Disable "Other" Tab, as it has stuff not for public
-        this.tabPageSave = General.TabPages[11];
-        this.General.TabPages.Remove(tabPageSave); // Disable "About" Tab
-        // this.Label_UserProfileName.Visible = false;
-        // this.UserProfileName.Visible = false;
-        this.cbTrailerAutoregister.Visible = false;
-        this.cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
+
         this.ShowTrailerWhenStartingMovie.Visible = false;
         this.numUpDownTrailersInIntro.Visible = false;
+
+      }
+      
+      if (MyFilms_PluginMode == "normal")
+      {
+        this.tabPageSave = General.TabPages[11];
+        this.General.TabPages.Remove(tabPageSave); // Disable "About" Tab
+
+        this.cbTrailerAutoregister.Visible = false;
+        this.cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
+
         this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
         this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
         this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
@@ -131,6 +137,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //CatalogType.Items.Add("test");
         Config_EnablePreload.Visible = false; // precaching of config and DB on Init phase
         butNew.Visible = false; // disable "new" button for normal mode for V6.0.1
+
         // autostart settings for AMCupdater background Launcher:
         chkAMCUscanOnStartup.Visible = false;
         chkAMCUwatchScanFolders.Visible = false;
@@ -138,9 +145,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         numericUpDownAMCUscanStartDelay.Visible = false;
         btnTestMode.ResetBackColor();
       }
-      else
+      else if (MyFilms_PluginMode == "test")
       {
+
         btnTestMode.BackColor = System.Drawing.Color.OrangeRed;
+      }
+      else // 'extended' or dev settings
+      {
         //  //show a tab by adding it to the TabPages collection
         //  if (this.tabPageSave != null)
         //  {
