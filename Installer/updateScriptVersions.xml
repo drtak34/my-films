@@ -10,16 +10,8 @@
     <version>0.9.2</version>
   </scripts>
   <scripts>
-    <name>Cinefacts-BluRay.xml</name>
-    <version>1.0</version>
-  </scripts>
-  <scripts>
-    <name>Cinefacts-DVD.xml</name>
-    <version>1.0</version>
-  </scripts>
-  <scripts>
     <name>Cinefacts-Kino.xml</name>
-    <version>1.0</version>
+    <version>1.1</version>
   </scripts>
   <scripts>
     <name>cineol.xml</name>
