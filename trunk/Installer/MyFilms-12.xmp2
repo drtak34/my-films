@@ -1417,6 +1417,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <ZipFileName>Installer{CopyFile}\{8e0d6461-8126-4655-b989-1b6c99f09dcd}-Unrated.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Unrated.png</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\NotRated.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{77a8308f-8906-49e2-bce0-7c28fcf2b18e}-NotRated.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\NotRated.png</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -3507,13 +3514,6 @@ Note: Folders which may contain your user files, like Catalog, GroupViewImages..
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Skin.12\Black Glass\MyFilmsActorsInfo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e3fa8022-92c2-441d-92cc-b87e1ea450e5}-MyFilmsActorsInfo.xml</ZipFileName>
-              <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsActorsInfo.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Skin.12\Black Glass\MyFilmsCoverManager.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{b498d245-333a-4737-91b3-7f235ead5b6f}-MyFilmsCoverManager.xml</ZipFileName>
               <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsCoverManager.xml</DestinationFilename>
@@ -5146,7 +5146,7 @@ Please refer to the Wiki online documentation.</Value>
           <Revision>0</Revision>
         </MinVersion>
         <MaxVersion>
-          <Major>2</Major>
+          <Major>9</Major>
           <Minor>9</Minor>
           <Build>9</Build>
           <Revision>99999</Revision>
@@ -5190,7 +5190,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>2893</Revision>
+      <Revision>2908</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -5227,7 +5227,7 @@ Changes &amp; Fixes:
 - Grabber Interface - Detail tab : "Genre" should be "Category"</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
-    <ReleaseDate>2013-08-08T04:06:03.9867545+02:00</ReleaseDate>
+    <ReleaseDate>2013-08-17T05:33:39.0778529+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -6649,6 +6649,13 @@ Changes &amp; Fixes:
         <LocalFileName>Thumbs\MyFilms\DefaultLogos\Unrated.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{8e0d6461-8126-4655-b989-1b6c99f09dcd}-Unrated.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Unrated.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\NotRated.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{77a8308f-8906-49e2-bce0-7c28fcf2b18e}-NotRated.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\NotRated.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -8210,13 +8217,6 @@ Changes &amp; Fixes:
         <LocalFileName>Skin.12\Black Glass\MyFilmsActors.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{596e9506-cdad-449a-aae6-acf2c3d5fed2}-MyFilmsActors.xml</ZipFileName>
         <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsActors.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Skin.12\Black Glass\MyFilmsActorsInfo.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e3fa8022-92c2-441d-92cc-b87e1ea450e5}-MyFilmsActorsInfo.xml</ZipFileName>
-        <DestinationFilename>%Config%\MyFilms\Skin.12\Black Glass\MyFilmsActorsInfo.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
