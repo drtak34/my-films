@@ -5,7 +5,7 @@
     <URLPrefix>http://www.imdb.com</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>1.4.0</Version>
+    <Version>1.4.1</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept />
@@ -99,7 +99,7 @@
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_class_x003D__x0022_cast_x0022__x003E_._x002A__x003F__x007C__x003C_table_x0020_class_x003D__x0022_cast_list_x0022__x003E_._x002A__x003F_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
-      <KeyCreditsRegExp>td_x0020_class_x003D__x0022_nm_x0022__x003E__x003C_a_x0020_href_x003D_._x002F_name._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F__x003C_td.class_x003D__x0022_char_x0022__x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyCreditsRegExp>
+      <KeyCreditsRegExp>td_x0020_class_x003D__x0022_nm_x0022__x003E__x003C_a_x0020_href_x003D_._x002F_name._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F__x003C_td.class_x003D__x0022_char_x0022__x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0028__x003C__x002F__x007C__x0020__x005C__x0028__x0029_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage>URL_x0020_Redirection_x0020_Persons</KeyCreditsPage>
       <KeyCreditsMaxItems />
