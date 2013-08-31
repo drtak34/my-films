@@ -1598,20 +1598,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\Cinefacts-BluRay.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{602f3a2c-5a9d-40b5-92ee-6bc0584a29c0}-Cinefacts-BluRay.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-BluRay.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\Cinefacts-DVD.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{289de85d-79cc-4ca5-95d7-5640e5e53925}-Cinefacts-DVD.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-DVD.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\MoviePilot.de.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{4b29d304-bd74-4c92-aedb-5ba4abc7fb63}-MoviePilot.de.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\MoviePilot.de.xml</DestinationFilename>
@@ -5190,7 +5176,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>2908</Revision>
+      <Revision>2915</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -5227,7 +5213,7 @@ Changes &amp; Fixes:
 - Grabber Interface - Detail tab : "Genre" should be "Category"</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
-    <ReleaseDate>2013-08-17T05:33:39.0778529+02:00</ReleaseDate>
+    <ReleaseDate>2013-08-31T13:44:33.0791323+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -6817,20 +6803,6 @@ Changes &amp; Fixes:
         <LocalFileName>Config\scripts\MyFilms\MovieMaze.de.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{75412a81-ac91-4203-b6cf-c4e865e5176d}-MovieMaze.de.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\MovieMaze.de.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\Cinefacts-BluRay.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{602f3a2c-5a9d-40b5-92ee-6bc0584a29c0}-Cinefacts-BluRay.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-BluRay.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\Cinefacts-DVD.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{289de85d-79cc-4ca5-95d7-5640e5e53925}-Cinefacts-DVD.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\Cinefacts-DVD.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
