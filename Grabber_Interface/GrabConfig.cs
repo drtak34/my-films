@@ -2140,6 +2140,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLanguage)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLanguage)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLanguage)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLanguageRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; }
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyLanguageIndex)._Value;
           break;
         case 17: // Tagline
@@ -2178,6 +2183,11 @@ namespace Grabber_Interface
           textDReplaceWith.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Param2;
           TextKeyStartD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStartStudio)._Value;
           TextKeyStopD.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyEndStudio)._Value;
+          lblComplement.Visible = true;
+          textComplement.Visible = true;
+          lblComplement.Text = "RegExp";
+          try { textComplement.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStudioRegExp)._Value; }
+          catch { textComplement.Text = string.Empty; }
           Index.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyStudioIndex)._Value;
           break;
         case 20: // Edition
@@ -3426,8 +3436,14 @@ namespace Grabber_Interface
         case 15:
           xmlConf.find(xmlConf.listDetail, TagName.KeyCommentRegExp)._Value = textComplement.Text;
           break;
+        case 16:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyLanguageRegExp)._Value = textComplement.Text;
+          break;
         case 18:
           xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationRegExp)._Value = textComplement.Text;
+          break;
+        case 19:
+          xmlConf.find(xmlConf.listDetail, TagName.KeyStudioRegExp)._Value = textComplement.Text;
           break;
         case 23:
           xmlConf.find(xmlConf.listDetail, TagName.KeyGeneric1RegExp)._Value = textComplement.Text;
