@@ -9343,6 +9343,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
         }
       }
+
+      // might speed up playback start
+      // GUIGraphicsContext.IsFullScreenVideo = true;
+      // GUIWindowManager.ActivateWindow((int)GUIWindow.Window.WINDOW_FULLSCREEN_VIDEO);
+      
       if (iMovieIndex == -1)
         playlistPlayer.PlayNext();
       else
