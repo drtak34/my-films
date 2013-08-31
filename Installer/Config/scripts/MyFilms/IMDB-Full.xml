@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.6</Version>
+    <Version>1.2.7</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -49,7 +49,7 @@
       <KeyOTitleIndex />
       <KeyOTitlePage />
       <KeyStartTTitle Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h4._x002A__x003F__x0028_AKA_x0029_._x002A__x003F__x003C__x002F_h4_x003E_</KeyStartTTitle>
-      <KeyEndTTitle>_x003C__x002F_table_x003E_</KeyEndTTitle>
+      <KeyEndTTitle>_x0023_REGEX_x0023__x003C__x002F_table_x003E__x007C_It_x0020_looks_x0020_like_x0020_we_x0020_don_x0027_t</KeyEndTTitle>
       <KeyTTitleRegExp>_x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_._x002A__x003F__x003C_td_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_</KeyTTitleRegExp>
       <KeyTTitleIndex />
       <KeyTTitlePage>URL_x0020_Redirection_x0020_Title</KeyTTitlePage>
@@ -127,7 +127,7 @@
       <KeyCommentRegExp />
       <KeyCommentIndex />
       <KeyCommentPage>URL_x0020_Redirection_x0020_Comment</KeyCommentPage>
-      <KeyStartLanguage Param1="_x0023_REGEX_x0023__x005C_n._x002A__x003F__x003C_span_x0020_class_x003D__x0022_ghost_x0022__x003E__x005C__x007C__x003C__x002F_span_x003E_._x002A__x003F__x005C_n._x002A__x003F_url_x0027__x003E_" Param2="_x002C__x0020_">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E_Language_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E_</KeyStartLanguage>
+      <KeyStartLanguage Param1="_x0023_REGEX_x0023__x005C_n._x002A__x003F_url_x0027__x003E_" Param2="">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E_Language_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E_</KeyStartLanguage>
       <KeyEndLanguage>_x003C__x002F_div_x003E_</KeyEndLanguage>
       <KeyLanguageIndex />
       <KeyLanguagePage />
@@ -162,7 +162,7 @@
       <KeyDetails2Index />
       <KeyDetails2Page />
       <KeyEncodingDetails2 />
-      <KeyStartStudio Param1="_x0023_REGEX_x0023__x003C__x002F_span_x003E__x002C_._x002A__x003F__x005C_n._x002A__x003F_name_x0022__x003E_" Param2="_x002C__x0020_">_x0023_REGEX_x0023__x003C_h3_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Production_x0020_Co_x005B_s_x005D__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartStudio>
+      <KeyStartStudio Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_h3_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Production_x0020_Co_x005B_s_x005D__x003F__x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartStudio>
       <KeyEndStudio>_x0023_REGEX_x0023__x0022__x003E__x003C_a_x0020_href_x003D__x0022_companycredits_x0022__x003E__x007C__x003C_a_x0020_href_x003D__x0022_companycredits</KeyEndStudio>
       <KeyStudioIndex />
       <KeyStudioPage />
@@ -278,6 +278,8 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyLanguageRegExp>itemprop_x003D__x0027_url_x0027__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_a_x003E_</KeyLanguageRegExp>
+      <KeyStudioRegExp>itemprop_x003D__x0022_name_x0022__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_</KeyStudioRegExp>
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="TranslatedTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />

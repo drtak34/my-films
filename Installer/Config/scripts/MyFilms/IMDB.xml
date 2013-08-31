@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.2</Version>
+    <Version>1.2.3</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -127,7 +127,7 @@
       <KeyCommentRegExp />
       <KeyCommentIndex />
       <KeyCommentPage />
-      <KeyStartLanguage Param1="_x007C_" Param2="_x002C_">Language:</KeyStartLanguage>
+      <KeyStartLanguage Param1="_x0023_REGEX_x0023_" Param2="">Language:</KeyStartLanguage>
       <KeyEndLanguage>_x003C__x002F_div_x003E_</KeyEndLanguage>
       <KeyLanguageIndex />
       <KeyLanguagePage />
@@ -278,6 +278,7 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyLanguageRegExp>itemprop_x003D__x0027_url_x0027__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a</KeyLanguageRegExp>
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="TranslatedTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
