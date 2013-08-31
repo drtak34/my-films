@@ -458,12 +458,15 @@ public class TagName
 
   public static string KeyStartLanguage = "KeyStartLanguage";     // Language
   public static string KeyEndLanguage = "KeyEndLanguage";
+  public static string KeyLanguageRegExp = "KeyLanguageRegExp";
   public static string KeyLanguageIndex = "KeyLanguageIndex";
   public static string KeyLanguagePage = "KeyLanguagePage";
+
   public static string KeyStartTagline = "KeyStartTagline";     // Tagline 
   public static string KeyEndTagline = "KeyEndTagline";
   public static string KeyTaglineIndex = "KeyTaglineIndex";
   public static string KeyTaglinePage = "KeyTaglinePage";
+
   public static string KeyStartCertification = "KeyStartCertification";     // Certification
   public static string KeyEndCertification = "KeyEndCertification";
   public static string KeyCertificationRegExp = "KeyCertificationRegExp";
@@ -474,6 +477,7 @@ public class TagName
 
   public static string KeyStartStudio = "KeyStartStudio";     // Studio
   public static string KeyEndStudio = "KeyEndStudio";
+  public static string KeyStudioRegExp = "KeyStudioRegExp";
   public static string KeyStudioIndex = "KeyStudioIndex";
   public static string KeyStudioPage = "KeyStudioPage";
 
