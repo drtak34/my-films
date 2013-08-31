@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.5</Version>
+    <Version>1.2.6</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -280,7 +280,7 @@
       <KeyTrailerPage />
     </Details>
     <Mapping>
-      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_0 source="OriginalTitle" destination="TranslatedTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
