@@ -31,7 +31,7 @@
   </scripts>
   <scripts>
     <name>IMDB-Full.xml</name>
-    <version>1.2.6</version>
+    <version>1.2.7</version>
   </scripts>
   <scripts>
     <name>IMDB-TMDBcover.xml</name>
@@ -59,7 +59,7 @@
   </scripts>
   <scripts>
     <name>IMDB.xml</name>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
   </scripts>
   <scripts>
     <name>IMDB-Person.xml</name>
