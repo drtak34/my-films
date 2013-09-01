@@ -5296,44 +5296,98 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>2920</Revision>
+      <Revision>2921</Revision>
     </Version>
-    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
-
-
-
-
-The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
-
+    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+
+
+
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+
 My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
-    <VersionDescription>This version is a maintenance release of MyFilms 6.0.
-
-
-Please report bugs in MyFilms forum.
-
-Changes &amp; Fixes:
-- With multi part movies a "watched" event is send after each part
-- person role should be removed from label2 in related persons view
-- Add new property to show info about related context
-- Internal IMDB person info grabber stopped working due to IMDB changes
-- Random Fanart does not display when Reverse Person Names is enabled
-- Some Person Image files being saved in wrong directory
-- Bluray from folder do not natively play with MP1.3alpha
-- '&amp;' not correctly displayed in Movie Titles and cover does not display in facade
-- Rework of internal dialog handling
-- Navigation engine does have inconsistant behaviour for start settings
-- Custom Movie Group Settings are not applied in GUI and Layout is not saved.
-- Back navigation sets visibility condition too late
-- MP language is not properly detected and used
-- View Options context menu options do not work correctly for Group lists
-- Download Person Images (selected film) displays on Main window context menu under Updates
-- Move 'Import if no auto match' setting from AMCU to MF Setup and add to MF GUI options
-- Allow edition of previously created filter expressions for views
-- Grabber Interface - Detail tab : "Genre" should be "Category"</VersionDescription>
+    <VersionDescription>This version is a maintenance release of MyFilms 6.0.
+
+
+Please report bugs in MyFilms forum.
+
+
+Features:
+- Add regex grouping for studio and languages
+- Remove 'Use MP Logos' option
+- Allow users to select Test Mode more easily and display it in Setup/GUI
+- Add regex matching to logo rule editor
+- Current MyFilms is incompatible with MP 1.4.0
+- Use Localized Plugin Name in CurrentModule
+- Change Backnavigation behaviour to not step back when a view was called directly
+- Add logo rules to support certification logos
+
+Test Mode Features (6.1.0 preview):
+- Improve Setup Wizard to support central config setups
+- Allow sorting for Online Movie Info/Lists
+- Add dialog for visual image selection (for Collection Covers)
+- Download of collection covers from TMDB
+- Improve Box Sets management in GUI
+- Autorun AMCU when plugin starts
+- Allow local caching for trailers of online content
+- Precaching of movie DB on startup
+- Add context search option for online content to seach local content by facade label keywords
+- Add OnlineVideos search to movie context menu
+- Allow download for trailers for multiple movies
+- Add option to person context menu to get TMDB filmographie
+- Add virtual path browsing
+- Add online info about current, upcoming and most liked movies
+- Trailer 'Scrobbling' - Play random trailers from a group of films
+- Add "about" tab and credits
+- Support for movie thumbs in Details screen &amp; removal of old separate MyFilmsThumbs screen
+- Add virtual path title
+- View related persons view from Details Window
+- Add OV stream player for trailers
+- Actor screen
+
+Fixes:
+Grabber Engine - '#ADD#' uses wrong chars for splitting, should only use '|'
+Selecting more than one local movie in Trakt opens the wrong movie in MyFilms
+AMCU Update Movies Test Param does not display # Movies matched
+Trailer/Clip detection can cause that a movie is handled as a trailer
+Create Fanart does not work if you do a clean install of MP 1.4.0
+Grabber engine does not display preview resutls
+TMDB grabber does not add/update cover
+Cover Manager does not download covers
+IMDB-Full script is broken
+hyperlink from basic homescreen to a specific DB results in MyFilms showing blank screen
+Latest Media Handler does not work per Config
+My Movies export to XML catalog, "SortTitle" to "FormattedTitle" not working
+Trailers Button on Details Window causes Crash
+Search History does not display selected Search in Virtual Keyboard
+Layout button display is incorrect when you change layouts and return to MF
+Skin Updates for MP13 final
+Default view settings in Global Options not working properly
+Remove message 'WatchedItem' from movie ended handling
+Change encoding for AMCupdater created nfo files to UTF-8 for better compatibility with nfo grabber script
+IMDB-OFDB Scraper broken
+brackets should be removed from #myfilms.select property
+Exception on item counts on certain timing conditions
+Collection of structural changes of the Solution
+Skinengine falls back to wprite mode when high order characters are pushed to GUIProperties
+Long internet titles can result in "path too long" exceptions
+When importing DVD/BR folders size calculation does not work
+AMCupdater - "always ignore files" is case sensitive
+Group/Collection covers cannot be handled, if the name contains invalid characters
+Remove "star" on count indicator of filtered views
+MyFilms as problems with some "Pictures" in catalog/Pictures folder
+ampersand name issue
+AMCupdater - Movie Manager issues causing DB corruption
+Adding a filtered view to the menu does not create proper view
+Playback events for physical discs are not processed properly
+Remove IMDB.PT script from installer package and change the preset script for PT
+Better error handling when no config present or skin files missing
+Cinefacts has relaunched their website, so grabbers don't work anymore
+Add GUI Global Options to change default config and default setting</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
-    <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
-    <ReleaseDate>2013-08-31T15:58:01.6376763+02:00</ReleaseDate>
+    <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.3.2921.mpe1</OnlineLocation>
+    <ReleaseDate>2013-09-01T14:33:24.3101339+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -8881,14 +8935,14 @@ Changes &amp; Fixes:
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>..\MyFilms\Resources\film-reel-128x128.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9dd3de42-55d9-4923-af70-62e0fa30d8b2}-film-reel-128x128.png</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{11686057-54f3-477d-9691-a4874b628300}-film-reel-128x128.png</ZipFileName>
         <DestinationFilename />
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>ReadMe.txt</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{34fe4713-7aef-4c41-9f1a-0551fb0c28df}-ReadMe.txt</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{9c2dcb13-984a-4953-b140-c0829e8e5370}-ReadMe.txt</ZipFileName>
         <DestinationFilename />
       </FileItem>
     </Items>

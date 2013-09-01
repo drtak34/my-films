@@ -839,12 +839,17 @@ Please report bugs in MyFilms forum.</VersionDescription>
           <Build>2</Build>
           <Revision>2791</Revision>
         </Version>
-        <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
-
-The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+        <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+
+
+
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+
 My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
-        <VersionDescription>This version is a maintenance release of MyFilms 6.0.
+        <VersionDescription>This version is a maintenance release of MyFilms 6.0.
+
 
 Please report bugs in MyFilms forum.
 
@@ -870,6 +875,489 @@ Changes &amp; Fixes:
         <DevelopmentStatus>Stable</DevelopmentStatus>
         <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.2.2791.mpe1</OnlineLocation>
         <ReleaseDate>2012-12-15T17:13:57.342823+01:00</ReleaseDate>
+        <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
+        <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
+        <Params>
+          <Items>
+            <SectionParam Name="Online Icon">
+              <Value>http://wiki.team-mediaportal.com/@api/deki/files/1706/=MyFilmsLogo.png</Value>
+              <ValueType>String</ValueType>
+              <Description>The icon file of the package stored online (jpg,png,bmp)</Description>
+            </SectionParam>
+            <SectionParam Name="Configuration file">
+              <Value>%Plugins%\windows\myfilms.dll</Value>
+              <ValueType>Template</ValueType>
+              <Description>The file used to configure the extension.
+ If have .exe extension the will be executed
+ If have .dll extension used like MP plugin configuration</Description>
+            </SectionParam>
+            <SectionParam Name="Online Screenshots">
+              <Value>http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_000.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/MyFilmsMain.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/MyFilmsFanart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/CoverFlow.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/IconsLayout.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Filmstrip.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/CatListFanart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DefaultView.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsOverview.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsDesc.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/DetailsTechInfo.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/SetWatchedMain.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/QuickStart.jpg; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCInteractive.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCU_View.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/AMCU_ViewFull.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_000.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_001.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_003.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_004.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_005.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_006.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_008.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_016.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_017.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_018.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_019.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_021.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_023.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_024.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_029.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_031.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_033.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_034.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_035.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_036.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_037.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_038.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_050.png; http://my-films.googlecode.com/svn/trunk/Installer/ScreenShots/Preview_100.png</Value>
+              <ValueType>String</ValueType>
+              <Description>Online stored screenshot urls separated by ; </Description>
+            </SectionParam>
+            <SectionParam Name="Force to uninstall on update">
+              <Value>YES</Value>
+              <ValueType>Bool</ValueType>
+              <Description>Show dialog and force to uninstall previous version when updating an extension. Should only be disabled if you are using an NSIS/MSI installer.</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+      </GeneralInfo>
+      <UniqueFileList>
+        <Items />
+      </UniqueFileList>
+      <ProjectSettings>
+        <FolderGroups />
+      </ProjectSettings>
+      <IsSkin>false</IsSkin>
+    </PackageClass>
+    <PackageClass>
+      <Version>2.0</Version>
+      <Groups>
+        <Items>
+          <GroupItem Name="Default">
+            <DisplayName>Default</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>Default</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="SkinFiles">
+            <DisplayName>SkinFiles</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>SkinFiles</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="Logos">
+            <DisplayName>Logos</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>Logos</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="Scripts">
+            <DisplayName>Scripts</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>Scripts</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="DefaultImages">
+            <DisplayName>DefaultImages</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>DefaultImages</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="DefaultThumbs">
+            <DisplayName>DefaultThumbs</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>DefaultThumbs</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="SampleMovies">
+            <DisplayName>SampleMovies</DisplayName>
+            <DefaulChecked>false</DefaulChecked>
+            <Description>SampleMovies</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="AddOns">
+            <DisplayName>AddOns</DisplayName>
+            <DefaulChecked>false</DefaulChecked>
+            <Description>AddOns</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="AMCinstaller">
+            <DisplayName>AMCinstaller</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>AMCinstaller</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="LanguageFiles">
+            <DisplayName>LanguageFiles</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>LanguageFiles</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="WebLinks">
+            <DisplayName>WebLinks</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>WebLinks</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="DesktopShortcuts">
+            <DisplayName>DesktopShortcuts</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>DesktopShortcuts</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="Cleanup">
+            <DisplayName>Cleanup</DisplayName>
+            <DefaulChecked>false</DefaulChecked>
+            <Description>Cleanup</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="SkinFiles-13">
+            <DisplayName>SkinFiles-13</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>SkinFiles-13</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="SkinFiles-12">
+            <DisplayName>SkinFiles-12</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>SkinFiles-12</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+          <GroupItem Name="MTN">
+            <DisplayName>MTN</DisplayName>
+            <DefaulChecked>true</DefaulChecked>
+            <Description>MTN</Description>
+            <Files>
+              <Items />
+            </Files>
+          </GroupItem>
+        </Items>
+      </Groups>
+      <Sections>
+        <Items />
+      </Sections>
+      <Dependencies>
+        <Items>
+          <DependencyItem>
+            <Type>MediaPortal</Type>
+            <Id />
+            <MinVersion>
+              <Major>1</Major>
+              <Minor>1</Minor>
+              <Build>6</Build>
+              <Revision>27644</Revision>
+            </MinVersion>
+            <MaxVersion>
+              <Major>1</Major>
+              <Minor>1</Minor>
+              <Build>6</Build>
+              <Revision>27644</Revision>
+            </MaxVersion>
+            <WarnOnly>false</WarnOnly>
+            <Message>MyFilms 6 requires Mediaportal 1.2 or higher.</Message>
+            <Name>MediaPortal</Name>
+          </DependencyItem>
+          <DependencyItem>
+            <Type>Extension</Type>
+            <Id>2869e8cd-579e-4fdb-ad6d-19ff5bd4e46f</Id>
+            <MinVersion>
+              <Major>0</Major>
+              <Minor>3</Minor>
+              <Build>0</Build>
+              <Revision>0</Revision>
+            </MinVersion>
+            <MaxVersion>
+              <Major>1</Major>
+              <Minor>9</Minor>
+              <Build>9</Build>
+              <Revision>99999</Revision>
+            </MaxVersion>
+            <WarnOnly>true</WarnOnly>
+            <Message>To use My Films online help and preview IMDB pages, BrowseTheWeb version 0.30 or higher must be installed.</Message>
+            <Name>Browse The Web</Name>
+          </DependencyItem>
+          <DependencyItem>
+            <Type>Extension</Type>
+            <Id>269bd257-7ce5-450a-b786-1c2834c81849</Id>
+            <MinVersion>
+              <Major>1</Major>
+              <Minor>2</Minor>
+              <Build>0</Build>
+              <Revision>0</Revision>
+            </MinVersion>
+            <MaxVersion>
+              <Major>9</Major>
+              <Minor>99</Minor>
+              <Build>9</Build>
+              <Revision>99999</Revision>
+            </MaxVersion>
+            <WarnOnly>true</WarnOnly>
+            <Message>To access online trailers (incl. IMDB) from MyFilms, Online Videos v1.2 or higher must be installed.</Message>
+            <Name>OnlineVideos</Name>
+          </DependencyItem>
+          <DependencyItem>
+            <Type>Extension</Type>
+            <Id>f8f30e5e-cc8a-44a0-91a9-1175fe55732f</Id>
+            <MinVersion>
+              <Major>1</Major>
+              <Minor>0</Minor>
+              <Build>0</Build>
+              <Revision>0</Revision>
+            </MinVersion>
+            <MaxVersion>
+              <Major>9</Major>
+              <Minor>9</Minor>
+              <Build>9</Build>
+              <Revision>99999</Revision>
+            </MaxVersion>
+            <WarnOnly>true</WarnOnly>
+            <Message>To use subtitles the SubCentral Plugin with min. version 1.1.0.0 is required.</Message>
+            <Name>SubCentral</Name>
+          </DependencyItem>
+          <DependencyItem>
+            <Type>Extension</Type>
+            <Id>a9c3845a-8718-4712-85cc-26f56520bb9a</Id>
+            <MinVersion>
+              <Major>1</Major>
+              <Minor>5</Minor>
+              <Build>1</Build>
+              <Revision>0</Revision>
+            </MinVersion>
+            <MaxVersion>
+              <Major>9</Major>
+              <Minor>9</Minor>
+              <Build>9</Build>
+              <Revision>99999</Revision>
+            </MaxVersion>
+            <WarnOnly>true</WarnOnly>
+            <Message>To use film synchronisation and recommendations, you need Trakt plugin with version of 1.5.1.0 or above. V2.2 + is recommended to use latest features with My Films.</Message>
+            <Name>Trakt for MediaPortal</Name>
+          </DependencyItem>
+        </Items>
+      </Dependencies>
+      <PluginDependencies>
+        <Items>
+          <PluginDependencyItem AssemblyName="MyFilms.dll">
+            <CompatibleVersion>
+              <Items>
+                <CompatibleVersionItem>
+                  <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+                  <DesignedForVersion>1.3.100.0</DesignedForVersion>
+                </CompatibleVersionItem>
+              </Items>
+            </CompatibleVersion>
+            <SubSystemsUsed>
+              <Items>
+                <SubSystemItem Name="MP.Config" />
+                <SubSystemItem Name="MP.DB" />
+                <SubSystemItem Name="MP.Players.Video" />
+                <SubSystemItem Name="MP.SkinEngine" />
+              </Items>
+            </SubSystemsUsed>
+          </PluginDependencyItem>
+        </Items>
+      </PluginDependencies>
+      <GeneralInfo>
+        <Name>MyFilms</Name>
+        <Id>ceddd4d1-4cac-4846-9af5-f4daee1bbddc</Id>
+        <Author>Zebons, Guzzi</Author>
+        <HomePage>http://wiki.team-mediaportal.com/1_MEDIAPORTAL_1/17_Extensions/3_Plugins/My_Films</HomePage>
+        <ForumPage>http://forum.team-mediaportal.com/my-films-164/</ForumPage>
+        <UpdateUrl>http://my-films.googlecode.com/svn/trunk/Installer/update.xml</UpdateUrl>
+        <Version>
+          <Major>6</Major>
+          <Minor>0</Minor>
+          <Build>3</Build>
+          <Revision>2921</Revision>
+        </Version>
+        <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+
+
+
+
+
+
+
+
+
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+
+
+
+My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
+        <VersionDescription>This version is a maintenance release of MyFilms 6.0.
+
+
+
+
+
+Please report bugs in MyFilms forum.
+
+
+
+
+
+Features:
+
+- Add regex grouping for studio and languages
+
+- Remove 'Use MP Logos' option
+
+- Allow users to select Test Mode more easily and display it in Setup/GUI
+
+- Add regex matching to logo rule editor
+
+- Current MyFilms is incompatible with MP 1.4.0
+
+- Use Localized Plugin Name in CurrentModule
+
+- Change Backnavigation behaviour to not step back when a view was called directly
+
+- Add logo rules to support certification logos
+
+
+
+Test Mode Features (6.1.0 preview):
+
+- Improve Setup Wizard to support central config setups
+
+- Allow sorting for Online Movie Info/Lists
+
+- Add dialog for visual image selection (for Collection Covers)
+
+- Download of collection covers from TMDB
+
+- Improve Box Sets management in GUI
+
+- Autorun AMCU when plugin starts
+
+- Allow local caching for trailers of online content
+
+- Precaching of movie DB on startup
+
+- Add context search option for online content to seach local content by facade label keywords
+
+- Add OnlineVideos search to movie context menu
+
+- Allow download for trailers for multiple movies
+
+- Add option to person context menu to get TMDB filmographie
+
+- Add virtual path browsing
+
+- Add online info about current, upcoming and most liked movies
+
+- Trailer 'Scrobbling' - Play random trailers from a group of films
+
+- Add "about" tab and credits
+
+- Support for movie thumbs in Details screen &amp; removal of old separate MyFilmsThumbs screen
+
+- Add virtual path title
+
+- View related persons view from Details Window
+
+- Add OV stream player for trailers
+
+- Actor screen
+
+
+
+Fixes:
+
+Grabber Engine - '#ADD#' uses wrong chars for splitting, should only use '|'
+
+Selecting more than one local movie in Trakt opens the wrong movie in MyFilms
+
+AMCU Update Movies Test Param does not display # Movies matched
+
+Trailer/Clip detection can cause that a movie is handled as a trailer
+
+Create Fanart does not work if you do a clean install of MP 1.4.0
+
+Grabber engine does not display preview resutls
+
+TMDB grabber does not add/update cover
+
+Cover Manager does not download covers
+
+IMDB-Full script is broken
+
+hyperlink from basic homescreen to a specific DB results in MyFilms showing blank screen
+
+Latest Media Handler does not work per Config
+
+My Movies export to XML catalog, "SortTitle" to "FormattedTitle" not working
+
+Trailers Button on Details Window causes Crash
+
+Search History does not display selected Search in Virtual Keyboard
+
+Layout button display is incorrect when you change layouts and return to MF
+
+Skin Updates for MP13 final
+
+Default view settings in Global Options not working properly
+
+Remove message 'WatchedItem' from movie ended handling
+
+Change encoding for AMCupdater created nfo files to UTF-8 for better compatibility with nfo grabber script
+
+IMDB-OFDB Scraper broken
+
+brackets should be removed from #myfilms.select property
+
+Exception on item counts on certain timing conditions
+
+Collection of structural changes of the Solution
+
+Skinengine falls back to wprite mode when high order characters are pushed to GUIProperties
+
+Long internet titles can result in "path too long" exceptions
+
+When importing DVD/BR folders size calculation does not work
+
+AMCupdater - "always ignore files" is case sensitive
+
+Group/Collection covers cannot be handled, if the name contains invalid characters
+
+Remove "star" on count indicator of filtered views
+
+MyFilms as problems with some "Pictures" in catalog/Pictures folder
+
+ampersand name issue
+
+AMCupdater - Movie Manager issues causing DB corruption
+
+Adding a filtered view to the menu does not create proper view
+
+Playback events for physical discs are not processed properly
+
+Remove IMDB.PT script from installer package and change the preset script for PT
+
+Better error handling when no config present or skin files missing
+
+Cinefacts has relaunched their website, so grabbers don't work anymore
+
+Add GUI Global Options to change default config and default setting</VersionDescription>
+        <DevelopmentStatus>Stable</DevelopmentStatus>
+        <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.3.2921.mpe1</OnlineLocation>
+        <ReleaseDate>2013-09-01T14:33:24.3101339+02:00</ReleaseDate>
         <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
         <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
         <Params>
