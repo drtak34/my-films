@@ -486,6 +486,7 @@
       this.Label_UserProfileName = new System.Windows.Forms.Label();
       this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
       this.Config_EnablePreload = new System.Windows.Forms.CheckBox();
+      this.btnTestMode = new System.Windows.Forms.Button();
       this.Tab_Trakt = new System.Windows.Forms.TabPage();
       this.groupBoxExternal = new System.Windows.Forms.GroupBox();
       this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
@@ -626,7 +627,6 @@
       this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-      this.btnTestMode = new System.Windows.Forms.Button();
       ownerLabel = new System.Windows.Forms.Label();
       mailLabel = new System.Windows.Forms.Label();
       siteLabel = new System.Windows.Forms.Label();
@@ -2935,9 +2935,9 @@
             "(",
             "....",
             ")"});
-      this.RoleSeparator5.Location = new System.Drawing.Point(376, 43);
+      this.RoleSeparator5.Location = new System.Drawing.Point(396, 46);
       this.RoleSeparator5.Name = "RoleSeparator5";
-      this.RoleSeparator5.Size = new System.Drawing.Size(40, 21);
+      this.RoleSeparator5.Size = new System.Drawing.Size(48, 21);
       this.RoleSeparator5.TabIndex = 11;
       this.RoleSeparator5.Text = "List";
       // 
@@ -2949,9 +2949,9 @@
             "(",
             "....",
             ")"});
-      this.RoleSeparator4.Location = new System.Drawing.Point(327, 43);
+      this.RoleSeparator4.Location = new System.Drawing.Point(342, 46);
       this.RoleSeparator4.Name = "RoleSeparator4";
-      this.RoleSeparator4.Size = new System.Drawing.Size(40, 21);
+      this.RoleSeparator4.Size = new System.Drawing.Size(48, 21);
       this.RoleSeparator4.TabIndex = 10;
       this.RoleSeparator4.Text = "List";
       // 
@@ -2962,9 +2962,9 @@
             ",",
             ";",
             "|"});
-      this.ListSeparator5.Location = new System.Drawing.Point(376, 16);
+      this.ListSeparator5.Location = new System.Drawing.Point(396, 19);
       this.ListSeparator5.Name = "ListSeparator5";
-      this.ListSeparator5.Size = new System.Drawing.Size(40, 21);
+      this.ListSeparator5.Size = new System.Drawing.Size(48, 21);
       this.ListSeparator5.TabIndex = 5;
       this.ListSeparator5.Text = "List";
       // 
@@ -2975,9 +2975,9 @@
             ",",
             ";",
             "|"});
-      this.ListSeparator4.Location = new System.Drawing.Point(327, 16);
+      this.ListSeparator4.Location = new System.Drawing.Point(342, 19);
       this.ListSeparator4.Name = "ListSeparator4";
-      this.ListSeparator4.Size = new System.Drawing.Size(40, 21);
+      this.ListSeparator4.Size = new System.Drawing.Size(48, 21);
       this.ListSeparator4.TabIndex = 4;
       this.ListSeparator4.Text = "List";
       // 
@@ -2988,9 +2988,9 @@
             ",",
             ";",
             "|"});
-      this.ListSeparator3.Location = new System.Drawing.Point(278, 16);
+      this.ListSeparator3.Location = new System.Drawing.Point(288, 19);
       this.ListSeparator3.Name = "ListSeparator3";
-      this.ListSeparator3.Size = new System.Drawing.Size(40, 21);
+      this.ListSeparator3.Size = new System.Drawing.Size(48, 21);
       this.ListSeparator3.TabIndex = 3;
       this.ListSeparator3.Text = "List";
       // 
@@ -3001,9 +3001,9 @@
             ",",
             ";",
             "|"});
-      this.ListSeparator2.Location = new System.Drawing.Point(229, 16);
+      this.ListSeparator2.Location = new System.Drawing.Point(234, 19);
       this.ListSeparator2.Name = "ListSeparator2";
-      this.ListSeparator2.Size = new System.Drawing.Size(40, 21);
+      this.ListSeparator2.Size = new System.Drawing.Size(48, 21);
       this.ListSeparator2.TabIndex = 2;
       this.ListSeparator2.Text = "List";
       // 
@@ -3015,9 +3015,9 @@
             "(",
             ")",
             "...."});
-      this.RoleSeparator2.Location = new System.Drawing.Point(229, 43);
+      this.RoleSeparator2.Location = new System.Drawing.Point(234, 46);
       this.RoleSeparator2.Name = "RoleSeparator2";
-      this.RoleSeparator2.Size = new System.Drawing.Size(40, 21);
+      this.RoleSeparator2.Size = new System.Drawing.Size(48, 21);
       this.RoleSeparator2.Sorted = true;
       this.RoleSeparator2.TabIndex = 8;
       this.RoleSeparator2.Text = "List";
@@ -3030,9 +3030,9 @@
             "(",
             ")",
             "...."});
-      this.RoleSeparator3.Location = new System.Drawing.Point(278, 43);
+      this.RoleSeparator3.Location = new System.Drawing.Point(288, 46);
       this.RoleSeparator3.Name = "RoleSeparator3";
-      this.RoleSeparator3.Size = new System.Drawing.Size(40, 21);
+      this.RoleSeparator3.Size = new System.Drawing.Size(48, 21);
       this.RoleSeparator3.Sorted = true;
       this.RoleSeparator3.TabIndex = 9;
       this.RoleSeparator3.Text = "List";
@@ -3040,7 +3040,7 @@
       // label22
       // 
       this.label22.AutoSize = true;
-      this.label22.Location = new System.Drawing.Point(14, 46);
+      this.label22.Location = new System.Drawing.Point(14, 49);
       this.label22.Name = "label22";
       this.label22.Size = new System.Drawing.Size(107, 13);
       this.label22.TabIndex = 6;
@@ -3055,9 +3055,9 @@
             "(",
             ")",
             "...."});
-      this.RoleSeparator1.Location = new System.Drawing.Point(180, 43);
+      this.RoleSeparator1.Location = new System.Drawing.Point(180, 46);
       this.RoleSeparator1.Name = "RoleSeparator1";
-      this.RoleSeparator1.Size = new System.Drawing.Size(40, 21);
+      this.RoleSeparator1.Size = new System.Drawing.Size(48, 21);
       this.RoleSeparator1.Sorted = true;
       this.RoleSeparator1.TabIndex = 7;
       this.RoleSeparator1.Text = "List";
@@ -3065,7 +3065,7 @@
       // label24
       // 
       this.label24.AutoSize = true;
-      this.label24.Location = new System.Drawing.Point(14, 19);
+      this.label24.Location = new System.Drawing.Point(14, 22);
       this.label24.Name = "label24";
       this.label24.Size = new System.Drawing.Size(72, 13);
       this.label24.TabIndex = 0;
@@ -3080,9 +3080,9 @@
             ",",
             ";",
             "|"});
-      this.ListSeparator1.Location = new System.Drawing.Point(180, 16);
+      this.ListSeparator1.Location = new System.Drawing.Point(180, 19);
       this.ListSeparator1.Name = "ListSeparator1";
-      this.ListSeparator1.Size = new System.Drawing.Size(40, 21);
+      this.ListSeparator1.Size = new System.Drawing.Size(48, 21);
       this.ListSeparator1.TabIndex = 1;
       this.ListSeparator1.Text = "List";
       // 
@@ -5114,6 +5114,17 @@
       this.ToolTip1.SetToolTip(this.Config_EnablePreload, resources.GetString("Config_EnablePreload.ToolTip"));
       this.Config_EnablePreload.UseVisualStyleBackColor = true;
       // 
+      // btnTestMode
+      // 
+      this.btnTestMode.Location = new System.Drawing.Point(320, 466);
+      this.btnTestMode.Name = "btnTestMode";
+      this.btnTestMode.Size = new System.Drawing.Size(75, 31);
+      this.btnTestMode.TabIndex = 77;
+      this.btnTestMode.Text = "Test Mode";
+      this.ToolTip1.SetToolTip(this.btnTestMode, resources.GetString("btnTestMode.ToolTip"));
+      this.btnTestMode.UseVisualStyleBackColor = true;
+      this.btnTestMode.Click += new System.EventHandler(this.btnTestMode_Click);
+      // 
       // Tab_Trakt
       // 
       this.Tab_Trakt.Controls.Add(this.groupBoxExternal);
@@ -6533,17 +6544,6 @@
       this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
       this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
       this.layoutFilmsComboBox.TabIndex = 34;
-      // 
-      // btnTestMode
-      // 
-      this.btnTestMode.Location = new System.Drawing.Point(320, 466);
-      this.btnTestMode.Name = "btnTestMode";
-      this.btnTestMode.Size = new System.Drawing.Size(75, 31);
-      this.btnTestMode.TabIndex = 77;
-      this.btnTestMode.Text = "Test Mode";
-      this.ToolTip1.SetToolTip(this.btnTestMode, resources.GetString("btnTestMode.ToolTip"));
-      this.btnTestMode.UseVisualStyleBackColor = true;
-      this.btnTestMode.Click += new System.EventHandler(this.btnTestMode_Click);
       // 
       // MyFilmsSetup
       // 
