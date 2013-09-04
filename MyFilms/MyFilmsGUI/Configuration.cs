@@ -634,7 +634,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ListSeparator" + i, string.Empty).Length > 0)
           {
-            this.ListSeparator[j] = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ListSeparator" + i, string.Empty);
+            this.ListSeparator[j] = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "ListSeparator" + i, string.Empty).Replace("#LF#", "\n"); // support for new line separation
             j++;
           }
         }
