@@ -184,6 +184,38 @@
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
 
+<!-- Test code for TexytBoxScrolllup alignment
+    <control>
+      <type>textboxscrollup</type>
+      <id>1025</id>
+      <posX>30</posX>
+      <posY>593</posY>
+      <width>800</width>
+      <height>75</height>
+      <font>font22</font>
+      <textcolor>FFFFFFFF</textcolor>
+      <label>#myfilms.db.description.value</label>
+      <visible>!player.hasmedia+[facadeview.list|facadeview.album]+control.hasfocus(50)</visible>
+      <seperator>: : :</seperator>
+      <animation effect="fade" time="250">visiblechange</animation>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+    </control>
+    <control>
+      <type>fadelabel</type>
+      <id>0</id>
+      <posX>30</posX>
+      <posY>593</posY>
+      <width>180</width>
+      <label>This is a test Lavbel to test vertical alignment !</label>
+      <font>font22</font>
+      <textcolor>FFFFFFFF</textcolor>
+      <animation effect="fade" time="250">WindowClose</animation>
+      <animation effect="fade" time="250">WindowOpen</animation>
+      <animation effect="fade" time="250">visiblechange</animation>
+    </control>
+-->
+
 
     <!-- Additional Display for Info if Fanart available and Movie available -->
 
