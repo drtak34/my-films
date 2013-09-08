@@ -997,6 +997,8 @@
       <posY>200</posY>
       <width>740</width>
       <height>412</height>
+      <scrollYOffset>2</scrollYOffset>
+      <lineSpacing>1.0</lineSpacing>
       <textcolor>FFFFFFFF</textcolor>
       <label>#myfilms.db.description.value</label>
       <seperator>: : :</seperator>
