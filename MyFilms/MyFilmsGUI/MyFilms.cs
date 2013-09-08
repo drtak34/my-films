@@ -11500,7 +11500,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Moviecontext
             if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
             {
-              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB API trailer and download entries")) // if (conf.ViewContext != ViewContext.TmdbMovies)
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: TMDB API trailer and download entries")) // if (conf.ViewContext != ViewContext.TmdbMovies)
               {
                 if (MyFilms.conf.BoolEnableOnlineServices) dlg.Add(string.Format(GUILocalizeStrings.Get(1079921), GUILocalizeStrings.Get(10798628))); // Get Online Info
                 if (!MyFilms.conf.BoolEnableOnlineServices) dlg.Add(string.Format(GUILocalizeStrings.Get(1079921), GUILocalizeStrings.Get(10798629)));
