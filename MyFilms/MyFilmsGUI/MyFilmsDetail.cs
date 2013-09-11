@@ -6990,10 +6990,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "imdb_id":
                 #region imdb_id
                 MyFilms.currentMovie.IMDBNumber = MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "";
+                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "");
                 break;
                 #endregion
-              case "tmdb_id":
-                break;
               case "isonline":
                 #region set online status
                 if (MyFilms.InitialIsOnlineScan) // if availability scanner did run - either by autostart or manually
