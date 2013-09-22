@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en|all</Language>
     <Type>person</Type>
-    <Version>1.1</Version>
+    <Version>1.2</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -15,7 +15,7 @@
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023_primary_photo_x0022__x003E__x0020_._x002A__x003F__x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
-      <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_nm_x0026_q_x003D__x0023_Search_x0023_</URL>
+      <URL Param1="" Param2="">http:_x002F__x002F_akas.imdb.com_x002F_find_x003F_s_x003D_nm_x0026_q_x003D__x0023_Search_x0023__x0026_exact_x003D_true_x0026_ref__x003D_fn_nm_ex</URL>
       <KeyStartList Param1="" Param2="">_x003C__x002F_a_x003E_Names_x003C__x002F_h3_x003E_</KeyStartList>
       <KeyEndList>_x003C__x002F_div_x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
@@ -48,8 +48,8 @@
       <KeyEndOTitle>_x003C__x002F_title_x003E_</KeyEndOTitle>
       <KeyOTitleIndex />
       <KeyOTitlePage />
-      <KeyStartTTitle Param1="_x0026_nbsp_x003B__x003C_span_x003E__x007C_" Param2="_x002C_">_x0023_REGEX_x0023__x003C_h4_x0020_class_x003D__x0022_inline_x0022__x003E_Alternate_x0020_Names:_x003C__x002F_h4_x003E_</KeyStartTTitle>
-      <KeyEndTTitle>_x003C_hr_x0020__x002F__x003E_</KeyEndTTitle>
+      <KeyStartTTitle Param1="_x0026_nbsp_x003B__x003C_span_x003E__x007C_" Param2="_x002C_">_x0023_REGEX_x0023_Alternate_x0020_Names:_x003C__x002F_h4_x003E_</KeyStartTTitle>
+      <KeyEndTTitle>_x0023_REGEX_x0023__x003C_hr_x0020__x002F__x003E__x007C__x003C_hr_x002F__x003E_</KeyEndTTitle>
       <KeyTTitleRegExp />
       <KeyTTitleIndex />
       <KeyTTitlePage />
@@ -176,10 +176,10 @@
       <KeyEndTMDB_Id />
       <KeyTMDB_IdIndex />
       <KeyTMDB_IdPage />
-      <KeyStartLinkSyn Param1="_x002F__x0022__x0020_" Param2="_x002F_bio">_x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_</KeyStartLinkSyn>
-      <KeyEndLinkSyn>_x002F__x003E__x003C_meta_x0020_property_x003D__x0022_</KeyEndLinkSyn>
+      <KeyStartLinkSyn Param1="_x0023_ADD_x0023_" Param2="_x007C__x002F_bio">url_x003E_</KeyStartLinkSyn>
+      <KeyEndLinkSyn>_x0023_REGEX_x0023__x003C__x002F_url_x003E__x007C__x002F__x005C__x003F_ref</KeyEndLinkSyn>
       <KeyLinkSynIndex />
-      <KeyLinkSynPage />
+      <KeyLinkSynPage>DetailsPath</KeyLinkSynPage>
       <KeyStartLinkGeneric1 Param1="" Param2="" />
       <KeyEndLinkGeneric1 />
       <KeyLinkGeneric1Index />
