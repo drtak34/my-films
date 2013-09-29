@@ -762,6 +762,37 @@ namespace MyFilmsPlugin.MyFilms.Utils
       }
       return output;
     }
+
+    public static ArrayList RemoveDuplicate(ArrayList sourceList)
+    {
+      ArrayList arrList = new ArrayList(sourceList);
+
+      //use a hashtable to create a unique list
+      Hashtable ht = new Hashtable();
+
+      foreach (int item in arrList)
+      {
+        //set a key in the hashtable for our arraylist value - leaving the hashtable value empty
+        ht[item] = null;
+      }
+
+      //now grab the keys from that hashtable into another arraylist
+      ArrayList distincArray = new ArrayList(ht.Keys);
+
+      return distincArray;
+
+      //ArrayList list = new ArrayList();
+      //foreach (string item in sourceList)
+      //{
+      //  if (!list.Contains(item))
+      //  {
+      //    list.Add(item);
+      //  }
+      //}
+      //return list;
+    }
+
+
     #endregion
 
     #region Assembly methods
@@ -1368,6 +1399,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return SQLOps.Join(
         First, Second, new DataColumn[] { First.Columns[FJC] }, new DataColumn[] { First.Columns[SJC] });
     }
+
   }
 
 }
