@@ -104,6 +104,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_BtnMaj = 107,
       CTRL_BtnActors = 108,
       CTRL_BtnPlayTrailer = 109,
+      CTRL_BtnTraktMenu = 110,
       CTRL_Fanart = 1000,
       CTRL_FanartDir = 1001,
       CTRL_MovieThumbsDir = 1002,
@@ -133,6 +134,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     protected GUIButtonControl BtnFirst;
     [SkinControlAttribute((int)Controls.CTRL_BtnLast)]
     protected GUIButtonControl BtnLast;
+    [SkinControlAttribute((int)Controls.CTRL_BtnTraktMenu)]
+    protected GUIButtonControl BtnTraktMenu;
     [SkinControlAttribute(2024)]
     protected GUIImage ImgDetFilm;
     [SkinControlAttribute(2023)]
@@ -885,6 +888,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return true;
             case (int)Controls.CTRL_BtnActors:
               GUIWindowManager.ActivateWindow(MyFilms.ID_MyFilmsActors);
+              return true;
+            case (int)Controls.CTRL_BtnTraktMenu:
+              TraktInternalMenu(MyFilms.currentMovie);
               return true;
             #endregion
           }
@@ -2563,10 +2569,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private bool TraktInternalMenu(MFMovie movie)
     {
       bool success = false;
-      LogMyFilms.Debug("TraktInternalMenu(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', tmdb = '" + movie.TMDBNumber + "'");
       try
       {
-        // ToDo: Activate the internal menu, once trakt >1.8.1 is out
+        LogMyFilms.Debug("TraktInternalMenu(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', tmdb = '" + movie.TMDBNumber + "', actors = '" + movie.Actors.Count + "', Persons total = '" + (movie.Actors.Count + movie.Producers.Count + movie.Directors.Count + movie.Writers.Count) + "'");
         //public static bool ShowTraktExtMovieMenu(string title, string year, string imdbid, string fanart)
         //{
         //    return ShowTraktExtMovieMenu(title, year, imdbid, fanart, false);
