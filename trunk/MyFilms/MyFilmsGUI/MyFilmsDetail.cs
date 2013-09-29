@@ -1066,7 +1066,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgmenu.Add(GUILocalizeStrings.Get(10798725)); //delete Trailer entries from DB record
             choiceViewMenu.Add("trailer-delete");
 
-            if (ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: Trailer Download"))
+            if (ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Details context: Trailer Download"))
             {
               dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
               choiceViewMenu.Add("trailer-imdb");
