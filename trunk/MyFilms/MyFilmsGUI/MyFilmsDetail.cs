@@ -1090,10 +1090,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgmenu.Add(GUILocalizeStrings.Get(10798725)); //delete Trailer entries from DB record
             choiceViewMenu.Add("trailer-delete");
 
-            if (ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Details context: Trailer Download"))
+            if (ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: Tmdb Trailer Download"))
             {
               dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
-              choiceViewMenu.Add("trailer-imdb");
+              // dlgmenu.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
+              choiceViewMenu.Add("trailer-tmdb");
             }
           }
 
@@ -2126,8 +2127,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIUtils.ShowOKDialog("Action not yet implemented");
           break;
 
-        case "trailer-imdb":
-          GUIUtils.ShowOKDialog("Action not yet implemented");
+        case "trailer-tmdb":
+          if (!Helper.IsOnlineVideosAvailableAndEnabled)
+          {
+            GUIUtils.ShowNotifyDialog("OnlineVideos is not available!");
+            return;
+          }
+          SearchAndDownloadTrailerOnlineTMDB(MyFilms.r, MyFilms.conf.StrIndex, false, true, (MyFilms.conf.StrDirStorTrailer.Length > 0) ? MyFilms.conf.StrDirStorTrailer : null); // MyFilmsDetail.SearchAndDownloadTrailerOnlineTMDB(r, MyFilms.conf.StrIndex, false, true, null);
           break;
 
         case "cover-thumbnailer":
