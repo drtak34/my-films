@@ -39,6 +39,10 @@ namespace MyFilmsPlugin.MyFilms
       this.Username = string.Empty;
       this.ReadOnly = false;
       this.ID = -1;
+      this.Actors = new List<string>();
+      this.Directors = new List<string>();
+      this.Writers = new List<string>();
+      this.Producers = new List<string>();
     }
 
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();
@@ -86,6 +90,10 @@ namespace MyFilmsPlugin.MyFilms
     public string Config { get; set; }
     public string Username { get; set; }
     public bool ReadOnly { get; set; }
+    public List<string> Actors { get; set; }
+    public List<string> Directors { get; set; }
+    public List<string> Writers { get; set; }
+    public List<string> Producers { get; set; }
 
     //public bool AllowTrakt { get; set; }
     //public bool AllowLatestMediaAPI { get; set; }
@@ -120,6 +128,10 @@ namespace MyFilmsPlugin.MyFilms
       this.Config = string.Empty;
       this.Username = string.Empty;
       this.ReadOnly = false;
+      this.Actors.Clear();
+      this.Directors.Clear();
+      this.Writers.Clear();
+      this.Producers.Clear();
       //this.AllowTrakt = false;
       //this.AllowLatestMediaAPI = false;
       //this.MovieRow = null;
