@@ -12061,7 +12061,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
                 keyboard.Text = viewRow.Value;
                 keyboard.DoModal(GetID);
-                if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                if (keyboard.IsConfirmed && keyboard.Text != null)
                 {
                   viewRow.Value = keyboard.Text;
                   SaveCustomViews();
@@ -12086,19 +12086,207 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 // ändern
                 // löschen
                 // auswählen via "field" und "wert - wert wahlweise manuell
-                VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-                if (null == keyboard) return;
-                keyboard.Reset();
-                keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
-                keyboard.Text = viewRow.Filter;
-                keyboard.DoModal(GetID);
-                if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+
+                // offer menu to user about actions
+                GUIListItem item;
+                string AntFilteritem = "";
+                List<string> filteritems = new List<string>(); 
+
+                GUIDialogMenu dlgmenu = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+                if (dlgmenu == null) return;
+                dlgmenu.Reset();
+                dlgmenu.SetHeading(GUILocalizeStrings.Get(1079826)); // set view filter expression
+                item = new GUIListItem();
+                item.Label = "remove all filter";
+                dlgmenu.Add(item);
+                filteritems.Add(item.Label);
+                item = new GUIListItem();
+                item.Label = "manual edit filter";
+                dlgmenu.Add(item);
+                filteritems.Add(item.Label);
+
+                #region add all field options ...
+                ArrayList displayItems = GetDisplayItems("view");
+                foreach (string[] displayItem in displayItems)
                 {
-                  viewRow.Filter = keyboard.Text;
-                  SaveCustomViews();
-                  GetSelectFromMenuView(conf.BoolMenuShowAll);
-                  NavigationStack.Clear();
+                  item = new GUIListItem();
+                  item.Label = (string.IsNullOrEmpty(displayItem[1])) ? displayItem[0] : displayItem[1];
+                  item.DVDLabel = displayItem[0];
+                  dlgmenu.Add(item);
+                  filteritems.Add(displayItem[0]);
                 }
+                #endregion
+                dlgmenu.DoModal(GetID);
+                if (dlgmenu.SelectedLabel == -1) break;
+
+                switch (dlgmenu.SelectedLabel)
+                {
+                  case 0:
+                    viewRow.Filter = "";
+                    SaveCustomViews();
+                    GetSelectFromMenuView(conf.BoolMenuShowAll);
+                    NavigationStack.Clear();
+                    break;
+                  case 1:
+                    VirtualKeyboard keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+                    if (null == keyboard) return;
+                    keyboard.Reset();
+                    keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
+                    keyboard.Text = viewRow.Filter;
+                    keyboard.DoModal(GetID);
+                    if ((keyboard.IsConfirmed) && (keyboard.Text.Length > 0))
+                    {
+                      viewRow.Filter = keyboard.Text;
+                      SaveCustomViews();
+                      GetSelectFromMenuView(conf.BoolMenuShowAll);
+                      NavigationStack.Clear();
+                    }
+                    break;
+
+                  default:
+                    AntFilteritem = filteritems[dlgmenu.SelectedLabel];
+                    List<GUIListItem> filteroptions = new List<GUIListItem>(); 
+                    dlgmenu.Reset();
+                    dlgmenu.SetHeading("add filter - choose operator");
+                    #region add filter options
+                    item = new GUIListItem();
+                    item.Label = "Contains ...";
+                    item.DVDLabel = "like";
+                    dlgmenu.Add(item);
+                    filteroptions.Add(item);
+                    item = new GUIListItem();
+                    item.Label = "Contains not ...";
+                    item.DVDLabel = "not like";
+                    dlgmenu.Add(item);
+                    filteroptions.Add(item);
+                    item = new GUIListItem();
+                    item.Label = "Equals ...";
+                    item.DVDLabel = "=";
+                    dlgmenu.Add(item);
+                    filteroptions.Add(item);
+                    item = new GUIListItem();
+                    item.Label = "Equals not ...";
+                    item.DVDLabel = "<>";
+                    dlgmenu.Add(item);
+                    filteroptions.Add(item);
+                    #endregion
+
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1) break;
+
+                    string FilterSign = filteroptions[dlgmenu.SelectedLabel].DVDLabel;
+
+                    ArrayList w_tableau = new ArrayList();
+                    // var w_tableau = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    // var w_tableau = new List<string>();
+
+                    #region get possible values
+                    string champselect = "";
+                    FieldType fieldType = GetFieldType(AntFilteritem);
+                    bool isperson = IsPersonField(fieldType);
+                    bool isdate = IsDateField(fieldType);
+                    bool issplitfield = IsSplittableField(AntFilteritem);
+                    bool dontsplitvalues = MyFilms.conf.BoolDontSplitValuesInViews;
+                    bool showEmptyValues = MyFilms.conf.BoolShowEmptyValuesInViews;
+                    bool reversenames = (isperson && conf.BoolReverseNames);
+
+                    foreach (DataRow row in r) // foreach (DataRow row in BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, WstrSelect, WStrSort, WStrSortSens))
+                    {
+                      if (isdate)
+                      {
+                        DateTime tmpdate;
+                        champselect = (DateTime.TryParse(row[AntFilteritem].ToString(), out tmpdate)) ? string.Format("{0:yyyy/MM/dd}", tmpdate.ToShortDateString()) : "";
+                      }
+                      else
+                        champselect = row[AntFilteritem].ToString().Trim();
+
+                      if (issplitfield && !dontsplitvalues)
+                      {
+                        ArrayList wtab = Search_String(champselect, reversenames); //ArrayList wtab = Search_String(champselect, isperson);
+                        if (wtab.Count > 0)
+                        {
+                          for (int wi = 0; wi < wtab.Count; wi++) w_tableau.Add(wtab[wi]); //w_tableau.AddRange(wtab);
+                        }
+                        else if (showEmptyValues)  // only add empty entries, if they should show - speeds up sorting otherwise ...
+                        {
+                          w_tableau.Add(champselect);
+                        }
+                      }
+                      else
+                      {
+                        if (champselect.Length > 0 || showEmptyValues)  // only add empty entries, if they should show - speeds up sorting otherwise ...
+                        {
+                          w_tableau.Add(champselect);
+                        }
+                      }
+                    }
+
+                    w_tableau = Helper.RemoveDuplicate(w_tableau);  
+
+                    switch (fieldType)
+                    {
+                      case FieldType.AlphaNumeric:
+                      case FieldType.Decimal:
+                        IComparer myComparer = new AlphanumComparatorFast();
+                        w_tableau.Sort(0, w_tableau.Count, myComparer);
+                        break;
+
+                      default: // default sorter
+                        w_tableau.Sort(0, w_tableau.Count, StringComparer.OrdinalIgnoreCase);
+                        break;
+                    }
+                    #endregion
+
+                    dlgmenu.Reset();
+                    dlgmenu.SetHeading("add filter - choose operator");
+                    foreach (string value in w_tableau)
+                    {
+                      item = new GUIListItem();
+                      item.Label = value;
+                      dlgmenu.Add(item);
+                    }
+                    dlgmenu.DoModal(GetID);
+                    if (dlgmenu.SelectedLabel == -1) break;
+
+                    string sValue = dlgmenu.SelectedLabelText;
+
+                    // create the filter rule
+                    string StrViewFilterSelect = string.Empty;
+
+                    switch (FilterSign)
+                    {
+                      case "not like":
+                      case "#":
+                        StrViewFilterSelect = "(" + AntFilteritem + " " + FilterSign + " #" + Convert.ToDateTime(sValue) + "# or " + AntFilteritem + " is null) ";
+                        break;
+                      //case "not in":
+                      //case "in":
+                      //  StrViewFilterSelect = "(" + AntFilteritem + " " + FilterSign + " (" + DBitemList(sValuet, true) + ")) ";
+                      //  break;
+                      //case "like in":
+                      //  StrViewFilterSelect = "(" + TransformedLikeIn(FilterSign, sValue, true) + ") ";
+                      //  break;
+                      default:
+                        StrViewFilterSelect = "(" + AntFilteritem + " " + FilterSign + " #" + Convert.ToDateTime(sValue) + "# ) ";
+                        break;
+                    }
+                    LogMyFilms.Debug("New filter expression = '" + StrViewFilterSelect + "'");
+
+                    if (viewRow.Filter.Length > 0)
+                    {
+                      viewRow.Filter += " AND " + StrViewFilterSelect;
+                    }
+                    else
+                    {
+                      viewRow.Filter = StrViewFilterSelect;
+                    }
+                    LogMyFilms.Debug("Resulting view filter expression = '" + viewRow.Filter + "'");
+                    SaveCustomViews();
+                    GetSelectFromMenuView(conf.BoolMenuShowAll);
+                    NavigationStack.Clear();
+                    break;
+                }
+
                 break;
               }
             }

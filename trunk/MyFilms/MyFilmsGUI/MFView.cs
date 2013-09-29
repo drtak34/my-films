@@ -344,4 +344,49 @@ namespace MyFilmsPlugin.MyFilmsGUI
     }
   }
 
+  public class CustomFilter
+  {
+
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+    
+    public CustomFilter()
+    {
+      Field = "";
+      Operator = "like";
+      Value = "";
+    }
+
+    #region public vars
+
+    public string Field { get; set; }
+    public string Operator { get; set; }
+    public string Value { get; set; }
+
+    #endregion
+
+    public string SaveToString()
+    {
+      string savestring = Field + "|" + Operator + "|" + Value;
+      LogMyFilms.Debug("SaveToString() - output = '" + savestring + "'");
+      return savestring;
+    }
+
+    public void LoadFromString(string inputstring)
+    {
+      int i = 0;
+      string[] split = inputstring.Split(new char[] { '|' }, StringSplitOptions.None);
+      LogMyFilms.Debug("LoadFromString() - parsed '" + split.Length + "' elements from inputstring = '" + inputstring + "'");
+      foreach (string s in split)
+      {
+        LogMyFilms.Debug("LoadFromString() - Parsed Value [" + i + "] = '" + s + "'");
+        i++;
+      }
+      Field = split[0];
+      Operator = split[1];
+      Value = split[2];
+    }
+
+
+  }
+
 }
