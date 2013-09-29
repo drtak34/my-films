@@ -1527,8 +1527,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //dlgmenu.Add(GUILocalizeStrings.Get(10798777)); // 
           //choiceViewMenu.Add("trakt-Calendar");
 
-          dlgmenu.Add(GUILocalizeStrings.Get(10798778)); // 
-          choiceViewMenu.Add("trakt-Friends");
+          dlgmenu.Add(GUILocalizeStrings.Get(10798778)); // Network
+          choiceViewMenu.Add("trakt-Network");
 
           dlgmenu.Add(GUILocalizeStrings.Get(10798779)); // 
           choiceViewMenu.Add("trakt-RecommendationsMovies");
@@ -1578,9 +1578,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Calendar, "");
           break;
 
-        case "trakt-Friends":
-          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Friends, "");
-          //GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Network, "");
+        case "trakt-Network":
+          GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Network, "");
           break;
 
         case "trakt-RecommendationsMovies":
@@ -6994,11 +6993,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   wstring = MyFilms.r[itemId]["Actors"].ToString().Replace('|', '\n');
                   wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring));
 
-                  IEnumerable<DbPersonInfo> persons = MyFilms.Search_String_Persons(wstring, false);
-                  foreach (DbPersonInfo t in persons)
-                  {
-                    MyFilms.currentMovie.Actors.Add(t.Name);
-                  }
+                  //IEnumerable<DbPersonInfo> persons = MyFilms.Search_String_Persons(wstring, false);
+                  //foreach (DbPersonInfo t in persons)
+                  //{
+                  //  MyFilms.currentMovie.Actors.Add(t.Name);
+                  //}
                 }
                 setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
                 Load_Detailed_DB_PushActorsToSkin(wstring);
@@ -7007,27 +7006,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               case "director":
               case "producer":
               case "writer":
-                wstring = MyFilms.r[itemId][dc.ColumnName].ToString();
-                if (wstring.Length > 0)
-                {
-                  wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring));
-                  IEnumerable<DbPersonInfo> persons = MyFilms.Search_String_Persons(wstring, false);
-                  foreach (DbPersonInfo t in persons)
-                  {
-                    switch (dc.ColumnName.ToLower())
-                    {
-                      case "director":
-                        MyFilms.currentMovie.Directors.Add(t.Name);
-                        break;
-                      case "producer":
-                        MyFilms.currentMovie.Producers.Add(t.Name);
-                        break;
-                      case "writer":
-                        MyFilms.currentMovie.Writers.Add(t.Name);
-                        break;
-                    }
-                  }
-                }
+                //wstring = MyFilms.r[itemId][dc.ColumnName].ToString();
+                //if (wstring.Length > 0)
+                //{
+                //  wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring));
+                //  IEnumerable<DbPersonInfo> persons = MyFilms.Search_String_Persons(wstring, false);
+                //  foreach (DbPersonInfo t in persons)
+                //  {
+                //    switch (dc.ColumnName.ToLower())
+                //    {
+                //      case "director":
+                //        MyFilms.currentMovie.Directors.Add(t.Name);
+                //        break;
+                //      case "producer":
+                //        MyFilms.currentMovie.Producers.Add(t.Name);
+                //        break;
+                //      case "writer":
+                //        MyFilms.currentMovie.Writers.Add(t.Name);
+                //        break;
+                //    }
+                //  }
+                //}
                 setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "");
                 break;
               
