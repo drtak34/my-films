@@ -878,7 +878,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       get
       {
-        bool status = IsAssemblyAvailable("TraktPlugin", new Version(2, 0, 0, 0), true) && IsPluginEnabled("Trakt");
+        bool status = IsAssemblyAvailable("TraktPlugin", new Version(3, 1, 0, 0), true) && IsPluginEnabled("Trakt");
         // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
         return status;
       }

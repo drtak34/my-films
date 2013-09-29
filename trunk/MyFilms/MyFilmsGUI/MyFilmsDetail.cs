@@ -212,7 +212,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       ListItems = 87276,
       RelatedMovies = 87277,
       RelatedShows = 87278,
-      Shouts = 87280
+      Shouts = 87280,
+      ShowSeasons = 87281,
+      SeasonEpisodes = 87282,
+      Network = 87283,
+      RecentWatchedMovies = 87284,
+      RecentWatchedEpisodes = 87285,
+      RecentAddedMovies = 87286,
+      RecentAddedEpisodes = 87287,
+      RecentShouts = 87288,
+      UserProfile = 87400,
+      Search = 874001,
+      SearchEpisodes = 874002,
+      SearchShows = 874003,
+      SearchMovies = 874004,
+      SearchPeople = 874005,
+      SearchUsers = 874006
     }
 
     public enum GrabType
@@ -987,10 +1002,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
             choiceViewMenu.Add("trakt");
 
-            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Detail ontext menu - new Trakt internal menu"))
+            if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
             {
-              dlgmenu.Add(GUILocalizeStrings.Get(10798775) + " (test internal menu)"); // Trakt ...
-              choiceViewMenu.Add("traktinternal");
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Detail context menu - new Trakt internal menu"))
+              {
+                dlgmenu.Add(GUILocalizeStrings.Get(10798775) + " (test internal menu)"); // Trakt ...
+                choiceViewMenu.Add("traktinternal");
+              }
             }
           }
           else LogMyFilms.Debug("trakt not found or wrong version - disabling context entry");
@@ -1539,6 +1557,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgmenu.Add(GUILocalizeStrings.Get(10798787)); // 
           choiceViewMenu.Add("trakt-RelatedMovies");
 
+          dlgmenu.Add(GUILocalizeStrings.Get(10798788)); // Search people ...
+          choiceViewMenu.Add("trakt-SearchPeople");
+
           dlgmenu.DoModal(GetID);
           if (dlgmenu.SelectedLabel == -1)
           {
@@ -1559,6 +1580,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "trakt-Friends":
           GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Friends, "");
+          //GUIWindowManager.ActivateWindow((int)TraktGuiWindows.Network, "");
           break;
 
         case "trakt-RecommendationsMovies":
@@ -1628,6 +1650,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (Helper.IsTraktAvailableAndEnabled)
           {
             TraktRelatedMovies(MyFilms.currentMovie);
+          }
+          else
+          {
+            GUIUtils.ShowErrorDialog("Your installed Trakt Version does not allow this feature!");
+          }
+          break;
+
+        case "trakt-SearchPeople":
+          if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
+          {
+            TraktSearchPeople(MyFilms.currentMovie);
           }
           else
           {
@@ -2535,7 +2568,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       try
       {
         // ToDo: Activate the internal menu, once trakt >1.8.1 is out
-        // success = TraktPlugin.GUI.GUICommon.ShowTraktExtMovieMenu(movie.Title, movie.Year.ToString(), movie.IMDBNumber, movie.Fanart, true);
+        //public static bool ShowTraktExtMovieMenu(string title, string year, string imdbid, string fanart)
+        //{
+        //    return ShowTraktExtMovieMenu(title, year, imdbid, fanart, false);
+        //}
+        //public static bool ShowTraktExtMovieMenu(string title, string year, string imdbid, string fanart, bool showAll)
+        //{
+        //    return ShowTraktExtMovieMenu(title, year, imdbid, fanart, null, showAll);
+        //}
+        //public static bool ShowTraktExtMovieMenu(string title, string year, string imdbid, string fanart, SearchPeople people, bool showAll)
+        
+        ExternalPlugins::TraktPlugin.GUI.SearchPeople people = new ExternalPlugins::TraktPlugin.GUI.SearchPeople();
+        people.Actors.AddRange(movie.Actors);
+        people.Directors.AddRange(movie.Directors);
+        people.Writers.AddRange(movie.Writers);
+        people.Directors.AddRange(movie.Producers);
+
+        success = ExternalPlugins::TraktPlugin.GUI.GUICommon.ShowTraktExtMovieMenu(movie.Title, movie.Year.ToString(), movie.IMDBNumber, movie.Fanart, people, true);
       }
       catch (Exception ex)
       {
@@ -2581,6 +2630,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       LogMyFilms.Debug("TraktRelatedMovies(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
       ExternalPlugins::TraktPlugin.TraktHelper.ShowRelatedMovies(movie.IMDBNumber, movie.Title, movie.Year.ToString());
+    }
+
+    private void TraktSearchPeople(MFMovie movie)
+    {
+      LogMyFilms.Debug("TraktSearchPersons(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
+      ExternalPlugins::TraktPlugin.GUI.SearchPeople people = new ExternalPlugins::TraktPlugin.GUI.SearchPeople();
+      people.Actors.AddRange(movie.Actors);
+      people.Directors.AddRange(movie.Directors);
+      people.Writers.AddRange(movie.Writers);
+      people.Directors.AddRange(movie.Producers);
+      ExternalPlugins::TraktPlugin.GUI.GUICommon.ShowSearchByMenu(people);
     }
 
     private void TraktAddRemoveMovieInUserlist(MFMovie movie, bool remove)
@@ -6094,6 +6154,28 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       MyFilms.currentMovie.IMDBNumber = imdb;
 
+      // add persons to movie object
+      IEnumerable<DbPersonInfo> actors = MyFilms.Search_String_Persons(MyFilms.r[MyFilms.conf.StrIndex]["Actors"].ToString(), false);
+      foreach (DbPersonInfo t in actors)
+      {
+        MyFilms.currentMovie.Actors.Add(t.Name);
+      }
+      IEnumerable<DbPersonInfo> producers = MyFilms.Search_String_Persons(MyFilms.r[MyFilms.conf.StrIndex]["Producer"].ToString(), false);
+      foreach (DbPersonInfo t in producers)
+      {
+        MyFilms.currentMovie.Producers.Add(t.Name);
+      }
+      IEnumerable<DbPersonInfo> directors = MyFilms.Search_String_Persons(MyFilms.r[MyFilms.conf.StrIndex]["Director"].ToString(), false);
+      foreach (DbPersonInfo t in directors)
+      {
+        MyFilms.currentMovie.Directors.Add(t.Name);
+      }
+      IEnumerable<DbPersonInfo> writers = MyFilms.Search_String_Persons(MyFilms.r[MyFilms.conf.StrIndex]["Writer"].ToString(), false);
+      foreach (DbPersonInfo t in writers)
+      {
+        MyFilms.currentMovie.Writers.Add(t.Name);
+      }
+
       string file = "";
       string strThumb = MediaPortal.Util.Utils.GetCoverArtName((MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Movies"), MyFilms.conf.StrTIndex); // cached cover
       if (File.Exists(strThumb))
@@ -6911,11 +6993,44 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   wstring = MyFilms.r[itemId]["Actors"].ToString().Replace('|', '\n');
                   wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring));
+
+                  IEnumerable<DbPersonInfo> persons = MyFilms.Search_String_Persons(wstring, false);
+                  foreach (DbPersonInfo t in persons)
+                  {
+                    MyFilms.currentMovie.Actors.Add(t.Name);
+                  }
                 }
                 setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
                 Load_Detailed_DB_PushActorsToSkin(wstring);
                 break;
                 #endregion
+              case "director":
+              case "producer":
+              case "writer":
+                wstring = MyFilms.r[itemId][dc.ColumnName].ToString();
+                if (wstring.Length > 0)
+                {
+                  wstring = System.Web.HttpUtility.HtmlDecode(MediaPortal.Util.HTMLParser.removeHtml(wstring));
+                  IEnumerable<DbPersonInfo> persons = MyFilms.Search_String_Persons(wstring, false);
+                  foreach (DbPersonInfo t in persons)
+                  {
+                    switch (dc.ColumnName.ToLower())
+                    {
+                      case "director":
+                        MyFilms.currentMovie.Directors.Add(t.Name);
+                        break;
+                      case "producer":
+                        MyFilms.currentMovie.Producers.Add(t.Name);
+                        break;
+                      case "writer":
+                        MyFilms.currentMovie.Writers.Add(t.Name);
+                        break;
+                    }
+                  }
+                }
+                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "");
+                break;
+              
               case "description":
               case "comments":
                 #region description & comment
