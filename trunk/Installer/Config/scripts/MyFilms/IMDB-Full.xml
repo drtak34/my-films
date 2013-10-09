@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.9</Version>
+    <Version>1.2.10</Version>
     <Encoding />
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -78,30 +78,30 @@
       <KeyEndSyn>_x0023_REGEX_x0023__x003C_span_x0020_class_x007C_Written_x0020_by</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage />
-      <KeyStartRealise Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h5_x003E_._x002A__x003F_Directed_x0020_by_x003F_._x002A__x003F__x003C__x002F_h5_x003E_</KeyStartRealise>
+      <KeyStartRealise Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h4._x002A__x003F_Directed_x0020_by._x002A__x003F__x003C__x002F_h4_x003E_</KeyStartRealise>
       <KeyEndRealise>_x003C__x002F_table_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage>URL_x0020_Redirection_x0020_Persons</KeyRealisePage>
-      <KeyRealiseRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022__x005B__x005E__x003E__x005D__x002A__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_a_x003E_</KeyRealiseRegExp>
+      <KeyRealiseRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x005B__x005E__x003E__x005D__x002A__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_a_x003E_._x002A__x003F__x0022__x003E_._x002A__x003F__x005C__x0028__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x005C__x0029_</KeyRealiseRegExp>
       <KeyRealiseMaxItems>_x0039_99</KeyRealiseMaxItems>
-      <KeyStartProduct Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h5._x002A__x003F_Produced_x0020_by</KeyStartProduct>
+      <KeyStartProduct Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h4._x002A__x003F_Produced_x0020_by</KeyStartProduct>
       <KeyEndProduct>_x003C__x002F_table_x003E_</KeyEndProduct>
       <KeyProductIndex />
       <KeyProductPage>URL_x0020_Redirection_x0020_Persons</KeyProductPage>
-      <KeyProductRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022__x005B__x005E__x003E__x005D__x002A__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_a_x003E_</KeyProductRegExp>
-      <KeyProductMaxItems>_x0039_99</KeyProductMaxItems>
-      <KeyStartWriter Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h5._x002A__x003F_Writing_x0020_credits._x002A__x003F_</KeyStartWriter>
+      <KeyProductRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x005B__x005E__x003E__x005D__x002A__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_a_x003E_._x002A__x003F_credit_x0022__x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td</KeyProductRegExp>
+      <KeyProductMaxItems />
+      <KeyStartWriter Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h4._x002A__x003F_Writing_x0020__x005B_Cc_x005D_redits._x002A__x003F_</KeyStartWriter>
       <KeyEndWriter>_x003C__x002F_table_x003E_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage>URL_x0020_Redirection_x0020_Persons</KeyWriterPage>
-      <KeyWriterRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F__x0022__x003E__x005C__x0028__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x005C__x0029_</KeyWriterRegExp>
+      <KeyWriterRegExp>_x003C_a_x005C_s_x002B_href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x005B__x005E__x003E__x005D__x002A__x003E__x0028__x003F__x003C_person_x003E__x005B__x005E__x003C__x005D__x002B__x0029__x003C__x002F_a_x003E_._x002A__x003F__x0022__x003E_._x002A__x003F__x005C__x0028__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x005C__x0029_</KeyWriterRegExp>
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x0020__x0020__x007C__x005C_s_x005C__x0028_._x002A__x005C__x0029__x007C__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_class_x003D__x0022_cast_x0022__x003E_._x002A__x003F__x007C__x003C_table_x0020_class_x003D__x0022_cast_list_x0022__x003E_._x002A__x003F_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
       <KeyCreditsRegExp>itemprop_x003D__x0022_name_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F__x003C_td_x0020_class_x003D__x0022_character_x0022__x003E_._x002A__x003F__x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_div_x003E_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage>URL_x0020_Redirection_x0020_Persons</KeyCreditsPage>
-      <KeyCreditsMaxItems>_x0039_99</KeyCreditsMaxItems>
+      <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
       <KeyStartCountry Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Countr_x005B_ys_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartCountry>
       <KeyEndCountry>_x0023_REGEX_x0023__x003C__x002F_div_x003E_</KeyEndCountry>

@@ -31,7 +31,7 @@
   </scripts>
   <scripts>
     <name>IMDB-Full.xml</name>
-    <version>1.2.9</version>
+    <version>1.2.10</version>
   </scripts>
   <scripts>
     <name>IMDB-TMDBcover.xml</name>
@@ -39,7 +39,7 @@
   </scripts>
   <scripts>
     <name>IMDB.DE-OFDB.xml</name>
-    <version>1.5.2</version>
+    <version>1.5.3</version>
   </scripts>
   <scripts>
     <name>IMDB.ES.xml</name>
