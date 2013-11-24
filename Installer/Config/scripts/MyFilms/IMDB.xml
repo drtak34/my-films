@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.5</Version>
+    <Version>1.2.6</Version>
     <Encoding />
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -60,7 +60,7 @@
       <KeyEndImg>_x0022_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage>URL_x0020_Redirection_x0020_Cover</KeyImgPage>
-      <KeyStartLinkImg Param1="_x002F_rm" Param2="http:_x002F__x002F_akas.imdb.com_x002F_media_x002F_rm">href_x003D__x0022__x002F_media</KeyStartLinkImg>
+      <KeyStartLinkImg Param1="_x002F_rm" Param2="http:_x002F__x002F_akas.imdb.com_x002F_media_x002F_rm">_x0023_REGEX_x0023__x0020_id_x003D__x0022_img_primary_x0022__x003E_._x002A__x003F_href_x003D__x0022__x002F_media</KeyStartLinkImg>
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
@@ -279,6 +279,10 @@
       <KeyTrailerLanguage />
       <KeyTrailerPage />
       <KeyLanguageRegExp>itemprop_x003D__x0027_url_x0027__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a</KeyLanguageRegExp>
+      <KeyRuntimePage />
+      <KeyStartRuntime Param1="" Param2="" />
+      <KeyEndRuntime />
+      <KeyRuntimeIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="TranslatedTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
