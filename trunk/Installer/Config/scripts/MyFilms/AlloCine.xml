@@ -5,7 +5,7 @@
     <URLPrefix>www.allocine.fr</URLPrefix>
     <Language>fr</Language>
     <Type>details|cover</Type>
-    <Version>0.9.2</Version>
+    <Version>0.9.3</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -65,12 +65,12 @@
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
       <KeyEncodingLinkImg />
-      <KeyStartRate Param1="" Param2="">_x0023_REGEX_x0023__x003D__x0022_note_x0022__x003E__x007C_Spectateurs_x003C__x002F_span_x003E_._x002A__x003F_</KeyStartRate>
-      <KeyEndRate>_x002F_div</KeyEndRate>
+      <KeyStartRate Param1="" Param2="">ratingValue_x0022__x0020_content_x003D__x0022_</KeyStartRate>
+      <KeyEndRate>_x0022__x003E_</KeyEndRate>
       <KeyRateIndex />
       <KeyRatePage />
-      <KeyStartRate2 Param1="" Param2="">_x0026_notepublic_x003D_</KeyStartRate2>
-      <KeyEndRate2>_x0026_</KeyEndRate2>
+      <KeyStartRate2 Param1="" Param2="">_x003C_span_x0020_class_x003D__x0022_note_x0022__x003E_</KeyStartRate2>
+      <KeyEndRate2>_x003C__x002F_span_x003E_</KeyEndRate2>
       <KeyRate2Index />
       <KeyRate2Page />
       <BaseRating>_x0035_</BaseRating>
@@ -78,11 +78,11 @@
       <KeyEndSyn>_x003C__x002F_p_x003E_</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage />
-      <KeyStartRealise Param1="" Param2="">Réalisateurs</KeyStartRealise>
-      <KeyEndRealise>_x003C__x002F_div_x003E__x003C__x0021_--_x0020_sep_x0020_--_x003E_</KeyEndRealise>
+      <KeyStartRealise Param1="_x0023_REGEX_x0023_" Param2="">Person_x0022_</KeyStartRealise>
+      <KeyEndRealise>_x003C__x002F_div_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage>URL_x0020_Redirection_x0020_Persons</KeyRealisePage>
-      <KeyRealiseRegExp>_x003C_span_x0020_itemprop_x003D__x0022_name_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_span_x003E_</KeyRealiseRegExp>
+      <KeyRealiseRegExp>title_x003D__x0027__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0027__x0020__x002F__x003E__x003C__x002F_span_x003E_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_h2._x002A__x003F_Production._x003C__x002F_h2_x003E_</KeyStartProduct>
       <KeyEndProduct>_x003C__x002F_table_x003E_</KeyEndProduct>
@@ -96,19 +96,19 @@
       <KeyWriterPage>URL_x0020_Redirection_x0020_Persons</KeyWriterPage>
       <KeyWriterRegExp>_x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C_span_x0020_class_x003D__x0022_acLnk._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_span_x003E_</KeyWriterRegExp>
       <KeyWriterMaxItems />
-      <KeyStartCredits Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023_Acteurs_x0020_et_x0020_actrices._x002A__x003F_div_x003E_</KeyStartCredits>
+      <KeyStartCredits Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023_Acteurs_x0020_de_x0020_doublage._x002A__x003F_div_x003E_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
       <KeyCreditsRegExp>title_x003D__x0027__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0027_._x002A__x003F__x003C_p_x003E_._x002A__x003F_:._x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_p_x007C__x003C_tr._x002A__x003F__x003E_._x002A__x003F__x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C_._x002A__x003F_title_x003D__x0027__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0027_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage>URL_x0020_Redirection_x0020_Persons</KeyCreditsPage>
       <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
-      <KeyStartCountry Param1="" Param2="_x0020_">Nationalité_x003C__x002F_span_x003E_</KeyStartCountry>
+      <KeyStartCountry Param1="_x0023_REGEX_x0023__x005C_n" Param2="_x0020_">Nationalité_x003C__x002F_span_x003E_</KeyStartCountry>
       <KeyEndCountry>_x003C__x002F_div_x003E_</KeyEndCountry>
       <KeyCountryRegExp>itemprop_x003D__x0022_Nationalite_x0022__x003E__x0028__x003F__x003C_underline_x003E_._x002A__x003F__x0029__x003C__x002F_span_x003E_</KeyCountryRegExp>
       <KeyCountryIndex>Actors</KeyCountryIndex>
       <KeyCountryPage />
-      <KeyStartGenre Param1="" Param2="">Genre_x003C__x002F_span_x003E_</KeyStartGenre>
+      <KeyStartGenre Param1="_x0023_REGEX_x0023__x005C_n" Param2="_x0020_">Genre_x003C__x002F_span_x003E_</KeyStartGenre>
       <KeyEndGenre>_x003C__x002F_div_x003E_</KeyEndGenre>
       <KeyGenreRegExp>itemprop_x003D__x0022_genre_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_span_x003E_</KeyGenreRegExp>
       <KeyGenreIndex />
@@ -127,8 +127,8 @@
       <KeyCommentRegExp />
       <KeyCommentIndex />
       <KeyCommentPage />
-      <KeyStartLanguage Param1="" Param2="" />
-      <KeyEndLanguage />
+      <KeyStartLanguage Param1="" Param2="">Langue_x003C__x002F_div_x003E__x003C__x002F_th_x003E__x003C_td_x003E_</KeyStartLanguage>
+      <KeyEndLanguage>_x003C__x002F_td_x003E_</KeyEndLanguage>
       <KeyLanguageIndex />
       <KeyLanguagePage />
       <KeyStartTagline Param1="" Param2="" />
@@ -162,8 +162,8 @@
       <KeyDetails2Index />
       <KeyDetails2Page />
       <KeyEncodingDetails2 />
-      <KeyStartStudio Param1="" Param2="">Distributeur_x0020_:</KeyStartStudio>
-      <KeyEndStudio>_x003C__x002F_a_x003E_</KeyEndStudio>
+      <KeyStartStudio Param1="" Param2="">Distributeur</KeyStartStudio>
+      <KeyEndStudio>_x003C__x002F_td_x003E_</KeyEndStudio>
       <KeyStudioIndex />
       <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
@@ -278,6 +278,8 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyLanguageRegExp />
+      <KeyStudioRegExp />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />

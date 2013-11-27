@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>IMDB person info grabber</DBName>
+    <DBName>IMDB (person)</DBName>
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en|all</Language>
     <Type>person</Type>
-    <Version>1.2</Version>
+    <Version>1.3</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -48,8 +48,8 @@
       <KeyEndOTitle>_x003C__x002F_title_x003E_</KeyEndOTitle>
       <KeyOTitleIndex />
       <KeyOTitlePage />
-      <KeyStartTTitle Param1="_x0026_nbsp_x003B__x003C_span_x003E__x007C_" Param2="_x002C_">_x0023_REGEX_x0023_Alternate_x0020_Names:_x003C__x002F_h4_x003E_</KeyStartTTitle>
-      <KeyEndTTitle>_x0023_REGEX_x0023__x003C_hr_x0020__x002F__x003E__x007C__x003C_hr_x002F__x003E_</KeyEndTTitle>
+      <KeyStartTTitle Param1="_x0026_nbsp_x003B__x003C_span_x003E__x007C_" Param2="_x002C_">_x0023_REGEX_x0023_Nickname:_x003C__x002F_h4_x003E__x005C_n_x005C_s_x002B_</KeyStartTTitle>
+      <KeyEndTTitle>_x0023_REGEX_x0023__x005C_n</KeyEndTTitle>
       <KeyTTitleRegExp />
       <KeyTTitleIndex />
       <KeyTTitlePage />
@@ -60,7 +60,7 @@
       <KeyEndImg>src_x003D__x0022_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage>URL_x0020_Redirection_x0020_Cover</KeyImgPage>
-      <KeyStartLinkImg Param1="_x002F_rm" Param2="http:_x002F__x002F_akas.imdb.com_x002F_media_x002F_rm">href_x003D__x0022__x002F_media</KeyStartLinkImg>
+      <KeyStartLinkImg Param1="_x002F_rm" Param2="http:_x002F__x002F_akas.imdb.com_x002F_media_x002F_rm">_x0023_REGEX_x0023__x0020_id_x003D__x0022_img_primary_x0022__x003E_._x002A__x003F_href_x003D__x0022__x002F_media</KeyStartLinkImg>
       <KeyEndLinkImg>_x0022_</KeyEndLinkImg>
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
