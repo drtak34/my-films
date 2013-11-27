@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>The Movie DB (V3 API)</DBName>
+    <DBName>The Movie DB</DBName>
     <URLPrefix>http://api.themoviedb.org/3/movie/</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>2.2</Version>
+    <Version>3.0</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -80,19 +80,19 @@
       <KeyEndSyn>_x0022__x002C__x0022_</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage />
-      <KeyStartRealise Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x0022_crew_x0022_:_x005B_</KeyStartRealise>
+      <KeyStartRealise Param1="_x0023_REGEX_x0023__x007B__x0022_id._x002A__x003F__x007D__x0024__x007C_" Param2="">_x0022_crew_x0022_:_x005B_</KeyStartRealise>
       <KeyEndRealise>_x005D__x007D_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage>URL_x0020_Redirection_x0020_Persons</KeyRealisePage>
       <KeyRealiseRegExp>_x007B__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x002C__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_department_x0022_:_x0022_Directing_x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x007D_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
-      <KeyStartProduct Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x0022_crew_x0022_:_x005B_</KeyStartProduct>
+      <KeyStartProduct Param1="_x0023_REGEX_x0023__x007B__x0022_id._x002A__x003F__x007D__x0024__x007C_" Param2="">_x0022_crew_x0022_:_x005B_</KeyStartProduct>
       <KeyEndProduct>_x005D_</KeyEndProduct>
       <KeyProductIndex />
       <KeyProductPage>URL_x0020_Redirection_x0020_Persons</KeyProductPage>
       <KeyProductRegExp>_x007B__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x002C__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_department_x0022_:_x0022_Production_x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_job_x0022_:_x0022__x0028__x003F__x003C_role_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x007D_</KeyProductRegExp>
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x0022_crew_x0022_:_x005B_</KeyStartWriter>
+      <KeyStartWriter Param1="_x0023_REGEX_x0023__x007B__x0022_id._x002A__x003F__x007D__x0024__x007C_" Param2="">_x0022_crew_x0022_:_x005B_</KeyStartWriter>
       <KeyEndWriter>_x005D__x007D_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage>URL_x0020_Redirection_x0020_Persons</KeyWriterPage>
@@ -124,13 +124,13 @@
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
       <KeyEncodingLinkPersons />
-      <KeyStartComment Param1="" Param2="">_x0023_REGEX_x0023_Ansicht_x0020_einer_x0020_Inhaltsangabe._x002A__x003F__x003E__x003C__x002F_b_x003E__x003C_br_x003E__x003C_br_x003E_</KeyStartComment>
-      <KeyEndComment>_x003C__x002F_font_x003E__x003C__x002F_p_x003E_</KeyEndComment>
-      <KeyCommentRegExp />
+      <KeyStartComment Param1="_x0023_REGEX_x0023__x0023_MULTI_x0023__x0022__x002C__x0022_content_x0022_:_x0022__x007C_:_x0020__x0022_" Param2="">results_x0022_:_x005B__x007B_</KeyStartComment>
+      <KeyEndComment>_x007D__x005D_</KeyEndComment>
+      <KeyCommentRegExp>_x002C__x0022_author_x0022_:_x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x002C__x0022_url</KeyCommentRegExp>
       <KeyCommentIndex />
-      <KeyCommentPage />
-      <KeyStartLanguage Param1="" Param2="" />
-      <KeyEndLanguage />
+      <KeyCommentPage>URL_x0020_Redirection_x0020_Comment</KeyCommentPage>
+      <KeyStartLanguage Param1="_x0023_REGEX_x0023_" Param2="">_x0022_spoken_languages_x0022_:_x005B_</KeyStartLanguage>
+      <KeyEndLanguage>_x005D_</KeyEndLanguage>
       <KeyLanguageIndex />
       <KeyLanguagePage />
       <KeyStartTagline Param1="" Param2="">tagline_x0022_:_x0022_</KeyStartTagline>
@@ -154,8 +154,8 @@
       <KeyLinkCertificationIndex />
       <KeyLinkCertificationPage />
       <KeyEncodingLinkCertification />
-      <KeyStartLinkComment Param1="ot_x002F_" Param2="http:_x002F__x002F_www.ofdb.de_x002F_plot_x002F_">_x003C_a_x0020_href_x003D__x0022_pl</KeyStartLinkComment>
-      <KeyEndLinkComment>_x0022__x003E__x003C_b_x003E_</KeyEndLinkComment>
+      <KeyStartLinkComment Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_api.themoviedb.org_x002F_3_x002F_movie_x002F__x007C__x002F_reviews_x003F_api_key_x003D_5b8fecd0c39786077bc5af07e56fee5e">_x0022__x002C__x0022_id_x0022_:</KeyStartLinkComment>
+      <KeyEndLinkComment>_x002C_</KeyEndLinkComment>
       <KeyLinkCommentIndex />
       <KeyLinkCommentPage />
       <KeyEncodingLinkComment />
@@ -164,8 +164,8 @@
       <KeyDetails2Index />
       <KeyDetails2Page />
       <KeyEncodingDetails2 />
-      <KeyStartStudio Param1="" Param2="" />
-      <KeyEndStudio />
+      <KeyStartStudio Param1="_x0023_REGEX_x0023__x003C_a_x003E_" Param2="">_x0022_production_companies_x0022_:_x005B_</KeyStartStudio>
+      <KeyEndStudio>_x005D_</KeyEndStudio>
       <KeyStudioIndex />
       <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
@@ -199,10 +199,10 @@
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
       <KeyEncodingLinkGeneric2 />
-      <KeyStartGeneric1 Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x0022_production_companies_x0022_:_x005B_</KeyStartGeneric1>
-      <KeyEndGeneric1>_x005D_</KeyEndGeneric1>
+      <KeyStartGeneric1 Param1="" Param2="" />
+      <KeyEndGeneric1 />
       <KeyGeneric1Index />
-      <KeyGeneric1RegExp>_x007B__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007D__x005D__x002A__x003F__x007D_</KeyGeneric1RegExp>
+      <KeyGeneric1RegExp />
       <KeyGeneric1MaxItems />
       <KeyGeneric1Language />
       <KeyGeneric1Page />
@@ -292,6 +292,8 @@
       <KeyStartRuntime Param1="" Param2="">runtime_x0022_:</KeyStartRuntime>
       <KeyEndRuntime>_x002C_</KeyEndRuntime>
       <KeyRuntimeIndex />
+      <KeyLanguageRegExp>name_x0022_:_x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x007D_</KeyLanguageRegExp>
+      <KeyStudioRegExp>_x007B__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007D__x005D__x002A__x003F__x007D_</KeyStudioRegExp>
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
@@ -330,7 +332,7 @@
       <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_35 source="TMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_37 source="Collection" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_38 source="CollectionImageURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_39 source="PictureURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
