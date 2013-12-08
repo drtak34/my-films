@@ -145,8 +145,4 @@
     <name>TMDB-ZH.xml</name>
     <version>3.0</version>
   </scripts>
-  <scripts>
-    <name>WorldOfVideo.xml</name>
-    <version>0.9</version>
-  </scripts>
 </grabberscripts>
