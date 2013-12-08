@@ -5,12 +5,13 @@
     <URLPrefix>http://www.cineol.net</URLPrefix>
     <Language>es</Language>
     <Type>details|cover</Type>
-    <Version>0.9</Version>
+    <Version>1.0</Version>
     <Encoding>UTF-8</Encoding>
     <SearchCleanup />
     <Accept />
     <UserAgent />
     <Headers />
+    <FileBasedReader>false</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="galeria" Param2="http:_x002F__x002F_www.cineol.net_x002F_galeria">_x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
@@ -56,7 +57,7 @@
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
       <KeyStartImg Param1="_" Param2="http:_x002F__x002F_www.cineol.net_x002F_galeria_x002F_carteles_x002F_bigtmp_">galeria_x002F_carteles_x002F_bigtmp</KeyStartImg>
-      <KeyEndImg>_x0022__x0020_class</KeyEndImg>
+      <KeyEndImg>_x0022__x002F__x003E_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage />
       <KeyStartLinkImg Param1="" Param2="" />
@@ -77,19 +78,19 @@
       <KeyEndSyn>_x003C__x002F_p_x003E_</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage />
-      <KeyStartRealise Param1="" Param2="">_x003C_li_x003E__x003C_strong_x003E_Dirección:</KeyStartRealise>
+      <KeyStartRealise Param1="_x0020__x002F__x0020_" Param2="_x002C__x0020_">_x003C_li_x003E__x003C_strong_x003E_Dirección:</KeyStartRealise>
       <KeyEndRealise>_x003C__x002F_li_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage />
       <KeyRealiseRegExp />
       <KeyRealiseMaxItems />
-      <KeyStartProduct Param1="" Param2="">_x003C_li_x003E__x003C_strong_x003E_Producción:</KeyStartProduct>
+      <KeyStartProduct Param1="_x0020__x002F__x0020_" Param2="_x002C__x0020_">_x003C_li_x003E__x003C_strong_x003E_Producción:</KeyStartProduct>
       <KeyEndProduct>_x003C__x002F_li_x003E_</KeyEndProduct>
       <KeyProductIndex />
       <KeyProductPage />
       <KeyProductRegExp />
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="" Param2="">_x003C_li_x003E__x003C_strong_x003E_Guión:</KeyStartWriter>
+      <KeyStartWriter Param1="_x0020__x002F__x0020_" Param2="_x002C__x0020_">_x003C_li_x003E__x003C_strong_x003E_Guión:</KeyStartWriter>
       <KeyEndWriter>_x003C__x002F_li_x003E_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage />
@@ -97,17 +98,17 @@
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023_" Param2="">_x003C_h2_x003E_Intérpretes_x003C__x002F_h2_x003E_</KeyStartCredits>
       <KeyEndCredits>_x003C_div_x0020_class_x003D__x0022_clearing_x0022__x003E__x0020__x003C__x002F_div_x003E_</KeyEndCredits>
-      <KeyCreditsRegExp>_x003C_a_x0020_href_x003D__x0022_gente._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E__x003C__x002F_td_x003E__x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_</KeyCreditsRegExp>
+      <KeyCreditsRegExp>_x003C_span_x0020_itemprop_x003D__x0022_name_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_span_x003E__x003C__x002F_a_x003E__x003C__x002F_td_x003E__x003C_td_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_td_x003E_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage />
       <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
-      <KeyStartCountry Param1="" Param2="">_x003C_li_x003E__x003C_strong_x003E_País:_x003C__x002F_strong_x003E__x0020_</KeyStartCountry>
+      <KeyStartCountry Param1="_x0020__x002F__x0020_" Param2="_x002C__x0020_">_x003C_li_x003E__x003C_strong_x003E_País:_x003C__x002F_strong_x003E__x0020_</KeyStartCountry>
       <KeyEndCountry>_x003C__x002F_li_x003E_</KeyEndCountry>
       <KeyCountryRegExp />
       <KeyCountryIndex />
       <KeyCountryPage />
-      <KeyStartGenre Param1="" Param2="">nero:_x003C__x002F_strong_x003E_</KeyStartGenre>
+      <KeyStartGenre Param1="_x0020__x002F__x0020_" Param2="_x002C__x0020_">nero:_x003C__x002F_strong_x003E_</KeyStartGenre>
       <KeyEndGenre>_x003C__x002F_a_x003E__x003C__x002F_li_x003E_</KeyEndGenre>
       <KeyGenreRegExp />
       <KeyGenreIndex />
@@ -277,6 +278,10 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyRuntimePage />
+      <KeyStartRuntime Param1="" Param2="">_x003C_time_x0020_itemprop_x003D__x0022_duration_x0022__x0020_datetime_x003D__x0022_PT</KeyStartRuntime>
+      <KeyEndRuntime>M_x0022__x003E_</KeyEndRuntime>
+      <KeyRuntimeIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
@@ -315,7 +320,7 @@
       <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_35 source="TMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_37 source="Collection" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_38 source="CollectionImageURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_39 source="PictureURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />

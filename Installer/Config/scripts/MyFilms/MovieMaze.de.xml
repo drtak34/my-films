@@ -4,8 +4,8 @@
     <DBName>MovieMaze</DBName>
     <URLPrefix>http://www.moviemaze.de</URLPrefix>
     <Language>de</Language>
-    <Type>cover</Type>
-    <Version>1.1</Version>
+    <Type>cover|multicovers</Type>
+    <Version>1.2</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -189,8 +189,8 @@
       <KeyLinkSynIndex />
       <KeyLinkSynPage />
       <KeyEncodingLinkSyn />
-      <KeyStartLinkGeneric1 Param1="_x002F_filme" Param2="http:_x002F__x002F_www.moviemaze.de_x002F_filme">_x0023_REGEX_x0023__x003C__x002F_span_x003E__x003C__x002F_td_x003E_._x002A__x003F__x003C_a_x0020_href_x003D__x0022_</KeyStartLinkGeneric1>
-      <KeyEndLinkGeneric1>_x0022_</KeyEndLinkGeneric1>
+      <KeyStartLinkGeneric1 Param1="" Param2="" />
+      <KeyEndLinkGeneric1 />
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page />
       <KeyEncodingLinkGeneric1 />
@@ -220,15 +220,15 @@
       <KeyGeneric3MaxItems />
       <KeyGeneric3Language />
       <KeyGeneric3Page />
-      <KeyStartLinkMultiPosters Param1="" Param2="" />
-      <KeyEndLinkMultiPosters />
+      <KeyStartLinkMultiPosters Param1="_x002F_media" Param2="http:_x002F__x002F_www.moviemaze.de_x002F_media">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_</KeyStartLinkMultiPosters>
+      <KeyEndLinkMultiPosters>_x0022_</KeyEndLinkMultiPosters>
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
       <KeyEncodingLinkMultiPosters />
-      <KeyStartMultiPosters Param1="" Param2="" />
-      <KeyEndMultiPosters />
+      <KeyStartMultiPosters Param1="_x0023_REGEX_x0023__x0023_MULTI_x0023_filme_x007C__x002F_filme_x007C__x003B_poster_x007C_poster_lg" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_border</KeyStartMultiPosters>
+      <KeyEndMultiPosters>_x003C__x002F_table_x003E_</KeyEndMultiPosters>
       <KeyMultiPostersIndex />
-      <KeyMultiPostersRegExp />
+      <KeyMultiPostersRegExp>img_x0020_src_x003D__x0022__x002F__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiPostersRegExp>
       <KeyMultiPostersMaxItems />
       <KeyMultiPostersLanguage />
       <KeyMultiPostersPage />

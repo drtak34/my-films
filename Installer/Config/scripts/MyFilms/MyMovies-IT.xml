@@ -5,12 +5,13 @@
     <URLPrefix>http://www.mymovies.it/</URLPrefix>
     <Language>it</Language>
     <Type>details|cover</Type>
-    <Version>0.3</Version>
+    <Version>0.4</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
     <UserAgent />
     <Headers />
+    <FileBasedReader>false</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
@@ -32,8 +33,8 @@
       <KeyStartLink Param1="" Param2="">_x0023_REGEX_x0023__x003C_div_x0020_class_x003D__x0022_linkblu_x0022_._x002A__x003F__x003C_a_x0020_href_x003D__x0022_</KeyStartLink>
       <KeyEndLink>_x0022_</KeyEndLink>
       <KeyLinkIndex />
-      <KeyStartID Param1="" Param2="" />
-      <KeyEndID />
+      <KeyStartID Param1="" Param2="">_x0023_REGEX_x0023__x003C_h2_x003E_._x002A__x003F_id_x003D_</KeyStartID>
+      <KeyEndID>_x0022_</KeyEndID>
       <KeyStartOptions Param1="" Param2="" />
       <KeyEndOptions />
       <KeyStartAkas Param1="" Param2="" />
@@ -43,8 +44,8 @@
     <Details>
       <KeyStartBody Param1="" Param2="" />
       <KeyEndBody />
-      <KeyStartOTitle Param1="_x0023_REGEX_x0023_.-.MYmovies" Param2="">Titolo_x0020_originale</KeyStartOTitle>
-      <KeyEndOTitle>_x003C__x002F_</KeyEndOTitle>
+      <KeyStartOTitle Param1="_x0023_REGEX_x0023_.-.MYmovies" Param2="">Titolo_x0020_originale_x0020__x003C_em_x003E_</KeyStartOTitle>
+      <KeyEndOTitle>_x003C__x002F_em_x003E_</KeyEndOTitle>
       <KeyOTitleIndex />
       <KeyOTitlePage />
       <KeyStartTTitle Param1="_x0023_REGEX_x0023_.-.MYmovies" Param2="">_x003C_title_x003E_</KeyStartTTitle>
@@ -72,7 +73,7 @@
       <KeyEndRate2 />
       <KeyRate2Index />
       <KeyRate2Page />
-      <BaseRating />
+      <BaseRating>_x0035_</BaseRating>
       <KeyStartSyn Param1="" Param2="">id_x003D__x0022_recensione_x0022__x003E_</KeyStartSyn>
       <KeyEndSyn>_x003C__x002F_p_x003E_</KeyEndSyn>
       <KeySynIndex />
@@ -107,13 +108,13 @@
       <KeyCountryRegExp />
       <KeyCountryIndex />
       <KeyCountryPage />
-      <KeyStartGenre Param1="" Param2="">_x0020__x0020__x0020__x0020_sas_target_x003D__x0027_genere_x003D_</KeyStartGenre>
-      <KeyEndGenre>_x003B_</KeyEndGenre>
+      <KeyStartGenre Param1="" Param2="">_x0027_genere_x003D_</KeyStartGenre>
+      <KeyEndGenre>_x0026_</KeyEndGenre>
       <KeyGenreRegExp />
       <KeyGenreIndex />
       <KeyGenrePage />
       <KeyStartYear Param1="" Param2="">anno_x003D_</KeyStartYear>
-      <KeyEndYear>_x003B__x0027__x003B_</KeyEndYear>
+      <KeyEndYear>_x0026_</KeyEndYear>
       <KeyYearIndex />
       <KeyYearPage />
       <KeyStartLinkPersons Param1="poster_x002F_" Param2="cast_x002F_">_x0023_REGEX_x0023__x003C_a_x0020_title_x003D__x0022_Poster._x002A__x003F_href_x003D__x0022_</KeyStartLinkPersons>
@@ -161,9 +162,9 @@
       <KeyDetails2Index />
       <KeyDetails2Page />
       <KeyEncodingDetails2 />
-      <KeyStartStudio Param1="" Param2="" />
-      <KeyEndStudio />
-      <KeyStudioIndex />
+      <KeyStartStudio Param1="_x002D_" Param2="">_x0023_REGEX_x0023__x003C__x002F_a_x003E__x003C__x002F_strong_x003E_._x005C_s_x002B_-</KeyStartStudio>
+      <KeyEndStudio>_x0023_REGEX_x0023__x005C_s_x002B__x003C_</KeyEndStudio>
+      <KeyStudioIndex>Year</KeyStudioIndex>
       <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
       <KeyEndEdition />
@@ -277,6 +278,7 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage />
+      <KeyStudioRegExp />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />

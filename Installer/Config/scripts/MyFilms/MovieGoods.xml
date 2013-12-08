@@ -5,12 +5,13 @@
     <URLPrefix>http://www.moviegoods.com</URLPrefix>
     <Language>all</Language>
     <Type>cover|multicovers</Type>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
     <UserAgent />
     <Headers />
+    <FileBasedReader>false</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x0023_REGEX_x0023_IMG_x005C_sid._x002A__x003F_src_x003D__x0027_</KeyStartThumb>
       <KeyEndThumb>_x0027_</KeyEndThumb>
@@ -224,8 +225,8 @@
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
       <KeyEncodingLinkMultiPosters />
-      <KeyStartMultiPosters Param1="_x0023_REGEX_x0023_1010" Param2="_x0031_020">_x0023_REGEX_x0023_alt_x003D__x0022_Browse_x0020_All_x0020_Poster._x002A__x003F__x003C__x002F_div_x003E_</KeyStartMultiPosters>
-      <KeyEndMultiPosters>_x003C__x002F_body_x003E_</KeyEndMultiPosters>
+      <KeyStartMultiPosters Param1="_x0023_REGEX_x0023__x0023_MULTI_x0023__x007C__x003B_1010_x007C_1020" Param2="">_x003C__x0021_--_x0020_All_x0020_Posters_x0020_Div_x0020_--_x003E_</KeyStartMultiPosters>
+      <KeyEndMultiPosters>_x003C__x002F_table_x003E_</KeyEndMultiPosters>
       <KeyMultiPostersIndex />
       <KeyMultiPostersRegExp>_x003C_a_x0020_href_x003D__x0022__x002F_movie_product_static._x002A__x003F_src_x003D__x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_alt_x003D__x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022_._x002A__x003F_</KeyMultiPostersRegExp>
       <KeyMultiPostersMaxItems />
