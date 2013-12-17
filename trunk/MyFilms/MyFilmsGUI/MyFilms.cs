@@ -69,7 +69,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
   // using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
-  using TmdbPerson = Grabber.TheMovieDbAPI.TmdbPerson;
+  // using TmdbPerson = Grabber.TheMovieDbAPI.TmdbPerson;
   
   using TMDB = WatTmdb.V3;
 

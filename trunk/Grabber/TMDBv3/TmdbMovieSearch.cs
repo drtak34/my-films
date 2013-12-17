@@ -24,6 +24,6 @@ namespace WatTmdb.V3
         }
     }
 
-    public class TmdbMovieSearch : TmdbSearchResultBase<MovieResult>
+    public class TmdbMovieSearch : TmdbSearchResultBase<TmdbMovie>
     { }
 }

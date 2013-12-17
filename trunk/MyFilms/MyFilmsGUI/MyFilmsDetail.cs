@@ -9755,13 +9755,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else
             {
-              var choiceMovies = new List<MovieResult>();
+              var choiceMovies = new List<TmdbMovie>();
               var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
               if (dlg == null) return;
               dlg.Reset();
               dlg.SetHeading(GUILocalizeStrings.Get(10798992)); // Select movie ...
 
-              foreach (MovieResult movieResult in moviesfound.results)
+              foreach (TmdbMovie movieResult in moviesfound.results)
               {
                 dlg.Add(movieResult.title + " (" + movieResult.release_date + ")");
                 choiceMovies.Add(movieResult);
@@ -9921,7 +9921,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("SearchTmdbMovie() - title '" + title + "', title2 '" + title2 + "', year '" + year.ToString() + "'");
       var api = new Tmdb(MyFilms.TmdbApiKey, language);
       var tmdbConf = api.GetConfiguration();
-      var allMoviesFound = new List<MovieResult>();
+      var allMoviesFound = new List<TmdbMovie>();
       var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
 
       const int minChars = 2;
@@ -9931,9 +9931,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(10798646));  // Search Films
       dlg.Add("  *****  " + GUILocalizeStrings.Get(1079860) + "  *****  "); //manual selection
-      allMoviesFound.Add(new MovieResult());
+      allMoviesFound.Add(new TmdbMovie());
 
-      foreach (MovieResult t in api.SearchMovie(searchexpression, 1, null).results)
+      foreach (TmdbMovie t in api.SearchMovie(searchexpression, 1, null).results)
       {
         LogMyFilms.Debug("TMDB - movie found '" + t.title + "'");
         var item = new GUIListItem();
@@ -11114,27 +11114,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //TmdbUpcoming GetUpcomingMovies(int page)
         #endregion
 
-        #region TMDB v2 loading ...
-        //List<grabber.DBPersonInfo> personlist = tmdbapi.getPersonsByName(personname, false, language);
-        //if (personlist.Count > 0)
-        //{
-        //  grabber.DBPersonInfo f = personlist[0];
-
-        //  if (f != null && !File.Exists(filename))
-        //  {
-        //    if (f.Images.Count > 0)
-        //    {
-        //      //grabber.DBPersonInfo persondetails = new DBPersonInfo();
-        //      //persondetails = tmdbapi.getPersonsById(f.Id, string.Empty);
-        //      //LogMyFilms.Info("Person Artwork - " + f.Images.Count + " Images found for '" + f.Name + "'");
-        //      item.Label3 = "Loading TMDBv2 image ...";
-        //      string filename1person = Grabber.GrabUtil.DownloadPersonArtwork(MyFilms.conf.StrPathArtist, f.Images[0], f.Name, false, true, out filename);
-        //      LogMyFilms.Debug("Person Image (TMDB) '" + filename1person.Substring(filename1person.LastIndexOf("\\") + 1) + "' downloaded for '" + f.Name + "', path = '" + filename1person + "', filename = '" + filename + "'");
-        //    }
-        //  }
-        //}
-        #endregion
-
         #region TMDB v3 infos ...
         try
         {
@@ -11489,12 +11468,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   }
                   else
                   {
-                    var choiceMovies = new List<MovieResult>();
+                    var choiceMovies = new List<TmdbMovie>();
                     if (dlg == null) return;
                     dlg.Reset();
                     dlg.SetHeading(GUILocalizeStrings.Get(10798992)); // Select movie ...
 
-                    foreach (MovieResult movieResult in moviesfound.results)
+                    foreach (TmdbMovie movieResult in moviesfound.results)
                     {
                       dlg.Add(movieResult.title + " (" + movieResult.release_date + ")");
                       choiceMovies.Add(movieResult);
