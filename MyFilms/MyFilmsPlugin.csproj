@@ -32,6 +32,8 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -76,9 +78,27 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CodeForce.Entities">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeForce.Enums">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Enums.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeForce.Extensions">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeForce.Picasa">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Picasa.dll</HintPath>
+    </Reference>
+    <Reference Include="CodeForce.Utilities">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Utilities.dll</HintPath>
+    </Reference>
     <Reference Include="Common.Utils, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Common.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="CookComputing.XmlRpcV2">
+      <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
     <Reference Include="Core, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -95,9 +115,36 @@
     <Reference Include="DirectShowLib">
       <HintPath>..\Externals\Mediaportal\DirectShowLib.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+    <Reference Include="Google.GData.AccessControl">
+      <HintPath>..\packages\Google.GData.AccessControl.2.2.0.0\lib\Google.GData.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Client">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Photos">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\Google.GData.Photos.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.YouTube">
+      <HintPath>..\packages\Google.GData.YouTube.2.2.0.0\lib\Google.GData.YouTube.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaBrowser.ApiInteraction.net35">
+      <HintPath>..\packages\MediaBrowser.ApiClient.3.0.0.270\lib\net35\MediaBrowser.ApiInteraction.net35.dll</HintPath>
+    </Reference>
+    <Reference Include="MediaBrowser.Model">
+      <HintPath>..\packages\MediaBrowser.Common.3.0.255\lib\net35\MediaBrowser.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net35\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=2.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.2.1.0\lib\net35\NLog.dll</HintPath>
     </Reference>
     <Reference Include="OnlineVideos, Version=1.3.0.2261, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -112,6 +159,10 @@
     <Reference Include="RemotePlugins, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\RemotePlugins.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net35\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="SubCentral, Version=1.0.0.203, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -158,6 +209,9 @@
     <Reference Include="Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocket4Net">
+      <HintPath>..\packages\WebSocket4Net.0.8\lib\net35\WebSocket4Net.dll</HintPath>
     </Reference>
     <Reference Include="WindowPlugins, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -297,6 +351,10 @@
     <None Include="DataBase\MFview.xss">
       <DependentUpon>MFview.xsd</DependentUpon>
     </None>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -413,4 +471,5 @@
     <PostBuildEvent>if exist $(ProjectDir)PostBuild.bat call $(ProjectDir)PostBuild.bat $(ProjectDir) $(ConfigurationName)</PostBuildEvent>
     <PreBuildEvent>subwcrev "$(SolutionDir)\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"</PreBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>

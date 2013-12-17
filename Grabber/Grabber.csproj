@@ -29,6 +29,8 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -84,16 +86,15 @@
       <HintPath>..\Externals\GoogleTranslateAPI.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net35\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+    <Reference Include="NLog, Version=2.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.2.1.0\lib\net35\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=103.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Externals\RestSharp.dll</HintPath>
+      <HintPath>..\packages\RestSharp.104.4.0\lib\net35\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -139,24 +140,6 @@
     <Compile Include="ShareWatcher\ShareWatcherEvent.cs" />
     <Compile Include="ShareWatcher\ShareWatcherHelper.cs" />
     <Compile Include="TheMoviedb.cs" />
-    <Compile Include="TheMovieDbAPI\ImdbMovieInfoCompletedEventArgs.cs" />
-    <Compile Include="TheMovieDbAPI\ImdbMovieSearchCompletedEventArgs.cs" />
-    <Compile Include="TheMovieDbAPI\ImdbPersonInfoCompletedEventArgs.cs" />
-    <Compile Include="TheMovieDbAPI\ImdbPersonSearchCompletedEventArgs.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbAlsoKnownAs.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbApi.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbCastPerson.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbCategory.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbCountry.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbImage.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbImageSize.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbImageType.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbMovie.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbMovieSearchResults.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbPerson.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbPersonFilm.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbPersonSearchResults.cs" />
-    <Compile Include="TheMovieDbAPI\TmdbStudio.cs" />
     <Compile Include="ThumbCreator.cs" />
     <Compile Include="TMDBv3\TmdbMovieSearchResult.cs">
       <SubType>Code</SubType>
@@ -231,6 +214,9 @@
     <Folder Include="LocalMedia\" />
     <Folder Include="Util\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />
@@ -239,4 +225,5 @@
     <PreBuildEvent>subwcrev "$(SolutionDir)\." "$(SolutionDir)VersionInfo.cs.tmpl" "$(ProjectDir)Properties\VersionInfo.cs"</PreBuildEvent>
     <PostBuildEvent>if exist $(ProjectDir)PostBuild.bat call $(ProjectDir)PostBuild.bat $(SolutionDir) $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>
