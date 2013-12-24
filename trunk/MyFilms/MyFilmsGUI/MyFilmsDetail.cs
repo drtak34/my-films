@@ -8972,9 +8972,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           string strPath, strFileName;
 
-          MediaPortal.Database.DatabaseUtility.Split(filename, out strPath, out strFileName);
-          MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strPath);
-          MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(ref strFileName);
+          Helper.DatabaseUtility.Split(filename, out strPath, out strFileName);
+          Helper.DatabaseUtility.RemoveInvalidChars(ref strPath);
+          Helper.DatabaseUtility.RemoveInvalidChars(ref strFileName);
           pathId = VideoDatabase.GetPath(strPath);
           pathId = pathId == -1 ? VideoDatabase.AddPath(strPath) : VideoDatabase.GetPath(strPath);
           VideoDatabase.AddFile(idMovie, pathId, strFileName);

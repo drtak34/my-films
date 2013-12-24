@@ -1217,7 +1217,6 @@ namespace MyFilmsPlugin.MyFilms.Utils
     }
 
 
-
     #region Directory and Drive utils
 
     public struct Drive
@@ -1277,6 +1276,72 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return drives;
     }
     #endregion
+
+    /// <summary>
+    /// Summary description for DatabaseUtility.
+    /// </summary>
+    public class DatabaseUtility
+    {
+      private DatabaseUtility() { }
+
+      /// <summary>
+      /// This will remove all chars which are not allowed for the DB and quote / escape when needed
+      /// </summary>
+      /// <param name="aStringToClean">The value to be stored</param>
+      /// <returns>The string to put into an SQL statement</returns>
+      internal static string RemoveInvalidChars(string aStringToClean)
+      {
+        string result = aStringToClean;
+        RemoveInvalidChars(ref result);
+        return result;
+      }
+
+      /// <summary>
+      /// This will remove all chars which are not allowed for the DB and quote / escape when needed
+      /// </summary>
+      /// <param name="strTxt">The value to be stored</param>
+      internal static void RemoveInvalidChars(ref string strTxt)
+      {
+        strTxt = FilterText(strTxt);
+      }
+
+      private static string FilterText(string strTxt)
+      {
+        if (string.IsNullOrEmpty(strTxt))
+        {
+          return Strings.Unknown;
+        }
+        strTxt = strTxt.Replace("'", "''").Trim();
+
+        return strTxt;
+      }
+
+      internal static void Split(string strFileNameAndPath, out string strPath, out string strFileName)
+      {
+        strFileNameAndPath = strFileNameAndPath.Trim();
+        strFileName = "";
+        strPath = "";
+        if (strFileNameAndPath.Length == 0)
+        {
+          return;
+        }
+        int i = strFileNameAndPath.Length - 1;
+        while (i > 0)
+        {
+          char ch = strFileNameAndPath[i];
+          if (ch == ':' || ch == '/' || ch == '\\')
+          {
+            break;
+          }
+          else
+          {
+            i--;
+          }
+        }
+        strPath = strFileNameAndPath.Substring(0, i).Trim();
+        strFileName = strFileNameAndPath.Substring(i, strFileNameAndPath.Length - i).Trim();
+      }
+    }
   }
 
   // usage: RetryUtility.RetryAction( () => SomeFunctionThatCanFail(), 3, 1000 );
@@ -1401,6 +1466,5 @@ namespace MyFilmsPlugin.MyFilms.Utils
     }
 
   }
-
 }
 
