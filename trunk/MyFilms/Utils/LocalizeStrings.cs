@@ -23,6 +23,9 @@
 
 #endregion
 
+using System.Linq;
+using MediaPortal.Util;
+
 namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
@@ -245,7 +248,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       return _languages;
     }
 
-    static public string GetCultureName(string language)
+    internal static string GetCultureName(string language)
     {
       if (_cultures == null)
       {
@@ -255,7 +258,14 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         foreach (CultureInfo t in cultureList)
         {
-          _cultures.Add(t.EnglishName, t.Name);
+          try
+          {
+            _cultures.Add(t.EnglishName, t.Name);
+          }
+          catch (Exception)
+          {
+            LogMyFilms.Warn("LocalizeStrings - duplicate culture found: " + t.EnglishName + " (" + t.Name + ")");
+          }
         }
       }
 
