@@ -12430,7 +12430,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "artistdetail":
           LogMyFilms.Debug("artistdetail: searching infos for '" + this.facadeFilms.SelectedListItem.Label + "'");
           {
-            string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(this.facadeFilms.SelectedListItem.Label);
+            string actorSearchname = Helper.DatabaseUtility.RemoveInvalidChars(this.facadeFilms.SelectedListItem.Label);
             PersonInfo(actorSearchname);
             break;
           }
@@ -12438,7 +12438,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "artistdetailtmdb":
           LogMyFilms.Debug("artistdetailtmdb: launching TMDB online infos for '" + this.facadeFilms.SelectedListItem.Label + "'");
           {
-            string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(this.facadeFilms.SelectedListItem.Label);
+            string actorSearchname = Helper.DatabaseUtility.RemoveInvalidChars(this.facadeFilms.SelectedListItem.Label);
             SaveListState(false); // save current display to navigation cache
             GetSelectFromTMDB(actorSearchname);
             break;
@@ -13113,7 +13113,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg.SelectedLabel == -1) return;
           if (choiceSearch[dlg.SelectedLabel] == "PersonInfo")
           {
-            string actorSearchname = MediaPortal.Database.DatabaseUtility.RemoveInvalidChars(wperson);
+            string actorSearchname = Helper.DatabaseUtility.RemoveInvalidChars(wperson);
             PersonInfo(actorSearchname);
             return;
           }
@@ -17251,7 +17251,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.clearGUIProperty("details.downloads.status");
       MyFilmsDetail.clearGUIProperty("details.downloads.count");
       MyFilmsDetail.clearGUIProperty("details.downloads.name");
-      // MyFilmsDetail.clearGUIProperty(guiProperty.statusmessage);
 
       MyFilmsDetail.clearGUIProperty("moviecontext.value");
 
