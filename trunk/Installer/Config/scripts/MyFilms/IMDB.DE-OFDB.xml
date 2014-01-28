@@ -5,7 +5,7 @@
     <URLPrefix>http://www.imdb.com</URLPrefix>
     <Language>de</Language>
     <Type>details|cover|multicovers</Type>
-    <Version>1.5.3</Version>
+    <Version>1.5.4</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -57,7 +57,7 @@
       <KeyTTitleMaxItems>_x0039_99</KeyTTitleMaxItems>
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
-      <KeyStartImg Param1="" Param2="">_x0023_REGEX_x0023_link_x0020_rel_x003D__x0022_image_src_x0022__x0020_href_x003D__x0022_</KeyStartImg>
+      <KeyStartImg Param1="" Param2="">_x0023_REGEX_x0023_id_x003D__x0022_primary-img_x0022_._x002A__x003F_src_x003D__x0022_</KeyStartImg>
       <KeyEndImg>_x0022_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage>URL_x0020_Redirection_x0020_Cover</KeyImgPage>
@@ -75,8 +75,8 @@
       <KeyRate2Index />
       <KeyRate2Page />
       <BaseRating>_x0031_0</BaseRating>
-      <KeyStartSyn Param1="_x0023_REGEX_x0023_Written_x0020_by_x007C__x003C__x002F_p_x003E__x007C__x005C_s_x005C_s_x002B_" Param2="">_x0023_REGEX_x0023__x003C_p_x0020_class_x003D__x0022_plotpar_x0022__x003E_</KeyStartSyn>
-      <KeyEndSyn>_x0023_REGEX_x0023__x003C__x002F_div_x003E__x007C__x003C_h5_x003E_Plot_x0020_Synopsis:_x003C__x002F_h5_x003E_</KeyEndSyn>
+      <KeyStartSyn Param1="_x0023_REGEX_x0023_Written_x0020_by_x007C__x003C__x002F_p_x003E__x007C__x005C_s_x005C_s_x002B_" Param2="">_x0023_REGEX_x0023__x003C_p_x0020_class_x003D__x0022_plotSummary_x0022__x003E_</KeyStartSyn>
+      <KeyEndSyn>_x0023_REGEX_x0023__x003C_span_x0020_class_x003D__x0022_nobr_x0022__x003E_-_x0020_</KeyEndSyn>
       <KeySynIndex>Original_x0020_Title</KeySynIndex>
       <KeySynPage>URL_x0020_Redirection_x0020_Description</KeySynPage>
       <KeyStartRealise Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h4._x002A__x003F_Directed_x0020_by._x002A__x003F__x003C__x002F_h4_x003E_</KeyStartRealise>
