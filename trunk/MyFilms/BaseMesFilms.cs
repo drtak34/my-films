@@ -28,7 +28,7 @@ namespace MyFilmsPlugin.MyFilms
   using System.Collections.Generic;
   using System.ComponentModel;
   using System.Data;
-  using System.Data.DataSetExtensions;
+  using System.Data.Linq;
   using System.Diagnostics;
   using System.Globalization;
   using System.IO;

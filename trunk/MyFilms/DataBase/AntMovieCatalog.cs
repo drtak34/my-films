@@ -1,5 +1,5 @@
 ﻿using System.Data;
-using System.Data.DataSetExtensions;
+using System.Data.Linq;
 
 namespace MyFilmsPlugin.DataBase
 {
