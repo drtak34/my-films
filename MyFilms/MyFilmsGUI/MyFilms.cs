@@ -1262,7 +1262,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         XmlSettings xmlSettings = xmlConfig;
         foreach (string strFileXml in configs.Select(config => xmlSettings.ReadXmlConfig("MyFilms", config, "AntCatalog", string.Empty)))
         {
-          MyFilmsDetail.SetGlobalLock(false, strFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
+          try
+          {
+            MyFilmsDetail.SetGlobalLock(false, strFileXml); // release global lock, if there is any, after initializing (this is cleanup for older leftovers)
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("MyFilms.CleanOrphanedDBlocks - Error: Path = '" + strFileXml + "', -> " + ex.Message + ".");
+          }
         }
       }
     }

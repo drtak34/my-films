@@ -4682,7 +4682,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     private void newCatalogWizard()
     {
       bool newCatalog = true;
-      MyFilms.SetupType setupType = MyFilms.SetupType.Local; // set local install as default
+      // MyFilms.SetupType setupType = MyFilms.SetupType.Local; // set local install as default
 
       // load central server config, if it already exists
       XmlConfig myFilmsServer = new XmlConfig();
@@ -4765,7 +4765,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           catch (Exception ex)
           {
             //MessageBox.Show("Error: " + ex.StackTrace, "MyFilms Server Setup", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            MessageBox.Show("Cannot write to local directory - cannot continue !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Cannot write to local directory - cannot continue ! \n(" + ex.Message + ")", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
           }
 
