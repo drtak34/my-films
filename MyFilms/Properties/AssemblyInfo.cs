@@ -11,7 +11,7 @@ using MediaPortal.Common.Utils;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MediaPortal")]
-[assembly: AssemblyCopyright("Copyright © 2011")]
+[assembly: AssemblyCopyright("Copyright © 2014")]
 [assembly: AssemblyTrademark("Zebons, Guzzi")]
 [assembly: AssemblyCulture("")]
 
@@ -35,8 +35,10 @@ using MediaPortal.Common.Utils;
 //[assembly: AssemblyFileVersion("5.0.2.1372")]
 //[assembly: NeutralResourcesLanguageAttribute("")]
 
-[assembly: CompatibleVersion("1.3.100.0", "1.1.6.27644")]
+[assembly: CompatibleVersion("1.6.100.0", "1.1.6.27644")]
+// [assembly: CompatibleVersion("1.5.100.0", "1.1.6.27644")]
 [assembly: UsesSubsystem("MP.SkinEngine")]
 [assembly: UsesSubsystem("MP.Config")]
 [assembly: UsesSubsystem("MP.Players.Video")]
-[assembly: UsesSubsystem("MP.DB")]
+// [assembly: UsesSubsystem("MP.DB")]
+[assembly: UsesSubsystem("MP.DB.Videos")]
