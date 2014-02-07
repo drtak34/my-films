@@ -15,7 +15,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <ApplicationIcon>Resources\MyFilmsIcon.ico</ApplicationIcon>
     <PublishUrl>publish\</PublishUrl>
@@ -34,6 +34,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,142 +79,76 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CodeForce.Entities">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Entities.dll</HintPath>
-    </Reference>
-    <Reference Include="CodeForce.Enums">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Enums.dll</HintPath>
-    </Reference>
-    <Reference Include="CodeForce.Extensions">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="CodeForce.Picasa">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Picasa.dll</HintPath>
-    </Reference>
-    <Reference Include="CodeForce.Utilities">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\CodeForce.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Utils, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Common.Utils, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Common.Utils.dll</HintPath>
     </Reference>
-    <Reference Include="CookComputing.XmlRpcV2">
-      <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
-    </Reference>
-    <Reference Include="Core, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Core, Version=1.6.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Core.dll</HintPath>
     </Reference>
-    <Reference Include="Databases, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Databases, Version=1.6.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Databases.dll</HintPath>
     </Reference>
-    <Reference Include="Dialogs, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Dialogs, Version=1.6.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Dialogs.dll</HintPath>
     </Reference>
-    <Reference Include="DirectShowLib">
+    <Reference Include="DirectShowLib, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\DirectShowLib.dll</HintPath>
     </Reference>
-    <Reference Include="Google.GData.AccessControl">
-      <HintPath>..\packages\Google.GData.AccessControl.2.2.0.0\lib\Google.GData.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Client">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\Google.GData.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Extensions">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\Google.GData.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Photos">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\Google.GData.Photos.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.YouTube">
-      <HintPath>..\packages\Google.GData.YouTube.2.2.0.0\lib\Google.GData.YouTube.dll</HintPath>
-    </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\packages\CodeForceLib.Picasa.2.0\lib\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="MediaBrowser.ApiInteraction.net35">
-      <HintPath>..\packages\MediaBrowser.ApiClient.3.0.0.270\lib\net35\MediaBrowser.ApiInteraction.net35.dll</HintPath>
-    </Reference>
-    <Reference Include="MediaBrowser.Model">
-      <HintPath>..\packages\MediaBrowser.Common.3.0.255\lib\net35\MediaBrowser.Model.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net35\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog, Version=2.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+    <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NLog.2.1.0\lib\net35\NLog.dll</HintPath>
+      <HintPath>..\Externals\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="OnlineVideos, Version=1.3.0.2261, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OnlineVideos, Version=1.6.1.2835, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\OnlineVideos.dll</HintPath>
       <Aliases>ExternalPlugins</Aliases>
     </Reference>
-    <Reference Include="OnlineVideos.MediaPortal1, Version=1.2.0.2012, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="OnlineVideos.MediaPortal1, Version=1.6.1.2835, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\OnlineVideos.MediaPortal1.dll</HintPath>
       <Aliases>ExternalPlugins</Aliases>
     </Reference>
-    <Reference Include="RemotePlugins, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="RemotePlugins, Version=1.6.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\RemotePlugins.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp, Version=104.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\RestSharp.104.4.0\lib\net35\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SubCentral, Version=1.0.0.203, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SubCentral, Version=1.2.2.312, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\SubCentral.dll</HintPath>
       <Aliases>ExternalPlugins</Aliases>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.Entity">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="TaskScheduler, Version=1.3.3304.15002, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\TaskScheduler.dll</HintPath>
     </Reference>
-    <Reference Include="TraktPlugin, Version=1.0.4.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="TraktPlugin, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\TraktPlugin.dll</HintPath>
       <Aliases>ExternalPlugins</Aliases>
     </Reference>
-    <Reference Include="Utils, Version=1.1.6.27744, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="Utils, Version=1.6.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\Utils.dll</HintPath>
     </Reference>
-    <Reference Include="WebSocket4Net">
-      <HintPath>..\packages\WebSocket4Net.0.8\lib\net35\WebSocket4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowPlugins, Version=1.1.8.28143, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="WindowPlugins, Version=1.6.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\Mediaportal\WindowPlugins.dll</HintPath>
     </Reference>
@@ -292,11 +227,6 @@
     <Compile Include="MyFilmsSettings.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
     <Compile Include="Properties\VersionInfo.cs" />
     <Compile Include="DataBase\Trailer.cs" />
     <Compile Include="Utils\Cornerstone.MP\AsyncImageResource.cs" />
@@ -351,14 +281,7 @@
     <None Include="DataBase\MFview.xss">
       <DependentUpon>MFview.xsd</DependentUpon>
     </None>
-    <None Include="NLog.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
