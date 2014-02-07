@@ -56,13 +56,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Base\PluginConfigLoader.exe</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2922cb6f-5563-4c9b-9cfb-bb99bcd2f06b}-PluginConfigLoader.exe</ZipFileName>
-              <DestinationFilename>%Base%\PluginConfigLoader.exe</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Base.12\NLog.dll</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{489c36c2-f379-4836-8909-0ff16c768cad}-NLog.dll</ZipFileName>
               <DestinationFilename>%Base%\NLog.dll</DestinationFilename>
@@ -143,6 +136,20 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Base.12\GoogleTranslateAPI.dll</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{61acc0c2-d32f-41cb-83a8-c01fabf70a35}-GoogleTranslateAPI.dll</ZipFileName>
               <DestinationFilename>%Base%\GoogleTranslateAPI.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\PluginConfigLoader.exe.config</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{683b4d43-2781-499e-bc9c-d3990224980c}-PluginConfigLoader.exe.config</ZipFileName>
+              <DestinationFilename>%Base%\PluginConfigLoader.exe.config</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Base.12\PluginConfigLoader.exe</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7700ca2d-6ed9-4594-9550-c2318a14ca2b}-PluginConfigLoader.exe</ZipFileName>
+              <DestinationFilename>%Base%\PluginConfigLoader.exe</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -1458,20 +1465,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB.ES.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{cba9dc03-a822-40e0-bb46-afcf86af8ade}-IMDB.ES.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB.IT.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{206477b0-a029-4269-b0e5-abecdca60cb5}-IMDB.IT.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.IT.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{fe34fdf6-e280-4c24-ad0f-dd56b1e70f49}-IMDB.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
@@ -1542,13 +1535,6 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB.FR.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{8c818b0e-b856-43ab-b525-57cc41342679}-IMDB.FR.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.FR.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\cineol.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{2632428f-f451-41b2-a1e6-7bb739c990d3}-cineol.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\cineol.xml</DestinationFilename>
@@ -1605,23 +1591,9 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\WorldOfVideo.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{464c667b-169a-405e-8fad-e0f61c434454}-WorldOfVideo.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\WorldOfVideo.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\TMDB-ZH.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{2da77b48-ea06-4346-a005-147d83dd763b}-TMDB-ZH.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ZH.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\TMDB-DE-Person.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{7df28536-41ca-4150-a806-804d4175a477}-TMDB-DE-Person.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-Person.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -1633,44 +1605,9 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB-TMDBcover.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e08b96f8-02c3-448a-896e-ae27c3c81852}-IMDB-TMDBcover.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-TMDBcover.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\TMDB-DE-V3.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{7fae215d-388b-4e36-aee3-61803f25e304}-TMDB-DE-V3.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-V3.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\TMDB-EN-V3.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{bfe4f04b-ea28-4003-81b3-6be19a2afd94}-TMDB-EN-V3.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-EN-V3.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\TMDB-ES-V3.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2c98f9d6-9135-4b61-91c9-f207d632582d}-TMDB-ES-V3.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ES-V3.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>Config\scripts\MyFilms\NFO.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{4de922b3-592c-4846-ae6d-cdcb01afa29f}-NFO.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\NFO.xml</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB.ES-TMDB.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{48eb9229-f72d-4d8f-9134-9659ce91b80e}-IMDB.ES-TMDB.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES-TMDB.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -1682,16 +1619,79 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\Media-Passion.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{827f3d55-1235-4a61-aa88-dc9d2c458e08}-Media-Passion.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\Media-Passion.xml</DestinationFilename>
+              <LocalFileName>Config\scripts\MyFilms\IMDB-Person.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6a1f912c-e780-43a2-8498-b2fdebf86fc0}-IMDB-Person.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Person.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>Config\scripts\MyFilms\IMDB-Person.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{6a1f912c-e780-43a2-8498-b2fdebf86fc0}-IMDB-Person.xml</ZipFileName>
-              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Person.xml</DestinationFilename>
+              <LocalFileName>Config\scripts\MyFilms\AdoroCinema.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{bcb45727-a638-4d37-8b26-1461a6ae2ff6}-AdoroCinema.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\AdoroCinema.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\FilmWeb.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2201341d-be0c-4fff-b078-775bbb0c7ae1}-FilmWeb.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\FilmWeb.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\Kinopoisk.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1474b804-15a8-404c-9fde-057b9d1ea36c}-Kinopoisk.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\Kinopoisk.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\Moviemeter.nl.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e0b275bb-3dc4-487a-9044-93cd3fd35d32}-Moviemeter.nl.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\Moviemeter.nl.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\MoviePosterDB.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9efd8e1b-e471-4c4a-a296-9d7bb581bd43}-MoviePosterDB.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\MoviePosterDB.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\TMDB-Covers.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6a300126-09a7-4065-a7e2-99fbb2f06d6a}-TMDB-Covers.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-Covers.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\TMDB-NL.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a6e271e5-a881-4310-b179-03feeb77ac1e}-TMDB-NL.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-NL.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\TMDB-Person.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{4397d9c2-ccf0-4201-a89f-19c6fb1eea44}-TMDB-Person.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-Person.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\TMDB-PT.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{46689798-4930-42c5-8ea5-b2eccc669491}-TMDB-PT.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-PT.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\TMDB-RU.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9f5f224f-1b07-4959-931a-12d19596a67f}-TMDB-RU.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\TMDB-RU.xml</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -5143,18 +5143,48 @@ Please refer to the Wiki online documentation.</Value>
         </Params>
         <Actions>
           <Items>
-            <ActionItem Name="ConfigurePlugin" ActionType="ConfigurePlugin" ConditionGroup="Default">
+            <ActionItem Name="RunApplication" ActionType="RunApplication" ConditionGroup="">
               <Params>
                 <Items>
-                  <SectionParam Name="Path to plugin">
-                    <Value>%Plugins%\windows\myfilms.dll</Value>
+                  <SectionParam Name="Path to application">
+                    <Value>%Base%\PluginLoader - MyFilms.cmd</Value>
                     <ValueType>Template</ValueType>
-                    <Description>Path to the plugin like 
- %Plugins%\Windows\plugin.dll</Description>
+                    <Description>Path to the application like 
+ %Base%\MediaPortal.exe</Description>
+                  </SectionParam>
+                  <SectionParam Name="Parameters for application">
+                    <Value />
+                    <ValueType>String</ValueType>
+                    <Description>Command line parameters</Description>
+                  </SectionParam>
+                  <SectionParam Name="Wait for exit">
+                    <Value>NO</Value>
+                    <ValueType>Bool</ValueType>
+                    <Description>Wait for exit </Description>
+                  </SectionParam>
+                  <SectionParam Name="Don't run when silent install">
+                    <Value>YES</Value>
+                    <ValueType>Bool</ValueType>
+                    <Description>If set to Yes the aplication don't run when the istalation is silent </Description>
+                  </SectionParam>
+                  <SectionParam Name="Path to uninstall application">
+                    <Value />
+                    <ValueType>Template</ValueType>
+                    <Description>Path to the application which should be executed when uninstall</Description>
+                  </SectionParam>
+                  <SectionParam Name="Parameters for uninstall application">
+                    <Value />
+                    <ValueType>String</ValueType>
+                    <Description>Command line parameters for uninstall app</Description>
+                  </SectionParam>
+                  <SectionParam Name="Wait for exit on uninstall">
+                    <Value>NO</Value>
+                    <ValueType>Bool</ValueType>
+                    <Description>Wait for exit on uninstall </Description>
                   </SectionParam>
                 </Items>
               </Params>
-              <ExecuteLocation>AfterPanelHide</ExecuteLocation>
+              <ExecuteLocation>AfterPanelShow</ExecuteLocation>
             </ActionItem>
           </Items>
         </Actions>
@@ -5270,14 +5300,14 @@ Please refer to the Wiki online documentation.</Value>
           <Items>
             <CompatibleVersionItem>
               <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.3.100.0</DesignedForVersion>
+              <DesignedForVersion>1.6.100.0</DesignedForVersion>
             </CompatibleVersionItem>
           </Items>
         </CompatibleVersion>
         <SubSystemsUsed>
           <Items>
             <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.DB" />
+            <SubSystemItem Name="MP.DB.Videos" />
             <SubSystemItem Name="MP.Players.Video" />
             <SubSystemItem Name="MP.SkinEngine" />
           </Items>
@@ -5296,98 +5326,183 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>0</Minor>
       <Build>3</Build>
-      <Revision>2921</Revision>
+      <Revision>2954</Revision>
     </Version>
-    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
-
-
-
-
-The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
-
+    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+
+
+
+
+
+
+
+
+
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+
+
+
 My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
-    <VersionDescription>This version is a maintenance release of MyFilms 6.0.
-
-
-Please report bugs in MyFilms forum.
-
-
-Features:
-- Add regex grouping for studio and languages
-- Remove 'Use MP Logos' option
-- Allow users to select Test Mode more easily and display it in Setup/GUI
-- Add regex matching to logo rule editor
-- Current MyFilms is incompatible with MP 1.4.0
-- Use Localized Plugin Name in CurrentModule
-- Change Backnavigation behaviour to not step back when a view was called directly
-- Add logo rules to support certification logos
-
-Test Mode Features (6.1.0 preview):
-- Improve Setup Wizard to support central config setups
-- Allow sorting for Online Movie Info/Lists
-- Add dialog for visual image selection (for Collection Covers)
-- Download of collection covers from TMDB
-- Improve Box Sets management in GUI
-- Autorun AMCU when plugin starts
-- Allow local caching for trailers of online content
-- Precaching of movie DB on startup
-- Add context search option for online content to seach local content by facade label keywords
-- Add OnlineVideos search to movie context menu
-- Allow download for trailers for multiple movies
-- Add option to person context menu to get TMDB filmographie
-- Add virtual path browsing
-- Add online info about current, upcoming and most liked movies
-- Trailer 'Scrobbling' - Play random trailers from a group of films
-- Add "about" tab and credits
-- Support for movie thumbs in Details screen &amp; removal of old separate MyFilmsThumbs screen
-- Add virtual path title
-- View related persons view from Details Window
-- Add OV stream player for trailers
-- Actor screen
-
-Fixes:
-Grabber Engine - '#ADD#' uses wrong chars for splitting, should only use '|'
-Selecting more than one local movie in Trakt opens the wrong movie in MyFilms
-AMCU Update Movies Test Param does not display # Movies matched
-Trailer/Clip detection can cause that a movie is handled as a trailer
-Create Fanart does not work if you do a clean install of MP 1.4.0
-Grabber engine does not display preview resutls
-TMDB grabber does not add/update cover
-Cover Manager does not download covers
-IMDB-Full script is broken
-hyperlink from basic homescreen to a specific DB results in MyFilms showing blank screen
-Latest Media Handler does not work per Config
-My Movies export to XML catalog, "SortTitle" to "FormattedTitle" not working
-Trailers Button on Details Window causes Crash
-Search History does not display selected Search in Virtual Keyboard
-Layout button display is incorrect when you change layouts and return to MF
-Skin Updates for MP13 final
-Default view settings in Global Options not working properly
-Remove message 'WatchedItem' from movie ended handling
-Change encoding for AMCupdater created nfo files to UTF-8 for better compatibility with nfo grabber script
-IMDB-OFDB Scraper broken
-brackets should be removed from #myfilms.select property
-Exception on item counts on certain timing conditions
-Collection of structural changes of the Solution
-Skinengine falls back to wprite mode when high order characters are pushed to GUIProperties
-Long internet titles can result in "path too long" exceptions
-When importing DVD/BR folders size calculation does not work
-AMCupdater - "always ignore files" is case sensitive
-Group/Collection covers cannot be handled, if the name contains invalid characters
-Remove "star" on count indicator of filtered views
-MyFilms as problems with some "Pictures" in catalog/Pictures folder
-ampersand name issue
-AMCupdater - Movie Manager issues causing DB corruption
-Adding a filtered view to the menu does not create proper view
-Playback events for physical discs are not processed properly
-Remove IMDB.PT script from installer package and change the preset script for PT
-Better error handling when no config present or skin files missing
-Cinefacts has relaunched their website, so grabbers don't work anymore
+    <VersionDescription>This version is a maintenance release of MyFilms 6.0.
+
+
+
+
+
+Please report bugs in MyFilms forum.
+
+
+
+
+
+Features:
+
+- Add regex grouping for studio and languages
+
+- Remove 'Use MP Logos' option
+
+- Allow users to select Test Mode more easily and display it in Setup/GUI
+
+- Add regex matching to logo rule editor
+
+- Current MyFilms is incompatible with MP 1.4.0
+
+- Use Localized Plugin Name in CurrentModule
+
+- Change Backnavigation behaviour to not step back when a view was called directly
+
+- Add logo rules to support certification logos
+
+
+
+Test Mode Features (6.1.0 preview):
+
+- Improve Setup Wizard to support central config setups
+
+- Allow sorting for Online Movie Info/Lists
+
+- Add dialog for visual image selection (for Collection Covers)
+
+- Download of collection covers from TMDB
+
+- Improve Box Sets management in GUI
+
+- Autorun AMCU when plugin starts
+
+- Allow local caching for trailers of online content
+
+- Precaching of movie DB on startup
+
+- Add context search option for online content to seach local content by facade label keywords
+
+- Add OnlineVideos search to movie context menu
+
+- Allow download for trailers for multiple movies
+
+- Add option to person context menu to get TMDB filmographie
+
+- Add virtual path browsing
+
+- Add online info about current, upcoming and most liked movies
+
+- Trailer 'Scrobbling' - Play random trailers from a group of films
+
+- Add "about" tab and credits
+
+- Support for movie thumbs in Details screen &amp; removal of old separate MyFilmsThumbs screen
+
+- Add virtual path title
+
+- View related persons view from Details Window
+
+- Add OV stream player for trailers
+
+- Actor screen
+
+
+
+Fixes:
+
+Grabber Engine - '#ADD#' uses wrong chars for splitting, should only use '|'
+
+Selecting more than one local movie in Trakt opens the wrong movie in MyFilms
+
+AMCU Update Movies Test Param does not display # Movies matched
+
+Trailer/Clip detection can cause that a movie is handled as a trailer
+
+Create Fanart does not work if you do a clean install of MP 1.4.0
+
+Grabber engine does not display preview resutls
+
+TMDB grabber does not add/update cover
+
+Cover Manager does not download covers
+
+IMDB-Full script is broken
+
+hyperlink from basic homescreen to a specific DB results in MyFilms showing blank screen
+
+Latest Media Handler does not work per Config
+
+My Movies export to XML catalog, "SortTitle" to "FormattedTitle" not working
+
+Trailers Button on Details Window causes Crash
+
+Search History does not display selected Search in Virtual Keyboard
+
+Layout button display is incorrect when you change layouts and return to MF
+
+Skin Updates for MP13 final
+
+Default view settings in Global Options not working properly
+
+Remove message 'WatchedItem' from movie ended handling
+
+Change encoding for AMCupdater created nfo files to UTF-8 for better compatibility with nfo grabber script
+
+IMDB-OFDB Scraper broken
+
+brackets should be removed from #myfilms.select property
+
+Exception on item counts on certain timing conditions
+
+Collection of structural changes of the Solution
+
+Skinengine falls back to wprite mode when high order characters are pushed to GUIProperties
+
+Long internet titles can result in "path too long" exceptions
+
+When importing DVD/BR folders size calculation does not work
+
+AMCupdater - "always ignore files" is case sensitive
+
+Group/Collection covers cannot be handled, if the name contains invalid characters
+
+Remove "star" on count indicator of filtered views
+
+MyFilms as problems with some "Pictures" in catalog/Pictures folder
+
+ampersand name issue
+
+AMCupdater - Movie Manager issues causing DB corruption
+
+Adding a filtered view to the menu does not create proper view
+
+Playback events for physical discs are not processed properly
+
+Remove IMDB.PT script from installer package and change the preset script for PT
+
+Better error handling when no config present or skin files missing
+
+Cinefacts has relaunched their website, so grabbers don't work anymore
+
 Add GUI Global Options to change default config and default setting</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.3.2921.mpe1</OnlineLocation>
-    <ReleaseDate>2013-09-01T14:33:24.3101339+02:00</ReleaseDate>
+    <ReleaseDate>2014-02-07T12:10:19.8434416+01:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -5465,13 +5580,6 @@ Add GUI Global Options to change default config and default setting</VersionDesc
         <LocalFileName>Base\PluginLoader - MyFilms.cmd</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{ff248d24-84a2-4f2d-81d3-d8796c7780c6}-PluginLoader - MyFilms.cmd</ZipFileName>
         <DestinationFilename>%Base%\PluginLoader - MyFilms.cmd</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Base\PluginConfigLoader.exe</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2922cb6f-5563-4c9b-9cfb-bb99bcd2f06b}-PluginConfigLoader.exe</ZipFileName>
-        <DestinationFilename>%Base%\PluginConfigLoader.exe</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
@@ -5556,6 +5664,20 @@ Add GUI Global Options to change default config and default setting</VersionDesc
         <LocalFileName>Base.12\GoogleTranslateAPI.dll</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{61acc0c2-d32f-41cb-83a8-c01fabf70a35}-GoogleTranslateAPI.dll</ZipFileName>
         <DestinationFilename>%Base%\GoogleTranslateAPI.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\PluginConfigLoader.exe.config</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{683b4d43-2781-499e-bc9c-d3990224980c}-PluginConfigLoader.exe.config</ZipFileName>
+        <DestinationFilename>%Base%\PluginConfigLoader.exe.config</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Base.12\PluginConfigLoader.exe</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7700ca2d-6ed9-4594-9550-c2318a14ca2b}-PluginConfigLoader.exe</ZipFileName>
+        <DestinationFilename>%Base%\PluginConfigLoader.exe</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -6841,20 +6963,6 @@ Add GUI Global Options to change default config and default setting</VersionDesc
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB.ES.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{cba9dc03-a822-40e0-bb46-afcf86af8ade}-IMDB.ES.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB.IT.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{206477b0-a029-4269-b0e5-abecdca60cb5}-IMDB.IT.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.IT.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\IMDB.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{fe34fdf6-e280-4c24-ad0f-dd56b1e70f49}-IMDB.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\IMDB.xml</DestinationFilename>
@@ -6925,13 +7033,6 @@ Add GUI Global Options to change default config and default setting</VersionDesc
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB.FR.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{8c818b0e-b856-43ab-b525-57cc41342679}-IMDB.FR.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.FR.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\cineol.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2632428f-f451-41b2-a1e6-7bb739c990d3}-cineol.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\cineol.xml</DestinationFilename>
@@ -6988,23 +7089,9 @@ Add GUI Global Options to change default config and default setting</VersionDesc
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\WorldOfVideo.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{464c667b-169a-405e-8fad-e0f61c434454}-WorldOfVideo.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\WorldOfVideo.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\TMDB-ZH.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{2da77b48-ea06-4346-a005-147d83dd763b}-TMDB-ZH.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ZH.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\TMDB-DE-Person.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7df28536-41ca-4150-a806-804d4175a477}-TMDB-DE-Person.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-Person.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -7016,44 +7103,9 @@ Add GUI Global Options to change default config and default setting</VersionDesc
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB-TMDBcover.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e08b96f8-02c3-448a-896e-ae27c3c81852}-IMDB-TMDBcover.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-TMDBcover.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\TMDB-DE-V3.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7fae215d-388b-4e36-aee3-61803f25e304}-TMDB-DE-V3.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-DE-V3.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\TMDB-EN-V3.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{bfe4f04b-ea28-4003-81b3-6be19a2afd94}-TMDB-EN-V3.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-EN-V3.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\TMDB-ES-V3.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2c98f9d6-9135-4b61-91c9-f207d632582d}-TMDB-ES-V3.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-ES-V3.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>Config\scripts\MyFilms\NFO.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{4de922b3-592c-4846-ae6d-cdcb01afa29f}-NFO.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\NFO.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB.ES-TMDB.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{48eb9229-f72d-4d8f-9134-9659ce91b80e}-IMDB.ES-TMDB.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB.ES-TMDB.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -7065,16 +7117,79 @@ Add GUI Global Options to change default config and default setting</VersionDesc
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\Media-Passion.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{827f3d55-1235-4a61-aa88-dc9d2c458e08}-Media-Passion.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\Media-Passion.xml</DestinationFilename>
+        <LocalFileName>Config\scripts\MyFilms\IMDB-Person.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6a1f912c-e780-43a2-8498-b2fdebf86fc0}-IMDB-Person.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Person.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>Config\scripts\MyFilms\IMDB-Person.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{6a1f912c-e780-43a2-8498-b2fdebf86fc0}-IMDB-Person.xml</ZipFileName>
-        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Person.xml</DestinationFilename>
+        <LocalFileName>Config\scripts\MyFilms\AdoroCinema.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{bcb45727-a638-4d37-8b26-1461a6ae2ff6}-AdoroCinema.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\AdoroCinema.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\FilmWeb.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2201341d-be0c-4fff-b078-775bbb0c7ae1}-FilmWeb.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\FilmWeb.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\Kinopoisk.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1474b804-15a8-404c-9fde-057b9d1ea36c}-Kinopoisk.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\Kinopoisk.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\Moviemeter.nl.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e0b275bb-3dc4-487a-9044-93cd3fd35d32}-Moviemeter.nl.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\Moviemeter.nl.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\MoviePosterDB.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9efd8e1b-e471-4c4a-a296-9d7bb581bd43}-MoviePosterDB.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\MoviePosterDB.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\TMDB-Covers.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6a300126-09a7-4065-a7e2-99fbb2f06d6a}-TMDB-Covers.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-Covers.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\TMDB-NL.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a6e271e5-a881-4310-b179-03feeb77ac1e}-TMDB-NL.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-NL.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\TMDB-Person.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{4397d9c2-ccf0-4201-a89f-19c6fb1eea44}-TMDB-Person.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-Person.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\TMDB-PT.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{46689798-4930-42c5-8ea5-b2eccc669491}-TMDB-PT.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-PT.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\TMDB-RU.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9f5f224f-1b07-4959-931a-12d19596a67f}-TMDB-RU.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\TMDB-RU.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
@@ -9017,16 +9132,6 @@ Add GUI Global Options to change default config and default setting</VersionDesc
         <DestinationFilename>%Skin%\DefaultWide</DestinationFilename>
         <Folder>Skin.12\DefaultWide</Folder>
         <Group>SkinFiles</Group>
-        <Recursive>true</Recursive>
-      </FolderGroup>
-      <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName />
-        <ZipFileName>Installer{CopyFile}\{1a5477a2-4d97-4608-89ff-773f551b89b8}-</ZipFileName>
-        <DestinationFilename>%Language%\MyFilms</DestinationFilename>
-        <Folder>Language\MyFilms</Folder>
-        <Group>Default</Group>
         <Recursive>true</Recursive>
       </FolderGroup>
       <FolderGroup InstallType="CopyFile" SystemFile="false" Modified="true">
