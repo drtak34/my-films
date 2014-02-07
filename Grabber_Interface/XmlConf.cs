@@ -300,6 +300,39 @@ class ListNode
 }
 
 
+//public class LinkPage
+//{
+//  public static int Index = 1;
+//  public string DisplayName;
+//  public static string LinkPage = "LinkPage" + Index;
+//  public static string Start = "Start" + Index;
+//  public static string End = "End" + Index;
+//  public static string PageIndex = "PageIndex" + Index;
+//  public static string Page = "Page" + Index;
+//  public static string Encoding = "Encoding" + Index;
+//  public static string Result = null;
+//}
+
+//public class GrabElement
+//{
+//  public static int Index;
+//  public string DisplayName;
+//  public static string LinkPage = "LinkPage" + Index;
+//  public static string Start = "Start" + Index;
+//  public static string End = "End" + Index;
+//  public static string PageIndex = "PageIndex" + Index;
+//  public static string Page = "Page" + Index;
+//  public static string Encoding = "Encoding" + Index;
+//  // inner matchgroups
+//  public static string RegExp = "RegExp" + Index;
+//  public static string MaxItems = "MaxItems" + Index;
+//  public static string Filter = "Filter" + Index;
+  
+//  public static string Result = null;
+
+//}
+
+
 //Class qui contient la liste des tags des fichiers de conf
 //Permet d'éviter d'aller chercher dans les fichiers pour se souvenir du nom ...
 // A compléter si ajout de tag.
