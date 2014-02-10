@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <Profile>
   <Section>
-    <DBName>NFO (Ember Media Manager)</DBName>
+    <DBName>NFO</DBName>
     <URLPrefix />
     <Language>all</Language>
     <Type>details|cover|fanart</Type>
-    <Version>1.0</Version>
+    <Version>1.2</Version>
     <Encoding>UTF-8</Encoding>
     <FileBasedReader>true</FileBasedReader>
     <SearchCleanup />
@@ -73,27 +73,27 @@
       <KeyRate2Index />
       <KeyRate2Page />
       <BaseRating />
-      <KeyStartSyn Param1="" Param2="">_x003C_plot_x003E_</KeyStartSyn>
+      <KeyStartSyn Param1="_x003C__x0021__x005B_CDATA_x005B_" Param2="">_x003C_plot_x003E_</KeyStartSyn>
       <KeyEndSyn>_x003C__x002F_plot_x003E_</KeyEndSyn>
       <KeySynIndex />
       <KeySynPage />
-      <KeyStartRealise Param1="_x0023_REGEX_x0023__x0020__x002F_" Param2="_x002C_">_x003C_director_x003E_</KeyStartRealise>
-      <KeyEndRealise>_x003C__x002F_director_x003E_</KeyEndRealise>
+      <KeyStartRealise Param1="_x0023_REGEX_x0023__x0020__x002F_" Param2="_x002C_">_x003C_movie</KeyStartRealise>
+      <KeyEndRealise>_x003C__x002F_movie_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage />
-      <KeyRealiseRegExp />
+      <KeyRealiseRegExp>_x003C_director_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_director_x003E_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
-      <KeyStartProduct Param1="_x0023_REGEX_x0023_" Param2="">_x003C_credits_x003E_</KeyStartProduct>
-      <KeyEndProduct>_x003C__x002F_credits_x003E_</KeyEndProduct>
+      <KeyStartProduct Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x003C_producer_x003E_</KeyStartProduct>
+      <KeyEndProduct>_x003C__x002F_movie_x003E_</KeyEndProduct>
       <KeyProductIndex />
       <KeyProductPage />
-      <KeyProductRegExp />
+      <KeyProductRegExp>_x003C_name_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_name_x003E_._x002A__x003F__x003C_role_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C_</KeyProductRegExp>
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="" Param2="">_x003C_credits_x003E_</KeyStartWriter>
-      <KeyEndWriter>_x003C__x002F_credits_x003E_</KeyEndWriter>
+      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">_x003C_movie</KeyStartWriter>
+      <KeyEndWriter>_x003C__x002F_movie_x003E_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage />
-      <KeyWriterRegExp />
+      <KeyWriterRegExp>_x003C_credits_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_credits_x003E_</KeyWriterRegExp>
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x003F__x005C__x0029_" Param2="">_x003C_actor_x003E_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_movie_x003E_</KeyEndCredits>
@@ -120,12 +120,12 @@
       <KeyEndLinkPersons />
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
-      <KeyStartComment Param1="" Param2="" />
-      <KeyEndComment />
+      <KeyStartComment Param1="" Param2="">_x003C_comments_x003E_</KeyStartComment>
+      <KeyEndComment>_x003C__x002F_</KeyEndComment>
       <KeyCommentRegExp />
       <KeyCommentIndex />
       <KeyCommentPage />
-      <KeyStartLanguage Param1="" Param2="">_x003C_longlanguage_x003E_</KeyStartLanguage>
+      <KeyStartLanguage Param1="" Param2="">_x003C_languages_x003E_</KeyStartLanguage>
       <KeyEndLanguage>_x003C__x002F_</KeyEndLanguage>
       <KeyLanguageIndex />
       <KeyLanguagePage />
@@ -133,8 +133,8 @@
       <KeyEndTagline>_x003C__x002F_tagline_x003E_</KeyEndTagline>
       <KeyTaglineIndex />
       <KeyTaglinePage />
-      <KeyStartCertification Param1="" Param2="">_x0023_REGEX_x0023__x003C_mpaa_x003E_._x002A__x003F__</KeyStartCertification>
-      <KeyEndCertification>_x003C__x002F_mpaa_x003E_</KeyEndCertification>
+      <KeyStartCertification Param1="_x0023_REGEX_x0023_FSK" Param2="">_x0023_REGEX_x0023__x003C_certification_x003E_._x002A__x003F_:</KeyStartCertification>
+      <KeyEndCertification>_x002F_</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
       <KeyCertificationPage />
@@ -156,24 +156,24 @@
       <KeyEndDetails2 />
       <KeyDetails2Index />
       <KeyDetails2Page />
-      <KeyStartStudio Param1="" Param2="">_x003C_studio_x003E_</KeyStartStudio>
-      <KeyEndStudio>_x003C__x002F_studio_x003E_</KeyEndStudio>
+      <KeyStartStudio Param1="_x0023_REGEX_x0023__x0020__x002F_" Param2="_x002C_">_x003C_movie</KeyStartStudio>
+      <KeyEndStudio>_x003C__x002F_movie_x003E_</KeyEndStudio>
       <KeyStudioIndex />
       <KeyStudioPage />
       <KeyStartEdition Param1="" Param2="" />
       <KeyEndEdition />
       <KeyEditionIndex />
       <KeyEditionPage />
-      <KeyStartIMDB_Rank Param1="" Param2="" />
-      <KeyEndIMDB_Rank />
+      <KeyStartIMDB_Rank Param1="" Param2="">_x0020__x003C_top250_x003E_</KeyStartIMDB_Rank>
+      <KeyEndIMDB_Rank>_x003C__x002F_</KeyEndIMDB_Rank>
       <KeyIMDB_RankIndex />
       <KeyIMDB_RankPage />
-      <KeyStartIMDB_Id Param1="" Param2="">_x003C_id_x003E_</KeyStartIMDB_Id>
-      <KeyEndIMDB_Id>_x003C__x002F_</KeyEndIMDB_Id>
+      <KeyStartIMDB_Id Param1="" Param2="">_x0023_REGEX_x0023__x003C_id_x003E__x007C__x003C_imdb_id_x003E_</KeyStartIMDB_Id>
+      <KeyEndIMDB_Id>_x003C_</KeyEndIMDB_Id>
       <KeyIMDB_IdIndex />
       <KeyIMDB_IdPage />
-      <KeyStartTMDB_Id Param1="" Param2="">_x003C_id_x003E_</KeyStartTMDB_Id>
-      <KeyEndTMDB_Id>_x003C__x002F_id_x003E_</KeyEndTMDB_Id>
+      <KeyStartTMDB_Id Param1="" Param2="">_x003C_tmdbId_x003E_</KeyStartTMDB_Id>
+      <KeyEndTMDB_Id>_x003C__x002F_tmdbId_x003E_</KeyEndTMDB_Id>
       <KeyTMDB_IdIndex />
       <KeyTMDB_IdPage />
       <KeyStartLinkSyn Param1="" Param2="" />
@@ -188,35 +188,35 @@
       <KeyEndLinkGeneric2 />
       <KeyLinkGeneric2Index />
       <KeyLinkGeneric2Page />
-      <KeyStartGeneric1 Param1="" Param2="">_x0023_REGEX_x0023__x003C_certification_x003E_._x002A__x003F_:</KeyStartGeneric1>
-      <KeyEndGeneric1>_x002F_</KeyEndGeneric1>
+      <KeyStartGeneric1 Param1="Rated_x0020_" Param2="">_x003C_mpaa_x003E_</KeyStartGeneric1>
+      <KeyEndGeneric1>_x003C__x002F_mpaa_x003E_</KeyEndGeneric1>
       <KeyGeneric1Index />
       <KeyGeneric1RegExp />
       <KeyGeneric1MaxItems />
       <KeyGeneric1Language />
       <KeyGeneric1Page />
-      <KeyStartGeneric2 Param1="" Param2="" />
-      <KeyEndGeneric2 />
+      <KeyStartGeneric2 Param1="_x0023_REGEX_x0023_" Param2="">_x003C_movie</KeyStartGeneric2>
+      <KeyEndGeneric2>_x003C__x002F_movie_x003E_</KeyEndGeneric2>
       <KeyGeneric2Index />
-      <KeyGeneric2RegExp />
+      <KeyGeneric2RegExp>_x003C_credits_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_credits_x003E_</KeyGeneric2RegExp>
       <KeyGeneric2MaxItems />
-      <KeyGeneric2Language />
+      <KeyGeneric2Language>writer</KeyGeneric2Language>
       <KeyGeneric2Page />
-      <KeyStartGeneric3 Param1="" Param2="" />
-      <KeyEndGeneric3 />
+      <KeyStartGeneric3 Param1="_x0023_REGEX_x0023_" Param2="">_x003C_movie</KeyStartGeneric3>
+      <KeyEndGeneric3>_x003C__x002F_movie_x003E_</KeyEndGeneric3>
       <KeyGeneric3Index />
-      <KeyGeneric3RegExp />
+      <KeyGeneric3RegExp>_x003C_credits_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_credits_x003E_</KeyGeneric3RegExp>
       <KeyGeneric3MaxItems />
-      <KeyGeneric3Language />
+      <KeyGeneric3Language>producer</KeyGeneric3Language>
       <KeyGeneric3Page />
       <KeyStartLinkMultiPosters Param1="" Param2="" />
       <KeyEndLinkMultiPosters />
       <KeyLinkMultiPostersIndex />
       <KeyLinkMultiPostersPage />
-      <KeyStartMultiPosters Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C__x002F_actor_x003E_.._x0020__x003C_th</KeyStartMultiPosters>
-      <KeyEndMultiPosters>_x003C_fanart</KeyEndMultiPosters>
+      <KeyStartMultiPosters Param1="" Param2="" />
+      <KeyEndMultiPosters />
       <KeyMultiPostersIndex />
-      <KeyMultiPostersRegExp>mb_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyMultiPostersRegExp>
+      <KeyMultiPostersRegExp />
       <KeyMultiPostersMaxItems />
       <KeyMultiPostersLanguage />
       <KeyMultiPostersPage />
@@ -235,10 +235,10 @@
       <KeyEndLinkPersonImages />
       <KeyLinkPersonImagesIndex />
       <KeyLinkPersonImagesPage />
-      <KeyStartPersonImages Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_actor_x003E_</KeyStartPersonImages>
-      <KeyEndPersonImages>_x0023_REGEX_x0023__x003C__x002F_actor_x003E_..._x003C_thumb_x003E_</KeyEndPersonImages>
+      <KeyStartPersonImages Param1="" Param2="" />
+      <KeyEndPersonImages />
       <KeyPersonImagesIndex />
-      <KeyPersonImagesRegExp>thumb_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_th</KeyPersonImagesRegExp>
+      <KeyPersonImagesRegExp />
       <KeyPersonImagesMaxItems />
       <KeyPersonImagesLanguage />
       <KeyPersonImagesPage />
@@ -251,7 +251,7 @@
       <KeyMultiFanartIndex />
       <KeyMultiFanartRegExp>jpg_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_jp</KeyMultiFanartRegExp>
       <KeyMultiFanartMaxItems />
-      <KeyMultiFanartLanguage>extra</KeyMultiFanartLanguage>
+      <KeyMultiFanartLanguage>extrafanart</KeyMultiFanartLanguage>
       <KeyMultiFanartPage>DetailsPath</KeyMultiFanartPage>
       <KeyStartLinkTrailer Param1="" Param2="" />
       <KeyEndLinkTrailer />
@@ -286,11 +286,16 @@
       <KeyStartCollectionImageURL Param1="" Param2="" />
       <KeyEndCollectionImageURL />
       <KeyCollectionImageURLIndex />
-      <KeyStudioRegExp />
+      <KeyStudioRegExp>_x003C_studio_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_studio_x003E_</KeyStudioRegExp>
+      <KeyLanguageRegExp />
+      <KeyRuntimePage />
+      <KeyStartRuntime Param1="" Param2="">_x003C_runtime_x003E_</KeyStartRuntime>
+      <KeyEndRuntime>_x003C_</KeyEndRuntime>
+      <KeyRuntimeIndex />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_1 source="TranslatedTitle" destination="OriginalTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_4 source="Rating" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
@@ -313,8 +318,8 @@
       <Field_21 source="Edition" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_22 source="Fanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_23 source="Generic1" destination="Certification" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
-      <Field_24 source="Generic2" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_25 source="Generic3" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_24 source="Generic2" destination="Writer" replace="False" addstart="False" addend="False" mergeprefersource="True" mergepreferdestination="False" />
+      <Field_25 source="Generic3" destination="Producer" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_26 source="TranslatedTitle_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_27 source="TranslatedTitle_x0020_-_x0020_All_x0020_Values" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_28 source="Certification_x0020_-_x0020_All_x0020_Names" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
@@ -325,7 +330,7 @@
       <Field_33 source="MultiFanart" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_34 source="Trailer" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_35 source="TMDB_Id" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
-      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_36 source="Runtime" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_37 source="Collection" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_38 source="CollectionImageURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_39 source="PictureURL" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
