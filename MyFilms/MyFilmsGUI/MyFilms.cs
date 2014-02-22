@@ -8577,10 +8577,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
-      var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
+      var stopwatch = new Stopwatch();
+      stopwatch.Reset();
+      stopwatch.Start();
       string oldXmlDb = (conf != null) ? conf.StrFileXml : "";
       conf = new Configuration(CurrentConfig, true, create_temp, loadParams);
-      conf.IsDbReloadRequired = (oldXmlDb != conf.StrFileXml); // set reload flag, if the underlying DB has changed (it might not, if user switches config using the same DB)
+      conf.IsDbReloadRequired = (oldXmlDb != conf.StrFileXml);
+      // set reload flag, if the underlying DB has changed (it might not, if user switches config using the same DB)
       stopwatch.Stop();
       LogMyFilms.Debug("Load_Config(): Finished loading config '" + CurrentConfig + "' (" + (stopwatch.ElapsedMilliseconds) + " ms)");
 
@@ -8631,6 +8634,43 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       // set user online status
       MyFilmsDetail.setGUIProperty("user.onlinestatus", Helper.IsTraktAvailableAndEnabled ? Helper.GetUserOnlineStatus(conf.StrUserProfileName) : "local");
+
+      // get the userdefined Views
+      try
+      {
+        if (MyFilms.conf.CustomViews.View.Rows.Count > 0)
+        {
+          MyFilmsDetail.setGUIProperty("views.count", "0");
+          int i = 1;
+          foreach (MFview.ViewRow customView in Enumerable.Where(MyFilms.conf.CustomViews.View, customView => Helper.FieldIsSet(customView.DBfield) && customView.ViewEnabled))
+          {
+            // publish properties for skin menu
+            MyFilmsDetail.setGUIProperty(string.Format("views.item.{0}.name", i), ((string.IsNullOrEmpty(customView.Label)) ? customView.DBfield : customView.Label));
+            MyFilmsDetail.setGUIProperty(string.Format("views.item.{0}.image", i), customView.ImagePath);
+            MyFilmsDetail.setGUIProperty(string.Format("views.item.{0}.hyperlinkparameter", i), "config:" + CurrentConfig + "|view:" + ((string.IsNullOrEmpty(customView.Label)) ? customView.DBfield : customView.Label));
+            i++;
+          }
+        }
+        else
+        {
+          MyFilmsDetail.setGUIProperty("views.count", MyFilms.conf.CustomViews.View.Rows.Count.ToString());
+        }
+
+        #region show all view options, if selected ... (disabled)
+        //ArrayList displayItems = GetDisplayItems("view");
+        //foreach (string[] displayItem in displayItems)
+        //{
+        //  strin viewlabel = (string.IsNullOrEmpty(displayItem[1])) ? displayItem[0] : displayItem[1];
+        //  string view = displayItem[0];
+        //  string image = ""; // GetImageforMenu(item);
+        //}
+        #endregion
+
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("Load_Config(): Error setting views to GUIproperties: '" + ex.Message);
+      }
     }
 
     private void Refreshfacade()
@@ -17210,6 +17250,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Category", "");
       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Search", "");
       GUIPropertyManager.SetProperty("#OnlineVideos.startparams.Return", "");
+
+      MyFilmsDetail.setGUIProperty("views.count", "0");
 
       MyFilmsDetail.setGUIProperty("db.calc.aspectratio.label", GUILocalizeStrings.Get(10798697));
       MyFilmsDetail.setGUIProperty("db.calc.imageformat.label", GUILocalizeStrings.Get(10798698));
