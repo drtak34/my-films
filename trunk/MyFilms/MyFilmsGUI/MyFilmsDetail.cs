@@ -2381,7 +2381,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private List<KeyValuePair<string, string>> GetOnlineVideosViews()
     {
-      // check if we have already got them
+      // check if we have already got themargument (filestorage)
       if (onlineVideosViews.Count == 0)
       {
         // set path of config file, so we load user settings

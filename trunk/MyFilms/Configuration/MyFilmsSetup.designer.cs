@@ -4117,9 +4117,7 @@
       this.tbExternalPlayerStartParams.Name = "tbExternalPlayerStartParams";
       this.tbExternalPlayerStartParams.Size = new System.Drawing.Size(65, 20);
       this.tbExternalPlayerStartParams.TabIndex = 6;
-      this.ToolTip1.SetToolTip(this.tbExternalPlayerStartParams, "External Player start parameters.\r\n\r\nSupported placeholders:\r\n- %filename%\r\n- %fp" +
-        "s%\r\n- %root%\r\n- %drive%\r\n\r\nE.g. use %filename% as placeholder for the media file" +
-        " to be played.");
+      this.ToolTip1.SetToolTip(this.tbExternalPlayerStartParams, resources.GetString("tbExternalPlayerStartParams.ToolTip"));
       // 
       // tbExternalPlayerPath
       // 
