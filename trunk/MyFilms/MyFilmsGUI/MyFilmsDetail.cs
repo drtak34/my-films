@@ -2592,8 +2592,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         people.Actors.AddRange(movie.Actors);
         people.Directors.AddRange(movie.Directors);
         people.Writers.AddRange(movie.Writers);
-        people.Directors.AddRange(movie.Producers);
-
+        people.Producers.AddRange(movie.Producers);
         success = ExternalPlugins::TraktPlugin.GUI.GUICommon.ShowTraktExtMovieMenu(movie.Title, movie.Year.ToString(), movie.IMDBNumber, movie.Fanart, people, true);
       }
       catch (Exception ex)
@@ -2650,7 +2649,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       people.Directors.AddRange(movie.Directors);
       people.Writers.AddRange(movie.Writers);
       people.Directors.AddRange(movie.Producers);
-      ExternalPlugins::TraktPlugin.GUI.GUICommon.ShowSearchByMenu(people);
+      ExternalPlugins::TraktPlugin.GUI.GUICommon.ShowSearchByMenu(people, movie.Title, movie.Fanart);
     }
 
     private void TraktAddRemoveMovieInUserlist(MFMovie movie, bool remove)
