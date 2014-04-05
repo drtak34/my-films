@@ -724,7 +724,9 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         }
       #endregion
 
-      if (Verify_Config() == false) // check if config successful and if config should be saved - Also (re) imports the external catalog data
+      string verifyResult = "";
+
+      if (Verify_Config(ref verifyResult) == false) // check if config successful and if config should be saved - Also (re) imports the external catalog data
         return;
 
       if (AntTitle2.Text.Length == 0) AntTitle2.Text = "(none)";
@@ -1008,7 +1010,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       }
       //if (chkAMCUpd.Checked) Save_XML_AMCconfig(currentconfig);
       textBoxNBconfigs.Text = Config_Name.Items.Count.ToString();
-      MessageBox.Show("Configuration saved !", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+      MessageBox.Show("Configuration saved !\n\n" + verifyResult, "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private void SaveView(int index, MFview.ViewRow viewRow)
@@ -1999,7 +2001,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       MessageBox.Show("Give the Configuration's Name first !", "Control Configuration", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
       Config_Name.Focus();
     }
-    private bool Verify_Config()
+    private bool Verify_Config(ref string verifyResult)
     {
       if (MesFilmsCat.Text.Length > 0)
       {
@@ -2014,7 +2016,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           DataRow[] movies = mydivx.Movie.Select(StrDfltSelect + AntTitle1.Text + " not like ''");
           if (mydivx.Movie.Count > 0)
           {
-            if (movies.Length > 0) MessageBox.Show("Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'User defined Config Filter' configuration", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            if (movies.Length > 0)
+              verifyResult = "Your XML file is valid with " + mydivx.Movie.Count + " Movies in your database and " + movies.Length + " Movies to display with your 'User defined Config Filter' configuration";
             else MessageBox.Show("Your XML file is valid with 0 Movie in your database but no Movie to display, you have to change the 'User defined Config Filter' or fill your database with AMCUpdater, AMC or your compatible Software", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             if (IsAMC4AndHasInvalidCustomFields(mydivx)) MessageBox.Show("Your XML file seems to have CustomFields defined that are NOT supported by MyFilms ! Their content will get lost, if you continue!", "MyFilms Compatibility Warning", MessageBoxButtons.OK, MessageBoxIcon.Stop);
           }
@@ -5485,7 +5488,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void chkAMC_Purge_Missing_Files_CheckedChanged(object sender, EventArgs e)
     {
-      if (chkAMC_Purge_Missing_Files.Checked && !WizardActive && AMCGetAttribute("Purge_Missing_Files") != "true")
+      if (General.SelectedIndex == 5 && chkAMC_Purge_Missing_Files.Checked && !WizardActive && AMCGetAttribute("Purge_Missing_Files") != "true") // if the user is on the tab, show a security warning
       {
         if (MessageBox.Show("Are you sure, you want to purge records from your DB \n where media files are not accessible during AMC Updater scans ?", "Control Configuration", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
         {
