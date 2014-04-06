@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="OutputData" targetNamespace="http://tempuri.org/OutputData.xsd" xmlns:mstns="http://tempuri.org/OutputData.xsd" xmlns="http://tempuri.org/OutputData.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="OutputData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="OutputData" msprop:Generator_UserDSName="OutputData">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="OutputData" msprop:Generator_TableClassName="OutputDataDataTable" msprop:Generator_TableVarName="tableOutputData" msprop:Generator_TablePropName="_OutputData" msprop:Generator_RowDeletingName="OutputDataRowDeleting" msprop:Generator_RowChangingName="OutputDataRowChanging" msprop:Generator_RowEvHandlerName="OutputDataRowChangeEventHandler" msprop:Generator_RowDeletedName="OutputDataRowDeleted" msprop:Generator_UserTableName="OutputData" msprop:Generator_RowChangedName="OutputDataRowChanged" msprop:Generator_RowEvArgName="OutputDataRowChangeEvent" msprop:Generator_RowClassName="OutputDataRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OutputData_Id" msprop:Generator_ColumnVarNameInTable="columnOutputData_Id" msprop:Generator_ColumnPropNameInRow="OutputData_Id" msprop:Generator_ColumnPropNameInTable="OutputData_IdColumn" msprop:Generator_UserColumnName="OutputData_Id" type="xs:string" />
+              <xs:element name="Index" msprop:Generator_ColumnVarNameInTable="columnIndex" msprop:Generator_ColumnPropNameInRow="Index" msprop:Generator_ColumnPropNameInTable="IndexColumn" msprop:Generator_UserColumnName="Index" type="xs:int" default="-1" minOccurs="0" />
+              <xs:element name="FieldName" msprop:Generator_ColumnVarNameInTable="columnFieldName" msprop:Generator_ColumnPropNameInRow="FieldName" msprop:Generator_ColumnPropNameInTable="FieldNameColumn" msprop:Generator_UserColumnName="FieldName" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="OriginalResult" msprop:Generator_ColumnVarNameInTable="columnOriginalResult" msprop:Generator_ColumnPropNameInRow="OriginalResult" msprop:Generator_ColumnPropNameInTable="OriginalResultColumn" msprop:Generator_UserColumnName="OriginalResult" type="xs:string" default="" minOccurs="0" />
+              <xs:element name="FinalResult" msprop:Generator_ColumnVarNameInTable="columnFinalResult" msprop:Generator_ColumnPropNameInRow="FinalResult" msprop:Generator_ColumnPropNameInTable="FinalResultColumn" msprop:Generator_UserColumnName="FinalResult" type="xs:string" default="" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:OutputData" />
+      <xs:field xpath="mstns:OutputData_Id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
