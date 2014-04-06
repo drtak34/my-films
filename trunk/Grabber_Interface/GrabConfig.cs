@@ -3194,16 +3194,6 @@ namespace Grabber_Interface
                 labelImageSize.Text = "n/a";
                 //MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               }
-              try
-              {
-                pictureBoxPreviewCollection.ImageLocation = Path.Combine(Path.GetDirectoryName(Result[i]), "Collection_" + Path.GetFileName(Result[i]));
-                //FileInfo f = new FileInfo(Result[i]);
-                //labelImageSize.Text = this.ByteString(f.Length);
-              }
-              catch (Exception)
-              {
-                // labelImageSize.Text = "n/a";
-              }
             }
             break;
           case 3:
@@ -3349,6 +3339,16 @@ namespace Grabber_Interface
           case 38:
           case 78:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "CollectionImageURL'" + mapped + Environment.NewLine;
+            try
+            {
+              pictureBoxPreviewCollection.ImageLocation = Path.Combine(Path.GetDirectoryName(Result[i]), Path.GetFileName(Result[i]));
+              //FileInfo f = new FileInfo(Result[i]);
+              //labelImageSize.Text = this.ByteString(f.Length);
+            }
+            catch (Exception)
+            {
+              // labelImageSize.Text = "n/a";
+            }
             break;
           case 39:
           case 79:
