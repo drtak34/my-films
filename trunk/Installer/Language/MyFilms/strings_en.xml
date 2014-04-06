@@ -416,6 +416,7 @@
     <String id="10798968">Older than 3 Years</String>
     <String id="10798970">Global filter "choose custom filter" ({0})</String>
     <String id="10798971">Global filter "disable custom filter" ({0})</String>
+    <String id="10798979">Select random movie</String>
     <String id="10798980">Play random trailers</String>
     <String id="10798981">Trailer scrobbling</String>
     <String id="10798982">Play next trailer?</String>

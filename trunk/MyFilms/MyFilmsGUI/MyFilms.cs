@@ -360,6 +360,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       CTRL_BtnToggleGlobalUnwatchedStatus = 9,
       CTRL_BtnOnlineMovieLists = 10,
       //CTRL_TxtSelect = 12,
+      CTRL_BtnSelectRamdomMovie = 13,
       CTRL_Fanart = 11,
       CTRL_Fanart2 = 21,
       CTRL_LoadingImage = 22,
@@ -1562,7 +1563,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         default:
           if (action.m_key != null)
           {
-            if ((action.m_key.KeyChar == 112) && this.facadeFilms.Focus && !this.facadeFilms.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
+            if (action.m_key.KeyChar == 114 && this.facadeFilms.Focus) // 114 = "r" -> select random movie in current list
+            {
+              SelectRandomMovie();
+            }
+            if (action.m_key.KeyChar == 112 && this.facadeFilms.Focus && !this.facadeFilms.SelectedListItem.IsFolder) // 112 = "p", 120 = "x"
             {
               conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
               conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
@@ -1879,6 +1884,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               ToggleGlobalUnwatched();
               GUIControl.UnfocusControl(GetID, (int)Controls.CTRL_BtnToggleGlobalUnwatchedStatus);
               GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              break;
+            case (int)Controls.CTRL_BtnSelectRamdomMovie:
+              GUIControl.UnfocusControl(GetID, (int)Controls.CTRL_BtnSelectRamdomMovie);
+              GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+              SelectRandomMovie();
               break;
             case (int)Controls.CTRL_BtnLayout:
               Change_Layout();
@@ -11203,10 +11213,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             //// not yet implemented
             //dlg.Add(GUILocalizeStrings.Get(10798710) + " (TMDB)");//play trailer
-            //updChoice.Add("playtrailertmdb");
+            //choice.Add("playtrailertmdb");
 
             //dlg.Add(GUILocalizeStrings.Get(10798710) + " - All (TMDB)");//play trailer
-            //updChoice.Add("playtrailertmdball");
+            //choice.Add("playtrailertmdball");
+          }
+
+          if (this.facadeFilms.Count > 1) // not for single movie display ...
+          {
+            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: select random movie"))
+            {
+              dlg.Add(GUILocalizeStrings.Get(10798979)); // select random movie
+              choice.Add("selectrandommovie");
+            }
           }
 
           if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) // add or remove movie from/to box set (hierarchy)
@@ -11710,6 +11729,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "playrandomtrailers":  // only in views and intended for "multiple movies" // dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
           PlayRandomTrailersInit(facadeFilms.SelectedListItem.Label, "");
+          break;
+
+        case "selectrandommovie":  // only in views // dlg.Add(GUILocalizeStrings.Get(10798979)); // select random movie
+          SelectRandomMovie();
           break;
 
         case "downloadtrailertmdb":
@@ -14123,6 +14146,41 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return;
       }
       PlayRandomTrailer(false);
+    }
+
+    private void SelectRandomMovie()
+    {
+      if (facadeFilms.SelectedListItemIndex == -1 || facadeFilms.Count < 2 ||
+          !(conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection))
+      {
+        LogMyFilms.Warn("SelectRandomMovie() - invalid context - return without action!");
+        return;
+      }
+      
+      string currentLabel = conf.StrTIndex;
+      int currentIndex = conf.StrIndex;
+      // int iMoviesInList = r.Count();
+      int iMoviesInList = facadeFilms.Count;
+      LogMyFilms.Debug("SelectRandomMovie() - currentLabel = '" + currentLabel + "', Items in current View = '" + iMoviesInList + "'");
+
+      //Choose Random Movie from Resultlist
+      var rnd = new Random();
+      Int32 randomNumber = rnd.Next(iMoviesInList);
+      string randomTitle = facadeFilms[randomNumber].Label;
+      LogMyFilms.Debug("RandomNumber: '" + randomNumber + "', RandomTitle: '" + randomTitle + "'");
+
+      // set the focus to random selected movie ...
+      GUIControl.SelectItemControl(GetID, (int)Controls.CTRL_ListFilms, randomNumber);
+
+      // update current values
+      conf.StrIndex = this.facadeFilms.SelectedListItem.ItemId;
+      conf.StrTIndex = this.facadeFilms.SelectedListItem.Label;
+
+      //if (randomTitle.Length > 0 && randomTitle.Contains(MyFilms.conf.TitleDelim))
+      //{
+      //  randomTitle = randomTitle.Substring(randomTitle.LastIndexOf(MyFilms.conf.TitleDelim) + 1);
+      //}
+      //GetFilmList(randomTitle);
     }
 
     private void OnTrailerEnded(string filename)
