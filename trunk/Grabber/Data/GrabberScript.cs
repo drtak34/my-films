@@ -3,5 +3,8 @@
     
     
     public partial class GrabberScript {
+      partial class UserOptionsDataTable
+      {
+      }
     }
 }
