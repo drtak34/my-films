@@ -585,6 +585,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     // TMDB sort method
     private SortMethod _currentSortMethod = SortMethod.Date;
+    private string _currentSortDirection = " DESC";
 
     #endregion
 
@@ -595,6 +596,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       Date = 1,
       Rating = 2,
       Votes = 3
+    }
+
+    private enum SortDirection
+    {
+      Asc = 0,
+      Desc = 1
     }
 
     private enum MenuAction : int
@@ -1905,6 +1912,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ipage++;
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
+      movies.OrderByDescending(x => x.vote_count).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.release_date);
       watch.Stop();
       LogMyFilms.Debug("GetPopularMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
       return movies.AsEnumerable();
@@ -1927,7 +1935,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ipage++;
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
-      movies = movies.OrderByDescending(x => x.release_date).ToList();
+      // movies = movies.OrderByDescending(x => x.release_date).ToList();
+      movies.OrderByDescending(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count);
       watch.Stop();
       LogMyFilms.Debug("GetNowPlayingMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
       return movies.AsEnumerable();
@@ -1951,7 +1960,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ipage++;
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
-      movies = movies.OrderByDescending(x => x.vote_average).ToList();
+      // movies = movies.OrderByDescending(x => x.vote_average).ToList();
+      movies.OrderByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count).ThenByDescending(x => x.release_date);
       watch.Stop();
       LogMyFilms.Debug("GetTopRatedMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
       return movies.AsEnumerable();
@@ -1975,7 +1985,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ipage++;
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
-      movies = movies.OrderBy(x => x.release_date).ToList();
+      // movies = movies.OrderBy(x => x.release_date).ToList();
+      movies.OrderBy(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.release_date);
       watch.Stop();
       LogMyFilms.Debug("GetUpcomingMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
       return movies.AsEnumerable();
@@ -2023,9 +2034,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           movies.Add(item);
         }
       }
-      movies = movies.OrderByDescending(x => x.release_date).ToList();
+      // movies = movies.OrderByDescending(x => x.release_date).ToList();
+      movies.OrderByDescending(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count);
       watch.Stop();
       LogMyFilms.Debug("GetUpcomingMovies() - finished loading movies from TMDB, Total Results = '" + movies.Count + "', (" + (watch.ElapsedMilliseconds) + " ms)");
+
       return movies.AsEnumerable();
     }
 
@@ -4026,9 +4039,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             //BtnSrtBy.Label = (conf.BoolCollection) ? (GUILocalizeStrings.Get(96) + ((conf.StrSortaInHierarchies == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSortaInHierarchies))) : (GUILocalizeStrings.Get(96) + ((conf.StrSorta == conf.StrSTitle) ? GUILocalizeStrings.Get(103) : BaseMesFilms.TranslateColumn(conf.StrSorta)));
             //BtnSrtBy.IsAscending = (conf.BoolCollection) ? (conf.StrSortSensInHierarchies == " ASC") : (conf.StrSortSens == " ASC");
-            if (e.Order.ToString().Substring(0, 3).ToLower() == conf.StrSortSens.Trim().Substring(0, 3).ToLower())
+            if (e.Order.ToString().Substring(0, 3).ToLower() == _currentSortDirection.Trim().Substring(0, 3).ToLower())
               return;
-            conf.StrSortSens = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
+            _currentSortDirection = (BtnSrtBy.IsAscending) ? " ASC" : " DESC";
 
             SetLabels();
             facadeFilms.Sort(this);
@@ -4036,7 +4049,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception ex)
           {
-            Log.Error("TvRecorded: Error sorting items - {0}", ex.ToString());
+            Log.Error("SortChanged - TMDB Movies: Error sorting items - {0}", ex.ToString());
           }
           return;
 
@@ -4128,15 +4141,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          GUIListItem item1 = facadeFilms[i];
-          OnlineMovie onlineMovie = (OnlineMovie)item1.TVTag;
+          GUIListItem item = facadeFilms[i];
+          OnlineMovie onlineMovie = (OnlineMovie)item.TVTag;
 
           if (onlineMovie == null) continue;
 
           if (conf.StrLayOut == 0) // if list layout
           {
-            item1.Label2 = "";
-            item1.Label3 = "";
+            item.Label2 = "";
+            item.Label3 = "";
           }
 
           switch (_currentSortMethod)
@@ -4144,10 +4157,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             case SortMethod.Date:
               try
               {
-                string label = DateTime.Parse(onlineMovie.MovieSearchResult.release_date.ToString()).ToShortDateString();
+                string label = DateTime.Parse(onlineMovie.MovieSearchResult.release_date).ToShortDateString();
                 if (!String.IsNullOrEmpty(label))
                 {
-                  item1.Label2 = label;
+                  item.Label2 = label;
                 }
               }
               catch (Exception) { }
@@ -4158,7 +4171,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string label = onlineMovie.MovieSearchResult.vote_average.ToString("0.0");
                 if (!String.IsNullOrEmpty(label))
                 {
-                  item1.Label2 = label;
+                  item.Label2 = label;
                 }
               }
               catch (Exception) { }
@@ -4169,7 +4182,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 string label = onlineMovie.MovieSearchResult.vote_count.ToString();
                 if (!String.IsNullOrEmpty(label))
                 {
-                  item1.Label2 = label;
+                  item.Label2 = label;
                 }
               }
               catch (Exception) { }
@@ -4178,15 +4191,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             default:
               try
               {
-                string label = DateTime.Parse(onlineMovie.MovieSearchResult.release_date.ToString()).ToShortDateString();
+                string label = DateTime.Parse(onlineMovie.MovieSearchResult.release_date).ToShortDateString();
                 if (!String.IsNullOrEmpty(label))
                 {
-                  item1.Label2 = label;
+                  item.Label2 = label;
                 }
                 label = onlineMovie.MovieSearchResult.vote_average.ToString("0.0") + " (" + onlineMovie.MovieSearchResult.vote_count + ")";
                 if (!String.IsNullOrEmpty(label))
                 {
-                  item1.Label3 = label;
+                  item.Label3 = label;
                 }
               }
               catch (Exception) { }
@@ -4882,7 +4895,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
 
     //--------------------------------------------------------------------------------------------
-    //  Change Sort Option for films, vies or collections/groups
+    //  Change Sort Option for films, views or collections/groups
     //--------------------------------------------------------------------------------------------
     private void Change_Sort_Option_Menu()
     {
@@ -4913,7 +4926,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
 
         _currentSortMethod = (SortMethod)dlg.SelectedLabel;
-        BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
+
+        switch (_currentSortMethod)
+        {
+          case SortMethod.Name:
+          // case SortMethod.Date:
+            _currentSortDirection = " ASC";
+            break;
+          default:
+            _currentSortDirection = " DESC";
+            break;
+        }
+        BtnSrtBy.IsAscending = (_currentSortDirection == " ASC");
 
         try
         {
@@ -6097,6 +6121,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       BtnSrtBy.IsEnabled = allowSortchanges;
       _currentSortMethod = SortMethod.Date;
+      _currentSortDirection = " DESC";
       BtnSrtBy.IsAscending = false; // (conf.StrSortSens == " ASC");
       UpdateButtonStates();
 
@@ -6178,6 +6203,50 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             facadeFilms.Add(item);
             itemId++;
             #endregion
+          }
+          #endregion
+
+          #region do initial sorting
+          if (tmdBfunction == GUILocalizeStrings.Get(10798826)) // Popular Movies
+          {
+            _currentSortMethod = SortMethod.Votes;
+            _currentSortDirection = " DESC";
+          }
+          else if (tmdBfunction == GUILocalizeStrings.Get(10798827))  // Now Playing
+          {
+            _currentSortMethod = SortMethod.Date;
+            _currentSortDirection = " DESC";
+          }
+          else if (tmdBfunction == GUILocalizeStrings.Get(10798828))  // Top Rated
+          {
+            _currentSortMethod = SortMethod.Rating;
+            _currentSortDirection = " DESC";
+          }
+          else if (tmdBfunction == GUILocalizeStrings.Get(10798829))  // Upcoming Movies
+          {
+            _currentSortMethod = SortMethod.Date;
+            _currentSortDirection = " ASC";
+          }
+          else // it is a person movie list...
+          {
+            _currentSortMethod = SortMethod.Date;
+            _currentSortDirection = " DESC";
+          }
+
+          if (BtnSrtBy != null) BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
+
+          try
+          {
+            SetLabels();
+
+            // facadeFilms.Sort(this); // no sorting needed here, because list already sorted in pull method !
+
+            UpdateButtonStates();
+
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("Error sorting items - {0}", ex.ToString());
           }
           #endregion
 
