@@ -11891,6 +11891,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             MyFilms.conf.BoolVirtualPathBrowsing = !MyFilms.conf.BoolVirtualPathBrowsing;
             LogMyFilms.Debug("Context_Menu_Movie() : Option 'Use virtual Path Browsing' changed to " + MyFilms.conf.BoolVirtualPathBrowsing);
+            if (!MyFilms.conf.BoolVirtualPathBrowsing) MyFilms.conf.StrTitleSelect = "";
             Refreshfacade();
             break;
           }
