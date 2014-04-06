@@ -416,6 +416,7 @@
     <String id="10798968">Älter als 3 Jahre</String>
     <String id="10798970">Globaler Filter "Wähle Custom Filter" ({0})</String>
     <String id="10798971">Globaler Filter "Deaktiviere Custom Filter" ({0})</String>
+    <String id="10798979">Wähle zufälligen Film</String>
     <String id="10798980">Spiele zufällige Trailer dieser Ansicht</String>
     <String id="10798981">Trailer Scrobbling ...</String>
     <String id="10798982">Spiele nächsten Trailer ?</String>
@@ -470,7 +471,7 @@
     <String id="10799611">Die MyFilms Skindateien sind nicht kompatibel !</String>
     <String id="10799612">Aktuelle Version: </String>
     <String id="10799613">Benötigte Version: </String>
-    <String id="10799614">Die MyFilms Skindateien sollten aktualisiert werden um alle Features zu unterst�tzen !</String>
+    <String id="10799614">Die MyFilms Skindateien sollten aktualisiert werden um alle Features zu unterstützen !</String>
     <String id="10799615">Verwenden Sie ältere MyFilms Skindateien um diese Version zu nutzen !</String>
     <String id="10799616">Der aktuelle Skin unterstützt MyFilms nicht !</String>
     <String id="10799617">Fragen Sie den Skin Autor nach einem Update für MyFilms.</String>
