@@ -120,9 +120,14 @@
           <textYOff3>36</textYOff3>
           <textvisible3>yes</textvisible3> 
 
+          <textWidth2>375</textWidth2> 
+          <textpadding2>0</textpadding2> 
+          <textalign2>right</textalign2>
+
           <font2>font12</font2>
           <font3>font10</font3>
           <textureHeight>60</textureHeight>
+          <textureWidth>44</textureWidth>
           <keepaspectratio>yes</keepaspectratio>
 
           <textureFocus>bg_facade_line_focus.png</textureFocus>
