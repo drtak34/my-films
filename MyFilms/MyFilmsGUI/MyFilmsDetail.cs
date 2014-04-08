@@ -46,8 +46,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using ExternalPlugins::OnlineVideos.MediaPortal1;
 
   using WatTmdb.V3;
-
-  using grabber;
   using Grabber;
   using Grabber.TMDBv3;
 
@@ -5726,7 +5724,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                       if (dlgPrgrs != null) dlgPrgrs.SetLine(1, "Loading person images for '" + wttitle + "'");
                       if (dlgPrgrs != null) dlgPrgrs.SetLine(2, "");
 
-                      foreach (grabber.DbPersonInfo person in listemovies[0].Persons)
+                      foreach (Grabber.DbPersonInfo person in listemovies[0].Persons)
                       {
                         bool firstpersonimage = true;
                         bool onlysinglepersonimage = true;
