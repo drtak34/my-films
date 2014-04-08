@@ -61,9 +61,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using NLog.Targets;
 
   using WatTmdb.V3;
-
-  using grabber;
-
   using Action = MediaPortal.GUI.Library.Action;
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using ImageFast = MyFilmsPlugin.MyFilms.Utils.ImageFast;
@@ -317,6 +314,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private const string LogFileName = "MyFilms.log";  //log's filename
     private const string OldLogFileName = "MyFilms.old.log";  //log's old filename
+    private const string LogFileNameGrabber = "MyFilmsGrabber.log";  //log's filename
+    private const string OldLogFileNameGrabber = "MyFilmsGrabber.old.log";  //log's old filename
 
     //private BaseMesFilms films;
 
@@ -3017,7 +3016,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         IComparer myComparer = new AlphanumComparatorFast();
         string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
-        grabber.TheMoviedb tmdbapi = new grabber.TheMoviedb();
+        Grabber.TheMoviedb tmdbapi = new Grabber.TheMoviedb();
         TMDB.Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
         TMDB.TmdbConfiguration tmdbConf = api.GetConfiguration();
         TmdbPersonSearch personSearch = api.SearchPerson(conf.Wselectedlabel, 1);
@@ -5825,7 +5824,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       MatchCollection oMatches = oRegex.Matches(champselect);
       champselect = oMatches.Cast<Match>().Aggregate(champselect, (current, oMatch) => current.Replace(oMatch.Value, oRegexReplace.Replace(oMatch.Value, string.Empty)));
-      var wtab = new List<grabber.DbPersonInfo>();
+      var wtab = new List<Grabber.DbPersonInfo>();
 
       int wi;
       string[] sep = conf.ListSeparator;
@@ -17258,7 +17257,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       try
       {
-        var logFile = new FileInfo(Config.GetFile(Config.Dir.Log, LogFileName));
+        // myfilms log
+        FileInfo logFile = new FileInfo(Config.GetFile(Config.Dir.Log, LogFileName));
         if (logFile.Exists)
         {
           if (File.Exists(Config.GetFile(Config.Dir.Log, OldLogFileName)))
@@ -17267,10 +17267,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           logFile.CopyTo(Config.GetFile(Config.Dir.Log, OldLogFileName));
           logFile.Delete();
         }
+
+        // grabber log
+        FileInfo logFile2 = new FileInfo(Config.GetFile(Config.Dir.Log, LogFileNameGrabber));
+        if (logFile2.Exists)
+        {
+          if (File.Exists(Config.GetFile(Config.Dir.Log, OldLogFileNameGrabber)))
+            File.Delete(Config.GetFile(Config.Dir.Log, OldLogFileNameGrabber));
+
+          logFile2.CopyTo(Config.GetFile(Config.Dir.Log, OldLogFileNameGrabber));
+          logFile2.Delete();
+        }
       }
       catch (Exception) { }
 
-      var fileTarget = new FileTarget();
+      FileTarget fileTarget = new FileTarget();
       // Filter logFilter = new Filter(); // use to only log MyFilms messages ...
       fileTarget.FileName = Config.GetFile(Config.Dir.Log, LogFileName);
       fileTarget.Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss,fff} " +  // "${date:format=yyyy-mm-dd HH\\:mm\\:ss,fff} " + 
@@ -17286,6 +17297,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // ${threadname} - The name of the current thread.
 
       config.AddTarget("file", fileTarget);
+
+      FileTarget fileTarget2 = new FileTarget();
+      // Filter logFilter = new Filter(); // use to only log MyFilms messages ...
+      fileTarget2.FileName = Config.GetFile(Config.Dir.Log, LogFileNameGrabber);
+      fileTarget2.Layout = "${date:format=yyyy-MM-dd HH\\:mm\\:ss,fff} " +  // "${date:format=yyyy-mm-dd HH\\:mm\\:ss,fff} " + 
+        // "| ${qpc:normalize=true:difference=true:alignDecimalPoint=true:precision=3:seconds=true} " + 
+                          "${level:fixedLength=true:padding=5} [" +
+        //"[${threadname:fixedLength=true:padding=10} | " + 
+                          "${threadid:fixedLength=true:padding=3} | ${logger:fixedLength=true:padding=13:shortName=true} ]: " +
+                          "${message} ${exception:format=tostring}";
+      //"${qpc}";
+      // ${date:format=dd-MMM-yyyy HH\\:mm\\:ss,fff}
+      //${qpc:normalize=Boolean:difference=Boolean:alignDecimalPoint=Boolean:precision=Integer:seconds=Boolean}
+      // ${threadid} - The identifier of the current thread.
+      // ${threadname} - The name of the current thread.
+
+      config.AddTarget("file", fileTarget2);
+
+
 
       // Get current Log Level from MediaPortal 
       NLog.LogLevel logLevel;
@@ -17327,10 +17357,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       logLevel = LogLevel.Debug;
 #endif
 
-      var rule = new LoggingRule("MyFilms*", logLevel, fileTarget); // only push logging from namespace "MyFilms*" to log file
+      LoggingRule rule = new LoggingRule("MyFilms*", logLevel, fileTarget); // only push logging from namespace "MyFilms*" to log file
       config.LoggingRules.Add(rule);
-      var rule2 = new LoggingRule("Grabber*", logLevel, fileTarget); // add Grabber classes to logging
+      LoggingRule rule2 = new LoggingRule("Grabber*", logLevel, fileTarget2); // add Grabber classes to logging
       config.LoggingRules.Add(rule2);
+      LoggingRule rule3 = new LoggingRule("grabber*", logLevel, fileTarget2); // add TMDB grabber classes to logging
+      config.LoggingRules.Add(rule3);
 
       LogManager.Configuration = config;
     }

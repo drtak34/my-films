@@ -9,11 +9,12 @@ using System.Xml;
 using WatTmdb.V3;
 using NLog;
 
-namespace grabber
+namespace Grabber
 {
 
   public class DbMovieInfo
   {
+
     public DbMovieInfo()
     {
       // initialize the List objects ...
@@ -66,6 +67,8 @@ namespace grabber
 
   public class TheMoviedb
   {
+    private static Logger LogMyFilms = LogManager.GetCurrentClassLogger();
+
     private const string TmdbApiKey = "1e66c0cc99696feaf2ea56695e134eae";
     private const string ApiSearchMovie = "http://api.themoviedb.org/2.1/Movie.search/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
     private const string ApiSearchMovieByImdb = "http://api.themoviedb.org/2.1/Movie.imdbLookup/en/xml/1e66c0cc99696feaf2ea56695e134eae/"; // add tt-nbr to search for movie ... tt0137523
@@ -121,7 +124,7 @@ namespace grabber
 
       Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
       // TmdbConfiguration tmdbConf = api.GetConfiguration();
-      
+
       try
       {
         if (!string.IsNullOrEmpty(imdbid) && imdbid.Contains("tt"))
@@ -164,7 +167,9 @@ namespace grabber
           foreach (TmdbMovie movieResult in movies)
           {
             DbMovieInfo movie = GetMovieInformation(api, movieResult, language);
-            if (movie != null && Grabber.GrabUtil.normalizeTitle(movie.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
+            if (movie != null &&
+                Grabber.GrabUtil.normalizeTitle(movie.Name.ToLower())
+                  .Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
               if (year > 0 && movie.Year > 0 && !choose)
               {
                 if ((year >= movie.Year - 2) && (year <= movie.Year + 2))
@@ -177,7 +182,10 @@ namespace grabber
         }
 
       }
-      catch {}
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug(ex.StackTrace);
+      }
 
 
 
@@ -271,6 +279,8 @@ namespace grabber
 
     private static DbMovieInfo GetMovieInformation(Tmdb api, TmdbMovie movieNode, string language)
     {
+      LogMyFilms.Debug("GetMovieInformation()");
+
       if (movieNode == null) return null;
       DbMovieInfo movie = new DbMovieInfo();
 
@@ -387,7 +397,7 @@ namespace grabber
       }
       catch (Exception ex)
       {
-        string message = ex.Message;
+        LogMyFilms.Debug(ex.StackTrace);
       }
       return movie;
     }
