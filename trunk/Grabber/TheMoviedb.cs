@@ -1,16 +1,34 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Text;
 using System.Xml;
 using WatTmdb.V3;
+using NLog;
 
 namespace grabber
 {
-  using System.Linq;
 
   public class DbMovieInfo
   {
+    public DbMovieInfo()
+    {
+      // initialize the List objects ...
+      Posters = new List<string>();
+      Backdrops = new List<string>();
+      Languages = new List<string>();
+      Producers = new List<string>();
+      Directors = new List<string>();
+      Writers = new List<string>();
+      Actors = new List<string>();
+      Country = new List<string>();
+      Genres = new List<string>();
+      Persons = new List<DbPersonInfo>();
+    }
+
     public string Identifier { get; set; }
     public string Name { get; set; }
     public string TranslatedTitle { get; set; }
@@ -54,22 +72,16 @@ namespace grabber
     private const string ApiGetMovieInfo = "http://api.themoviedb.org/2.1/Movie.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
     private const string ApiGetPersonInfo = "http://api.themoviedb.org/2.1/Person.getInfo/en/xml/1e66c0cc99696feaf2ea56695e134eae/";
 
-
-    public List<DbMovieInfo> GetMoviesByTitles(string title, string ttitle, int year, string director, string imdbid, bool choose)
+    public List<DbMovieInfo> GetMoviesByTitles(string title, string ttitle, int year, string director, string imdbid, string tmdbid, bool choose, string language)
     {
-      return GetMoviesByTitles(title, ttitle, year, director, imdbid, choose, "en"); // set "en" as default
-    }
-
-    public List<DbMovieInfo> GetMoviesByTitles(string title, string ttitle, int year, string director, string imdbid, bool choose, string language)
-    {
-      List<DbMovieInfo> results = GetMoviesByTitle(title, year, director, imdbid, choose, language);
+      List<DbMovieInfo> results = GetMoviesByTitle(title, year, director, imdbid, tmdbid, choose, language);
       if (results.Count == 1)
         return results;
-      List<DbMovieInfo> results2 = GetMoviesByTitle(ttitle, year, director, imdbid, choose, language);
+      List<DbMovieInfo> results2 = GetMoviesByTitle(ttitle, year, director, imdbid, tmdbid, choose, language);
       return results2.Count == 1 ? results2 : results;
     }
 
-    public List<DbMovieInfo> GetMoviesByTitle(string title, int year, string director, string imdbid, bool choose, string language)
+    private List<DbMovieInfo> GetMoviesByTitle(string title, int year, string director, string imdbid, string tmdbid, bool choose, string language)
     {
       //title = Grabber.GrabUtil.normalizeTitle(title);
       string apiSearchLanguage = ApiSearchMovie;
@@ -86,10 +98,25 @@ namespace grabber
         language = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
       }
 
-      var results = new List<DbMovieInfo>();
-      var resultsdet = new List<DbMovieInfo>();
+      List<DbMovieInfo> results = new List<DbMovieInfo>();
+      List<DbMovieInfo> resultsdet = new List<DbMovieInfo>();
       XmlNodeList xml = null;
       List<TmdbMovie> movies = new List<TmdbMovie>();
+
+
+      //Tmdb api = new Tmdb(TmdbApiKey, CultureInfo.CurrentCulture.Name.Substring(0, 2)); // language is optional, default is "en"
+      //TmdbConfiguration tmdbConf = api.GetConfiguration();
+      //TmdbMovieSearch tmdbMovies = api.SearchMovie(searchname, 0, language, 2012);
+      //TmdbPersonSearch tmdbPerson = api.SearchPerson(personname, 1);
+      //List<MovieResult> persons = tmdbMovies.results;
+      //if (persons != null && persons.Count > 0)
+      //{
+      //  PersonResult pinfo = persons[0];
+      //  TmdbPerson singleperson = api.GetPersonInfo(pinfo.id);
+      //  // TMDB.TmdbPersonImages images = api.GetPersonImages(pinfo.id);
+      //  // TMDB.TmdbPersonCredits personFilmList = api.GetPersonCredits(pinfo.id);
+      //}
+
 
 
       Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
@@ -154,6 +181,9 @@ namespace grabber
 
 
 
+
+      // ToDo: Adapt to TMDBv3 API methods
+
       if (!string.IsNullOrEmpty(imdbid))
         xml = GetXml(ApiSearchMovieByImdb + imdbid);
       if (xml == null) // if imdb search was unsuccessful use normal search...
@@ -210,7 +240,6 @@ namespace grabber
       return resultsdet.Count > 0 ? resultsdet : results;
     }
 
-
     public DbPersonInfo GetPersonsById(string id, string language)
     {
       DbPersonInfo result = new DbPersonInfo();
@@ -243,129 +272,123 @@ namespace grabber
     private static DbMovieInfo GetMovieInformation(Tmdb api, TmdbMovie movieNode, string language)
     {
       if (movieNode == null) return null;
+      DbMovieInfo movie = new DbMovieInfo();
 
-      var producers = new List<string>();
-      var directors = new List<string>();
-      var writers = new List<string>();
-      var actors = new List<string>();
-      var backdrops = new List<string>();
-      var posters = new List<string>();
-      var persons = new List<DbPersonInfo>();
-      var movie = new DbMovieInfo();
-
-      TmdbMovie m = api.GetMovieInfo(movieNode.id);
-
-      movie.Identifier = m.id.ToString();
-      movie.ImdbId = m.imdb_id;
-      movie.Name = m.original_title;
-      movie.TranslatedTitle = m.title;
-      movie.AlternativeTitle = m.original_title;
-      DateTime date;
-      if (DateTime.TryParse(m.release_date, out date))
-        movie.Year = date.Year;
-      movie.DetailsUrl = m.homepage;
-      movie.Summary = m.overview;
-      movie.Score = (float) Math.Round(m.vote_average, 1);
-      // movie.Certification = "";
-      foreach (SpokenLanguage spokenLanguage in m.spoken_languages)
+      try
       {
-        movie.Languages.Add(spokenLanguage.name);
-      }
-      movie.Runtime = m.runtime;
+        TmdbMovie m = api.GetMovieInfo(movieNode.id);
 
-      TmdbMovieCast p = api.GetMovieCast(movieNode.id);
-
-      foreach (Cast cast in p.cast)
-      {
-        string name = cast.name;
-        string character = cast.character;
-        string id = cast.id.ToString();
-        string url = cast.profile_path;
-        var personToAdd = new DbPersonInfo {Id = id, Name = name, DetailsUrl = url};
-        movie.Persons.Add(personToAdd);
-
-        if (character.Length > 0) name = name + " (" + character + ")";
-        movie.Actors.Add(name);
-      }
-
-      foreach (Crew crew in p.crew)
-      {
-        var personToAdd = new DbPersonInfo {Id = crew.id.ToString(), Name = crew.name, DetailsUrl = crew.profile_path};
-        movie.Persons.Add(personToAdd);
-        switch (crew.department)
+        movie.Identifier = m.id.ToString();
+        movie.ImdbId = m.imdb_id;
+        movie.Name = m.original_title;
+        movie.TranslatedTitle = m.title;
+        movie.AlternativeTitle = m.original_title;
+        DateTime date;
+        if (DateTime.TryParse(m.release_date, out date))
+          movie.Year = date.Year;
+        movie.DetailsUrl = m.homepage;
+        movie.Summary = m.overview;
+        movie.Score = (float)Math.Round(m.vote_average, 1);
+        // movie.Certification = "";
+        foreach (SpokenLanguage spokenLanguage in m.spoken_languages)
         {
-          case "Production":
-            movie.Producers.Add(crew.name);
-            break;
-          case "Directing":
-            movie.Directors.Add(crew.name);
-            break;
-          case "Writing":
-            movie.Writers.Add(crew.name);
-            break;
-          case "Sound":
-          case "Camera":
-            break;
+          movie.Languages.Add(spokenLanguage.name);
+        }
+        movie.Runtime = m.runtime;
+
+        TmdbMovieCast p = api.GetMovieCast(movieNode.id);
+
+        foreach (Cast cast in p.cast)
+        {
+          string name = cast.name;
+          string character = cast.character;
+          DbPersonInfo personToAdd = new DbPersonInfo { Id = cast.id.ToString(), Name = cast.name, DetailsUrl = cast.profile_path };
+          movie.Persons.Add(personToAdd);
+
+          if (character.Length > 0) name = name + " (" + character + ")";
+          movie.Actors.Add(name);
+        }
+
+        foreach (Crew crew in p.crew)
+        {
+          DbPersonInfo personToAdd = new DbPersonInfo { Id = crew.id.ToString(), Name = crew.name, DetailsUrl = crew.profile_path };
+          movie.Persons.Add(personToAdd);
+          switch (crew.department)
+          {
+            case "Production":
+              movie.Producers.Add(crew.name);
+              break;
+            case "Directing":
+              movie.Directors.Add(crew.name);
+              break;
+            case "Writing":
+              movie.Writers.Add(crew.name);
+              break;
+            case "Sound":
+            case "Camera":
+              break;
+          }
+        }
+
+        foreach (Cast cast in p.cast)
+        {
+          string name = cast.name;
+          string character = cast.character;
+          string thumb = cast.profile_path;
+          string job = cast.character;
+          string id = cast.id.ToString();
+          string url = cast.profile_path;
+          var personToAdd = new DbPersonInfo { Id = id, Name = name, DetailsUrl = url, Job = job };
+          movie.Persons.Add(personToAdd);
+          switch (job)
+          {
+            case "Producer":
+              movie.Producers.Add(name);
+              break;
+            case "Director":
+              movie.Directors.Add(name);
+              break;
+            case "Actor":
+              if (character.Length > 0)
+                name = name + " (" + character + ")";
+              movie.Actors.Add(name);
+              break;
+            case "Screenplay":
+              movie.Writers.Add(name);
+              break;
+          }
+        }
+        foreach (ProductionCountry country in m.production_countries)
+        {
+          movie.Country.Add(country.name);
+        }
+        foreach (MovieGenre genre in m.genres)
+        {
+          movie.Country.Add(genre.name);
+        }
+
+        TmdbConfiguration tmdbConf = api.GetConfiguration();
+
+        TmdbMovieImages movieImages = api.GetMovieImages(movieNode.id, language);
+        if (movieImages.posters.Count == 0)
+        {
+          movieImages = api.GetMovieImages(movieNode.id, null); // fallback to non language sopecific images
+        }
+
+        foreach (Poster poster in movieImages.posters)
+        {
+          movie.Posters.Add(tmdbConf.images.base_url + "w500" + poster.file_path);
+        }
+
+        foreach (Backdrop backdrop in movieImages.backdrops)
+        {
+          movie.Backdrops.Add(tmdbConf.images.base_url + "original" + backdrop.file_path);
         }
       }
-
-      foreach (Cast cast in p.cast)
+      catch (Exception ex)
       {
-        string name = cast.name;
-        string character = cast.character;
-        string thumb = cast.profile_path;
-        string job = cast.character;
-        string id = cast.id.ToString();
-        string url = cast.profile_path;
-        var personToAdd = new DbPersonInfo {Id = id, Name = name, DetailsUrl = url, Job = job};
-        persons.Add(personToAdd);
-        switch (job)
-        {
-          case "Producer":
-            producers.Add(name);
-            break;
-          case "Director":
-            directors.Add(name);
-            break;
-          case "Actor":
-            if (character.Length > 0)
-              name = name + " (" + character + ")";
-            actors.Add(name);
-            break;
-          case "Screenplay":
-            writers.Add(name);
-            break;
-        }
+        string message = ex.Message;
       }
-      foreach (ProductionCountry country in m.production_countries)
-      {
-        movie.Country.Add(country.name);
-      }
-      foreach (MovieGenre genre in m.genres)
-      {
-        movie.Country.Add(genre.name);
-      }
-
-
-      TmdbConfiguration tmdbConf = api.GetConfiguration();
-
-
-      TmdbMovieImages movieImages = api.GetMovieImages(movieNode.id, language);
-      if (movieImages.posters.Count == 0)
-      {
-        movieImages = api.GetMovieImages(movieNode.id, null);
-      }
-
-      foreach (Poster poster in movieImages.posters)
-      {
-        movie.Posters.Add(tmdbConf.images.base_url + "w500" + poster.file_path);
-      }
-
-      foreach (Backdrop backdrop in movieImages.backdrops)
-      {
-        movie.Backdrops.Add(tmdbConf.images.base_url + "original" + backdrop.file_path);
-      }
-
       return movie;
     }
 
