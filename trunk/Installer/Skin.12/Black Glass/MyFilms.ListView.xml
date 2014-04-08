@@ -68,7 +68,7 @@
       <animation effect="fade" time="250">WindowOpen</animation>
     </control>
     <control>
-      <description>Bography</description>
+      <description>Biography</description>
       <type>textboxscrollup</type>
       <id>0</id>
       <posX>30</posX>
