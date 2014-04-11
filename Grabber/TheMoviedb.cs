@@ -14,7 +14,6 @@ namespace Grabber
 
   public class DbMovieInfo
   {
-
     public DbMovieInfo()
     {
       // initialize the List objects ...
@@ -55,6 +54,11 @@ namespace Grabber
 
   public class DbPersonInfo
   {
+    public DbPersonInfo()
+    {
+      Images = new List<string>();
+    }
+
     public string Id { get; set; }
     public string Name { get; set; }
     public string Job { get; set; }
@@ -86,24 +90,30 @@ namespace Grabber
 
     private List<DbMovieInfo> GetMoviesByTitle(string title, int year, string director, string imdbid, string tmdbid, bool choose, string language)
     {
+      LogMyFilms.Debug("GetMoviesByTitle - title = '" + title + "', year = '" + year + "', imdbid = '" + imdbid + "', tmdbid = '" + tmdbid + "', choose = '" + choose + "', language = '" + language + "'");
+
       //title = Grabber.GrabUtil.normalizeTitle(title);
-      string apiSearchLanguage = ApiSearchMovie;
-      string apiGetMovieInfoLanguage = ApiGetMovieInfo;
-      if (language.Length == 2)
-      {
-        apiSearchLanguage = ApiSearchMovie.Replace("/en/", "/" + language + "/");
-        apiGetMovieInfoLanguage = ApiGetMovieInfo.Replace("/en/", "/" + language + "/");
-      }
-      else
-      {
-        apiSearchLanguage = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
-        apiGetMovieInfoLanguage = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
+
+      //string apiSearchLanguage = ApiSearchMovie;
+      //string apiGetMovieInfoLanguage = ApiGetMovieInfo;
+      //if (language.Length == 2)
+      //{
+      //  apiSearchLanguage = ApiSearchMovie.Replace("/en/", "/" + language + "/");
+      //  apiGetMovieInfoLanguage = ApiGetMovieInfo.Replace("/en/", "/" + language + "/");
+      //}
+      //else
+      //{
+      //  apiSearchLanguage = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
+      //  apiGetMovieInfoLanguage = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
+      //  language = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
+      //}
+
+      if (language.Length != 2)
         language = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
-      }
 
       List<DbMovieInfo> results = new List<DbMovieInfo>();
       List<DbMovieInfo> resultsdet = new List<DbMovieInfo>();
-      XmlNodeList xml = null;
+      // XmlNodeList xml = null; // old API2.1 xml structure
       List<TmdbMovie> movies = new List<TmdbMovie>();
 
 
@@ -167,9 +177,7 @@ namespace Grabber
           foreach (TmdbMovie movieResult in movies)
           {
             DbMovieInfo movie = GetMovieInformation(api, movieResult, language);
-            if (movie != null &&
-                Grabber.GrabUtil.normalizeTitle(movie.Name.ToLower())
-                  .Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
+            if (movie != null && Grabber.GrabUtil.normalizeTitle(movie.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
               if (year > 0 && movie.Year > 0 && !choose)
               {
                 if ((year >= movie.Year - 2) && (year <= movie.Year + 2))
@@ -187,81 +195,88 @@ namespace Grabber
         LogMyFilms.Debug(ex.StackTrace);
       }
 
+      #region old TMDB APIv2.1 code
+      //if (!string.IsNullOrEmpty(imdbid))
+      //  xml = GetXml(ApiSearchMovieByImdb + imdbid);
+      //if (xml == null) // if imdb search was unsuccessful use normal search...
+      //  xml = GetXml(apiSearchLanguage + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()).Replace(" ", "+"));
+
+      //if (xml == null)
+      //  return results;
+
+      //XmlNodeList movieNodes = xml.Item(0).SelectNodes("//movie");
+      //foreach (XmlNode node in movieNodes)
+      //{
+      //  DbMovieInfo movie = GetMovieInformation(node);
+      //  if (movie != null && Grabber.GrabUtil.normalizeTitle(movie.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
+      //    if (year > 0 && movie.Year > 0 && !choose)
+      //    {
+      //      if ((year >= movie.Year - 2) && (year <= movie.Year + 2))
+      //        results.Add(movie);
+      //    }
+      //    else
+      //      results.Add(movie);
+      //}
 
 
+      //if (results.Count > 0)
+      //{
+      //  // Replace non-descriptive characters with spaces
+      //  director = System.Text.RegularExpressions.Regex.Replace(director, "( et | and | & | und )", ",");
+      //  if (director.IndexOf(",", System.StringComparison.Ordinal) > 0) 
+      //    director = director.Substring(0, director.IndexOf(",", System.StringComparison.Ordinal));
+      //  foreach (DbMovieInfo movie in results.Where(movie => movie.Identifier != null))
+      //  {
+      //    try { xml = GetXml(apiGetMovieInfoLanguage + movie.Identifier); }
+      //    catch { xml = null; }
+      //    if (xml != null)
+      //    {
+      //      movieNodes = xml.Item(0).SelectNodes("//movie");
+      //      foreach (DbMovieInfo movie2 in from XmlNode node in movieNodes select GetMovieInformation(node))
+      //      {
+      //        if (movie2 != null && Grabber.GrabUtil.normalizeTitle(movie2.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())) && movie2.Directors.Contains(director))
+      //          if (year > 0 && movie2.Year > 0 && !choose)
+      //          {
+      //            if ((year >= movie2.Year - 2) && (year <= movie2.Year + 2))
+      //              resultsdet.Add(movie2);
+      //          }
+      //          else
+      //            resultsdet.Add(movie2);
+      //        else
+      //          if (choose)
+      //            resultsdet.Add(movie2);
+      //      }
+      //    }
+      //  }
+      //}
+      #endregion
 
-      // ToDo: Adapt to TMDBv3 API methods
-
-      if (!string.IsNullOrEmpty(imdbid))
-        xml = GetXml(ApiSearchMovieByImdb + imdbid);
-      if (xml == null) // if imdb search was unsuccessful use normal search...
-        xml = GetXml(apiSearchLanguage + Grabber.GrabUtil.RemoveDiacritics(title.Trim().ToLower()).Replace(" ", "+"));
-
-      if (xml == null)
-        return results;
-
-      XmlNodeList movieNodes = xml.Item(0).SelectNodes("//movie");
-      foreach (XmlNode node in movieNodes)
-      {
-        DbMovieInfo movie = GetMovieInformation(node);
-        if (movie != null && Grabber.GrabUtil.normalizeTitle(movie.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())))
-          if (year > 0 && movie.Year > 0 && !choose)
-          {
-            if ((year >= movie.Year - 2) && (year <= movie.Year + 2))
-              results.Add(movie);
-          }
-          else
-            results.Add(movie);
-      }
-
-
-      if (results.Count > 0)
-      {
-        // Replace non-descriptive characters with spaces
-        director = System.Text.RegularExpressions.Regex.Replace(director, "( et | and | & | und )", ",");
-        if (director.IndexOf(",", System.StringComparison.Ordinal) > 0) 
-          director = director.Substring(0, director.IndexOf(",", System.StringComparison.Ordinal));
-        foreach (DbMovieInfo movie in results.Where(movie => movie.Identifier != null))
-        {
-          try { xml = GetXml(apiGetMovieInfoLanguage + movie.Identifier); }
-          catch { xml = null; }
-          if (xml != null)
-          {
-            movieNodes = xml.Item(0).SelectNodes("//movie");
-            foreach (DbMovieInfo movie2 in from XmlNode node in movieNodes select GetMovieInformation(node))
-            {
-              if (movie2 != null && Grabber.GrabUtil.normalizeTitle(movie2.Name.ToLower()).Contains(Grabber.GrabUtil.normalizeTitle(title.ToLower())) && movie2.Directors.Contains(director))
-                if (year > 0 && movie2.Year > 0 && !choose)
-                {
-                  if ((year >= movie2.Year - 2) && (year <= movie2.Year + 2))
-                    resultsdet.Add(movie2);
-                }
-                else
-                  resultsdet.Add(movie2);
-              else
-                if (choose)
-                  resultsdet.Add(movie2);
-            }
-          }
-        }
-      }
       return resultsdet.Count > 0 ? resultsdet : results;
     }
 
     public DbPersonInfo GetPersonsById(string id, string language)
     {
-      DbPersonInfo result = new DbPersonInfo();
-      string apiGetPersonInfoLanguage = language.Length == 2 ? ApiGetPersonInfo.Replace("/en/", "/" + language + "/") : ApiGetPersonInfo;
-      
-      XmlNodeList xml = GetXml(apiGetPersonInfoLanguage + id);
-      if (xml == null) return result;
+      Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
 
-      XmlNodeList personNodes = xml.Item(0).SelectNodes("//person");
-      foreach (DbPersonInfo person in personNodes.Cast<XmlNode>().Select(node => GetPersonInformation(node)).Where(person => person != null))
-      {
-        result = person;
-      }
+      if (language.Length != 2)
+        language = CultureInfo.CurrentCulture.Name.Substring(0, 2); // use local language instead 
+
+      TmdbPerson singleperson = api.GetPersonInfo(int.Parse(id));
+
+      DbPersonInfo result = GetPersonInformation(api, singleperson, language);
       return result;
+      
+      //string apiGetPersonInfoLanguage = language.Length == 2 ? ApiGetPersonInfo.Replace("/en/", "/" + language + "/") : ApiGetPersonInfo;
+      
+      //XmlNodeList xml = GetXml(apiGetPersonInfoLanguage + id);
+      //if (xml == null) return result;
+
+      //XmlNodeList personNodes = xml.Item(0).SelectNodes("//person");
+      //foreach (DbPersonInfo person in personNodes.Cast<XmlNode>().Select(node => GetPersonInformation(node)).Where(person => person != null))
+      //{
+      //  result = person;
+      //}
+      //return result;
     }
 
     private XmlNodeList GetXml(string url)
@@ -388,6 +403,11 @@ namespace Grabber
         foreach (Poster poster in movieImages.posters)
         {
           movie.Posters.Add(tmdbConf.images.base_url + "w500" + poster.file_path);
+        }
+
+        if (movieImages.backdrops.Count == 0)
+        {
+          movieImages = api.GetMovieImages(movieNode.id, null); // fallback to non language sopecific images
         }
 
         foreach (Backdrop backdrop in movieImages.backdrops)
@@ -548,6 +568,51 @@ namespace Grabber
       return movie;
     }
 
+    private static DbPersonInfo GetPersonInformation(Tmdb api, TmdbPerson personNode, string language)
+    {
+      LogMyFilms.Debug("GetPersonInformation()");
+
+      if (personNode == null) return null;
+
+      List<string> images = new List<string>();
+      DbPersonInfo person = new DbPersonInfo();
+
+      try
+      {
+        TmdbPerson m = api.GetPersonInfo(personNode.id);
+
+        person.Id = m.id.ToString();
+        person.Name = m.name;
+        person.Biography = m.biography;
+        person.Birthday = m.birthday;
+        person.Birthplace = m.place_of_birth;
+        person.DetailsUrl = m.homepage;
+
+        TmdbPersonCredits p = api.GetPersonCredits(personNode.id);
+
+        foreach (CastCredit cast in p.cast)
+        {
+        }
+
+        foreach (CrewCredit crew in p.crew)
+        {
+        }
+
+        TmdbConfiguration tmdbConf = api.GetConfiguration();
+
+        TmdbPersonImages personImages = api.GetPersonImages(personNode.id);
+        foreach (PersonImageProfile imageProfile in personImages.profiles)
+        {
+          person.Images.Add(tmdbConf.images.base_url + "w500" + imageProfile.file_path);
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug(ex.StackTrace);
+      }
+      return person;
+    }
+
     private static DbPersonInfo GetPersonInformation(XmlNode personNode)
     {
       if (personNode == null)
@@ -556,8 +621,8 @@ namespace Grabber
       if (personNode.ChildNodes.Count < 2 || personNode.Name != "person")
         return null;
 
-      var images = new List<string>();
-      var person = new DbPersonInfo();
+      List<string> images = new List<string>();
+      DbPersonInfo person = new DbPersonInfo();
       foreach (XmlNode node in personNode.ChildNodes)
       {
         string value = node.InnerText;
