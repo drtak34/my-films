@@ -1339,6 +1339,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public override void OnAction(Action action)
     {
       LogMyFilms.Debug("OnAction() -  " + action.wID);
+      if (action.m_key != null) LogMyFilms.Debug("action.m_key.KeyChar = '" + action.m_key.KeyChar + "'");
+
       switch (action.wID)
       {
         case Action.ActionType.ACTION_MOVE_LEFT:
