@@ -1,8 +1,8 @@
 Imports System.Windows.Forms
 Imports System.Globalization
 Imports Grabber
-Imports Cornerstone.Tools
 Imports System.Xml
+Imports Grabber.Util
 
 Public Class AntRecord
     'Inherits Xml.XmlElement
