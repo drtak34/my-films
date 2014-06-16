@@ -86,14 +86,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Externals\GoogleTranslateAPI.dll</HintPath>
     </Reference>
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\Externals\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="Jurassic">
       <HintPath>..\packages\Jurassic.2.2.0\lib\Jurassic.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -129,6 +130,8 @@
       <DependentUpon>OutputData.xsd</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DbMovieInfo.cs" />
+    <Compile Include="DbPersonInfo.cs" />
     <Compile Include="Grab.cs" />
     <Compile Include="Data\GrabberScript.cs">
       <DependentUpon>GrabberScript.xsd</DependentUpon>
@@ -188,6 +191,8 @@
     <Compile Include="TMDBv3\Utility.cs" />
     <Compile Include="TMDBv3\WatJsonDeserializer.cs" />
     <Compile Include="TranslateProvider\TranslateProvider.cs" />
+    <Compile Include="Updater.cs" />
+    <Compile Include="Util\AdvancedStringComparer.cs" />
     <Compile Include="WebGrabber.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,7 +229,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="LocalMedia\" />
-    <Folder Include="Util\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\GrabberScript.xsc">
