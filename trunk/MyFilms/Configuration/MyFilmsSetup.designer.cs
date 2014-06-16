@@ -4293,7 +4293,8 @@
             "XBMC (V10.0)",
             "MovingPicturesXML (V1.2 process plugin)",
             "Ant Movie Catalog Xtended (V4.1)",
-            "XBMC nfo reader"});
+            "XBMC nfo reader",
+            "Mediabrowser 3"});
       this.CatalogType.Location = new System.Drawing.Point(533, 14);
       this.CatalogType.Name = "CatalogType";
       this.CatalogType.Size = new System.Drawing.Size(194, 21);

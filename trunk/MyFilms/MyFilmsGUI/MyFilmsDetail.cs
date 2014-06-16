@@ -21,6 +21,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
+using WakeOnLanManager = MyFilmsPlugin.MyFilms.Utils.WakeOnLanManager;
+
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   extern alias ExternalPlugins;
@@ -53,7 +55,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using MediaPortal;
   using MediaPortal.Dialogs;
   using MediaPortal.GUI.Library;
-  using MediaPortal.GUI.Video;
   using MediaPortal.Player;
   using MediaPortal.Playlists;
   using MediaPortal.Profile;
@@ -70,6 +71,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using GUILocalizeStrings = MyFilmsPlugin.MyFilms.Utils.GUILocalizeStrings;
   using MediaInfo = Grabber.MediaInfo;
   using Utils = MediaPortal.Util.Utils;
+  using WakeOnLanManager = MyFilmsPlugin.MyFilms.Utils.WakeOnLanManager;
 
   
   /// <summary>

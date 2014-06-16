@@ -131,6 +131,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
         //CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
         //CatalogType.Items.Remove("Ant Movie Catalog Xtended (V4.1)");
+        CatalogType.Items.Remove("Mediabrowser 3");
         CatalogType.Items.Remove("XBMC nfo reader");
         //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
         //CatalogType.Items.RemoveAt(8); // XBMC nfo reader (deparate files)
@@ -3158,6 +3159,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
               var nfo = new XbmcNfo();
               mydivx.ReadXml(nfo.ConvertXbmcNfo(MesFilmsCat.Text, MesFilmsImg.Text, destinationTagline, destinationTags, destinationCertification, destinationWriter, AntStorage.Text, chkDVDprofilerOnlyFile.Checked, TitleDelim.Text));
               break;
+            //case 12: // Mediabrowser 3 server import
+            //  destFile = MesFilmsCat.Text.Substring(0, MesFilmsCat.Text.Length - 4) + "_tmp.xml";
+            //  if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(MesFilmsCat.Text))))
+            //  {
+            //    mydivx.ReadXml(destFile);
+            //    break;
+            //  }
+            //  var mb3 = new Mediabrowser();
+            //  mydivx.ReadXml(mb3.ConvertMediabrowser(MesFilmsCat.Text, MesFilmsImg.Text, destinationTagline, destinationTags, destinationCertification, destinationWriter));
+            //  break;
           }
 
         }
