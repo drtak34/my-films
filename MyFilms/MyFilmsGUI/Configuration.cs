@@ -65,7 +65,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       XBMC = 8,
       MovingPicturesXML = 9,
       AntMovieCatalog4Xtended = 10,
-      XBMCnfoReader = 11
+      XBMCnfoReader = 11,
+      MediaBrowser3 = 12
     }
 
     private bool IsExternalCatalog(CatalogType type)
@@ -502,6 +503,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           case CatalogType.XBMCnfoReader:
             break;
+          //case CatalogType.MediaBrowser3:
+          //  if (createTemp)
+          //  {
+          //    string WStrPath = System.IO.Path.GetDirectoryName(StrFileXml);
+          //    string destFile = WStrPath + "\\" + StrFileXml.Substring(StrFileXml.LastIndexOf(@"\") + 1, StrFileXml.Length - StrFileXml.LastIndexOf(@"\") - 5) + "_tmp.xml";
+          //    if ((System.IO.File.Exists(destFile) && (System.IO.File.GetLastWriteTime(destFile) > System.IO.File.GetLastWriteTime(StrFileXml))))
+          //    {
+          //      StrFileXml = destFile;
+          //      break;
+          //    }
+          //    bool OnlyFile = false;
+          //    OnlyFile = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "OnlyFile", false);
+          //    var mb3 = new Mediabrowser();
+          //    StrFileXml = mb3.ConvertMediabrowser(StrFileXml, StrPathImg, destinationTagline, destinationTags, destinationCertification, destinationWriter);
+          //  }
+          //  else
+          //    StrFileXml = xmlConfig.ReadXmlConfig("MyFilms", currentConfig, "AntCatalogTemp", string.Empty);
+          //  break;
+
         }
         #endregion
 
