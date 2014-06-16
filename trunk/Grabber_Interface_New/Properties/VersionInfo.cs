@@ -1,0 +1,1 @@
+﻿[assembly: System.Reflection.AssemblyVersion("6.1.0.2992")]
