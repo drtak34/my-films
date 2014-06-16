@@ -1781,14 +1781,12 @@ namespace Grabber_Interface
       this.pictureBoxUSFlag.Image = global::Grabber_Interface.Properties.Resources.United_States_of_America_USA_;
       this.pictureBoxUSFlag.Name = "pictureBoxUSFlag";
       this.pictureBoxUSFlag.TabStop = false;
-      this.pictureBoxUSFlag.Click += new System.EventHandler(this.pictureBoxUSFlag_Click);
       // 
       // pictureBoxFranceFlag
       // 
       resources.ApplyResources(this.pictureBoxFranceFlag, "pictureBoxFranceFlag");
       this.pictureBoxFranceFlag.Name = "pictureBoxFranceFlag";
       this.pictureBoxFranceFlag.TabStop = false;
-      this.pictureBoxFranceFlag.Click += new System.EventHandler(this.pictureBoxFranceFlag_Click);
       // 
       // cbFileBasedReader
       // 
