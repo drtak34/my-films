@@ -67,6 +67,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   // using AntMovieCatalog = MyFilmsPlugin.MyFilms.AntMovieCatalog;
   using Layout = MediaPortal.GUI.Library.GUIFacadeControl.Layout;
   // using TmdbPerson = Grabber.TheMovieDbAPI.TmdbPerson;
+
+  using WakeOnLanManager = MyFilmsPlugin.MyFilms.Utils.WakeOnLanManager;
   
   using TMDB = WatTmdb.V3;
 
@@ -1923,10 +1925,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         ipage++;
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
-      movies.OrderByDescending(x => x.vote_count).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.release_date);
+      // movies.OrderByDescending(x => x.vote_count).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.release_date);
       watch.Stop();
       LogMyFilms.Debug("GetPopularMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
-      return movies.AsEnumerable();
+      return movies.AsEnumerable().OrderByDescending(vc => vc.vote_count).ThenByDescending(va => va.vote_average).ThenByDescending(rd => rd.release_date);
     }
 
     private static IEnumerable<TmdbMovieSearchResult> GetNowPlayingMovies(bool all)
@@ -1947,10 +1949,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
       // movies = movies.OrderByDescending(x => x.release_date).ToList();
-      movies.OrderByDescending(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count);
+      // movies.OrderByDescending(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count);
       watch.Stop();
       LogMyFilms.Debug("GetNowPlayingMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
-      return movies.AsEnumerable();
+      return movies.AsEnumerable().OrderByDescending(rd => rd.release_date).ThenByDescending(va => va.vote_average).ThenByDescending(vc => vc.vote_count);
     }
 
     private static IEnumerable<TmdbMovieSearchResult> GetTopRatedMovies(bool all)
@@ -1972,10 +1974,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
       // movies = movies.OrderByDescending(x => x.vote_average).ToList();
-      movies.OrderByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count).ThenByDescending(x => x.release_date);
+      // movies.OrderByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count).ThenByDescending(x => x.release_date);
       watch.Stop();
       LogMyFilms.Debug("GetTopRatedMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
-      return movies.AsEnumerable();
+      return movies.AsEnumerable().OrderByDescending(v => v.vote_average).ThenByDescending(vc => vc.vote_count).ThenByDescending(rd => rd.release_date);
     }
 
     private static IEnumerable<TmdbMovieSearchResult> GetUpcomingMovies(bool all)
@@ -1997,10 +1999,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         if (ipage > movieSearchResults.total_pages || !all || movies.Count > MaxTmdbResults) break;
       }
       // movies = movies.OrderBy(x => x.release_date).ToList();
-      movies.OrderBy(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.release_date);
+      // movies.OrderBy(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.release_date);
       watch.Stop();
       LogMyFilms.Debug("GetUpcomingMovies() - finished loading movies from TMDB (" + (watch.ElapsedMilliseconds) + " ms)");
-      return movies.AsEnumerable();
+      return movies.AsEnumerable().OrderBy(rd => rd.release_date).ThenByDescending(v => v.vote_average);
     }
 
     private static IEnumerable<TmdbMovieSearchResult> GetPersonMovies(string personname, bool all)
@@ -2046,11 +2048,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
       }
       // movies = movies.OrderByDescending(x => x.release_date).ToList();
-      movies.OrderByDescending(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count);
+      // movies.OrderByDescending(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.vote_count);
       watch.Stop();
       LogMyFilms.Debug("GetUpcomingMovies() - finished loading movies from TMDB, Total Results = '" + movies.Count + "', (" + (watch.ElapsedMilliseconds) + " ms)");
 
-      return movies.AsEnumerable();
+      return movies.AsEnumerable().OrderByDescending(r => r.release_date).ThenByDescending(v => v.vote_average).ThenByDescending(vc => vc.vote_count);
     }
 
     #endregion
