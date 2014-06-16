@@ -1,7 +1,7 @@
 Imports System.Windows.Forms
 Imports Grabber
 Imports MediaPortal.Configuration
-Imports Cornerstone.Tools
+Imports Grabber.Util
 
 Public Class frmList
 
