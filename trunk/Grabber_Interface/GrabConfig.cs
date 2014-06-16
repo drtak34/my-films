@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using System.Xml;
 using System.IO;
 using System.Web;
@@ -14,18 +13,15 @@ using Grabber;
 using System.Collections;
 using System.Globalization;
 using System.Reflection;
-using System.Diagnostics;
-using System.Linq;
-
-using Grabber.Data;
-
-using MediaPortal.Configuration;
-
-using GrabberScript = Grabber.Data.GrabberScript;
 
 
 namespace Grabber_Interface
 {
+  using System.Diagnostics;
+  using System.Linq;
+
+  using MediaPortal.Configuration;
+
   public partial class GrabConfig : Form
   {
     private System.Resources.ResourceManager RM = new System.Resources.ResourceManager("Localisation.Form1", System.Reflection.Assembly.GetExecutingAssembly());
@@ -34,9 +30,6 @@ namespace Grabber_Interface
 
     static System.Windows.Forms.OpenFileDialog openFileDialog1 = new OpenFileDialog();
     static System.Windows.Forms.SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
-    // the search detail items, we use
-    private List<string> searchUrlItemsList = new List<string> { "List", "Title", "Year", "Options", "ID", "Link", "Director", "Akas", "Thumb" };
 
     private int GLiSearch = 0;
     private int GLiSearchD = 0;
@@ -47,8 +40,6 @@ namespace Grabber_Interface
     private bool GLbBlockSelect = false;
     private string Body = string.Empty;
     private string BodyStripped = string.Empty; // added to hold stripped search page
-
-    // vars for details
     private string BodyDetail = string.Empty;
     private string BodyDetail2 = string.Empty;
     private string BodyLinkImg = string.Empty;
@@ -102,12 +93,8 @@ namespace Grabber_Interface
     private bool ExpertModeOn = true; // to toggle GUI for simplification
 
     private XmlConf xmlConf;
-    private Grabber.Data.GrabberScript grabberscript;
-    private Grabber.Data.OutputData outputdata = new OutputData();
     private ArrayList listUrl = new ArrayList();
     private CookieContainer cookie = new CookieContainer();
-    //private List<LinkPage> LinkPages = new List<LinkPage>();
-    //private List<GrabElement> GrabElements = new List<GrabElement>();
 
     //TabPage tabPageSaveMovie = null;
     //TabPage tabPageSaveDetails = null;
@@ -119,7 +106,7 @@ namespace Grabber_Interface
       System.Threading.Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
       InitializeComponent();
 
-      InitMappingTable(); // load Mappingtable with values and other initialization
+      this.InitMappingTable(); // load Mappingtable with values and other initialization
 
       if (CultureInfo.InstalledUICulture.ToString() == FrenchCulture.ToString())
         radioButtonFR.Checked = true;
@@ -130,7 +117,7 @@ namespace Grabber_Interface
       ChangeVisibility(true);
 
       System.Reflection.Assembly asm = System.Reflection.Assembly.GetExecutingAssembly();
-      Version_Label.Text = "V" + asm.GetName().Version;
+      this.Version_Label.Text = "V" + asm.GetName().Version.ToString();
 
       // Test if input arguments were supplied:
       if (args.Length > 0)
@@ -166,8 +153,8 @@ namespace Grabber_Interface
       {
         ResetFormControlValues(this);
         textConfig.Text = openFileDialog1.FileName;
-        bool loadSuccess = LoadXml();
-        if (loadSuccess) button_Load_Click(this, e);
+        LoadXml();
+        button_Load_Click(this, e);
       }
     }
 
@@ -182,40 +169,63 @@ namespace Grabber_Interface
       button_Preview.Enabled = true;
       labelSearchAkasRegex.Visible = false;
 
-      foreach (GrabberScript.SearchDetailsRow searchDetailsRow in grabberscript.URLSearch[0].GetSearchDetailsRows().Where(searchDetailsRow => searchDetailsRow.Name == GetSysNameFromDisplay(cb_Parameter.Text)))
-      {
-        labelSearchAkasRegex.Visible = true;
-        textboxSearchAkasRegex.Visible = true;
-        TextKeyStart.Text = searchDetailsRow.Start;
-        TextKeyStop.Text = searchDetailsRow.End;
-        textReplace.Text = searchDetailsRow.Param1;
-        textReplaceWith.Text = searchDetailsRow.Param2;
-        textboxSearchAkasRegex.Text = searchDetailsRow.RegExp;
-        break;
-      }
-
       switch (cb_Parameter.SelectedIndex)
       {
         case 0: // Start - End
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value;
           buttonPrevParam1.Visible = false;
           break;
         case 1: // Title
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndTitle)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Param2;
           break;
         case 2: // Year
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartYear)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndYear)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartYear)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartYear)._Param2;
           break;
         case 3: // Director
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndDirector)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Param2;
           break;
         case 4: // details page URL
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndLink)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Param2;
           break;
         case 5: // ID (e.g. IMDB_Id)
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndID)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Param2;
           break;
         case 6: // Options (e.g. Groups like "Video, Kino, TV, Series, etc.)
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Param2;
           break;
         case 7: // Akas (other title infos)
           labelSearchAkasRegex.Visible = true;
           textboxSearchAkasRegex.Visible = true;
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndAkas)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Param2;
+          textboxSearchAkasRegex.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyAkasRegExp)._Value;
           break;
         case 8: // Thumb
+          TextKeyStart.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Value;
+          TextKeyStop.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyEndThumb)._Value;
+          textReplace.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Param1;
+          textReplaceWith.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Param2;
           break;
 
         default:
@@ -252,15 +262,6 @@ namespace Grabber_Interface
       GLbBlock = false;
     }
 
-    private string GetSysNameFromDisplay(string displayname)
-    {
-      if (displayname == "(Start-End Result List)") return "List";
-      if (displayname == "URL Detail Page") return "DetailsURL";
-      if (displayname == "AKAs") return "Akas";
-      if (displayname == "Image") return "Thumb";
-      return displayname;
-    }
-    
     private void button_Load_Click(object sender, EventArgs e)
     {
       if (!TextURL.Text.Contains("#Search#") && !TextURL.Text.Contains("#Filename#") && !TextSearch.Text.Contains("\\"))
@@ -368,14 +369,8 @@ namespace Grabber_Interface
         // now stripping the search page
         BodyStripped = Body;
         textBody.Text = Body;
-        foreach (GrabberScript.SearchDetailsRow searchDetailsRow in grabberscript.URLSearch[0].GetSearchDetailsRows())
-        {
-          if (searchDetailsRow.Name == "List")
-          {
-            starttext = searchDetailsRow.Start;
-            endtext = searchDetailsRow.End;
-          }
-        }
+        starttext = xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value;
+        endtext = xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value;
 
         if (Body.Length > 0 && (starttext.Length > 0 || endtext.Length > 0))
         {
@@ -407,132 +402,91 @@ namespace Grabber_Interface
       }
     }
 
-    public bool LoadXml()
+    public void LoadXml()
     {
-      grabberscript = new Grabber.Data.GrabberScript();
-      string strTemp;
-      string[] split;
-      List<string> fields;
+      // InitMappingTable();
+      xmlConf = new XmlConf(textConfig.Text);
 
-      try
-      {
-        using (var fs = new FileStream(textConfig.Text, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-        {
-          grabberscript = new Grabber.Data.GrabberScript();
-          //// synchronize dataset with hierarchical XMLdoc
-          //xmlDoc = new XmlDataDocument(data);
-          //xmlDoc.Load(fs);
-          grabberscript.ReadXml(fs);
-          fs.Close();
-        }
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show("Config not loaded !\n\nError: " + ex.Message, "Info");
-        return false;
-      }
+      textName.Text = xmlConf.find(xmlConf.listGen, TagName.DBName)._Value;
+      textURLPrefix.Text = xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value;
+      try { textEncoding.Text = xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value; }
+      catch (Exception) { textEncoding.Text = ""; }
+      try { textLanguage.Text = xmlConf.find(xmlConf.listGen, TagName.Language)._Value; }
+      catch (Exception) { textLanguage.Text = ""; }
+      try { textVersion.Text = xmlConf.find(xmlConf.listGen, TagName.Version)._Value; }
+      catch (Exception) { textVersion.Text = ""; }
+      try { textType.Text = xmlConf.find(xmlConf.listGen, TagName.Type)._Value; }
+      catch (Exception) { textType.Text = ""; }
+      try { textSearchCleanup.Text = xmlConf.find(xmlConf.listGen, TagName.SearchCleanup)._Value; }
+      catch (Exception) { textSearchCleanup.Text = ""; }
+      try { textAccept.Text = xmlConf.find(xmlConf.listGen, TagName.Accept)._Value; }
+      catch (Exception) { textAccept.Text = ""; }
+      try { textUserAgent.Text = xmlConf.find(xmlConf.listGen, TagName.UserAgent)._Value; }
+      catch (Exception) { textUserAgent.Text = ""; }
+      try { textHeaders.Text = xmlConf.find(xmlConf.listGen, TagName.Headers)._Value; }
+      catch (Exception) { textHeaders.Text = ""; }
+      try { cbFileBasedReader.Checked = (xmlConf.find(xmlConf.listGen, TagName.FileBasedReader)._Value == "true"); }
+      catch (Exception) { cbFileBasedReader.Checked = false; }
 
-      try
-      {
-        string test = grabberscript.UserOptions[0].PreferredLanguage; // this one does not exist in old scripts !
-      }
-      catch (Exception ex)
-      {
-        MessageBox.Show("Script is not compatible!\n\nYou might try to convert it to current format.\n\nError: " + ex.Message, "Info");
-        return false;
-      }
-      
-      #region init GUI with settings and URLsearch options
-
-      //textName.Text = grabberscript.Settings[0].DBName;
-      //textVersion.Text = !grabberscript.Settings[0].IsVersionNull() ? grabberscript.Settings[0].Version : "";
-      //textURLPrefix.Text = grabberscript.Settings[0].URLPrefix;
-      //textLanguage.Text = !grabberscript.Settings[0].IsLanguageNull() ? grabberscript.Settings[0].Language : "";
-      //textType.Text = !grabberscript.Settings[0].IsTypeNull() ? grabberscript.Settings[0].Type : "";
-      //textSearchCleanup.Text = !grabberscript.Settings[0].IsSearchCleanupNull() ? grabberscript.Settings[0].SearchCleanup : "";
-      //textEncoding.Text = !grabberscript.Settings[0].IsEncodingNull() ? grabberscript.Settings[0].Encoding : "";
-      //textAccept.Text = !grabberscript.Settings[0].IsAcceptNull() ? grabberscript.Settings[0].Accept : "";
-      //textUserAgent.Text = !grabberscript.Settings[0].IsUseragentNull() ? grabberscript.Settings[0].Useragent : "";
-      //textHeaders.Text = !grabberscript.Settings[0].IsHeadersNull() ? grabberscript.Settings[0].Headers : "";
-      //cbFileBasedReader.Checked = !grabberscript.Settings[0].IsFileBasedReaderNull() && grabberscript.Settings[0].FileBasedReader;
-
-      textName.Text = grabberscript.Settings[0].DBName;
-      textVersion.Text = grabberscript.Settings[0].Version;
-      textURLPrefix.Text = grabberscript.Settings[0].URLPrefix;
-      textLanguage.Text = grabberscript.Settings[0].Language;
-      textType.Text = grabberscript.Settings[0].Type;
-      textSearchCleanup.Text = grabberscript.Settings[0].SearchCleanup;
-      textEncoding.Text = grabberscript.Settings[0].Encoding;
-      textAccept.Text = grabberscript.Settings[0].Accept;
-      textUserAgent.Text = grabberscript.Settings[0].Useragent;
-      textHeaders.Text = grabberscript.Settings[0].Headers;
-      cbFileBasedReader.Checked = grabberscript.Settings[0].FileBasedReader;
-
-      TextURL.Text = grabberscript.URLSearch[0].URL;
-      textRedir.Text = grabberscript.URLSearch[0].Redirection;
-      textStartPage.Text = grabberscript.URLSearch[0].StartPage;
-      textNextPage.Text = grabberscript.URLSearch[0].NextPage;
-      textStepPage.Text = grabberscript.URLSearch[0].StepPage;
-
+      TextURL.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Value;
+      textRedir.Text = xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1;
+      textNextPage.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value;
+      textStartPage.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStartPage)._Value;
+      textStepPage.Text = xmlConf.find(xmlConf.listSearch, TagName.KeyStepPage)._Value;
       textPage.Text = textStartPage.Text;
-
-      foreach (GrabberScript.SearchDetailsRow searchRow in grabberscript.URLSearch[0].GetSearchDetailsRows())
-      {
-        // nothing to do here, only will be used when user selects the field in GUI
-        switch (searchRow.Name)
-        {
-          case "List":
-            //textStartPage.Text = searchRow.Start;
-            //ToDo: Init values, if necessary
-            
-            break;
-        }
-      }
-      #endregion
-
-      #region Load User Settings
-      cbMaxActors.Text = grabberscript.UserOptions[0].MaxActors;
+      // Load User Settings Page...
+      try { cbMaxActors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value; }
+      catch { cbMaxActors.Text = string.Empty; }
       cbMaxActors.Enabled = !string.IsNullOrEmpty(cbMaxActors.Text);
-      chkGrabActorRoles.Checked = grabberscript.UserOptions[0].GrabActorRoles;
 
-      // ToDo: once we load the data, the check can be reenabled
-      //string strGrabActorRoles = "";
-      //string strGrabActorRegex = "";
-      //try
-      //{
-      //  strGrabActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
-      //  strGrabActorRegex = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsRegExp)._Value;
-      //}
-      //catch
-      //{
-      //  chkGrabActorRoles.Checked = false;
-      //  chkGrabActorRoles.Enabled = false;
-      //}
-      //if (string.IsNullOrEmpty(strGrabActorRoles) || string.IsNullOrEmpty(strGrabActorRegex))
-      //  chkGrabActorRoles.Enabled = false;
-      //else chkGrabActorRoles.Enabled = true;
+      string strGrabActorRoles = "";
+      string strGrabActorRegex = "";
+      try
+      {
+        strGrabActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
+        strGrabActorRegex = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsRegExp)._Value;
+        this.chkGrabActorRoles.Checked = strGrabActorRoles == "true";
+      }
+      catch
+      {
+        chkGrabActorRoles.Checked = false;
+        chkGrabActorRoles.Enabled = false;
+      }
+      if (string.IsNullOrEmpty(strGrabActorRoles) || string.IsNullOrEmpty(strGrabActorRegex)) chkGrabActorRoles.Enabled = false;
+      else chkGrabActorRoles.Enabled = true;
 
-      cbMaxProducers.Text = grabberscript.UserOptions[0].MaxProducers;
-      cbMaxProducers.Enabled = !string.IsNullOrEmpty(this.cbMaxProducers.Text);
+      try { cbMaxProducers.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value; }
+      catch { cbMaxProducers.Text = string.Empty; }
+      this.cbMaxProducers.Enabled = !string.IsNullOrEmpty(this.cbMaxProducers.Text);
 
-      cbMaxDirectors.Text = grabberscript.UserOptions[0].MaxDirectors;
-      cbMaxDirectors.Enabled = !string.IsNullOrEmpty(this.cbMaxDirectors.Text);
+      try { cbMaxDirectors.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value; }
+      catch { cbMaxDirectors.Text = string.Empty; }
+      this.cbMaxDirectors.Enabled = !string.IsNullOrEmpty(this.cbMaxDirectors.Text);
 
-      cbMaxWriters.Text = grabberscript.UserOptions[0].MaxWriters;
-      cbMaxWriters.Enabled = !string.IsNullOrEmpty(this.cbMaxWriters.Text);
+      try { cbMaxWriters.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value; }
+      catch { cbMaxWriters.Text = string.Empty; }
+      this.cbMaxWriters.Enabled = !string.IsNullOrEmpty(this.cbMaxWriters.Text);
 
-      cbTtitlePreferredLanguage.Text = grabberscript.UserOptions[0].TitleCountry;
+      try { cbTtitlePreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value; }
+      catch { cbTtitlePreferredLanguage.Text = string.Empty; }
       //if (string.IsNullOrEmpty(cbTtitlePreferredLanguage.Text)) cbTtitlePreferredLanguage.Enabled = false;
       //else cbTtitlePreferredLanguage.Enabled = true;
-      cbTtitleMaxTitles.Text = grabberscript.UserOptions[0].MaxTitles;
-      cbTtitleMaxTitles.Enabled = !string.IsNullOrEmpty(cbTtitleMaxTitles.Text);
-      cbCertificationPreferredLanguage.Text = grabberscript.UserOptions[0].CertificationCountry;
+
+      try { cbTtitleMaxTitles.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value; }
+      catch { cbTtitleMaxTitles.Text = string.Empty; }
+      this.cbTtitleMaxTitles.Enabled = !string.IsNullOrEmpty(this.cbTtitleMaxTitles.Text);
+
+      try { cbCertificationPreferredLanguage.Text = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
+      catch { cbCertificationPreferredLanguage.Text = string.Empty; }
       //if (string.IsNullOrEmpty(cbCertificationPreferredLanguage.Text)) cbCertificationPreferredLanguage.Enabled = false;
       //else cbCertificationPreferredLanguage.Enabled = true;
 
       // Add Dropdownentries to User Options
       cbTtitlePreferredLanguage.Items.Clear();
-      split = grabberscript.UserOptions[0].TitleCountryAll.ToString().Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
+      string strTemp;
+      try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguageAll)._Value; }
+      catch { strTemp = string.Empty; }
+      string[] split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
       Array.Sort(split);
       foreach (var strDroptext in split)
       {
@@ -542,14 +496,8 @@ namespace Grabber_Interface
       cbTtitlePreferredLanguage.Enabled = cbTtitlePreferredLanguage.Items.Count > 0;
 
       cbCertificationPreferredLanguage.Items.Clear();
-      try
-      {
-        strTemp = grabberscript.UserOptions[0].CertificationCountry;
-      }
-      catch
-      {
-        strTemp = string.Empty;
-      }
+      try { strTemp = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguageAll)._Value; }
+      catch { strTemp = string.Empty; }
       split = strTemp.Split(new Char[] { ',', ';', '/' }, StringSplitOptions.RemoveEmptyEntries);
       Array.Sort(split);
       foreach (var strDroptext in split)
@@ -557,180 +505,155 @@ namespace Grabber_Interface
         if (!cbCertificationPreferredLanguage.Items.Contains(strDroptext.Trim()))
           cbCertificationPreferredLanguage.Items.Add(strDroptext.Trim());
       }
-      cbCertificationPreferredLanguage.Enabled = cbCertificationPreferredLanguage.Items.Count > 0;
+      this.cbCertificationPreferredLanguage.Enabled = this.cbCertificationPreferredLanguage.Items.Count > 0;
 
-      cbAllowMideaInfo.Checked = grabberscript.UserOptions[0].GetMediaInfo;
+      // Read Mapping Infos
+      List<string> fields = Grabber.Grabber_URLClass.FieldList();
 
-      cbGoogleTranslateLanguage.Text = grabberscript.UserOptions[0].TranslationLanguage;
-
-      #endregion
-
-      #region Load Mapping to mapping matrix
-      fields = Grabber.Grabber_URLClass.FieldList();
-      for (int i = 0; i < grabberscript.MappingRules[0].GetMappingRuleRows().Length; i++)
+      for (int i = 0; i < 40; i++)
       {
-        var mapRuleRow = grabberscript.MappingRules[0].GetMappingRuleRows()[i];
-        dataGridViewMapping.Rows[i].Cells[1].Value = mapRuleRow.InputField;
-        dataGridViewMapping.Rows[i].Cells[2].Value = mapRuleRow.OutputField;
-        dataGridViewMapping.Rows[i].Cells[3].Value = mapRuleRow.Replace;
-        dataGridViewMapping.Rows[i].Cells[4].Value = mapRuleRow.AddStart;
-        dataGridViewMapping.Rows[i].Cells[5].Value = mapRuleRow.AddEnd;
-        dataGridViewMapping.Rows[i].Cells[6].Value = mapRuleRow.MergePreferInput;
-        dataGridViewMapping.Rows[i].Cells[7].Value = mapRuleRow.MergePreferOutput;
-        // dataGridViewMapping.Rows[i].Cells[8].Value = mapRuleRow.ApplyReplacements;
-      }
-      #endregion
+        try
+        {
+          string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty, val6 = string.Empty, val7 = string.Empty;
+          val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
+          if (string.IsNullOrEmpty(val1)) val1 = fields[i]; // if missing field in script, replace DB-field name with "right one"
+          val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
+          val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
+          val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
+          val5 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param5;
+          val6 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param6;
+          val7 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param7;
 
-      return true;
+          dataGridViewMapping.Rows[i].Cells[1].Value = val1;
+          dataGridViewMapping.Rows[i].Cells[2].Value = val2;
+          dataGridViewMapping.Rows[i].Cells[3].Value = Convert.ToBoolean(val3);
+          dataGridViewMapping.Rows[i].Cells[4].Value = Convert.ToBoolean(val4);
+          dataGridViewMapping.Rows[i].Cells[5].Value = Convert.ToBoolean(val5);
+          dataGridViewMapping.Rows[i].Cells[6].Value = Convert.ToBoolean(val6);
+          dataGridViewMapping.Rows[i].Cells[7].Value = Convert.ToBoolean(val7);
+        }
+        catch (Exception)
+        {
+          dataGridViewMapping.Rows[i].Cells[1].Value = fields[i];
+          dataGridViewMapping.Rows[i].Cells[2].Value = "";
+          dataGridViewMapping.Rows[i].Cells[3].Value = false;
+          dataGridViewMapping.Rows[i].Cells[4].Value = false;
+          dataGridViewMapping.Rows[i].Cells[5].Value = false;
+          dataGridViewMapping.Rows[i].Cells[6].Value = false;
+          dataGridViewMapping.Rows[i].Cells[7].Value = false;
+        }
+      }
     }
 
     public void SaveXml(string File)
     {
-      #region old save method - DISABLED
-      //xmlConf.find(xmlConf.listGen, TagName.DBName)._Value = textName.Text;
-      //xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value = textURLPrefix.Text;
-      //try { xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value = textEncoding.Text; } catch (Exception) { }
-      //try { xmlConf.find(xmlConf.listGen, TagName.Language)._Value = textLanguage.Text; } catch (Exception) { }
-      //try { xmlConf.find(xmlConf.listGen, TagName.Version)._Value = textVersion.Text; } catch (Exception) { }
-      //try { xmlConf.find(xmlConf.listGen, TagName.Type)._Value = textType.Text; } catch (Exception) { }
-      //try { xmlConf.find(xmlConf.listGen, TagName.SearchCleanup)._Value = textSearchCleanup.Text; } catch (Exception) { }
-      //try { xmlConf.find(xmlConf.listGen, TagName.Accept)._Value = textAccept.Text; } catch (Exception) { }
-      //try { xmlConf.find(xmlConf.listGen, TagName.UserAgent)._Value = textUserAgent.Text; } catch (Exception) { }
-      //try { xmlConf.find(xmlConf.listGen, TagName.Headers)._Value = textHeaders.Text; } catch (Exception) { }
-
-      //try { xmlConf.find(this.xmlConf.listGen, TagName.FileBasedReader)._Value = cbFileBasedReader.Checked ? "true" : "false"; } catch (Exception) { }
-
-      //xmlConf.find(xmlConf.listSearch, TagName.URL)._Value = TextURL.Text;
-      //xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1 = textRedir.Text;
-      //xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value = textNextPage.Text;
-      //xmlConf.find(xmlConf.listSearch, TagName.KeyStartPage)._Value = textStartPage.Text;
-      //xmlConf.find(xmlConf.listSearch, TagName.KeyStepPage)._Value = textStepPage.Text;
-
-
-      //XmlTextWriter tw = new XmlTextWriter(File, UTF8Encoding.UTF8);
-      //tw.Formatting = Formatting.Indented;
-      //tw.WriteStartDocument(true);
-      //tw.WriteStartElement("Profile");
-      //tw.WriteStartElement("Section");
-
-      //for (int i = 0; i < xmlConf.listGen.Count; i++)
-      //{
-      //  tw.WriteStartElement(xmlConf.listGen[i]._Tag);
-      //  tw.WriteString(xmlConf.listGen[i]._Value);
-      //  tw.WriteEndElement();
-      //}
-
-      //tw.WriteStartElement("URLSearch");
-
-      //for (int i = 0; i < xmlConf.listSearch.Count; i++)
-      //{
-      //  tw.WriteStartElement(xmlConf.listSearch[i]._Tag);
-      //  if (xmlConf.listSearch[i]._Tag.StartsWith("KeyStart") || xmlConf.listSearch[i]._Tag.Equals("URL"))
-      //  {
-      //    tw.WriteAttributeString("Param1", XmlConvert.EncodeName(xmlConf.listSearch[i]._Param1));
-      //    tw.WriteAttributeString("Param2", XmlConvert.EncodeName(xmlConf.listSearch[i]._Param2));
-      //  }
-      //  tw.WriteString(XmlConvert.EncodeName(xmlConf.listSearch[i]._Value));
-      //  tw.WriteEndElement();
-
-      //}
-
-      //tw.WriteEndElement();
-      //tw.WriteStartElement("Details");
-
-      //for (int i = 0; i < xmlConf.listDetail.Count; i++)
-      //{
-      //  tw.WriteStartElement(xmlConf.listDetail[i]._Tag);
-      //  if (xmlConf.listDetail[i]._Tag.StartsWith("KeyStart"))
-      //  {
-      //    tw.WriteAttributeString("Param1", XmlConvert.EncodeName(xmlConf.listDetail[i]._Param1));
-      //    tw.WriteAttributeString("Param2", XmlConvert.EncodeName(xmlConf.listDetail[i]._Param2));
-      //  }
-      //  tw.WriteString(XmlConvert.EncodeName(xmlConf.listDetail[i]._Value));
-      //  tw.WriteEndElement();
-      //}
-      //tw.WriteEndElement();
-
-      //// Write Mapping Infos
-      //tw.WriteStartElement("Mapping");
-      //for (int i = 0; i < dataGridViewMapping.Rows.Count; i++)
-      //{
-      //  tw.WriteStartElement("Field_" + i.ToString()); // fieldnumer
-      //  string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty, val6 = string.Empty, val7 = string.Empty;
-      //  if (dataGridViewMapping.Rows[i].Cells[1].Value != null) val1 = dataGridViewMapping.Rows[i].Cells[1].Value.ToString(); // source
-      //  if (dataGridViewMapping.Rows[i].Cells[2].Value != null) val2 = dataGridViewMapping.Rows[i].Cells[2].Value.ToString(); // destination
-      //  if (dataGridViewMapping.Rows[i].Cells[3].Value != null) val3 = dataGridViewMapping.Rows[i].Cells[3].Value.ToString(); // replace
-      //  if (dataGridViewMapping.Rows[i].Cells[4].Value != null) val4 = dataGridViewMapping.Rows[i].Cells[4].Value.ToString(); // add before
-      //  if (dataGridViewMapping.Rows[i].Cells[5].Value != null) val5 = dataGridViewMapping.Rows[i].Cells[5].Value.ToString(); // add after
-      //  if (dataGridViewMapping.Rows[i].Cells[6].Value != null) val6 = dataGridViewMapping.Rows[i].Cells[6].Value.ToString(); // merge prefer source
-      //  if (dataGridViewMapping.Rows[i].Cells[7].Value != null) val7 = dataGridViewMapping.Rows[i].Cells[7].Value.ToString(); // merge prefer destination
-
-      //  tw.WriteAttributeString("source", XmlConvert.EncodeName(val1));
-      //  tw.WriteAttributeString("destination", XmlConvert.EncodeName(val2));
-      //  tw.WriteAttributeString("replace", XmlConvert.EncodeName(val3));
-      //  tw.WriteAttributeString("addstart", XmlConvert.EncodeName(val4));
-      //  tw.WriteAttributeString("addend", XmlConvert.EncodeName(val5));
-      //  tw.WriteAttributeString("mergeprefersource", XmlConvert.EncodeName(val6));
-      //  tw.WriteAttributeString("mergepreferdestination", XmlConvert.EncodeName(val7));
-      //  tw.WriteEndElement();
-      //}
-
-      //tw.WriteEndElement();
-      //tw.WriteEndElement();
-      //tw.WriteEndDocument();
-      //// on ferme ensuite le fichier xml
-      //tw.Flush();
-      //// pour finir on va vider le buffer , et on ferme le fichier
-      //tw.Close();
-      #endregion old save method
-
-      #region new method:
-      //ToDo: Change filename to original one
-      grabberscript.Settings[0].DBName = textName.Text;
-      grabberscript.Settings[0].Version = textVersion.Text;
-      grabberscript.Settings[0].URLPrefix = textURLPrefix.Text;
-      grabberscript.Settings[0].Language = textLanguage.Text;
-      grabberscript.Settings[0].Type = textType.Text;
-      grabberscript.Settings[0].SearchCleanup = textSearchCleanup.Text;
-      grabberscript.Settings[0].Encoding = textEncoding.Text;
-      grabberscript.Settings[0].Accept = textAccept.Text;
-      grabberscript.Settings[0].Useragent = textUserAgent.Text;
-      grabberscript.Settings[0].Headers = textHeaders.Text;
-      grabberscript.Settings[0].FileBasedReader = cbFileBasedReader.Checked;
-
-      grabberscript.URLSearch[0].URL = TextURL.Text;
-      grabberscript.URLSearch[0].Redirection = textRedir.Text;
-      grabberscript.URLSearch[0].StartPage = textStartPage.Text;
-      grabberscript.URLSearch[0].NextPage = textNextPage.Text;
-      grabberscript.URLSearch[0].StepPage = textStepPage.Text;
-
-      // ToDo: Add missing Useroptions
-      grabberscript.UserOptions[0].GetMediaInfo = cbAllowMideaInfo.Checked;
-      grabberscript.UserOptions[0].TranslationLanguage = cbGoogleTranslateLanguage.Text;
-
+      xmlConf.find(xmlConf.listGen, TagName.DBName)._Value = textName.Text;
+      xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value = textURLPrefix.Text;
+      try { xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value = textEncoding.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Language)._Value = textLanguage.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Version)._Value = textVersion.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Type)._Value = textType.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.SearchCleanup)._Value = textSearchCleanup.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Accept)._Value = textAccept.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.UserAgent)._Value = textUserAgent.Text; }
+      catch (Exception) { }
+      try { xmlConf.find(xmlConf.listGen, TagName.Headers)._Value = textHeaders.Text; }
+      catch (Exception) { }
 
       try
       {
-        using (var fs = new FileStream(File, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
-        {
-          fs.SetLength(0); // do not append, owerwrite !
-          // XmlTextWriter tw = new XmlTextWriter(File, UTF8Encoding.UTF8);
-          using (var myXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.UTF8))
-          {
-            myXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-            myXmlTextWriter.WriteStartDocument();
-            grabberscript.WriteXml(myXmlTextWriter, XmlWriteMode.IgnoreSchema); myXmlTextWriter.Flush();
-            myXmlTextWriter.Close();
-          }
-          //xmlDoc.Save(fs);
-          fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
-        }
+        this.xmlConf.find(this.xmlConf.listGen, TagName.FileBasedReader)._Value = this.cbFileBasedReader.Checked ? "true" : "false";
       }
-      catch (Exception ex)
+      catch (Exception) { }
+
+      xmlConf.find(xmlConf.listSearch, TagName.URL)._Value = TextURL.Text;
+      xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1 = textRedir.Text;
+      xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value = textNextPage.Text;
+      xmlConf.find(xmlConf.listSearch, TagName.KeyStartPage)._Value = textStartPage.Text;
+      xmlConf.find(xmlConf.listSearch, TagName.KeyStepPage)._Value = textStepPage.Text;
+
+
+      XmlTextWriter tw = new XmlTextWriter(File, UTF8Encoding.UTF8);
+      tw.Formatting = Formatting.Indented;
+      tw.WriteStartDocument(true);
+      tw.WriteStartElement("Profile");
+      tw.WriteStartElement("Section");
+
+      for (int i = 0; i < xmlConf.listGen.Count; i++)
       {
-        MessageBox.Show("Error saving script !\n\nError: " + ex.Message, "Info");
+        tw.WriteStartElement(xmlConf.listGen[i]._Tag);
+        tw.WriteString(xmlConf.listGen[i]._Value);
+        tw.WriteEndElement();
       }
-      #endregion
+
+      tw.WriteStartElement("URLSearch");
+
+      for (int i = 0; i < xmlConf.listSearch.Count; i++)
+      {
+        tw.WriteStartElement(xmlConf.listSearch[i]._Tag);
+        if (xmlConf.listSearch[i]._Tag.StartsWith("KeyStart") || xmlConf.listSearch[i]._Tag.Equals("URL"))
+        {
+          tw.WriteAttributeString("Param1", XmlConvert.EncodeName(xmlConf.listSearch[i]._Param1));
+          tw.WriteAttributeString("Param2", XmlConvert.EncodeName(xmlConf.listSearch[i]._Param2));
+        }
+        tw.WriteString(XmlConvert.EncodeName(xmlConf.listSearch[i]._Value));
+        tw.WriteEndElement();
+
+      }
+
+      tw.WriteEndElement();
+      tw.WriteStartElement("Details");
+
+      for (int i = 0; i < xmlConf.listDetail.Count; i++)
+      {
+        tw.WriteStartElement(xmlConf.listDetail[i]._Tag);
+        if (xmlConf.listDetail[i]._Tag.StartsWith("KeyStart"))
+        {
+          tw.WriteAttributeString("Param1", XmlConvert.EncodeName(xmlConf.listDetail[i]._Param1));
+          tw.WriteAttributeString("Param2", XmlConvert.EncodeName(xmlConf.listDetail[i]._Param2));
+        }
+        tw.WriteString(XmlConvert.EncodeName(xmlConf.listDetail[i]._Value));
+        tw.WriteEndElement();
+      }
+      tw.WriteEndElement();
+
+      // Write Mapping Infos
+      tw.WriteStartElement("Mapping");
+      for (int i = 0; i < dataGridViewMapping.Rows.Count; i++)
+      {
+        tw.WriteStartElement("Field_" + i.ToString()); // fieldnumer
+        string val1 = string.Empty, val2 = string.Empty, val3 = string.Empty, val4 = string.Empty, val5 = string.Empty, val6 = string.Empty, val7 = string.Empty;
+        if (dataGridViewMapping.Rows[i].Cells[1].Value != null) val1 = dataGridViewMapping.Rows[i].Cells[1].Value.ToString(); // source
+        if (dataGridViewMapping.Rows[i].Cells[2].Value != null) val2 = dataGridViewMapping.Rows[i].Cells[2].Value.ToString(); // destination
+        if (dataGridViewMapping.Rows[i].Cells[3].Value != null) val3 = dataGridViewMapping.Rows[i].Cells[3].Value.ToString(); // replace
+        if (dataGridViewMapping.Rows[i].Cells[4].Value != null) val4 = dataGridViewMapping.Rows[i].Cells[4].Value.ToString(); // add before
+        if (dataGridViewMapping.Rows[i].Cells[5].Value != null) val5 = dataGridViewMapping.Rows[i].Cells[5].Value.ToString(); // add after
+        if (dataGridViewMapping.Rows[i].Cells[6].Value != null) val6 = dataGridViewMapping.Rows[i].Cells[6].Value.ToString(); // merge prefer source
+        if (dataGridViewMapping.Rows[i].Cells[7].Value != null) val7 = dataGridViewMapping.Rows[i].Cells[7].Value.ToString(); // merge prefer destination
+
+        tw.WriteAttributeString("source", XmlConvert.EncodeName(val1));
+        tw.WriteAttributeString("destination", XmlConvert.EncodeName(val2));
+        tw.WriteAttributeString("replace", XmlConvert.EncodeName(val3));
+        tw.WriteAttributeString("addstart", XmlConvert.EncodeName(val4));
+        tw.WriteAttributeString("addend", XmlConvert.EncodeName(val5));
+        tw.WriteAttributeString("mergeprefersource", XmlConvert.EncodeName(val6));
+        tw.WriteAttributeString("mergepreferdestination", XmlConvert.EncodeName(val7));
+        tw.WriteEndElement();
+      }
+
+      tw.WriteEndElement();
+      tw.WriteEndElement();
+      tw.WriteEndDocument();
+      // on ferme ensuite le fichier xml
+      tw.Flush();
+      // pour finir on va vider le buffer , et on ferme le fichier
+      tw.Close();
 
     }
 
@@ -793,7 +716,6 @@ namespace Grabber_Interface
       }
       else
       {
-        // We need to save the config, as the grabber engine loads it from disk !
         SaveXml(textConfig.Text + ".tmp");
         Load_Preview(true); // always ask - gives all matching results! - was false in earlier versions ...
       }
@@ -969,15 +891,44 @@ namespace Grabber_Interface
       }
     }
 
+
     private void TextKeyStart_TextChanged(object sender, EventArgs e)
     {
       if (GLbBlock == true)
         return;
 
-      foreach (GrabberScript.SearchDetailsRow searchDetailsRow in grabberscript.URLSearch[0].GetSearchDetailsRows().Where(searchDetailsRow => searchDetailsRow.Name == GetSysNameFromDisplay(cb_Parameter.Text)))
+      switch (cb_Parameter.SelectedIndex)
       {
-        searchDetailsRow.Start = TextKeyStart.Text;
-        break;
+        case 0:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartList)._Value = TextKeyStart.Text;
+          break;
+        case 1:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartTitle)._Value = TextKeyStart.Text;
+          break;
+        case 2:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartYear)._Value = TextKeyStart.Text;
+          break;
+        case 3:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartDirector)._Value = TextKeyStart.Text;
+          break;
+        case 4:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartLink)._Value = TextKeyStart.Text;
+          break;
+        case 5:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartID)._Value = TextKeyStart.Text;
+          break;
+        case 6:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartOptions)._Value = TextKeyStart.Text;
+          break;
+        case 7:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartAkas)._Value = TextKeyStart.Text;
+          break;
+        case 8:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyStartThumb)._Value = TextKeyStart.Text;
+          break;
+        default:
+          TextKeyStart.Text = "";
+          break;
       }
 
       textBody.Text = cb_Parameter.SelectedIndex > 0 ? BodyStripped : Body;
@@ -987,23 +938,55 @@ namespace Grabber_Interface
 
     private void TextKeyStop_TextChanged(object sender, EventArgs e)
     {
-      foreach (GrabberScript.SearchDetailsRow searchDetailsRow in grabberscript.URLSearch[0].GetSearchDetailsRows().Where(searchDetailsRow => searchDetailsRow.Name == GetSysNameFromDisplay(cb_Parameter.Text)))
+      switch (cb_Parameter.SelectedIndex)
       {
-        searchDetailsRow.End = TextKeyStop.Text;
-        break;
+        case 0:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndList)._Value = TextKeyStop.Text;
+          try { textBody.Text = BodyStripped; }
+          catch { textBody.Text = Body; }
+          break;
+        case 1:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndTitle)._Value = TextKeyStop.Text;
+          break;
+        case 2:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndYear)._Value = TextKeyStop.Text;
+          break;
+        case 3:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndDirector)._Value = TextKeyStop.Text;
+          break;
+        case 4:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndLink)._Value = TextKeyStop.Text;
+          break;
+        case 5:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndID)._Value = TextKeyStop.Text;
+          break;
+        case 6:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndOptions)._Value = TextKeyStop.Text;
+          break;
+        case 7:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndAkas)._Value = TextKeyStop.Text;
+          break;
+        case 8:
+          xmlConf.find(xmlConf.listSearch, TagName.KeyEndThumb)._Value = TextKeyStop.Text;
+          break;
+        default:
+          TextKeyStop.Text = "";
+          break;
       }
 
-      // change text, if neccessary and redo selection
-      textBody.Text = cb_Parameter.SelectedIndex > 0 ? BodyStripped : Body;  // && TextKeyStop.Text.Length > 0
+      this.textBody.Text = this.cb_Parameter.SelectedIndex > 0 ? this.BodyStripped : this.Body;  // && TextKeyStop.Text.Length > 0
       textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text, false);
     }
 
     private void textboxSearchAkasRegex_TextChanged(object sender, EventArgs e)
     {
-      foreach (GrabberScript.SearchDetailsRow searchDetailsRow in grabberscript.URLSearch[0].GetSearchDetailsRows().Where(searchDetailsRow => searchDetailsRow.Name == GetSysNameFromDisplay(cb_Parameter.Text)))
+      switch (cb_Parameter.SelectedIndex)
       {
-        searchDetailsRow.RegExp = textboxSearchAkasRegex.Text;
-        break;
+        case 7: // Akas Search Regex
+          xmlConf.find(xmlConf.listSearch, TagName.KeyAkasRegExp)._Value = textboxSearchAkasRegex.Text;
+          break;
+        default:
+          break;
       }
     }
 
@@ -1023,11 +1006,13 @@ namespace Grabber_Interface
         // i = textBody.Find(textBody.SelectedText, i + textBody.SelectedText.Length, RichTextBoxFinds.NoHighlight);
         i = GrabUtil.FindPosition(textBody.Text, textBody.SelectedText, i + iLength, ref iLength, true, false);
       }
-      lblResultsFound.Text = nb + " match(es) found";
+      lblResultsFound.Text = nb.ToString() + " match found";
     }
+
 
     private void textBody_NewSelection(string starttext, string endtext, bool manualselect)
     {
+
       // If you have at least the key to start, we cut strBody
       if (textBody.Text.Length > 0 && (starttext.Length > 0 || endtext.Length > 0))
       {
@@ -1145,6 +1130,8 @@ namespace Grabber_Interface
           e.Cancel = true;
       }
     }
+
+
 
     /*
      *
@@ -1283,16 +1270,14 @@ namespace Grabber_Interface
         BodyDetail = TextURLDetail.Text.ToLower().StartsWith("http")
                             ? GrabUtil.GetPage(TextURLDetail.Text, textEncoding.Text, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text)
                             : GrabUtil.GetFileContent(TextURLDetail.Text, textEncoding.Text);
-
-
-        if (grabberscript.SearchDetails[0].Start.Length > 0)
+        if (xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value.Length > 0)
         {
-          iStart = BodyDetail.IndexOf(grabberscript.SearchDetails[0].Start);
+          iStart = BodyDetail.IndexOf(xmlConf.find(xmlConf.listDetail, TagName.KeyStartBody)._Value);
           //Si la clé de début a été trouvé
           if (iStart > 0)
           {
             //Si une clé de fin a été paramétrée, on l'utilise si non on prend le reste du body
-            iEnd = grabberscript.SearchDetails[0].End != "" ? BodyDetail.IndexOf(grabberscript.SearchDetails[0].End, iStart) : BodyDetail.Length;
+            iEnd = this.xmlConf.find(this.xmlConf.listDetail, TagName.KeyEndBody)._Value != "" ? this.BodyDetail.IndexOf(this.xmlConf.find(this.xmlConf.listDetail, TagName.KeyEndBody)._Value, iStart) : this.BodyDetail.Length;
 
             if (iEnd == -1)
               iEnd = BodyDetail.Length;
@@ -1309,446 +1294,442 @@ namespace Grabber_Interface
           textBodyDetail.Text = BodyDetail;
 
         watch.Stop();
-        TimeBodyDetail = " (" + (watch.ElapsedMilliseconds) + " ms)";
+        TimeBodyDetail = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
         #endregion
       }
 
-      #region load all other data pages ...
+      #region Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
+      try
+      {
+        watch.Reset();
+        watch.Start();
+        strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
+        strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
+        strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
+        strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
+        strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
+        strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Page)._Value;
+        try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingDetails2)._Value; }
+        catch (Exception) { strPage = ""; }
 
-      //#region Test if there is a page for Secondary Details (like OFDB GW) and load page in BodyDetails2
-      //try
-      //{
-      //  watch.Reset();
-      //  watch.Start();
-      //  strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Value;
-      //  strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndDetails2)._Value;
-      //  strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param1;
-      //  strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartDetails2)._Param2;
-      //  strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Index)._Value;
-      //  strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyDetails2Page)._Value;
-      //  try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingDetails2)._Value; }
-      //  catch (Exception) { strPage = ""; }
+        strActivePage = this.LoadPage(strPage);
+        if (strStart.Length > 0)
+        {
+          string strTemp = string.Empty;
+          if (strParam1.Length > 0 && strParam2.Length > 0)
+            strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+          else
+            strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+          URLBodyDetail2 = strTemp;
+          BodyDetail2 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        }
+        else
+          BodyDetail2 = "";
+        watch.Stop();
+        TimeBodyDetail2 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      }
+      catch
+      {
+        BodyDetail2 = "";
+      }
+      #endregion
 
-      //  strActivePage = this.LoadPage(strPage);
-      //  if (strStart.Length > 0)
-      //  {
-      //    string strTemp = string.Empty;
-      //    if (strParam1.Length > 0 && strParam2.Length > 0)
-      //      strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //    else
-      //      strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //    URLBodyDetail2 = strTemp;
-      //    BodyDetail2 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //  }
-      //  else
-      //    BodyDetail2 = "";
-      //  watch.Stop();
-      //  TimeBodyDetail2 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //}
-      //catch
-      //{
-      //  BodyDetail2 = "";
-      //}
-      //#endregion
+      #region Test if there is a page for Generic 1 Page
+      try
+      {
+        watch.Reset();
+        watch.Start();
+        strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Value;
+        strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric1)._Value;
+        strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param1;
+        strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param2;
+        strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Index)._Value;
+        strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Page)._Value;
+        try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric1)._Value; }
+        catch (Exception) { strPage = ""; }
 
-      //#region Test if there is a page for Generic 1 Page
-      //try
-      //{
-      //  watch.Reset();
-      //  watch.Start();
-      //  strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Value;
-      //  strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric1)._Value;
-      //  strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param1;
-      //  strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric1)._Param2;
-      //  strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Index)._Value;
-      //  strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric1Page)._Value;
-      //  try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric1)._Value; }
-      //  catch (Exception) { strPage = ""; }
+        strActivePage = this.LoadPage(strPage);
+        if (strStart.Length > 0)
+        {
+          string strTemp = string.Empty;
+          if (strParam1.Length > 0 && strParam2.Length > 0)
+            strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+          else
+            strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+          URLBodyLinkGeneric1 = strTemp;
+          BodyLinkGeneric1 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        }
+        else
+          BodyLinkGeneric1 = "";
+        watch.Stop();
+        TimeBodyLinkGeneric1 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      }
+      catch
+      {
+        BodyLinkGeneric1 = "";
+      }
+      #endregion
 
-      //  strActivePage = this.LoadPage(strPage);
-      //  if (strStart.Length > 0)
-      //  {
-      //    string strTemp = string.Empty;
-      //    if (strParam1.Length > 0 && strParam2.Length > 0)
-      //      strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //    else
-      //      strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //    URLBodyLinkGeneric1 = strTemp;
-      //    BodyLinkGeneric1 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //  }
-      //  else
-      //    BodyLinkGeneric1 = "";
-      //  watch.Stop();
-      //  TimeBodyLinkGeneric1 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //}
-      //catch
-      //{
-      //  BodyLinkGeneric1 = "";
-      //}
-      //#endregion
+      #region Test if there is a page for Generic 2 Page
+      try
+      {
+        watch.Reset();
+        watch.Start();
+        strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Value;
+        strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric2)._Value;
+        strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param1;
+        strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param2;
+        strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Index)._Value;
+        strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Page)._Value;
+        try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric2)._Value; }
+        catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a page for Generic 2 Page
-      //try
-      //{
-      //  watch.Reset();
-      //  watch.Start();
-      //  strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Value;
-      //  strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkGeneric2)._Value;
-      //  strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param1;
-      //  strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkGeneric2)._Param2;
-      //  strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Index)._Value;
-      //  strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkGeneric2Page)._Value;
-      //  try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkGeneric2)._Value; }
-      //  catch (Exception) { strEncoding = ""; }
+        strActivePage = this.LoadPage(strPage);
+        if (strStart.Length > 0)
+        {
+          string strTemp = string.Empty;
+          if (strParam1.Length > 0 && strParam2.Length > 0)
+            strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+          else
+            strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+          URLBodyLinkGeneric2 = strTemp;
+          BodyLinkGeneric2 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+        }
+        else
+          BodyLinkGeneric2 = "";
+        watch.Stop();
+        TimeBodyLinkGeneric2 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      }
+      catch
+      {
+        BodyLinkGeneric2 = "";
+      }
+      #endregion
 
-      //  strActivePage = this.LoadPage(strPage);
-      //  if (strStart.Length > 0)
-      //  {
-      //    string strTemp = string.Empty;
-      //    if (strParam1.Length > 0 && strParam2.Length > 0)
-      //      strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //    else
-      //      strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //    URLBodyLinkGeneric2 = strTemp;
-      //    BodyLinkGeneric2 = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //  }
-      //  else
-      //    BodyLinkGeneric2 = "";
-      //  watch.Stop();
-      //  TimeBodyLinkGeneric2 = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //}
-      //catch
-      //{
-      //  BodyLinkGeneric2 = "";
-      //}
-      //#endregion
+      #region Test if there is a redirection page for Covers and load page in BodyLinkImg
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkImg)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkImg)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Covers and load page in BodyLinkImg
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkImg)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkImg)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkImgPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkImg)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkImg = strTemp;
+        BodyLinkImg = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkImg = "";
+      watch.Stop();
+      TimeBodyLinkImg = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkImg = strTemp;
-      //  BodyLinkImg = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkImg = "";
-      //watch.Stop();
-      //TimeBodyLinkImg = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for Persons and load page in BodyLinkPersons
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersons)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersons)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Persons and load page in BodyLinkPersons
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersons)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersons)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonsPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersons)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkPersons = strTemp;
+        BodyLinkPersons = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkPersons = "";
+      watch.Stop();
+      TimeBodyLinkPersons = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkPersons = strTemp;
-      //  BodyLinkPersons = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkPersons = "";
-      //watch.Stop();
-      //TimeBodyLinkPersons = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for Titles and load page in BodyLinkTitles
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTitles)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTitles)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Titles and load page in BodyLinkTitles
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTitles)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTitles)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTitlesPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTitles)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkTitles = strTemp;
+        BodyLinkTitles = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkTitles = "";
+      watch.Stop();
+      TimeBodyLinkTitles = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkTitles = strTemp;
-      //  BodyLinkTitles = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkTitles = "";
-      //watch.Stop();
-      //TimeBodyLinkTitles = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for Certification and load page in BodyLinkCertification
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkCertification)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkCertification)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Certification and load page in BodyLinkCertification
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkCertification)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkCertification)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCertificationPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkCertification)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkCertification = strTemp;
+        BodyLinkCertification = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkCertification = "";
+      watch.Stop();
+      TimeBodyLinkCertification = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkCertification = strTemp;
-      //  BodyLinkCertification = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkCertification = "";
-      //watch.Stop();
-      //TimeBodyLinkCertification = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for Synopsis/Description and load page in BodyLinkSyn
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkSyn)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Synopsis/Description and load page in BodyLinkSyn
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkSyn)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkSyn)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkSynPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkSyn)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkSyn = strTemp;
+        BodyLinkSyn = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkSyn = "";
+      watch.Stop();
+      TimeBodyLinkSyn = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkSyn = strTemp;
-      //  BodyLinkSyn = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkSyn = "";
-      //watch.Stop();
-      //TimeBodyLinkSyn = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for Comment and load page in BodyLinkComment
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkComment)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Comment and load page in BodyLinkComment
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkComment)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkComment)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkCommentPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkComment)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkComment = strTemp;
+        BodyLinkComment = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkComment = "";
+      watch.Stop();
+      TimeBodyLinkComment = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkComment = strTemp;
-      //  BodyLinkComment = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkComment = "";
-      //watch.Stop();
-      //TimeBodyLinkComment = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for MultiPosters and load page in BodyLinkMultiPosters
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiPosters)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiPosters)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for MultiPosters and load page in BodyLinkMultiPosters
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiPosters)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiPosters)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiPostersPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiPosters)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkMultiPosters = strTemp;
+        BodyLinkMultiPosters = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkMultiPosters = "";
+      watch.Stop();
+      TimeBodyLinkMultiPosters = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkMultiPosters = strTemp;
-      //  BodyLinkMultiPosters = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkMultiPosters = "";
-      //watch.Stop();
-      //TimeBodyLinkMultiPosters = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for Photos and load page in BodyLinkPhotos
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPhotos)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPhotos)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Photos and load page in BodyLinkPhotos
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPhotos)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPhotos)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPhotosPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPhotos)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkPhotos = strTemp;
+        BodyLinkPhotos = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkPhotos = "";
+      watch.Stop();
+      TimeBodyLinkPhotos = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkPhotos = strTemp;
-      //  BodyLinkPhotos = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkPhotos = "";
-      //watch.Stop();
-      //TimeBodyLinkPhotos = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for PersonImages and load page in BodyLinkPersonImages
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersonImages)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersonImages)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for PersonImages and load page in BodyLinkPersonImages
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkPersonImages)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkPersonImages)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkPersonImagesPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkPersonImages)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkPersonImages = strTemp;
+        BodyLinkPersonImages = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkPersonImages = "";
+      watch.Stop();
+      TimeBodyLinkPersonImages = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkPersonImages = strTemp;
-      //  BodyLinkPersonImages = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkPersonImages = "";
-      //watch.Stop();
-      //TimeBodyLinkPersonImages = " (" + (watch.ElapsedMilliseconds) + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for MultiFanart and load page in BodyLinkMultiFanart
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiFanart)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiFanart)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for MultiFanart and load page in BodyLinkMultiFanart
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkMultiFanart)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkMultiFanart)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkMultiFanartPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkMultiFanart)._Value; }
-      //catch (Exception) { strEncoding = ""; }
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkMultiFanart = strTemp;
+        BodyLinkMultiFanart = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkMultiFanart = "";
+      watch.Stop();
+      TimeBodyLinkMultiFanart = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
+      #endregion
 
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkMultiFanart = strTemp;
-      //  BodyLinkMultiFanart = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkMultiFanart = "";
-      //watch.Stop();
-      //TimeBodyLinkMultiFanart = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
+      #region Test if there is a redirection page for Trailer and load page in BodyLinkTrailer
+      watch.Reset();
+      watch.Start();
+      strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Value;
+      strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTrailer)._Value;
+      strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param1;
+      strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param2;
+      strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerIndex)._Value;
+      strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value;
+      try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTrailer)._Value; }
+      catch (Exception) { strEncoding = ""; }
 
-      //#region Test if there is a redirection page for Trailer and load page in BodyLinkTrailer
-      //watch.Reset();
-      //watch.Start();
-      //strStart = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Value;
-      //strEnd = xmlConf.find(xmlConf.listDetail, TagName.KeyEndLinkTrailer)._Value;
-      //strParam1 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param1;
-      //strParam2 = xmlConf.find(xmlConf.listDetail, TagName.KeyStartLinkTrailer)._Param2;
-      //strIndex = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerIndex)._Value;
-      //strPage = xmlConf.find(xmlConf.listDetail, TagName.KeyLinkTrailerPage)._Value;
-      //try { strEncoding = xmlConf.find(xmlConf.listDetail, TagName.KeyEncodingLinkTrailer)._Value; }
-      //catch (Exception) { strEncoding = ""; }
-
-      //strActivePage = this.LoadPage(strPage);
-      //if (strStart.Length > 0)
-      //{
-      //  string strTemp = string.Empty;
-      //  if (strParam1.Length > 0 && strParam2.Length > 0)
-      //    strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
-      //  else
-      //    strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
-      //  URLBodyLinkTrailer = strTemp;
-      //  BodyLinkTrailer = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
-      //}
-      //else
-      //  BodyLinkTrailer = "";
-      //watch.Stop();
-      //TimeBodyLinkTrailer = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
-      //#endregion
-      
+      strActivePage = this.LoadPage(strPage);
+      if (strStart.Length > 0)
+      {
+        string strTemp = string.Empty;
+        if (strParam1.Length > 0 && strParam2.Length > 0)
+          strTemp = GrabUtil.FindWithAction(strActivePage, strStart, strEnd, strParam1, strParam2).Trim();
+        else
+          strTemp = GrabUtil.Find(strActivePage, strStart, strEnd).Trim();
+        URLBodyLinkTrailer = strTemp;
+        BodyLinkTrailer = GrabUtil.GetPage(strTemp, (string.IsNullOrEmpty(strEncoding)) ? textEncoding.Text : strEncoding, out absoluteUri, new CookieContainer(), textHeaders.Text, textAccept.Text, textUserAgent.Text);
+      }
+      else
+        BodyLinkTrailer = "";
+      watch.Stop();
+      TimeBodyLinkTrailer = " (" + (watch.ElapsedMilliseconds).ToString() + " ms)";
       #endregion
     }
 
-    private string LoadPage(string page)
+    private string LoadPage(string Page)
     {
       string strActivePage = string.Empty;
-      switch (page)
+      switch (Page)
       {
         case "":
           strActivePage = BodyDetail;
@@ -1828,6 +1809,7 @@ namespace Grabber_Interface
 
     private void textBodyDetail_NewSelection(string starttext, string endtext, int bodystart, string param1)
     {
+
       if (textBodyDetail.Text.Length > 0 && starttext.Length > 0 && endtext.Length > 0)
       {
         GLbBlockSelect = true;
@@ -3196,6 +3178,16 @@ namespace Grabber_Interface
                 labelImageSize.Text = "n/a";
                 //MessageBox.Show("An error ocurred in image preview - check your config.\n" + ex.Message + "\n" + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
               }
+              try
+              {
+                pictureBoxPreviewCollection.ImageLocation = Path.Combine(Path.GetDirectoryName(Result[i]), "Collection_" + Path.GetFileName(Result[i]));
+                //FileInfo f = new FileInfo(Result[i]);
+                //labelImageSize.Text = this.ByteString(f.Length);
+              }
+              catch (Exception)
+              {
+                // labelImageSize.Text = "n/a";
+              }
             }
             break;
           case 3:
@@ -3341,16 +3333,6 @@ namespace Grabber_Interface
           case 38:
           case 78:
             textPreview.SelectedText += "(" + i.ToString() + ") " + "CollectionImageURL'" + mapped + Environment.NewLine;
-            try
-            {
-              pictureBoxPreviewCollection.ImageLocation = Path.Combine(Path.GetDirectoryName(Result[i]), Path.GetFileName(Result[i]));
-              //FileInfo f = new FileInfo(Result[i]);
-              //labelImageSize.Text = this.ByteString(f.Length);
-            }
-            catch (Exception)
-            {
-              // labelImageSize.Text = "n/a";
-            }
             break;
           case 39:
           case 79:
@@ -3620,6 +3602,7 @@ namespace Grabber_Interface
           break;
       }
     }
+
 
     private void radioButtonFR_CheckedChanged(object sender, EventArgs e)
     {
@@ -4078,7 +4061,6 @@ namespace Grabber_Interface
       //if (comboBox1.SelectedIndex > 0)
       //    textBody_NewSelection(TextKeyStart.Text, TextKeyStop.Text);
     }
-    
     private int ExtractBody(string Body, string ParamStart)
     {
       string strStart = string.Empty;
@@ -4646,6 +4628,16 @@ namespace Grabber_Interface
       labelImageSize.Text = "";
     }
 
+    private void pictureBoxFranceFlag_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void pictureBoxUSFlag_Click(object sender, EventArgs e)
+    {
+
+    }
+
     private void textConfig_TextChanged(object sender, EventArgs e)
     {
       if (string.IsNullOrEmpty(textConfig.Text))
@@ -4708,7 +4700,6 @@ namespace Grabber_Interface
         ExpertModeOn = true;
       }
     }
-    
     private void ChangeVisibility(bool visibleForExpert)
     {
       if (visibleForExpert == false)
@@ -4760,8 +4751,7 @@ namespace Grabber_Interface
 
     private void checkBox2_CheckedChanged(object sender, EventArgs e)
     {
-      // ToDo: Adapt to new code
-      // xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = chkGrabActorRoles.Checked ? "true" : "false";
+      xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value = chkGrabActorRoles.Checked ? "true" : "false";
     }
 
     private void cbMaxProducers_SelectedIndexChanged(object sender, EventArgs e)
@@ -4772,8 +4762,8 @@ namespace Grabber_Interface
 
     private void cbMaxDirectors_SelectedIndexChanged(object sender, EventArgs e)
     {
-      //if (cbMaxDirectors.SelectedIndex != -1)
-      //  xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value = cbMaxDirectors.Text;
+      if (cbMaxDirectors.SelectedIndex != -1)
+        xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value = cbMaxDirectors.Text;
     }
 
     private void cbMaxWriters_SelectedIndexChanged(object sender, EventArgs e)
@@ -4789,8 +4779,8 @@ namespace Grabber_Interface
 
     private void cbTtitleMaxTitles_SelectedIndexChanged(object sender, EventArgs e)
     {
-      //if (cbTtitleMaxTitles.SelectedIndex != -1)
-      //  xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value = cbTtitleMaxTitles.Text;
+      if (cbTtitleMaxTitles.SelectedIndex != -1)
+        xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value = cbTtitleMaxTitles.Text;
     }
 
     private void cbCertificationPreferredLanguage_SelectedIndexChanged(object sender, EventArgs e)
@@ -4801,7 +4791,7 @@ namespace Grabber_Interface
 
     private void InitMappingTable()
     {
-      List<string> fields = Grabber_URLClass.FieldList();
+      List<string> fields = Grabber.Grabber_URLClass.FieldList();
       for (int i = 0; i < 40; i++)
       {
         Fields[i] = fields[i];
@@ -4825,8 +4815,6 @@ namespace Grabber_Interface
         dataGridViewMapping.Rows[i].Cells[5].Value = false;
         dataGridViewMapping.Rows[i].Cells[6].Value = false;
         dataGridViewMapping.Rows[i].Cells[7].Value = false;
-        dataGridViewMapping.Rows[i].Cells[8].Value = false; // apply translation
-        dataGridViewMapping.Rows[i].Cells[9].Value = false; // apply replacements
       }
 
     }
@@ -5005,16 +4993,19 @@ namespace Grabber_Interface
         tabControl1.TabPages.Remove(tp);
     }
 
+
     private void ShowTabPage(TabPage tp)
     {
       ShowTabPage(tp, tabControl1.TabPages.Count);
     }
+
 
     private void ShowTabPage(TabPage tp, int index)
     {
       if (tabControl1.TabPages.Contains(tp)) return;
       InsertTabPage(tp, index);
     }
+
 
     private void InsertTabPage(TabPage tabpage, int index)
     {
@@ -5029,6 +5020,7 @@ namespace Grabber_Interface
         while (tabControl1.TabPages.IndexOf(tabpage) != index);
       tabControl1.SelectedTab = tabpage;
     }
+
 
     private void SwapTabPages(TabPage tp1, TabPage tp2)
     {
@@ -5186,7 +5178,6 @@ namespace Grabber_Interface
         label11.Visible = false;
         textPage.Visible = false;
         button_Load_Web.Visible = false;
-        cbAllowMideaInfo.Visible = true;
       }
       else
       {
@@ -5211,314 +5202,8 @@ namespace Grabber_Interface
         label11.Visible = true;
         textPage.Visible = true;
         button_Load_Web.Visible = true;
-        cbAllowMideaInfo.Visible = false;
       }
     }
 
-    private void btnLoadOldScript_Click(object sender, EventArgs e)
-    {
-      if (System.IO.Directory.Exists(Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\"))
-      {
-        openFileDialog1.InitialDirectory = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\";
-        // openFileDialog1.FileName = Config.GetDirectoryInfo(Config.Dir.Config) + @"\scripts\MyFilms\*.xml";
-        // openFileDialog1.FileName = @"*.xml";
-        openFileDialog1.RestoreDirectory = false;
-      }
-      else
-      {
-        openFileDialog1.RestoreDirectory = true;
-      }
-      openFileDialog1.Filter = "XML Files (*.xml)|*.xml";
-      openFileDialog1.Title = "Find Internet Grabber Script file (xml file)";
-      if (openFileDialog1.ShowDialog() == DialogResult.OK)
-      {
-        ResetFormControlValues(this);
-        textConfig.Text = openFileDialog1.FileName;
-        // take a backup so user can revert to old version 
-        File.Copy(openFileDialog1.FileName, (openFileDialog1.FileName + "-bup" + DateTime.Now.ToString().Replace(":", "-") + ".xml").Replace("/", "-"));
-        LoadXmloldScripts();
-        // button_Load_Click(this, e); // no need to load, we only want to convert it here !
-
-        saveFileDialog1.FileName = textConfig.Text;
-        saveFileDialog1.Filter = "XML Files (*.xml)|*.xml";
-        saveFileDialog1.Title = "Save Internet Grabber Script file (xml file)";
-        if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-        {
-          textConfig.Text = saveFileDialog1.FileName;
-          // ToDo:  we can use this later, once we have migrated old save method to new !
-          // SaveXml(textConfig.Text); 
-
-          try
-          {
-            using (var fs = new FileStream(textConfig.Text, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
-            {
-              fs.SetLength(0); // do not append, owerwrite !
-              // XmlTextWriter tw = new XmlTextWriter(File, UTF8Encoding.UTF8);
-              using (var myXmlTextWriter = new XmlTextWriter(fs, System.Text.Encoding.UTF8))
-              {
-                myXmlTextWriter.Formatting = System.Xml.Formatting.Indented;
-                myXmlTextWriter.WriteStartDocument();
-                grabberscript.WriteXml(myXmlTextWriter, XmlWriteMode.IgnoreSchema); myXmlTextWriter.Flush();
-                myXmlTextWriter.Close();
-              }
-              //xmlDoc.Save(fs);
-              fs.Close(); // write buffer and release lock on file (either Flush, Dispose or Close is required)
-              MessageBox.Show("Config saved !", "Info");
-            }
-          }
-          catch (Exception ex)
-          {
-            MessageBox.Show("Config not saved !\n\nError: " + ex.Message, "Info"); 
-          }
-        }
-      }
-    }
-
-    private void LoadXmloldScripts()
-    {
-      // InitMappingTable();
-      xmlConf = new XmlConf(textConfig.Text);
-
-      grabberscript = new Grabber.Data.GrabberScript();
-      bool needsConversion = false;
-      string strTemp;
-      string[] split;
-      List<string> fields;
-
-      // load old script into XMLnode
-      var doc = new XmlDocument();
-      doc.Load(textConfig.Text);
-      XmlNode script = doc.ChildNodes[1].FirstChild;
-
-      #region init the new data structure
-      if (grabberscript == null) grabberscript = new Grabber.Data.GrabberScript();
-
-      if (grabberscript.Settings.Count == 0)
-      {
-        #region Create Settings
-        GrabberScript.SettingsRow settings = grabberscript.Settings.NewSettingsRow();
-        settings.DBName = xmlConf.find(xmlConf.listGen, TagName.DBName)._Value;
-        try { settings.Version = xmlConf.find(xmlConf.listGen, TagName.Version)._Value; } catch (Exception) { settings.Version = ""; }
-        settings.URLPrefix = xmlConf.find(xmlConf.listGen, TagName.URLPrefix)._Value;
-        try { settings.Language = xmlConf.find(xmlConf.listGen, TagName.Language)._Value; } catch (Exception) { settings.Language = ""; }
-        try { settings.Type = xmlConf.find(xmlConf.listGen, TagName.Type)._Value; }
-        catch (Exception) { settings.Type = ""; }
-        try { settings.SearchCleanup = xmlConf.find(xmlConf.listGen, TagName.SearchCleanup)._Value; }
-        catch (Exception) { settings.SearchCleanup = ""; }
-        try { settings.Encoding = xmlConf.find(xmlConf.listGen, TagName.Encoding)._Value; }
-        catch (Exception) { settings.Encoding = ""; }
-        try { settings.Accept = xmlConf.find(xmlConf.listGen, TagName.Accept)._Value; }
-        catch (Exception) { settings.Accept = ""; }
-        try { settings.Useragent = xmlConf.find(xmlConf.listGen, TagName.UserAgent)._Value; }
-        catch (Exception) { settings.Useragent = ""; }
-        try { settings.Headers = xmlConf.find(xmlConf.listGen, TagName.Headers)._Value; }
-        catch (Exception) { settings.Headers = ""; }
-        try { settings.FileBasedReader = (xmlConf.find(xmlConf.listGen, TagName.FileBasedReader)._Value == "true"); }
-        catch (Exception) { settings.FileBasedReader = false; }
-        grabberscript.Settings.AddSettingsRow(settings);
-        #endregion
-      }
-      if (grabberscript.UserOptions.Count == 0)
-      {
-        #region Create UserOptions
-        GrabberScript.UserOptionsRow useroptions = grabberscript.UserOptions.NewUserOptionsRow();
-        // ToDo: Might load values here
-        try { useroptions.MaxActors = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsMaxItems)._Value; }
-        catch { useroptions.MaxActors = string.Empty; }
-
-        string strGrabActorRoles = "";
-        try
-        {
-          strGrabActorRoles = xmlConf.find(xmlConf.listDetail, TagName.KeyCreditsGrabActorRoles)._Value;
-          useroptions.GrabActorRoles = strGrabActorRoles == "true";
-        }
-        catch
-        {
-          useroptions.GrabActorRoles = false;
-        }
-
-        try { useroptions.MaxProducers = xmlConf.find(xmlConf.listDetail, TagName.KeyProductMaxItems)._Value; }
-        catch { useroptions.MaxProducers = string.Empty; }
-
-        try { useroptions.MaxDirectors = xmlConf.find(xmlConf.listDetail, TagName.KeyRealiseMaxItems)._Value; }
-        catch { useroptions.MaxDirectors = string.Empty; }
-
-        try { useroptions.MaxWriters = xmlConf.find(xmlConf.listDetail, TagName.KeyWriterMaxItems)._Value; }
-        catch { useroptions.MaxWriters = string.Empty; }
-
-        try { useroptions.TitleCountry = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleLanguage)._Value; }
-        catch { useroptions.TitleCountry = string.Empty; }
-
-        try { useroptions.MaxTitles = xmlConf.find(xmlConf.listDetail, TagName.KeyTTitleMaxItems)._Value; }
-        catch { useroptions.MaxTitles = string.Empty; }
-
-        try { useroptions.CertificationCountry = xmlConf.find(xmlConf.listDetail, TagName.KeyCertificationLanguage)._Value; }
-        catch { useroptions.CertificationCountry = string.Empty; }
-        grabberscript.UserOptions.AddUserOptionsRow(useroptions);
-        #endregion
-      }
-      if (grabberscript.URLSearch.Count == 0)
-      {
-        #region Create URLSearch
-        GrabberScript.URLSearchRow urlsearch = grabberscript.URLSearch.NewURLSearchRow();
-        urlsearch.URL = xmlConf.find(xmlConf.listSearch, TagName.URL)._Value;
-        urlsearch.Redirection = xmlConf.find(xmlConf.listSearch, TagName.URL)._Param1;
-        urlsearch.StartPage = xmlConf.find(xmlConf.listSearch, TagName.KeyStartPage)._Value;
-        urlsearch.NextPage = xmlConf.find(xmlConf.listSearch, TagName.KeyNextPage)._Value;
-        urlsearch.StepPage = xmlConf.find(xmlConf.listSearch, TagName.KeyStepPage)._Value;
-        grabberscript.URLSearch.AddURLSearchRow(urlsearch);
-        // GrabberScript.SearchRow[] fields = urlsearch.GetSearchRows().Length;
-        if (grabberscript.URLSearch[0].GetSearchDetailsRows().Length == 0)
-        {
-          #region load URLSearchDetails
-          //AntMovieCatalog.CustomFieldRow cfr = data.CustomField.NewCustomFieldRow();
-          //cfr.SetParentRow(data.CustomFieldsProperties[0]);
-          //cfr.Tag = customFieldDefinition[0];
-          //cfr.Name = (!string.IsNullOrEmpty(TranslateColumn(customFieldDefinition[0]))) ? TranslateColumn(customFieldDefinition[0]) : customFieldDefinition[1];
-          //cfr.Type = customFieldDefinition[2];
-          //data.CustomField.AddCustomFieldRow(cfr);
-          foreach (string property in searchUrlItemsList)
-          {
-            GrabberScript.SearchDetailsRow search = grabberscript.SearchDetails.NewSearchDetailsRow();
-            search.SetParentRow(grabberscript.URLSearch[0]);
-            search.Name = property.Replace("Link", "DetailsURL");
-            try { search.Start = XmlConvert.DecodeName(script.SelectSingleNodeFast("URLSearch/KeyStart" + property).InnerText); } catch (Exception) { search.Start = ""; }
-            try { search.End = XmlConvert.DecodeName(script.SelectSingleNodeFast("URLSearch/KeyEnd" + property).InnerText); } catch (Exception) { search.End = ""; }
-            try { search.RegExp = XmlConvert.DecodeName(script.SelectSingleNodeFast("URLSearch/Key" + property + "RegExp").InnerText); } catch (Exception) { search.RegExp = ""; }
-            grabberscript.SearchDetails.AddSearchDetailsRow(search);
-          }
-          #endregion
-        }
-        #endregion
-      }
-
-      #region create the detail items collection
-      GrabberScript.DetailsRow Details = grabberscript.Details.NewDetailsRow();
-      grabberscript.Details.AddDetailsRow(Details);
-
-      foreach (var grabDetailItem in Grabber_URLClass.GrabDetailItems)
-      {
-        string name = grabDetailItem.GrabName;
-
-        GrabberScript.DetailRow detail = grabberscript.Detail.NewDetailRow();
-        // detail.InternalName = name;
-        detail.Name = grabDetailItem.DisplayName;
-        detail.Type = (name.ToLower().StartsWith("url")) ? "URL" : "Value";
-        detail.SetParentRow(Details);
-
-        try 
-        { 
-          detail.Start = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/KeyStart" + name).InnerText) ?? "";
-          detail.End = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/KeyEnd" + name).InnerText) ?? "";
-          detail.Param1 = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/KeyStart" + name).Attributes["Param1"].InnerText) ?? "";
-          detail.Param2 = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/KeyStart" + name).Attributes["Param2"].InnerText) ?? "";
-          try { detail.Param3 = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/Key" + name + "RegExp").InnerText) ?? ""; }
-          catch (Exception) { detail.Param3 = ""; }
-          detail.Index = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/Key" + name + "Index").InnerText) ?? "";
-          detail.SourcePage = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/Key" + name + "Page").InnerText) ?? "";
-          try { detail.MaxItems = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/Key" + name + "MaxItems").InnerText) ?? ""; }
-          catch (Exception) { detail.MaxItems = ""; }
-          try { detail.Filter = XmlConvert.DecodeName(script.SelectSingleNodeFast("Details/Key" + name + "Language").InnerText); }
-          catch (Exception) { detail.Filter = ""; }
-          detail.GetRoles = true;
-          detail.ApplyReplacements = false;
-          detail.RunTime = 0;
-          detail.FinalRegExp = "";
-          // detail.Result = "";
-
-          // strActivePage = this.LoadPage(strPage);
-        }
-        catch (Exception) 
-        { 
-          // if Start fails, we have to assume, there is no definition, so we create an empty one
-          detail.Start = "";
-          detail.End = "";
-          detail.Param1 = "";
-          detail.Param2 = "";
-          detail.Param3 = "";
-          detail.Index = "";
-          detail.SourcePage = "";
-          detail.MaxItems = "";
-          detail.Filter = "";
-          detail.GetRoles = true;
-          detail.ApplyReplacements = false;
-          detail.RunTime = 0;
-          detail.FinalRegExp = "";
-          // detail.Result = "";
-        }
-
-        grabberscript.Detail.AddDetailRow(detail);
-
-      }
-
-      #endregion
-
-      #region create the mapper collection
-      // Read Mapping Infos
-      fields = Grabber.Grabber_URLClass.FieldList();
-
-      if (grabberscript.MappingRules.Count == 0)
-      {
-        GrabberScript.MappingRulesRow row = grabberscript.MappingRules.NewMappingRulesRow();
-        grabberscript.MappingRules.AddMappingRulesRow(row);
-      }
-
-      for (int i = 0; i < 40; i++)
-      {
-        GrabberScript.MappingRuleRow mappingRule = grabberscript.MappingRule.NewMappingRuleRow();
-        mappingRule.SetParentRow(grabberscript.MappingRules[0]);
-        try
-        {
-          string val1 = string.Empty,
-            val2 = string.Empty,
-            val3 = string.Empty,
-            val4 = string.Empty,
-            val5 = string.Empty,
-            val6 = string.Empty,
-            val7 = string.Empty;
-          val1 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param1;
-          if (string.IsNullOrEmpty(val1))
-            val1 = fields[i]; // if missing field in script, replace DB-field name with "right one"
-          val2 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param2;
-          val3 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param3;
-          val4 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param4;
-          val5 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param5;
-          val6 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param6;
-          val7 = xmlConf.find(xmlConf.listMapping, "Field_" + i)._Param7;
-
-          mappingRule.Number = i;
-          mappingRule.InputField = val1;
-          mappingRule.OutputField = val2;
-          mappingRule.Replace = Convert.ToBoolean(val3);
-          mappingRule.AddStart = Convert.ToBoolean(val4);
-          mappingRule.AddEnd = Convert.ToBoolean(val5);
-          mappingRule.MergePreferInput = Convert.ToBoolean(val6);
-          mappingRule.MergePreferOutput = Convert.ToBoolean(val7);
-          mappingRule.ApplyReplacements = false; //new param, initialized false
-        }
-        catch (Exception)
-        {
-          mappingRule.Number = i;
-          mappingRule.InputField = fields[i];
-          mappingRule.OutputField = "";
-          mappingRule.Replace = false;
-          mappingRule.AddStart = false;
-          mappingRule.AddEnd = false;
-          mappingRule.MergePreferInput = false;
-          mappingRule.MergePreferOutput = false;
-          mappingRule.ApplyReplacements = false; //new param, initialized false
-        }
-        grabberscript.MappingRule.AddMappingRuleRow(mappingRule);
-
-      }
-
-      #endregion
-
-      #endregion
-
-      // save new format - will overwrite the old script !!!
-
-
-    }
   }
 }
