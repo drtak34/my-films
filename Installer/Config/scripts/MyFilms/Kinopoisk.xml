@@ -5,7 +5,7 @@
     <URLPrefix>www.kinopoisk.ru</URLPrefix>
     <Language>ru</Language>
     <Type>details|cover</Type>
-    <Version>0.1</Version>
+    <Version>0.2</Version>
     <Encoding>windows-1251</Encoding>
     <SearchCleanup />
     <Accept>text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</Accept>
@@ -56,7 +56,7 @@
       <KeyTTitleMaxItems />
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll />
-      <KeyStartImg Param1="" Param2="">_x003D__x0022_openImgPopup_x0028__x0027_</KeyStartImg>
+      <KeyStartImg Param1="_x002F_images" Param2="http:_x002F__x002F_www.kinopoisk.ru_x002F_images">_x003D__x0022_openImgPopup_x0028__x0027_</KeyStartImg>
       <KeyEndImg>_x0027__x0029_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage />
@@ -113,7 +113,7 @@
       <KeyGenreRegExp>a_x0020_href_x003D__x0022__x002F_lists_x002F_m_act_x0025_5Bgenre._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyGenreRegExp>
       <KeyGenreIndex />
       <KeyGenrePage />
-      <KeyStartYear Param1="" Param2="">_x003C_a_x0020_href_x003D__x0022__x002F_lists_x002F_m_act_x0025_5Byear_x0025_5D_x002F_2013_x002F__x0022__x0020_title_x003D__x0022__x0022__x003E_</KeyStartYear>
+      <KeyStartYear Param1="" Param2="">_x0023_REGEX_x0023__x003C_td_x0020_class_x003D__x0022_type_x0022__x003E_год_x003C__x002F_td_x003E_</KeyStartYear>
       <KeyEndYear>_x003C__x002F_a_x003E_</KeyEndYear>
       <KeyYearIndex />
       <KeyYearPage />

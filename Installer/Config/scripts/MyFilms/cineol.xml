@@ -5,7 +5,7 @@
     <URLPrefix>http://www.cineol.net</URLPrefix>
     <Language>es</Language>
     <Type>details|cover</Type>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Encoding>UTF-8</Encoding>
     <SearchCleanup />
     <Accept />
@@ -131,8 +131,8 @@
       <KeyEndLanguage />
       <KeyLanguageIndex />
       <KeyLanguagePage />
-      <KeyStartTagline Param1="" Param2="">_x003C_div_x0020_id_x003D__x0022_curiosidades_x0022__x0020_class_x003D__x0022_caja-impar_x0022__x003E_</KeyStartTagline>
-      <KeyEndTagline>_x003C_div_x0020_class_x003D__x0022_item_x0022__x003E__x003C_div_x0020_class_x003D__x0022_addthis_toolbox_x0020_addthis_default_style_x0022__x003E_</KeyEndTagline>
+      <KeyStartTagline Param1="" Param2="">_x0023_REGEX_x0023__x003C_div_x0020_id_x003D__x0022_curiosidades_x0022__x0020_class_x003D__x0022_caja-impar_x0022__x003E_._x002A__x003F__x003C_p_x003E_</KeyStartTagline>
+      <KeyEndTagline>_x003C__x002F_div_x003E_</KeyEndTagline>
       <KeyTaglineIndex />
       <KeyTaglinePage>URL_x0020_Redirection_x0020_Generic_x0020_1</KeyTaglinePage>
       <KeyStartCertification Param1="" Param2="" />
@@ -282,6 +282,8 @@
       <KeyStartRuntime Param1="" Param2="">_x003C_time_x0020_itemprop_x003D__x0022_duration_x0022__x0020_datetime_x003D__x0022_PT</KeyStartRuntime>
       <KeyEndRuntime>M_x0022__x003E_</KeyEndRuntime>
       <KeyRuntimeIndex />
+      <KeyLanguageRegExp />
+      <KeyStudioRegExp />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
