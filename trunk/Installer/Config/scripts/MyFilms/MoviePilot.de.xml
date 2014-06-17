@@ -5,7 +5,7 @@
     <URLPrefix>http://www.moviepilot.de</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup> -</SearchCleanup>
     <Accept />
@@ -16,7 +16,7 @@
       <KeyStartThumb Param1="_x0028_" Param2="http:_x002F__x002F_www.moviepilot.de">_x003C_div_x0020_class_x003D__x0027_list-item-poster_x0027__x0020_style_x003D__x0027_background-image:_x0020_url</KeyStartThumb>
       <KeyEndThumb>_x0029__x003B__x0027__x003E_</KeyEndThumb>
       <URL Param1="" Param2="">http:_x002F__x002F_www.moviepilot.de_x002F_suche_x003F_q_x003D__x0023_Search_x0023__x0026_type_x003D_movie</URL>
-      <KeyStartList Param1="" Param2="">Suchergebnisse_x000D__x000A_Filme</KeyStartList>
+      <KeyStartList Param1="" Param2="">Suchergebnisse_x0020_Filme</KeyStartList>
       <KeyEndList>_x003C_div_x0020_class_x003D__x0027_sidebar_x0027__x0020_id_x003D__x0027_sidebar_x0027__x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
       <KeyStepPage>_x0031_</KeyStepPage>
@@ -136,8 +136,8 @@
       <KeyEndTagline />
       <KeyTaglineIndex />
       <KeyTaglinePage />
-      <KeyStartCertification Param1="_x0023_REGEX_x0023_freigegeben" Param2="">_x0023_REGEX_x0023_Originaltitel:._x002A__x003F_insist_x0022__x003E_</KeyStartCertification>
-      <KeyEndCertification>_x003C__x002F_span_x003E_</KeyEndCertification>
+      <KeyStartCertification Param1="_x002C_" Param2="">_x0023_REGEX_x0023_Laufzeit._x002A__x003F__x002C_</KeyStartCertification>
+      <KeyEndCertification>_x003C_a_x0020_href</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
       <KeyCertificationPage />
@@ -279,6 +279,8 @@
       <KeyTrailerMaxItems />
       <KeyTrailerLanguage />
       <KeyTrailerPage>URL_x0020_Redirection_x0020_Trailer</KeyTrailerPage>
+      <KeyLanguageRegExp />
+      <KeyStudioRegExp />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />

@@ -5,7 +5,7 @@
     <URLPrefix />
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>1.2</Version>
+    <Version>1.3</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept />
@@ -76,10 +76,10 @@
       <KeyRate2Index />
       <KeyRate2Page />
       <BaseRating>_x0031_0</BaseRating>
-      <KeyStartSyn Param1="_x0023_REGEX_x0023_.mehr." Param2="">_x003C_h3_x003E_Langinhalt_x003C__x002F_h3_x003E_</KeyStartSyn>
-      <KeyEndSyn>_x003C__x002F_div_x003E_</KeyEndSyn>
+      <KeyStartSyn Param1="_x0023_REGEX_x0023_.mehr." Param2="">Inhalt:</KeyStartSyn>
+      <KeyEndSyn>_x003C__x002F_section_x003E_</KeyEndSyn>
       <KeySynIndex />
-      <KeySynPage>URL_x0020_Redirection_x0020_Description</KeySynPage>
+      <KeySynPage />
       <KeyStartRealise Param1="_x0023_REGEX_x0023_" Param2="">Regie</KeyStartRealise>
       <KeyEndRealise>_x003C__x002F_section_x003E__x003C_section_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
@@ -92,14 +92,14 @@
       <KeyProductPage>URL_x0020_Redirection_x0020_Persons</KeyProductPage>
       <KeyProductRegExp>class_x003D__x0022_item_content_x0022__x003E_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F_Rolle:_x0020__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyProductRegExp>
       <KeyProductMaxItems />
-      <KeyStartWriter Param1="_x0023_REGEX_x0023_" Param2="">Drehbuch</KeyStartWriter>
+      <KeyStartWriter Param1="_x003C__x002F_h5_x003E_" Param2="_x002C__x0020_">Drehbuch</KeyStartWriter>
       <KeyEndWriter>_x003C__x002F_section_x003E__x003C_section_x003E_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage>URL_x0020_Redirection_x0020_Persons</KeyWriterPage>
       <KeyWriterRegExp>class_x003D__x0022_item_content_x0022__x003E_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F_Rolle:_x0020__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyWriterRegExp>
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h4_x003E_._x002A__x003F_arsteller_x003C_</KeyStartCredits>
-      <KeyEndCredits>_x0023_REGEX_x0023_Produzent</KeyEndCredits>
+      <KeyEndCredits>_x003C__x002F_section_x003E_</KeyEndCredits>
       <KeyCreditsRegExp>class_x003D__x0022_item_content_x0022__x003E_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_._x002A__x003F_Rolle:_x0020__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage>URL_x0020_Redirection_x0020_Persons</KeyCreditsPage>
@@ -110,9 +110,9 @@
       <KeyCountryRegExp />
       <KeyCountryIndex />
       <KeyCountryPage />
-      <KeyStartGenre Param1="_x0023_REGEX_x0023_" Param2="">Genre</KeyStartGenre>
-      <KeyEndGenre>_x003C__x002F_header_x003E_</KeyEndGenre>
-      <KeyGenreRegExp>_x003D__x0022_genre_x0022__x0020__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_span</KeyGenreRegExp>
+      <KeyStartGenre Param1="" Param2="">Genre:</KeyStartGenre>
+      <KeyEndGenre>_x007C_</KeyEndGenre>
+      <KeyGenreRegExp />
       <KeyGenreIndex />
       <KeyGenrePage />
       <KeyStartYear Param1="_x0023_REGEX_x0023__x005C_D" Param2="">_x0023_REGEX_x0023__x0022__x0020_itemprop_x003D__x0022_dateCreated</KeyStartYear>
@@ -292,6 +292,8 @@
       <KeyStartRuntime Param1="" Param2="">_x0023_REGEX_x0023__x003C_time_x0020_itemprop_x003D__x0022_duration_x0022_._x002A__x003F__x003E_</KeyStartRuntime>
       <KeyEndRuntime>_x003C__x002F_time_x003E__x0020_</KeyEndRuntime>
       <KeyRuntimeIndex />
+      <KeyLanguageRegExp />
+      <KeyStudioRegExp />
     </Details>
     <Mapping>
       <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
