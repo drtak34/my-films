@@ -264,9 +264,15 @@ namespace Grabber_Interface
 
     private void button_Load_Click(object sender, EventArgs e)
     {
-      if (!TextURL.Text.Contains("#Search#") && !TextURL.Text.Contains("#Filename#") && !TextSearch.Text.Contains("\\"))
+      if (cbFileBasedReader.Checked == false && !TextURL.Text.Contains("#Search#"))
       {
-        MessageBox.Show("Please, replace search keyword by #Search# in URL or use a media path for local grabbing in Testpage !", "Error");
+        MessageBox.Show("Please, replace search keyword by #Search# in URL !", "Error");
+        return;
+      }
+
+      if (cbFileBasedReader.Checked == true && !TextSearch.Text.Contains("\\"))
+      {
+        MessageBox.Show("Please, make sure you have a media path for local (nfo) grabbing in Testpage !", "Error");
         return;
       }
 
