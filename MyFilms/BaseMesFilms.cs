@@ -1634,7 +1634,7 @@ namespace MyFilmsPlugin.MyFilms
         string file = Path.Combine(Config.GetFolder(Config.Dir.Config), ("MyFilms_Queue_" + name + ".dat"));
         if (q == null || q.Count == 0)
         {
-          LogMyFilms.Error("SaveQueueToDisk() - nothing to save for queue '" + name + "' - deleteing file '" + file + "'");
+          LogMyFilms.Info("SaveQueueToDisk() - nothing to save for queue '" + name + "' - deleteing file '" + file + "'");
           if (File.Exists(file)) File.Delete(file);
           return;
         }
