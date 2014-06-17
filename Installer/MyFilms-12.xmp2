@@ -4917,104 +4917,58 @@ public class Script
 {
   public static void Main(PackageClass packageClass, ActionItem actionItem)
   {
-	//// get base path for MediaPortal
-	//string basePath = MpeInstaller.TransformInRealPath("%Base%");
-	//// get the file version info for currently installed MediaPortal.
-               //FileVersionInfo mpVersionInfo = FileVersionInfo.GetVersionInfo(basePath + "\\MediaPortal.exe");
-	////Version mpNet4Version = new System.Version(1, 6, 0, 0);
-                //Version mpCurrVersion = new System.Version(mpVersionInfo.FileVersion);
-                ////string source = string.Empty;
-	//string destination = basePath + "\\PluginConfigLoader.exe";
-	
-	// copy the correct compiled version of the config launcher based on installed version
-	//if (mpCurrVersion.CompareTo(mpNet4Version) &amp;gt;= 0)
-	//{
-	//	// .Net 4... current MP version is v1.6 or greater
-	//	source = basePath + @"\MyFilms\Tools\.NET 40\PluginConfigLoader.exe";
-	//}
-	//else
-	//{
-	//	// .Net 3... current MP version is less than v1.6
-	//	source = basePath + @"\MyFilms\Tools\.NET 30\PluginConfigLoader.exe";
-	//}
-	//
-	//try { File.Copy(source, destination, true); } catch {}
+    //// get base path for MediaPortal
+    //string basePath = MpeInstaller.TransformInRealPath("%Base%");
+    //// get the file version info for currently installed MediaPortal.
+    //FileVersionInfo mpVersionInfo = FileVersionInfo.GetVersionInfo(basePath + "\\MediaPortal.exe");
+    ////Version mpNet4Version = new System.Version(1, 6, 0, 0);
+    //Version mpCurrVersion = new System.Version(mpVersionInfo.FileVersion);
+    ////string source = string.Empty;
+    //string destination = basePath + "\\PluginConfigLoader.exe";
+
+    // copy the correct compiled version of the config launcher based on installed version
+    //if (mpCurrVersion.CompareTo(mpNet4Version) &amp;gt;= 0)
+    //{
+    //	// .Net 4... current MP version is v1.6 or greater
+    //	source = basePath + @"\MyFilms\Tools\.NET 40\PluginConfigLoader.exe";
+    //}
+    //else
+    //{
+    //	// .Net 3... current MP version is less than v1.6
+    //	source = basePath + @"\MyFilms\Tools\.NET 30\PluginConfigLoader.exe";
+    //}
+    //
+    //try { File.Copy(source, destination, true); } catch {}
 
     System.Version MpSkinVersion = MediaPortal.Common.Utils.CompatibilityManager.SkinVersion;
+    // System.Version MPVersion = Assembly.GetEntryAssembly().GetName().Version;
 
     System.Version Version13 = new System.Version(1, 3, 0, 0);
     System.Version Version14 = new System.Version(1, 4, 0, 0);
-    System.Version Version15 = new System.Version(1, 5, 0, 0);
-    System.Version Version16 = new System.Version(1, 6, 0, 0);
-    System.Version Version17 = new System.Version(1, 7, 0, 0);
 
-    if (MpSkinVersion.CompareTo(Version17) &gt;= 0)
+    //string mpversion = MpeCore.Classes.VersionProvider.MediaPortalVersion.MinimumMPVersionRequired.ToString();
+    //switch (mpversion)
+    //{
+    //  case  "1.3.100.0":
+    //    break;
+    //  case "1.2.100.0":
+    //    break;
+    //  case "1.1.6.27644":
+    //    break;
+    //  default:
+    //    break;
+    //}
+
+    if (MpSkinVersion.CompareTo(Version14) &gt;= 0)
     {
       if (!packageClass.Silent)
       {
-        MessageBox.Show("MP 1.7.x detected ! Now updating skin files ...");
-      }
-      string myFilmsDefaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Config%"), @"MyFilms\Skin.13\DefaultWide");
-      string defaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Skin%"), "DefaultWide");
-      if (Directory.Exists(myFilmsDefaultWideFolder) &amp;&amp; Directory.Exists(defaultWideFolder))
-      {
-        CopyFiles(myFilmsDefaultWideFolder, defaultWideFolder, true);
-      }
-             
-      myFilmsDefaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Config%"), @"MyFilms\Skin.13\Default");
-      defaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Skin%"), "Default");
-      if (Directory.Exists(myFilmsDefaultWideFolder) &amp;&amp; Directory.Exists(defaultWideFolder))
-      {
-        CopyFiles(myFilmsDefaultWideFolder, defaultWideFolder, true);
-      }
-
-      return;
-    }
-else if (MpSkinVersion.CompareTo(Version13) &gt;= 0)
-
-
-    if (MpeCore.Classes.VersionProvider.MediaPortalVersion.MinimumMPVersionRequired.ToString() == "1.3.100.0")
-    {
-      
-    }
-    if (MpeCore.Classes.VersionProvider.MediaPortalVersion.MinimumMPVersionRequired.ToString() == "1.2.100.0")
-    {
-      
-    }
-    if (MpeCore.Classes.VersionProvider.MediaPortalVersion.MinimumMPVersionRequired.ToString() == "1.1.6.27644")
-    {
-      
-    }
-
-
-    if (MpSkinVersion.CompareTo(Version16) &gt;= 0)
-    {
-      if (!packageClass.Silent)
-      {
-        MessageBox.Show("MP 1.6.x detected ! Now updating skin files ...");
+        MessageBox.Show("MP Version &gt;= 1.4 detected ! Now updating skin files ...");
       }
       Copy13();
       return;
     }
-else if (MpSkinVersion.CompareTo(Version15) &gt;= 0)
-    {
-      if (!packageClass.Silent)
-      {
-        MessageBox.Show("MP 1.5.x detected ! Now updating skin files ...");
-      }
-      Copy13();
-      return;
-    }
-else if (MpSkinVersion.CompareTo(Version14) &gt;= 0)
-    {
-      if (!packageClass.Silent)
-      {
-        MessageBox.Show("MP 1.4.x detected ! Now updating skin files ...");
-      }
-      Copy13();
-      return;
-    }
-else if (MpSkinVersion.CompareTo(Version13) &gt;= 0)
+    else if (MpSkinVersion.CompareTo(Version13) &gt;= 0)
     {
       if (!packageClass.Silent)
       {
@@ -5023,7 +4977,7 @@ else if (MpSkinVersion.CompareTo(Version13) &gt;= 0)
       Copy13();
       return;
     }
-else
+    else
     {
       if (!packageClass.Silent)
       {
@@ -5035,19 +4989,19 @@ else
 
   public static void Copy13()
   {
-      string myFilmsDefaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Config%"), @"MyFilms\Skin.13\DefaultWide");
-      string defaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Skin%"), "DefaultWide");
-      if (Directory.Exists(myFilmsDefaultWideFolder) &amp;&amp; Directory.Exists(defaultWideFolder))
-      {
-        CopyFiles(myFilmsDefaultWideFolder, defaultWideFolder, true);
-      }
-             
-      myFilmsDefaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Config%"), @"MyFilms\Skin.13\Default");
-      defaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Skin%"), "Default");
-      if (Directory.Exists(myFilmsDefaultWideFolder) &amp;&amp; Directory.Exists(defaultWideFolder))
-      {
-        CopyFiles(myFilmsDefaultWideFolder, defaultWideFolder, true);
-      }
+    string myFilmsDefaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Config%"), @"MyFilms\Skin.13\DefaultWide");
+    string defaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Skin%"), "DefaultWide");
+    if (Directory.Exists(myFilmsDefaultWideFolder) &amp;&amp; Directory.Exists(defaultWideFolder))
+    {
+      CopyFiles(myFilmsDefaultWideFolder, defaultWideFolder, true);
+    }
+
+    myFilmsDefaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Config%"), @"MyFilms\Skin.13\Default");
+    defaultWideFolder = Path.Combine(MpeCore.MpeInstaller.TransformInRealPath("%Skin%"), "Default");
+    if (Directory.Exists(myFilmsDefaultWideFolder) &amp;&amp; Directory.Exists(defaultWideFolder))
+    {
+      CopyFiles(myFilmsDefaultWideFolder, defaultWideFolder, true);
+    }
   }
 
 
@@ -5383,9 +5337,9 @@ Please refer to the Wiki online documentation.</Value>
     <UpdateUrl>http://my-films.googlecode.com/svn/trunk/Installer/update.xml</UpdateUrl>
     <Version>
       <Major>6</Major>
-      <Minor>0</Minor>
-      <Build>3</Build>
-      <Revision>2979</Revision>
+      <Minor>1</Minor>
+      <Build>0</Build>
+      <Revision>2995</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -5561,7 +5515,7 @@ Cinefacts has relaunched their website, so grabbers don't work anymore
 Add GUI Global Options to change default config and default setting</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.3.2921.mpe1</OnlineLocation>
-    <ReleaseDate>2014-04-08T22:01:55.7074946+02:00</ReleaseDate>
+    <ReleaseDate>2014-06-16T23:42:39.0416518+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
