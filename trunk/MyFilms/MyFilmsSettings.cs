@@ -91,6 +91,7 @@ namespace MyFilmsPlugin.MyFilms
         isConfig = !System.IO.Path.GetFileNameWithoutExtension(EntryAssembly.Location).Equals("mediaportal", StringComparison.InvariantCultureIgnoreCase);
         Version = Assembly.GetCallingAssembly().GetName().Version;
         MPVersion = Assembly.GetEntryAssembly().GetName().Version;
+        MPSkinVersion = MediaPortal.Common.Utils.CompatibilityManager.SkinVersion;
         BuildDate = getLinkerTimeStamp(Assembly.GetAssembly(typeof(MyFilmsSettings)).Location);
         MPBuildDate = getLinkerTimeStamp(System.IO.Path.Combine(MyFilmsSettings.GetPath(Path.app), "MediaPortal.exe"));
         UserAgent = string.Format("MyFilms{0}/{1}", isConfig ? "Config" : string.Empty, Version);
@@ -136,6 +137,8 @@ namespace MyFilmsPlugin.MyFilms
     public static Version Version { get; private set; }
 
     public static Version MPVersion { get; private set; }
+
+    public static Version MPSkinVersion { get; private set; }
 
     public static DateTime BuildDate { get; private set; }
 
