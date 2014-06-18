@@ -1415,6 +1415,15 @@ You can enable or disable Trakt synchronisation separately for each My Films con
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
+  <data name="txtCountry.ToolTip" xml:space="preserve">
+    <value>Set a country short code (e.g. "gb", "de", etc.) will make the logo engine 
+to first search for matching in such a subdirectory.
+This allows to have country specific logos e.g. for certification that do not overlap.
+If not set, logo engine will try to find a subdirectory matching the MP language, 
+preferring logos there.
+Both will fallback to the default logo directory in case the subdirectory does not exist 
+and also if the subdirectory exists, but no matching logo can be found.</value>
+  </data>
   <data name="label41.Text" xml:space="preserve">
     <value>Development: Guzzi, Zebons, Orion Hall, Titof
 Wiki Docs: Dadeo, Guzzi

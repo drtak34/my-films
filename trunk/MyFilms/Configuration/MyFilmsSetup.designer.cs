@@ -627,6 +627,8 @@
       this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
+      this.txtCountry = new System.Windows.Forms.TextBox();
+      this.lblCountry = new System.Windows.Forms.Label();
       ownerLabel = new System.Windows.Forms.Label();
       mailLabel = new System.Windows.Forms.Label();
       siteLabel = new System.Windows.Forms.Label();
@@ -5581,6 +5583,8 @@
       // 
       // Tab_Logos
       // 
+      this.Tab_Logos.Controls.Add(this.lblCountry);
+      this.Tab_Logos.Controls.Add(this.txtCountry);
       this.Tab_Logos.Controls.Add(this.btnUpdate);
       this.Tab_Logos.Controls.Add(this.btnLogoClearCache);
       this.Tab_Logos.Controls.Add(this.lblLogoPresets);
@@ -5631,7 +5635,7 @@
       // lblLogoPresets
       // 
       this.lblLogoPresets.AutoSize = true;
-      this.lblLogoPresets.Location = new System.Drawing.Point(108, 11);
+      this.lblLogoPresets.Location = new System.Drawing.Point(110, 11);
       this.lblLogoPresets.Name = "lblLogoPresets";
       this.lblLogoPresets.Size = new System.Drawing.Size(42, 13);
       this.lblLogoPresets.TabIndex = 1;
@@ -5698,7 +5702,7 @@
       // lblLogosPath
       // 
       this.lblLogosPath.AutoSize = true;
-      this.lblLogosPath.Location = new System.Drawing.Point(108, 36);
+      this.lblLogosPath.Location = new System.Drawing.Point(110, 36);
       this.lblLogosPath.Name = "lblLogosPath";
       this.lblLogosPath.Size = new System.Drawing.Size(106, 13);
       this.lblLogosPath.TabIndex = 6;
@@ -6544,6 +6548,23 @@
       this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
       this.layoutFilmsComboBox.TabIndex = 34;
       // 
+      // txtCountry
+      // 
+      this.txtCountry.Location = new System.Drawing.Point(75, 33);
+      this.txtCountry.Name = "txtCountry";
+      this.txtCountry.Size = new System.Drawing.Size(29, 20);
+      this.txtCountry.TabIndex = 86;
+      this.ToolTip1.SetToolTip(this.txtCountry, resources.GetString("txtCountry.ToolTip"));
+      // 
+      // lblCountry
+      // 
+      this.lblCountry.AutoSize = true;
+      this.lblCountry.Location = new System.Drawing.Point(26, 36);
+      this.lblCountry.Name = "lblCountry";
+      this.lblCountry.Size = new System.Drawing.Size(43, 13);
+      this.lblCountry.TabIndex = 87;
+      this.lblCountry.Text = "Country";
+      // 
       // MyFilmsSetup
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -7227,5 +7248,7 @@
         private Label labelAMCUstartdelay;
         private TextBox AntViewFilterSaveString;
         private Button btnTestMode;
+        private Label lblCountry;
+        private TextBox txtCountry;
     }
 }

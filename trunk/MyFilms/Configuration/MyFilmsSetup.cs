@@ -1116,6 +1116,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogoPresets", comboBoxLogoPresets.Text); // Added Presets to Logo Config
       XmlConfig.WriteXmlConfig(wfile, "ID0000", "LogosPath", txtLogosPath.Text);
       XmlConfig.WriteXmlConfig(wfile, "ID0000", "Spacing", comboBoxLogoSpacing.Text); // Added Spacing to Logo Config
+      XmlConfig.WriteXmlConfig(wfile, "ID0000", "Country", txtCountry.Text); // Added Country to Logo Config
+
       int iID2001 = 0;
       int iID2002 = 0;
       int iID2003 = 0;
@@ -3440,6 +3442,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       //txtLogosPath.Text = XmlConfig.ReadXmlConfig("MyFilmsLogos_" + Configuration.CurrentConfig, "ID0000", "LogosPath", Config.GetDirectoryInfo(Config.Dir.Thumbs).ToString() + "\\MyFilms_Logos");
       txtLogosPath.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogosPath", "");
       comboBoxLogoSpacing.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "Spacing", "1");
+      txtCountry.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "Country", "");
       selected_Logo_Item = -1;
       comboBoxLogoPresets.Text = XmlConfig.ReadXmlConfig(wfile, "ID0000", "LogoPresets", "Use Logos of currently selected skin");
       LogosPresetSelect();
@@ -3558,7 +3561,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         btnLogosPath.Enabled = true;
         comboBoxLogoSpacing.Enabled = true;
         btnLogoClearCache.Enabled = true;
-        txtLogosPath.Enabled = true;
+        txtCountry.Enabled = true;
         comboBoxLogoPresets.Enabled = true;
         if (LogoView.Items.Count == 0)
           Read_XML_Logos(); // Old: //Read_XML_Logos(Config_Name.Text);
@@ -3580,11 +3583,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         btnUp.Enabled = false;
         btnDown.Enabled = false;
         btnUpdate.Enabled = false;
-        txtLogosPath.Enabled = true;
-        btnLogosPath.Enabled = true;
+        txtLogosPath.Enabled = false;
+        btnLogosPath.Enabled = false;
         comboBoxLogoSpacing.Enabled = false;
         btnLogoClearCache.Enabled = false;
-        txtLogosPath.Enabled = false;
+        txtCountry.Enabled = false;
         comboBoxLogoPresets.Enabled = false;
       }
     }
