@@ -24,6 +24,7 @@
 namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
+  using System.IO;
   using System.Collections;
   using System.Collections.Generic;
   using System.Data;
@@ -33,7 +34,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
   using MediaPortal.Configuration;
   using MediaPortal.GUI.Library;
-  using MyFilmsPlugin.MyFilms.MyFilmsGUI;
+  using MyFilmsGUI;
 
   public class Logos
   {
@@ -48,6 +49,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
     public static string LogosPathThumbs = MyFilmsSettings.GetPath(MyFilmsSettings.Path.ThumbsCache) + @"\MyFilms_Logos\"; // Path for creating Thumbs - hardcoded.
     public static int Spacer = 1; // Added for Logo Spacing, set to 1 for default
     public static string LogoConfigOverride = String.Empty; // Added for differentiate cache files for override configs to be able to change skin from GUI having correct logos
+    public static string Country = string.Empty; // Added for Logo subdirectories for e.g. certification - example: Thumbs\MyFilms\DefaultLogos\Certification\de\... (here Country = "de")
+    private static bool UseCountryLogos = false;
     #endregion
 
     public Logos()
@@ -66,7 +69,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         logoConfigPathSkin = Config.GetDirectoryInfo(Config.Dir.Skin) + @"\" + xmlreader.GetValueAsString("skin", "name", "DefaultWide"); // Get current path to active skin directory
       }
 
-      if (System.IO.File.Exists(logoConfigPathSkin + @"\MyFilmsLogos.xml"))
+      if (File.Exists(logoConfigPathSkin + @"\MyFilmsLogos.xml"))
       {
         try
         {
@@ -108,8 +111,27 @@ namespace MyFilmsPlugin.MyFilms.Utils
         if (LogosPath.LastIndexOf("\\", System.StringComparison.Ordinal) != LogosPath.Length - 1)
           LogosPath = LogosPath + "\\";
         Spacer = xmlConfig.ReadXmlConfig(activeLogoConfigFile, "ID0000", "Spacing", 1);
+        Country = xmlConfig.ReadXmlConfig(activeLogoConfigFile, "ID0000", "Country", string.Empty);
+
+        // use Country setting of Logos if available
+        if (Country.Length > 0)
+        {
+          if (Directory.Exists(LogosPath + Country))
+          {
+            UseCountryLogos = true;
+          }
+        }
+
+        // use MP language, if directory exists
+        if (MyFilmsSettings.MPLanguage.Length > 0 && Directory.Exists(LogosPath + MyFilmsSettings.MPLanguage))
+        {
+          Country = MyFilmsSettings.MPLanguage;
+          UseCountryLogos = true;
+        }
+
         LogMyFilms.Debug("Logo path for reading logos        : '" + LogosPath + "'");
-        LogMyFilms.Debug("Logo path for storing cached logos : '" + LogosPathThumbs + "' with spacing = '" + Spacer.ToString() + "'");
+        LogMyFilms.Debug("Logo path for storing cached logos : '" + LogosPathThumbs + "' with spacing = '" + Spacer + "'");
+        LogMyFilms.Debug("Logo Country                       : '" + Country + "', MP language = '" + MyFilmsSettings.MPLanguage + "'");
         int i = 0;
         ID2001Logos.Clear();
         ID2002Logos.Clear();
@@ -191,7 +213,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         catch (Exception)
         {
         }
-        if (!System.IO.File.Exists(LogosPathThumbs + fileLogoName) || wHeight != imgHeight || wWidth != imgWidth)
+        if (!File.Exists(LogosPathThumbs + fileLogoName) || wHeight != imgHeight || wWidth != imgWidth)
         {
           Bitmap b = new Bitmap(imgWidth, imgHeight);
           Image img = b;
@@ -205,7 +227,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
           catch (Exception e)
           {
-            LogMyFilms.Info("Unable to save Logo file ! error : " + e.Message.ToString());
+            LogMyFilms.Info("Unable to save Logo file ! error : " + e.Message);
           }
         }
         return LogosPathThumbs + fileLogoName;
@@ -219,15 +241,21 @@ namespace MyFilmsPlugin.MyFilms.Utils
       string fileLogoName = string.Empty;
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
       {
+        // Added to also support specific Logos in language subdirectories
+        if (UseCountryLogos && File.Exists(LogosPath + "\\" + Country + "\\" + wtab[7])) // Check, if logofile is present in country name logo subdirectory of current skin
+        {
+          wtab[7] = LogosPath + "\\" + Country + "\\" + wtab[7];
+        }
         // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
-        if (!System.IO.File.Exists(wtab[7]) && System.IO.File.Exists(LogosPath + wtab[7]))  // Check, if logofile is present in logo directory of current skin
+        else if (!File.Exists(wtab[7]) && File.Exists(LogosPath + wtab[7])) // Check, if logofile is present in logo directory of current skin
         {
           wtab[7] = LogosPath + wtab[7];
         }
         else
+        {
           if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
           {
-            string[] filePathsLogoSearch = System.IO.Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories);
+            string[] filePathsLogoSearch = Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories);
             if (filePathsLogoSearch.Length > 0)
               try
               {
@@ -235,8 +263,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
               }
               catch { }
           }
+        }
 
-        if (System.IO.File.Exists(wtab[7]) && System.IO.Path.GetDirectoryName(wtab[7]).Length > 0)
+        if (File.Exists(wtab[7]) && Path.GetDirectoryName(wtab[7]).Length > 0)
         {
           bool cond1 = GetRecordRule(r, wtab[0], wtab[1], wtab[2]);
           bool cond2 = GetRecordRule(r, wtab[4], wtab[5], wtab[6]);
@@ -245,7 +274,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (!listelogos.Contains(wtab[7]))
             {
               listelogos.Add(wtab[7]);
-              fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
+              fileLogoName = fileLogoName + "_" + Path.GetFileNameWithoutExtension(wtab[7]);
             }
             continue;
           }
@@ -254,7 +283,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (!listelogos.Contains(wtab[7]))
             {
               listelogos.Add(wtab[7]);
-              fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
+              fileLogoName = fileLogoName + "_" + Path.GetFileNameWithoutExtension(wtab[7]);
             }
             continue;
           }
@@ -263,7 +292,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             if (!listelogos.Contains(wtab[7]))
             {
               listelogos.Add(wtab[7]);
-              fileLogoName = fileLogoName + "_" + System.IO.Path.GetFileNameWithoutExtension(wtab[7]);
+              fileLogoName = fileLogoName + "_" + Path.GetFileNameWithoutExtension(wtab[7]);
             }
           }
         }

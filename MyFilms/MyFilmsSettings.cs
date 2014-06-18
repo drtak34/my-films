@@ -72,10 +72,6 @@ namespace MyFilmsPlugin.MyFilms
 
     #endregion
 
-    #region Vars
-
-    #endregion
-
     #region Constructors
 
     static MyFilmsSettings()
@@ -86,28 +82,28 @@ namespace MyFilmsPlugin.MyFilms
       EntryAssembly = null;
       try
       {
-        apppath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+        apppath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
         EntryAssembly = Assembly.GetEntryAssembly();
         isConfig = !System.IO.Path.GetFileNameWithoutExtension(EntryAssembly.Location).Equals("mediaportal", StringComparison.InvariantCultureIgnoreCase);
         Version = Assembly.GetCallingAssembly().GetName().Version;
         MPVersion = Assembly.GetEntryAssembly().GetName().Version;
         MPSkinVersion = MediaPortal.Common.Utils.CompatibilityManager.SkinVersion;
-        BuildDate = getLinkerTimeStamp(Assembly.GetAssembly(typeof(MyFilmsSettings)).Location);
-        MPBuildDate = getLinkerTimeStamp(System.IO.Path.Combine(MyFilmsSettings.GetPath(Path.app), "MediaPortal.exe"));
+        BuildDate = GetLinkerTimeStamp(Assembly.GetAssembly(typeof(MyFilmsSettings)).Location);
+        MPBuildDate = GetLinkerTimeStamp(System.IO.Path.Combine(GetPath(Path.app), "MediaPortal.exe"));
         UserAgent = string.Format("MyFilms{0}/{1}", isConfig ? "Config" : string.Empty, Version);
       }
       catch (Exception)
       {
       }
 
-      logPath = Config.GetFile(Config.Dir.Log, "MyFilms.log");
+      logPath       = Config.GetFile(Config.Dir.Log, "MyFilms.log");
       backupLogPath = Config.GetFile(Config.Dir.Log, "MyFilms.bak");
-      langPath = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
+      langPath      = Config.GetSubFolder(Config.Dir.Language, "MyFilms");
 
-      MyFilmsPath = Config.GetFolder(Config.Dir.Config) + @"\MyFilms";
+      MyFilmsPath   = Config.GetFolder(Config.Dir.Config) + @"\MyFilms";
       MyFilmsThumbsPath = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms";
       DefaultImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\DefaultImages";
-      ViewImages = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\ViewImages";
+      ViewImages    = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\ViewImages";
 
       ThumbsCachePath = Config.GetFolder(Config.Dir.Thumbs) + @"\MyFilms\ThumbsCache";
 
@@ -115,6 +111,19 @@ namespace MyFilmsPlugin.MyFilms
       skinPath = Config.GetFolder(Config.Dir.Skin);
 
       initFolders();
+
+      try
+      {
+        using (var reader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
+        {
+          string language = reader.GetValueAsString("gui", "language", null);
+          MPLanguage = language != null ? Utils.GUILocalizeStrings.GetCultureName(language) : "Default";
+        }
+      }
+      catch (Exception)
+      {
+        MPLanguage = "Default"; // use default 
+      }
     }
 
     #endregion
@@ -143,6 +152,8 @@ namespace MyFilmsPlugin.MyFilms
     public static DateTime BuildDate { get; private set; }
 
     public static DateTime MPBuildDate { get; private set; }
+
+    public static string MPLanguage { get; private set; }
 
     public static string UserAgent { get; private set; }
 
@@ -215,7 +226,7 @@ namespace MyFilmsPlugin.MyFilms
     {
       try
       {
-        createDirIfNotExists(langPath);
+        CreateDirIfNotExists(langPath);
       }
       catch (Exception ex)
       {
@@ -223,13 +234,13 @@ namespace MyFilmsPlugin.MyFilms
       }
     }
 
-    private static void createDirIfNotExists(string dir)
+    private static void CreateDirIfNotExists(string dir)
     {
       if (!Directory.Exists(System.IO.Path.GetDirectoryName(dir)))
         Directory.CreateDirectory(System.IO.Path.GetDirectoryName(dir));
     }
 
-    private static DateTime getLinkerTimeStamp(string filePath)
+    private static DateTime GetLinkerTimeStamp(string filePath)
     {
       const int PeHeaderOffset = 60;
       const int LinkerTimestampOffset = 8;
