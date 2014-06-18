@@ -5166,7 +5166,7 @@ namespace Grabber_Interface
         label8.Text = "#Filename#";
         btnLoadDetailInWeb.Text = "Show";
         textRedir.Visible = false;
-        textSearchCleanup.Visible = false;
+        // textSearchCleanup.Visible = false;
         textUserAgent.Visible = false;
         textAccept.Visible = false;
         textHeaders.Visible = false;
@@ -5184,13 +5184,14 @@ namespace Grabber_Interface
         label11.Visible = false;
         textPage.Visible = false;
         button_Load_Web.Visible = false;
+        cbIgnoreCase.Visible = false;
       }
       else
       {
         label8.Text = "#Search#";
         btnLoadDetailInWeb.Text = "Web";
         textRedir.Visible = true;
-        textSearchCleanup.Visible = true;
+        // textSearchCleanup.Visible = true;
         textUserAgent.Visible = true;
         textAccept.Visible = true;
         textHeaders.Visible = true;
@@ -5208,6 +5209,7 @@ namespace Grabber_Interface
         label11.Visible = true;
         textPage.Visible = true;
         button_Load_Web.Visible = true;
+        cbIgnoreCase.Visible = true;
       }
     }
 
