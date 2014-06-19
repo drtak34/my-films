@@ -5,23 +5,23 @@
     <URLPrefix>http:\\www.moviemeter.nl</URLPrefix>
     <Language>nl</Language>
     <Type>details|cover</Type>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Encoding>UTF-8</Encoding>
     <SearchCleanup />
-    <Accept>application/json</Accept>
+    <Accept />
     <UserAgent />
     <Headers />
     <FileBasedReader>false</FileBasedReader>
     <URLSearch>
       <KeyStartThumb Param1="" Param2="">_x003C_img_x0020_src_x003D__x0022_</KeyStartThumb>
       <KeyEndThumb>_x0022_</KeyEndThumb>
-      <URL Param1="http:_x002F__x002F_www.moviemeter.nl_x002F_film_x002F_searchresults_x0023_results" Param2="">http:_x002F__x002F_www.moviemeter.nl_x002F_film_x002F_search_x002F__x0023_Search_x0023_</URL>
-      <KeyStartList Param1="" Param2="">_x003C_div_x0020_id_x003D__x0022_searchResult_x0022__x003E_</KeyStartList>
-      <KeyEndList>_x003C__x002F_div_x003E__x003C__x002F_div_x003E_</KeyEndList>
+      <URL Param1="" Param2="">http:_x002F__x002F_www.moviemeter.nl_x002F_film_x002F_search_x002F__x0023_Search_x0023_</URL>
+      <KeyStartList Param1="" Param2="">_x003E__x003C_h2_x003E_Films_x003C__x002F_h2_x003E_</KeyStartList>
+      <KeyEndList>_x003C_h2_x003E_</KeyEndList>
       <KeyStartPage Param1="" Param2="" />
       <KeyStepPage />
       <KeyNextPage />
-      <KeyStartTitle Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_a_x0020_href_x003D__x0022_._x002A__x003F__x003E_</KeyStartTitle>
+      <KeyStartTitle Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023_href_x003D__x0022_._x002A__x003F__x003E_</KeyStartTitle>
       <KeyEndTitle>_x003C__x002F_a_x003E__x0020_</KeyEndTitle>
       <KeyTitleIndex />
       <KeyStartYear Param1="_x0029_" Param2="">_x003E__x0020__x0028_</KeyStartYear>
@@ -44,8 +44,8 @@
     <Details>
       <KeyStartBody Param1="" Param2="">locatie:</KeyStartBody>
       <KeyEndBody>_x003C_div_x0020_style_x003D__x0022_text-align:_x0020_center_x003B_margin-top:_x0020_-20px_x003B__x0022__x003E_</KeyEndBody>
-      <KeyStartOTitle Param1="" Param2="">Films_x003C__x002F_a_x003E__x0026_nbsp_x003B__x0026_raquo_x003B__x0026_nbsp_x003B_</KeyStartOTitle>
-      <KeyEndOTitle>_x0020__x0028_</KeyEndOTitle>
+      <KeyStartOTitle Param1="" Param2="">_x003C_span_x0020_itemprop_x003D__x0022_name_x0022__x003E_</KeyStartOTitle>
+      <KeyEndOTitle>_x003C__x002F_span_x003E_</KeyEndOTitle>
       <KeyOTitleIndex />
       <KeyOTitlePage />
       <KeyStartTTitle Param1="" Param2="" />
@@ -56,7 +56,7 @@
       <KeyTTitleMaxItems>_x0039_99</KeyTTitleMaxItems>
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll>USA_x002C__x0020_Argentina_x002C__x0020_Austria_x002C__x0020_Belgium_x002C__x0020_Brazil_x002C__x0020_Croatia_x002C__x0020_Czech_x0020_Republic_x002C__x0020_Estonia_x002C__x0020_Finland_x002C__x0020_France_x002C__x0020_Germany_x002C__x0020_Italy_x002C__x0020_Japan_x002C__x0020_Mexico_x002C__x0020_Poland_x002C__x0020_Portugal_x002C__x0020_Romania_x002C__x0020_Slovakia_x002C__x0020_Spain_x002C__x0020_Sweden_x002C__x0020_Turkey_x002C__x0020_Uruguay_x002C__x0020_Denmark_x002C__x0020_Greece_x002C__x0020_Norway_x002C__x0020_Russia_x002C__x0020_Canada_x002C__x0020_Hungary_x002C__x0020_Estonia_x002C__x0020_Slovenia</KeyTTitleLanguageAll>
-      <KeyStartImg Param1="_x002E_200" Param2="">class_x003D__x0022_poster_x0022__x0020_src_x003D__x0022_</KeyStartImg>
+      <KeyStartImg Param1="" Param2="">img_x0020_itemprop_x003D__x0022_image_x0022__x0020_src_x003D__x0022_</KeyStartImg>
       <KeyEndImg>_x0022__x0020_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage />
@@ -65,8 +65,8 @@
       <KeyLinkImgIndex />
       <KeyLinkImgPage />
       <KeyEncodingLinkImg />
-      <KeyStartRate Param1="" Param2="">ratingValue_x0022__x003E_</KeyStartRate>
-      <KeyEndRate>_x003C__x002F_b_x003E_</KeyEndRate>
+      <KeyStartRate Param1="" Param2="">film_average_x0022__x003E_</KeyStartRate>
+      <KeyEndRate>_x003C__x002F_div_x003E_</KeyEndRate>
       <KeyRateIndex />
       <KeyRatePage />
       <KeyStartRate2 Param1="" Param2="" />
@@ -78,11 +78,11 @@
       <KeyEndSyn>_x003C__x002F_p_x003E_</KeyEndSyn>
       <KeySynIndex>Actors</KeySynIndex>
       <KeySynPage />
-      <KeyStartRealise Param1="_x0020_en_x0020_" Param2="_x002C__x0020_">geregisseerd_x0020_door_x0020_</KeyStartRealise>
+      <KeyStartRealise Param1="" Param2="_x002C__x0020_">itemprop_x003D__x0022_director_x0022__x003E_</KeyStartRealise>
       <KeyEndRealise>_x003C__x002F_a_x003E__x003C_br_x0020__x002F__x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage />
-      <KeyRealiseRegExp>href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022_._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyRealiseRegExp>
+      <KeyRealiseRegExp />
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="" Param2="" />
       <KeyEndProduct />
@@ -135,7 +135,7 @@
       <KeyEndTagline />
       <KeyTaglineIndex />
       <KeyTaglinePage />
-      <KeyStartCertification Param1="" Param2="">_x003C_div_x0020_id_x003D__x0022_rating_x0022__x003E__x003C_img_x0020_alt_x003D__x0022_</KeyStartCertification>
+      <KeyStartCertification Param1="" Param2="">_x003C_div_x0020_id_x003D__x0022_rating_x0022__x003E__x003C_div_x0020_title_x003D__x0022_</KeyStartCertification>
       <KeyEndCertification>_x0020_jaar</KeyEndCertification>
       <KeyCertificationRegExp />
       <KeyCertificationIndex />
@@ -174,7 +174,7 @@
       <KeyEndIMDB_Rank />
       <KeyIMDB_RankIndex />
       <KeyIMDB_RankPage />
-      <KeyStartIMDB_Id Param1="" Param2="">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.com_x002F_title_x002F_</KeyStartIMDB_Id>
+      <KeyStartIMDB_Id Param1="" Param2="">_x0023_REGEX_x0023__x003C_a_x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.com_x002F_title_x002F_</KeyStartIMDB_Id>
       <KeyEndIMDB_Id>_x002F__x0022_</KeyEndIMDB_Id>
       <KeyIMDB_IdIndex />
       <KeyIMDB_IdPage />
@@ -285,7 +285,7 @@
       <KeyRuntimeIndex />
     </Details>
     <Mapping>
-      <Field_0 source="OriginalTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
+      <Field_0 source="OriginalTitle" destination="TranslatedTitle" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="True" />
       <Field_1 source="TranslatedTitle" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_2 source="Picture" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
       <Field_3 source="Description" destination="" replace="False" addstart="False" addend="False" mergeprefersource="False" mergepreferdestination="False" />
