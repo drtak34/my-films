@@ -416,6 +416,10 @@
     <String id="10798968">Más de 3 años</String>
     <String id="10798970">Filtro global "elegir filtro personal" ({0})</String>
     <String id="10798971">Filtro global "desactivar filtro personal" ({0})</String>
+    <String id="10798972">Global filter "film format (2D-3D)" ({0})</String>
+    <String id="10798973">all</String>
+    <String id="10798974">2D only</String>
+    <String id="10798975">3D only</String>
     <String id="10798979">Select random movie</String>
     <String id="10798980">Reproducir trailers al azar</String>
     <String id="10798981">Adquiriendo trailer ...</String>
