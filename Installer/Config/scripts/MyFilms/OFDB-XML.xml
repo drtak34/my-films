@@ -2,19 +2,20 @@
 <Profile>
   <Section>
     <DBName>OFDB XML Gateway</DBName>
-    <URLPrefix>http://ofdbgw.home-of-root.de</URLPrefix>
+    <URLPrefix />
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>1.0</Version>
-    <Encoding />
+    <Version>1.1</Version>
+    <Encoding>UTF-8</Encoding>
     <SearchCleanup />
-    <Accept />
+    <Accept>application/xml</Accept>
     <UserAgent />
     <Headers />
+    <FileBasedReader>false</FileBasedReader>
     <URLSearch>
-      <KeyStartThumb Param1="" Param2="" />
-      <KeyEndThumb />
-      <URL Param1="" Param2="">http:_x002F__x002F_ofdbgw.home-of-root.de_x002F_search_x002F__x0023_Search_x0023_</URL>
+      <KeyStartThumb Param1="" Param2="">_x003C_bild_x003E_</KeyStartThumb>
+      <KeyEndThumb>_x003C__x002F_bild_x003E_</KeyEndThumb>
+      <URL Param1="" Param2="">http:_x002F__x002F_mirror1.ofdbgw.org_x002F_search_x002F__x0023_Search_x0023_</URL>
       <KeyStartList Param1="" Param2="">_x003C_resultat_x003E_</KeyStartList>
       <KeyEndList />
       <KeyStartPage Param1="" Param2="">_x0031_</KeyStartPage>
@@ -29,7 +30,7 @@
       <KeyStartDirector Param1="" Param2="" />
       <KeyEndDirector />
       <KeyDirectorIndex />
-      <KeyStartLink Param1="_x003E_" Param2="http:_x002F__x002F_ofdbgw.org_x002F_movie_x002F_">_x003C_id</KeyStartLink>
+      <KeyStartLink Param1="_x003E_" Param2="http:_x002F__x002F_mirror1.ofdbgw.org_x002F_movie_x002F_">_x003C_id</KeyStartLink>
       <KeyEndLink>_x003C__x002F_id_x003E_</KeyEndLink>
       <KeyLinkIndex />
       <KeyStartID Param1="" Param2="">_x003C_id_x003E_</KeyStartID>
@@ -102,7 +103,7 @@
       <KeyCreditsRegExp>name_x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_name._x002A__x003F_rolle_x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage />
-      <KeyCreditsMaxItems>_x0039_99</KeyCreditsMaxItems>
+      <KeyCreditsMaxItems />
       <KeyCreditsGrabActorRoles>true</KeyCreditsGrabActorRoles>
       <KeyStartCountry Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">_x003C_produktionsland_x003E_</KeyStartCountry>
       <KeyEndCountry>_x003C__x002F_produktionsland_x003E_</KeyEndCountry>
