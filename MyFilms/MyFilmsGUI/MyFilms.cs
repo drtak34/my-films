@@ -515,6 +515,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public bool GlobalFilterTrailersOnly = false;
     public bool GlobalFilterMinRating = false;
     public bool GlobalFilterIsOnlineOnly = false;
+    public string GlobalFilterMovieFormat3D = "";
     //public string GlobalFilterString = string.Empty;
     public string GlobalFilterStringTrailersOnly = string.Empty;
     public string GlobalFilterStringUnwatched = string.Empty;
@@ -522,6 +523,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string GlobalFilterStringIsOnline = string.Empty;
     //public string GlobalUnwatchedFilterString = string.Empty;
     //public string GlobalFilterStringCustomFilter = string.Empty;
+    public string GlobalFilterStringMovieFormat3D = string.Empty;
 
     public static bool InitialStart = false;                  //Added to implement InitialViewSetup
     public static bool InitialIsOnlineScan = false;           //Added to implement switch if facade should display media availability
@@ -2521,7 +2523,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       SetFilmSelect();
 
       // set online filter only, if scan is done already ...
-      MyFilms.conf.StrGlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      MyFilms.conf.StrGlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
 
       LogMyFilms.Debug("(GetFilmList) - conf.GlobalFilterString:        '" + conf.StrGlobalFilterString + "'");
       LogMyFilms.Debug("(GetFilmList) - conf.StrViewSelect:             '" + conf.StrViewSelect + "'");
@@ -3467,7 +3469,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         s = s + conf.StrTitle1 + " not like ''";
       string StrFilmSelect = s;
 
-      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
       DataRow[] rFanart = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrViewSelect + conf.StrDfltSelect, StrFilmSelect, conf.StrSorta, conf.StrSortSens, false);
       LogMyFilms.Debug("(GetRandomFanartForGroups) - Count: '" + rFanart.Length + "'");
       int iCnt = 0;
@@ -4741,7 +4743,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         #region Load Counts threaded
         // set online filter only, if scan is done already ...
-        MyFilms.conf.StrGlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+        MyFilms.conf.StrGlobalFilterString = (InitialIsOnlineScan) ? GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D : GlobalFilterStringUnwatched + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
 
         // DataRow[] allrows = BaseMesFilms.ReadDataMovies("", "", conf.StrSorta, conf.StrSortSens); // load dataset without filters
         r = BaseMesFilms.ReadDataMovies(conf.StrGlobalFilterString + conf.StrDfltSelect, conf.StrSelect, conf.StrSorta, conf.StrSortSens);
@@ -5355,7 +5357,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       choiceViewGlobalOptions.Add("filterdbrating");
 
       // Change Value for global MovieFilter (Only Movies with highRating)
-      dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MyFilms.conf.StrAntFilterMinRating.ToString()));
+      dlg1.Add(string.Format(GUILocalizeStrings.Get(10798693), MyFilms.conf.StrAntFilterMinRating));
       choiceViewGlobalOptions.Add("filterdbsetrating");
 
       //if (MyFilms.conf.BoolShowEmptyValuesInViews) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079871), GUILocalizeStrings.Get(10798628))); // show empty values in views
@@ -5367,10 +5369,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //if (GlobalFilterStringCustomFilter.Length == 0) dlg1.Add(GUILocalizeStrings.Get(0)); // select user filter
       //choiceViewGlobalOptions.Add("filterdbcustomfilter");
 
+      // Change global Movie type Filter (all, 2d, 3d)
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Global Filter 3D movies"))
+      {
+        dlg1.Add(string.Format(GUILocalizeStrings.Get(10798972), GlobalFilterMovieFormat3D));
+        choiceViewGlobalOptions.Add("filter3d");
+      }
+
       dlg1.DoModal(GetID);
       if (dlg1.SelectedLabel == -1) return;
-      LogMyFilms.Debug("Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel].ToString() + "'");
-      this.Change_Menu_Action(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
+      LogMyFilms.Debug("Call change_global_filters menu with option: '" + choiceViewGlobalOptions[dlg1.SelectedLabel] + "'");
+      Change_Menu_Action(choiceViewGlobalOptions[dlg1.SelectedLabel].ToLower());
     }
 
     private void Change_Search_Options()
@@ -6288,7 +6297,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region local availability
         Thread.Sleep(25);
         Stopwatch watch = new Stopwatch(); watch.Reset(); watch.Start();
-        DataRow[] rtemp = BaseMesFilms.ReadDataMovies(this.GlobalFilterStringUnwatched + this.GlobalFilterStringIsOnline + this.GlobalFilterStringTrailersOnly + this.GlobalFilterStringMinRating + conf.StrDfltSelect, "", conf.WStrSort, conf.WStrSortSens);
+        DataRow[] rtemp = BaseMesFilms.ReadDataMovies(this.GlobalFilterStringUnwatched + this.GlobalFilterStringIsOnline + this.GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D + conf.StrDfltSelect, "", conf.WStrSort, conf.WStrSortSens);
         List<GUIListItem> itemlist = new List<GUIListItem>();
 
         for (int i = 0; i < facadeFilms.Count; i++)
@@ -6954,7 +6963,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //getSelectFromDivx("Actors like '*" + keyboard.Text + "*'", conf.WStrSort, conf.WStrSortSens, keyboard.Text, true, "");
       #endregion
 
-      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
       LogMyFilms.Debug("(GetSelectFromDivx) - GlobalFilterString      : '" + GlobalFilterString + "'");
       LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrViewSelect      : '" + conf.StrViewSelect + "'");
       LogMyFilms.Debug("(GetSelectFromDivx) - conf.StrDfltSelect      : '" + conf.StrDfltSelect + "'");
@@ -7267,7 +7276,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         //item.IconImage = defaultcover;
         //item.IconImageBig = defaultcover;
         item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-        this.facadeFilms.Add(item);
+        facadeFilms.Add(item);
         if (SelItem != "" && item.Label == SelItem) conf.StrIndex = facadeFilms.Count - 1; //test if this item is one to select
         Wnb_enr = 0;
       }
@@ -7473,7 +7482,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             DataRow[] rtemp = null;
             if (conf.StrPersons.Length > 0) // reading full dataset only required, if personcounts are requested...
-              rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + conf.StrViewSelect + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
+              rtemp = BaseMesFilms.ReadDataMovies(GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D + conf.StrViewSelect + conf.StrDfltSelect, "", wStrSort, conf.WStrSortSens);
             if (rtemp != null && conf.StrPersons.Length > 0)
             {
               Thread.Sleep(50);
@@ -9136,6 +9145,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         GlobalFilterStringIsOnline = String.Empty;
         MyFilmsDetail.clearGUIProperty("globalfilter.isonline");
       }
+
+      GlobalFilterMovieFormat3D = GUILocalizeStrings.Get(10798973); // all
+      GlobalFilterStringMovieFormat3D = string.Empty;
+      MyFilmsDetail.clearGUIProperty("globalfilter.movieformat");
+
     }
 
     //--------------------------------------------------------------------------------------------
@@ -10043,10 +10057,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
         case "filterdbsetrating":
           #region Set global value for minimum Rating to restrict movielist
-          LogMyFilms.Info(
-            "(FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating +
-            "', current decimalseparator: '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() +
-            "'");
+          LogMyFilms.Info("(FilterDbSetRating) - 'AntFilterMinRating' current setting = '" + MyFilms.conf.StrAntFilterMinRating + "', current decimalseparator: '" + CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString() + "'");
           MyFilmsDialogSetRating dlgRating = (MyFilmsDialogSetRating)GUIWindowManager.GetWindow(ID_MyFilmsDialogRating);
           if (MyFilms.conf.StrAntFilterMinRating.Length > 0)
           {
@@ -10080,9 +10091,49 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             MyFilmsDetail.clearGUIProperty("globalfilter.minrating");
             MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue");
           }
-          LogMyFilms.Info(
-            "(SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
+          LogMyFilms.Info("(SetGlobalFilterString) - 'GlobalFilterStringMinRating' = '" + GlobalFilterStringMinRating + "'");
           this.Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
+          if (!Context_Menu) this.Change_Menu_Action("globaloptions");
+          else Context_Menu = false;
+          break;
+          #endregion
+
+        case "filter3d":
+          #region GlobalFilter3D
+          LogMyFilms.Info("(filter3d) - 'GlobalFilterMovieFormat3D' current setting = '" + GlobalFilterMovieFormat3D + "'");
+          var dlg3d = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
+          if (dlg3d == null) return;
+          dlg3d.Reset();
+          dlg3d.SetHeading(string.Format(GUILocalizeStrings.Get(10798972), GlobalFilterMovieFormat3D)); // current setting....
+          dlg3d.Add(GUILocalizeStrings.Get(10798973)); //all
+          dlg3d.Add(GUILocalizeStrings.Get(10798974)); //2D only
+          dlg3d.Add(GUILocalizeStrings.Get(10798975)); //3D only
+          dlg3d.DoModal(GetID);
+
+          switch (dlg3d.SelectedLabel)
+          {
+            case -1:
+              return;
+            case 0:
+              GlobalFilterStringMovieFormat3D = string.Empty;
+              GlobalFilterMovieFormat3D = GUILocalizeStrings.Get(10798973); // all
+              MyFilmsDetail.setGUIProperty("globalfilter.movieformat", GlobalFilterMovieFormat3D);
+              break;
+            case 1:
+              GlobalFilterStringMovieFormat3D = "(S3D is NULL OR S3D like '') AND ";
+              GlobalFilterMovieFormat3D = GUILocalizeStrings.Get(10798974); // 2D only
+              MyFilmsDetail.setGUIProperty("globalfilter.movieformat", GlobalFilterMovieFormat3D);
+              break;
+            case 2:
+              GlobalFilterStringMovieFormat3D = "(S3D is NOT NULL AND S3D NOT like '') AND ";
+              GlobalFilterMovieFormat3D = GUILocalizeStrings.Get(10798975); // 3D only
+              MyFilmsDetail.setGUIProperty("globalfilter.movieformat", GlobalFilterMovieFormat3D);
+              break;
+          }
+          LogMyFilms.Info("(filter3d) - 'GlobalFilterMovieFormat3D' changed to '" + GlobalFilterMovieFormat3D + "'");
+          //GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
+          LogMyFilms.Info("(SetGlobalFilterString) - 'GlobalFilterStringMovieFormat3D' = '" + GlobalFilterStringMovieFormat3D + "'");
+          Refreshfacade(); // loads threaded: Fin_Charge_Init(false, true); //NotDefaultSelect, Only reload
           if (!Context_Menu) this.Change_Menu_Action("globaloptions");
           else Context_Menu = false;
           break;
@@ -12878,6 +12929,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //if (!MyFilms.conf.AlwaysDefaultView) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079880), GUILocalizeStrings.Get(10798629)));
           //choiceViewGlobalOptions.Add("alwaysdefaultview");
 
+          // Change global Movie type Filter (all, 2d, 3d)
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Global Filter 3D movies"))
+          {
+            dlg1.Add(string.Format(GUILocalizeStrings.Get(10798972), GlobalFilterMovieFormat3D));
+            choiceViewGlobalOptions.Add("filter3d");
+          }
+
           dlg1.DoModal(GetID);
           if (dlg1.SelectedLabel == -1)
           {
@@ -13899,7 +13957,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (dlg == null) return;
       dlg.Reset();
       dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+      string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
       DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
       wTableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
       w_count.Add(0);
@@ -14429,7 +14487,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg == null) return;
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
-          string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+          string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
           DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1 + " like '*'", conf.StrSorta, conf.StrSortSens);
           wTableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
           w_count.Add(0);
@@ -14808,7 +14866,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg.Reset();
           dlg.SetHeading(GUILocalizeStrings.Get(10798613)); // menu
           //Modified to checked for GlobalFilterString
-          string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+          string GlobalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
           DataRow[] wr = BaseMesFilms.ReadDataMovies(GlobalFilterString + conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
           //DataColumn[] wc = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrTitle1.ToString() + " like '*'", conf.StrSorta, conf.StrSortSens);
           wTableau.Add(string.Format(GUILocalizeStrings.Get(10798623))); //Add Defaultgroup for invalid or empty properties
@@ -15210,7 +15268,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             UpdateRecentSearch(searchstring, MaxSearchHistoryLength);
             var wCount = new List<int>();
-            string globalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating;
+            string globalFilterString = GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D;
             switch (wproperty)
             {
               case "all":
@@ -15810,12 +15868,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.clearGUIProperty("globalfilter.minrating", log);
         MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue", log);
       }
-      if (!GlobalFilterMinRating)
-      {
-        GlobalFilterStringMinRating = "";
-        MyFilmsDetail.clearGUIProperty("globalfilter.minrating", log);
-        MyFilmsDetail.clearGUIProperty("globalfilter.minratingvalue", log);
-      }
+
+      GlobalFilterMovieFormat3D = GUILocalizeStrings.Get(10798973); // all
+      GlobalFilterStringMovieFormat3D = string.Empty;
+      MyFilmsDetail.clearGUIProperty("globalfilter.movieformat", log);
     }
 
     private void InitFolders()
@@ -17232,7 +17288,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "root":
           //conf.StrTxtSelect = GUILocalizeStrings.Get(10798622) + " " + GUILocalizeStrings.Get(10798632); // 10798622 all films // 10798632 (global filter active) 
           // 10798632 (global filter active) / Filtered  //10798622 All
-          conf.StrTxtSelect = GUILocalizeStrings.Get((GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating).Length > 0 ? 10798632 : 10798622);
+          conf.StrTxtSelect = GUILocalizeStrings.Get((GlobalFilterStringUnwatched + GlobalFilterStringIsOnline + GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D).Length > 0 ? 10798632 : 10798622);
           break;
 
         case "menu":

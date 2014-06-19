@@ -416,6 +416,10 @@
     <String id="10798968">Älter als 3 Jahre</String>
     <String id="10798970">Globaler Filter "Wähle Custom Filter" ({0})</String>
     <String id="10798971">Globaler Filter "Deaktiviere Custom Filter" ({0})</String>
+    <String id="10798972">Globaler Filter "Film Format (2D-3D)" ({0})</String>
+    <String id="10798973">Alle</String>
+    <String id="10798974">Nur 2D</String>
+    <String id="10798975">Nur 3D</String>
     <String id="10798979">Wähle zufälligen Film</String>
     <String id="10798980">Spiele zufällige Trailer dieser Ansicht</String>
     <String id="10798981">Trailer Scrobbling ...</String>
