@@ -5,7 +5,7 @@
     <URLPrefix>http://api.themoviedb.org/3/movie/</URLPrefix>
     <Language>de</Language>
     <Type>details|cover</Type>
-    <Version>3.0</Version>
+    <Version>3.1</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -84,23 +84,23 @@
       <KeyEndRealise>_x005D__x007D_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage>URL_x0020_Redirection_x0020_Persons</KeyRealisePage>
-      <KeyRealiseRegExp>_x007B__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x002C__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_department_x0022_:_x0022_Directing_x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x007D_</KeyRealiseRegExp>
+      <KeyRealiseRegExp>department_x0022_:_x0022_Directing_x0022__x002C__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x002C__x0022_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="_x0023_REGEX_x0023__x007B__x0022_id._x002A__x003F__x007D__x0024__x007C_" Param2="">_x0022_crew_x0022_:_x005B_</KeyStartProduct>
       <KeyEndProduct>_x005D_</KeyEndProduct>
       <KeyProductIndex />
       <KeyProductPage>URL_x0020_Redirection_x0020_Persons</KeyProductPage>
-      <KeyProductRegExp>_x007B__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x002C__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_department_x0022_:_x0022_Production_x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_job_x0022_:_x0022__x0028__x003F__x003C_role_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x007D_</KeyProductRegExp>
+      <KeyProductRegExp>department_x0022_:_x0022_Production_x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_job_x0022_:_x0022__x0028__x003F__x003C_role_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x002C__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x002C__x0022_</KeyProductRegExp>
       <KeyProductMaxItems />
       <KeyStartWriter Param1="_x0023_REGEX_x0023__x007B__x0022_id._x002A__x003F__x007D__x0024__x007C_" Param2="">_x0022_crew_x0022_:_x005B_</KeyStartWriter>
       <KeyEndWriter>_x005D__x007D_</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage>URL_x0020_Redirection_x0020_Persons</KeyWriterPage>
-      <KeyWriterRegExp>_x007B__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x002C__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_department_x0022_:_x0022_Writing_x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_job_x0022_:_x0022__x0028__x003F__x003C_role_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x007D_</KeyWriterRegExp>
+      <KeyWriterRegExp>department_x0022_:_x0022_Writing_x0022__x005B__x005E__x005C__x007B__x005C__x007D__x005D__x002A__x003F__x0022_job_x0022_:_x0022__x0028__x003F__x003C_role_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x002C__x0022_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E__x005B__x005E__x0022__x005D__x002A__x003F__x0029__x0022__x002C__x0022_</KeyWriterRegExp>
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x003C__x002F_a_x003E_" Param2="_x002C__x0020_">cast_x0022_:_x005B_</KeyStartCredits>
       <KeyEndCredits>_x005D__x002C__x0022_crew</KeyEndCredits>
-      <KeyCreditsRegExp>name_x0022_:_x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x002C__x0022_character_x0022_:_x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022__x002C__x0022_order</KeyCreditsRegExp>
+      <KeyCreditsRegExp>character_x0022_:_x0022__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0022__x002C__x0022_credit._x002A__x003F_name_x0022_:_x0022__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x0022__x002C__x0022_</KeyCreditsRegExp>
       <KeyCreditsIndex />
       <KeyCreditsPage>URL_x0020_Redirection_x0020_Persons</KeyCreditsPage>
       <KeyCreditsMaxItems>_x0039_99</KeyCreditsMaxItems>

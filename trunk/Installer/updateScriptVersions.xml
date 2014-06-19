@@ -103,31 +103,31 @@
   </scripts>
   <scripts>
     <name>TMDB-CZ.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-DE.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-EN.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-ES.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-FR.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-IT.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-NL.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-Person.xml</name>
@@ -135,14 +135,14 @@
   </scripts>
   <scripts>
     <name>TMDB-PT.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-RU.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
   <scripts>
     <name>TMDB-ZH.xml</name>
-    <version>3.0</version>
+    <version>3.1</version>
   </scripts>
 </grabberscripts>
