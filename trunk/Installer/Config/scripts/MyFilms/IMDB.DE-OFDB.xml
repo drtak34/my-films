@@ -5,7 +5,7 @@
     <URLPrefix>http://www.imdb.com</URLPrefix>
     <Language>de</Language>
     <Type>details|cover|multicovers</Type>
-    <Version>1.5.5</Version>
+    <Version>1.5.6</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -158,7 +158,7 @@
       <KeyLinkCommentIndex />
       <KeyLinkCommentPage />
       <KeyEncodingLinkComment />
-      <KeyStartDetails2 Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_www.ofdbgw.org_x002F_imdb2ofdb_x002F__x007C_">_x0023_REGEX_x0023_url_x003E_._x002A__x003F_title_x002F_</KeyStartDetails2>
+      <KeyStartDetails2 Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_mirror1.ofdbgw.org_x002F_imdb2ofdb_x002F__x007C_">_x0023_REGEX_x0023_url_x003E_._x002A__x003F_title_x002F_</KeyStartDetails2>
       <KeyEndDetails2>_x0023_REGEX_x0023__x002F__x003C_</KeyEndDetails2>
       <KeyDetails2Index />
       <KeyDetails2Page>DetailsPath</KeyDetails2Page>
@@ -188,7 +188,7 @@
       <KeyLinkSynIndex />
       <KeyLinkSynPage />
       <KeyEncodingLinkSyn />
-      <KeyStartLinkGeneric1 Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_www.ofdbgw.org_x002F_movie_x002F__x007C_">_x003C_ofdbid_x003E_</KeyStartLinkGeneric1>
+      <KeyStartLinkGeneric1 Param1="_x0023_ADD_x0023_" Param2="http:_x002F__x002F_mirror1.ofdbgw.org_x002F_movie_x002F__x007C_">_x003C_ofdbid_x003E_</KeyStartLinkGeneric1>
       <KeyEndLinkGeneric1>_x003C__x002F_ofdbid_x003E_</KeyEndLinkGeneric1>
       <KeyLinkGeneric1Index />
       <KeyLinkGeneric1Page>URL_x0020_Gateway</KeyLinkGeneric1Page>
