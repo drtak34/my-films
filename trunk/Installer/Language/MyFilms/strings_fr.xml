@@ -476,5 +476,12 @@
     <String id="10799615">Your MyFilms skin should be downgraded to properly work with this version !</String>
     <String id="10799616">Your current skin does not support MyFilms !</String>
     <String id="10799617">Please ask skin author to add MyFilms support.</String>
+    <String id="10799701">Composer</String>
+    <String id="10799702">Release date</String>
+    <String id="10799703">Budget</String>
+    <String id="10799704">Collection</String>
+    <String id="10799705">Collection image</String>
+    <String id="10799706">Collection details</String>
+    <String id="10799707">3D</String>
   </Section>
 </Language>
