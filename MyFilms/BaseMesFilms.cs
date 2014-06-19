@@ -88,9 +88,11 @@ namespace MyFilmsPlugin.MyFilms
               // CustomFieldList.Add(new string[] { "IndexedTitle", "IndexedTitle", "ftString" });
               new string[] { "Edition", "Edition", "ftString" },
               new string[] { "Studio", "Studio", "ftString" },
+              new string[] { "Budget", "Budget", "ftString" },
               new string[] { "Fanart", "Fanart", "ftString" },
               new string[] { "Certification", "Certification", "ftString" },
               new string[] { "Writer", "Writer", "ftString" },
+              new string[] { "Composer", "Composer", "ftString" },
               new string[] { "TagLine", "TagLine", "ftString" },
               new string[] { "Tags", "Tags", "ftString" },
               new string[] { "Aspectratio", "Aspectratio", "ftString" },
@@ -108,7 +110,12 @@ namespace MyFilmsPlugin.MyFilms
               new string[] { "AudioChannelCount", "AudioChannelCount", "ftString" },
               new string[] { "AlternateTitles", "AlternateTitles", "ftString" },
               new string[] { "DateWatched", "DateWatched", "ftDate" },
+              new string[] { "DateReleased", "DateReleased", "ftDate" },
               new string[] { "MultiUserState", "MultiUserState", "ftString" },
+              new string[] { "S3D", "S3D", "ftString" },
+              new string[] { "Collection", "Collection", "ftString" },
+              new string[] { "CollectionImage", "CollectionImage", "ftString" },
+              new string[] { "CollectionDetails", "CollectionDetails", "ftString" },
               new string[] { "CustomField1", "CustomField1", "ftString" },
               new string[] { "CustomField2", "CustomField2", "ftString" },
               new string[] { "CustomField3", "CustomField3", "ftString" }
@@ -2146,6 +2153,28 @@ namespace MyFilmsPlugin.MyFilms
         case "VirtualPathTitle": // virtual path = directory path plus movie title
         case "virtualpathtitle":
           return GUILocalizeStrings.Get(10798933);
+
+        case "Composer":
+        case "composer":
+          return GUILocalizeStrings.Get(10799701);
+        case "DateReleased":
+        case "datereleased":
+          return GUILocalizeStrings.Get(10799702);
+        case "Budget":
+        case "budget":
+          return GUILocalizeStrings.Get(10799703);
+        case "Collection":
+        case "collection":
+          return GUILocalizeStrings.Get(10799704);
+        case "CollectionImage":
+        case "collectionimage":
+          return GUILocalizeStrings.Get(10799705);
+        case "CollectionDetails":
+        case "collectiondetails":
+          return GUILocalizeStrings.Get(10799706);
+        case "S3D":
+        case "s3d":
+          return GUILocalizeStrings.Get(10799707);
 
         default:
           {

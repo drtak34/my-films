@@ -475,5 +475,12 @@
     <String id="10799615">Verwenden Sie ältere MyFilms Skindateien um diese Version zu nutzen !</String>
     <String id="10799616">Der aktuelle Skin unterstützt MyFilms nicht !</String>
     <String id="10799617">Fragen Sie den Skin Autor nach einem Update für MyFilms.</String>
+    <String id="10799701">Komponist</String>
+    <String id="10799702">Release Datum</String>
+    <String id="10799703">Budget</String>
+    <String id="10799704">Collection</String>
+    <String id="10799705">Collection Bild</String>
+    <String id="10799706">Collection Details</String>
+    <String id="10799707">3D</String>
   </Section>
 </Language>

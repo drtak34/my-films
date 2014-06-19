@@ -521,7 +521,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public string GlobalFilterStringMinRating = string.Empty;
     public string GlobalFilterStringIsOnline = string.Empty;
     //public string GlobalUnwatchedFilterString = string.Empty;
-    public string GlobalFilterStringCustomFilter = string.Empty;
+    //public string GlobalFilterStringCustomFilter = string.Empty;
 
     public static bool InitialStart = false;                  //Added to implement InitialViewSetup
     public static bool InitialIsOnlineScan = false;           //Added to implement switch if facade should display media availability
@@ -559,7 +559,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // keeps track of currently loaded skin name to (re)initiate skin interface check on pageload
     private string currentSkin = null;
 
-    public static string[] PersonTypes = new string[] { "Persons", "Actors", "Producer", "Director", "Writer", "Borrower" };
+    private static string[] PersonTypes = new string[] { "Persons", "Actors", "Producer", "Director", "Writer", "Borrower", "Composer" };
 
     private static string EmptyFacadeValue = "(empty)";
 
@@ -2972,7 +2972,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return !(this.facadeFilms.Count == 1 && item.IsFolder); //ret false if single folder found
     }
 
-    public static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
+    private static bool EnhancedWatched(string strEnhancedWatchedValue, string strUserProfileName)
     {
       if (!strEnhancedWatchedValue.Contains(strUserProfileName + ":")) return false;
       if (strEnhancedWatchedValue.Contains(strUserProfileName + ":0")) return false;
@@ -5612,7 +5612,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    internal string Equalexpression(string columnname, string comparevalue)
+    private string Equalexpression(string columnname, string comparevalue)
     {
       string expression;
       Type columnType = GetColumnType(columnname);
@@ -5650,7 +5650,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       return (fieldtype == FieldType.Person);
     }
-    private static bool IsPersonField(string fieldname)  // "Persons", "Actors", "Producer", "Director", "Writer", "Borrower"
+    private static bool IsPersonField(string fieldname)  // "Persons", "Actors", "Producer", "Director", "Writer", "Borrower", "Composer"
     {
       if (string.Compare(fieldname, "Persons", true) == 0) return true;
       if (string.Compare(fieldname, "Actors", true) == 0) return true;
@@ -5658,6 +5658,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "Director", true) == 0) return true;
       if (string.Compare(fieldname, "Writer", true) == 0) return true;
       if (string.Compare(fieldname, "Borrower", true) == 0) return true;
+      if (string.Compare(fieldname, "Composer", true) == 0) return true;
       return false;
     }
 
@@ -5671,7 +5672,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static bool IsPersonsField(string fieldname)
     {
-      return PersonTypes.Any(personField => string.Compare(fieldname, personField, true) == 0); // "Persons", "Actors", "Producer", "Director", "Writer", "Borrower"
+      return PersonTypes.Any(personField => string.Compare(fieldname, personField, true) == 0); // "Persons", "Actors", "Producer", "Director", "Writer", "Borrower", "Composer"
     }
 
     private static bool IsAlphaNumericalField(FieldType fieldtype)
@@ -5688,11 +5689,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "Comment", true) == 0) return false;
       if (string.Compare(fieldname, "Source", true) == 0) return false;
       if (string.Compare(fieldname, "SourceTrailer", true) == 0) return false;
+      if (string.Compare(fieldname, "Collection", true) == 0) return false;
+      if (string.Compare(fieldname, "CollectionImage", true) == 0) return false;
+      if (string.Compare(fieldname, "CollectionDetails", true) == 0) return false;
       if (string.Compare(fieldname, "Date", true) == 0) return false;
       if (string.Compare(fieldname, "DateWatched", true) == 0) return false;
+      if (string.Compare(fieldname, "DateReleased", true) == 0) return false;
       if (string.Compare(fieldname, "DateAdded", true) == 0) return false;
       if (string.Compare(fieldname, "Year", true) == 0) return false;
       if (string.Compare(fieldname, "RecentlyAdded", true) == 0) return false;
+      if (string.Compare(fieldname, "Budget", true) == 0) return false;
       if (IsDecimalField(fieldname)) return false;
       if (IsAlphaNumericalField(fieldname)) return false;
       return true;
@@ -5731,7 +5737,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       return (fieldtype == FieldType.Title);
     }
-    private static bool IsTitleField(string fieldname)
+    private static bool IsTitleField(string fieldname) // AlternativeTitles NOT added, is only used internally
     {
       if (string.Compare(fieldname, "OriginalTitle", true) == 0) return true;
       if (string.Compare(fieldname, "TranslatedTitle", true) == 0) return true;
@@ -5749,6 +5755,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "Date", true) == 0) return true;
       if (string.Compare(fieldname, "DateAdded", true) == 0) return true;
       if (string.Compare(fieldname, "DateWatched", true) == 0) return true;
+      if (string.Compare(fieldname, "DateReleased", true) == 0) return true;
       return false;
     }
 
@@ -5757,6 +5764,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "DateAdded", true) == 0) return true;
       if (string.Compare(fieldname, "DateWatched", true) == 0) return true;
       if (string.Compare(fieldname, "DateWatched", true) == 0) return true;
+      if (string.Compare(fieldname, "DateReleased", true) == 0) return true;
       return false;
     }
 
@@ -6084,25 +6092,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     {
       try
       {
-        if (this.facadeFilms.ListLayout != null)
-          this.facadeFilms.ListLayout.Clear();
+        if (facadeFilms.ListLayout != null) facadeFilms.ListLayout.Clear();
 
-        if (this.facadeFilms.AlbumListLayout != null)
-          this.facadeFilms.AlbumListLayout.Clear();
+        if (facadeFilms.AlbumListLayout != null) facadeFilms.AlbumListLayout.Clear();
 
-        if (this.facadeFilms.ThumbnailLayout != null)
-          this.facadeFilms.ThumbnailLayout.Clear();
+        if (facadeFilms.ThumbnailLayout != null) facadeFilms.ThumbnailLayout.Clear();
 
-        if (this.facadeFilms.FilmstripLayout != null)
-          this.facadeFilms.FilmstripLayout.Clear();
+        if (facadeFilms.FilmstripLayout != null) facadeFilms.FilmstripLayout.Clear();
 
-        if (this.facadeFilms.CoverFlowLayout != null)
-          this.facadeFilms.CoverFlowLayout.Clear();
+        if (facadeFilms.CoverFlowLayout != null) facadeFilms.CoverFlowLayout.Clear();
 
-        if (this.facadeFilms != null)
-          this.facadeFilms.Clear();
+        if (facadeFilms != null) facadeFilms.Clear();
 
-        if (this.facadeFilms != null) this.facadeFilms.Focus = true;
+        if (facadeFilms != null) facadeFilms.Focus = true;
       }
       catch (Exception ex)
       {
@@ -11087,7 +11089,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-
     //--------------------------------------------------------------------------------------------
     //   Display Context Menu for Movie 
     //--------------------------------------------------------------------------------------------
@@ -13045,7 +13046,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }) { Name = "MyFilmsBrowseTheWebLauncher", IsBackground = true }.Start();
     }
 
-
     private void MoviePersonListLauncher(bool savestate, bool askforpersontype)
     {
       #region display person list of current movie
@@ -13103,7 +13103,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  select person type dialog
     //*****************************************************************************************
-    internal string SelectPersonType(int index)
+    private string SelectPersonType(int index)
     {
       var choiceSearch = new List<string>();
       var dlg = (GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
