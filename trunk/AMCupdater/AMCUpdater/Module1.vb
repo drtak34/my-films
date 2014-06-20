@@ -977,6 +977,30 @@ Public Module Module1
                     LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
                     ReturnValue = ""
                 End Try
+
+            Case "3d"
+                Try
+                    MI = New MediaInfo
+                    MI.Open(FilePath)
+                    TempString = MI.Get_(StreamKind.Visual, 0, "MultiView_Count")
+                    MI.Close()
+                    Integer.TryParse(TempString, TempInteger)
+                    If TempInteger > 1 Then
+                        ReturnValue = "3D"
+                    ElseIf FilePath.Contains("3DSBS") Then
+                        ReturnValue = "3DSBS"
+                    ElseIf FilePath.Contains("3DTAB") Then
+                        ReturnValue = "3DTAB"
+                    ElseIf FilePath.Contains("(3D)") Then
+                        ReturnValue = "3D"
+                    Else 
+                        ReturnValue = ""
+                    End If
+                Catch ex As Exception
+                    'Console.WriteLine(ex.Message)
+                    LogEvent("ErrorEvent : " + ex.Message.ToString, EventLogLevel.ErrorEvent)
+                    ReturnValue = ""
+                End Try
             Case "textstreamcodeclist"
                 Try
                     MI = New MediaInfo

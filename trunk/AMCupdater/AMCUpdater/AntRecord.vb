@@ -1473,6 +1473,12 @@ Public Class AntRecord
                 CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
             End If
 
+            CurrentAttribute = "S3D"
+            If (_filePath.Length > 0) And IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
+                TempValue = GetFileData(_filePath, "3d")
+                CreateOrUpdateElement(CurrentAttribute, TempValue, ProcessMode)
+            End If
+
             CurrentAttribute = "Aspectratio"
             If IsUpdateRequested(CurrentAttribute, ProcessMode) = True Then
                 If (_filePath.Length > 0) Then
