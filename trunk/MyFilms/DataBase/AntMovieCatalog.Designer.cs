@@ -7934,11 +7934,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Director {
                 get {
-                    try {
-                        return ((string)(this[this.tableMovie.DirectorColumn]));
+                    if (this.IsDirectorNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Director in Tabelle Movie ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableMovie.DirectorColumn]));
                     }
                 }
                 set {
@@ -7950,11 +7950,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Producer {
                 get {
-                    try {
-                        return ((string)(this[this.tableMovie.ProducerColumn]));
+                    if (this.IsProducerNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Producer in Tabelle Movie ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableMovie.ProducerColumn]));
                     }
                 }
                 set {
@@ -8030,11 +8030,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Actors {
                 get {
-                    try {
-                        return ((string)(this[this.tableMovie.ActorsColumn]));
+                    if (this.IsActorsNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Actors in Tabelle Movie ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableMovie.ActorsColumn]));
                     }
                 }
                 set {
@@ -8302,11 +8302,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Writer {
                 get {
-                    try {
-                        return ((string)(this[this.tableMovie.WriterColumn]));
+                    if (this.IsWriterNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle Movie ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableMovie.WriterColumn]));
                     }
                 }
                 set {
@@ -8318,11 +8318,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Composer {
                 get {
-                    try {
-                        return ((string)(this[this.tableMovie.ComposerColumn]));
+                    if (this.IsComposerNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Composer in Tabelle Movie ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableMovie.ComposerColumn]));
                     }
                 }
                 set {
@@ -9902,11 +9902,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Writer {
                 get {
-                    try {
-                        return ((string)(this[this.tableCustomFields.WriterColumn]));
+                    if (this.IsWriterNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle CustomFields ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableCustomFields.WriterColumn]));
                     }
                 }
                 set {
@@ -9918,11 +9918,11 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Composer {
                 get {
-                    try {
-                        return ((string)(this[this.tableCustomFields.ComposerColumn]));
+                    if (this.IsComposerNull()) {
+                        return null;
                     }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Composer in Tabelle CustomFields ist DBNull.", e);
+                    else {
+                        return ((string)(this[this.tableCustomFields.ComposerColumn]));
                     }
                 }
                 set {

@@ -7759,11 +7759,11 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Director() As String
             Get
-                Try 
+                If Me.IsDirectorNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.DirectorColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Director in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.DirectorColumn) = value
@@ -7774,11 +7774,11 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Producer() As String
             Get
-                Try 
+                If Me.IsProducerNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.ProducerColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Producer in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.ProducerColumn) = value
@@ -7849,11 +7849,11 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Actors() As String
             Get
-                Try 
+                If Me.IsActorsNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.ActorsColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Actors in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.ActorsColumn) = value
@@ -8104,11 +8104,11 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Writer() As String
             Get
-                Try 
+                If Me.IsWriterNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.WriterColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.WriterColumn) = value
@@ -8119,11 +8119,11 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Composer() As String
             Get
-                Try 
+                If Me.IsComposerNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableMovie.ComposerColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Composer in Tabelle Movie ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableMovie.ComposerColumn) = value
@@ -9661,11 +9661,11 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Writer() As String
             Get
-                Try 
+                If Me.IsWriterNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableCustomFields.WriterColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Writer in Tabelle CustomFields ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableCustomFields.WriterColumn) = value
@@ -9676,11 +9676,11 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Composer() As String
             Get
-                Try 
+                If Me.IsComposerNull Then
+                    Return Nothing
+                Else
                     Return CType(Me(Me.tableCustomFields.ComposerColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Composer in Tabelle CustomFields ist DBNull.", e)
-                End Try
+                End If
             End Get
             Set
                 Me(Me.tableCustomFields.ComposerColumn) = value

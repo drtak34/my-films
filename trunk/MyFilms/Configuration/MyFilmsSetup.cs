@@ -213,14 +213,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       {
         if ((dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" && dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" &&
              dc.ColumnName != "LastPosition" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "MultiUserState" &&
-             dc.ColumnName != "AlternateTitles" && dc.ColumnName != "VirtualPathTitle" && dc.ColumnName != "Collection" && dc.ColumnName != "CollectionImage" && dc.ColumnName != "CollectionDetails")
+             dc.ColumnName != "AlternateTitles" && dc.ColumnName != "VirtualPathTitle" && dc.ColumnName != "CollectionImage")
             && (CatalogType.SelectedIndex != 0 ||
             (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
              dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" &&
              dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
              dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" &&
              dc.ColumnName != "CustomField1" && dc.ColumnName != "CustomField2" && dc.ColumnName != "CustomField3" && dc.ColumnName != "DateWatched" &&
-             dc.ColumnName != "DateReleased" && dc.ColumnName != "Budget" && dc.ColumnName != "Composer" && dc.ColumnName != "S3D"))
+             dc.ColumnName != "DateReleased" && dc.ColumnName != "Budget" && dc.ColumnName != "Composer" && dc.ColumnName != "S3D" && dc.ColumnName != "Collection" && dc.ColumnName != "CollectionDetails"))
           )
         {
           if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||
