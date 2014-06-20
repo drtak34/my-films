@@ -2033,9 +2033,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var item = new TmdbMovieSearchResult();
           item.id = credit.id;
           item.title = credit.title;
-          item.original_title = credit.original_title + "|" + credit.character;
+          item.original_title = credit.character;
           item.poster_path = credit.poster_path;
           item.release_date = credit.release_date;
+          // item.person_credit = credit.original_title + "|" + credit.character;
           movies.Add(item);
         }
         foreach (CrewCredit credit in personFilmList.crew)
@@ -2043,9 +2044,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var item = new TmdbMovieSearchResult();
           item.id = credit.id;
           item.title = credit.title;
-          item.original_title = credit.original_title + "|" + credit.department;
+          item.original_title = credit.job + " (" + credit.department + ")";
           item.poster_path = credit.poster_path;
           item.release_date = credit.release_date;
+          // item.person_credit = credit.original_title + "|" + credit.department;
           movies.Add(item);
         }
       }
@@ -4165,7 +4167,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (conf.StrLayOut == 0) // if list layout
           {
             item.Label2 = "";
-            item.Label3 = "";
+            // item.Label3 = ""; // do not change Label3 when sorting, keep original value !
           }
 
           switch (_currentSortMethod)
@@ -6178,6 +6180,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       #region get movie lists from TMDB ...
       watch.Reset(); watch.Start();
+      bool ispersonmovie = false;
 
       GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
       {
@@ -6187,10 +6190,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return NowPlayingMovies;
         if (tmdBfunction == GUILocalizeStrings.Get(10798828))  // Top Rated
           return TopRatedMovies;
-        if (tmdBfunction == GUILocalizeStrings.Get(10798829))  // Upcoming Movies
+        if (tmdBfunction == GUILocalizeStrings.Get(10798829)) // Upcoming Movies
           return UpcomingMovies;
-
-        return !string.IsNullOrEmpty(tmdBfunction) ? GetPersonMovies(tmdBfunction, true) : null;
+        ispersonmovie = true;
+      return !string.IsNullOrEmpty(tmdBfunction) ? GetPersonMovies(tmdBfunction, true) : null;
       },
       delegate(bool success, object result)
       {
@@ -6202,7 +6205,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           // clear facade
           GUIControl.ClearControl(GetID, facadeFilms.GetID);
 
-          if (movies == null || !movies.Any())
+          IEnumerable<TmdbMovieSearchResult> tmdbMovieSearchResults = movies as IList<TmdbMovieSearchResult> ?? movies.ToList();
+          if (movies == null || !tmdbMovieSearchResults.Any())
           {
             GUIUtils.ShowNotifyDialog("No Movie found !");
             DoBack(); return;
@@ -6210,14 +6214,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           #region Populate the facade ...
           int itemId = 0;
-          foreach (TmdbMovieSearchResult movie in movies)
+          foreach (TmdbMovieSearchResult movie in tmdbMovieSearchResults)
           {
             #region populate facade item
             GUIListItem item = new GUIListItem();
             OnlineMovie ovMovie = new OnlineMovie { MovieSearchResult = movie };
             // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
             string[] split = movie.original_title.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            bool ispersoninfo = (split.Length > 1);
+            // bool ispersoninfo = (split.Length > 1);
 
             item.ItemId = Int32.MaxValue - itemId;
             item.TVTag = ovMovie;
@@ -6230,8 +6234,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               item.Label2 = movie.release_date;
             }
-            item.Label3 = (!ispersoninfo) ? movie.vote_average + " (" + movie.vote_count + ")" :"";
-            if (ispersoninfo) item.Label2 = split[1] + " - " + item.Label2;
+            item.Label3 = (!ispersonmovie) ? movie.vote_average + " (" + movie.vote_count + ")" : movie.original_title;
+            if (ispersonmovie) item.Label2 = movie.original_title + " - " + item.Label2;
+            // if (ispersonmovie) item.Label2 = split[1] + " - " + item.Label2;
             item.Path = "";
             item.IsRemote = true;
             item.IsFolder = false;
