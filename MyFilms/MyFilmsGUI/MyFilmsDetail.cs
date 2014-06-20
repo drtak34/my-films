@@ -49,8 +49,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
   using WatTmdb.V3;
   using Grabber;
-  using Grabber.TMDBv3;
-
+  
   using MediaPortal.Configuration;
   using MediaPortal;
   using MediaPortal.Dialogs;
@@ -9718,7 +9717,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         TmdbMovieSearch moviesfound;
         if (int.TryParse(r1[index]["Year"].ToString(), out year))
         {
-          moviesfound = api.SearchMovie(titlename, 1, null, year);
+          moviesfound = api.SearchMovie(titlename, 1, "", null, year);
           if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename, 1, null);
         }
         else
@@ -9728,7 +9727,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             if (int.TryParse(r1[index]["Year"].ToString(), out year))
             {
-              moviesfound = api.SearchMovie(titlename2, 1, null, year);
+              moviesfound = api.SearchMovie(titlename2, 1, "", null, year);
               if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename2, 1, null);
             }
           }
@@ -11430,7 +11429,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               TmdbMovieSearch moviesfound;
               if (int.TryParse(r1[index]["Year"].ToString(), out year))
               {
-                moviesfound = api.SearchMovie(titlename, 1, null, year);
+                moviesfound = api.SearchMovie(titlename, 1, "", null, year);
                 if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename, 1, null);
               }
               else
@@ -11440,7 +11439,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 {
                   if (int.TryParse(r1[index]["Year"].ToString(), out year))
                   {
-                    moviesfound = api.SearchMovie(titlename2, 1, null, year);
+                    moviesfound = api.SearchMovie(titlename2, 1, "", null, year);
                     if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(titlename2, 1, null);
                   }
                 }

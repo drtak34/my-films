@@ -92,7 +92,7 @@ namespace Grabber
         TmdbMovieSearch moviesfound;
         if (year > 0)
         {
-          moviesfound = api.SearchMovie(title, 1, null, year);
+          moviesfound = api.SearchMovie(title, 1, "", null, year);
           if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(title, 1, language);
           movies.AddRange(moviesfound.results);
         }

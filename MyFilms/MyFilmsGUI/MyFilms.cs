@@ -3353,7 +3353,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 if (StopLoadingFilmlistDetails) return; // stop download if we have exited window
 
-                TmdbMovieSearch moviesfound = api.SearchMovie(item.Label, 1, null, item.Year);
+                TmdbMovieSearch moviesfound = api.SearchMovie(item.Label, 1, "", null, item.Year);
                 if (moviesfound.results.Count == 0) moviesfound = api.SearchMovie(item.Label, 1, null);
                 if (moviesfound.results.Count != 1)
                 {
