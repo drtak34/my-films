@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en|all</Language>
     <Type>person</Type>
-    <Version>1.4.2</Version>
+    <Version>1.4.3</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -121,7 +121,7 @@
       <KeyLinkPersonsIndex />
       <KeyLinkPersonsPage />
       <KeyStartComment Param1="_x0023_REGEX_x0023__x005C_s_x007B_2_x002C__x007D_" Param2="_x0020_">_x0023_REGEX_x0023__x003C_h4._x002A__x003F_nmbio_ov_1_x0022__x0020__x003E_</KeyStartComment>
-      <KeyEndComment>_x0023_REGEX_x0023__x003C_br_x002F__x003E__x007C__x002C_</KeyEndComment>
+      <KeyEndComment>_x0023_REGEX_x0023__x003C_br_x002F__x003E__x007C__x002C__x007C__x003C__x002F_table_x003E_</KeyEndComment>
       <KeyCommentRegExp />
       <KeyCommentIndex />
       <KeyCommentPage>URL_x0020_Redirection_x0020_Description</KeyCommentPage>
