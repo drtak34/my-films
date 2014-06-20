@@ -11379,8 +11379,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
           {
-            dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
-            choice.Add("artistdetail");
+            //dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
+            //choice.Add("artistdetail");
 
             dlg.Add(GUILocalizeStrings.Get(1079893)); // Filmographie (TMDB)
             choice.Add("artistdetailtmdb");
@@ -12622,14 +12622,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             break;
           }
 
-        case "artistdetail":
-          LogMyFilms.Debug("artistdetail: searching infos for '" + this.facadeFilms.SelectedListItem.Label + "'");
-          {
-            string actorSearchname = Helper.DatabaseUtility.RemoveInvalidChars(this.facadeFilms.SelectedListItem.Label);
-            PersonInfo(actorSearchname);
-            break;
-          }
-
         case "artistdetailtmdb":
           LogMyFilms.Debug("artistdetailtmdb: launching TMDB online infos for '" + this.facadeFilms.SelectedListItem.Label + "'");
           {
@@ -13235,7 +13227,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (dlg.SelectedLabel == -1)
           {
             if (returnToContextmenu) // only call if it was called from context menu
-              Context_Menu_Movie(this.facadeFilms.SelectedListItem.ItemId);
+              Context_Menu_Movie(facadeFilms.SelectedListItem.ItemId);
             else
               Change_Search_Options();
             return;
@@ -13263,23 +13255,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             if (dlgPrgrs != null)
             {
               dlgPrgrs.Percentage = 19;
-              dlgPrgrs.SetLine(1, "search person on IMDB ...");
+              dlgPrgrs.SetLine(1, "search person ...");
             }
 
-            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "relatedpersonsearch: add person option to dialog menu for personinfodialog"))
-            {
-              // First check if actor exists... - this only works with MePo V1.1.5+
-              LogMyFilms.Debug("Check, if Person is found in IMDB-DB (using MP actors DB)");
-              var actorList = new ArrayList(); // Search with searchName parameter which contain wanted actor name, result(s) is in array which conatin id and name separated with char "|"
-              try
-              {
-                VideoDatabase.GetActorByName(wperson, actorList);
-              }
-              catch (Exception)
-              { }
-              dlg.Add(GUILocalizeStrings.Get(10798731) + " (" + actorList.Count.ToString() + ")");
-              choiceSearch.Add("PersonInfo");
-            }
           }
 
           LogMyFilms.Debug("Adding search results for roles to menu ...");
@@ -13312,12 +13290,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           dlg.DoModal(GetID);
           if (dlg.SelectedLabel == -1) return;
-          if (choiceSearch[dlg.SelectedLabel] == "PersonInfo")
-          {
-            string actorSearchname = Helper.DatabaseUtility.RemoveInvalidChars(wperson);
-            PersonInfo(actorSearchname);
-            return;
-          }
 
           SaveListState(false); // SaveLastView(); // to restore to current context after search results ...
 
@@ -13370,76 +13342,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }) { Name = "SearchRelatedMoviesbyPersons", IsBackground = true }.Start();
     }
 
-    private void PersonInfo(string personName)
-    {
-      var imdbActor = new IMDBActor();
-      GetAndStorePersonInfo(personName, ref imdbActor);
-      if (string.IsNullOrEmpty(imdbActor.Name))
-      {
-        LogMyFilms.Debug("(Person Info): No ActorIDs found for '" + personName + "'");
-        GUIUtils.ShowOKDialog("Keine Personen Infos vorhanden !");
-        return;
-      }
-      OnVideoArtistInfoGuzzi(imdbActor);
-    }
-
-    private void OnVideoArtistInfoGuzzi(IMDBActor actor)
-    {
-      MediaPortal.GUI.Video.GUIVideoArtistInfo infoDlg = (MediaPortal.GUI.Video.GUIVideoArtistInfo)GUIWindowManager.GetWindow((int)Window.WINDOW_VIDEO_ARTIST_INFO);
-      if (infoDlg == null)
-      {
-        LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): infoDlg == null -> returning without action");
-        return;
-      }
-      if (actor == null)
-      {
-        LogMyFilms.Debug("(OnVideoArtistInfoGuzzi): actor == null -> returning without action");
-        return;
-      }
-
-      infoDlg.Actor = actor;
-      // ArrayList movies = new ArrayList();
-      IMDBMovie movie = new IMDBMovie();
-      // VideoDatabase.GetMoviesByActor(actor.Name, ref movies);
-
-      //if (movies.Count > 0)
-      //{
-      //  Random rnd = new Random();
-
-      //  for (int i = movies.Count - 1; i > 0; i--)
-      //  {
-      //    int position = rnd.Next(i + 1);
-      //    object temp = movies[i];
-      //    movies[i] = movies[position];
-      //    movies[position] = temp;
-      //  }
-
-      //  movie = (IMDBMovie)movies[0];
-      //}
-      infoDlg.Movie = movie;
-      //infoDlg.DoModal(GetID); //infoDlg.DoModal(GUIWindowManager.ActiveWindow);
-      GUIWindowManager.ActivateWindow((int)Window.WINDOW_VIDEO_ARTIST_INFO);
-    }
-
     private void GetAndStorePersonInfo(string personName, ref IMDBActor imdbActor)
     {
-      //var imdb = new IMDB();
-      //// var imdbfetcher = new IMDBFetcher(null);
-      //// bool fetchActors = imdbfetcher.FetchActors();
-      //imdb.FindActor(personName);
-      //foreach (var t in imdb)
-      //{
-      //  //#if MP1X
-      //  //        imdb.GetActorDetails(imdb[i], false, out imdbActor);
-      //  //#else
-      //  //        imdb.GetActorDetails(imdb[i], out imdbActor);
-      //  //#endif
-      //  GUIUtils.GetActorDetails(imdb, t, false, out imdbActor);
-      //  if (!string.IsNullOrEmpty(imdbActor.ThumbnailUrl))
-      //  {
-      //    break;
-      //  }
-      //}
       string grabberscript = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + @"\IMDB-Person.xml";
       if (File.Exists(grabberscript))
       {
@@ -13471,12 +13375,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         Log.Debug("IMDBFetcher single actor fetch: url=null or empty for actor {0}", personName);
       }
-      // Add actor to datbbase to get infos in person facades later...
-      //#if MP1X
-      //      int actorId = VideoDatabase.AddActor(imdbActor.Name);
-      //#else
-      //      int actorId = VideoDatabase.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
-      //#endif
       int actorId = GUIUtils.AddActor(imdbActor.IMDBActorID, imdbActor.Name);
       if (actorId > 0)
       {
