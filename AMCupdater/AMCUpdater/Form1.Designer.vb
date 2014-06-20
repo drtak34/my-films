@@ -550,93 +550,95 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateAddedDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ImageListViewPersons = New System.Windows.Forms.ImageList(Me.components)
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.txtSampleVideo3D = New System.Windows.Forms.TextBox()
         OwnerLabel = New System.Windows.Forms.Label()
         MailLabel = New System.Windows.Forms.Label()
         SiteLabel = New System.Windows.Forms.Label()
         DescriptionLabel = New System.Windows.Forms.Label()
-        Me.TabControl1.SuspendLayout()
-        Me.Import_Movies.SuspendLayout()
-        Me.GroupBox27.SuspendLayout()
-        Me.GroupBox9.SuspendLayout()
-        Me.GroupBox23.SuspendLayout()
-        Me.GroupBox17.SuspendLayout()
-        Me.GroupBox8.SuspendLayout()
-        Me.Update_Movies.SuspendLayout()
-        Me.GroupBox32.SuspendLayout()
-        Me.grpManualInternetLookupSettings.SuspendLayout()
-        Me.grpManualUpdatesParameters.SuspendLayout()
-        Me.GroupBox10.SuspendLayout()
-        Me.DatabaseFields.SuspendLayout()
-        Me.GroupBox_FanartHandling.SuspendLayout()
-        CType(Me.cbNumFanartLimitNumber, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox_TitleHandling.SuspendLayout()
-        Me.GroupBox_StorageFieldHandling.SuspendLayout()
-        Me.GroupBox_MediaLabelFieldHandling.SuspendLayout()
-        Me.GroupBox_OtherFieldHandling.SuspendLayout()
-        Me.GroupBox_PictureHandling.SuspendLayout()
-        Me.GroupBox16.SuspendLayout()
-        Me.ScanFilters.SuspendLayout()
-        Me.GroupBox28.SuspendLayout()
-        CType(Me.dgEditionStrings, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox24.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        Me.GroupBox20.SuspendLayout()
-        CType(Me.dgFilterStrings, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox19.SuspendLayout()
-        CType(Me.dgExcludedFolderStrings, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.dgExcludedFileStrings, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Options.SuspendLayout()
-        Me.GroupBox26.SuspendLayout()
-        Me.GroupBox11.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox25.SuspendLayout()
-        Me.GroupBox7.SuspendLayout()
-        Me.GroupBox13.SuspendLayout()
-        Me.GroupBox12.SuspendLayout()
-        Me.Mediainfo.SuspendLayout()
-        Me.GroupBox18.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.ViewCollection.SuspendLayout()
-        Me.GroupBoxMovieDetails.SuspendLayout()
-        CType(Me.MovieBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox14.SuspendLayout()
-        Me.GroupBox22.SuspendLayout()
-        Me.GroupBox21.SuspendLayout()
-        Me.GroupBox15.SuspendLayout()
-        Me.XionPanel1.SuspendLayout()
-        CType(Me.DataGridViewMovie, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.MovieBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.MovieBindingNavigator.SuspendLayout()
-        Me.ViewPersons.SuspendLayout()
-        Me.GroupBoxPersonInfo.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        CType(Me.PersonBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.XionPanelPerson.SuspendLayout()
-        CType(Me.DataGridViewPerson, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PersonBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PersonBindingNavigator.SuspendLayout()
-        Me.ViewCatalog.SuspendLayout()
-        CType(Me.UserDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.UserBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.AntMovieCatalog, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CustomFieldDataGridView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.CustomFieldBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PropertiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.mnuFile.SuspendLayout()
-        Me.StatusStrip1.SuspendLayout()
-        CType(Me.epInteractive, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.epManualUpdater, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.epOptions, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.ListVideos, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.TabControl1.SuspendLayout
+        Me.Import_Movies.SuspendLayout
+        Me.GroupBox27.SuspendLayout
+        Me.GroupBox9.SuspendLayout
+        Me.GroupBox23.SuspendLayout
+        Me.GroupBox17.SuspendLayout
+        Me.GroupBox8.SuspendLayout
+        Me.Update_Movies.SuspendLayout
+        Me.GroupBox32.SuspendLayout
+        Me.grpManualInternetLookupSettings.SuspendLayout
+        Me.grpManualUpdatesParameters.SuspendLayout
+        Me.GroupBox10.SuspendLayout
+        Me.DatabaseFields.SuspendLayout
+        Me.GroupBox_FanartHandling.SuspendLayout
+        CType(Me.cbNumFanartLimitNumber,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox_TitleHandling.SuspendLayout
+        Me.GroupBox_StorageFieldHandling.SuspendLayout
+        Me.GroupBox_MediaLabelFieldHandling.SuspendLayout
+        Me.GroupBox_OtherFieldHandling.SuspendLayout
+        Me.GroupBox_PictureHandling.SuspendLayout
+        Me.GroupBox16.SuspendLayout
+        Me.ScanFilters.SuspendLayout
+        Me.GroupBox28.SuspendLayout
+        CType(Me.dgEditionStrings,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox24.SuspendLayout
+        Me.GroupBox6.SuspendLayout
+        Me.GroupBox20.SuspendLayout
+        CType(Me.dgFilterStrings,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox19.SuspendLayout
+        CType(Me.dgExcludedFolderStrings,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.dgExcludedFileStrings,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Options.SuspendLayout
+        Me.GroupBox26.SuspendLayout
+        Me.GroupBox11.SuspendLayout
+        Me.GroupBox4.SuspendLayout
+        Me.GroupBox25.SuspendLayout
+        Me.GroupBox7.SuspendLayout
+        Me.GroupBox13.SuspendLayout
+        Me.GroupBox12.SuspendLayout
+        Me.Mediainfo.SuspendLayout
+        Me.GroupBox18.SuspendLayout
+        Me.GroupBox3.SuspendLayout
+        Me.GroupBox2.SuspendLayout
+        Me.GroupBox1.SuspendLayout
+        Me.ViewCollection.SuspendLayout
+        Me.GroupBoxMovieDetails.SuspendLayout
+        CType(Me.MovieBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox14.SuspendLayout
+        Me.GroupBox22.SuspendLayout
+        Me.GroupBox21.SuspendLayout
+        Me.GroupBox15.SuspendLayout
+        Me.XionPanel1.SuspendLayout
+        CType(Me.DataGridViewMovie,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.MovieBindingNavigator,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.MovieBindingNavigator.SuspendLayout
+        Me.ViewPersons.SuspendLayout
+        Me.GroupBoxPersonInfo.SuspendLayout
+        Me.GroupBox5.SuspendLayout
+        CType(Me.PersonBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PictureBox2,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.XionPanelPerson.SuspendLayout
+        CType(Me.DataGridViewPerson,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PersonBindingNavigator,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.PersonBindingNavigator.SuspendLayout
+        Me.ViewCatalog.SuspendLayout
+        CType(Me.UserDataGridView,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.UserBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.AntMovieCatalog,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.CustomFieldDataGridView,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.CustomFieldBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.PropertiesBindingSource,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.mnuFile.SuspendLayout
+        Me.StatusStrip1.SuspendLayout
+        CType(Me.epInteractive,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.epManualUpdater,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.epOptions,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.ListVideos,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'OwnerLabel
         '
-        OwnerLabel.AutoSize = True
+        OwnerLabel.AutoSize = true
         OwnerLabel.Location = New System.Drawing.Point(8, 13)
         OwnerLabel.Name = "OwnerLabel"
         OwnerLabel.Size = New System.Drawing.Size(41, 13)
@@ -645,7 +647,7 @@ Partial Class Form1
         '
         'MailLabel
         '
-        MailLabel.AutoSize = True
+        MailLabel.AutoSize = true
         MailLabel.Location = New System.Drawing.Point(8, 39)
         MailLabel.Name = "MailLabel"
         MailLabel.Size = New System.Drawing.Size(29, 13)
@@ -654,7 +656,7 @@ Partial Class Form1
         '
         'SiteLabel
         '
-        SiteLabel.AutoSize = True
+        SiteLabel.AutoSize = true
         SiteLabel.Location = New System.Drawing.Point(303, 13)
         SiteLabel.Name = "SiteLabel"
         SiteLabel.Size = New System.Drawing.Size(28, 13)
@@ -663,7 +665,7 @@ Partial Class Form1
         '
         'DescriptionLabel
         '
-        DescriptionLabel.AutoSize = True
+        DescriptionLabel.AutoSize = true
         DescriptionLabel.Location = New System.Drawing.Point(303, 39)
         DescriptionLabel.Name = "DescriptionLabel"
         DescriptionLabel.Size = New System.Drawing.Size(63, 13)
@@ -672,13 +674,13 @@ Partial Class Form1
         '
         'FolderBrowserDialog1
         '
-        Me.FolderBrowserDialog1.ShowNewFolderButton = False
+        Me.FolderBrowserDialog1.ShowNewFolderButton = false
         '
         'TabControl1
         '
-        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.Import_Movies)
         Me.TabControl1.Controls.Add(Me.Update_Movies)
         Me.TabControl1.Controls.Add(Me.DatabaseFields)
@@ -712,7 +714,7 @@ Partial Class Form1
         Me.Import_Movies.Size = New System.Drawing.Size(600, 580)
         Me.Import_Movies.TabIndex = 0
         Me.Import_Movies.Text = "Import Movies"
-        Me.Import_Movies.UseVisualStyleBackColor = True
+        Me.Import_Movies.UseVisualStyleBackColor = true
         '
         'btnOpenLog
         '
@@ -721,11 +723,11 @@ Partial Class Form1
         Me.btnOpenLog.Size = New System.Drawing.Size(75, 23)
         Me.btnOpenLog.TabIndex = 8
         Me.btnOpenLog.Text = "Open Log"
-        Me.btnOpenLog.UseVisualStyleBackColor = True
+        Me.btnOpenLog.UseVisualStyleBackColor = true
         '
         'Label_VersionNumber
         '
-        Me.Label_VersionNumber.AutoSize = True
+        Me.Label_VersionNumber.AutoSize = true
         Me.Label_VersionNumber.Location = New System.Drawing.Point(23, 14)
         Me.Label_VersionNumber.Name = "Label_VersionNumber"
         Me.Label_VersionNumber.Size = New System.Drawing.Size(71, 13)
@@ -735,12 +737,12 @@ Partial Class Form1
         '
         'LinkLabelMyFilmsWiki
         '
-        Me.LinkLabelMyFilmsWiki.AutoSize = True
+        Me.LinkLabelMyFilmsWiki.AutoSize = true
         Me.LinkLabelMyFilmsWiki.Location = New System.Drawing.Point(111, 14)
         Me.LinkLabelMyFilmsWiki.Name = "LinkLabelMyFilmsWiki"
         Me.LinkLabelMyFilmsWiki.Size = New System.Drawing.Size(68, 13)
         Me.LinkLabelMyFilmsWiki.TabIndex = 1
-        Me.LinkLabelMyFilmsWiki.TabStop = True
+        Me.LinkLabelMyFilmsWiki.TabStop = true
         Me.LinkLabelMyFilmsWiki.Text = "MyFilms Wiki"
         '
         'Label88
@@ -764,41 +766,41 @@ Partial Class Form1
         Me.GroupBox27.Name = "GroupBox27"
         Me.GroupBox27.Size = New System.Drawing.Size(572, 126)
         Me.GroupBox27.TabIndex = 4
-        Me.GroupBox27.TabStop = False
+        Me.GroupBox27.TabStop = false
         Me.GroupBox27.Text = "Import Options ..."
         '
         'chkDontAskInteractive
         '
-        Me.chkDontAskInteractive.AutoSize = True
+        Me.chkDontAskInteractive.AutoSize = true
         Me.chkDontAskInteractive.Location = New System.Drawing.Point(406, 80)
         Me.chkDontAskInteractive.Name = "chkDontAskInteractive"
         Me.chkDontAskInteractive.Size = New System.Drawing.Size(129, 17)
         Me.chkDontAskInteractive.TabIndex = 2
         Me.chkDontAskInteractive.Text = "Don't ask, if no match"
         Me.ToolTip1.SetToolTip(Me.chkDontAskInteractive, resources.GetString("chkDontAskInteractive.ToolTip"))
-        Me.chkDontAskInteractive.UseVisualStyleBackColor = True
+        Me.chkDontAskInteractive.UseVisualStyleBackColor = true
         '
         'chkImportOnInternetFailInGuiMode
         '
-        Me.chkImportOnInternetFailInGuiMode.AutoSize = True
+        Me.chkImportOnInternetFailInGuiMode.AutoSize = true
         Me.chkImportOnInternetFailInGuiMode.Location = New System.Drawing.Point(406, 102)
         Me.chkImportOnInternetFailInGuiMode.Name = "chkImportOnInternetFailInGuiMode"
         Me.chkImportOnInternetFailInGuiMode.Size = New System.Drawing.Size(131, 17)
         Me.chkImportOnInternetFailInGuiMode.TabIndex = 4
         Me.chkImportOnInternetFailInGuiMode.Text = "Import if no automatch"
         Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFailInGuiMode, resources.GetString("chkImportOnInternetFailInGuiMode.ToolTip"))
-        Me.chkImportOnInternetFailInGuiMode.UseVisualStyleBackColor = True
+        Me.chkImportOnInternetFailInGuiMode.UseVisualStyleBackColor = true
         '
         'cbInternetLookupAlwaysPrompt
         '
-        Me.cbInternetLookupAlwaysPrompt.AutoSize = True
+        Me.cbInternetLookupAlwaysPrompt.AutoSize = true
         Me.cbInternetLookupAlwaysPrompt.Location = New System.Drawing.Point(406, 59)
         Me.cbInternetLookupAlwaysPrompt.Name = "cbInternetLookupAlwaysPrompt"
         Me.cbInternetLookupAlwaysPrompt.Size = New System.Drawing.Size(93, 17)
         Me.cbInternetLookupAlwaysPrompt.TabIndex = 5
-        Me.cbInternetLookupAlwaysPrompt.TabStop = False
+        Me.cbInternetLookupAlwaysPrompt.TabStop = false
         Me.cbInternetLookupAlwaysPrompt.Text = "always prompt"
-        Me.cbInternetLookupAlwaysPrompt.UseVisualStyleBackColor = True
+        Me.cbInternetLookupAlwaysPrompt.UseVisualStyleBackColor = true
         '
         'GroupBox9
         '
@@ -807,21 +809,21 @@ Partial Class Form1
         Me.GroupBox9.Name = "GroupBox9"
         Me.GroupBox9.Size = New System.Drawing.Size(174, 44)
         Me.GroupBox9.TabIndex = 10
-        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.TabStop = false
         Me.GroupBox9.Text = "Import behaviour in MyFilms ..."
-        Me.ToolTip1.SetToolTip(Me.GroupBox9, "This is the import behaviour used when you run AMCU in MyFilms plugin " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "via Globa" & _
+        Me.ToolTip1.SetToolTip(Me.GroupBox9, "This is the import behaviour used when you run AMCU in MyFilms plugin "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"via Globa"& _ 
         "l Updates > Import/Update all movies from the My Films main menu.")
         '
         'chkImportOnInternetFail
         '
-        Me.chkImportOnInternetFail.AutoSize = True
+        Me.chkImportOnInternetFail.AutoSize = true
         Me.chkImportOnInternetFail.Location = New System.Drawing.Point(14, 17)
         Me.chkImportOnInternetFail.Name = "chkImportOnInternetFail"
         Me.chkImportOnInternetFail.Size = New System.Drawing.Size(134, 17)
         Me.chkImportOnInternetFail.TabIndex = 3
         Me.chkImportOnInternetFail.Text = "Import if no auto match"
         Me.ToolTip1.SetToolTip(Me.chkImportOnInternetFail, resources.GetString("chkImportOnInternetFail.ToolTip"))
-        Me.chkImportOnInternetFail.UseVisualStyleBackColor = True
+        Me.chkImportOnInternetFail.UseVisualStyleBackColor = true
         '
         'lblInternetLookupCaseExplanation
         '
@@ -834,7 +836,7 @@ Partial Class Form1
         '
         'Label24
         '
-        Me.Label24.AutoSize = True
+        Me.Label24.AutoSize = true
         Me.Label24.Location = New System.Drawing.Point(14, 26)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(87, 13)
@@ -844,7 +846,7 @@ Partial Class Form1
         'cbInternetLookupBehaviour
         '
         Me.cbInternetLookupBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbInternetLookupBehaviour.FormattingEnabled = True
+        Me.cbInternetLookupBehaviour.FormattingEnabled = true
         Me.cbInternetLookupBehaviour.Items.AddRange(New Object() {"Auto match only", "Auto match & media only if no match", "Auto match & ask if no match", "Manual match (always ask)"})
         Me.cbInternetLookupBehaviour.Location = New System.Drawing.Point(116, 23)
         Me.cbInternetLookupBehaviour.Name = "cbInternetLookupBehaviour"
@@ -866,7 +868,7 @@ Partial Class Form1
         Me.GroupBox23.Name = "GroupBox23"
         Me.GroupBox23.Size = New System.Drawing.Size(572, 79)
         Me.GroupBox23.TabIndex = 5
-        Me.GroupBox23.TabStop = False
+        Me.GroupBox23.TabStop = false
         Me.GroupBox23.Text = "Internet Grabber Options ..."
         '
         'btnImportFromDrive
@@ -876,12 +878,12 @@ Partial Class Form1
         Me.btnImportFromDrive.Size = New System.Drawing.Size(60, 38)
         Me.btnImportFromDrive.TabIndex = 6
         Me.btnImportFromDrive.Text = "Import Disc"
-        Me.btnImportFromDrive.UseVisualStyleBackColor = True
-        Me.btnImportFromDrive.Visible = False
+        Me.btnImportFromDrive.UseVisualStyleBackColor = true
+        Me.btnImportFromDrive.Visible = false
         '
         'txtParserFilePathDisplay
         '
-        Me.txtParserFilePathDisplay.Enabled = False
+        Me.txtParserFilePathDisplay.Enabled = false
         Me.txtParserFilePathDisplay.Location = New System.Drawing.Point(116, 18)
         Me.txtParserFilePathDisplay.Name = "txtParserFilePathDisplay"
         Me.txtParserFilePathDisplay.Size = New System.Drawing.Size(135, 20)
@@ -891,7 +893,7 @@ Partial Class Form1
         '
         Me.cbTitleHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbTitleHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbTitleHandling.FormattingEnabled = True
+        Me.cbTitleHandling.FormattingEnabled = true
         Me.cbTitleHandling.Items.AddRange(New Object() {"File Name", "Folder Name", "Relative Name", "File Name + Internet Lookup", "Folder Name + Internet Lookup", "Relative Name + Internet Lookup"})
         Me.cbTitleHandling.Location = New System.Drawing.Point(116, 44)
         Me.cbTitleHandling.Name = "cbTitleHandling"
@@ -901,12 +903,12 @@ Partial Class Form1
         '
         'Label43
         '
-        Me.Label43.AutoSize = True
+        Me.Label43.AutoSize = true
         Me.Label43.Location = New System.Drawing.Point(11, 41)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(86, 26)
         Me.Label43.TabIndex = 4
-        Me.Label43.Text = "Title and " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Search Handling"
+        Me.Label43.Text = "Title and "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Search Handling"
         '
         'Button1
         '
@@ -915,21 +917,21 @@ Partial Class Form1
         Me.Button1.Size = New System.Drawing.Size(116, 20)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "Grabber Options"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = true
         '
         'btnSelectParserFile
         '
-        Me.btnSelectParserFile.CausesValidation = False
+        Me.btnSelectParserFile.CausesValidation = false
         Me.btnSelectParserFile.Location = New System.Drawing.Point(282, 18)
         Me.btnSelectParserFile.Name = "btnSelectParserFile"
         Me.btnSelectParserFile.Size = New System.Drawing.Size(32, 20)
         Me.btnSelectParserFile.TabIndex = 2
         Me.btnSelectParserFile.Text = "..."
-        Me.btnSelectParserFile.UseVisualStyleBackColor = True
+        Me.btnSelectParserFile.UseVisualStyleBackColor = true
         '
         'Label23
         '
-        Me.Label23.AutoSize = True
+        Me.Label23.AutoSize = true
         Me.Label23.Location = New System.Drawing.Point(11, 20)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(73, 13)
@@ -943,7 +945,7 @@ Partial Class Form1
         Me.txtParserFilePath.Size = New System.Drawing.Size(198, 20)
         Me.txtParserFilePath.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.txtParserFilePath, resources.GetString("txtParserFilePath.ToolTip"))
-        Me.txtParserFilePath.Visible = False
+        Me.txtParserFilePath.Visible = false
         '
         'GroupBox17
         '
@@ -957,82 +959,82 @@ Partial Class Form1
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(572, 67)
         Me.GroupBox17.TabIndex = 3
-        Me.GroupBox17.TabStop = False
+        Me.GroupBox17.TabStop = false
         Me.GroupBox17.Text = "Options for File Handling ..."
         '
         'chkPurgeMissingAlways
         '
-        Me.chkPurgeMissingAlways.AutoSize = True
+        Me.chkPurgeMissingAlways.AutoSize = true
         Me.chkPurgeMissingAlways.Location = New System.Drawing.Point(180, 42)
         Me.chkPurgeMissingAlways.Name = "chkPurgeMissingAlways"
         Me.chkPurgeMissingAlways.Size = New System.Drawing.Size(220, 17)
         Me.chkPurgeMissingAlways.TabIndex = 4
         Me.chkPurgeMissingAlways.Text = "Purge Orphans when Source unavailable"
         Me.ToolTip1.SetToolTip(Me.chkPurgeMissingAlways, resources.GetString("chkPurgeMissingAlways.ToolTip"))
-        Me.chkPurgeMissingAlways.UseVisualStyleBackColor = True
+        Me.chkPurgeMissingAlways.UseVisualStyleBackColor = true
         '
         'chkRescanMovedFiles
         '
-        Me.chkRescanMovedFiles.AutoSize = True
+        Me.chkRescanMovedFiles.AutoSize = true
         Me.chkRescanMovedFiles.Location = New System.Drawing.Point(406, 42)
         Me.chkRescanMovedFiles.Name = "chkRescanMovedFiles"
         Me.chkRescanMovedFiles.Size = New System.Drawing.Size(128, 17)
         Me.chkRescanMovedFiles.TabIndex = 5
         Me.chkRescanMovedFiles.Text = "Re-Scan Moved Files"
-        Me.ToolTip1.SetToolTip(Me.chkRescanMovedFiles, "Forces a refresh of file-based and online data for a file when it is found to hav" & _
+        Me.ToolTip1.SetToolTip(Me.chkRescanMovedFiles, "Forces a refresh of file-based and online data for a file when it is found to hav"& _ 
         "e moved.")
-        Me.chkRescanMovedFiles.UseVisualStyleBackColor = True
+        Me.chkRescanMovedFiles.UseVisualStyleBackColor = true
         '
         'chkProhibitInternetLookup
         '
-        Me.chkProhibitInternetLookup.AutoSize = True
+        Me.chkProhibitInternetLookup.AutoSize = true
         Me.chkProhibitInternetLookup.Location = New System.Drawing.Point(406, 19)
         Me.chkProhibitInternetLookup.Name = "chkProhibitInternetLookup"
         Me.chkProhibitInternetLookup.Size = New System.Drawing.Size(139, 17)
         Me.chkProhibitInternetLookup.TabIndex = 2
         Me.chkProhibitInternetLookup.Text = "Prohibit Internet Lookup"
         Me.ToolTip1.SetToolTip(Me.chkProhibitInternetLookup, "Global override option to disable all Internet-based functionality.")
-        Me.chkProhibitInternetLookup.UseVisualStyleBackColor = True
+        Me.chkProhibitInternetLookup.UseVisualStyleBackColor = true
         '
         'chkPurgeMissing
         '
-        Me.chkPurgeMissing.AutoSize = True
+        Me.chkPurgeMissing.AutoSize = true
         Me.chkPurgeMissing.Location = New System.Drawing.Point(180, 19)
         Me.chkPurgeMissing.Name = "chkPurgeMissing"
         Me.chkPurgeMissing.Size = New System.Drawing.Size(135, 17)
         Me.chkPurgeMissing.TabIndex = 1
         Me.chkPurgeMissing.Text = "Purge Orphan Records"
         Me.ToolTip1.SetToolTip(Me.chkPurgeMissing, resources.GetString("chkPurgeMissing.ToolTip"))
-        Me.chkPurgeMissing.UseVisualStyleBackColor = True
+        Me.chkPurgeMissing.UseVisualStyleBackColor = true
         '
         'chkOverwriteXML
         '
-        Me.chkOverwriteXML.AutoSize = True
+        Me.chkOverwriteXML.AutoSize = true
         Me.chkOverwriteXML.Location = New System.Drawing.Point(12, 19)
         Me.chkOverwriteXML.Name = "chkOverwriteXML"
         Me.chkOverwriteXML.Size = New System.Drawing.Size(115, 17)
         Me.chkOverwriteXML.TabIndex = 0
         Me.chkOverwriteXML.Text = "Overwrite XML File"
         Me.ToolTip1.SetToolTip(Me.chkOverwriteXML, "Directly over-write the given Ant Movie Catalog database file.")
-        Me.chkOverwriteXML.UseVisualStyleBackColor = True
+        Me.chkOverwriteXML.UseVisualStyleBackColor = true
         '
         'chkBackupXMLFirst
         '
-        Me.chkBackupXMLFirst.AutoSize = True
-        Me.chkBackupXMLFirst.Checked = True
+        Me.chkBackupXMLFirst.AutoSize = true
+        Me.chkBackupXMLFirst.Checked = true
         Me.chkBackupXMLFirst.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkBackupXMLFirst.Enabled = False
+        Me.chkBackupXMLFirst.Enabled = false
         Me.chkBackupXMLFirst.Location = New System.Drawing.Point(12, 42)
         Me.chkBackupXMLFirst.Name = "chkBackupXMLFirst"
         Me.chkBackupXMLFirst.Size = New System.Drawing.Size(107, 17)
         Me.chkBackupXMLFirst.TabIndex = 3
         Me.chkBackupXMLFirst.Text = "Backup XML File"
         Me.ToolTip1.SetToolTip(Me.chkBackupXMLFirst, "Back up the Ant Movie Catalog database file before modifying it.")
-        Me.chkBackupXMLFirst.UseVisualStyleBackColor = True
+        Me.chkBackupXMLFirst.UseVisualStyleBackColor = true
         '
         'ToolStripProgressMessage
         '
-        Me.ToolStripProgressMessage.AutoSize = True
+        Me.ToolStripProgressMessage.AutoSize = true
         Me.ToolStripProgressMessage.Location = New System.Drawing.Point(16, 553)
         Me.ToolStripProgressMessage.Name = "ToolStripProgressMessage"
         Me.ToolStripProgressMessage.Size = New System.Drawing.Size(35, 13)
@@ -1042,13 +1044,13 @@ Partial Class Form1
         '
         'btnShowHideLog
         '
-        Me.btnShowHideLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnShowHideLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnShowHideLog.Location = New System.Drawing.Point(491, 549)
         Me.btnShowHideLog.Name = "btnShowHideLog"
         Me.btnShowHideLog.Size = New System.Drawing.Size(92, 22)
         Me.btnShowHideLog.TabIndex = 9
         Me.btnShowHideLog.Text = "Show Log >>"
-        Me.btnShowHideLog.UseVisualStyleBackColor = True
+        Me.btnShowHideLog.UseVisualStyleBackColor = true
         '
         'GroupBox8
         '
@@ -1064,22 +1066,22 @@ Partial Class Form1
         Me.GroupBox8.Name = "GroupBox8"
         Me.GroupBox8.Size = New System.Drawing.Size(572, 105)
         Me.GroupBox8.TabIndex = 6
-        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.TabStop = false
         Me.GroupBox8.Text = "Begin Import ..."
         '
         'BtnImportWatcher
         '
-        Me.BtnImportWatcher.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnImportWatcher.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.BtnImportWatcher.Location = New System.Drawing.Point(500, 32)
         Me.BtnImportWatcher.Name = "BtnImportWatcher"
         Me.BtnImportWatcher.Size = New System.Drawing.Size(60, 57)
         Me.BtnImportWatcher.TabIndex = 7
         Me.BtnImportWatcher.Text = "Start Import Watcher"
-        Me.BtnImportWatcher.UseVisualStyleBackColor = True
+        Me.BtnImportWatcher.UseVisualStyleBackColor = true
         '
         'Label16
         '
-        Me.Label16.AutoSize = True
+        Me.Label16.AutoSize = true
         Me.Label16.Location = New System.Drawing.Point(286, 16)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(178, 13)
@@ -1094,24 +1096,24 @@ Partial Class Form1
         Me.btnParseXML.TabIndex = 3
         Me.btnParseXML.Text = "1 - Scan Movie DB"
         Me.btnParseXML.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnParseXML.UseVisualStyleBackColor = True
+        Me.btnParseXML.UseVisualStyleBackColor = true
         '
         'btnFindOrphans
         '
-        Me.btnFindOrphans.Enabled = False
+        Me.btnFindOrphans.Enabled = false
         Me.btnFindOrphans.Location = New System.Drawing.Point(261, 66)
         Me.btnFindOrphans.Name = "btnFindOrphans"
         Me.btnFindOrphans.Size = New System.Drawing.Size(106, 23)
         Me.btnFindOrphans.TabIndex = 5
         Me.btnFindOrphans.Text = "3 - Find Orphans"
         Me.btnFindOrphans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindOrphans.UseVisualStyleBackColor = True
+        Me.btnFindOrphans.UseVisualStyleBackColor = true
         '
         'btnCancelProcessing
         '
-        Me.btnCancelProcessing.Enabled = False
-        Me.btnCancelProcessing.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancelProcessing.Image = CType(resources.GetObject("btnCancelProcessing.Image"), System.Drawing.Image)
+        Me.btnCancelProcessing.Enabled = false
+        Me.btnCancelProcessing.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.btnCancelProcessing.Image = CType(resources.GetObject("btnCancelProcessing.Image"),System.Drawing.Image)
         Me.btnCancelProcessing.ImageAlign = System.Drawing.ContentAlignment.TopCenter
         Me.btnCancelProcessing.Location = New System.Drawing.Point(137, 32)
         Me.btnCancelProcessing.Name = "btnCancelProcessing"
@@ -1120,33 +1122,33 @@ Partial Class Form1
         Me.btnCancelProcessing.Text = "Cancel"
         Me.btnCancelProcessing.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancelProcessing.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        Me.btnCancelProcessing.UseVisualStyleBackColor = True
+        Me.btnCancelProcessing.UseVisualStyleBackColor = true
         '
         'btnUpdateXML
         '
-        Me.btnUpdateXML.Enabled = False
+        Me.btnUpdateXML.Enabled = false
         Me.btnUpdateXML.Location = New System.Drawing.Point(373, 66)
         Me.btnUpdateXML.Name = "btnUpdateXML"
         Me.btnUpdateXML.Size = New System.Drawing.Size(117, 23)
         Me.btnUpdateXML.TabIndex = 6
         Me.btnUpdateXML.Text = "4 - Update Movie DB"
         Me.btnUpdateXML.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateXML.UseVisualStyleBackColor = True
+        Me.btnUpdateXML.UseVisualStyleBackColor = true
         '
         'btnProcessMovieList
         '
-        Me.btnProcessMovieList.Enabled = False
+        Me.btnProcessMovieList.Enabled = false
         Me.btnProcessMovieList.Location = New System.Drawing.Point(373, 36)
         Me.btnProcessMovieList.Name = "btnProcessMovieList"
         Me.btnProcessMovieList.Size = New System.Drawing.Size(117, 23)
         Me.btnProcessMovieList.TabIndex = 4
         Me.btnProcessMovieList.Text = "2 - Scan Movie Files"
         Me.btnProcessMovieList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProcessMovieList.UseVisualStyleBackColor = True
+        Me.btnProcessMovieList.UseVisualStyleBackColor = true
         '
         'btnJustDoIt
         '
-        Me.btnJustDoIt.Image = CType(resources.GetObject("btnJustDoIt.Image"), System.Drawing.Image)
+        Me.btnJustDoIt.Image = CType(resources.GetObject("btnJustDoIt.Image"),System.Drawing.Image)
         Me.btnJustDoIt.Location = New System.Drawing.Point(13, 32)
         Me.btnJustDoIt.Name = "btnJustDoIt"
         Me.btnJustDoIt.Size = New System.Drawing.Size(103, 57)
@@ -1154,7 +1156,7 @@ Partial Class Form1
         Me.btnJustDoIt.Text = "Begin Import"
         Me.btnJustDoIt.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnJustDoIt.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        Me.btnJustDoIt.UseVisualStyleBackColor = True
+        Me.btnJustDoIt.UseVisualStyleBackColor = true
         '
         'Update_Movies
         '
@@ -1169,7 +1171,7 @@ Partial Class Form1
         Me.Update_Movies.Size = New System.Drawing.Size(600, 580)
         Me.Update_Movies.TabIndex = 3
         Me.Update_Movies.Text = "Update Movies"
-        Me.Update_Movies.UseVisualStyleBackColor = True
+        Me.Update_Movies.UseVisualStyleBackColor = true
         '
         'Label20
         '
@@ -1188,13 +1190,13 @@ Partial Class Form1
         Me.GroupBox32.Name = "GroupBox32"
         Me.GroupBox32.Size = New System.Drawing.Size(398, 87)
         Me.GroupBox32.TabIndex = 4
-        Me.GroupBox32.TabStop = False
+        Me.GroupBox32.TabStop = false
         Me.GroupBox32.Text = "Begin Update ..."
         '
         'btnManualCancel
         '
-        Me.btnManualCancel.Enabled = False
-        Me.btnManualCancel.Image = CType(resources.GetObject("btnManualCancel.Image"), System.Drawing.Image)
+        Me.btnManualCancel.Enabled = false
+        Me.btnManualCancel.Image = CType(resources.GetObject("btnManualCancel.Image"),System.Drawing.Image)
         Me.btnManualCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnManualCancel.Location = New System.Drawing.Point(263, 21)
         Me.btnManualCancel.Name = "btnManualCancel"
@@ -1203,25 +1205,25 @@ Partial Class Form1
         Me.btnManualCancel.Text = "Cancel"
         Me.btnManualCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnManualCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        Me.btnManualCancel.UseVisualStyleBackColor = True
+        Me.btnManualCancel.UseVisualStyleBackColor = true
         '
         'btnManualDoTest
         '
-        Me.btnManualDoTest.Image = CType(resources.GetObject("btnManualDoTest.Image"), System.Drawing.Image)
+        Me.btnManualDoTest.Image = CType(resources.GetObject("btnManualDoTest.Image"),System.Drawing.Image)
         Me.btnManualDoTest.ImageAlign = System.Drawing.ContentAlignment.BottomRight
         Me.btnManualDoTest.Location = New System.Drawing.Point(8, 21)
         Me.btnManualDoTest.Name = "btnManualDoTest"
         Me.btnManualDoTest.Size = New System.Drawing.Size(110, 57)
         Me.btnManualDoTest.TabIndex = 0
-        Me.btnManualDoTest.Text = "Test " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Params"
+        Me.btnManualDoTest.Text = "Test "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Params"
         Me.btnManualDoTest.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnManualDoTest.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        Me.btnManualDoTest.UseVisualStyleBackColor = True
+        Me.btnManualDoTest.UseVisualStyleBackColor = true
         '
         'btnManualApplyChanges
         '
-        Me.btnManualApplyChanges.Enabled = False
-        Me.btnManualApplyChanges.Image = CType(resources.GetObject("btnManualApplyChanges.Image"), System.Drawing.Image)
+        Me.btnManualApplyChanges.Enabled = false
+        Me.btnManualApplyChanges.Image = CType(resources.GetObject("btnManualApplyChanges.Image"),System.Drawing.Image)
         Me.btnManualApplyChanges.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnManualApplyChanges.Location = New System.Drawing.Point(124, 21)
         Me.btnManualApplyChanges.Name = "btnManualApplyChanges"
@@ -1230,7 +1232,7 @@ Partial Class Form1
         Me.btnManualApplyChanges.Text = "Apply Changes"
         Me.btnManualApplyChanges.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnManualApplyChanges.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage
-        Me.btnManualApplyChanges.UseVisualStyleBackColor = True
+        Me.btnManualApplyChanges.UseVisualStyleBackColor = true
         '
         'grpManualInternetLookupSettings
         '
@@ -1247,33 +1249,33 @@ Partial Class Form1
         Me.grpManualInternetLookupSettings.Name = "grpManualInternetLookupSettings"
         Me.grpManualInternetLookupSettings.Size = New System.Drawing.Size(573, 107)
         Me.grpManualInternetLookupSettings.TabIndex = 3
-        Me.grpManualInternetLookupSettings.TabStop = False
+        Me.grpManualInternetLookupSettings.TabStop = false
         Me.grpManualInternetLookupSettings.Text = "Internet Grabber Options ..."
         '
         'cbManualInternetLookupAlwaysPrompt
         '
-        Me.cbManualInternetLookupAlwaysPrompt.AutoSize = True
+        Me.cbManualInternetLookupAlwaysPrompt.AutoSize = true
         Me.cbManualInternetLookupAlwaysPrompt.Location = New System.Drawing.Point(343, 65)
         Me.cbManualInternetLookupAlwaysPrompt.Name = "cbManualInternetLookupAlwaysPrompt"
         Me.cbManualInternetLookupAlwaysPrompt.Size = New System.Drawing.Size(93, 17)
         Me.cbManualInternetLookupAlwaysPrompt.TabIndex = 47
         Me.cbManualInternetLookupAlwaysPrompt.Text = "always prompt"
-        Me.cbManualInternetLookupAlwaysPrompt.UseVisualStyleBackColor = True
+        Me.cbManualInternetLookupAlwaysPrompt.UseVisualStyleBackColor = true
         '
         'chkManualDontAskInteractive
         '
-        Me.chkManualDontAskInteractive.AutoSize = True
+        Me.chkManualDontAskInteractive.AutoSize = true
         Me.chkManualDontAskInteractive.Location = New System.Drawing.Point(465, 58)
         Me.chkManualDontAskInteractive.Name = "chkManualDontAskInteractive"
         Me.chkManualDontAskInteractive.Size = New System.Drawing.Size(78, 30)
         Me.chkManualDontAskInteractive.TabIndex = 6
-        Me.chkManualDontAskInteractive.Text = "Don't ask," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "if no match"
+        Me.chkManualDontAskInteractive.Text = "Don't ask,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"if no match"
         Me.ToolTip1.SetToolTip(Me.chkManualDontAskInteractive, resources.GetString("chkManualDontAskInteractive.ToolTip"))
-        Me.chkManualDontAskInteractive.UseVisualStyleBackColor = True
+        Me.chkManualDontAskInteractive.UseVisualStyleBackColor = true
         '
         'txtManualInternetParserPathDisplay
         '
-        Me.txtManualInternetParserPathDisplay.Enabled = False
+        Me.txtManualInternetParserPathDisplay.Enabled = false
         Me.txtManualInternetParserPathDisplay.Location = New System.Drawing.Point(107, 35)
         Me.txtManualInternetParserPathDisplay.Name = "txtManualInternetParserPathDisplay"
         Me.txtManualInternetParserPathDisplay.Size = New System.Drawing.Size(166, 20)
@@ -1286,11 +1288,11 @@ Partial Class Form1
         Me.Button2.Size = New System.Drawing.Size(94, 21)
         Me.Button2.TabIndex = 3
         Me.Button2.Text = "Grabber Options"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = true
         '
         'Label42
         '
-        Me.Label42.AutoSize = True
+        Me.Label42.AutoSize = true
         Me.Label42.Location = New System.Drawing.Point(8, 66)
         Me.Label42.Name = "Label42"
         Me.Label42.Size = New System.Drawing.Size(93, 13)
@@ -1299,18 +1301,18 @@ Partial Class Form1
         '
         'btnManualSelectInternetParserPath
         '
-        Me.btnManualSelectInternetParserPath.CausesValidation = False
+        Me.btnManualSelectInternetParserPath.CausesValidation = false
         Me.btnManualSelectInternetParserPath.Location = New System.Drawing.Point(290, 35)
         Me.btnManualSelectInternetParserPath.Name = "btnManualSelectInternetParserPath"
         Me.btnManualSelectInternetParserPath.Size = New System.Drawing.Size(36, 20)
         Me.btnManualSelectInternetParserPath.TabIndex = 2
         Me.btnManualSelectInternetParserPath.Text = "..."
-        Me.btnManualSelectInternetParserPath.UseVisualStyleBackColor = True
+        Me.btnManualSelectInternetParserPath.UseVisualStyleBackColor = true
         '
         'cbManualInternetLookupBehaviour
         '
         Me.cbManualInternetLookupBehaviour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualInternetLookupBehaviour.FormattingEnabled = True
+        Me.cbManualInternetLookupBehaviour.FormattingEnabled = true
         Me.cbManualInternetLookupBehaviour.Items.AddRange(New Object() {"Auto match only", "Auto match & ask if no match", "Manual match (always ask)"})
         Me.cbManualInternetLookupBehaviour.Location = New System.Drawing.Point(107, 63)
         Me.cbManualInternetLookupBehaviour.Name = "cbManualInternetLookupBehaviour"
@@ -1324,11 +1326,11 @@ Partial Class Form1
         Me.txtManualInternetParserPath.Name = "txtManualInternetParserPath"
         Me.txtManualInternetParserPath.Size = New System.Drawing.Size(219, 20)
         Me.txtManualInternetParserPath.TabIndex = 46
-        Me.txtManualInternetParserPath.Visible = False
+        Me.txtManualInternetParserPath.Visible = false
         '
         'Label41
         '
-        Me.Label41.AutoSize = True
+        Me.Label41.AutoSize = true
         Me.Label41.Location = New System.Drawing.Point(8, 38)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(75, 13)
@@ -1337,13 +1339,13 @@ Partial Class Form1
         '
         'btnShowHideLogTest
         '
-        Me.btnShowHideLogTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnShowHideLogTest.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.btnShowHideLogTest.Location = New System.Drawing.Point(489, 547)
         Me.btnShowHideLogTest.Name = "btnShowHideLogTest"
         Me.btnShowHideLogTest.Size = New System.Drawing.Size(94, 22)
         Me.btnShowHideLogTest.TabIndex = 5
         Me.btnShowHideLogTest.Text = "Show Log >>"
-        Me.btnShowHideLogTest.UseVisualStyleBackColor = True
+        Me.btnShowHideLogTest.UseVisualStyleBackColor = true
         '
         'grpManualUpdatesParameters
         '
@@ -1367,26 +1369,26 @@ Partial Class Form1
         Me.grpManualUpdatesParameters.Name = "grpManualUpdatesParameters"
         Me.grpManualUpdatesParameters.Size = New System.Drawing.Size(573, 129)
         Me.grpManualUpdatesParameters.TabIndex = 2
-        Me.grpManualUpdatesParameters.TabStop = False
+        Me.grpManualUpdatesParameters.TabStop = false
         Me.grpManualUpdatesParameters.Text = "Parameters ..."
-        Me.grpManualUpdatesParameters.Visible = False
+        Me.grpManualUpdatesParameters.Visible = false
         '
         'cbSkipExcludedMovieFiles
         '
-        Me.cbSkipExcludedMovieFiles.AutoSize = True
+        Me.cbSkipExcludedMovieFiles.AutoSize = true
         Me.cbSkipExcludedMovieFiles.Location = New System.Drawing.Point(341, 102)
         Me.cbSkipExcludedMovieFiles.Name = "cbSkipExcludedMovieFiles"
         Me.cbSkipExcludedMovieFiles.Size = New System.Drawing.Size(202, 17)
         Me.cbSkipExcludedMovieFiles.TabIndex = 15
         Me.cbSkipExcludedMovieFiles.Text = "Skip Movies in 'Excluded Movies File'"
-        Me.ToolTip1.SetToolTip(Me.cbSkipExcludedMovieFiles, "If checked, files contained in " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "'Excluded Movie Files' will be skipped.")
-        Me.cbSkipExcludedMovieFiles.UseVisualStyleBackColor = True
-        Me.cbSkipExcludedMovieFiles.Visible = False
+        Me.ToolTip1.SetToolTip(Me.cbSkipExcludedMovieFiles, "If checked, files contained in "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"'Excluded Movie Files' will be skipped.")
+        Me.cbSkipExcludedMovieFiles.UseVisualStyleBackColor = true
+        Me.cbSkipExcludedMovieFiles.Visible = false
         '
         'cbManualParameterAndOr
         '
         Me.cbManualParameterAndOr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualParameterAndOr.FormattingEnabled = True
+        Me.cbManualParameterAndOr.FormattingEnabled = true
         Me.cbManualParameterAndOr.Items.AddRange(New Object() {"and", "or", " "})
         Me.cbManualParameterAndOr.Location = New System.Drawing.Point(6, 49)
         Me.cbManualParameterAndOr.Name = "cbManualParameterAndOr"
@@ -1395,23 +1397,23 @@ Partial Class Form1
         '
         'lblManualParametersValue2
         '
-        Me.lblManualParametersValue2.AutoSize = True
+        Me.lblManualParametersValue2.AutoSize = true
         Me.lblManualParametersValue2.Location = New System.Drawing.Point(339, 57)
         Me.lblManualParametersValue2.Name = "lblManualParametersValue2"
         Me.lblManualParametersValue2.Size = New System.Drawing.Size(34, 13)
         Me.lblManualParametersValue2.TabIndex = 11
         Me.lblManualParametersValue2.Text = "Value"
-        Me.lblManualParametersValue2.Visible = False
+        Me.lblManualParametersValue2.Visible = false
         '
         'lblManualParametersOperator2
         '
-        Me.lblManualParametersOperator2.AutoSize = True
+        Me.lblManualParametersOperator2.AutoSize = true
         Me.lblManualParametersOperator2.Location = New System.Drawing.Point(219, 58)
         Me.lblManualParametersOperator2.Name = "lblManualParametersOperator2"
         Me.lblManualParametersOperator2.Size = New System.Drawing.Size(48, 13)
         Me.lblManualParametersOperator2.TabIndex = 9
         Me.lblManualParametersOperator2.Text = "Operator"
-        Me.lblManualParametersOperator2.Visible = False
+        Me.lblManualParametersOperator2.Visible = false
         '
         'txtManualParameterValue2
         '
@@ -1419,43 +1421,43 @@ Partial Class Form1
         Me.txtManualParameterValue2.Name = "txtManualParameterValue2"
         Me.txtManualParameterValue2.Size = New System.Drawing.Size(207, 20)
         Me.txtManualParameterValue2.TabIndex = 12
-        Me.txtManualParameterValue2.Visible = False
-        Me.txtManualParameterValue2.WordWrap = False
+        Me.txtManualParameterValue2.Visible = false
+        Me.txtManualParameterValue2.WordWrap = false
         '
         'cbManualParameterOperator2
         '
         Me.cbManualParameterOperator2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualParameterOperator2.FormattingEnabled = True
+        Me.cbManualParameterOperator2.FormattingEnabled = true
         Me.cbManualParameterOperator2.Items.AddRange(New Object() {"=", "!=", "LIKE", "NOT LIKE", "EXISTS", "NOT EXISTS", ">", "<", ">Num", "<Num"})
         Me.cbManualParameterOperator2.Location = New System.Drawing.Point(215, 74)
         Me.cbManualParameterOperator2.Name = "cbManualParameterOperator2"
         Me.cbManualParameterOperator2.Size = New System.Drawing.Size(111, 21)
         Me.cbManualParameterOperator2.TabIndex = 10
-        Me.cbManualParameterOperator2.Visible = False
+        Me.cbManualParameterOperator2.Visible = false
         '
         'lblManualParametersField2
         '
-        Me.lblManualParametersField2.AutoSize = True
+        Me.lblManualParametersField2.AutoSize = true
         Me.lblManualParametersField2.Location = New System.Drawing.Point(68, 58)
         Me.lblManualParametersField2.Name = "lblManualParametersField2"
         Me.lblManualParametersField2.Size = New System.Drawing.Size(47, 13)
         Me.lblManualParametersField2.TabIndex = 7
         Me.lblManualParametersField2.Text = "DB Field"
-        Me.lblManualParametersField2.Visible = False
+        Me.lblManualParametersField2.Visible = false
         '
         'cbManualParameterFieldList2
         '
         Me.cbManualParameterFieldList2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualParameterFieldList2.FormattingEnabled = True
+        Me.cbManualParameterFieldList2.FormattingEnabled = true
         Me.cbManualParameterFieldList2.Location = New System.Drawing.Point(68, 74)
         Me.cbManualParameterFieldList2.Name = "cbManualParameterFieldList2"
         Me.cbManualParameterFieldList2.Size = New System.Drawing.Size(132, 21)
         Me.cbManualParameterFieldList2.TabIndex = 8
-        Me.cbManualParameterFieldList2.Visible = False
+        Me.cbManualParameterFieldList2.Visible = false
         '
         'Label21
         '
-        Me.Label21.AutoSize = True
+        Me.Label21.AutoSize = true
         Me.Label21.Location = New System.Drawing.Point(18, 102)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(25, 13)
@@ -1464,27 +1466,27 @@ Partial Class Form1
         '
         'chkManualParametersUpdateAll
         '
-        Me.chkManualParametersUpdateAll.AutoSize = True
+        Me.chkManualParametersUpdateAll.AutoSize = true
         Me.chkManualParametersUpdateAll.Location = New System.Drawing.Point(49, 101)
         Me.chkManualParametersUpdateAll.Name = "chkManualParametersUpdateAll"
         Me.chkManualParametersUpdateAll.Size = New System.Drawing.Size(115, 17)
         Me.chkManualParametersUpdateAll.TabIndex = 14
         Me.chkManualParametersUpdateAll.Text = "Update all records."
-        Me.chkManualParametersUpdateAll.UseVisualStyleBackColor = True
+        Me.chkManualParametersUpdateAll.UseVisualStyleBackColor = true
         '
         'lblManualParametersValue1
         '
-        Me.lblManualParametersValue1.AutoSize = True
+        Me.lblManualParametersValue1.AutoSize = true
         Me.lblManualParametersValue1.Location = New System.Drawing.Point(339, 15)
         Me.lblManualParametersValue1.Name = "lblManualParametersValue1"
         Me.lblManualParametersValue1.Size = New System.Drawing.Size(34, 13)
         Me.lblManualParametersValue1.TabIndex = 4
         Me.lblManualParametersValue1.Text = "Value"
-        Me.lblManualParametersValue1.Visible = False
+        Me.lblManualParametersValue1.Visible = false
         '
         'Label19
         '
-        Me.Label19.AutoSize = True
+        Me.Label19.AutoSize = true
         Me.Label19.Location = New System.Drawing.Point(219, 16)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(48, 13)
@@ -1497,12 +1499,12 @@ Partial Class Form1
         Me.txtManualParameterValue1.Name = "txtManualParameterValue1"
         Me.txtManualParameterValue1.Size = New System.Drawing.Size(207, 20)
         Me.txtManualParameterValue1.TabIndex = 5
-        Me.txtManualParameterValue1.Visible = False
+        Me.txtManualParameterValue1.Visible = false
         '
         'cbManualParameterOperator1
         '
         Me.cbManualParameterOperator1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualParameterOperator1.FormattingEnabled = True
+        Me.cbManualParameterOperator1.FormattingEnabled = true
         Me.cbManualParameterOperator1.Items.AddRange(New Object() {"=", "!=", "LIKE", "NOT LIKE", "EXISTS", "NOT EXISTS", ">", "<", ">Num", "<Num"})
         Me.cbManualParameterOperator1.Location = New System.Drawing.Point(215, 32)
         Me.cbManualParameterOperator1.Name = "cbManualParameterOperator1"
@@ -1511,7 +1513,7 @@ Partial Class Form1
         '
         'Label18
         '
-        Me.Label18.AutoSize = True
+        Me.Label18.AutoSize = true
         Me.Label18.Location = New System.Drawing.Point(68, 16)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(47, 13)
@@ -1521,7 +1523,7 @@ Partial Class Form1
         'cbManualParameterFieldList1
         '
         Me.cbManualParameterFieldList1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualParameterFieldList1.FormattingEnabled = True
+        Me.cbManualParameterFieldList1.FormattingEnabled = true
         Me.cbManualParameterFieldList1.Location = New System.Drawing.Point(68, 32)
         Me.cbManualParameterFieldList1.Name = "cbManualParameterFieldList1"
         Me.cbManualParameterFieldList1.Size = New System.Drawing.Size(132, 21)
@@ -1549,84 +1551,84 @@ Partial Class Form1
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.Size = New System.Drawing.Size(573, 113)
         Me.GroupBox10.TabIndex = 1
-        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.TabStop = false
         Me.GroupBox10.Text = "Operation ..."
         '
         'chkManualNfoFilesOnlyAddMissing
         '
-        Me.chkManualNfoFilesOnlyAddMissing.AutoSize = True
+        Me.chkManualNfoFilesOnlyAddMissing.AutoSize = true
         Me.chkManualNfoFilesOnlyAddMissing.Location = New System.Drawing.Point(49, 80)
         Me.chkManualNfoFilesOnlyAddMissing.Name = "chkManualNfoFilesOnlyAddMissing"
         Me.chkManualNfoFilesOnlyAddMissing.Size = New System.Drawing.Size(127, 17)
         Me.chkManualNfoFilesOnlyAddMissing.TabIndex = 7
         Me.chkManualNfoFilesOnlyAddMissing.Text = "Don't overrite existing"
-        Me.chkManualNfoFilesOnlyAddMissing.UseVisualStyleBackColor = True
-        Me.chkManualNfoFilesOnlyAddMissing.Visible = False
+        Me.chkManualNfoFilesOnlyAddMissing.UseVisualStyleBackColor = true
+        Me.chkManualNfoFilesOnlyAddMissing.Visible = false
         '
         'cbManualNfoFileHandling
         '
-        Me.cbManualNfoFileHandling.FormattingEnabled = True
+        Me.cbManualNfoFileHandling.FormattingEnabled = true
         Me.cbManualNfoFileHandling.Items.AddRange(New Object() {"MyFilms.nfo", "Movie Name", "Both"})
         Me.cbManualNfoFileHandling.Location = New System.Drawing.Point(342, 19)
         Me.cbManualNfoFileHandling.Name = "cbManualNfoFileHandling"
         Me.cbManualNfoFileHandling.Size = New System.Drawing.Size(206, 21)
         Me.cbManualNfoFileHandling.TabIndex = 3
-        Me.cbManualNfoFileHandling.Visible = False
+        Me.cbManualNfoFileHandling.Visible = false
         '
         'lblManualNfoFileHandling
         '
-        Me.lblManualNfoFileHandling.AutoSize = True
+        Me.lblManualNfoFileHandling.AutoSize = true
         Me.lblManualNfoFileHandling.Location = New System.Drawing.Point(234, 24)
         Me.lblManualNfoFileHandling.Name = "lblManualNfoFileHandling"
         Me.lblManualNfoFileHandling.Size = New System.Drawing.Size(88, 13)
         Me.lblManualNfoFileHandling.TabIndex = 1
         Me.lblManualNfoFileHandling.Text = "NFO file handling"
-        Me.lblManualNfoFileHandling.Visible = False
+        Me.lblManualNfoFileHandling.Visible = false
         '
         'lblManualSelectFieldDestination
         '
-        Me.lblManualSelectFieldDestination.AutoSize = True
+        Me.lblManualSelectFieldDestination.AutoSize = true
         Me.lblManualSelectFieldDestination.Location = New System.Drawing.Point(222, 71)
         Me.lblManualSelectFieldDestination.Name = "lblManualSelectFieldDestination"
         Me.lblManualSelectFieldDestination.Size = New System.Drawing.Size(103, 13)
         Me.lblManualSelectFieldDestination.TabIndex = 15
         Me.lblManualSelectFieldDestination.Text = "DB Field Destination"
-        Me.lblManualSelectFieldDestination.Visible = False
+        Me.lblManualSelectFieldDestination.Visible = false
         '
         'cbManualSelectFieldDestination
         '
         Me.cbManualSelectFieldDestination.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualSelectFieldDestination.FormattingEnabled = True
+        Me.cbManualSelectFieldDestination.FormattingEnabled = true
         Me.cbManualSelectFieldDestination.Location = New System.Drawing.Point(342, 69)
         Me.cbManualSelectFieldDestination.Name = "cbManualSelectFieldDestination"
         Me.cbManualSelectFieldDestination.Size = New System.Drawing.Size(206, 21)
         Me.cbManualSelectFieldDestination.TabIndex = 0
         Me.ToolTip1.SetToolTip(Me.cbManualSelectFieldDestination, "Destination field for ""Copy Value"" operation")
-        Me.cbManualSelectFieldDestination.Visible = False
+        Me.cbManualSelectFieldDestination.Visible = false
         '
         'chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData
         '
-        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.AutoSize = True
+        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.AutoSize = true
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Location = New System.Drawing.Point(49, 90)
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Name = "chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData"
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Size = New System.Drawing.Size(181, 17)
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.TabIndex = 8
         Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Text = "Only update with non-empty data"
-        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.UseVisualStyleBackColor = True
-        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = False
+        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.UseVisualStyleBackColor = true
+        Me.chkManualUpdateRecordsOnlyUpdateWhithNonEmptyData.Visible = false
         '
         'chkManualUpdateRecordsOnlyMissingData
         '
-        Me.chkManualUpdateRecordsOnlyMissingData.AutoSize = True
+        Me.chkManualUpdateRecordsOnlyMissingData.AutoSize = true
         Me.chkManualUpdateRecordsOnlyMissingData.Location = New System.Drawing.Point(49, 73)
         Me.chkManualUpdateRecordsOnlyMissingData.Name = "chkManualUpdateRecordsOnlyMissingData"
         Me.chkManualUpdateRecordsOnlyMissingData.Size = New System.Drawing.Size(129, 17)
         Me.chkManualUpdateRecordsOnlyMissingData.TabIndex = 6
         Me.chkManualUpdateRecordsOnlyMissingData.Text = "Only add missing data"
-        Me.ToolTip1.SetToolTip(Me.chkManualUpdateRecordsOnlyMissingData, "If checked, instead of owerwriting all fields selected on ""Database Fields"" tab w" & _
-        "ith the new grabbed data," & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "only fields that are empty are filled with data.")
-        Me.chkManualUpdateRecordsOnlyMissingData.UseVisualStyleBackColor = True
-        Me.chkManualUpdateRecordsOnlyMissingData.Visible = False
+        Me.ToolTip1.SetToolTip(Me.chkManualUpdateRecordsOnlyMissingData, "If checked, instead of owerwriting all fields selected on ""Database Fields"" tab w"& _ 
+        "ith the new grabbed data,"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"only fields that are empty are filled with data.")
+        Me.chkManualUpdateRecordsOnlyMissingData.UseVisualStyleBackColor = true
+        Me.chkManualUpdateRecordsOnlyMissingData.Visible = false
         '
         'txtManualOldValue
         '
@@ -1634,62 +1636,62 @@ Partial Class Form1
         Me.txtManualOldValue.Name = "txtManualOldValue"
         Me.txtManualOldValue.Size = New System.Drawing.Size(206, 20)
         Me.txtManualOldValue.TabIndex = 14
-        Me.txtManualOldValue.Visible = False
+        Me.txtManualOldValue.Visible = false
         '
         'lblManualEnterOldValue
         '
-        Me.lblManualEnterOldValue.AutoSize = True
+        Me.lblManualEnterOldValue.AutoSize = true
         Me.lblManualEnterOldValue.Location = New System.Drawing.Point(251, 56)
         Me.lblManualEnterOldValue.Name = "lblManualEnterOldValue"
         Me.lblManualEnterOldValue.Size = New System.Drawing.Size(53, 13)
         Me.lblManualEnterOldValue.TabIndex = 13
         Me.lblManualEnterOldValue.Text = "Old Value"
-        Me.lblManualEnterOldValue.Visible = False
+        Me.lblManualEnterOldValue.Visible = false
         '
         'chkManualMissingFanartDownload
         '
-        Me.chkManualMissingFanartDownload.AutoSize = True
-        Me.chkManualMissingFanartDownload.Checked = True
+        Me.chkManualMissingFanartDownload.AutoSize = true
+        Me.chkManualMissingFanartDownload.Checked = true
         Me.chkManualMissingFanartDownload.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkManualMissingFanartDownload.Location = New System.Drawing.Point(279, 23)
         Me.chkManualMissingFanartDownload.Name = "chkManualMissingFanartDownload"
         Me.chkManualMissingFanartDownload.Size = New System.Drawing.Size(218, 17)
         Me.chkManualMissingFanartDownload.TabIndex = 2
         Me.chkManualMissingFanartDownload.Text = "Download only for Movies missing Fanart"
-        Me.chkManualMissingFanartDownload.UseVisualStyleBackColor = True
-        Me.chkManualMissingFanartDownload.Visible = False
+        Me.chkManualMissingFanartDownload.UseVisualStyleBackColor = true
+        Me.chkManualMissingFanartDownload.Visible = false
         '
         'lblManualDatabaseFieldsPrompt
         '
-        Me.lblManualDatabaseFieldsPrompt.AutoSize = True
+        Me.lblManualDatabaseFieldsPrompt.AutoSize = true
         Me.lblManualDatabaseFieldsPrompt.Location = New System.Drawing.Point(5, 44)
         Me.lblManualDatabaseFieldsPrompt.Name = "lblManualDatabaseFieldsPrompt"
         Me.lblManualDatabaseFieldsPrompt.Size = New System.Drawing.Size(205, 26)
         Me.lblManualDatabaseFieldsPrompt.TabIndex = 4
-        Me.lblManualDatabaseFieldsPrompt.Text = "Note : Ensure the fields you want updated" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "are selected on the Database Fields ta" & _
-    "b." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
-        Me.lblManualDatabaseFieldsPrompt.Visible = False
+        Me.lblManualDatabaseFieldsPrompt.Text = "Note : Ensure the fields you want updated"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"are selected on the Database Fields ta"& _ 
+    "b."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+        Me.lblManualDatabaseFieldsPrompt.Visible = false
         '
         'lblManualSelectField
         '
-        Me.lblManualSelectField.AutoSize = True
+        Me.lblManualSelectField.AutoSize = true
         Me.lblManualSelectField.Location = New System.Drawing.Point(278, 24)
         Me.lblManualSelectField.Name = "lblManualSelectField"
         Me.lblManualSelectField.Size = New System.Drawing.Size(47, 13)
         Me.lblManualSelectField.TabIndex = 4
         Me.lblManualSelectField.Text = "DB Field"
         Me.lblManualSelectField.TextAlign = System.Drawing.ContentAlignment.TopRight
-        Me.lblManualSelectField.Visible = False
+        Me.lblManualSelectField.Visible = false
         '
         'cbManualSelectField
         '
         Me.cbManualSelectField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualSelectField.FormattingEnabled = True
+        Me.cbManualSelectField.FormattingEnabled = true
         Me.cbManualSelectField.Location = New System.Drawing.Point(342, 19)
         Me.cbManualSelectField.Name = "cbManualSelectField"
         Me.cbManualSelectField.Size = New System.Drawing.Size(206, 21)
         Me.cbManualSelectField.TabIndex = 1
-        Me.cbManualSelectField.Visible = False
+        Me.cbManualSelectField.Visible = false
         '
         'txtManualNewValue
         '
@@ -1697,12 +1699,12 @@ Partial Class Form1
         Me.txtManualNewValue.Name = "txtManualNewValue"
         Me.txtManualNewValue.Size = New System.Drawing.Size(206, 20)
         Me.txtManualNewValue.TabIndex = 2
-        Me.txtManualNewValue.Visible = False
+        Me.txtManualNewValue.Visible = false
         '
         'lblManualEnterNewValue
         '
-        Me.lblManualEnterNewValue.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblManualEnterNewValue.AutoSize = True
+        Me.lblManualEnterNewValue.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblManualEnterNewValue.AutoSize = true
         Me.lblManualEnterNewValue.Location = New System.Drawing.Point(252, 84)
         Me.lblManualEnterNewValue.Name = "lblManualEnterNewValue"
         Me.lblManualEnterNewValue.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -1710,12 +1712,12 @@ Partial Class Form1
         Me.lblManualEnterNewValue.TabIndex = 1
         Me.lblManualEnterNewValue.Text = "New Value :"
         Me.lblManualEnterNewValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.lblManualEnterNewValue.Visible = False
+        Me.lblManualEnterNewValue.Visible = false
         '
         'cbManualSelectOperation
         '
         Me.cbManualSelectOperation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbManualSelectOperation.FormattingEnabled = True
+        Me.cbManualSelectOperation.FormattingEnabled = true
         Me.cbManualSelectOperation.Items.AddRange(New Object() {"Update Value", "Update Value - Replace String", "Update Value - Add String", "Update Value - Insert String", "Update Value - Remove String", "Delete Value", "Copy Value", "Update Record", "Delete Record", "Download Fanart", "Update NFO File", "Delete NFO File"})
         Me.cbManualSelectOperation.Location = New System.Drawing.Point(8, 19)
         Me.cbManualSelectOperation.Name = "cbManualSelectOperation"
@@ -1739,11 +1741,11 @@ Partial Class Form1
         Me.DatabaseFields.Size = New System.Drawing.Size(600, 580)
         Me.DatabaseFields.TabIndex = 4
         Me.DatabaseFields.Text = "Database Fields"
-        Me.DatabaseFields.UseVisualStyleBackColor = True
+        Me.DatabaseFields.UseVisualStyleBackColor = true
         '
         'GroupBox_FanartHandling
         '
-        Me.GroupBox_FanartHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_FanartHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox_FanartHandling.Controls.Add(Me.chkLoadPersonImagesWithFanart)
         Me.GroupBox_FanartHandling.Controls.Add(Me.chkUseGrabberForFanart)
         Me.GroupBox_FanartHandling.Controls.Add(Me.cbFanartLimitResolutionMin)
@@ -1754,34 +1756,34 @@ Partial Class Form1
         Me.GroupBox_FanartHandling.Name = "GroupBox_FanartHandling"
         Me.GroupBox_FanartHandling.Size = New System.Drawing.Size(353, 62)
         Me.GroupBox_FanartHandling.TabIndex = 8
-        Me.GroupBox_FanartHandling.TabStop = False
+        Me.GroupBox_FanartHandling.TabStop = false
         Me.GroupBox_FanartHandling.Text = "Fanart Handling ..."
         '
         'chkLoadPersonImagesWithFanart
         '
-        Me.chkLoadPersonImagesWithFanart.AutoSize = True
+        Me.chkLoadPersonImagesWithFanart.AutoSize = true
         Me.chkLoadPersonImagesWithFanart.Location = New System.Drawing.Point(21, 37)
         Me.chkLoadPersonImagesWithFanart.Name = "chkLoadPersonImagesWithFanart"
         Me.chkLoadPersonImagesWithFanart.Size = New System.Drawing.Size(123, 17)
         Me.chkLoadPersonImagesWithFanart.TabIndex = 1
         Me.chkLoadPersonImagesWithFanart.Text = "Load Person Images"
         Me.ToolTip1.SetToolTip(Me.chkLoadPersonImagesWithFanart, resources.GetString("chkLoadPersonImagesWithFanart.ToolTip"))
-        Me.chkLoadPersonImagesWithFanart.UseVisualStyleBackColor = True
+        Me.chkLoadPersonImagesWithFanart.UseVisualStyleBackColor = true
         '
         'chkUseGrabberForFanart
         '
-        Me.chkUseGrabberForFanart.AutoSize = True
+        Me.chkUseGrabberForFanart.AutoSize = true
         Me.chkUseGrabberForFanart.Location = New System.Drawing.Point(21, 17)
         Me.chkUseGrabberForFanart.Name = "chkUseGrabberForFanart"
         Me.chkUseGrabberForFanart.Size = New System.Drawing.Size(121, 17)
         Me.chkUseGrabberForFanart.TabIndex = 0
         Me.chkUseGrabberForFanart.Text = "Use script for Fanart"
         Me.ToolTip1.SetToolTip(Me.chkUseGrabberForFanart, resources.GetString("chkUseGrabberForFanart.ToolTip"))
-        Me.chkUseGrabberForFanart.UseVisualStyleBackColor = True
+        Me.chkUseGrabberForFanart.UseVisualStyleBackColor = true
         '
         'cbFanartLimitResolutionMin
         '
-        Me.cbFanartLimitResolutionMin.FormattingEnabled = True
+        Me.cbFanartLimitResolutionMin.FormattingEnabled = true
         Me.cbFanartLimitResolutionMin.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
         Me.cbFanartLimitResolutionMin.Location = New System.Drawing.Point(164, 34)
         Me.cbFanartLimitResolutionMin.Name = "cbFanartLimitResolutionMin"
@@ -1791,7 +1793,7 @@ Partial Class Form1
         '
         'lblFanartLimits
         '
-        Me.lblFanartLimits.AutoSize = True
+        Me.lblFanartLimits.AutoSize = true
         Me.lblFanartLimits.Location = New System.Drawing.Point(166, 13)
         Me.lblFanartLimits.Name = "lblFanartLimits"
         Me.lblFanartLimits.Size = New System.Drawing.Size(66, 13)
@@ -1800,7 +1802,7 @@ Partial Class Form1
         '
         'cbFanartLimitResolutionMax
         '
-        Me.cbFanartLimitResolutionMax.FormattingEnabled = True
+        Me.cbFanartLimitResolutionMax.FormattingEnabled = true
         Me.cbFanartLimitResolutionMax.Items.AddRange(New Object() {"", "0x0", "640x480", "768x576", "1280x720", "1920x1080"})
         Me.cbFanartLimitResolutionMax.Location = New System.Drawing.Point(248, 34)
         Me.cbFanartLimitResolutionMax.Name = "cbFanartLimitResolutionMax"
@@ -1814,11 +1816,11 @@ Partial Class Form1
         Me.cbNumFanartLimitNumber.Name = "cbNumFanartLimitNumber"
         Me.cbNumFanartLimitNumber.Size = New System.Drawing.Size(44, 20)
         Me.cbNumFanartLimitNumber.TabIndex = 4
-        Me.ToolTip1.SetToolTip(Me.cbNumFanartLimitNumber, "Limits the number of downloaded fanarts." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & """0"" = all available.")
+        Me.ToolTip1.SetToolTip(Me.cbNumFanartLimitNumber, "Limits the number of downloaded fanarts."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"""0"" = all available.")
         '
         'GroupBox_TitleHandling
         '
-        Me.GroupBox_TitleHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_TitleHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox_TitleHandling.Controls.Add(Me.Label101)
         Me.GroupBox_TitleHandling.Controls.Add(Me.cbEditionNameAppliesTo)
         Me.GroupBox_TitleHandling.Controls.Add(Me.txtSeriesNameIdentifier)
@@ -1834,12 +1836,12 @@ Partial Class Form1
         Me.GroupBox_TitleHandling.Name = "GroupBox_TitleHandling"
         Me.GroupBox_TitleHandling.Size = New System.Drawing.Size(353, 136)
         Me.GroupBox_TitleHandling.TabIndex = 4
-        Me.GroupBox_TitleHandling.TabStop = False
+        Me.GroupBox_TitleHandling.TabStop = false
         Me.GroupBox_TitleHandling.Text = "Title Handling ..."
         '
         'Label101
         '
-        Me.Label101.AutoSize = True
+        Me.Label101.AutoSize = true
         Me.Label101.Location = New System.Drawing.Point(170, 38)
         Me.Label101.Name = "Label101"
         Me.Label101.Size = New System.Drawing.Size(36, 13)
@@ -1848,7 +1850,7 @@ Partial Class Form1
         '
         'cbEditionNameAppliesTo
         '
-        Me.cbEditionNameAppliesTo.FormattingEnabled = True
+        Me.cbEditionNameAppliesTo.FormattingEnabled = true
         Me.cbEditionNameAppliesTo.Items.AddRange(New Object() {"", "Original Title", "Translated Title", "Both Titles"})
         Me.cbEditionNameAppliesTo.Location = New System.Drawing.Point(164, 84)
         Me.cbEditionNameAppliesTo.Name = "cbEditionNameAppliesTo"
@@ -1866,7 +1868,7 @@ Partial Class Form1
         '
         'Label106
         '
-        Me.Label106.AutoSize = True
+        Me.Label106.AutoSize = true
         Me.Label106.Location = New System.Drawing.Point(18, 87)
         Me.Label106.Name = "Label106"
         Me.Label106.Size = New System.Drawing.Size(127, 13)
@@ -1875,7 +1877,7 @@ Partial Class Form1
         '
         'Label89
         '
-        Me.Label89.AutoSize = True
+        Me.Label89.AutoSize = true
         Me.Label89.Location = New System.Drawing.Point(170, 14)
         Me.Label89.Name = "Label89"
         Me.Label89.Size = New System.Drawing.Size(36, 13)
@@ -1894,7 +1896,7 @@ Partial Class Form1
         '
         Me.cbGroupNameAppliesTo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbGroupNameAppliesTo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbGroupNameAppliesTo.FormattingEnabled = True
+        Me.cbGroupNameAppliesTo.FormattingEnabled = true
         Me.cbGroupNameAppliesTo.Items.AddRange(New Object() {"Original Title", "Translated Title", "Both Titles"})
         Me.cbGroupNameAppliesTo.Location = New System.Drawing.Point(164, 59)
         Me.cbGroupNameAppliesTo.Name = "cbGroupNameAppliesTo"
@@ -1903,18 +1905,18 @@ Partial Class Form1
         '
         'chkFolderNameIsGroupName
         '
-        Me.chkFolderNameIsGroupName.AutoSize = True
+        Me.chkFolderNameIsGroupName.AutoSize = true
         Me.chkFolderNameIsGroupName.Location = New System.Drawing.Point(21, 17)
         Me.chkFolderNameIsGroupName.Name = "chkFolderNameIsGroupName"
         Me.chkFolderNameIsGroupName.Size = New System.Drawing.Size(112, 30)
         Me.chkFolderNameIsGroupName.TabIndex = 0
-        Me.chkFolderNameIsGroupName.Text = "Folder Name " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "as Group Identifier"
+        Me.chkFolderNameIsGroupName.Text = "Folder Name "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"as Group Identifier"
         Me.ToolTip1.SetToolTip(Me.chkFolderNameIsGroupName, resources.GetString("chkFolderNameIsGroupName.ToolTip"))
-        Me.chkFolderNameIsGroupName.UseVisualStyleBackColor = True
+        Me.chkFolderNameIsGroupName.UseVisualStyleBackColor = true
         '
         'lblGroupNameAppliesTo
         '
-        Me.lblGroupNameAppliesTo.AutoSize = True
+        Me.lblGroupNameAppliesTo.AutoSize = true
         Me.lblGroupNameAppliesTo.Location = New System.Drawing.Point(18, 62)
         Me.lblGroupNameAppliesTo.Name = "lblGroupNameAppliesTo"
         Me.lblGroupNameAppliesTo.Size = New System.Drawing.Size(113, 13)
@@ -1925,18 +1927,18 @@ Partial Class Form1
         '
         Me.cbMasterTitle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbMasterTitle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbMasterTitle.FormattingEnabled = True
+        Me.cbMasterTitle.FormattingEnabled = true
         Me.cbMasterTitle.Items.AddRange(New Object() {"TranslatedTitle", "OriginalTitle", "FormattedTitle"})
         Me.cbMasterTitle.Location = New System.Drawing.Point(164, 109)
         Me.cbMasterTitle.Name = "cbMasterTitle"
         Me.cbMasterTitle.Size = New System.Drawing.Size(174, 21)
         Me.cbMasterTitle.TabIndex = 10
-        Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for internet data search." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "It is used for both inte" & _
-        "rnet data (e.g. update records) and" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "fanart search and creation.")
+        Me.ToolTip1.SetToolTip(Me.cbMasterTitle, "Select the title that is used for internet data search."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"It is used for both inte"& _ 
+        "rnet data (e.g. update records) and"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"fanart search and creation.")
         '
         'lblMasterTitle
         '
-        Me.lblMasterTitle.AutoSize = True
+        Me.lblMasterTitle.AutoSize = true
         Me.lblMasterTitle.Location = New System.Drawing.Point(18, 112)
         Me.lblMasterTitle.Name = "lblMasterTitle"
         Me.lblMasterTitle.Size = New System.Drawing.Size(62, 13)
@@ -1945,7 +1947,7 @@ Partial Class Form1
         '
         'GroupBox_StorageFieldHandling
         '
-        Me.GroupBox_StorageFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_StorageFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.chkShortNames)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.Label26)
         Me.GroupBox_StorageFieldHandling.Controls.Add(Me.txtDefaultSourceField)
@@ -1953,29 +1955,29 @@ Partial Class Form1
         Me.GroupBox_StorageFieldHandling.Name = "GroupBox_StorageFieldHandling"
         Me.GroupBox_StorageFieldHandling.Size = New System.Drawing.Size(353, 43)
         Me.GroupBox_StorageFieldHandling.TabIndex = 3
-        Me.GroupBox_StorageFieldHandling.TabStop = False
+        Me.GroupBox_StorageFieldHandling.TabStop = false
         Me.GroupBox_StorageFieldHandling.Text = "Storage Field Handling ..."
         '
         'chkShortNames
         '
-        Me.chkShortNames.AutoSize = True
+        Me.chkShortNames.AutoSize = true
         Me.chkShortNames.Location = New System.Drawing.Point(21, 17)
         Me.chkShortNames.Name = "chkShortNames"
         Me.chkShortNames.Size = New System.Drawing.Size(78, 17)
         Me.chkShortNames.TabIndex = 0
         Me.chkShortNames.Text = "Name Only"
-        Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "without path information." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You have to make sure, your MyFilms settings support searching" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for matching fi" & _
+        Me.ToolTip1.SetToolTip(Me.chkShortNames, "If checked, only file name will be stored to your DB "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"without path information."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"You have to make sure, your MyFilms settings support searching"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"for matching fi"& _ 
         "les in your setup.")
-        Me.chkShortNames.UseVisualStyleBackColor = True
+        Me.chkShortNames.UseVisualStyleBackColor = true
         '
         'Label26
         '
-        Me.Label26.AutoSize = True
+        Me.Label26.AutoSize = true
         Me.Label26.Location = New System.Drawing.Point(158, 12)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(65, 26)
         Me.Label26.TabIndex = 1
-        Me.Label26.Text = "Item for File " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Info Storage"
+        Me.Label26.Text = "Item for File "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Info Storage"
         '
         'txtDefaultSourceField
         '
@@ -1983,13 +1985,13 @@ Partial Class Form1
         Me.txtDefaultSourceField.Name = "txtDefaultSourceField"
         Me.txtDefaultSourceField.Size = New System.Drawing.Size(109, 20)
         Me.txtDefaultSourceField.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel " & _
-        "files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The default is 'Source' - do not change this unless you are sure you nee" & _
+        Me.ToolTip1.SetToolTip(Me.txtDefaultSourceField, "This is the Ant Movie Catalog field which references the location of your moviel "& _ 
+        "files."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"The default is 'Source' - do not change this unless you are sure you nee"& _ 
         "d to!")
         '
         'GroupBox_MediaLabelFieldHandling
         '
-        Me.GroupBox_MediaLabelFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_MediaLabelFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.Label13)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.chkReadDVDLabel)
         Me.GroupBox_MediaLabelFieldHandling.Controls.Add(Me.txtMediaLabel)
@@ -1997,12 +1999,12 @@ Partial Class Form1
         Me.GroupBox_MediaLabelFieldHandling.Name = "GroupBox_MediaLabelFieldHandling"
         Me.GroupBox_MediaLabelFieldHandling.Size = New System.Drawing.Size(353, 59)
         Me.GroupBox_MediaLabelFieldHandling.TabIndex = 5
-        Me.GroupBox_MediaLabelFieldHandling.TabStop = False
+        Me.GroupBox_MediaLabelFieldHandling.TabStop = false
         Me.GroupBox_MediaLabelFieldHandling.Text = "Media Label Field Handling ..."
         '
         'Label13
         '
-        Me.Label13.AutoSize = True
+        Me.Label13.AutoSize = true
         Me.Label13.Location = New System.Drawing.Point(18, 16)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(65, 13)
@@ -2011,14 +2013,14 @@ Partial Class Form1
         '
         'chkReadDVDLabel
         '
-        Me.chkReadDVDLabel.AutoSize = True
+        Me.chkReadDVDLabel.AutoSize = true
         Me.chkReadDVDLabel.Location = New System.Drawing.Point(21, 37)
         Me.chkReadDVDLabel.Name = "chkReadDVDLabel"
         Me.chkReadDVDLabel.Size = New System.Drawing.Size(327, 17)
         Me.chkReadDVDLabel.TabIndex = 2
         Me.chkReadDVDLabel.Text = "Try to read DVD Disk Label, Volume Name or UNC server name"
         Me.ToolTip1.SetToolTip(Me.chkReadDVDLabel, resources.GetString("chkReadDVDLabel.ToolTip"))
-        Me.chkReadDVDLabel.UseVisualStyleBackColor = True
+        Me.chkReadDVDLabel.UseVisualStyleBackColor = true
         '
         'txtMediaLabel
         '
@@ -2026,12 +2028,12 @@ Partial Class Form1
         Me.txtMediaLabel.Name = "txtMediaLabel"
         Me.txtMediaLabel.Size = New System.Drawing.Size(174, 20)
         Me.txtMediaLabel.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field" & _
+        Me.ToolTip1.SetToolTip(Me.txtMediaLabel, "Sets a value to be stored in the Ant Movie Database under the 'Media Label' field"& _ 
         ".")
         '
         'GroupBox_OtherFieldHandling
         '
-        Me.GroupBox_OtherFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_OtherFieldHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.chkUseInternetDataForLanguagesField)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.Label12)
         Me.GroupBox_OtherFieldHandling.Controls.Add(Me.txtMediaType)
@@ -2043,31 +2045,31 @@ Partial Class Form1
         Me.GroupBox_OtherFieldHandling.Name = "GroupBox_OtherFieldHandling"
         Me.GroupBox_OtherFieldHandling.Size = New System.Drawing.Size(353, 93)
         Me.GroupBox_OtherFieldHandling.TabIndex = 6
-        Me.GroupBox_OtherFieldHandling.TabStop = False
+        Me.GroupBox_OtherFieldHandling.TabStop = false
         Me.GroupBox_OtherFieldHandling.Text = "Other Field Handling Options ..."
         '
         'chkUseInternetDataForLanguagesField
         '
-        Me.chkUseInternetDataForLanguagesField.AutoSize = True
+        Me.chkUseInternetDataForLanguagesField.AutoSize = true
         Me.chkUseInternetDataForLanguagesField.Location = New System.Drawing.Point(21, 58)
         Me.chkUseInternetDataForLanguagesField.Name = "chkUseInternetDataForLanguagesField"
         Me.chkUseInternetDataForLanguagesField.Size = New System.Drawing.Size(119, 30)
         Me.chkUseInternetDataForLanguagesField.TabIndex = 4
-        Me.chkUseInternetDataForLanguagesField.Text = "Use Internet Data " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for Languages Field"
-        Me.ToolTip1.SetToolTip(Me.chkUseInternetDataForLanguagesField, "If checked, the internet data from the grabber will be used to populate the ""Lang" & _
-        "uages"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If unchecked, mediainfo audio stream languages list will be used." & _
+        Me.chkUseInternetDataForLanguagesField.Text = "Use Internet Data "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"for Languages Field"
+        Me.ToolTip1.SetToolTip(Me.chkUseInternetDataForLanguagesField, "If checked, the internet data from the grabber will be used to populate the ""Lang"& _ 
+        "uages"" field."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"If unchecked, mediainfo audio stream languages list will be used."& _ 
         "")
-        Me.chkUseInternetDataForLanguagesField.UseVisualStyleBackColor = True
+        Me.chkUseInternetDataForLanguagesField.UseVisualStyleBackColor = true
         '
         'Label12
         '
-        Me.Label12.AutoSize = True
+        Me.Label12.AutoSize = true
         Me.Label12.Location = New System.Drawing.Point(170, 68)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(63, 13)
         Me.Label12.TabIndex = 5
         Me.Label12.Text = "Media Type"
-        Me.ToolTip1.SetToolTip(Me.Label12, "You can enter a value that will be imported " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "into the ""MediaType"" field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This a" & _
+        Me.ToolTip1.SetToolTip(Me.Label12, "You can enter a value that will be imported "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"into the ""MediaType"" field."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"This a"& _ 
         "cts as a ""preset"".")
         '
         'txtMediaType
@@ -2076,12 +2078,12 @@ Partial Class Form1
         Me.txtMediaType.Name = "txtMediaType"
         Me.txtMediaType.Size = New System.Drawing.Size(90, 20)
         Me.txtMediaType.TabIndex = 6
-        Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field." & _
+        Me.ToolTip1.SetToolTip(Me.txtMediaType, "Sets a value to be stored in the Ant Movie Database under the 'Media Type' field."& _ 
         "")
         '
         'lblCheckFieldHandling
         '
-        Me.lblCheckFieldHandling.AutoSize = True
+        Me.lblCheckFieldHandling.AutoSize = true
         Me.lblCheckFieldHandling.Location = New System.Drawing.Point(18, 42)
         Me.lblCheckFieldHandling.Name = "lblCheckFieldHandling"
         Me.lblCheckFieldHandling.Size = New System.Drawing.Size(120, 13)
@@ -2090,7 +2092,7 @@ Partial Class Form1
         '
         'Label30
         '
-        Me.Label30.AutoSize = True
+        Me.Label30.AutoSize = true
         Me.Label30.Location = New System.Drawing.Point(18, 17)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(100, 13)
@@ -2101,33 +2103,33 @@ Partial Class Form1
         '
         Me.cbDateHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbDateHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbDateHandling.FormattingEnabled = True
+        Me.cbDateHandling.FormattingEnabled = true
         Me.cbDateHandling.Items.AddRange(New Object() {"File Created Date", "File Modified Date", "Current System Date", "No Date"})
         Me.cbDateHandling.Location = New System.Drawing.Point(164, 14)
         Me.cbDateHandling.Name = "cbDateHandling"
         Me.cbDateHandling.Size = New System.Drawing.Size(174, 21)
         Me.cbDateHandling.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.cbDateHandling, "When using ""file creation date"", the result is depending on your setting " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for ""T" & _
-        "itle Search Handling"" - it will be the file date or " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the directory date, depend" & _
+        Me.ToolTip1.SetToolTip(Me.cbDateHandling, "When using ""file creation date"", the result is depending on your setting "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"for ""T"& _ 
+        "itle Search Handling"" - it will be the file date or "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"the directory date, depend"& _ 
         "ing on your choice.")
         '
         'cbCheckHandling
         '
         Me.cbCheckHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbCheckHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbCheckHandling.FormattingEnabled = True
+        Me.cbCheckHandling.FormattingEnabled = true
         Me.cbCheckHandling.Items.AddRange(New Object() {"Checked", "Unchecked"})
         Me.cbCheckHandling.Location = New System.Drawing.Point(164, 39)
         Me.cbCheckHandling.Name = "cbCheckHandling"
         Me.cbCheckHandling.Size = New System.Drawing.Size(174, 21)
         Me.cbCheckHandling.TabIndex = 3
-        Me.ToolTip1.SetToolTip(Me.cbCheckHandling, "The Ant Movie Catalog database includes a boolean 'Checked' field." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you select" & _
-        " this option in the Database Fields list you can choose " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "whether to set it to '" & _
+        Me.ToolTip1.SetToolTip(Me.cbCheckHandling, "The Ant Movie Catalog database includes a boolean 'Checked' field."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"If you select"& _ 
+        " this option in the Database Fields list you can choose "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"whether to set it to '"& _ 
         "True' or 'False'.")
         '
         'GroupBox_PictureHandling
         '
-        Me.GroupBox_PictureHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox_PictureHandling.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox_PictureHandling.Controls.Add(Me.txtPictureFilenameSuffix)
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPicturePrefix)
         Me.GroupBox_PictureHandling.Controls.Add(Me.lblPictureHandling)
@@ -2137,7 +2139,7 @@ Partial Class Form1
         Me.GroupBox_PictureHandling.Name = "GroupBox_PictureHandling"
         Me.GroupBox_PictureHandling.Size = New System.Drawing.Size(353, 67)
         Me.GroupBox_PictureHandling.TabIndex = 7
-        Me.GroupBox_PictureHandling.TabStop = False
+        Me.GroupBox_PictureHandling.TabStop = false
         Me.GroupBox_PictureHandling.Text = "Cover Handling ..."
         '
         'txtPictureFilenameSuffix
@@ -2150,7 +2152,7 @@ Partial Class Form1
         '
         'lblPicturePrefix
         '
-        Me.lblPicturePrefix.AutoSize = True
+        Me.lblPicturePrefix.AutoSize = true
         Me.lblPicturePrefix.Location = New System.Drawing.Point(18, 42)
         Me.lblPicturePrefix.Name = "lblPicturePrefix"
         Me.lblPicturePrefix.Size = New System.Drawing.Size(133, 13)
@@ -2159,7 +2161,7 @@ Partial Class Form1
         '
         'lblPictureHandling
         '
-        Me.lblPictureHandling.AutoSize = True
+        Me.lblPictureHandling.AutoSize = true
         Me.lblPictureHandling.Location = New System.Drawing.Point(18, 17)
         Me.lblPictureHandling.Name = "lblPictureHandling"
         Me.lblPictureHandling.Size = New System.Drawing.Size(85, 13)
@@ -2170,7 +2172,7 @@ Partial Class Form1
         '
         Me.cbPictureHandling.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbPictureHandling.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPictureHandling.FormattingEnabled = True
+        Me.cbPictureHandling.FormattingEnabled = true
         Me.cbPictureHandling.Items.AddRange(New Object() {"Full Path", "Full Path & Create Moviethumb", "Relative Path", "Relative Path & Create Moviethumb", "Use Folder.jpg", "Create Moviethumb"})
         Me.cbPictureHandling.Location = New System.Drawing.Point(164, 13)
         Me.cbPictureHandling.Name = "cbPictureHandling"
@@ -2188,8 +2190,8 @@ Partial Class Form1
         '
         'lblInternetLookupRequired
         '
-        Me.lblInternetLookupRequired.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblInternetLookupRequired.AutoSize = True
+        Me.lblInternetLookupRequired.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.lblInternetLookupRequired.AutoSize = true
         Me.lblInternetLookupRequired.ForeColor = System.Drawing.Color.Red
         Me.lblInternetLookupRequired.Location = New System.Drawing.Point(8, 557)
         Me.lblInternetLookupRequired.Name = "lblInternetLookupRequired"
@@ -2200,7 +2202,7 @@ Partial Class Form1
         '
         'GroupBox16
         '
-        Me.GroupBox16.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox16.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox16.Controls.Add(Me.Label33)
         Me.GroupBox16.Controls.Add(Me.Label32)
         Me.GroupBox16.Controls.Add(Me.Label31)
@@ -2214,12 +2216,12 @@ Partial Class Form1
         Me.GroupBox16.Name = "GroupBox16"
         Me.GroupBox16.Size = New System.Drawing.Size(353, 93)
         Me.GroupBox16.TabIndex = 2
-        Me.GroupBox16.TabStop = False
+        Me.GroupBox16.TabStop = false
         Me.GroupBox16.Text = "Quick Select ..."
         '
         'Label33
         '
-        Me.Label33.AutoSize = True
+        Me.Label33.AutoSize = true
         Me.Label33.Location = New System.Drawing.Point(245, 16)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(93, 13)
@@ -2228,7 +2230,7 @@ Partial Class Form1
         '
         'Label32
         '
-        Me.Label32.AutoSize = True
+        Me.Label32.AutoSize = true
         Me.Label32.Location = New System.Drawing.Point(138, 16)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(86, 13)
@@ -2237,7 +2239,7 @@ Partial Class Form1
         '
         'Label31
         '
-        Me.Label31.AutoSize = True
+        Me.Label31.AutoSize = true
         Me.Label31.Location = New System.Drawing.Point(44, 16)
         Me.Label31.Name = "Label31"
         Me.Label31.Size = New System.Drawing.Size(45, 13)
@@ -2251,7 +2253,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectNoMedia.Size = New System.Drawing.Size(89, 23)
         Me.btnDBFieldsSelectNoMedia.TabIndex = 5
         Me.btnDBFieldsSelectNoMedia.Text = "Select None"
-        Me.btnDBFieldsSelectNoMedia.UseVisualStyleBackColor = True
+        Me.btnDBFieldsSelectNoMedia.UseVisualStyleBackColor = true
         '
         'btnDBFieldsSelectNoInternet
         '
@@ -2260,7 +2262,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectNoInternet.Size = New System.Drawing.Size(90, 23)
         Me.btnDBFieldsSelectNoInternet.TabIndex = 8
         Me.btnDBFieldsSelectNoInternet.Text = "Select None"
-        Me.btnDBFieldsSelectNoInternet.UseVisualStyleBackColor = True
+        Me.btnDBFieldsSelectNoInternet.UseVisualStyleBackColor = true
         '
         'btnDBFieldsSelectNone
         '
@@ -2269,7 +2271,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectNone.Size = New System.Drawing.Size(89, 23)
         Me.btnDBFieldsSelectNone.TabIndex = 2
         Me.btnDBFieldsSelectNone.Text = "Select None"
-        Me.btnDBFieldsSelectNone.UseVisualStyleBackColor = True
+        Me.btnDBFieldsSelectNone.UseVisualStyleBackColor = true
         '
         'btnDBFieldsSelectAllMedia
         '
@@ -2278,7 +2280,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectAllMedia.Size = New System.Drawing.Size(89, 23)
         Me.btnDBFieldsSelectAllMedia.TabIndex = 4
         Me.btnDBFieldsSelectAllMedia.Text = "Select All"
-        Me.btnDBFieldsSelectAllMedia.UseVisualStyleBackColor = True
+        Me.btnDBFieldsSelectAllMedia.UseVisualStyleBackColor = true
         '
         'btnDBFieldsSelectAllInternet
         '
@@ -2287,7 +2289,7 @@ Partial Class Form1
         Me.btnDBFieldsSelectAllInternet.Size = New System.Drawing.Size(90, 23)
         Me.btnDBFieldsSelectAllInternet.TabIndex = 7
         Me.btnDBFieldsSelectAllInternet.Text = "Select All"
-        Me.btnDBFieldsSelectAllInternet.UseVisualStyleBackColor = True
+        Me.btnDBFieldsSelectAllInternet.UseVisualStyleBackColor = true
         '
         'btnDBFieldsSelectAll
         '
@@ -2296,25 +2298,25 @@ Partial Class Form1
         Me.btnDBFieldsSelectAll.Size = New System.Drawing.Size(89, 23)
         Me.btnDBFieldsSelectAll.TabIndex = 1
         Me.btnDBFieldsSelectAll.Text = "Select All"
-        Me.btnDBFieldsSelectAll.UseVisualStyleBackColor = True
+        Me.btnDBFieldsSelectAll.UseVisualStyleBackColor = true
         '
         'cbDatabaseFields
         '
-        Me.cbDatabaseFields.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cbDatabaseFields.CheckOnClick = True
+        Me.cbDatabaseFields.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.cbDatabaseFields.CheckOnClick = true
         Me.cbDatabaseFields.ColumnWidth = 140
-        Me.cbDatabaseFields.FormattingEnabled = True
+        Me.cbDatabaseFields.FormattingEnabled = true
         Me.cbDatabaseFields.Location = New System.Drawing.Point(11, 24)
-        Me.cbDatabaseFields.MultiColumn = True
+        Me.cbDatabaseFields.MultiColumn = true
         Me.cbDatabaseFields.Name = "cbDatabaseFields"
         Me.cbDatabaseFields.Size = New System.Drawing.Size(218, 529)
         Me.cbDatabaseFields.TabIndex = 1
         '
         'Label34
         '
-        Me.Label34.AutoSize = True
+        Me.Label34.AutoSize = true
         Me.Label34.Location = New System.Drawing.Point(8, 7)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(225, 13)
@@ -2334,28 +2336,28 @@ Partial Class Form1
         Me.ScanFilters.Size = New System.Drawing.Size(600, 580)
         Me.ScanFilters.TabIndex = 5
         Me.ScanFilters.Text = "Scan Path and Filters"
-        Me.ScanFilters.UseVisualStyleBackColor = True
+        Me.ScanFilters.UseVisualStyleBackColor = true
         '
         'GroupBox28
         '
-        Me.GroupBox28.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox28.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox28.Controls.Add(Me.dgEditionStrings)
         Me.GroupBox28.Location = New System.Drawing.Point(8, 375)
         Me.GroupBox28.Name = "GroupBox28"
         Me.GroupBox28.Size = New System.Drawing.Size(584, 87)
         Me.GroupBox28.TabIndex = 4
-        Me.GroupBox28.TabStop = False
+        Me.GroupBox28.TabStop = false
         Me.GroupBox28.Text = "Edition Detection ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox28, resources.GetString("GroupBox28.ToolTip"))
         '
         'dgEditionStrings
         '
-        Me.dgEditionStrings.AllowUserToResizeRows = False
-        Me.dgEditionStrings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgEditionStrings.AllowUserToResizeRows = false
+        Me.dgEditionStrings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.dgEditionStrings.BackgroundColor = System.Drawing.SystemColors.Window
         Me.dgEditionStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgEditionStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
@@ -2383,8 +2385,8 @@ Partial Class Form1
         '
         'GroupBox24
         '
-        Me.GroupBox24.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox24.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox24.Controls.Add(Me.txtOverridePath)
         Me.GroupBox24.Controls.Add(Me.lblOverridePath)
         Me.GroupBox24.Controls.Add(Me.btnSelectMovieFolder)
@@ -2395,13 +2397,13 @@ Partial Class Form1
         Me.GroupBox24.Name = "GroupBox24"
         Me.GroupBox24.Size = New System.Drawing.Size(584, 88)
         Me.GroupBox24.TabIndex = 0
-        Me.GroupBox24.TabStop = False
+        Me.GroupBox24.TabStop = false
         Me.GroupBox24.Text = "Movie Scan Folder(s) ..."
         '
         'txtOverridePath
         '
-        Me.txtOverridePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtOverridePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtOverridePath.Location = New System.Drawing.Point(103, 60)
         Me.txtOverridePath.Name = "txtOverridePath"
         Me.txtOverridePath.Size = New System.Drawing.Size(410, 20)
@@ -2410,7 +2412,7 @@ Partial Class Form1
         '
         'lblOverridePath
         '
-        Me.lblOverridePath.AutoSize = True
+        Me.lblOverridePath.AutoSize = true
         Me.lblOverridePath.Location = New System.Drawing.Point(11, 63)
         Me.lblOverridePath.Name = "lblOverridePath"
         Me.lblOverridePath.Size = New System.Drawing.Size(71, 13)
@@ -2419,18 +2421,18 @@ Partial Class Form1
         '
         'btnSelectMovieFolder
         '
-        Me.btnSelectMovieFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelectMovieFolder.CausesValidation = False
+        Me.btnSelectMovieFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnSelectMovieFolder.CausesValidation = false
         Me.btnSelectMovieFolder.Location = New System.Drawing.Point(528, 34)
         Me.btnSelectMovieFolder.Name = "btnSelectMovieFolder"
         Me.btnSelectMovieFolder.Size = New System.Drawing.Size(32, 20)
         Me.btnSelectMovieFolder.TabIndex = 3
         Me.btnSelectMovieFolder.Text = "..."
-        Me.btnSelectMovieFolder.UseVisualStyleBackColor = True
+        Me.btnSelectMovieFolder.UseVisualStyleBackColor = true
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
+        Me.Label1.AutoSize = true
         Me.Label1.Location = New System.Drawing.Point(11, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(130, 13)
@@ -2439,20 +2441,20 @@ Partial Class Form1
         '
         'txtMovieFolder
         '
-        Me.txtMovieFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtMovieFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtMovieFolder.Location = New System.Drawing.Point(12, 34)
         Me.txtMovieFolder.Name = "txtMovieFolder"
         Me.txtMovieFolder.Size = New System.Drawing.Size(501, 20)
         Me.txtMovieFolder.TabIndex = 2
-        Me.ToolTip1.SetToolTip(Me.txtMovieFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
+        Me.ToolTip1.SetToolTip(Me.txtMovieFolder, "Enter the paths (local or UNC) to the folders you want to scan."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Separate multipl"& _ 
         "e folders with semi-colons.")
         '
         'Label17
         '
-        Me.Label17.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label17.AutoSize = True
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.Label17.AutoSize = true
+        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label17.Location = New System.Drawing.Point(311, 19)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(202, 12)
@@ -2461,20 +2463,20 @@ Partial Class Form1
         '
         'GroupBox6
         '
-        Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox6.Controls.Add(Me.Label25)
         Me.GroupBox6.Controls.Add(Me.txtRegExSearchMultiPart)
         Me.GroupBox6.Location = New System.Drawing.Point(8, 162)
         Me.GroupBox6.Name = "GroupBox6"
         Me.GroupBox6.Size = New System.Drawing.Size(584, 63)
         Me.GroupBox6.TabIndex = 2
-        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.TabStop = false
         Me.GroupBox6.Text = "Multi Part Files Detection  ..."
         '
         'Label25
         '
-        Me.Label25.AutoSize = True
+        Me.Label25.AutoSize = true
         Me.Label25.Location = New System.Drawing.Point(20, 16)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(210, 13)
@@ -2483,13 +2485,13 @@ Partial Class Form1
         '
         'txtRegExSearchMultiPart
         '
-        Me.txtRegExSearchMultiPart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtRegExSearchMultiPart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtRegExSearchMultiPart.Location = New System.Drawing.Point(14, 32)
         Me.txtRegExSearchMultiPart.Name = "txtRegExSearchMultiPart"
         Me.txtRegExSearchMultiPart.Size = New System.Drawing.Size(546, 20)
         Me.txtRegExSearchMultiPart.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.txtRegExSearchMultiPart, "AMCUpdater uses this Regular Expression to detect multi-part movies." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Example: 'm" & _
+        Me.ToolTip1.SetToolTip(Me.txtRegExSearchMultiPart, "AMCUpdater uses this Regular Expression to detect multi-part movies."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Example: 'm"& _ 
         "oviename - CD1.avi;'moviename - CD2.avi '")
         '
         'Label46
@@ -2502,23 +2504,23 @@ Partial Class Form1
         '
         'GroupBox20
         '
-        Me.GroupBox20.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox20.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox20.Controls.Add(Me.Label83)
         Me.GroupBox20.Controls.Add(Me.dgFilterStrings)
         Me.GroupBox20.Location = New System.Drawing.Point(8, 231)
         Me.GroupBox20.Name = "GroupBox20"
         Me.GroupBox20.Size = New System.Drawing.Size(584, 138)
         Me.GroupBox20.TabIndex = 3
-        Me.GroupBox20.TabStop = False
+        Me.GroupBox20.TabStop = false
         Me.GroupBox20.Text = "Strip Characters From Title ..."
-        Me.ToolTip1.SetToolTip(Me.GroupBox20, "You can define expressions to clean up the (media) names to get a clean title for" & _
-        " internet searches." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Both normal and RegEx search expressi0ons are allowed.")
+        Me.ToolTip1.SetToolTip(Me.GroupBox20, "You can define expressions to clean up the (media) names to get a clean title for"& _ 
+        " internet searches."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Both normal and RegEx search expressi0ons are allowed.")
         '
         'Label83
         '
-        Me.Label83.AutoSize = True
+        Me.Label83.AutoSize = true
         Me.Label83.Location = New System.Drawing.Point(20, 19)
         Me.Label83.Name = "Label83"
         Me.Label83.Size = New System.Drawing.Size(233, 13)
@@ -2527,15 +2529,15 @@ Partial Class Form1
         '
         'dgFilterStrings
         '
-        Me.dgFilterStrings.AllowUserToResizeRows = False
-        Me.dgFilterStrings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.dgFilterStrings.AllowUserToResizeRows = false
+        Me.dgFilterStrings.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.dgFilterStrings.BackgroundColor = System.Drawing.SystemColors.Window
         Me.dgFilterStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgFilterStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.dgFilterStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgFilterStrings.ColumnHeadersVisible = False
+        Me.dgFilterStrings.ColumnHeadersVisible = false
         Me.dgFilterStrings.Location = New System.Drawing.Point(14, 35)
         Me.dgFilterStrings.Name = "dgFilterStrings"
         Me.dgFilterStrings.RowHeadersWidth = 25
@@ -2546,8 +2548,8 @@ Partial Class Form1
         '
         'GroupBox19
         '
-        Me.GroupBox19.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox19.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox19.Controls.Add(Me.dgExcludedFolderStrings)
         Me.GroupBox19.Controls.Add(Me.Label44)
         Me.GroupBox19.Controls.Add(Me.Label45)
@@ -2556,17 +2558,17 @@ Partial Class Form1
         Me.GroupBox19.Name = "GroupBox19"
         Me.GroupBox19.Size = New System.Drawing.Size(584, 106)
         Me.GroupBox19.TabIndex = 5
-        Me.GroupBox19.TabStop = False
+        Me.GroupBox19.TabStop = false
         Me.GroupBox19.Text = "File and Folder Exclusions ..."
         '
         'dgExcludedFolderStrings
         '
-        Me.dgExcludedFolderStrings.AllowUserToResizeRows = False
+        Me.dgExcludedFolderStrings.AllowUserToResizeRows = false
         Me.dgExcludedFolderStrings.BackgroundColor = System.Drawing.SystemColors.Window
         Me.dgExcludedFolderStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgExcludedFolderStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.dgExcludedFolderStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgExcludedFolderStrings.ColumnHeadersVisible = False
+        Me.dgExcludedFolderStrings.ColumnHeadersVisible = false
         Me.dgExcludedFolderStrings.Location = New System.Drawing.Point(14, 34)
         Me.dgExcludedFolderStrings.Name = "dgExcludedFolderStrings"
         Me.dgExcludedFolderStrings.RowHeadersWidth = 25
@@ -2576,7 +2578,7 @@ Partial Class Form1
         '
         'Label44
         '
-        Me.Label44.AutoSize = True
+        Me.Label44.AutoSize = true
         Me.Label44.Location = New System.Drawing.Point(20, 18)
         Me.Label44.Name = "Label44"
         Me.Label44.Size = New System.Drawing.Size(194, 13)
@@ -2585,7 +2587,7 @@ Partial Class Form1
         '
         'Label45
         '
-        Me.Label45.AutoSize = True
+        Me.Label45.AutoSize = true
         Me.Label45.Location = New System.Drawing.Point(307, 18)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(173, 13)
@@ -2594,12 +2596,12 @@ Partial Class Form1
         '
         'dgExcludedFileStrings
         '
-        Me.dgExcludedFileStrings.AllowUserToResizeRows = False
+        Me.dgExcludedFileStrings.AllowUserToResizeRows = false
         Me.dgExcludedFileStrings.BackgroundColor = System.Drawing.SystemColors.Window
         Me.dgExcludedFileStrings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.dgExcludedFileStrings.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText
         Me.dgExcludedFileStrings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgExcludedFileStrings.ColumnHeadersVisible = False
+        Me.dgExcludedFileStrings.ColumnHeadersVisible = false
         Me.dgExcludedFileStrings.Location = New System.Drawing.Point(299, 34)
         Me.dgExcludedFileStrings.Name = "dgExcludedFileStrings"
         Me.dgExcludedFileStrings.RowHeadersWidth = 25
@@ -2621,12 +2623,12 @@ Partial Class Form1
         Me.Options.Size = New System.Drawing.Size(600, 580)
         Me.Options.TabIndex = 1
         Me.Options.Text = "Options"
-        Me.Options.UseVisualStyleBackColor = True
+        Me.Options.UseVisualStyleBackColor = true
         '
         'GroupBox26
         '
-        Me.GroupBox26.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox26.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox26.Controls.Add(Me.Label87)
         Me.GroupBox26.Controls.Add(Me.Label86)
         Me.GroupBox26.Controls.Add(Me.Label85)
@@ -2639,14 +2641,14 @@ Partial Class Form1
         Me.GroupBox26.Name = "GroupBox26"
         Me.GroupBox26.Size = New System.Drawing.Size(575, 86)
         Me.GroupBox26.TabIndex = 3
-        Me.GroupBox26.TabStop = False
+        Me.GroupBox26.TabStop = false
         Me.GroupBox26.Text = "Internet Grabber - Override Options ..."
         Me.ToolTip1.SetToolTip(Me.GroupBox26, resources.GetString("GroupBox26.ToolTip"))
         '
         'Label87
         '
-        Me.Label87.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label87.AutoSize = True
+        Me.Label87.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.Label87.AutoSize = true
         Me.Label87.Location = New System.Drawing.Point(339, 62)
         Me.Label87.Name = "Label87"
         Me.Label87.Size = New System.Drawing.Size(66, 13)
@@ -2655,8 +2657,8 @@ Partial Class Form1
         '
         'Label86
         '
-        Me.Label86.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label86.AutoSize = True
+        Me.Label86.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.Label86.AutoSize = true
         Me.Label86.Location = New System.Drawing.Point(339, 38)
         Me.Label86.Name = "Label86"
         Me.Label86.Size = New System.Drawing.Size(79, 13)
@@ -2665,8 +2667,8 @@ Partial Class Form1
         '
         'Label85
         '
-        Me.Label85.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label85.AutoSize = True
+        Me.Label85.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.Label85.AutoSize = true
         Me.Label85.Location = New System.Drawing.Point(339, 14)
         Me.Label85.Name = "Label85"
         Me.Label85.Size = New System.Drawing.Size(82, 13)
@@ -2675,52 +2677,52 @@ Partial Class Form1
         '
         'Label84
         '
-        Me.Label84.AutoSize = True
+        Me.Label84.AutoSize = true
         Me.Label84.Location = New System.Drawing.Point(12, 27)
         Me.Label84.Name = "Label84"
         Me.Label84.Size = New System.Drawing.Size(68, 39)
         Me.Label84.TabIndex = 0
-        Me.Label84.Text = "Preferred " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Languages /" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Countries"
+        Me.Label84.Text = "Preferred "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Languages /"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Countries"
         '
         'chkGrabberOverrideTitleLimit
         '
-        Me.chkGrabberOverrideTitleLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkGrabberOverrideTitleLimit.FormattingEnabled = True
+        Me.chkGrabberOverrideTitleLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.chkGrabberOverrideTitleLimit.FormattingEnabled = true
         Me.chkGrabberOverrideTitleLimit.Items.AddRange(New Object() {"0", "1", "2", "3", "4", "5", "10", "15", "20", "999"})
         Me.chkGrabberOverrideTitleLimit.Location = New System.Drawing.Point(436, 59)
         Me.chkGrabberOverrideTitleLimit.Name = "chkGrabberOverrideTitleLimit"
         Me.chkGrabberOverrideTitleLimit.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverrideTitleLimit.TabIndex = 7
-        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "You may also set a preferred lan" & _
-        "guage/country " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "for grabbing in the override options.")
+        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideTitleLimit, "Limits the number of translated titles grabbed."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"You may also set a preferred lan"& _ 
+        "guage/country "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"for grabbing in the override options.")
         '
         'chkGrabberOverridePersonLimit
         '
-        Me.chkGrabberOverridePersonLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkGrabberOverridePersonLimit.FormattingEnabled = True
+        Me.chkGrabberOverridePersonLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.chkGrabberOverridePersonLimit.FormattingEnabled = true
         Me.chkGrabberOverridePersonLimit.Items.AddRange(New Object() {"1", "2", "3", "4", "5", "10", "15", "20", "999"})
         Me.chkGrabberOverridePersonLimit.Location = New System.Drawing.Point(436, 35)
         Me.chkGrabberOverridePersonLimit.Name = "chkGrabberOverridePersonLimit"
         Me.chkGrabberOverridePersonLimit.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverridePersonLimit.TabIndex = 5
-        Me.ToolTip1.SetToolTip(Me.chkGrabberOverridePersonLimit, "Limits the number of person names grabbed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This settings applies to all fields t" & _
-        "hat grab person names, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "like actors, producers, writers, directors.")
+        Me.ToolTip1.SetToolTip(Me.chkGrabberOverridePersonLimit, "Limits the number of person names grabbed."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"This settings applies to all fields t"& _ 
+        "hat grab person names, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"like actors, producers, writers, directors.")
         '
         'chkGrabberOverrideGetRoles
         '
-        Me.chkGrabberOverrideGetRoles.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkGrabberOverrideGetRoles.FormattingEnabled = True
+        Me.chkGrabberOverrideGetRoles.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.chkGrabberOverrideGetRoles.FormattingEnabled = true
         Me.chkGrabberOverrideGetRoles.Items.AddRange(New Object() {"true", "false"})
         Me.chkGrabberOverrideGetRoles.Location = New System.Drawing.Point(436, 11)
         Me.chkGrabberOverrideGetRoles.Name = "chkGrabberOverrideGetRoles"
         Me.chkGrabberOverrideGetRoles.Size = New System.Drawing.Size(69, 21)
         Me.chkGrabberOverrideGetRoles.TabIndex = 3
-        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideGetRoles, "If checked, add Roles to actor infos." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Depends on the grabber script supporting t" & _
+        Me.ToolTip1.SetToolTip(Me.chkGrabberOverrideGetRoles, "If checked, add Roles to actor infos."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Depends on the grabber script supporting t"& _ 
         "hat option.")
         '
         'chkGrabberOverrideLanguage
         '
-        Me.chkGrabberOverrideLanguage.FormattingEnabled = True
+        Me.chkGrabberOverrideLanguage.FormattingEnabled = true
         Me.chkGrabberOverrideLanguage.Items.AddRange(New Object() {"Argentina", "Australia", "Austria", "Belgium", "Brazil", "Canada", "Chile", "China", "Croatia", "Czech Republic", "Denmark", "Estonia", "Finland", "France", "Germany", "Greece", "Hong Kong", "Hungary", "Iceland", "India", "Ireland", "Israel", "Italy", "Japan", "Malaysia", "Mexico", "Netherlands", "New Zealand", "Norway", "Peru", "Philippines", "Poland", "Portugal", "Romania", "Russia", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland", "Turkey", "UK", "Uruguay", "USA"})
         Me.chkGrabberOverrideLanguage.Location = New System.Drawing.Point(112, 35)
         Me.chkGrabberOverrideLanguage.Name = "chkGrabberOverrideLanguage"
@@ -2730,8 +2732,8 @@ Partial Class Form1
         '
         'GroupBox11
         '
-        Me.GroupBox11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox11.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox11.Controls.Add(Me.btnExcludeFileDelete)
         Me.GroupBox11.Controls.Add(Me.btnExcludeFileShow)
         Me.GroupBox11.Controls.Add(Me.txtExcludeFilePath)
@@ -2744,34 +2746,34 @@ Partial Class Form1
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.Size = New System.Drawing.Size(575, 102)
         Me.GroupBox11.TabIndex = 0
-        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.TabStop = false
         Me.GroupBox11.Text = "AMC Folders and Files ..."
         '
         'btnExcludeFileDelete
         '
-        Me.btnExcludeFileDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExcludeFileDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExcludeFileDelete.Location = New System.Drawing.Point(339, 72)
         Me.btnExcludeFileDelete.Name = "btnExcludeFileDelete"
         Me.btnExcludeFileDelete.Size = New System.Drawing.Size(56, 20)
         Me.btnExcludeFileDelete.TabIndex = 5
         Me.btnExcludeFileDelete.Text = "reset"
         Me.ToolTip1.SetToolTip(Me.btnExcludeFileDelete, resources.GetString("btnExcludeFileDelete.ToolTip"))
-        Me.btnExcludeFileDelete.UseVisualStyleBackColor = True
+        Me.btnExcludeFileDelete.UseVisualStyleBackColor = true
         '
         'btnExcludeFileShow
         '
-        Me.btnExcludeFileShow.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExcludeFileShow.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExcludeFileShow.Location = New System.Drawing.Point(415, 72)
         Me.btnExcludeFileShow.Name = "btnExcludeFileShow"
         Me.btnExcludeFileShow.Size = New System.Drawing.Size(56, 20)
         Me.btnExcludeFileShow.TabIndex = 6
         Me.btnExcludeFileShow.Text = "show"
-        Me.btnExcludeFileShow.UseVisualStyleBackColor = True
+        Me.btnExcludeFileShow.UseVisualStyleBackColor = true
         '
         'txtExcludeFilePath
         '
-        Me.txtExcludeFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtExcludeFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtExcludeFilePath.Location = New System.Drawing.Point(12, 72)
         Me.txtExcludeFilePath.Name = "txtExcludeFilePath"
         Me.txtExcludeFilePath.Size = New System.Drawing.Size(296, 20)
@@ -2780,7 +2782,7 @@ Partial Class Form1
         '
         'Label22
         '
-        Me.Label22.AutoSize = True
+        Me.Label22.AutoSize = true
         Me.Label22.Location = New System.Drawing.Point(12, 56)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(173, 13)
@@ -2789,30 +2791,30 @@ Partial Class Form1
         '
         'btnSelectExcludeFile
         '
-        Me.btnSelectExcludeFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelectExcludeFile.CausesValidation = False
+        Me.btnSelectExcludeFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnSelectExcludeFile.CausesValidation = false
         Me.btnSelectExcludeFile.Location = New System.Drawing.Point(521, 72)
         Me.btnSelectExcludeFile.Name = "btnSelectExcludeFile"
         Me.btnSelectExcludeFile.Size = New System.Drawing.Size(37, 20)
         Me.btnSelectExcludeFile.TabIndex = 7
         Me.btnSelectExcludeFile.Text = "..."
-        Me.btnSelectExcludeFile.UseVisualStyleBackColor = True
+        Me.btnSelectExcludeFile.UseVisualStyleBackColor = true
         '
         'txtConfigFilePath
         '
-        Me.txtConfigFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtConfigFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtConfigFilePath.Location = New System.Drawing.Point(12, 32)
         Me.txtConfigFilePath.Name = "txtConfigFilePath"
         Me.txtConfigFilePath.Size = New System.Drawing.Size(501, 20)
         Me.txtConfigFilePath.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "This must be saved in .xml f" & _
-        "ormat." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "If you do not have one, enter the desired location and a new database fi" & _
+        Me.ToolTip1.SetToolTip(Me.txtConfigFilePath, "Enter the location of your Ant Movie Database file."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"This must be saved in .xml f"& _ 
+        "ormat."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"If you do not have one, enter the desired location and a new database fi"& _ 
         "le will be created for you.")
         '
         'Label2
         '
-        Me.Label2.AutoSize = True
+        Me.Label2.AutoSize = true
         Me.Label2.Location = New System.Drawing.Point(12, 16)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(168, 13)
@@ -2821,19 +2823,19 @@ Partial Class Form1
         '
         'btnSelectConfigFile
         '
-        Me.btnSelectConfigFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelectConfigFile.CausesValidation = False
+        Me.btnSelectConfigFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnSelectConfigFile.CausesValidation = false
         Me.btnSelectConfigFile.Location = New System.Drawing.Point(521, 32)
         Me.btnSelectConfigFile.Name = "btnSelectConfigFile"
         Me.btnSelectConfigFile.Size = New System.Drawing.Size(37, 20)
         Me.btnSelectConfigFile.TabIndex = 2
         Me.btnSelectConfigFile.Text = "..."
-        Me.btnSelectConfigFile.UseVisualStyleBackColor = True
+        Me.btnSelectConfigFile.UseVisualStyleBackColor = true
         '
         'GroupBox4
         '
-        Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.chkParseTrailers)
         Me.GroupBox4.Controls.Add(Me.GroupBox25)
         Me.GroupBox4.Controls.Add(Me.txtTrailerIentificationStrings)
@@ -2846,25 +2848,25 @@ Partial Class Form1
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(575, 138)
         Me.GroupBox4.TabIndex = 2
-        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.TabStop = false
         Me.GroupBox4.Text = "File Type Identification ..."
         '
         'chkParseTrailers
         '
-        Me.chkParseTrailers.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.chkParseTrailers.AutoSize = True
-        Me.chkParseTrailers.Enabled = False
+        Me.chkParseTrailers.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.chkParseTrailers.AutoSize = true
+        Me.chkParseTrailers.Enabled = false
         Me.chkParseTrailers.Location = New System.Drawing.Point(377, 113)
         Me.chkParseTrailers.Name = "chkParseTrailers"
         Me.chkParseTrailers.Size = New System.Drawing.Size(134, 17)
         Me.chkParseTrailers.TabIndex = 7
         Me.chkParseTrailers.Text = "Check for Trailers (wip)"
-        Me.chkParseTrailers.UseVisualStyleBackColor = True
-        Me.chkParseTrailers.Visible = False
+        Me.chkParseTrailers.UseVisualStyleBackColor = true
+        Me.chkParseTrailers.Visible = false
         '
         'GroupBox25
         '
-        Me.GroupBox25.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox25.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox25.Controls.Add(Me.chkCheckDVDFolders)
         Me.GroupBox25.Controls.Add(Me.chkParseSubtitleFiles)
         Me.GroupBox25.Controls.Add(Me.chkParsePlaylistFiles)
@@ -2872,47 +2874,47 @@ Partial Class Form1
         Me.GroupBox25.Name = "GroupBox25"
         Me.GroupBox25.Size = New System.Drawing.Size(187, 91)
         Me.GroupBox25.TabIndex = 6
-        Me.GroupBox25.TabStop = False
+        Me.GroupBox25.TabStop = false
         Me.GroupBox25.Text = "Media Scan Options ..."
         '
         'chkCheckDVDFolders
         '
-        Me.chkCheckDVDFolders.AutoSize = True
+        Me.chkCheckDVDFolders.AutoSize = true
         Me.chkCheckDVDFolders.Location = New System.Drawing.Point(10, 23)
         Me.chkCheckDVDFolders.Name = "chkCheckDVDFolders"
         Me.chkCheckDVDFolders.Size = New System.Drawing.Size(158, 17)
         Me.chkCheckDVDFolders.TabIndex = 0
         Me.chkCheckDVDFolders.Text = "Check for DVD / BR folders"
-        Me.ToolTip1.SetToolTip(Me.chkCheckDVDFolders, "Enable this option to search for DVD rips." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The system looks for a VIDEO_TS.IFO f" & _
-        "ile and attempts to work out" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "the movie title from the folder structure.")
-        Me.chkCheckDVDFolders.UseVisualStyleBackColor = True
+        Me.ToolTip1.SetToolTip(Me.chkCheckDVDFolders, "Enable this option to search for DVD rips."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"The system looks for a VIDEO_TS.IFO f"& _ 
+        "ile and attempts to work out"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"the movie title from the folder structure.")
+        Me.chkCheckDVDFolders.UseVisualStyleBackColor = true
         '
         'chkParseSubtitleFiles
         '
-        Me.chkParseSubtitleFiles.AutoSize = True
+        Me.chkParseSubtitleFiles.AutoSize = true
         Me.chkParseSubtitleFiles.Location = New System.Drawing.Point(10, 46)
         Me.chkParseSubtitleFiles.Name = "chkParseSubtitleFiles"
         Me.chkParseSubtitleFiles.Size = New System.Drawing.Size(145, 17)
         Me.chkParseSubtitleFiles.TabIndex = 1
         Me.chkParseSubtitleFiles.Text = "Try to Parse Subtitle Files"
         Me.ToolTip1.SetToolTip(Me.chkParseSubtitleFiles, resources.GetString("chkParseSubtitleFiles.ToolTip"))
-        Me.chkParseSubtitleFiles.UseVisualStyleBackColor = True
+        Me.chkParseSubtitleFiles.UseVisualStyleBackColor = true
         '
         'chkParsePlaylistFiles
         '
-        Me.chkParsePlaylistFiles.AutoSize = True
-        Me.chkParsePlaylistFiles.Enabled = False
+        Me.chkParsePlaylistFiles.AutoSize = true
+        Me.chkParsePlaylistFiles.Enabled = false
         Me.chkParsePlaylistFiles.Location = New System.Drawing.Point(10, 69)
         Me.chkParsePlaylistFiles.Name = "chkParsePlaylistFiles"
         Me.chkParsePlaylistFiles.Size = New System.Drawing.Size(156, 17)
         Me.chkParsePlaylistFiles.TabIndex = 2
         Me.chkParsePlaylistFiles.Text = "Check for Playlist Files (wip)"
-        Me.chkParsePlaylistFiles.UseVisualStyleBackColor = True
+        Me.chkParsePlaylistFiles.UseVisualStyleBackColor = true
         '
         'txtTrailerIentificationStrings
         '
-        Me.txtTrailerIentificationStrings.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtTrailerIentificationStrings.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtTrailerIentificationStrings.Location = New System.Drawing.Point(12, 111)
         Me.txtTrailerIentificationStrings.Name = "txtTrailerIentificationStrings"
         Me.txtTrailerIentificationStrings.Size = New System.Drawing.Size(296, 20)
@@ -2921,7 +2923,7 @@ Partial Class Form1
         '
         'Label79
         '
-        Me.Label79.AutoSize = True
+        Me.Label79.AutoSize = true
         Me.Label79.Location = New System.Drawing.Point(9, 94)
         Me.Label79.Name = "Label79"
         Me.Label79.Size = New System.Drawing.Size(183, 13)
@@ -2930,8 +2932,8 @@ Partial Class Form1
         '
         'txtDefaultFileTypesNonMedia
         '
-        Me.txtDefaultFileTypesNonMedia.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDefaultFileTypesNonMedia.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtDefaultFileTypesNonMedia.Location = New System.Drawing.Point(12, 71)
         Me.txtDefaultFileTypesNonMedia.Name = "txtDefaultFileTypesNonMedia"
         Me.txtDefaultFileTypesNonMedia.Size = New System.Drawing.Size(296, 20)
@@ -2939,7 +2941,7 @@ Partial Class Form1
         '
         'Label14
         '
-        Me.Label14.AutoSize = True
+        Me.Label14.AutoSize = true
         Me.Label14.Location = New System.Drawing.Point(9, 55)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(285, 13)
@@ -2948,8 +2950,8 @@ Partial Class Form1
         '
         'txtDefaultFileTypes
         '
-        Me.txtDefaultFileTypes.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDefaultFileTypes.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtDefaultFileTypes.Location = New System.Drawing.Point(12, 32)
         Me.txtDefaultFileTypes.Name = "txtDefaultFileTypes"
         Me.txtDefaultFileTypes.Size = New System.Drawing.Size(296, 20)
@@ -2957,18 +2959,18 @@ Partial Class Form1
         '
         'Label15
         '
-        Me.Label15.AutoSize = True
+        Me.Label15.AutoSize = true
         Me.Label15.Location = New System.Drawing.Point(9, 16)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(274, 13)
         Me.Label15.TabIndex = 0
         Me.Label15.Text = "Accepted Mediainfo Files. Separate List with semi-colons"
-        Me.ToolTip1.SetToolTip(Me.Label15, "Accepted Media Files." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate List with semi-colons, e.g. wmv,avi,mpg")
+        Me.ToolTip1.SetToolTip(Me.Label15, "Accepted Media Files."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Separate List with semi-colons, e.g. wmv,avi,mpg")
         '
         'GroupBox7
         '
-        Me.GroupBox7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox7.Controls.Add(Me.btnSelectPersonArtworkFolder)
         Me.GroupBox7.Controls.Add(Me.Label28)
         Me.GroupBox7.Controls.Add(Me.txtPersonArtworkFolder)
@@ -2979,22 +2981,22 @@ Partial Class Form1
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(575, 107)
         Me.GroupBox7.TabIndex = 1
-        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.TabStop = false
         Me.GroupBox7.Text = "Artwork Folders ..."
         '
         'btnSelectPersonArtworkFolder
         '
-        Me.btnSelectPersonArtworkFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSelectPersonArtworkFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnSelectPersonArtworkFolder.Location = New System.Drawing.Point(521, 74)
         Me.btnSelectPersonArtworkFolder.Name = "btnSelectPersonArtworkFolder"
         Me.btnSelectPersonArtworkFolder.Size = New System.Drawing.Size(37, 20)
         Me.btnSelectPersonArtworkFolder.TabIndex = 5
         Me.btnSelectPersonArtworkFolder.Text = "..."
-        Me.btnSelectPersonArtworkFolder.UseVisualStyleBackColor = True
+        Me.btnSelectPersonArtworkFolder.UseVisualStyleBackColor = true
         '
         'Label28
         '
-        Me.Label28.AutoSize = True
+        Me.Label28.AutoSize = true
         Me.Label28.Location = New System.Drawing.Point(10, 58)
         Me.Label28.Name = "Label28"
         Me.Label28.Size = New System.Drawing.Size(117, 13)
@@ -3003,8 +3005,8 @@ Partial Class Form1
         '
         'txtPersonArtworkFolder
         '
-        Me.txtPersonArtworkFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPersonArtworkFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtPersonArtworkFolder.Location = New System.Drawing.Point(10, 74)
         Me.txtPersonArtworkFolder.Name = "txtPersonArtworkFolder"
         Me.txtPersonArtworkFolder.Size = New System.Drawing.Size(503, 20)
@@ -3012,29 +3014,29 @@ Partial Class Form1
         '
         'btnSelectFanartFolder
         '
-        Me.btnSelectFanartFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSelectFanartFolder.CausesValidation = False
+        Me.btnSelectFanartFolder.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnSelectFanartFolder.CausesValidation = false
         Me.btnSelectFanartFolder.Location = New System.Drawing.Point(521, 33)
         Me.btnSelectFanartFolder.Name = "btnSelectFanartFolder"
         Me.btnSelectFanartFolder.Size = New System.Drawing.Size(37, 20)
         Me.btnSelectFanartFolder.TabIndex = 2
         Me.btnSelectFanartFolder.Text = "..."
-        Me.btnSelectFanartFolder.UseVisualStyleBackColor = True
+        Me.btnSelectFanartFolder.UseVisualStyleBackColor = true
         '
         'txtFanartFolder
         '
-        Me.txtFanartFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtFanartFolder.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtFanartFolder.Location = New System.Drawing.Point(10, 33)
         Me.txtFanartFolder.Name = "txtFanartFolder"
         Me.txtFanartFolder.Size = New System.Drawing.Size(503, 20)
         Me.txtFanartFolder.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.txtFanartFolder, "Enter the paths (local or UNC) to the folders you want to scan." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Separate multipl" & _
+        Me.ToolTip1.SetToolTip(Me.txtFanartFolder, "Enter the paths (local or UNC) to the folders you want to scan."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Separate multipl"& _ 
         "e folders with semi-colons.")
         '
         'Label48
         '
-        Me.Label48.AutoSize = True
+        Me.Label48.AutoSize = true
         Me.Label48.Location = New System.Drawing.Point(10, 16)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(80, 13)
@@ -3043,22 +3045,22 @@ Partial Class Form1
         '
         'GroupBox13
         '
-        Me.GroupBox13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox13.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox13.Controls.Add(Me.cbLogLevel)
         Me.GroupBox13.Controls.Add(Me.Label29)
         Me.GroupBox13.Location = New System.Drawing.Point(13, 534)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(575, 40)
         Me.GroupBox13.TabIndex = 5
-        Me.GroupBox13.TabStop = False
+        Me.GroupBox13.TabStop = false
         Me.GroupBox13.Text = "Other"
         '
         'cbLogLevel
         '
         Me.cbLogLevel.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cbLogLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbLogLevel.FormattingEnabled = True
+        Me.cbLogLevel.FormattingEnabled = true
         Me.cbLogLevel.Items.AddRange(New Object() {"All Events with Grabbing", "All Events", "Major Events", "Errors Only"})
         Me.cbLogLevel.Location = New System.Drawing.Point(112, 13)
         Me.cbLogLevel.Name = "cbLogLevel"
@@ -3068,7 +3070,7 @@ Partial Class Form1
         '
         'Label29
         '
-        Me.Label29.AutoSize = True
+        Me.Label29.AutoSize = true
         Me.Label29.Location = New System.Drawing.Point(9, 16)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(80, 13)
@@ -3077,8 +3079,8 @@ Partial Class Form1
         '
         'GroupBox12
         '
-        Me.GroupBox12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox12.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBox12.Controls.Add(Me.chkExecuteOnlyForOrphans)
         Me.GroupBox12.Controls.Add(Me.btnExecuteProgramSelectPath)
         Me.GroupBox12.Controls.Add(Me.txtExecuteProgramPath)
@@ -3088,33 +3090,33 @@ Partial Class Form1
         Me.GroupBox12.Name = "GroupBox12"
         Me.GroupBox12.Size = New System.Drawing.Size(575, 68)
         Me.GroupBox12.TabIndex = 4
-        Me.GroupBox12.TabStop = False
+        Me.GroupBox12.TabStop = false
         Me.GroupBox12.Text = "Post Processing"
         '
         'chkExecuteOnlyForOrphans
         '
-        Me.chkExecuteOnlyForOrphans.AutoSize = True
+        Me.chkExecuteOnlyForOrphans.AutoSize = true
         Me.chkExecuteOnlyForOrphans.Location = New System.Drawing.Point(377, 16)
         Me.chkExecuteOnlyForOrphans.Name = "chkExecuteOnlyForOrphans"
         Me.chkExecuteOnlyForOrphans.Size = New System.Drawing.Size(136, 17)
         Me.chkExecuteOnlyForOrphans.TabIndex = 4
         Me.chkExecuteOnlyForOrphans.Text = "Only if changes applied"
-        Me.chkExecuteOnlyForOrphans.UseVisualStyleBackColor = True
+        Me.chkExecuteOnlyForOrphans.UseVisualStyleBackColor = true
         '
         'btnExecuteProgramSelectPath
         '
-        Me.btnExecuteProgramSelectPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExecuteProgramSelectPath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnExecuteProgramSelectPath.Location = New System.Drawing.Point(521, 39)
         Me.btnExecuteProgramSelectPath.Name = "btnExecuteProgramSelectPath"
         Me.btnExecuteProgramSelectPath.Size = New System.Drawing.Size(37, 20)
         Me.btnExecuteProgramSelectPath.TabIndex = 3
         Me.btnExecuteProgramSelectPath.Text = "..."
-        Me.btnExecuteProgramSelectPath.UseVisualStyleBackColor = True
+        Me.btnExecuteProgramSelectPath.UseVisualStyleBackColor = true
         '
         'txtExecuteProgramPath
         '
-        Me.txtExecuteProgramPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtExecuteProgramPath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.txtExecuteProgramPath.Location = New System.Drawing.Point(112, 39)
         Me.txtExecuteProgramPath.Name = "txtExecuteProgramPath"
         Me.txtExecuteProgramPath.Size = New System.Drawing.Size(401, 20)
@@ -3122,17 +3124,17 @@ Partial Class Form1
         '
         'chkExecuteProgram
         '
-        Me.chkExecuteProgram.AutoSize = True
+        Me.chkExecuteProgram.AutoSize = true
         Me.chkExecuteProgram.Location = New System.Drawing.Point(12, 16)
         Me.chkExecuteProgram.Name = "chkExecuteProgram"
         Me.chkExecuteProgram.Size = New System.Drawing.Size(217, 17)
         Me.chkExecuteProgram.TabIndex = 0
         Me.chkExecuteProgram.Text = "Launch a file after processing completed"
-        Me.chkExecuteProgram.UseVisualStyleBackColor = True
+        Me.chkExecuteProgram.UseVisualStyleBackColor = true
         '
         'Label27
         '
-        Me.Label27.AutoSize = True
+        Me.Label27.AutoSize = true
         Me.Label27.Location = New System.Drawing.Point(10, 42)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(96, 13)
@@ -3156,7 +3158,7 @@ Partial Class Form1
         Me.Mediainfo.Size = New System.Drawing.Size(600, 580)
         Me.Mediainfo.TabIndex = 2
         Me.Mediainfo.Text = "Mediainfo"
-        Me.Mediainfo.UseVisualStyleBackColor = True
+        Me.Mediainfo.UseVisualStyleBackColor = true
         '
         'Label47
         '
@@ -3164,8 +3166,8 @@ Partial Class Form1
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(495, 43)
         Me.Label47.TabIndex = 0
-        Me.Label47.Text = "This page allows you to test that the MediaInfo dll is able to read your movie fi" & _
-    "le correctly.  Relevant information from the file will be displayed below if pos" & _
+        Me.Label47.Text = "This page allows you to test that the MediaInfo dll is able to read your movie fi"& _ 
+    "le correctly.  Relevant information from the file will be displayed below if pos"& _ 
     "sible."
         '
         'GroupBox18
@@ -3178,30 +3180,30 @@ Partial Class Form1
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.Size = New System.Drawing.Size(522, 99)
         Me.GroupBox18.TabIndex = 7
-        Me.GroupBox18.TabStop = False
+        Me.GroupBox18.TabStop = false
         Me.GroupBox18.Text = "Subtitles ..."
         '
         'txtSampleTextLanguageList
         '
         Me.txtSampleTextLanguageList.Location = New System.Drawing.Point(87, 45)
         Me.txtSampleTextLanguageList.Name = "txtSampleTextLanguageList"
-        Me.txtSampleTextLanguageList.ReadOnly = True
+        Me.txtSampleTextLanguageList.ReadOnly = true
         Me.txtSampleTextLanguageList.Size = New System.Drawing.Size(397, 20)
         Me.txtSampleTextLanguageList.TabIndex = 3
-        Me.txtSampleTextLanguageList.TabStop = False
+        Me.txtSampleTextLanguageList.TabStop = false
         '
         'txtSampleTextCodecList
         '
         Me.txtSampleTextCodecList.Location = New System.Drawing.Point(87, 19)
         Me.txtSampleTextCodecList.Name = "txtSampleTextCodecList"
-        Me.txtSampleTextCodecList.ReadOnly = True
+        Me.txtSampleTextCodecList.ReadOnly = true
         Me.txtSampleTextCodecList.Size = New System.Drawing.Size(397, 20)
         Me.txtSampleTextCodecList.TabIndex = 1
-        Me.txtSampleTextCodecList.TabStop = False
+        Me.txtSampleTextCodecList.TabStop = false
         '
         'Label39
         '
-        Me.Label39.AutoSize = True
+        Me.Label39.AutoSize = true
         Me.Label39.Location = New System.Drawing.Point(18, 22)
         Me.Label39.Name = "Label39"
         Me.Label39.Size = New System.Drawing.Size(63, 13)
@@ -3210,7 +3212,7 @@ Partial Class Form1
         '
         'Label38
         '
-        Me.Label38.AutoSize = True
+        Me.Label38.AutoSize = true
         Me.Label38.Location = New System.Drawing.Point(15, 48)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(66, 13)
@@ -3227,21 +3229,21 @@ Partial Class Form1
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(522, 58)
         Me.GroupBox3.TabIndex = 8
-        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.TabStop = false
         Me.GroupBox3.Text = "File ..."
         '
         'txtSampleFileLength
         '
         Me.txtSampleFileLength.Location = New System.Drawing.Point(327, 22)
         Me.txtSampleFileLength.Name = "txtSampleFileLength"
-        Me.txtSampleFileLength.ReadOnly = True
+        Me.txtSampleFileLength.ReadOnly = true
         Me.txtSampleFileLength.Size = New System.Drawing.Size(157, 20)
         Me.txtSampleFileLength.TabIndex = 3
-        Me.txtSampleFileLength.TabStop = False
+        Me.txtSampleFileLength.TabStop = false
         '
         'Label8
         '
-        Me.Label8.AutoSize = True
+        Me.Label8.AutoSize = true
         Me.Label8.Location = New System.Drawing.Point(275, 25)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(46, 13)
@@ -3252,14 +3254,14 @@ Partial Class Form1
         '
         Me.txtSampleFileSize.Location = New System.Drawing.Point(87, 22)
         Me.txtSampleFileSize.Name = "txtSampleFileSize"
-        Me.txtSampleFileSize.ReadOnly = True
+        Me.txtSampleFileSize.ReadOnly = true
         Me.txtSampleFileSize.Size = New System.Drawing.Size(139, 20)
         Me.txtSampleFileSize.TabIndex = 1
-        Me.txtSampleFileSize.TabStop = False
+        Me.txtSampleFileSize.TabStop = false
         '
         'Label9
         '
-        Me.Label9.AutoSize = True
+        Me.Label9.AutoSize = true
         Me.Label9.Location = New System.Drawing.Point(47, 25)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(33, 13)
@@ -3284,12 +3286,12 @@ Partial Class Form1
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(522, 154)
         Me.GroupBox2.TabIndex = 6
-        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.TabStop = false
         Me.GroupBox2.Text = "Audio ..."
         '
         'Label100
         '
-        Me.Label100.AutoSize = True
+        Me.Label100.AutoSize = true
         Me.Label100.Location = New System.Drawing.Point(275, 22)
         Me.Label100.Name = "Label100"
         Me.Label100.Size = New System.Drawing.Size(54, 13)
@@ -3300,14 +3302,14 @@ Partial Class Form1
         '
         Me.txtSampleAudioChannelCount.Location = New System.Drawing.Point(359, 19)
         Me.txtSampleAudioChannelCount.Name = "txtSampleAudioChannelCount"
-        Me.txtSampleAudioChannelCount.ReadOnly = True
+        Me.txtSampleAudioChannelCount.ReadOnly = true
         Me.txtSampleAudioChannelCount.Size = New System.Drawing.Size(125, 20)
         Me.txtSampleAudioChannelCount.TabIndex = 3
-        Me.txtSampleAudioChannelCount.TabStop = False
+        Me.txtSampleAudioChannelCount.TabStop = false
         '
         'Label37
         '
-        Me.Label37.AutoSize = True
+        Me.Label37.AutoSize = true
         Me.Label37.Location = New System.Drawing.Point(19, 125)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(66, 13)
@@ -3316,7 +3318,7 @@ Partial Class Form1
         '
         'Label36
         '
-        Me.Label36.AutoSize = True
+        Me.Label36.AutoSize = true
         Me.Label36.Location = New System.Drawing.Point(30, 99)
         Me.Label36.Name = "Label36"
         Me.Label36.Size = New System.Drawing.Size(51, 13)
@@ -3327,32 +3329,32 @@ Partial Class Form1
         '
         Me.txtSampleAudioLanguageList.Location = New System.Drawing.Point(87, 122)
         Me.txtSampleAudioLanguageList.Name = "txtSampleAudioLanguageList"
-        Me.txtSampleAudioLanguageList.ReadOnly = True
+        Me.txtSampleAudioLanguageList.ReadOnly = true
         Me.txtSampleAudioLanguageList.Size = New System.Drawing.Size(397, 20)
         Me.txtSampleAudioLanguageList.TabIndex = 11
-        Me.txtSampleAudioLanguageList.TabStop = False
+        Me.txtSampleAudioLanguageList.TabStop = false
         '
         'txtSampleAudioStreamList
         '
         Me.txtSampleAudioStreamList.Location = New System.Drawing.Point(87, 96)
         Me.txtSampleAudioStreamList.Name = "txtSampleAudioStreamList"
-        Me.txtSampleAudioStreamList.ReadOnly = True
+        Me.txtSampleAudioStreamList.ReadOnly = true
         Me.txtSampleAudioStreamList.Size = New System.Drawing.Size(397, 20)
         Me.txtSampleAudioStreamList.TabIndex = 9
-        Me.txtSampleAudioStreamList.TabStop = False
+        Me.txtSampleAudioStreamList.TabStop = false
         '
         'txtSampleAudioStreamCount
         '
         Me.txtSampleAudioStreamCount.Location = New System.Drawing.Point(359, 48)
         Me.txtSampleAudioStreamCount.Name = "txtSampleAudioStreamCount"
-        Me.txtSampleAudioStreamCount.ReadOnly = True
+        Me.txtSampleAudioStreamCount.ReadOnly = true
         Me.txtSampleAudioStreamCount.Size = New System.Drawing.Size(125, 20)
         Me.txtSampleAudioStreamCount.TabIndex = 7
-        Me.txtSampleAudioStreamCount.TabStop = False
+        Me.txtSampleAudioStreamCount.TabStop = false
         '
         'Label35
         '
-        Me.Label35.AutoSize = True
+        Me.Label35.AutoSize = true
         Me.Label35.Location = New System.Drawing.Point(275, 51)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(51, 13)
@@ -3363,14 +3365,14 @@ Partial Class Form1
         '
         Me.txtSampleAudioBitrate.Location = New System.Drawing.Point(86, 48)
         Me.txtSampleAudioBitrate.Name = "txtSampleAudioBitrate"
-        Me.txtSampleAudioBitrate.ReadOnly = True
+        Me.txtSampleAudioBitrate.ReadOnly = true
         Me.txtSampleAudioBitrate.Size = New System.Drawing.Size(157, 20)
         Me.txtSampleAudioBitrate.TabIndex = 5
-        Me.txtSampleAudioBitrate.TabStop = False
+        Me.txtSampleAudioBitrate.TabStop = false
         '
         'Label10
         '
-        Me.Label10.AutoSize = True
+        Me.Label10.AutoSize = true
         Me.Label10.Location = New System.Drawing.Point(36, 51)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(43, 13)
@@ -3381,14 +3383,14 @@ Partial Class Form1
         '
         Me.txtSampleAudioCodec.Location = New System.Drawing.Point(87, 19)
         Me.txtSampleAudioCodec.Name = "txtSampleAudioCodec"
-        Me.txtSampleAudioCodec.ReadOnly = True
+        Me.txtSampleAudioCodec.ReadOnly = true
         Me.txtSampleAudioCodec.Size = New System.Drawing.Size(156, 20)
         Me.txtSampleAudioCodec.TabIndex = 1
-        Me.txtSampleAudioCodec.TabStop = False
+        Me.txtSampleAudioCodec.TabStop = false
         '
         'Label11
         '
-        Me.Label11.AutoSize = True
+        Me.Label11.AutoSize = true
         Me.Label11.Location = New System.Drawing.Point(37, 22)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(44, 13)
@@ -3402,10 +3404,12 @@ Partial Class Form1
         Me.btnTestAnalyse.Size = New System.Drawing.Size(124, 31)
         Me.btnTestAnalyse.TabIndex = 4
         Me.btnTestAnalyse.Text = "Analyse"
-        Me.btnTestAnalyse.UseVisualStyleBackColor = True
+        Me.btnTestAnalyse.UseVisualStyleBackColor = true
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtSampleVideo3D)
+        Me.GroupBox1.Controls.Add(Me.Label40)
         Me.GroupBox1.Controls.Add(Me.txtSampleAspectRatio)
         Me.GroupBox1.Controls.Add(Me.Label107)
         Me.GroupBox1.Controls.Add(Me.txtSampleVideoResolution)
@@ -3420,7 +3424,7 @@ Partial Class Form1
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(522, 81)
         Me.GroupBox1.TabIndex = 5
-        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.TabStop = false
         Me.GroupBox1.Text = "Video ..."
         '
         'txtSampleAspectRatio
@@ -3430,11 +3434,11 @@ Partial Class Form1
         Me.txtSampleAspectRatio.Name = "txtSampleAspectRatio"
         Me.txtSampleAspectRatio.Size = New System.Drawing.Size(84, 20)
         Me.txtSampleAspectRatio.TabIndex = 9
-        Me.txtSampleAspectRatio.TabStop = False
+        Me.txtSampleAspectRatio.TabStop = false
         '
         'Label107
         '
-        Me.Label107.AutoSize = True
+        Me.Label107.AutoSize = true
         Me.Label107.Location = New System.Drawing.Point(326, 51)
         Me.Label107.Name = "Label107"
         Me.Label107.Size = New System.Drawing.Size(68, 13)
@@ -3445,14 +3449,14 @@ Partial Class Form1
         '
         Me.txtSampleVideoResolution.Location = New System.Drawing.Point(400, 22)
         Me.txtSampleVideoResolution.Name = "txtSampleVideoResolution"
-        Me.txtSampleVideoResolution.ReadOnly = True
+        Me.txtSampleVideoResolution.ReadOnly = true
         Me.txtSampleVideoResolution.Size = New System.Drawing.Size(84, 20)
         Me.txtSampleVideoResolution.TabIndex = 3
-        Me.txtSampleVideoResolution.TabStop = False
+        Me.txtSampleVideoResolution.TabStop = false
         '
         'Label7
         '
-        Me.Label7.AutoSize = True
+        Me.Label7.AutoSize = true
         Me.Label7.Location = New System.Drawing.Point(331, 25)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(63, 13)
@@ -3463,14 +3467,14 @@ Partial Class Form1
         '
         Me.txtSampleVideoFramerate.Location = New System.Drawing.Point(252, 48)
         Me.txtSampleVideoFramerate.Name = "txtSampleVideoFramerate"
-        Me.txtSampleVideoFramerate.ReadOnly = True
+        Me.txtSampleVideoFramerate.ReadOnly = true
         Me.txtSampleVideoFramerate.Size = New System.Drawing.Size(68, 20)
         Me.txtSampleVideoFramerate.TabIndex = 7
-        Me.txtSampleVideoFramerate.TabStop = False
+        Me.txtSampleVideoFramerate.TabStop = false
         '
         'Label6
         '
-        Me.Label6.AutoSize = True
+        Me.Label6.AutoSize = true
         Me.Label6.Location = New System.Drawing.Point(182, 51)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(65, 13)
@@ -3481,14 +3485,14 @@ Partial Class Form1
         '
         Me.txtSampleVideoBitrate.Location = New System.Drawing.Point(86, 48)
         Me.txtSampleVideoBitrate.Name = "txtSampleVideoBitrate"
-        Me.txtSampleVideoBitrate.ReadOnly = True
+        Me.txtSampleVideoBitrate.ReadOnly = true
         Me.txtSampleVideoBitrate.Size = New System.Drawing.Size(88, 20)
         Me.txtSampleVideoBitrate.TabIndex = 5
-        Me.txtSampleVideoBitrate.TabStop = False
+        Me.txtSampleVideoBitrate.TabStop = false
         '
         'Label5
         '
-        Me.Label5.AutoSize = True
+        Me.Label5.AutoSize = true
         Me.Label5.Location = New System.Drawing.Point(37, 51)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 13)
@@ -3499,14 +3503,14 @@ Partial Class Form1
         '
         Me.txtSampleVideoCodec.Location = New System.Drawing.Point(87, 22)
         Me.txtSampleVideoCodec.Name = "txtSampleVideoCodec"
-        Me.txtSampleVideoCodec.ReadOnly = True
-        Me.txtSampleVideoCodec.Size = New System.Drawing.Size(233, 20)
+        Me.txtSampleVideoCodec.ReadOnly = true
+        Me.txtSampleVideoCodec.Size = New System.Drawing.Size(87, 20)
         Me.txtSampleVideoCodec.TabIndex = 1
-        Me.txtSampleVideoCodec.TabStop = False
+        Me.txtSampleVideoCodec.TabStop = false
         '
         'Label4
         '
-        Me.Label4.AutoSize = True
+        Me.Label4.AutoSize = true
         Me.Label4.Location = New System.Drawing.Point(36, 25)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(44, 13)
@@ -3515,7 +3519,7 @@ Partial Class Form1
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
+        Me.Label3.AutoSize = true
         Me.Label3.Location = New System.Drawing.Point(20, 55)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(126, 13)
@@ -3529,7 +3533,7 @@ Partial Class Form1
         Me.btnGetSampleFile.Size = New System.Drawing.Size(38, 20)
         Me.btnGetSampleFile.TabIndex = 3
         Me.btnGetSampleFile.Text = "..."
-        Me.btnGetSampleFile.UseVisualStyleBackColor = True
+        Me.btnGetSampleFile.UseVisualStyleBackColor = true
         '
         'txtSampleFile
         '
@@ -3550,7 +3554,7 @@ Partial Class Form1
         Me.ViewCollection.Size = New System.Drawing.Size(600, 580)
         Me.ViewCollection.TabIndex = 6
         Me.ViewCollection.Text = "View Movies"
-        Me.ViewCollection.UseVisualStyleBackColor = True
+        Me.ViewCollection.UseVisualStyleBackColor = true
         '
         'GroupBoxMovieDetails
         '
@@ -3613,13 +3617,13 @@ Partial Class Form1
         Me.GroupBoxMovieDetails.Name = "GroupBoxMovieDetails"
         Me.GroupBoxMovieDetails.Size = New System.Drawing.Size(510, 549)
         Me.GroupBoxMovieDetails.TabIndex = 1
-        Me.GroupBoxMovieDetails.TabStop = False
+        Me.GroupBoxMovieDetails.TabStop = false
         '
         'TextBox40
         '
-        Me.TextBox40.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Comments", True))
+        Me.TextBox40.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Comments", true))
         Me.TextBox40.Location = New System.Drawing.Point(187, 430)
-        Me.TextBox40.Multiline = True
+        Me.TextBox40.Multiline = true
         Me.TextBox40.Name = "TextBox40"
         Me.TextBox40.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox40.Size = New System.Drawing.Size(310, 56)
@@ -3631,9 +3635,9 @@ Partial Class Form1
         '
         'TextBox39
         '
-        Me.TextBox39.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Description", True))
+        Me.TextBox39.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Description", true))
         Me.TextBox39.Location = New System.Drawing.Point(187, 329)
-        Me.TextBox39.Multiline = True
+        Me.TextBox39.Multiline = true
         Me.TextBox39.Name = "TextBox39"
         Me.TextBox39.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox39.Size = New System.Drawing.Size(310, 93)
@@ -3641,9 +3645,9 @@ Partial Class Form1
         '
         'TextBox38
         '
-        Me.TextBox38.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Actors", True))
+        Me.TextBox38.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Actors", true))
         Me.TextBox38.Location = New System.Drawing.Point(227, 266)
-        Me.TextBox38.Multiline = True
+        Me.TextBox38.Multiline = true
         Me.TextBox38.Name = "TextBox38"
         Me.TextBox38.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox38.Size = New System.Drawing.Size(270, 57)
@@ -3651,7 +3655,7 @@ Partial Class Form1
         '
         'TextBox37
         '
-        Me.TextBox37.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "IMDB_Id", True))
+        Me.TextBox37.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "IMDB_Id", true))
         Me.TextBox37.Location = New System.Drawing.Point(241, 20)
         Me.TextBox37.Name = "TextBox37"
         Me.TextBox37.Size = New System.Drawing.Size(63, 20)
@@ -3659,7 +3663,7 @@ Partial Class Form1
         '
         'Label103
         '
-        Me.Label103.AutoSize = True
+        Me.Label103.AutoSize = true
         Me.Label103.Location = New System.Drawing.Point(326, 242)
         Me.Label103.Name = "Label103"
         Me.Label103.Size = New System.Drawing.Size(31, 13)
@@ -3668,7 +3672,7 @@ Partial Class Form1
         '
         'Label102
         '
-        Me.Label102.AutoSize = True
+        Me.Label102.AutoSize = true
         Me.Label102.Location = New System.Drawing.Point(184, 242)
         Me.Label102.Name = "Label102"
         Me.Label102.Size = New System.Drawing.Size(37, 13)
@@ -3677,7 +3681,7 @@ Partial Class Form1
         '
         'TextBox33
         '
-        Me.TextBox33.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Studio", True))
+        Me.TextBox33.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Studio", true))
         Me.TextBox33.Location = New System.Drawing.Point(227, 239)
         Me.TextBox33.Name = "TextBox33"
         Me.TextBox33.Size = New System.Drawing.Size(93, 20)
@@ -3685,7 +3689,7 @@ Partial Class Form1
         '
         'TextBox32
         '
-        Me.TextBox32.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Tags", True))
+        Me.TextBox32.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Tags", true))
         Me.TextBox32.Location = New System.Drawing.Point(376, 239)
         Me.TextBox32.Name = "TextBox32"
         Me.TextBox32.Size = New System.Drawing.Size(121, 20)
@@ -3693,18 +3697,18 @@ Partial Class Form1
         '
         'PictureBox1
         '
-        Me.PictureBox1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.MovieBindingSource, "Picture", True))
+        Me.PictureBox1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.MovieBindingSource, "Picture", true))
         Me.PictureBox1.Location = New System.Drawing.Point(6, 11)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(158, 222)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 5
-        Me.PictureBox1.TabStop = False
+        Me.PictureBox1.TabStop = false
         Me.ToolTip1.SetToolTip(Me.PictureBox1, "Klick to get bigger image ...")
         '
         'TextBox31
         '
-        Me.TextBox31.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "TagLine", True))
+        Me.TextBox31.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "TagLine", true))
         Me.TextBox31.Location = New System.Drawing.Point(227, 213)
         Me.TextBox31.Name = "TextBox31"
         Me.TextBox31.Size = New System.Drawing.Size(93, 20)
@@ -3712,7 +3716,7 @@ Partial Class Form1
         '
         'TextBox2
         '
-        Me.TextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Number", True))
+        Me.TextBox2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Number", true))
         Me.TextBox2.Location = New System.Drawing.Point(202, 20)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(33, 20)
@@ -3720,7 +3724,7 @@ Partial Class Form1
         '
         'Label82
         '
-        Me.Label82.AutoSize = True
+        Me.Label82.AutoSize = true
         Me.Label82.Location = New System.Drawing.Point(184, 216)
         Me.Label82.Name = "Label82"
         Me.Label82.Size = New System.Drawing.Size(42, 13)
@@ -3729,7 +3733,7 @@ Partial Class Form1
         '
         'Label49
         '
-        Me.Label49.AutoSize = True
+        Me.Label49.AutoSize = true
         Me.Label49.Location = New System.Drawing.Point(172, 23)
         Me.Label49.Name = "Label49"
         Me.Label49.Size = New System.Drawing.Size(24, 13)
@@ -3738,7 +3742,7 @@ Partial Class Form1
         '
         'TextBox30
         '
-        Me.TextBox30.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Certification", True))
+        Me.TextBox30.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Certification", true))
         Me.TextBox30.Location = New System.Drawing.Point(227, 187)
         Me.TextBox30.Name = "TextBox30"
         Me.TextBox30.Size = New System.Drawing.Size(93, 20)
@@ -3746,7 +3750,7 @@ Partial Class Form1
         '
         'TextBox5
         '
-        Me.TextBox5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Rating", True))
+        Me.TextBox5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Rating", true))
         Me.TextBox5.Location = New System.Drawing.Point(352, 20)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(35, 20)
@@ -3754,7 +3758,7 @@ Partial Class Form1
         '
         'Label81
         '
-        Me.Label81.AutoSize = True
+        Me.Label81.AutoSize = true
         Me.Label81.Location = New System.Drawing.Point(184, 190)
         Me.Label81.Name = "Label81"
         Me.Label81.Size = New System.Drawing.Size(26, 13)
@@ -3763,7 +3767,7 @@ Partial Class Form1
         '
         'Label50
         '
-        Me.Label50.AutoSize = True
+        Me.Label50.AutoSize = true
         Me.Label50.Location = New System.Drawing.Point(311, 23)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(38, 13)
@@ -3772,7 +3776,7 @@ Partial Class Form1
         '
         'Label80
         '
-        Me.Label80.AutoSize = True
+        Me.Label80.AutoSize = true
         Me.Label80.Location = New System.Drawing.Point(329, 216)
         Me.Label80.Name = "Label80"
         Me.Label80.Size = New System.Drawing.Size(35, 13)
@@ -3781,7 +3785,7 @@ Partial Class Form1
         '
         'TextBox29
         '
-        Me.TextBox29.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Writer", True))
+        Me.TextBox29.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Writer", true))
         Me.TextBox29.Location = New System.Drawing.Point(376, 213)
         Me.TextBox29.Name = "TextBox29"
         Me.TextBox29.Size = New System.Drawing.Size(121, 20)
@@ -3800,13 +3804,13 @@ Partial Class Form1
         Me.GroupBox14.Name = "GroupBox14"
         Me.GroupBox14.Size = New System.Drawing.Size(236, 86)
         Me.GroupBox14.TabIndex = 7
-        Me.GroupBox14.TabStop = False
+        Me.GroupBox14.TabStop = false
         Me.GroupBox14.Text = "Titles"
         Me.ToolTip1.SetToolTip(Me.GroupBox14, "Shows all3 titles and the edition field")
         '
         'TextBox36
         '
-        Me.TextBox36.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Edition", True))
+        Me.TextBox36.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Edition", true))
         Me.TextBox36.Location = New System.Drawing.Point(154, 60)
         Me.TextBox36.Name = "TextBox36"
         Me.TextBox36.Size = New System.Drawing.Size(76, 20)
@@ -3814,7 +3818,7 @@ Partial Class Form1
         '
         'Label53
         '
-        Me.Label53.AutoSize = True
+        Me.Label53.AutoSize = true
         Me.Label53.Location = New System.Drawing.Point(6, 63)
         Me.Label53.Name = "Label53"
         Me.Label53.Size = New System.Drawing.Size(54, 13)
@@ -3823,7 +3827,7 @@ Partial Class Form1
         '
         'Label52
         '
-        Me.Label52.AutoSize = True
+        Me.Label52.AutoSize = true
         Me.Label52.Location = New System.Drawing.Point(6, 39)
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(57, 13)
@@ -3832,7 +3836,7 @@ Partial Class Form1
         '
         'Label51
         '
-        Me.Label51.AutoSize = True
+        Me.Label51.AutoSize = true
         Me.Label51.Location = New System.Drawing.Point(7, 15)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(42, 13)
@@ -3841,8 +3845,8 @@ Partial Class Form1
         '
         'TextBox7
         '
-        Me.TextBox7.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "FormattedTitle", True))
-        Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox7.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "FormattedTitle", true))
+        Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox7.Location = New System.Drawing.Point(65, 60)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(83, 20)
@@ -3850,8 +3854,8 @@ Partial Class Form1
         '
         'TextBox6
         '
-        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "TranslatedTitle", True))
-        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "TranslatedTitle", true))
+        Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox6.Location = New System.Drawing.Point(65, 36)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(165, 20)
@@ -3859,8 +3863,8 @@ Partial Class Form1
         '
         'TextBox1
         '
-        Me.TextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "OriginalTitle", True))
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "OriginalTitle", true))
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox1.Location = New System.Drawing.Point(65, 12)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(165, 20)
@@ -3868,8 +3872,8 @@ Partial Class Form1
         '
         'Label78
         '
-        Me.Label78.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label78.AutoSize = True
+        Me.Label78.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label78.AutoSize = true
         Me.Label78.Location = New System.Drawing.Point(179, 523)
         Me.Label78.Name = "Label78"
         Me.Label78.Size = New System.Drawing.Size(33, 13)
@@ -3878,8 +3882,8 @@ Partial Class Form1
         '
         'TextBox28
         '
-        Me.TextBox28.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox28.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Disks", True))
+        Me.TextBox28.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TextBox28.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Disks", true))
         Me.TextBox28.Location = New System.Drawing.Point(215, 520)
         Me.TextBox28.Name = "TextBox28"
         Me.TextBox28.Size = New System.Drawing.Size(36, 20)
@@ -3887,7 +3891,7 @@ Partial Class Form1
         '
         'TextBox3
         '
-        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Date", True))
+        Me.TextBox3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Date", true))
         Me.TextBox3.Location = New System.Drawing.Point(430, 20)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(67, 20)
@@ -3895,8 +3899,8 @@ Partial Class Form1
         '
         'Label77
         '
-        Me.Label77.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label77.AutoSize = True
+        Me.Label77.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label77.AutoSize = true
         Me.Label77.Location = New System.Drawing.Point(179, 497)
         Me.Label77.Name = "Label77"
         Me.Label77.Size = New System.Drawing.Size(27, 13)
@@ -3905,7 +3909,7 @@ Partial Class Form1
         '
         'Label54
         '
-        Me.Label54.AutoSize = True
+        Me.Label54.AutoSize = true
         Me.Label54.Location = New System.Drawing.Point(394, 23)
         Me.Label54.Name = "Label54"
         Me.Label54.Size = New System.Drawing.Size(30, 13)
@@ -3914,8 +3918,8 @@ Partial Class Form1
         '
         'TextBox27
         '
-        Me.TextBox27.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox27.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Size", True))
+        Me.TextBox27.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TextBox27.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Size", true))
         Me.TextBox27.Location = New System.Drawing.Point(215, 494)
         Me.TextBox27.Name = "TextBox27"
         Me.TextBox27.Size = New System.Drawing.Size(36, 20)
@@ -3923,7 +3927,7 @@ Partial Class Form1
         '
         'TextBox4
         '
-        Me.TextBox4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Year", True))
+        Me.TextBox4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Year", true))
         Me.TextBox4.Location = New System.Drawing.Point(457, 53)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(40, 20)
@@ -3931,8 +3935,8 @@ Partial Class Form1
         '
         'Label74
         '
-        Me.Label74.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label74.AutoSize = True
+        Me.Label74.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label74.AutoSize = true
         Me.Label74.Location = New System.Drawing.Point(10, 523)
         Me.Label74.Name = "Label74"
         Me.Label74.Size = New System.Drawing.Size(47, 13)
@@ -3942,7 +3946,7 @@ Partial Class Form1
         '
         'Label55
         '
-        Me.Label55.AutoSize = True
+        Me.Label55.AutoSize = true
         Me.Label55.Location = New System.Drawing.Point(413, 56)
         Me.Label55.Name = "Label55"
         Me.Label55.Size = New System.Drawing.Size(29, 13)
@@ -3951,9 +3955,9 @@ Partial Class Form1
         '
         'TextBox24
         '
-        Me.TextBox24.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox24.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Subtitles", True))
-        Me.TextBox24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox24.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TextBox24.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Subtitles", true))
+        Me.TextBox24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox24.Location = New System.Drawing.Point(70, 520)
         Me.TextBox24.Name = "TextBox24"
         Me.TextBox24.Size = New System.Drawing.Size(93, 20)
@@ -3961,7 +3965,7 @@ Partial Class Form1
         '
         'TextBox9
         '
-        Me.TextBox9.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Checked", True))
+        Me.TextBox9.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Checked", true))
         Me.TextBox9.Location = New System.Drawing.Point(457, 79)
         Me.TextBox9.Name = "TextBox9"
         Me.TextBox9.Size = New System.Drawing.Size(40, 20)
@@ -3969,8 +3973,8 @@ Partial Class Form1
         '
         'Label73
         '
-        Me.Label73.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label73.AutoSize = True
+        Me.Label73.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label73.AutoSize = true
         Me.Label73.Location = New System.Drawing.Point(7, 497)
         Me.Label73.Name = "Label73"
         Me.Label73.Size = New System.Drawing.Size(60, 13)
@@ -3980,7 +3984,7 @@ Partial Class Form1
         '
         'Label57
         '
-        Me.Label57.AutoSize = True
+        Me.Label57.AutoSize = true
         Me.Label57.Location = New System.Drawing.Point(413, 82)
         Me.Label57.Name = "Label57"
         Me.Label57.Size = New System.Drawing.Size(32, 13)
@@ -3990,9 +3994,9 @@ Partial Class Form1
         '
         'TextBox23
         '
-        Me.TextBox23.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox23.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Languages", True))
-        Me.TextBox23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox23.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TextBox23.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Languages", true))
+        Me.TextBox23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox23.Location = New System.Drawing.Point(70, 494)
         Me.TextBox23.Name = "TextBox23"
         Me.TextBox23.Size = New System.Drawing.Size(93, 20)
@@ -4000,7 +4004,7 @@ Partial Class Form1
         '
         'TextBox8
         '
-        Me.TextBox8.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Length", True))
+        Me.TextBox8.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Length", true))
         Me.TextBox8.Location = New System.Drawing.Point(457, 105)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(40, 20)
@@ -4008,7 +4012,7 @@ Partial Class Form1
         '
         'GroupBox22
         '
-        Me.GroupBox22.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox22.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.GroupBox22.Controls.Add(Me.Label75)
         Me.GroupBox22.Controls.Add(Me.Label76)
         Me.GroupBox22.Controls.Add(Me.TextBox25)
@@ -4017,12 +4021,12 @@ Partial Class Form1
         Me.GroupBox22.Name = "GroupBox22"
         Me.GroupBox22.Size = New System.Drawing.Size(152, 62)
         Me.GroupBox22.TabIndex = 48
-        Me.GroupBox22.TabStop = False
+        Me.GroupBox22.TabStop = false
         Me.GroupBox22.Text = "Audio"
         '
         'Label75
         '
-        Me.Label75.AutoSize = True
+        Me.Label75.AutoSize = true
         Me.Label75.Location = New System.Drawing.Point(9, 39)
         Me.Label75.Name = "Label75"
         Me.Label75.Size = New System.Drawing.Size(37, 13)
@@ -4032,7 +4036,7 @@ Partial Class Form1
         '
         'Label76
         '
-        Me.Label76.AutoSize = True
+        Me.Label76.AutoSize = true
         Me.Label76.Location = New System.Drawing.Point(6, 16)
         Me.Label76.Name = "Label76"
         Me.Label76.Size = New System.Drawing.Size(39, 13)
@@ -4042,8 +4046,8 @@ Partial Class Form1
         '
         'TextBox25
         '
-        Me.TextBox25.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "AudioFormat", True))
-        Me.TextBox25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox25.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "AudioFormat", true))
+        Me.TextBox25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox25.Location = New System.Drawing.Point(59, 13)
         Me.TextBox25.Name = "TextBox25"
         Me.TextBox25.Size = New System.Drawing.Size(86, 20)
@@ -4051,8 +4055,8 @@ Partial Class Form1
         '
         'TextBox26
         '
-        Me.TextBox26.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "AudioBitrate", True))
-        Me.TextBox26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox26.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "AudioBitrate", true))
+        Me.TextBox26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox26.Location = New System.Drawing.Point(59, 36)
         Me.TextBox26.Name = "TextBox26"
         Me.TextBox26.Size = New System.Drawing.Size(86, 20)
@@ -4060,7 +4064,7 @@ Partial Class Form1
         '
         'Label56
         '
-        Me.Label56.AutoSize = True
+        Me.Label56.AutoSize = true
         Me.Label56.Location = New System.Drawing.Point(411, 108)
         Me.Label56.Name = "Label56"
         Me.Label56.Size = New System.Drawing.Size(40, 13)
@@ -4070,7 +4074,7 @@ Partial Class Form1
         '
         'GroupBox21
         '
-        Me.GroupBox21.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox21.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.GroupBox21.Controls.Add(Me.Label72)
         Me.GroupBox21.Controls.Add(Me.TextBox22)
         Me.GroupBox21.Controls.Add(Me.Label71)
@@ -4083,12 +4087,12 @@ Partial Class Form1
         Me.GroupBox21.Name = "GroupBox21"
         Me.GroupBox21.Size = New System.Drawing.Size(152, 106)
         Me.GroupBox21.TabIndex = 47
-        Me.GroupBox21.TabStop = False
+        Me.GroupBox21.TabStop = false
         Me.GroupBox21.Text = "Video"
         '
         'Label72
         '
-        Me.Label72.AutoSize = True
+        Me.Label72.AutoSize = true
         Me.Label72.Location = New System.Drawing.Point(3, 84)
         Me.Label72.Name = "Label72"
         Me.Label72.Size = New System.Drawing.Size(54, 13)
@@ -4098,8 +4102,8 @@ Partial Class Form1
         '
         'TextBox22
         '
-        Me.TextBox22.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Framerate", True))
-        Me.TextBox22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox22.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Framerate", true))
+        Me.TextBox22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox22.Location = New System.Drawing.Point(59, 82)
         Me.TextBox22.Name = "TextBox22"
         Me.TextBox22.Size = New System.Drawing.Size(86, 20)
@@ -4107,7 +4111,7 @@ Partial Class Form1
         '
         'Label71
         '
-        Me.Label71.AutoSize = True
+        Me.Label71.AutoSize = true
         Me.Label71.Location = New System.Drawing.Point(1, 62)
         Me.Label71.Name = "Label71"
         Me.Label71.Size = New System.Drawing.Size(57, 13)
@@ -4117,8 +4121,8 @@ Partial Class Form1
         '
         'TextBox21
         '
-        Me.TextBox21.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Resolution", True))
-        Me.TextBox21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox21.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Resolution", true))
+        Me.TextBox21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox21.Location = New System.Drawing.Point(59, 59)
         Me.TextBox21.Name = "TextBox21"
         Me.TextBox21.Size = New System.Drawing.Size(86, 20)
@@ -4126,7 +4130,7 @@ Partial Class Form1
         '
         'Label69
         '
-        Me.Label69.AutoSize = True
+        Me.Label69.AutoSize = true
         Me.Label69.Location = New System.Drawing.Point(9, 39)
         Me.Label69.Name = "Label69"
         Me.Label69.Size = New System.Drawing.Size(37, 13)
@@ -4136,7 +4140,7 @@ Partial Class Form1
         '
         'Label70
         '
-        Me.Label70.AutoSize = True
+        Me.Label70.AutoSize = true
         Me.Label70.Location = New System.Drawing.Point(6, 16)
         Me.Label70.Name = "Label70"
         Me.Label70.Size = New System.Drawing.Size(39, 13)
@@ -4146,8 +4150,8 @@ Partial Class Form1
         '
         'TextBox19
         '
-        Me.TextBox19.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "VideoFormat", True))
-        Me.TextBox19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox19.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "VideoFormat", true))
+        Me.TextBox19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox19.Location = New System.Drawing.Point(59, 13)
         Me.TextBox19.Name = "TextBox19"
         Me.TextBox19.Size = New System.Drawing.Size(86, 20)
@@ -4155,8 +4159,8 @@ Partial Class Form1
         '
         'TextBox20
         '
-        Me.TextBox20.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "VideoBitrate", True))
-        Me.TextBox20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox20.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "VideoBitrate", true))
+        Me.TextBox20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox20.Location = New System.Drawing.Point(59, 36)
         Me.TextBox20.Name = "TextBox20"
         Me.TextBox20.Size = New System.Drawing.Size(86, 20)
@@ -4164,7 +4168,7 @@ Partial Class Form1
         '
         'Label58
         '
-        Me.Label58.AutoSize = True
+        Me.Label58.AutoSize = true
         Me.Label58.Location = New System.Drawing.Point(184, 266)
         Me.Label58.Name = "Label58"
         Me.Label58.Size = New System.Drawing.Size(37, 13)
@@ -4173,7 +4177,7 @@ Partial Class Form1
         '
         'GroupBox15
         '
-        Me.GroupBox15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
         Me.GroupBox15.Controls.Add(Me.Label68)
         Me.GroupBox15.Controls.Add(Me.Label67)
         Me.GroupBox15.Controls.Add(Me.TextBox17)
@@ -4182,12 +4186,12 @@ Partial Class Form1
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.Size = New System.Drawing.Size(153, 59)
         Me.GroupBox15.TabIndex = 46
-        Me.GroupBox15.TabStop = False
+        Me.GroupBox15.TabStop = false
         Me.GroupBox15.Text = "Media"
         '
         'Label68
         '
-        Me.Label68.AutoSize = True
+        Me.Label68.AutoSize = true
         Me.Label68.Location = New System.Drawing.Point(9, 39)
         Me.Label68.Name = "Label68"
         Me.Label68.Size = New System.Drawing.Size(31, 13)
@@ -4196,7 +4200,7 @@ Partial Class Form1
         '
         'Label67
         '
-        Me.Label67.AutoSize = True
+        Me.Label67.AutoSize = true
         Me.Label67.Location = New System.Drawing.Point(9, 15)
         Me.Label67.Name = "Label67"
         Me.Label67.Size = New System.Drawing.Size(33, 13)
@@ -4205,8 +4209,8 @@ Partial Class Form1
         '
         'TextBox17
         '
-        Me.TextBox17.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "MediaLabel", True))
-        Me.TextBox17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox17.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "MediaLabel", true))
+        Me.TextBox17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox17.Location = New System.Drawing.Point(53, 12)
         Me.TextBox17.Name = "TextBox17"
         Me.TextBox17.Size = New System.Drawing.Size(93, 20)
@@ -4214,8 +4218,8 @@ Partial Class Form1
         '
         'TextBox18
         '
-        Me.TextBox18.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "MediaType", True))
-        Me.TextBox18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox18.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "MediaType", true))
+        Me.TextBox18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox18.Location = New System.Drawing.Point(53, 36)
         Me.TextBox18.Name = "TextBox18"
         Me.TextBox18.Size = New System.Drawing.Size(93, 20)
@@ -4223,8 +4227,8 @@ Partial Class Form1
         '
         'TextBox10
         '
-        Me.TextBox10.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Director", True))
-        Me.TextBox10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox10.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Director", true))
+        Me.TextBox10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox10.Location = New System.Drawing.Point(376, 135)
         Me.TextBox10.Name = "TextBox10"
         Me.TextBox10.Size = New System.Drawing.Size(121, 20)
@@ -4232,7 +4236,7 @@ Partial Class Form1
         '
         'Label66
         '
-        Me.Label66.AutoSize = True
+        Me.Label66.AutoSize = true
         Me.Label66.Location = New System.Drawing.Point(326, 190)
         Me.Label66.Name = "Label66"
         Me.Label66.Size = New System.Drawing.Size(49, 13)
@@ -4241,7 +4245,7 @@ Partial Class Form1
         '
         'Label60
         '
-        Me.Label60.AutoSize = True
+        Me.Label60.AutoSize = true
         Me.Label60.Location = New System.Drawing.Point(326, 138)
         Me.Label60.Name = "Label60"
         Me.Label60.Size = New System.Drawing.Size(44, 13)
@@ -4250,8 +4254,8 @@ Partial Class Form1
         '
         'TextBox16
         '
-        Me.TextBox16.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Borrower", True))
-        Me.TextBox16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox16.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Borrower", true))
+        Me.TextBox16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox16.Location = New System.Drawing.Point(376, 187)
         Me.TextBox16.Name = "TextBox16"
         Me.TextBox16.Size = New System.Drawing.Size(121, 20)
@@ -4259,8 +4263,8 @@ Partial Class Form1
         '
         'TextBox11
         '
-        Me.TextBox11.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Producer", True))
-        Me.TextBox11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox11.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Producer", true))
+        Me.TextBox11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox11.Location = New System.Drawing.Point(376, 161)
         Me.TextBox11.Name = "TextBox11"
         Me.TextBox11.Size = New System.Drawing.Size(121, 20)
@@ -4268,8 +4272,8 @@ Partial Class Form1
         '
         'Label64
         '
-        Me.Label64.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label64.AutoSize = True
+        Me.Label64.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label64.AutoSize = true
         Me.Label64.Location = New System.Drawing.Point(264, 523)
         Me.Label64.Name = "Label64"
         Me.Label64.Size = New System.Drawing.Size(29, 13)
@@ -4278,7 +4282,7 @@ Partial Class Form1
         '
         'Label61
         '
-        Me.Label61.AutoSize = True
+        Me.Label61.AutoSize = true
         Me.Label61.Location = New System.Drawing.Point(326, 164)
         Me.Label61.Name = "Label61"
         Me.Label61.Size = New System.Drawing.Size(50, 13)
@@ -4287,9 +4291,9 @@ Partial Class Form1
         '
         'TextBox14
         '
-        Me.TextBox14.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox14.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "URL", True))
-        Me.TextBox14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox14.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TextBox14.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "URL", true))
+        Me.TextBox14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox14.Location = New System.Drawing.Point(299, 520)
         Me.TextBox14.Name = "TextBox14"
         Me.TextBox14.Size = New System.Drawing.Size(198, 20)
@@ -4297,8 +4301,8 @@ Partial Class Form1
         '
         'TextBox13
         '
-        Me.TextBox13.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Country", True))
-        Me.TextBox13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox13.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Country", true))
+        Me.TextBox13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox13.Location = New System.Drawing.Point(227, 161)
         Me.TextBox13.Name = "TextBox13"
         Me.TextBox13.Size = New System.Drawing.Size(93, 20)
@@ -4306,8 +4310,8 @@ Partial Class Form1
         '
         'Label65
         '
-        Me.Label65.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label65.AutoSize = True
+        Me.Label65.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.Label65.AutoSize = true
         Me.Label65.Location = New System.Drawing.Point(254, 497)
         Me.Label65.Name = "Label65"
         Me.Label65.Size = New System.Drawing.Size(41, 13)
@@ -4316,7 +4320,7 @@ Partial Class Form1
         '
         'Label63
         '
-        Me.Label63.AutoSize = True
+        Me.Label63.AutoSize = true
         Me.Label63.Location = New System.Drawing.Point(172, 164)
         Me.Label63.Name = "Label63"
         Me.Label63.Size = New System.Drawing.Size(43, 13)
@@ -4325,9 +4329,9 @@ Partial Class Form1
         '
         'TextBox15
         '
-        Me.TextBox15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.TextBox15.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Source", True))
-        Me.TextBox15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox15.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left),System.Windows.Forms.AnchorStyles)
+        Me.TextBox15.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Source", true))
+        Me.TextBox15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox15.Location = New System.Drawing.Point(299, 494)
         Me.TextBox15.Name = "TextBox15"
         Me.TextBox15.Size = New System.Drawing.Size(198, 20)
@@ -4335,8 +4339,8 @@ Partial Class Form1
         '
         'TextBox12
         '
-        Me.TextBox12.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Category", True))
-        Me.TextBox12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox12.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.MovieBindingSource, "Category", true))
+        Me.TextBox12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.TextBox12.Location = New System.Drawing.Point(227, 135)
         Me.TextBox12.Name = "TextBox12"
         Me.TextBox12.Size = New System.Drawing.Size(93, 20)
@@ -4344,7 +4348,7 @@ Partial Class Form1
         '
         'Label62
         '
-        Me.Label62.AutoSize = True
+        Me.Label62.AutoSize = true
         Me.Label62.Location = New System.Drawing.Point(172, 138)
         Me.Label62.Name = "Label62"
         Me.Label62.Size = New System.Drawing.Size(49, 13)
@@ -4353,36 +4357,36 @@ Partial Class Form1
         '
         'XionPanel1
         '
-        Me.XionPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.XionPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.XionPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.XionPanel1.Controls.Add(Me.DataGridViewMovie)
         Me.XionPanel1.Location = New System.Drawing.Point(3, 28)
-        Me.XionPanel1.Movable = False
+        Me.XionPanel1.Movable = false
         Me.XionPanel1.Name = "XionPanel1"
         Me.XionPanel1.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanel1.Padding = New System.Windows.Forms.Padding(0, 22, 0, 0)
-        Me.XionPanel1.Sizable = True
+        Me.XionPanel1.Sizable = true
         Me.XionPanel1.Size = New System.Drawing.Size(84, 549)
         Me.XionPanel1.State = XionControls.XionPanel.PanelState.Expand
         Me.XionPanel1.TabIndex = 0
         Me.XionPanel1.Text = "Movie List"
         Me.XionPanel1.Title = "Movie List"
         Me.XionPanel1.TitleBackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.XionPanel1.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XionPanel1.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.XionPanel1.TitleHeight = 22
         '
         'DataGridViewMovie
         '
-        Me.DataGridViewMovie.AutoGenerateColumns = False
+        Me.DataGridViewMovie.AutoGenerateColumns = false
         Me.DataGridViewMovie.ColumnHeadersHeight = 21
         Me.DataGridViewMovie.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.DataGridViewMovie.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn5, Me.Category, Me.Country, Me.Rating})
         Me.DataGridViewMovie.DataSource = Me.MovieBindingSource
         DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
         DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -4391,17 +4395,17 @@ Partial Class Form1
         Me.DataGridViewMovie.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridViewMovie.Location = New System.Drawing.Point(0, 22)
         Me.DataGridViewMovie.Name = "DataGridViewMovie"
-        Me.DataGridViewMovie.ReadOnly = True
+        Me.DataGridViewMovie.ReadOnly = true
         Me.DataGridViewMovie.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
         DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridViewMovie.RowHeadersDefaultCellStyle = DataGridViewCellStyle5
-        Me.DataGridViewMovie.RowHeadersVisible = False
+        Me.DataGridViewMovie.RowHeadersVisible = false
         Me.DataGridViewMovie.RowHeadersWidth = 20
         Me.DataGridViewMovie.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridViewMovie.RowTemplate.Height = 16
@@ -4415,7 +4419,7 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn1.DefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewTextBoxColumn1.HeaderText = "N°"
         Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        Me.DataGridViewTextBoxColumn1.ReadOnly = true
         Me.DataGridViewTextBoxColumn1.Width = 35
         '
         'DataGridViewTextBoxColumn4
@@ -4425,7 +4429,7 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn4.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewTextBoxColumn4.HeaderText = "Year"
         Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        Me.DataGridViewTextBoxColumn4.ReadOnly = true
         Me.DataGridViewTextBoxColumn4.Width = 35
         '
         'DataGridViewTextBoxColumn2
@@ -4433,14 +4437,14 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn2.DataPropertyName = "OriginalTitle"
         Me.DataGridViewTextBoxColumn2.HeaderText = "Original Title"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        Me.DataGridViewTextBoxColumn2.ReadOnly = true
         '
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.DataPropertyName = "TranslatedTitle"
         Me.DataGridViewTextBoxColumn3.HeaderText = "Translated Title"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        Me.DataGridViewTextBoxColumn3.ReadOnly = true
         '
         'DataGridViewTextBoxColumn5
         '
@@ -4449,7 +4453,7 @@ Partial Class Form1
         Me.DataGridViewTextBoxColumn5.DefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Added"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.ReadOnly = True
+        Me.DataGridViewTextBoxColumn5.ReadOnly = true
         Me.DataGridViewTextBoxColumn5.Width = 66
         '
         'Category
@@ -4457,7 +4461,7 @@ Partial Class Form1
         Me.Category.DataPropertyName = "Category"
         Me.Category.HeaderText = "Category"
         Me.Category.Name = "Category"
-        Me.Category.ReadOnly = True
+        Me.Category.ReadOnly = true
         Me.Category.Width = 110
         '
         'Country
@@ -4465,7 +4469,7 @@ Partial Class Form1
         Me.Country.DataPropertyName = "Country"
         Me.Country.HeaderText = "Country"
         Me.Country.Name = "Country"
-        Me.Country.ReadOnly = True
+        Me.Country.ReadOnly = true
         Me.Country.Width = 70
         '
         'Rating
@@ -4473,7 +4477,7 @@ Partial Class Form1
         Me.Rating.DataPropertyName = "Rating"
         Me.Rating.HeaderText = "Rating"
         Me.Rating.Name = "Rating"
-        Me.Rating.ReadOnly = True
+        Me.Rating.ReadOnly = true
         Me.Rating.Width = 50
         '
         'MovieBindingNavigator
@@ -4497,10 +4501,10 @@ Partial Class Form1
         'BindingNavigatorAddNewItem
         '
         Me.BindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItem.Enabled = False
-        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorAddNewItem.Enabled = false
+        Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"),System.Drawing.Image)
         Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
-        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorAddNewItem.Text = "Add Entry"
         '
@@ -4513,29 +4517,29 @@ Partial Class Form1
         '
         'BindingNavigatorDeleteItem
         '
-        Me.BindingNavigatorDeleteItem.CheckOnClick = True
+        Me.BindingNavigatorDeleteItem.CheckOnClick = true
         Me.BindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"),System.Drawing.Image)
         Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
-        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorDeleteItem.Text = "Delete Entry"
         '
         'BindingNavigatorMoveFirstItem
         '
         Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"),System.Drawing.Image)
         Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
-        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorMoveFirstItem.Text = "Move First"
         '
         'BindingNavigatorMovePreviousItem
         '
         Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"),System.Drawing.Image)
         Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
-        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorMovePreviousItem.Text = "Move Previous"
         '
@@ -4547,7 +4551,7 @@ Partial Class Form1
         'BindingNavigatorPositionItem
         '
         Me.BindingNavigatorPositionItem.AccessibleName = "Position"
-        Me.BindingNavigatorPositionItem.AutoSize = False
+        Me.BindingNavigatorPositionItem.AutoSize = false
         Me.BindingNavigatorPositionItem.Margin = New System.Windows.Forms.Padding(1, 3, 1, 3)
         Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
         Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(70, 18)
@@ -4562,18 +4566,18 @@ Partial Class Form1
         'BindingNavigatorMoveNextItem
         '
         Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"),System.Drawing.Image)
         Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
-        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorMoveNextItem.Text = "Move Next"
         '
         'BindingNavigatorMoveLastItem
         '
         Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"),System.Drawing.Image)
         Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
-        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
         Me.BindingNavigatorMoveLastItem.Text = "Move Last"
         '
@@ -4590,7 +4594,7 @@ Partial Class Form1
         'VidéoBindingNavigatorSaveItem
         '
         Me.VidéoBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.VidéoBindingNavigatorSaveItem.Image = CType(resources.GetObject("VidéoBindingNavigatorSaveItem.Image"), System.Drawing.Image)
+        Me.VidéoBindingNavigatorSaveItem.Image = CType(resources.GetObject("VidéoBindingNavigatorSaveItem.Image"),System.Drawing.Image)
         Me.VidéoBindingNavigatorSaveItem.Name = "VidéoBindingNavigatorSaveItem"
         Me.VidéoBindingNavigatorSaveItem.Size = New System.Drawing.Size(23, 22)
         Me.VidéoBindingNavigatorSaveItem.Text = "Save Datas"
@@ -4603,7 +4607,7 @@ Partial Class Form1
         'BindingNavigatorUpdate
         '
         Me.BindingNavigatorUpdate.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.BindingNavigatorUpdate.Image = CType(resources.GetObject("BindingNavigatorUpdate.Image"), System.Drawing.Image)
+        Me.BindingNavigatorUpdate.Image = CType(resources.GetObject("BindingNavigatorUpdate.Image"),System.Drawing.Image)
         Me.BindingNavigatorUpdate.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.BindingNavigatorUpdate.Name = "BindingNavigatorUpdate"
         Me.BindingNavigatorUpdate.Size = New System.Drawing.Size(85, 22)
@@ -4611,7 +4615,7 @@ Partial Class Form1
         '
         'Label59
         '
-        Me.Label59.AutoSize = True
+        Me.Label59.AutoSize = true
         Me.Label59.Location = New System.Drawing.Point(-55, 223)
         Me.Label59.Name = "Label59"
         Me.Label59.Size = New System.Drawing.Size(42, 13)
@@ -4628,12 +4632,12 @@ Partial Class Form1
         Me.ViewPersons.Size = New System.Drawing.Size(600, 580)
         Me.ViewPersons.TabIndex = 7
         Me.ViewPersons.Text = "View Persons"
-        Me.ViewPersons.UseVisualStyleBackColor = True
+        Me.ViewPersons.UseVisualStyleBackColor = true
         '
         'GroupBoxPersonInfo
         '
-        Me.GroupBoxPersonInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBoxPersonInfo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.GroupBoxPersonInfo.Controls.Add(Me.GroupBox5)
         Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxWriter)
         Me.GroupBoxPersonInfo.Controls.Add(Me.CheckBoxDirector)
@@ -4664,7 +4668,7 @@ Partial Class Form1
         Me.GroupBoxPersonInfo.Name = "GroupBoxPersonInfo"
         Me.GroupBoxPersonInfo.Size = New System.Drawing.Size(394, 546)
         Me.GroupBoxPersonInfo.TabIndex = 2
-        Me.GroupBoxPersonInfo.TabStop = False
+        Me.GroupBoxPersonInfo.TabStop = false
         Me.GroupBoxPersonInfo.Text = "Person Info ..."
         '
         'GroupBox5
@@ -4681,22 +4685,22 @@ Partial Class Form1
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(379, 79)
         Me.GroupBox5.TabIndex = 0
-        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.TabStop = false
         Me.GroupBox5.Text = "Internet Grabber Options ..."
         '
         'CheckBox1
         '
-        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.AutoSize = true
         Me.CheckBox1.Location = New System.Drawing.Point(268, 49)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(71, 17)
         Me.CheckBox1.TabIndex = 6
         Me.CheckBox1.Text = "Don't ask"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.CheckBox1.UseVisualStyleBackColor = true
         '
         'TextBox34
         '
-        Me.TextBox34.Enabled = False
+        Me.TextBox34.Enabled = false
         Me.TextBox34.Location = New System.Drawing.Point(97, 19)
         Me.TextBox34.Name = "TextBox34"
         Me.TextBox34.Size = New System.Drawing.Size(111, 20)
@@ -4709,31 +4713,31 @@ Partial Class Form1
         Me.Button3.Size = New System.Drawing.Size(94, 21)
         Me.Button3.TabIndex = 3
         Me.Button3.Text = "Grabber Options"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.UseVisualStyleBackColor = true
         '
         'Label104
         '
-        Me.Label104.AutoSize = True
+        Me.Label104.AutoSize = true
         Me.Label104.Location = New System.Drawing.Point(6, 44)
         Me.Label104.Name = "Label104"
         Me.Label104.Size = New System.Drawing.Size(85, 26)
         Me.Label104.TabIndex = 4
-        Me.Label104.Text = "Internet Lookup " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Behaviour"
+        Me.Label104.Text = "Internet Lookup "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Behaviour"
         '
         'Button4
         '
-        Me.Button4.CausesValidation = False
+        Me.Button4.CausesValidation = false
         Me.Button4.Location = New System.Drawing.Point(217, 19)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(36, 20)
         Me.Button4.TabIndex = 2
         Me.Button4.Text = "..."
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = true
         '
         'ComboBox1
         '
         Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.FormattingEnabled = true
         Me.ComboBox1.Location = New System.Drawing.Point(97, 47)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(156, 21)
@@ -4745,11 +4749,11 @@ Partial Class Form1
         Me.TextBox35.Name = "TextBox35"
         Me.TextBox35.Size = New System.Drawing.Size(156, 20)
         Me.TextBox35.TabIndex = 46
-        Me.TextBox35.Visible = False
+        Me.TextBox35.Visible = false
         '
         'Label105
         '
-        Me.Label105.AutoSize = True
+        Me.Label105.AutoSize = true
         Me.Label105.Location = New System.Drawing.Point(6, 22)
         Me.Label105.Name = "Label105"
         Me.Label105.Size = New System.Drawing.Size(75, 13)
@@ -4758,14 +4762,14 @@ Partial Class Form1
         '
         'CheckBoxWriter
         '
-        Me.CheckBoxWriter.AutoSize = True
-        Me.CheckBoxWriter.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsWriter", True))
+        Me.CheckBoxWriter.AutoSize = true
+        Me.CheckBoxWriter.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsWriter", true))
         Me.CheckBoxWriter.Location = New System.Drawing.Point(248, 218)
         Me.CheckBoxWriter.Name = "CheckBoxWriter"
         Me.CheckBoxWriter.Size = New System.Drawing.Size(54, 17)
         Me.CheckBoxWriter.TabIndex = 12
         Me.CheckBoxWriter.Text = "Writer"
-        Me.CheckBoxWriter.UseVisualStyleBackColor = True
+        Me.CheckBoxWriter.UseVisualStyleBackColor = true
         '
         'PersonBindingSource
         '
@@ -4773,40 +4777,40 @@ Partial Class Form1
         '
         'CheckBoxDirector
         '
-        Me.CheckBoxDirector.AutoSize = True
-        Me.CheckBoxDirector.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsDirector", True))
+        Me.CheckBoxDirector.AutoSize = true
+        Me.CheckBoxDirector.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsDirector", true))
         Me.CheckBoxDirector.Location = New System.Drawing.Point(248, 195)
         Me.CheckBoxDirector.Name = "CheckBoxDirector"
         Me.CheckBoxDirector.Size = New System.Drawing.Size(63, 17)
         Me.CheckBoxDirector.TabIndex = 11
         Me.CheckBoxDirector.Text = "Director"
-        Me.CheckBoxDirector.UseVisualStyleBackColor = True
+        Me.CheckBoxDirector.UseVisualStyleBackColor = true
         '
         'CheckBoxProducer
         '
-        Me.CheckBoxProducer.AutoSize = True
-        Me.CheckBoxProducer.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsProducer", True))
+        Me.CheckBoxProducer.AutoSize = true
+        Me.CheckBoxProducer.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsProducer", true))
         Me.CheckBoxProducer.Location = New System.Drawing.Point(248, 172)
         Me.CheckBoxProducer.Name = "CheckBoxProducer"
         Me.CheckBoxProducer.Size = New System.Drawing.Size(69, 17)
         Me.CheckBoxProducer.TabIndex = 9
         Me.CheckBoxProducer.Text = "Producer"
-        Me.CheckBoxProducer.UseVisualStyleBackColor = True
+        Me.CheckBoxProducer.UseVisualStyleBackColor = true
         '
         'CheckBoxActor
         '
-        Me.CheckBoxActor.AutoSize = True
-        Me.CheckBoxActor.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsActor", True))
+        Me.CheckBoxActor.AutoSize = true
+        Me.CheckBoxActor.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Me.PersonBindingSource, "IsActor", true))
         Me.CheckBoxActor.Location = New System.Drawing.Point(248, 149)
         Me.CheckBoxActor.Name = "CheckBoxActor"
         Me.CheckBoxActor.Size = New System.Drawing.Size(51, 17)
         Me.CheckBoxActor.TabIndex = 8
         Me.CheckBoxActor.Text = "Actor"
-        Me.CheckBoxActor.UseVisualStyleBackColor = True
+        Me.CheckBoxActor.UseVisualStyleBackColor = true
         '
         'Label99
         '
-        Me.Label99.AutoSize = True
+        Me.Label99.AutoSize = true
         Me.Label99.Location = New System.Drawing.Point(6, 387)
         Me.Label99.Name = "Label99"
         Me.Label99.Size = New System.Drawing.Size(29, 13)
@@ -4815,7 +4819,7 @@ Partial Class Form1
         '
         'Label98
         '
-        Me.Label98.AutoSize = True
+        Me.Label98.AutoSize = true
         Me.Label98.Location = New System.Drawing.Point(68, 414)
         Me.Label98.Name = "Label98"
         Me.Label98.Size = New System.Drawing.Size(49, 13)
@@ -4824,7 +4828,7 @@ Partial Class Form1
         '
         'Label97
         '
-        Me.Label97.AutoSize = True
+        Me.Label97.AutoSize = true
         Me.Label97.Location = New System.Drawing.Point(229, 413)
         Me.Label97.Name = "Label97"
         Me.Label97.Size = New System.Drawing.Size(53, 13)
@@ -4833,7 +4837,7 @@ Partial Class Form1
         '
         'Label96
         '
-        Me.Label96.AutoSize = True
+        Me.Label96.AutoSize = true
         Me.Label96.Location = New System.Drawing.Point(6, 439)
         Me.Label96.Name = "Label96"
         Me.Label96.Size = New System.Drawing.Size(40, 13)
@@ -4842,7 +4846,7 @@ Partial Class Form1
         '
         'ViewPersons_Photos
         '
-        Me.ViewPersons_Photos.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Photos", True))
+        Me.ViewPersons_Photos.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Photos", true))
         Me.ViewPersons_Photos.Location = New System.Drawing.Point(66, 436)
         Me.ViewPersons_Photos.Name = "ViewPersons_Photos"
         Me.ViewPersons_Photos.Size = New System.Drawing.Size(322, 20)
@@ -4850,7 +4854,7 @@ Partial Class Form1
         '
         'ViewPersons_URL
         '
-        Me.ViewPersons_URL.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "URL", True))
+        Me.ViewPersons_URL.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "URL", true))
         Me.ViewPersons_URL.Location = New System.Drawing.Point(66, 384)
         Me.ViewPersons_URL.Name = "ViewPersons_URL"
         Me.ViewPersons_URL.Size = New System.Drawing.Size(322, 20)
@@ -4858,7 +4862,7 @@ Partial Class Form1
         '
         'ViewPersons_TMDB_Id
         '
-        Me.ViewPersons_TMDB_Id.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "TMDB_Id", True))
+        Me.ViewPersons_TMDB_Id.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "TMDB_Id", true))
         Me.ViewPersons_TMDB_Id.Location = New System.Drawing.Point(288, 411)
         Me.ViewPersons_TMDB_Id.Name = "ViewPersons_TMDB_Id"
         Me.ViewPersons_TMDB_Id.Size = New System.Drawing.Size(100, 20)
@@ -4866,7 +4870,7 @@ Partial Class Form1
         '
         'ViewPersons_IMDB_Id
         '
-        Me.ViewPersons_IMDB_Id.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "IMDB_Id", True))
+        Me.ViewPersons_IMDB_Id.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "IMDB_Id", true))
         Me.ViewPersons_IMDB_Id.Location = New System.Drawing.Point(123, 410)
         Me.ViewPersons_IMDB_Id.Name = "ViewPersons_IMDB_Id"
         Me.ViewPersons_IMDB_Id.Size = New System.Drawing.Size(100, 20)
@@ -4874,16 +4878,16 @@ Partial Class Form1
         '
         'Label95
         '
-        Me.Label95.AutoSize = True
+        Me.Label95.AutoSize = true
         Me.Label95.Location = New System.Drawing.Point(6, 245)
         Me.Label95.Name = "Label95"
         Me.Label95.Size = New System.Drawing.Size(54, 26)
         Me.Label95.TabIndex = 13
-        Me.Label95.Text = "Mini " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Biography"
+        Me.Label95.Text = "Mini "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Biography"
         '
         'Label94
         '
-        Me.Label94.AutoSize = True
+        Me.Label94.AutoSize = true
         Me.Label94.Location = New System.Drawing.Point(184, 126)
         Me.Label94.Name = "Label94"
         Me.Label94.Size = New System.Drawing.Size(58, 13)
@@ -4892,7 +4896,7 @@ Partial Class Form1
         '
         'Label93
         '
-        Me.Label93.AutoSize = True
+        Me.Label93.AutoSize = true
         Me.Label93.Location = New System.Drawing.Point(184, 100)
         Me.Label93.Name = "Label93"
         Me.Label93.Size = New System.Drawing.Size(54, 13)
@@ -4901,7 +4905,7 @@ Partial Class Form1
         '
         'ViewPersons_Birthplace
         '
-        Me.ViewPersons_Birthplace.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "BirthPlace", True))
+        Me.ViewPersons_Birthplace.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "BirthPlace", true))
         Me.ViewPersons_Birthplace.Location = New System.Drawing.Point(248, 123)
         Me.ViewPersons_Birthplace.Name = "ViewPersons_Birthplace"
         Me.ViewPersons_Birthplace.Size = New System.Drawing.Size(138, 20)
@@ -4909,7 +4913,7 @@ Partial Class Form1
         '
         'ViewPersons_Birthday
         '
-        Me.ViewPersons_Birthday.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Born", True))
+        Me.ViewPersons_Birthday.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Born", true))
         Me.ViewPersons_Birthday.Location = New System.Drawing.Point(248, 97)
         Me.ViewPersons_Birthday.Name = "ViewPersons_Birthday"
         Me.ViewPersons_Birthday.Size = New System.Drawing.Size(100, 20)
@@ -4917,7 +4921,7 @@ Partial Class Form1
         '
         'ViewPersons_MiniBio
         '
-        Me.ViewPersons_MiniBio.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "MiniBiography", True))
+        Me.ViewPersons_MiniBio.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "MiniBiography", true))
         Me.ViewPersons_MiniBio.Location = New System.Drawing.Point(66, 245)
         Me.ViewPersons_MiniBio.Name = "ViewPersons_MiniBio"
         Me.ViewPersons_MiniBio.Size = New System.Drawing.Size(320, 44)
@@ -4926,7 +4930,7 @@ Partial Class Form1
         '
         'ViewPersons_Name
         '
-        Me.ViewPersons_Name.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Name", True))
+        Me.ViewPersons_Name.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Name", true))
         Me.ViewPersons_Name.Location = New System.Drawing.Point(248, 24)
         Me.ViewPersons_Name.Name = "ViewPersons_Name"
         Me.ViewPersons_Name.Size = New System.Drawing.Size(138, 20)
@@ -4934,7 +4938,7 @@ Partial Class Form1
         '
         'ViewPersons_Biography
         '
-        Me.ViewPersons_Biography.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Biography", True))
+        Me.ViewPersons_Biography.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "Biography", true))
         Me.ViewPersons_Biography.Location = New System.Drawing.Point(66, 298)
         Me.ViewPersons_Biography.Name = "ViewPersons_Biography"
         Me.ViewPersons_Biography.Size = New System.Drawing.Size(320, 80)
@@ -4944,16 +4948,16 @@ Partial Class Form1
         'PictureBox2
         '
         Me.PictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.PersonBindingSource, "Picture", True))
+        Me.PictureBox2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Me.PersonBindingSource, "Picture", true))
         Me.PictureBox2.Location = New System.Drawing.Point(9, 19)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(166, 220)
         Me.PictureBox2.TabIndex = 1
-        Me.PictureBox2.TabStop = False
+        Me.PictureBox2.TabStop = false
         '
         'Label91
         '
-        Me.Label91.AutoSize = True
+        Me.Label91.AutoSize = true
         Me.Label91.Location = New System.Drawing.Point(6, 298)
         Me.Label91.Name = "Label91"
         Me.Label91.Size = New System.Drawing.Size(54, 13)
@@ -4962,16 +4966,16 @@ Partial Class Form1
         '
         'Label92
         '
-        Me.Label92.AutoSize = True
+        Me.Label92.AutoSize = true
         Me.Label92.Location = New System.Drawing.Point(184, 62)
         Me.Label92.Name = "Label92"
         Me.Label92.Size = New System.Drawing.Size(52, 26)
         Me.Label92.TabIndex = 2
-        Me.Label92.Text = "Alternate " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Name"
+        Me.Label92.Text = "Alternate "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Name"
         '
         'Label90
         '
-        Me.Label90.AutoSize = True
+        Me.Label90.AutoSize = true
         Me.Label90.Location = New System.Drawing.Point(184, 27)
         Me.Label90.Name = "Label90"
         Me.Label90.Size = New System.Drawing.Size(35, 13)
@@ -4980,7 +4984,7 @@ Partial Class Form1
         '
         'ViewPersons_OtherName
         '
-        Me.ViewPersons_OtherName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "AlternateName", True))
+        Me.ViewPersons_OtherName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PersonBindingSource, "AlternateName", true))
         Me.ViewPersons_OtherName.Location = New System.Drawing.Point(248, 66)
         Me.ViewPersons_OtherName.Name = "ViewPersons_OtherName"
         Me.ViewPersons_OtherName.Size = New System.Drawing.Size(138, 20)
@@ -4990,36 +4994,36 @@ Partial Class Form1
         '
         Me.XionPanelPerson.Controls.Add(Me.DataGridViewPerson)
         Me.XionPanelPerson.Location = New System.Drawing.Point(3, 31)
-        Me.XionPanelPerson.Movable = True
+        Me.XionPanelPerson.Movable = true
         Me.XionPanelPerson.Name = "XionPanelPerson"
         Me.XionPanelPerson.Orientation = XionControls.XionPanel.PanelOrientation.Horizontal
         Me.XionPanelPerson.Padding = New System.Windows.Forms.Padding(0, 22, 0, 0)
-        Me.XionPanelPerson.Sizable = True
+        Me.XionPanelPerson.Sizable = true
         Me.XionPanelPerson.Size = New System.Drawing.Size(197, 546)
         Me.XionPanelPerson.State = XionControls.XionPanel.PanelState.Expand
         Me.XionPanelPerson.TabIndex = 1
         Me.XionPanelPerson.Text = "Person List"
         Me.XionPanelPerson.Title = "Person List"
         Me.XionPanelPerson.TitleBackColor = System.Drawing.SystemColors.Control
-        Me.XionPanelPerson.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.XionPanelPerson.TitleFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.XionPanelPerson.TitleHeight = 22
         '
         'DataGridViewPerson
         '
-        Me.DataGridViewPerson.AllowUserToOrderColumns = True
-        Me.DataGridViewPerson.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DataGridViewPerson.AutoGenerateColumns = False
+        Me.DataGridViewPerson.AllowUserToOrderColumns = true
+        Me.DataGridViewPerson.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
+            Or System.Windows.Forms.AnchorStyles.Left)  _
+            Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.DataGridViewPerson.AutoGenerateColumns = false
         Me.DataGridViewPerson.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.DataGridViewPerson.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridViewPerson.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridViewPerson.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameDataGridViewTextBoxColumn, Me.AlternateNameDataGridViewTextBoxColumn, Me.BornDataGridViewTextBoxColumn, Me.BirthPlaceDataGridViewTextBoxColumn, Me.MiniBiographyDataGridViewTextBoxColumn, Me.BiographyDataGridViewTextBoxColumn, Me.URLDataGridViewTextBoxColumn, Me.IMDBIdDataGridViewTextBoxColumn, Me.TMDBIdDataGridViewTextBoxColumn, Me.PictureDataGridViewTextBoxColumn, Me.PhotosDataGridViewTextBoxColumn, Me.IsActor, Me.IsProducer, Me.IsDirector, Me.IsWriter})
         Me.DataGridViewPerson.DataSource = Me.PersonBindingSource
         Me.DataGridViewPerson.Location = New System.Drawing.Point(0, 22)
-        Me.DataGridViewPerson.MultiSelect = False
+        Me.DataGridViewPerson.MultiSelect = false
         Me.DataGridViewPerson.Name = "DataGridViewPerson"
-        Me.DataGridViewPerson.RowHeadersVisible = False
+        Me.DataGridViewPerson.RowHeadersVisible = false
         Me.DataGridViewPerson.RowHeadersWidth = 20
         Me.DataGridViewPerson.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridViewPerson.RowTemplate.Height = 16
@@ -5154,9 +5158,9 @@ Partial Class Form1
         'BindingNavigatorAddNewItemPerson
         '
         Me.BindingNavigatorAddNewItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorAddNewItemPerson.Image = CType(resources.GetObject("BindingNavigatorAddNewItemPerson.Image"), System.Drawing.Image)
+        Me.BindingNavigatorAddNewItemPerson.Image = CType(resources.GetObject("BindingNavigatorAddNewItemPerson.Image"),System.Drawing.Image)
         Me.BindingNavigatorAddNewItemPerson.Name = "BindingNavigatorAddNewItemPerson"
-        Me.BindingNavigatorAddNewItemPerson.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorAddNewItemPerson.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorAddNewItemPerson.Size = New System.Drawing.Size(23, 26)
         Me.BindingNavigatorAddNewItemPerson.Text = "Add Entry"
         '
@@ -5170,27 +5174,27 @@ Partial Class Form1
         'BindingNavigatorDeleteItemPerson
         '
         Me.BindingNavigatorDeleteItemPerson.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorDeleteItemPerson.Image = CType(resources.GetObject("BindingNavigatorDeleteItemPerson.Image"), System.Drawing.Image)
+        Me.BindingNavigatorDeleteItemPerson.Image = CType(resources.GetObject("BindingNavigatorDeleteItemPerson.Image"),System.Drawing.Image)
         Me.BindingNavigatorDeleteItemPerson.Name = "BindingNavigatorDeleteItemPerson"
-        Me.BindingNavigatorDeleteItemPerson.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorDeleteItemPerson.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorDeleteItemPerson.Size = New System.Drawing.Size(23, 26)
         Me.BindingNavigatorDeleteItemPerson.Text = "Delete Entry"
         '
         'BindingNavigatorMoveFirstItem1
         '
         Me.BindingNavigatorMoveFirstItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveFirstItem1.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem1.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem1.Image"),System.Drawing.Image)
         Me.BindingNavigatorMoveFirstItem1.Name = "BindingNavigatorMoveFirstItem1"
-        Me.BindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem1.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMoveFirstItem1.Size = New System.Drawing.Size(23, 26)
         Me.BindingNavigatorMoveFirstItem1.Text = "Move First"
         '
         'BindingNavigatorMovePreviousItem1
         '
         Me.BindingNavigatorMovePreviousItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMovePreviousItem1.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem1.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem1.Image"),System.Drawing.Image)
         Me.BindingNavigatorMovePreviousItem1.Name = "BindingNavigatorMovePreviousItem1"
-        Me.BindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem1.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMovePreviousItem1.Size = New System.Drawing.Size(23, 26)
         Me.BindingNavigatorMovePreviousItem1.Text = "Move Previous"
         '
@@ -5202,7 +5206,7 @@ Partial Class Form1
         'BindingNavigatorPositionItem1
         '
         Me.BindingNavigatorPositionItem1.AccessibleName = "Position"
-        Me.BindingNavigatorPositionItem1.AutoSize = False
+        Me.BindingNavigatorPositionItem1.AutoSize = false
         Me.BindingNavigatorPositionItem1.Margin = New System.Windows.Forms.Padding(1, 3, 1, 3)
         Me.BindingNavigatorPositionItem1.Name = "BindingNavigatorPositionItem1"
         Me.BindingNavigatorPositionItem1.Size = New System.Drawing.Size(50, 18)
@@ -5217,18 +5221,18 @@ Partial Class Form1
         'BindingNavigatorMoveNextItem1
         '
         Me.BindingNavigatorMoveNextItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveNextItem1.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem1.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem1.Image"),System.Drawing.Image)
         Me.BindingNavigatorMoveNextItem1.Name = "BindingNavigatorMoveNextItem1"
-        Me.BindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem1.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMoveNextItem1.Size = New System.Drawing.Size(23, 26)
         Me.BindingNavigatorMoveNextItem1.Text = "Move Next"
         '
         'BindingNavigatorMoveLastItem1
         '
         Me.BindingNavigatorMoveLastItem1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.BindingNavigatorMoveLastItem1.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem1.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem1.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem1.Image"),System.Drawing.Image)
         Me.BindingNavigatorMoveLastItem1.Name = "BindingNavigatorMoveLastItem1"
-        Me.BindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem1.RightToLeftAutoMirrorImage = true
         Me.BindingNavigatorMoveLastItem1.Size = New System.Drawing.Size(23, 26)
         Me.BindingNavigatorMoveLastItem1.Text = "Move Last"
         '
@@ -5245,7 +5249,7 @@ Partial Class Form1
         'SpeichernToolStripButton
         '
         Me.SpeichernToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.SpeichernToolStripButton.Image = CType(resources.GetObject("SpeichernToolStripButton.Image"), System.Drawing.Image)
+        Me.SpeichernToolStripButton.Image = CType(resources.GetObject("SpeichernToolStripButton.Image"),System.Drawing.Image)
         Me.SpeichernToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SpeichernToolStripButton.Name = "SpeichernToolStripButton"
         Me.SpeichernToolStripButton.Size = New System.Drawing.Size(23, 26)
@@ -5259,7 +5263,7 @@ Partial Class Form1
         'ToolStripButtonAddMissingPersons
         '
         Me.ToolStripButtonAddMissingPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButtonAddMissingPersons.Image = CType(resources.GetObject("ToolStripButtonAddMissingPersons.Image"), System.Drawing.Image)
+        Me.ToolStripButtonAddMissingPersons.Image = CType(resources.GetObject("ToolStripButtonAddMissingPersons.Image"),System.Drawing.Image)
         Me.ToolStripButtonAddMissingPersons.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButtonAddMissingPersons.Name = "ToolStripButtonAddMissingPersons"
         Me.ToolStripButtonAddMissingPersons.Size = New System.Drawing.Size(121, 26)
@@ -5268,7 +5272,7 @@ Partial Class Form1
         'ToolStripButtonGrabPersons
         '
         Me.ToolStripButtonGrabPersons.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButtonGrabPersons.Image = CType(resources.GetObject("ToolStripButtonGrabPersons.Image"), System.Drawing.Image)
+        Me.ToolStripButtonGrabPersons.Image = CType(resources.GetObject("ToolStripButtonGrabPersons.Image"),System.Drawing.Image)
         Me.ToolStripButtonGrabPersons.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButtonGrabPersons.Name = "ToolStripButtonGrabPersons"
         Me.ToolStripButtonGrabPersons.Size = New System.Drawing.Size(63, 26)
@@ -5290,7 +5294,7 @@ Partial Class Form1
         '
         'ViewCatalog
         '
-        Me.ViewCatalog.AutoScroll = True
+        Me.ViewCatalog.AutoScroll = true
         Me.ViewCatalog.Controls.Add(Me.UserDataGridView)
         Me.ViewCatalog.Controls.Add(Me.CustomFieldDataGridView)
         Me.ViewCatalog.Controls.Add(OwnerLabel)
@@ -5306,11 +5310,11 @@ Partial Class Form1
         Me.ViewCatalog.Size = New System.Drawing.Size(600, 580)
         Me.ViewCatalog.TabIndex = 8
         Me.ViewCatalog.Text = "View Catalog"
-        Me.ViewCatalog.UseVisualStyleBackColor = True
+        Me.ViewCatalog.UseVisualStyleBackColor = true
         '
         'UserDataGridView
         '
-        Me.UserDataGridView.AutoGenerateColumns = False
+        Me.UserDataGridView.AutoGenerateColumns = false
         Me.UserDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.UserDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.UserDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17})
@@ -5362,7 +5366,7 @@ Partial Class Form1
         '
         'CustomFieldDataGridView
         '
-        Me.CustomFieldDataGridView.AutoGenerateColumns = False
+        Me.CustomFieldDataGridView.AutoGenerateColumns = false
         Me.CustomFieldDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.CustomFieldDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.CustomFieldDataGridView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn9, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13})
@@ -5436,7 +5440,7 @@ Partial Class Form1
         '
         'OwnerTextBox
         '
-        Me.OwnerTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Owner", True))
+        Me.OwnerTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Owner", true))
         Me.OwnerTextBox.Location = New System.Drawing.Point(77, 10)
         Me.OwnerTextBox.Name = "OwnerTextBox"
         Me.OwnerTextBox.Size = New System.Drawing.Size(220, 20)
@@ -5449,7 +5453,7 @@ Partial Class Form1
         '
         'MailTextBox
         '
-        Me.MailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Mail", True))
+        Me.MailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Mail", true))
         Me.MailTextBox.Location = New System.Drawing.Point(77, 36)
         Me.MailTextBox.Name = "MailTextBox"
         Me.MailTextBox.Size = New System.Drawing.Size(220, 20)
@@ -5457,7 +5461,7 @@ Partial Class Form1
         '
         'SiteTextBox
         '
-        Me.SiteTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Site", True))
+        Me.SiteTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Site", true))
         Me.SiteTextBox.Location = New System.Drawing.Point(372, 10)
         Me.SiteTextBox.Name = "SiteTextBox"
         Me.SiteTextBox.Size = New System.Drawing.Size(220, 20)
@@ -5465,7 +5469,7 @@ Partial Class Form1
         '
         'DescriptionTextBox
         '
-        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Description", True))
+        Me.DescriptionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.PropertiesBindingSource, "Description", true))
         Me.DescriptionTextBox.Location = New System.Drawing.Point(372, 36)
         Me.DescriptionTextBox.Name = "DescriptionTextBox"
         Me.DescriptionTextBox.Size = New System.Drawing.Size(220, 20)
@@ -5665,7 +5669,7 @@ Partial Class Form1
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 636)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(608, 22)
-        Me.StatusStrip1.SizingGrip = False
+        Me.StatusStrip1.SizingGrip = false
         Me.StatusStrip1.TabIndex = 0
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -5704,22 +5708,22 @@ Partial Class Form1
         'ToolTip1
         '
         Me.ToolTip1.AutoPopDelay = 15000
-        Me.ToolTip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.ToolTip1.BackColor = System.Drawing.Color.FromArgb(CType(CType(255,Byte),Integer), CType(CType(255,Byte),Integer), CType(CType(192,Byte),Integer))
         Me.ToolTip1.InitialDelay = 1000
-        Me.ToolTip1.IsBalloon = True
+        Me.ToolTip1.IsBalloon = true
         Me.ToolTip1.ReshowDelay = 250
         Me.ToolTip1.ToolTipTitle = "MyFilms AMCupdater Help ..."
         '
         'ListVideos
         '
-        Me.ListVideos.AutoGenerateColumns = False
+        Me.ListVideos.AutoGenerateColumns = false
         Me.ListVideos.ColumnHeadersHeight = 21
         Me.ListVideos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.ListVideos.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NumberDataGridViewTextBoxColumn, Me.OriginalTitleDataGridViewTextBoxColumn, Me.TranslatedTitleDataGridViewTextBoxColumn, Me.YearDataGridViewTextBoxColumn, Me.DateAddedDataGridViewTextBoxColumn})
         Me.ListVideos.DataSource = Me.MovieBindingSource
         DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
         DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -5727,17 +5731,17 @@ Partial Class Form1
         Me.ListVideos.DefaultCellStyle = DataGridViewCellStyle6
         Me.ListVideos.Location = New System.Drawing.Point(-2, 28)
         Me.ListVideos.Name = "ListVideos"
-        Me.ListVideos.ReadOnly = True
+        Me.ListVideos.ReadOnly = true
         Me.ListVideos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.ListVideos.RowHeadersDefaultCellStyle = DataGridViewCellStyle7
-        Me.ListVideos.RowHeadersVisible = False
+        Me.ListVideos.RowHeadersVisible = false
         Me.ListVideos.RowHeadersWidth = 20
         Me.ListVideos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.ListVideos.RowTemplate.Height = 16
@@ -5749,7 +5753,7 @@ Partial Class Form1
         Me.NumberDataGridViewTextBoxColumn.DataPropertyName = "Number"
         Me.NumberDataGridViewTextBoxColumn.HeaderText = "N°"
         Me.NumberDataGridViewTextBoxColumn.Name = "NumberDataGridViewTextBoxColumn"
-        Me.NumberDataGridViewTextBoxColumn.ReadOnly = True
+        Me.NumberDataGridViewTextBoxColumn.ReadOnly = true
         Me.NumberDataGridViewTextBoxColumn.Width = 35
         '
         'OriginalTitleDataGridViewTextBoxColumn
@@ -5758,7 +5762,7 @@ Partial Class Form1
         Me.OriginalTitleDataGridViewTextBoxColumn.DataPropertyName = "OriginalTitle"
         Me.OriginalTitleDataGridViewTextBoxColumn.HeaderText = "Original Title"
         Me.OriginalTitleDataGridViewTextBoxColumn.Name = "OriginalTitleDataGridViewTextBoxColumn"
-        Me.OriginalTitleDataGridViewTextBoxColumn.ReadOnly = True
+        Me.OriginalTitleDataGridViewTextBoxColumn.ReadOnly = true
         Me.OriginalTitleDataGridViewTextBoxColumn.Width = 90
         '
         'TranslatedTitleDataGridViewTextBoxColumn
@@ -5767,7 +5771,7 @@ Partial Class Form1
         Me.TranslatedTitleDataGridViewTextBoxColumn.DataPropertyName = "TranslatedTitle"
         Me.TranslatedTitleDataGridViewTextBoxColumn.HeaderText = "Translated Title"
         Me.TranslatedTitleDataGridViewTextBoxColumn.Name = "TranslatedTitleDataGridViewTextBoxColumn"
-        Me.TranslatedTitleDataGridViewTextBoxColumn.ReadOnly = True
+        Me.TranslatedTitleDataGridViewTextBoxColumn.ReadOnly = true
         Me.TranslatedTitleDataGridViewTextBoxColumn.Width = 105
         '
         'YearDataGridViewTextBoxColumn
@@ -5775,7 +5779,7 @@ Partial Class Form1
         Me.YearDataGridViewTextBoxColumn.DataPropertyName = "Year"
         Me.YearDataGridViewTextBoxColumn.HeaderText = "Year"
         Me.YearDataGridViewTextBoxColumn.Name = "YearDataGridViewTextBoxColumn"
-        Me.YearDataGridViewTextBoxColumn.ReadOnly = True
+        Me.YearDataGridViewTextBoxColumn.ReadOnly = true
         Me.YearDataGridViewTextBoxColumn.Width = 35
         '
         'DateAddedDataGridViewTextBoxColumn
@@ -5784,7 +5788,7 @@ Partial Class Form1
         Me.DateAddedDataGridViewTextBoxColumn.DataPropertyName = "DateAdded"
         Me.DateAddedDataGridViewTextBoxColumn.HeaderText = "Date Added"
         Me.DateAddedDataGridViewTextBoxColumn.Name = "DateAddedDataGridViewTextBoxColumn"
-        Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = True
+        Me.DateAddedDataGridViewTextBoxColumn.ReadOnly = true
         Me.DateAddedDataGridViewTextBoxColumn.Width = 89
         '
         'ImageListViewPersons
@@ -5792,6 +5796,24 @@ Partial Class Form1
         Me.ImageListViewPersons.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
         Me.ImageListViewPersons.ImageSize = New System.Drawing.Size(16, 16)
         Me.ImageListViewPersons.TransparentColor = System.Drawing.Color.Transparent
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = true
+        Me.Label40.Location = New System.Drawing.Point(182, 25)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(24, 13)
+        Me.Label40.TabIndex = 10
+        Me.Label40.Text = "3D:"
+        '
+        'txtSampleVideo3D
+        '
+        Me.txtSampleVideo3D.Location = New System.Drawing.Point(252, 22)
+        Me.txtSampleVideo3D.Name = "txtSampleVideo3D"
+        Me.txtSampleVideo3D.ReadOnly = true
+        Me.txtSampleVideo3D.Size = New System.Drawing.Size(68, 20)
+        Me.txtSampleVideo3D.TabIndex = 12
+        Me.txtSampleVideo3D.TabStop = false
         '
         'Form1
         '
@@ -6451,4 +6473,6 @@ End Sub
     Friend WithEvents TextBox39 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox40 As System.Windows.Forms.TextBox
     Friend WithEvents btnImportFromDrive As System.Windows.Forms.Button
+    Friend WithEvents txtSampleVideo3D As System.Windows.Forms.TextBox
+    Friend WithEvents Label40 As System.Windows.Forms.Label
 End Class

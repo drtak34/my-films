@@ -979,6 +979,7 @@ Public Class Form1
                 txtSampleAspectRatio.Text = GetFileData(txtSampleFile.Text, "Aspectratio")
                 txtSampleVideoFramerate.Text = GetFileData(txtSampleFile.Text, "Framerate")
                 txtSampleVideoResolution.Text = GetFileData(txtSampleFile.Text, "Resolution")
+                txtSampleVideo3D.Text = GetFileData(txtSampleFile.Text, "3d")
                 txtSampleAudioBitrate.Text = GetFileData(txtSampleFile.Text, "AudioBitrate")
                 txtSampleAudioCodec.Text = GetFileData(txtSampleFile.Text, "AudioFormat")
                 txtSampleFileLength.Text = GetFileData(txtSampleFile.Text, "runtime")
