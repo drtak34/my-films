@@ -4708,8 +4708,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       // load central server config, if it already exists
       XmlConfig myFilmsServer = new XmlConfig();
       string myFilmsCentralConfigDir = myFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "MyFilmsCentralConfigFile", "");
-
-
+      bool syncFromServerOnStartup = myFilmsServer.ReadXmlConfig("MyFilmsServer", "MyFilmsServerConfig", "SyncOnStartup", false);
       if (Config_Name.Text.Length != 0 || RunWizardAfterInstall)
       {
         if (MessageBox.Show("Do you want to create a new MyFilms Configuration ? \n\nThis wizard helps you to setup a new configuration with default settings. \nIf you select 'yes', enter a name for the configuration.\nIf you select 'no' you can relaunch the wizard later with the 'Setup Wizard' button.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
@@ -4719,7 +4718,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       #region ask for setup type - local, central master, central client
       MyFilmsInputBox input = new MyFilmsInputBox
         {
-          SetupType = (MyFilms_PluginMode == "normal") ? (int)MyFilms.SetupType.Local : (int)MyFilms.SetupType.CentralClient,
+          // preset to central config client only, if central config is available
+          SetupType = (!syncFromServerOnStartup || myFilmsCentralConfigDir.Length == 0) ? (int)MyFilms.SetupType.Local : (int)MyFilms.SetupType.CentralClient,
           Text = "MyFilms - Setup Wizard",
           UseNfoGrabber = false,
           CatalogTypeSelectedIndex = 10,
