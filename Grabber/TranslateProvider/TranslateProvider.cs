@@ -73,6 +73,8 @@ namespace Grabber.TranslateProvider
 
   public class GoogleTranslator
   {
+    private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
+
     /// <summary>
     /// Translates a string into another language using Google's translate API JSON calls.
     /// <seealso>Class TranslationServices</seealso>
@@ -119,7 +121,7 @@ namespace Grabber.TranslateProvider
       }
       catch (Exception ex)
       {
-        //this.ErrorMessage = Westwind.Globalization.Resources.Resources.ConnectionFailed + ": " + ex.GetBaseException().Message;
+        LogMyFilms.Error("ConnectionFailed: " + ex.GetBaseException().Message);
         return null;
       }
 
@@ -128,7 +130,7 @@ namespace Grabber.TranslateProvider
 
       if (string.IsNullOrEmpty(result))
       {
-        //this.ErrorMessage = Westwind.Globalization.Resources.Resources.InvalidSearchResult;
+        LogMyFilms.Error("No result found!");
         return null;
       }
 
@@ -182,7 +184,7 @@ namespace Grabber.TranslateProvider
         }
         catch (Exception ex)
         {
-          // ErrorMessage = Resources.Resources.ConnectionFailed + ": " + ex.GetBaseException().Message;
+          LogMyFilms.Error("ConnectionFailed: " + ex.GetBaseException().Message);
           return null;
         }
 
