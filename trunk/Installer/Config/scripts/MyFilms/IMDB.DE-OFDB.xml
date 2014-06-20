@@ -5,7 +5,7 @@
     <URLPrefix>http://www.imdb.com</URLPrefix>
     <Language>de</Language>
     <Type>details|cover|multicovers</Type>
-    <Version>1.5.6</Version>
+    <Version>1.5.7</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -171,8 +171,8 @@
       <KeyEndEdition />
       <KeyEditionIndex />
       <KeyEditionPage />
-      <KeyStartIMDB_Rank Param1="" Param2="">_x0023_REGEX_x0023__x003C_span_x0020_id_x003D__x0022_meterChange_x0022__x003E_</KeyStartIMDB_Rank>
-      <KeyEndIMDB_Rank>_x003C__x002F_span_x003E_</KeyEndIMDB_Rank>
+      <KeyStartIMDB_Rank Param1="" Param2="">_x0023_REGEX_x0023_titleAwardsRanks._x002A__x003F_Top_x0020_250_x0020__x0023_</KeyStartIMDB_Rank>
+      <KeyEndIMDB_Rank>_x003C__x002F_</KeyEndIMDB_Rank>
       <KeyIMDB_RankIndex />
       <KeyIMDB_RankPage />
       <KeyStartIMDB_Id Param1="" Param2="">_x0023_REGEX_x0023__x003C_link_x0020_rel_x003D__x0022_canonical_x0022__x0020_href_x003D__x0022_http:_x002F__x002F_www.imdb.com_x002F_title_x002F_</KeyStartIMDB_Id>
