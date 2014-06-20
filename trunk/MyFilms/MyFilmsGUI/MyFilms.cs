@@ -4043,6 +4043,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //-------------------------------------------------------------------------------------------        
     void SortChanged(object sender, SortEventArgs e)
     {
+      LogMyFilms.Debug("SortChanged triggered: ViewConext = '" + conf.ViewContext + "'");
       switch (conf.ViewContext)
       {
         case ViewContext.MenuAll:
@@ -4064,7 +4065,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           catch (Exception ex)
           {
-            Log.Error("SortChanged - TMDB Movies: Error sorting items - {0}", ex.ToString());
+            LogMyFilms.Error("SortChanged - TMDB Movies: Error sorting items - {0}", ex.ToString());
           }
           return;
 
@@ -5139,10 +5140,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           return -1;
         }
-        int iComp = 0;
 
         OnlineMovie movie1 = item1.TVTag as OnlineMovie;
         OnlineMovie movie2 = item2.TVTag as OnlineMovie;
+
+        DateTime dt1;
+        DateTime dt2;
 
         if (movie1 == null || movie2 == null)
         {
@@ -5151,7 +5154,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         switch (_currentSortMethod)
         {
           case SortMethod.Name:
-            if (conf.StrSortSens == " ASC") // ToDo: replace with sortdirection variable
+            int iComp = 0;
+            if (_currentSortDirection == " ASC") // ToDo: replace with sortdirection variable
             {
               iComp = string.Compare(item1.Label, item2.Label, true);
               if (iComp == 0)
@@ -5176,17 +5180,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
             }
           case SortMethod.Date:
-            if (conf.StrSortSens == " ASC")
+            if (_currentSortDirection == " ASC")
             {
               if (movie1.MovieSearchResult.release_date == movie2.MovieSearchResult.release_date)
               {
                 return 0;
               }
-              if (DateTime.Parse(movie1.MovieSearchResult.release_date) < DateTime.Parse(movie2.MovieSearchResult.release_date))
-              {
+
+              // move films without date always to the end
+              if (!DateTime.TryParse(movie1.MovieSearchResult.release_date, out dt1))
                 return 1;
+              if (!DateTime.TryParse(movie2.MovieSearchResult.release_date, out dt2))
+                return 1;
+
+              if (dt1 < dt2)
+              {
+                return -1;
               }
-              return -1;
+              return 1;
             }
             else
             {
@@ -5194,14 +5205,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 return 0;
               }
-              if (DateTime.Parse(movie1.MovieSearchResult.release_date) > DateTime.Parse(movie2.MovieSearchResult.release_date))
-              {
+
+              // move films without date always to the end
+              if (!DateTime.TryParse(movie1.MovieSearchResult.release_date, out dt1))
                 return 1;
+              if (!DateTime.TryParse(movie2.MovieSearchResult.release_date, out dt2))
+                return 1;
+
+              if (dt1 > dt2)
+              {
+                return -1;
               }
-              return -1;
+              return 1;
             }
           case SortMethod.Rating:
-            if (conf.StrSortSens == " ASC")
+            if (_currentSortDirection == " ASC")
             {
               if (movie1.MovieSearchResult.vote_average == movie2.MovieSearchResult.vote_average)
               {
@@ -5209,9 +5227,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               if (movie1.MovieSearchResult.vote_average < movie2.MovieSearchResult.vote_average)
               {
-                return 1;
+                return -1;
               }
-              return -1;
+              return 1;
             }
             else
             {
@@ -5221,12 +5239,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               if (movie1.MovieSearchResult.vote_average > movie2.MovieSearchResult.vote_average)
               {
-                return 1;
+                return -1;
               }
-              return -1;
+              return 1;
             }
           case SortMethod.Votes:
-            if (conf.StrSortSens == " ASC")
+            if (_currentSortDirection == " ASC")
             {
               if (movie1.MovieSearchResult.vote_count == movie2.MovieSearchResult.vote_count)
               {
@@ -5234,9 +5252,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               if (movie1.MovieSearchResult.vote_count < movie2.MovieSearchResult.vote_count)
               {
-                return 1;
+                return -1;
               }
-              return -1;
+              return 1;
             }
             else
             {
@@ -5246,9 +5264,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               }
               if (movie1.MovieSearchResult.vote_count > movie2.MovieSearchResult.vote_count)
               {
-                return 1;
+                return -1;
               }
-              return -1;
+              return 1;
             }
         }
         return 0;
@@ -6212,7 +6230,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               item.Label2 = movie.release_date;
             }
-            item.Label3 = (!ispersoninfo) ? movie.vote_average + " (" + movie.vote_count + ")" : "";
+            item.Label3 = (!ispersoninfo) ? movie.vote_average + " (" + movie.vote_count + ")" :"";
             if (ispersoninfo) item.Label2 = split[1] + " - " + item.Label2;
             item.Path = "";
             item.IsRemote = true;
@@ -6257,7 +6275,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             _currentSortDirection = " DESC";
           }
 
-          if (BtnSrtBy != null) BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
+          // if (BtnSrtBy != null) BtnSrtBy.IsAscending = (conf.StrSortSens == " ASC");
+          if (BtnSrtBy != null) BtnSrtBy.IsAscending = (_currentSortDirection == " ASC");
 
           try
           {
