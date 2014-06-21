@@ -67,8 +67,10 @@ namespace WatTmdb.Utilities
 
         public RequestBuilder AddParameter(string name, string value)
         {
-            if (name == PARAMETER_LANGUAGE && string.IsNullOrEmpty(value))
-                value = DefaultLanguage;
+          if (name == PARAMETER_LANGUAGE && value == null) // remove language parameter, if it is set to null
+            return this;
+          if (name == PARAMETER_LANGUAGE && string.IsNullOrEmpty(value))
+            value = DefaultLanguage;
 
             if (string.IsNullOrEmpty(value)) return this;
             value = value.EscapeString();
