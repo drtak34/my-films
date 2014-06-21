@@ -1392,6 +1392,15 @@ to always choose the config on startup.</value>
 You should only enable, if you want to help testing those features.
 Please report your findings in the My Films forum.</value>
   </data>
+  <data name="txtCountry.ToolTip" xml:space="preserve">
+    <value>Set a country short code (e.g. "gb", "de", etc.) will make the logo engine 
+to first search for matching in such a subdirectory.
+This allows to have country specific logos e.g. for certification that do not overlap.
+If not set, logo engine will try to find a subdirectory matching the MP language, 
+preferring logos there.
+Both will fallback to the default logo directory in case the subdirectory does not exist 
+and also if the subdirectory exists, but no matching logo can be found.</value>
+  </data>
   <data name="labelTraktDescription.Text" xml:space="preserve">
     <value>"Trakt.TV" actively keeps a record of what TV shows and movies you are watching. 
 Based on your favorites, your friends, and the community, trakt recommends 
@@ -1415,14 +1424,136 @@ You can enable or disable Trakt synchronisation separately for each My Films con
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
-  <data name="txtCountry.ToolTip" xml:space="preserve">
-    <value>Set a country short code (e.g. "gb", "de", etc.) will make the logo engine 
-to first search for matching in such a subdirectory.
-This allows to have country specific logos e.g. for certification that do not overlap.
-If not set, logo engine will try to find a subdirectory matching the MP language, 
-preferring logos there.
-Both will fallback to the default logo directory in case the subdirectory does not exist 
-and also if the subdirectory exists, but no matching logo can be found.</value>
+  <data name="pictureBoxTMDBlogo.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        EELcmb/+8T+kAiF9pgaaMQAAAABJRU5ErkJggg==
+</value>
   </data>
   <data name="label41.Text" xml:space="preserve">
     <value>Development: Guzzi, Zebons, Orion Hall, Titof
@@ -1434,8 +1565,8 @@ Testing: Dadeo, z3us, ncoH, TLD
 Project Management and Design: Guzzi, Dadeo
 Grabbers Scripts: Guzzi, z3us
 
-
-Special thanks to Dadeo: Without him, this former private version would never have made it to a public release!</value>
+Special thanks to Dadeo: Without him, this former private version 
+would never have made it to a public release!</value>
   </data>
   <data name="label28.Text" xml:space="preserve">
     <value>My Films is an extension to support users who already have invested time and energy to develop extensive movie catalogs 
@@ -1444,7 +1575,6 @@ It provides an 'out of the box' solution to use your movie catalog in MediaPorta
 to rescan or re-download your data and artwork.
 My Films allows you to manage your movie collection in either one of the supported external catalogs, with the supplied 
 AMC Updater or even from within My Films plugin itself.
-
 
 My Films is designed to combine the powerful features of movie catalog software with the 
 superb media center features of MediaPortal.</value>

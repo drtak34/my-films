@@ -11846,7 +11846,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     try
                     {
                       MyFilmsDetail.SearchAndDownloadTrailerOnlineTMDB(r, i, true, false, (MyFilms.conf.StrDirStorTrailer.Length > 0) ? MyFilms.conf.StrDirStorTrailer : null);
-                      MyFilmsDetail.setGUIProperty("statusmessage", "adding trailers to download queue for '" + r[i][MyFilms.conf.StrTitle1].ToString() + "'", false);
+                      MyFilmsDetail.setGUIProperty("statusmessage", "adding TMDB trailers to download queue for '" + r[i][MyFilms.conf.StrTitle1].ToString() + "'", false);
                     }
                     catch (Exception ie)
                     {
@@ -16478,7 +16478,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           continue;
         }
-        MyFilmsDetail.setGUIProperty("statusmessage", "Updating Fanart for '" + fanartTitle + "'");
+        MyFilmsDetail.setGUIProperty("statusmessage", "Updating TMDB Fanart for '" + fanartTitle + "'");
         var listemovies = grab.GetFanart(wtitle, fanartTitle, wyear, wdirector, wimdbid, MyFilms.conf.StrPathFanart, true, false, MyFilms.conf.StrTitle1, personartworkpath);
       }
     }
@@ -16942,7 +16942,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string destinationfile = Path.Combine(f.DestinationDirectory, (MediaPortal.Util.Utils.FilterFileName(f.MovieTitle + " (trailer) " + f.Trailername + " (" + f.Quality.Replace(" ", "") + ")" + extension)));
           if (!File.Exists(destinationfile))
           {
-            MyFilmsDetail.setGUIProperty("statusmessage", "Downloading  trailer '" + f.Trailername + "' for '" + f.MovieTitle + "'");
+            MyFilmsDetail.setGUIProperty("statusmessage", "Downloading  TMDB trailer '" + f.Trailername + "' for '" + f.MovieTitle + "'");
             bool bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
             if (!bDownloadSuccess) // refresh urls for download - might have timed out ....
             {

@@ -355,6 +355,7 @@
     <EmbeddedResource Include="Resources\AMCUpdaterSmall.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\var_1_0_PoweredByTMDB_Blk_Antitled.png" />
     <None Include="DataBase\AntMovieCatalog.xsc">
       <DependentUpon>AntMovieCatalog.xsd</DependentUpon>
     </None>

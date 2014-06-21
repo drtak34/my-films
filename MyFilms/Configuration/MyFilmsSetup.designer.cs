@@ -487,6 +487,7 @@
       this.chkEnhancedWatchedStatusHandling = new System.Windows.Forms.CheckBox();
       this.Config_EnablePreload = new System.Windows.Forms.CheckBox();
       this.btnTestMode = new System.Windows.Forms.Button();
+      this.txtCountry = new System.Windows.Forms.TextBox();
       this.Tab_Trakt = new System.Windows.Forms.TabPage();
       this.groupBoxExternal = new System.Windows.Forms.GroupBox();
       this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
@@ -531,6 +532,7 @@
       this.buttonOpenTmpFile = new System.Windows.Forms.Button();
       this.Tab_Network = new System.Windows.Forms.TabPage();
       this.Tab_Logos = new System.Windows.Forms.TabPage();
+      this.lblCountry = new System.Windows.Forms.Label();
       this.btnUpdate = new System.Windows.Forms.Button();
       this.lblLogoPresets = new System.Windows.Forms.Label();
       this.lbl_LogoSpacing = new System.Windows.Forms.Label();
@@ -556,6 +558,7 @@
       this.Tab_Update = new System.Windows.Forms.TabPage();
       this.General = new System.Windows.Forms.TabControl();
       this.Tab_About = new System.Windows.Forms.TabPage();
+      this.pictureBoxTMDBlogo = new System.Windows.Forms.PictureBox();
       this.groupBoxSupportedCatalogs = new System.Windows.Forms.GroupBox();
       this.label41 = new System.Windows.Forms.Label();
       this.groupBoxAbout = new System.Windows.Forms.GroupBox();
@@ -627,8 +630,7 @@
       this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-      this.txtCountry = new System.Windows.Forms.TextBox();
-      this.lblCountry = new System.Windows.Forms.Label();
+      this.lblTmdbNote = new System.Windows.Forms.Label();
       ownerLabel = new System.Windows.Forms.Label();
       mailLabel = new System.Windows.Forms.Label();
       siteLabel = new System.Windows.Forms.Label();
@@ -714,6 +716,7 @@
       this.Tab_Update.SuspendLayout();
       this.General.SuspendLayout();
       this.Tab_About.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTMDBlogo)).BeginInit();
       this.groupBoxSupportedCatalogs.SuspendLayout();
       this.groupBoxAbout.SuspendLayout();
       this.Tab_Other.SuspendLayout();
@@ -5126,6 +5129,14 @@
       this.btnTestMode.UseVisualStyleBackColor = true;
       this.btnTestMode.Click += new System.EventHandler(this.btnTestMode_Click);
       // 
+      // txtCountry
+      // 
+      this.txtCountry.Location = new System.Drawing.Point(75, 33);
+      this.txtCountry.Name = "txtCountry";
+      this.txtCountry.Size = new System.Drawing.Size(29, 20);
+      this.txtCountry.TabIndex = 86;
+      this.ToolTip1.SetToolTip(this.txtCountry, resources.GetString("txtCountry.ToolTip"));
+      // 
       // Tab_Trakt
       // 
       this.Tab_Trakt.Controls.Add(this.groupBoxExternal);
@@ -5622,6 +5633,15 @@
       this.Tab_Logos.ToolTipText = "Setup for logos";
       this.Tab_Logos.UseVisualStyleBackColor = true;
       // 
+      // lblCountry
+      // 
+      this.lblCountry.AutoSize = true;
+      this.lblCountry.Location = new System.Drawing.Point(26, 36);
+      this.lblCountry.Name = "lblCountry";
+      this.lblCountry.Size = new System.Drawing.Size(43, 13);
+      this.lblCountry.TabIndex = 87;
+      this.lblCountry.Text = "Country";
+      // 
       // btnUpdate
       // 
       this.btnUpdate.Location = new System.Drawing.Point(583, 331);
@@ -5914,6 +5934,8 @@
       // 
       // Tab_About
       // 
+      this.Tab_About.Controls.Add(this.lblTmdbNote);
+      this.Tab_About.Controls.Add(this.pictureBoxTMDBlogo);
       this.Tab_About.Controls.Add(this.groupBoxSupportedCatalogs);
       this.Tab_About.Controls.Add(this.groupBoxAbout);
       this.Tab_About.Location = new System.Drawing.Point(4, 22);
@@ -5924,12 +5946,23 @@
       this.Tab_About.ToolTipText = "About Info for MyFilms";
       this.Tab_About.UseVisualStyleBackColor = true;
       // 
+      // pictureBoxTMDBlogo
+      // 
+      this.pictureBoxTMDBlogo.Image = global::MyFilmsPlugin.Properties.Resources.var_1_0_PoweredByTMDB_Blk_Antitled;
+      this.pictureBoxTMDBlogo.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxTMDBlogo.InitialImage")));
+      this.pictureBoxTMDBlogo.Location = new System.Drawing.Point(481, 178);
+      this.pictureBoxTMDBlogo.Name = "pictureBoxTMDBlogo";
+      this.pictureBoxTMDBlogo.Size = new System.Drawing.Size(231, 67);
+      this.pictureBoxTMDBlogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+      this.pictureBoxTMDBlogo.TabIndex = 78;
+      this.pictureBoxTMDBlogo.TabStop = false;
+      // 
       // groupBoxSupportedCatalogs
       // 
       this.groupBoxSupportedCatalogs.Controls.Add(this.label41);
-      this.groupBoxSupportedCatalogs.Location = new System.Drawing.Point(30, 183);
+      this.groupBoxSupportedCatalogs.Location = new System.Drawing.Point(30, 171);
       this.groupBoxSupportedCatalogs.Name = "groupBoxSupportedCatalogs";
-      this.groupBoxSupportedCatalogs.Size = new System.Drawing.Size(682, 156);
+      this.groupBoxSupportedCatalogs.Size = new System.Drawing.Size(414, 180);
       this.groupBoxSupportedCatalogs.TabIndex = 1;
       this.groupBoxSupportedCatalogs.TabStop = false;
       this.groupBoxSupportedCatalogs.Text = "Credits ...";
@@ -5939,7 +5972,7 @@
       this.label41.AutoSize = true;
       this.label41.Location = new System.Drawing.Point(27, 18);
       this.label41.Name = "label41";
-      this.label41.Size = new System.Drawing.Size(529, 143);
+      this.label41.Size = new System.Drawing.Size(315, 143);
       this.label41.TabIndex = 0;
       this.label41.Text = resources.GetString("label41.Text");
       this.label41.Click += new System.EventHandler(this.label41_Click);
@@ -5949,7 +5982,7 @@
       this.groupBoxAbout.Controls.Add(this.label28);
       this.groupBoxAbout.Location = new System.Drawing.Point(30, 13);
       this.groupBoxAbout.Name = "groupBoxAbout";
-      this.groupBoxAbout.Size = new System.Drawing.Size(682, 165);
+      this.groupBoxAbout.Size = new System.Drawing.Size(682, 152);
       this.groupBoxAbout.TabIndex = 0;
       this.groupBoxAbout.TabStop = false;
       this.groupBoxAbout.Text = "About MyFilms ...";
@@ -5959,9 +5992,10 @@
       this.label28.AutoSize = true;
       this.label28.Location = new System.Drawing.Point(27, 25);
       this.label28.Name = "label28";
-      this.label28.Size = new System.Drawing.Size(584, 130);
+      this.label28.Size = new System.Drawing.Size(584, 117);
       this.label28.TabIndex = 0;
       this.label28.Text = resources.GetString("label28.Text");
+      this.label28.Click += new System.EventHandler(this.label28_Click);
       // 
       // Tab_Other
       // 
@@ -6548,22 +6582,16 @@
       this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
       this.layoutFilmsComboBox.TabIndex = 34;
       // 
-      // txtCountry
+      // lblTmdbNote
       // 
-      this.txtCountry.Location = new System.Drawing.Point(75, 33);
-      this.txtCountry.Name = "txtCountry";
-      this.txtCountry.Size = new System.Drawing.Size(29, 20);
-      this.txtCountry.TabIndex = 86;
-      this.ToolTip1.SetToolTip(this.txtCountry, resources.GetString("txtCountry.ToolTip"));
-      // 
-      // lblCountry
-      // 
-      this.lblCountry.AutoSize = true;
-      this.lblCountry.Location = new System.Drawing.Point(26, 36);
-      this.lblCountry.Name = "lblCountry";
-      this.lblCountry.Size = new System.Drawing.Size(43, 13);
-      this.lblCountry.TabIndex = 87;
-      this.lblCountry.Text = "Country";
+      this.lblTmdbNote.AutoSize = true;
+      this.lblTmdbNote.ForeColor = System.Drawing.SystemColors.GrayText;
+      this.lblTmdbNote.Location = new System.Drawing.Point(498, 256);
+      this.lblTmdbNote.Name = "lblTmdbNote";
+      this.lblTmdbNote.Size = new System.Drawing.Size(199, 26);
+      this.lblTmdbNote.TabIndex = 79;
+      this.lblTmdbNote.Text = "This product uses the TMDb API \r\nbut is not endorsed or certified by TMDb.";
+      this.lblTmdbNote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // MyFilmsSetup
       // 
@@ -6710,6 +6738,8 @@
       this.Tab_Update.ResumeLayout(false);
       this.General.ResumeLayout(false);
       this.Tab_About.ResumeLayout(false);
+      this.Tab_About.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTMDBlogo)).EndInit();
       this.groupBoxSupportedCatalogs.ResumeLayout(false);
       this.groupBoxSupportedCatalogs.PerformLayout();
       this.groupBoxAbout.ResumeLayout(false);
@@ -7250,5 +7280,7 @@
         private Button btnTestMode;
         private Label lblCountry;
         private TextBox txtCountry;
+        private PictureBox pictureBoxTMDBlogo;
+        private Label lblTmdbNote;
     }
 }
