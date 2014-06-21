@@ -9785,8 +9785,14 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       TmdbMovieTrailers trailers = api.GetMovieTrailers(selectedMovieId, language); // trailers in local language
       if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
-      trailers = api.GetMovieTrailers(selectedMovieId, null); // all trailers
-      if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
+      LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - '" + trailers.youtube.Count + "' trailers found in local language ('" + language + "')");
+
+      if (language != "en")
+      {
+        trailers = api.GetMovieTrailers(selectedMovieId, "en"); // engish trailers
+        if (trailers.youtube.Count > 0) trailersfound.AddRange(trailers.youtube);
+        LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - '" + trailers.youtube.Count + "' trailers found in language 'en'");
+      }
 
       if (trailersfound.Count == 0)
       {
