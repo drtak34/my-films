@@ -1955,9 +1955,9 @@ Public Module Module1
                 For Each person As String In actors
                     Dim persondetails As String() = person.Split(roleSep, StringSplitOptions.RemoveEmptyEntries)
                     writer.WriteStartElement("actor")
-                    writer.WriteElementString("name", persondetails(0))
+                    writer.WriteElementString("name", persondetails(0).Trim())
                     If persondetails.Length > 1 Then
-                        writer.WriteElementString("role", persondetails(1))
+                        writer.WriteElementString("role", persondetails(1).Trim())
                     End If
                     writer.WriteEndElement()
                 Next
@@ -1970,9 +1970,9 @@ Public Module Module1
                 For Each person As String In directors
                     Dim persondetails As String() = person.Split(roleSep, StringSplitOptions.RemoveEmptyEntries)
                     writer.WriteStartElement("producer")
-                    writer.WriteElementString("name", persondetails(0))
+                    writer.WriteElementString("name", persondetails(0).Trim())
                     If persondetails.Length > 1 Then
-                        writer.WriteElementString("role", persondetails(1))
+                        writer.WriteElementString("role", persondetails(1).Trim())
                     End If
                     writer.WriteEndElement()
                 Next
