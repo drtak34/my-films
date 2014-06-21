@@ -1,8 +1,10 @@
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using NLog;
 
 namespace Grabber
@@ -89,6 +91,67 @@ namespace Grabber
 
         return false;
       }
+    }
+
+    public static Task<bool> DownloadFileAsyncCore(WebClient webClient, Uri address, string fileName)
+    {
+      TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>(webClient);
+      AsyncCompletedEventHandler handler = null;
+
+      handler = (sender, e) =>
+      {
+        if (e.UserState != webClient) return;
+
+        if (e.Cancelled) tcs.TrySetCanceled();
+        else if (e.Error != null) tcs.TrySetException(e.Error);
+        else tcs.TrySetResult(true);
+
+        webClient.DownloadFileCompleted -= handler;
+      };
+
+      webClient.DownloadFileCompleted += handler;
+      try
+      {
+        webClient.DownloadFileAsync(address, fileName, webClient);
+      }
+      catch (Exception ex)
+      {
+        webClient.DownloadFileCompleted -= handler;
+        tcs.TrySetException(ex);
+      }
+
+      return tcs.Task;
+    }
+
+    private static Task DownloadDemo_Net_40(Uri address, string fileName, Func<Task> continuation)
+    {
+      WebClient wc = new WebClient();
+
+      TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+      AsyncCompletedEventHandler handler = null;
+
+      handler = (sender, e) =>
+      {
+        if (e.Cancelled) tcs.TrySetCanceled();
+        else if (e.Error != null) tcs.TrySetException(e.Error);
+        else tcs.TrySetResult(true);
+
+        wc.DownloadFileCompleted -= handler;
+      };
+
+      wc.DownloadFileCompleted += handler;
+      try
+      {
+        wc.DownloadFileAsync(address, fileName);
+      }
+      catch (Exception ex)
+      {
+        wc.DownloadFileCompleted -= handler;
+        tcs.TrySetException(ex);
+      }
+
+      tcs.Task.ContinueWith(t => wc.Dispose());
+      return tcs.Task.ContinueWith(t => continuation()).Unwrap();
     }
 
     private static string GetTempFilename()
