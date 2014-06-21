@@ -112,23 +112,23 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="textConfig.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="textConfig.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 12</value>
   </data>
   <data name="textConfig.Size" type="System.Drawing.Size, System.Drawing">
     <value>402, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="textConfig.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -136,7 +136,7 @@
     <value>textConfig</value>
   </data>
   <data name="&gt;&gt;textConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textConfig.Parent" xml:space="preserve">
     <value>$this</value>
@@ -162,7 +162,7 @@
   <data name="button_Browse.Text" xml:space="preserve">
     <value>Browse</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <data name="button_Browse.ToolTip" xml:space="preserve">
@@ -172,7 +172,7 @@
     <value>button_Browse</value>
   </data>
   <data name="&gt;&gt;button_Browse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Browse.Parent" xml:space="preserve">
     <value>$this</value>
@@ -202,7 +202,7 @@
     <value>label1</value>
   </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -232,7 +232,7 @@
     <value>label3</value>
   </data>
   <data name="&gt;&gt;label3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label3.Parent" xml:space="preserve">
     <value>$this</value>
@@ -256,7 +256,7 @@
     <value>textName</value>
   </data>
   <data name="&gt;&gt;textName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textName.Parent" xml:space="preserve">
     <value>$this</value>
@@ -286,7 +286,7 @@
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -312,7 +312,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>textURLPrefix</value>
   </data>
   <data name="&gt;&gt;textURLPrefix.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textURLPrefix.Parent" xml:space="preserve">
     <value>$this</value>
@@ -345,7 +345,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>button_New</value>
   </data>
   <data name="&gt;&gt;button_New.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_New.Parent" xml:space="preserve">
     <value>$this</value>
@@ -378,7 +378,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>button_Save</value>
   </data>
   <data name="&gt;&gt;button_Save.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Save.Parent" xml:space="preserve">
     <value>$this</value>
@@ -408,7 +408,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>radioButtonFR</value>
   </data>
   <data name="&gt;&gt;radioButtonFR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonFR.Parent" xml:space="preserve">
     <value>$this</value>
@@ -438,7 +438,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>radioButtonEN</value>
   </data>
   <data name="&gt;&gt;radioButtonEN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;radioButtonEN.Parent" xml:space="preserve">
     <value>$this</value>
@@ -468,7 +468,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>button2</value>
   </data>
   <data name="&gt;&gt;button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -492,7 +492,7 @@ This parameter makes it possible to define the beginning of the URL ("http://les
     <value>button3</value>
   </data>
   <data name="&gt;&gt;button3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="buttonExpertMode.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -523,7 +523,7 @@ expert mode is not required.</value>
     <value>buttonExpertMode</value>
   </data>
   <data name="&gt;&gt;buttonExpertMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonExpertMode.Parent" xml:space="preserve">
     <value>$this</value>
@@ -547,7 +547,7 @@ expert mode is not required.</value>
     <value>TextURLDetail</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextURLDetail.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -738,7 +738,7 @@ Certification: Certification</value>
     <value>cb_ParamDetail</value>
   </data>
   <data name="&gt;&gt;cb_ParamDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cb_ParamDetail.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -773,7 +773,7 @@ SpecialParameters for beginning of expression:
     <value>TextKeyStartD</value>
   </data>
   <data name="&gt;&gt;TextKeyStartD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextKeyStartD.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -808,7 +808,7 @@ SpecialParameters for beginning of expression:
     <value>TextKeyStopD</value>
   </data>
   <data name="&gt;&gt;TextKeyStopD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextKeyStopD.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -844,7 +844,7 @@ No parameters are required, but this will enable the scraper engine to use match
     <value>textComplement</value>
   </data>
   <data name="&gt;&gt;textComplement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textComplement.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -888,7 +888,7 @@ Set Characters to add in "With" field.
     <value>textDReplace</value>
   </data>
   <data name="&gt;&gt;textDReplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textDReplace.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -953,7 +953,7 @@ The grabber will therefore seek the chain starting from the last parameter
     <value>Index</value>
   </data>
   <data name="&gt;&gt;Index.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Index.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -991,7 +991,7 @@ Remarks:
     <value>textLanguages</value>
   </data>
   <data name="&gt;&gt;textLanguages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textLanguages.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -1019,7 +1019,7 @@ on "User Options" tab.</value>
     <value>textLanguagesAll</value>
   </data>
   <data name="&gt;&gt;textLanguagesAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textLanguagesAll.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -1049,7 +1049,7 @@ on "User Options" tab.</value>
     <value>Button_Load_URL</value>
   </data>
   <data name="&gt;&gt;Button_Load_URL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Button_Load_URL.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -1081,7 +1081,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>button_Find_Detail</value>
   </data>
   <data name="&gt;&gt;button_Find_Detail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Find_Detail.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -1113,7 +1113,7 @@ This preview takes all user settings into consideration.</value>
     <value>buttonPreviewDetailFullGrab</value>
   </data>
   <data name="&gt;&gt;buttonPreviewDetailFullGrab.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPreviewDetailFullGrab.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -1149,7 +1149,7 @@ all options are working as desired, please use "Preview Full Grab".</value>
     <value>buttonPrevParamDetail</value>
   </data>
   <data name="&gt;&gt;buttonPrevParamDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPrevParamDetail.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -1184,7 +1184,7 @@ Thus is usable when defining rules on "secondary pages" like Image Link URL.</va
     <value>lblResult</value>
   </data>
   <data name="&gt;&gt;lblResult.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblResult.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -1217,7 +1217,7 @@ This will be replaced by the grabber engine with the name of the mediafile.</val
     <value>TextURL</value>
   </data>
   <data name="&gt;&gt;TextURL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextURL.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -1281,7 +1281,7 @@ due to "lowest start value" being too high ...</value>
     <value>cb_Parameter</value>
   </data>
   <data name="&gt;&gt;cb_Parameter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cb_Parameter.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1321,7 +1321,7 @@ name of the NFO file name (usually same as film name)</value>
     <value>TextKeyStart</value>
   </data>
   <data name="&gt;&gt;TextKeyStart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextKeyStart.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1361,7 +1361,7 @@ name of the NFO file name (usually same as film name)</value>
     <value>TextKeyStop</value>
   </data>
   <data name="&gt;&gt;TextKeyStop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextKeyStop.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1403,7 +1403,7 @@ Set Characters to add in "With" field.
     <value>textReplace</value>
   </data>
   <data name="&gt;&gt;textReplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textReplace.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -1435,7 +1435,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>button_Find</value>
   </data>
   <data name="&gt;&gt;button_Find.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Find.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -1465,7 +1465,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>button_Preview</value>
   </data>
   <data name="&gt;&gt;button_Preview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Preview.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -1498,7 +1498,7 @@ If end of code is reached, it will restart from the beginning with searching.</v
     <value>button_GoDetailPage</value>
   </data>
   <data name="&gt;&gt;button_GoDetailPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_GoDetailPage.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -1525,7 +1525,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>textRedir</value>
   </data>
   <data name="&gt;&gt;textRedir.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textRedir.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -1558,7 +1558,7 @@ When you are searching the site, it is possible that the page result is a redire
     <value>buttonPrevParam1</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;buttonPrevParam1.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -1588,7 +1588,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>textStartPage</value>
   </data>
   <data name="&gt;&gt;textStartPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textStartPage.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -1618,7 +1618,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>textStepPage</value>
   </data>
   <data name="&gt;&gt;textStepPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textStepPage.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -1650,7 +1650,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>textNextPage</value>
   </data>
   <data name="&gt;&gt;textNextPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textNextPage.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -1677,7 +1677,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>textPage</value>
   </data>
   <data name="&gt;&gt;textPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textPage.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1707,7 +1707,7 @@ If found, it will ask the user to move to the next page.</value>
     <value>button_Load</value>
   </data>
   <data name="&gt;&gt;button_Load.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Load.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1737,7 +1737,7 @@ Two cases are supported:
     <value>TextSearch</value>
   </data>
   <data name="&gt;&gt;TextSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;TextSearch.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -1770,7 +1770,7 @@ Two cases are supported:
     <value>label24</value>
   </data>
   <data name="&gt;&gt;label24.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label24.Parent" xml:space="preserve">
     <value>groupBox8</value>
@@ -1800,7 +1800,7 @@ Two cases are supported:
     <value>label23</value>
   </data>
   <data name="&gt;&gt;label23.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label23.Parent" xml:space="preserve">
     <value>groupBox8</value>
@@ -1848,7 +1848,7 @@ Two cases are supported:
     <value>cbTtitleMaxTitles</value>
   </data>
   <data name="&gt;&gt;cbTtitleMaxTitles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbTtitleMaxTitles.Parent" xml:space="preserve">
     <value>groupBox8</value>
@@ -1875,7 +1875,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
     <value>cbTtitlePreferredLanguage</value>
   </data>
   <data name="&gt;&gt;cbTtitlePreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbTtitlePreferredLanguage.Parent" xml:space="preserve">
     <value>groupBox8</value>
@@ -1902,7 +1902,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
     <value>groupBox8</value>
   </data>
   <data name="&gt;&gt;groupBox8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox8.Parent" xml:space="preserve">
     <value>groupBox7</value>
@@ -1913,7 +1913,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="dataGridViewMapping.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column0.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column0.HeaderText" xml:space="preserve">
@@ -1922,7 +1922,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="Column0.Width" type="System.Int32, mscorlib">
     <value>49</value>
   </data>
-  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column1.HeaderText" xml:space="preserve">
@@ -1931,7 +1931,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="Column1.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
-  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column2.HeaderText" xml:space="preserve">
@@ -1940,7 +1940,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="Column2.Width" type="System.Int32, mscorlib">
     <value>125</value>
   </data>
-  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column3.HeaderText" xml:space="preserve">
@@ -1949,7 +1949,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="Column3.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column4.HeaderText" xml:space="preserve">
@@ -1958,7 +1958,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="Column4.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Column5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Column5.HeaderText" xml:space="preserve">
@@ -1967,7 +1967,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="Column5.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="MergePreferSource.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="MergePreferSource.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="MergePreferSource.HeaderText" xml:space="preserve">
@@ -1976,7 +1976,7 @@ You can add multiple languages, if you want the grabber to get more than one tit
   <data name="MergePreferSource.Width" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
-  <metadata name="MergePreferDestination.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="MergePreferDestination.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="MergePreferDestination.HeaderText" xml:space="preserve">
@@ -2017,7 +2017,7 @@ data from several source fields to a single destination field.
     <value>dataGridViewMapping</value>
   </data>
   <data name="&gt;&gt;dataGridViewMapping.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dataGridViewMapping.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
@@ -2047,7 +2047,7 @@ data from several source fields to a single destination field.
     <value>label29</value>
   </data>
   <data name="&gt;&gt;label29.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label29.Parent" xml:space="preserve">
     <value>groupBox10</value>
@@ -2068,7 +2068,7 @@ data from several source fields to a single destination field.
     <value>cbCertificationPreferredLanguage</value>
   </data>
   <data name="&gt;&gt;cbCertificationPreferredLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbCertificationPreferredLanguage.Parent" xml:space="preserve">
     <value>groupBox10</value>
@@ -2098,7 +2098,7 @@ Most sites do not support country specific certifications.</value>
     <value>groupBox10</value>
   </data>
   <data name="&gt;&gt;groupBox10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox10.Parent" xml:space="preserve">
     <value>groupBox7</value>
@@ -2131,7 +2131,7 @@ Most sites do not support country specific certifications.</value>
     <value>button_SaveAs</value>
   </data>
   <data name="&gt;&gt;button_SaveAs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_SaveAs.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2207,7 +2207,7 @@ sub pages can be cascaded, but order must be as listed here to make sure, data o
     <value>URLpage</value>
   </data>
   <data name="&gt;&gt;URLpage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;URLpage.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -2233,7 +2233,7 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
     <value>textFind</value>
   </data>
   <data name="&gt;&gt;textFind.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textFind.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2259,7 +2259,7 @@ to make a regex search, add "#REGEX#" at the start of the expression.</value>
     <value>textBox5</value>
   </data>
   <data name="&gt;&gt;textBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBox5.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -2291,7 +2291,7 @@ to properly collect title infos.</value>
     <value>textboxSearchAkasRegex</value>
   </data>
   <data name="&gt;&gt;textboxSearchAkasRegex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textboxSearchAkasRegex.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -2323,7 +2323,7 @@ otherwise the internet database would get this media file name as search express
     <value>button_openMediafile</value>
   </data>
   <data name="&gt;&gt;button_openMediafile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_openMediafile.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -2354,7 +2354,7 @@ for sub page grabbing.</value>
     <value>textEncoding</value>
   </data>
   <data name="&gt;&gt;textEncoding.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textEncoding.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2382,7 +2382,7 @@ usage:
     <value>textLanguage</value>
   </data>
   <data name="&gt;&gt;textLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textLanguage.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2410,7 +2410,7 @@ usage:
     <value>textType</value>
   </data>
   <data name="&gt;&gt;textType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2434,7 +2434,7 @@ usage:
     <value>textVersion</value>
   </data>
   <data name="&gt;&gt;textVersion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textVersion.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2462,7 +2462,7 @@ This field allows you to "clean" your search expression.</value>
     <value>textSearchCleanup</value>
   </data>
   <data name="&gt;&gt;textSearchCleanup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textSearchCleanup.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -2506,7 +2506,7 @@ will replace comma separated results with linebreaked results.</value>
     <value>textDReplaceWith</value>
   </data>
   <data name="&gt;&gt;textDReplaceWith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textDReplaceWith.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -2534,7 +2534,7 @@ application/vnd.ms-powerpoint, application/msword, application/x-shockwave-flash
     <value>textAccept</value>
   </data>
   <data name="&gt;&gt;textAccept.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textAccept.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -2561,7 +2561,7 @@ Request.UserAgent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NE
     <value>textUserAgent</value>
   </data>
   <data name="&gt;&gt;textUserAgent.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textUserAgent.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -2594,7 +2594,7 @@ Request.Headers.Add("Accept-Encoding", "deflate,sdch");</value>
     <value>textHeaders</value>
   </data>
   <data name="&gt;&gt;textHeaders.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textHeaders.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -2622,7 +2622,7 @@ If not set, default encoding will be used.</value>
     <value>EncodingSubPage</value>
   </data>
   <data name="&gt;&gt;EncodingSubPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;EncodingSubPage.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -2655,7 +2655,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>cbIgnoreCase</value>
   </data>
   <data name="&gt;&gt;cbIgnoreCase.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbIgnoreCase.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -2688,7 +2688,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>cbIgnoreCaseDetails</value>
   </data>
   <data name="&gt;&gt;cbIgnoreCaseDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbIgnoreCaseDetails.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2696,7 +2696,7 @@ search case sensitive - so you should verify the result properly.</value>
   <data name="&gt;&gt;cbIgnoreCaseDetails.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="saveFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>109, 17</value>
   </metadata>
   <data name="linkLabelMFwiki.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -2724,7 +2724,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>linkLabelMFwiki</value>
   </data>
   <data name="&gt;&gt;linkLabelMFwiki.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkLabelMFwiki.Parent" xml:space="preserve">
     <value>$this</value>
@@ -2748,7 +2748,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>pictureBoxPreviewCollection</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCollection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCollection.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2775,7 +2775,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>btnLoadDetailInWeb</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailInWeb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailInWeb.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2802,7 +2802,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>button_Load_File</value>
   </data>
   <data name="&gt;&gt;button_Load_File.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Load_File.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2832,7 +2832,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>label21</value>
   </data>
   <data name="&gt;&gt;label21.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label21.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2865,7 +2865,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>labelImageSize</value>
   </data>
   <data name="&gt;&gt;labelImageSize.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelImageSize.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2892,7 +2892,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>btnLoadDetailPreview</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btnLoadDetailPreview.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2913,7 +2913,7 @@ search case sensitive - so you should verify the result properly.</value>
     <value>textURLPreview</value>
   </data>
   <data name="&gt;&gt;textURLPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textURLPreview.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2924,11 +2924,11 @@ search case sensitive - so you should verify the result properly.</value>
   <data name="textBodyDetail.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="contextMenuStripDetails.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="contextMenuStripDetails.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>409, 17</value>
   </metadata>
   <data name="toolStripMenuDetailsCopyAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+    <value>153, 22</value>
   </data>
   <data name="toolStripMenuDetailsCopyAll.Text" xml:space="preserve">
     <value>Copy All</value>
@@ -2939,19 +2939,19 @@ RTF formatted content in an appropriate app - like e.g. wordpad.
 There you'll find both options when choosing edit - insert ...</value>
   </data>
   <data name="copySelectionToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+    <value>153, 22</value>
   </data>
   <data name="copySelectionToolStripMenuItem1.Text" xml:space="preserve">
     <value>Copy Selection</value>
   </data>
   <data name="contextMenuStripDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 48</value>
+    <value>154, 48</value>
   </data>
   <data name="&gt;&gt;contextMenuStripDetails.Name" xml:space="preserve">
     <value>contextMenuStripDetails</value>
   </data>
   <data name="&gt;&gt;contextMenuStripDetails.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textBodyDetail.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 314</value>
@@ -2972,7 +2972,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>textBodyDetail</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBodyDetail.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -2999,7 +2999,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label10</value>
   </data>
   <data name="&gt;&gt;label10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label10.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -3029,7 +3029,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>textPreview</value>
   </data>
   <data name="&gt;&gt;textPreview.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textPreview.Parent" xml:space="preserve">
     <value>groupBox3</value>
@@ -3053,7 +3053,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>groupBox3</value>
   </data>
   <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -3083,7 +3083,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblSubPage</value>
   </data>
   <data name="&gt;&gt;lblSubPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblSubPage.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3113,7 +3113,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblEncodingSubPage</value>
   </data>
   <data name="&gt;&gt;lblEncodingSubPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblEncodingSubPage.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3146,7 +3146,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblLanguagesAll</value>
   </data>
   <data name="&gt;&gt;lblLanguagesAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblLanguagesAll.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3179,7 +3179,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>chkActorRoles</value>
   </data>
   <data name="&gt;&gt;chkActorRoles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkActorRoles.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3212,7 +3212,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblLanguages</value>
   </data>
   <data name="&gt;&gt;lblLanguages.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblLanguages.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3245,7 +3245,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblMaxItems</value>
   </data>
   <data name="&gt;&gt;lblMaxItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblMaxItems.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3269,7 +3269,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>textMaxItems</value>
   </data>
   <data name="&gt;&gt;textMaxItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textMaxItems.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3299,7 +3299,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>btResetDetail</value>
   </data>
   <data name="&gt;&gt;btResetDetail.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btResetDetail.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3329,7 +3329,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label18</value>
   </data>
   <data name="&gt;&gt;label18.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label18.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3362,7 +3362,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>labelDReplaceWith</value>
   </data>
   <data name="&gt;&gt;labelDReplaceWith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDReplaceWith.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3395,7 +3395,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>labelDReplace</value>
   </data>
   <data name="&gt;&gt;labelDReplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelDReplace.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3428,7 +3428,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblComplement</value>
   </data>
   <data name="&gt;&gt;lblComplement.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblComplement.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3458,7 +3458,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label12</value>
   </data>
   <data name="&gt;&gt;label12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label12.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3488,7 +3488,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label13</value>
   </data>
   <data name="&gt;&gt;label13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label13.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3518,7 +3518,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label14</value>
   </data>
   <data name="&gt;&gt;label14.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label14.Parent" xml:space="preserve">
     <value>groupBox4</value>
@@ -3539,7 +3539,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -3569,7 +3569,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label15</value>
   </data>
   <data name="&gt;&gt;label15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label15.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -3599,7 +3599,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>pictureBoxPreviewCover</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxPreviewCover.Parent" xml:space="preserve">
     <value>tabPageDetailPage</value>
@@ -3626,7 +3626,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageDetailPage</value>
   </data>
   <data name="&gt;&gt;tabPageDetailPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageDetailPage.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -3656,7 +3656,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label36</value>
   </data>
   <data name="&gt;&gt;label36.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label36.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -3686,7 +3686,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label37</value>
   </data>
   <data name="&gt;&gt;label37.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label37.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -3716,7 +3716,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label35</value>
   </data>
   <data name="&gt;&gt;label35.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label35.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -3724,34 +3724,34 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="&gt;&gt;label35.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="label9.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblCleanup.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblCleanup.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblCleanup.Location" type="System.Drawing.Point, System.Drawing">
     <value>311, 33</value>
   </data>
-  <data name="label9.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblCleanup.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 13</value>
   </data>
-  <data name="label9.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblCleanup.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="label9.Text" xml:space="preserve">
+  <data name="lblCleanup.Text" xml:space="preserve">
     <value>Cleanup</value>
   </data>
-  <data name="&gt;&gt;label9.Name" xml:space="preserve">
-    <value>label9</value>
+  <data name="&gt;&gt;lblCleanup.Name" xml:space="preserve">
+    <value>lblCleanup</value>
   </data>
-  <data name="&gt;&gt;label9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblCleanup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label9.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblCleanup.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
   </data>
-  <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblCleanup.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="labelSearchPosition.AutoSize" type="System.Boolean, mscorlib">
@@ -3776,7 +3776,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>labelSearchPosition</value>
   </data>
   <data name="&gt;&gt;labelSearchPosition.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelSearchPosition.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -3806,7 +3806,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>PositionSearch</value>
   </data>
   <data name="&gt;&gt;PositionSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;PositionSearch.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -3833,7 +3833,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>button_Load_Web</value>
   </data>
   <data name="&gt;&gt;button_Load_Web.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_Load_Web.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -3863,7 +3863,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label8</value>
   </data>
   <data name="&gt;&gt;label8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label8.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -3893,7 +3893,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label11</value>
   </data>
   <data name="&gt;&gt;label11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label11.Parent" xml:space="preserve">
     <value>groupBox6</value>
@@ -3917,7 +3917,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>groupBox6</value>
   </data>
   <data name="&gt;&gt;groupBox6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox6.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -3947,7 +3947,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label20</value>
   </data>
   <data name="&gt;&gt;label20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label20.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -3977,7 +3977,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label16</value>
   </data>
   <data name="&gt;&gt;label16.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label16.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -4007,7 +4007,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label19</value>
   </data>
   <data name="&gt;&gt;label19.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label19.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -4031,7 +4031,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>groupBox5</value>
   </data>
   <data name="&gt;&gt;groupBox5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -4061,7 +4061,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label17</value>
   </data>
   <data name="&gt;&gt;label17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label17.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -4072,11 +4072,11 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="textBody.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <metadata name="contextMenuStripSearch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="contextMenuStripSearch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>237, 17</value>
   </metadata>
   <data name="toolStripMenuSearchCopyAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+    <value>153, 22</value>
   </data>
   <data name="toolStripMenuSearchCopyAll.Text" xml:space="preserve">
     <value>Copy All</value>
@@ -4087,19 +4087,19 @@ RTF formatted content in an appropriate app - like e.g. wordpad.
 There you'll find both options when choosing edit - insert ...</value>
   </data>
   <data name="copySelectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 22</value>
+    <value>153, 22</value>
   </data>
   <data name="copySelectionToolStripMenuItem.Text" xml:space="preserve">
     <value>Copy Selection</value>
   </data>
   <data name="contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 48</value>
+    <value>154, 48</value>
   </data>
   <data name="&gt;&gt;contextMenuStripSearch.Name" xml:space="preserve">
     <value>contextMenuStripSearch</value>
   </data>
   <data name="&gt;&gt;contextMenuStripSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="textBody.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 316</value>
@@ -4120,7 +4120,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>textBody</value>
   </data>
   <data name="&gt;&gt;textBody.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.RichTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textBody.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -4147,7 +4147,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblResultsFound</value>
   </data>
   <data name="&gt;&gt;lblResultsFound.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblResultsFound.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -4158,7 +4158,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="groupBox2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn1.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn1.HeaderText" xml:space="preserve">
@@ -4167,7 +4167,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="ResultColumn1.Width" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="Thumb.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="Thumb.HeaderText" xml:space="preserve">
@@ -4179,7 +4179,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="Thumb.Width" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn2.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn2.HeaderText" xml:space="preserve">
@@ -4188,7 +4188,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="ResultColumn2.MinimumWidth" type="System.Int32, mscorlib">
     <value>100</value>
   </data>
-  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn3.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn3.HeaderText" xml:space="preserve">
@@ -4197,7 +4197,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="ResultColumn3.Width" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
-  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn4.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn4.HeaderText" xml:space="preserve">
@@ -4206,7 +4206,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="ResultColumn4.Width" type="System.Int32, mscorlib">
     <value>68</value>
   </data>
-  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn5.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn5.HeaderText" xml:space="preserve">
@@ -4215,7 +4215,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="ResultColumn5.Width" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
-  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn6.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn6.HeaderText" xml:space="preserve">
@@ -4224,7 +4224,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="ResultColumn6.Width" type="System.Int32, mscorlib">
     <value>86</value>
   </data>
-  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn7.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn7.HeaderText" xml:space="preserve">
@@ -4236,7 +4236,7 @@ There you'll find both options when choosing edit - insert ...</value>
   <data name="ResultColumn7.Width" type="System.Int32, mscorlib">
     <value>69</value>
   </data>
-  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="ResultColumn8.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="ResultColumn8.HeaderText" xml:space="preserve">
@@ -4261,7 +4261,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>dataGridViewSearchResults</value>
   </data>
   <data name="&gt;&gt;dataGridViewSearchResults.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dataGridViewSearchResults.Parent" xml:space="preserve">
     <value>groupBox2</value>
@@ -4285,7 +4285,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>groupBox2</value>
   </data>
   <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -4318,7 +4318,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>labelSearchAkasRegex</value>
   </data>
   <data name="&gt;&gt;labelSearchAkasRegex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelSearchAkasRegex.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4351,7 +4351,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label_SearchMatches_Starttext</value>
   </data>
   <data name="&gt;&gt;label_SearchMatches_Starttext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label_SearchMatches_Starttext.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4384,7 +4384,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label_SearchMatches_Endtext</value>
   </data>
   <data name="&gt;&gt;label_SearchMatches_Endtext.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label_SearchMatches_Endtext.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4411,7 +4411,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>button_FirstMatch</value>
   </data>
   <data name="&gt;&gt;button_FirstMatch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_FirstMatch.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4438,7 +4438,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>button_NextMatch</value>
   </data>
   <data name="&gt;&gt;button_NextMatch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;button_NextMatch.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4468,7 +4468,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>btReset</value>
   </data>
   <data name="&gt;&gt;btReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;btReset.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4501,7 +4501,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>labelReplaceWith</value>
   </data>
   <data name="&gt;&gt;labelReplaceWith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelReplaceWith.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4534,7 +4534,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>labelReplace</value>
   </data>
   <data name="&gt;&gt;labelReplace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;labelReplace.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4564,7 +4564,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>textReplaceWith</value>
   </data>
   <data name="&gt;&gt;textReplaceWith.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;textReplaceWith.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4594,7 +4594,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label7</value>
   </data>
   <data name="&gt;&gt;label7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label7.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4624,7 +4624,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label6</value>
   </data>
   <data name="&gt;&gt;label6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label6.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4654,7 +4654,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label5</value>
   </data>
   <data name="&gt;&gt;label5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label5.Parent" xml:space="preserve">
     <value>groupBox1</value>
@@ -4675,7 +4675,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -4705,7 +4705,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label4</value>
   </data>
   <data name="&gt;&gt;label4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label4.Parent" xml:space="preserve">
     <value>tabPageSearchPage</value>
@@ -4732,7 +4732,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>tabPageSearchPage</value>
   </data>
   <data name="&gt;&gt;tabPageSearchPage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageSearchPage.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -4762,7 +4762,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label34</value>
   </data>
   <data name="&gt;&gt;label34.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label34.Parent" xml:space="preserve">
     <value>$this</value>
@@ -4792,7 +4792,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>lblType</value>
   </data>
   <data name="&gt;&gt;lblType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
     <value>$this</value>
@@ -4828,7 +4828,7 @@ There you'll find both options when choosing edit - insert ...</value>
     <value>label33</value>
   </data>
   <data name="&gt;&gt;label33.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label33.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
@@ -4863,7 +4863,7 @@ you do not need to customize them in each script here.</value>
     <value>label32</value>
   </data>
   <data name="&gt;&gt;label32.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label32.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
@@ -4896,7 +4896,7 @@ you do not need to customize them in each script here.</value>
     <value>label31</value>
   </data>
   <data name="&gt;&gt;label31.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label31.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
@@ -4934,7 +4934,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>label30</value>
   </data>
   <data name="&gt;&gt;label30.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label30.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
@@ -4967,7 +4967,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>label22</value>
   </data>
   <data name="&gt;&gt;label22.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label22.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
@@ -5015,7 +5015,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>cbMaxWriters</value>
   </data>
   <data name="&gt;&gt;cbMaxWriters.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbMaxWriters.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5063,7 +5063,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>cbMaxDirectors</value>
   </data>
   <data name="&gt;&gt;cbMaxDirectors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbMaxDirectors.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5111,7 +5111,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>cbMaxProducers</value>
   </data>
   <data name="&gt;&gt;cbMaxProducers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbMaxProducers.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5141,7 +5141,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>chkGrabActorRoles</value>
   </data>
   <data name="&gt;&gt;chkGrabActorRoles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;chkGrabActorRoles.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5189,7 +5189,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>cbMaxActors</value>
   </data>
   <data name="&gt;&gt;cbMaxActors.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbMaxActors.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5219,7 +5219,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>label28</value>
   </data>
   <data name="&gt;&gt;label28.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label28.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5249,7 +5249,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>label27</value>
   </data>
   <data name="&gt;&gt;label27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label27.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5279,7 +5279,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>label26</value>
   </data>
   <data name="&gt;&gt;label26.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label26.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5309,7 +5309,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>label25</value>
   </data>
   <data name="&gt;&gt;label25.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label25.Parent" xml:space="preserve">
     <value>groupBox9</value>
@@ -5333,7 +5333,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>groupBox9</value>
   </data>
   <data name="&gt;&gt;groupBox9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox9.Parent" xml:space="preserve">
     <value>groupBox7</value>
@@ -5357,7 +5357,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>groupBox7</value>
   </data>
   <data name="&gt;&gt;groupBox7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox7.Parent" xml:space="preserve">
     <value>tabPageUserSettings</value>
@@ -5384,7 +5384,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>tabPageUserSettings</value>
   </data>
   <data name="&gt;&gt;tabPageUserSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabPageUserSettings.Parent" xml:space="preserve">
     <value>tabControl1</value>
@@ -5408,7 +5408,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>tabControl1</value>
   </data>
   <data name="&gt;&gt;tabControl1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tabControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5444,7 +5444,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>Version_Label</value>
   </data>
   <data name="&gt;&gt;Version_Label.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Version_Label.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5474,7 +5474,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>lblLanguage</value>
   </data>
   <data name="&gt;&gt;lblLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblLanguage.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5504,7 +5504,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>lblVersion</value>
   </data>
   <data name="&gt;&gt;lblVersion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblVersion.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5534,7 +5534,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>pictureBox1</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBox1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5564,7 +5564,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>pictureBoxUSFlag</value>
   </data>
   <data name="&gt;&gt;pictureBoxUSFlag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxUSFlag.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5577,18 +5577,17 @@ If you want to create a new configuration based on the existing script, you can 
   </data>
   <data name="pictureBoxFranceFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAAK+wAA
-        CvsBy58dkAAAAidJREFUSEu11t9LU2Ecx3EDEXHp3ImxucUGHg1HU6bUKhk6TLcgpUFKFysxLAxntmk0
-        wwpa9ENi5UV1V1dBEHTXTX9ARUFEba4wUxCtCPY3fHq+B90Dz3PyudkOvHjOzsX3PZ6z7WwXgKqKHhSo
-        pIoO396darZFuxlbmdFMml3V2N//ANHooin2LnY8VgdP439oNgXckcgiFhbemFIF/mafwMzqiTP06XFT
-        wNvXl0Um8xozMy+RYmjdpgpspjMwXLlp+MX8ufMQK4NxCniNQG/vfaTTrzAx8VyiCmxMXYXo97W7+HHs
-        FA90d99DIvEC8fhTiSqwPjYN0WbyOpYHhnkgGLyN0dFnGBp6JFEF1k6ehWh9PInv4RgPdHVlEIs9Bm0V
-        6dla6Vx1rAyMQLQ2PI5C6DgPdHTcQDicRSBwS6IKLB+KQvQzMoJ8MMoDPt88mpvnoWkpiSqQb2qH6Jsv
-        hC+dR3lA1+fg8czBar0kUQYc+5EXFFoP43N7Dw94vbNwu9Oor5+WqAI5uw+ign4Qn9qO8IDLlYTTeRkW
-        y5REGdD2ISdY8nTio36ABxyOi7DbZ1Fbm5AoA42tyBlaSuvS3gA+sEjpm6xpk8bNramZlKgCXxt0iOim
-        v2/y84C14QJstpQpVSDv9MPMO3tbKeCqqzvH9v68qWKxiJ281VpQsoedE7rGVrZFLvqxszJ+JlRmNJNm
-        G08dy9YLulAuNLO68s/kSv6joNn/AB77BzKv8ubGAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr6AAAK+gEZ2P90AAACCUlE
+        QVRIS7XV30uTURgH8F2IiEvn3hibW2zgNBxNmVKrZOgw3YKUBilerMSwMJzZptEMK2jRD4mVF9VdXQVB
+        0F03/QEVBRG1ucJMQbQi2N/w7X3W287Fc+rcvH3hw3nfc/F84ZyLYwHwX0k3zSTdNBOlRrdDZzcZzaTZ
+        lqaBgTuIx5elVFkfOv5XNJsKPLHYMpaWXkip8jP/QGr96Akq8FCBr78/j1zuOebmniKjo/UPVbazud8u
+        XK34pvtx4y7WhpJU4KsU9PXdRjb7DFNTjxlVtmYuMt8v3cSXw2OioKfnFlKpJ0gmHzKqbE7MMtvpy1gd
+        HBEF4fB1jI8/wvDwPUaVjWMnmc3JND5HE6KguzuHROI+6KhIr7ESVdYGR5mNkUmUIkdEQWfnFUSjeYRC
+        1xhVVvfHma+xURTDcVEQCCyipWURmpZhVCk2dzCfAhF86DokCvz+BXi9C7DZzjGqFJ17mFLbAbzv6BUF
+        Pt88PJ4sGhpmGVUKjgBT8u/Du/aDosDtTsPlOg+rdYZRpaDtZla8XXjr3ysKnM6zcDjmUVeXYlQpNLUZ
+        Wqvryq4Q3ugl1QJNm65caG3tNKPKx0Y/Qxf9ujkoCmyNZ2C3Z6RUKbqCUq8c7dUCd339Kf28T0uVy+V/
+        eqm1CjsNxjfNpgKbLqiLmIxm0uzKq2M1fsxEM2uk76iZpJvmgeUX0bJL7CSd6HsAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="pictureBoxFranceFlag.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -5610,7 +5609,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>pictureBoxFranceFlag</value>
   </data>
   <data name="&gt;&gt;pictureBoxFranceFlag.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;pictureBoxFranceFlag.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5637,7 +5636,7 @@ If you want to create a new configuration based on the existing script, you can 
     <value>cbFileBasedReader</value>
   </data>
   <data name="&gt;&gt;cbFileBasedReader.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cbFileBasedReader.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5645,10 +5644,10 @@ If you want to create a new configuration based on the existing script, you can 
   <data name="&gt;&gt;cbFileBasedReader.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>122</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -6094,144 +6093,144 @@ If you want to create a new configuration based on the existing script, you can 
     <value>toolTip1</value>
   </data>
   <data name="&gt;&gt;toolTip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column0.Name" xml:space="preserve">
     <value>Column0</value>
   </data>
   <data name="&gt;&gt;Column0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column1.Name" xml:space="preserve">
     <value>Column1</value>
   </data>
   <data name="&gt;&gt;Column1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column2.Name" xml:space="preserve">
     <value>Column2</value>
   </data>
   <data name="&gt;&gt;Column2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column3.Name" xml:space="preserve">
     <value>Column3</value>
   </data>
   <data name="&gt;&gt;Column3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column4.Name" xml:space="preserve">
     <value>Column4</value>
   </data>
   <data name="&gt;&gt;Column4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Column5.Name" xml:space="preserve">
     <value>Column5</value>
   </data>
   <data name="&gt;&gt;Column5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;MergePreferSource.Name" xml:space="preserve">
     <value>MergePreferSource</value>
   </data>
   <data name="&gt;&gt;MergePreferSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;MergePreferDestination.Name" xml:space="preserve">
     <value>MergePreferDestination</value>
   </data>
   <data name="&gt;&gt;MergePreferDestination.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;saveFileDialog2.Name" xml:space="preserve">
     <value>saveFileDialog2</value>
   </data>
   <data name="&gt;&gt;saveFileDialog2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuDetailsCopyAll.Name" xml:space="preserve">
     <value>toolStripMenuDetailsCopyAll</value>
   </data>
   <data name="&gt;&gt;toolStripMenuDetailsCopyAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;copySelectionToolStripMenuItem1.Name" xml:space="preserve">
     <value>copySelectionToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;copySelectionToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripMenuSearchCopyAll.Name" xml:space="preserve">
     <value>toolStripMenuSearchCopyAll</value>
   </data>
   <data name="&gt;&gt;toolStripMenuSearchCopyAll.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;copySelectionToolStripMenuItem.Name" xml:space="preserve">
     <value>copySelectionToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;copySelectionToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn1.Name" xml:space="preserve">
     <value>ResultColumn1</value>
   </data>
   <data name="&gt;&gt;ResultColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;Thumb.Name" xml:space="preserve">
     <value>Thumb</value>
   </data>
   <data name="&gt;&gt;Thumb.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewImageColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn2.Name" xml:space="preserve">
     <value>ResultColumn2</value>
   </data>
   <data name="&gt;&gt;ResultColumn2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn3.Name" xml:space="preserve">
     <value>ResultColumn3</value>
   </data>
   <data name="&gt;&gt;ResultColumn3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn4.Name" xml:space="preserve">
     <value>ResultColumn4</value>
   </data>
   <data name="&gt;&gt;ResultColumn4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn5.Name" xml:space="preserve">
     <value>ResultColumn5</value>
   </data>
   <data name="&gt;&gt;ResultColumn5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn6.Name" xml:space="preserve">
     <value>ResultColumn6</value>
   </data>
   <data name="&gt;&gt;ResultColumn6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewLinkColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn7.Name" xml:space="preserve">
     <value>ResultColumn7</value>
   </data>
   <data name="&gt;&gt;ResultColumn7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ResultColumn8.Name" xml:space="preserve">
     <value>ResultColumn8</value>
   </data>
   <data name="&gt;&gt;ResultColumn8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GrabConfig</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
