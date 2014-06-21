@@ -1873,10 +1873,11 @@ Public Module Module1
         Return Name
     End Function
 
-    Public Function WriteNfoFile(ByVal OutFileName As String, ByVal node As XmlNode, ByVal UpdateOnlyMissing As Boolean, ByVal mastertitle As String)
+    Public Function WriteNfoFile(ByVal outFileName As String, ByVal node As XmlNode, ByVal updateOnlyMissing As Boolean, ByVal mastertitle As String)
         ' Create XmlWriterSettings.
 
-        If (System.IO.File.Exists(OutFileName) And UpdateOnlyMissing) Then
+        If (File.Exists(OutFileName) And UpdateOnlyMissing) Then
+            ' ToDo: add logic TypeOf detect, if existing files are MF created to decide if should be overwritten
             Return False ' Do nothing, if existing nfo files should NOT be updated/overwritten
         End If
 
@@ -1887,11 +1888,11 @@ Public Module Module1
         ' Delete existing nfo file, if any
         If (System.IO.File.Exists(OutFileName)) Then
             'Dim NewFileName As String = Replace(OutFileName, ".nfo", " - " + My.Computer.Clock.LocalTime.ToString.Replace(":", "-") + ".nfo")
-            Dim NewFileName As String = Replace(OutFileName, ".nfo", " - " + "mfbak" + ".nfo")
-            NewFileName = NewFileName.Replace("/", "-")
+            Dim newFileName As String = Replace(OutFileName, ".nfo", " - " + "mfbak" + ".nfo")
+            newFileName = newFileName.Replace("/", "-")
             Try
-                If (Not System.IO.File.Exists(NewFileName)) Then
-                    My.Computer.FileSystem.CopyFile(OutFileName, NewFileName, True) ' take a backup files - can be removed later
+                If (Not System.IO.File.Exists(newFileName)) Then
+                    My.Computer.FileSystem.CopyFile(OutFileName, newFileName, True) ' take a backup files - can be removed later
                 End If
                 System.IO.File.Delete(OutFileName)
             Catch ex As Exception
@@ -1904,80 +1905,110 @@ Public Module Module1
             writer.WriteStartDocument()
             writer.WriteStartElement("movie") ' Root.
 
-            writer.WriteElementString("number", GetValueFromCurrentNode(node, "Number"))
-            writer.WriteElementString("title", GetValueFromCurrentNode(node, mastertitle))
-            writer.WriteElementString("sorttitle", GetValueFromCurrentNode(node, "FormattedTitle"))
-            writer.WriteElementString("originaltitle", GetValueFromCurrentNode(node, "OriginalTitle"))
-            writer.WriteElementString("translatedtitle", GetValueFromCurrentNode(node, "TranslatedTitle"))
-            writer.WriteElementString("formattedtitle", GetValueFromCurrentNode(node, "FormattedTitle"))
-            writer.WriteElementString("edition", GetValueFromCurrentNode(node, "Edition"))
-            writer.WriteElementString("studio", GetValueFromCurrentNode(node, "Studio"))
-            writer.WriteElementString("imdb_id", GetValueFromCurrentNode(node, "IMDB_Id"))
-            writer.WriteElementString("imdb_rank", GetValueFromCurrentNode(node, "IMDB_Rank"))
-            writer.WriteElementString("tmdb_id", GetValueFromCurrentNode(node, "TMDB_Id"))
-            writer.WriteElementString("checked", GetValueFromCurrentNode(node, "Checked"))
-            writer.WriteElementString("url", GetValueFromCurrentNode(node, "URL"))
-            writer.WriteElementString("rating", GetValueFromCurrentNode(node, "Rating"))
-            writer.WriteElementString("ratinguser", GetValueFromCurrentNode(node, "RatingUser"))
-            writer.WriteElementString("plot", GetValueFromCurrentNode(node, "Description"))
-            writer.WriteElementString("comments", GetValueFromCurrentNode(node, "Comments"))
-            writer.WriteElementString("tagline", GetValueFromCurrentNode(node, "TagLine"))
-            writer.WriteElementString("tags", GetValueFromCurrentNode(node, "Tags"))
-            writer.WriteElementString("runtime", GetValueFromCurrentNode(node, "Length"))
-            writer.WriteElementString("mpaa", GetValueFromCurrentNode(node, "Certification"))
-            writer.WriteElementString("language", GetValueFromCurrentNode(node, "Languages"))
-            writer.WriteElementString("genre", GetValueFromCurrentNode(node, "Category"))
-            writer.WriteElementString("categorytrakt", GetValueFromCurrentNode(node, "CategoryTrakt"))
+            ConditionalOutput(writer, "number", GetValueFromCurrentNode(node, "Number"))
+            ConditionalOutput(writer, "title", GetValueFromCurrentNode(node, mastertitle))
+            ConditionalOutput(writer, "originaltitle", GetValueFromCurrentNode(node, "OriginalTitle"))
+            ConditionalOutput(writer, "translatedtitle", GetValueFromCurrentNode(node, "TranslatedTitle"))
+            ConditionalOutput(writer, "formattedtitle", GetValueFromCurrentNode(node, "FormattedTitle"))
+            ConditionalOutput(writer, "collection", GetValueFromCurrentNode(node, "Collection")) ' new for TMDB grabbers
+            ConditionalOutput(writer, "collectiondetails", GetValueFromCurrentNode(node, "CollectionDetails")) ' new for TMDB grabbers
+            ConditionalOutput(writer, "edition", GetValueFromCurrentNode(node, "Edition"))
+            ConditionalOutput(writer, "studio", GetValueFromCurrentNode(node, "Studio"))
+            ConditionalOutput(writer, "budget", GetValueFromCurrentNode(node, "Budget"))
+            ConditionalOutput(writer, "imdb_id", GetValueFromCurrentNode(node, "IMDB_Id"))
+            ConditionalOutput(writer, "imdb_rank", GetValueFromCurrentNode(node, "IMDB_Rank"))
+            ConditionalOutput(writer, "tmdb_id", GetValueFromCurrentNode(node, "TMDB_Id"))
+            ConditionalOutput(writer, "checked", GetValueFromCurrentNode(node, "Checked"))
+            ConditionalOutput(writer, "url", GetValueFromCurrentNode(node, "URL"))
+            ConditionalOutput(writer, "rating", GetValueFromCurrentNode(node, "Rating"))
+            ConditionalOutput(writer, "ratinguser", GetValueFromCurrentNode(node, "RatingUser"))
+            ConditionalOutput(writer, "plot", GetValueFromCurrentNode(node, "Description"))
+            ConditionalOutput(writer, "comments", GetValueFromCurrentNode(node, "Comments"))
+            ConditionalOutput(writer, "tagline", GetValueFromCurrentNode(node, "TagLine"))
+            ConditionalOutput(writer, "tags", GetValueFromCurrentNode(node, "Tags"))
+            ConditionalOutput(writer, "runtime", GetValueFromCurrentNode(node, "Length"))
+            ConditionalOutput(writer, "certification", GetValueFromCurrentNode(node, "Certification"))
+            ConditionalOutput(writer, "mpaa", GetValueFromCurrentNode(node, "Certification"))
+            ConditionalOutput(writer, "languages", GetValueFromCurrentNode(node, "Languages"))
+            ConditionalOutput(writer, "genre", GetValueFromCurrentNode(node, "Category"))
+            ConditionalOutput(writer, "categorytrakt", GetValueFromCurrentNode(node, "CategoryTrakt"))
+            
+            ConditionalOutput(writer, "country", GetValueFromCurrentNode(node, "Country"))
+            ConditionalOutput(writer, "year", GetValueFromCurrentNode(node, "Year"))
+            ConditionalOutput(writer, "date", GetValueFromCurrentNode(node, "Date"))
+            ConditionalOutput(writer, "dateadded", GetValueFromCurrentNode(node, "DateAdded"))
+            ConditionalOutput(writer, "datereleased", GetValueFromCurrentNode(node, "DateReleased"))
+            ConditionalOutput(writer, "plot", GetValueFromCurrentNode(node, "Description"))
 
-            writer.WriteElementString("country", GetValueFromCurrentNode(node, "Country"))
-            writer.WriteElementString("year", GetValueFromCurrentNode(node, "Year"))
-            writer.WriteElementString("date", GetValueFromCurrentNode(node, "Date"))
-            writer.WriteElementString("dateadded", GetValueFromCurrentNode(node, "DateAdded"))
+            ConditionalOutput(writer, "director", GetValueFromCurrentNode(node, "Director"))
+            ConditionalOutput(writer, "credits", GetValueFromCurrentNode(node, "Writer")) 'XBMC format !
+            ConditionalOutput(writer, "writer", GetValueFromCurrentNode(node, "Writer"))
+            ConditionalOutput(writer, "composer", GetValueFromCurrentNode(node, "Composer"))
+            ConditionalOutput(writer, "borrower", GetValueFromCurrentNode(node, "Borrower"))
+            ' actors
+            Dim sep As String() = New String() {",", "|", ";"}
+            Dim roleSep As String() = New String() {"(", ")", "as"}
 
-            writer.WriteStartElement("Persons")
-            writer.WriteElementString("Borrower", GetValueFromCurrentNode(node, "Borrower"))
-            writer.WriteElementString("Director", GetValueFromCurrentNode(node, "Director"))
-            writer.WriteElementString("Producer", GetValueFromCurrentNode(node, "Producer"))
-            writer.WriteElementString("Writer", GetValueFromCurrentNode(node, "Writer"))
-            writer.WriteElementString("Actors", GetValueFromCurrentNode(node, "Actors"))
+            Dim actors As String() = GetValueFromCurrentNode(node, "Actors").Split(sep, StringSplitOptions.RemoveEmptyEntries)
+            If actors.Length > 0 Then
+                writer.WriteStartElement("actors")
+                For Each person As String In actors
+                    Dim persondetails As String() = person.Split(roleSep, StringSplitOptions.RemoveEmptyEntries)
+                    writer.WriteStartElement("actor")
+                    writer.WriteElementString("name", persondetails(0))
+                    If persondetails.Length > 1 Then
+                        writer.WriteElementString("role", persondetails(1))
+                    End If
+                    writer.WriteEndElement()
+                Next
+                writer.WriteEndElement()
+            End If
+
+            Dim directors As String() = GetValueFromCurrentNode(node, "Producer").Split(sep, StringSplitOptions.RemoveEmptyEntries)
+            If directors.Length > 0 Then
+                writer.WriteStartElement("producers")
+                For Each person As String In directors
+                    Dim persondetails As String() = person.Split(roleSep, StringSplitOptions.RemoveEmptyEntries)
+                    writer.WriteStartElement("producer")
+                    writer.WriteElementString("name", persondetails(0))
+                    If persondetails.Length > 1 Then
+                        writer.WriteElementString("role", persondetails(1))
+                    End If
+                    writer.WriteEndElement()
+                Next
+                writer.WriteEndElement()
+            End If
+
             writer.WriteEndElement()
 
-            'writer.WriteStartElement("actor")
-            'writer.WriteElementString("name", "name1")
-            'writer.WriteElementString("role", "role1")
-            'writer.WriteEndElement()
-
-            'writer.WriteStartElement("writer")
-            'writer.WriteElementString("name", "name1")
-            'writer.WriteElementString("role", "role1")
-            'writer.WriteEndElement()
-
-            writer.WriteStartElement("MediaInfo")
-            writer.WriteElementString("MediaLabel", GetValueFromCurrentNode(node, "MediaLabel"))
-            writer.WriteElementString("MediaType", GetValueFromCurrentNode(node, "MediaType"))
-            writer.WriteElementString("Size", GetValueFromCurrentNode(node, "Size"))
-            writer.WriteElementString("Disks", GetValueFromCurrentNode(node, "Disks"))
-            writer.WriteElementString("Source", GetValueFromCurrentNode(node, "Source"))
-            writer.WriteElementString("SourceTrailer", GetValueFromCurrentNode(node, "SourceTrailer"))
-            writer.WriteElementString("VideoFormat", GetValueFromCurrentNode(node, "VideoFormat"))
-            writer.WriteElementString("VideoBitrate", GetValueFromCurrentNode(node, "VideoBitrate"))
-            writer.WriteElementString("AudioFormat", GetValueFromCurrentNode(node, "AudioFormat"))
-            writer.WriteElementString("AudioBitrate", GetValueFromCurrentNode(node, "AudioBitrate"))
-            writer.WriteElementString("AudioChannelCount", GetValueFromCurrentNode(node, "AudioChannelCount"))
-            writer.WriteElementString("Resolution", GetValueFromCurrentNode(node, "Resolution"))
-            writer.WriteElementString("Framerate", GetValueFromCurrentNode(node, "Framerate"))
-            writer.WriteElementString("Subtitles", GetValueFromCurrentNode(node, "Subtitles"))
-            writer.WriteElementString("Aspectratio", GetValueFromCurrentNode(node, "Aspectratio"))
+            writer.WriteStartElement("mediainfo")
+            ConditionalOutput(writer, "medialabel", GetValueFromCurrentNode(node, "MediaLabel"))
+            ConditionalOutput(writer, "mediatype", GetValueFromCurrentNode(node, "MediaType"))
+            ConditionalOutput(writer, "size", GetValueFromCurrentNode(node, "Size"))
+            ConditionalOutput(writer, "disks", GetValueFromCurrentNode(node, "Disks"))
+            ConditionalOutput(writer, "source", GetValueFromCurrentNode(node, "Source"))
+            ConditionalOutput(writer, "sourcetrailer", GetValueFromCurrentNode(node, "SourceTrailer"))
+            ConditionalOutput(writer, "videoformat", GetValueFromCurrentNode(node, "VideoFormat"))
+            ConditionalOutput(writer, "s3d", GetValueFromCurrentNode(node, "S3D"))
+            ConditionalOutput(writer, "videobitrate", GetValueFromCurrentNode(node, "VideoBitrate"))
+            ConditionalOutput(writer, "audioformat", GetValueFromCurrentNode(node, "AudioFormat"))
+            ConditionalOutput(writer, "audiobitrate", GetValueFromCurrentNode(node, "AudioBitrate"))
+            ConditionalOutput(writer, "audiochannelcount", GetValueFromCurrentNode(node, "AudioChannelCount"))
+            ConditionalOutput(writer, "resolution", GetValueFromCurrentNode(node, "Resolution"))
+            ConditionalOutput(writer, "framerate", GetValueFromCurrentNode(node, "Framerate"))
+            ConditionalOutput(writer, "subtitles", GetValueFromCurrentNode(node, "Subtitles"))
+            ConditionalOutput(writer, "aspectratio", GetValueFromCurrentNode(node, "Aspectratio"))
+            writer.WriteEndElement()
+            
+            writer.WriteStartElement("artwork")
+            ConditionalOutput(writer, "picture", GetValueFromCurrentNode(node, "Picture"))
+            ConditionalOutput(writer, "collectionimage", GetValueFromCurrentNode(node, "CollectionImage"))
+            ConditionalOutput(writer, "fanart", GetValueFromCurrentNode(node, "Fanart"))
             writer.WriteEndElement()
 
-            writer.WriteStartElement("Artwork")
-            writer.WriteElementString("Picture", GetValueFromCurrentNode(node, "Picture"))
-            writer.WriteElementString("Fanart", GetValueFromCurrentNode(node, "Fanart"))
-            writer.WriteEndElement()
-
-            writer.WriteStartElement("Status")
-            writer.WriteElementString("IsOnline", GetValueFromCurrentNode(node, "IsOnline"))
-            writer.WriteElementString("IsOnlineTrailer", GetValueFromCurrentNode(node, "IsOnlineTrailer"))
+            writer.WriteStartElement("status")
+            ConditionalOutput(writer, "isonline", GetValueFromCurrentNode(node, "IsOnline"))
+            ConditionalOutput(writer, "isonlinetrailer", GetValueFromCurrentNode(node, "IsOnlineTrailer"))
             writer.WriteEndElement()
 
             ' End document.
@@ -1985,6 +2016,15 @@ Public Module Module1
             writer.WriteEndDocument()
         End Using
         Return True
+    End Function
+
+    Private Function ConditionalOutput(ByVal writer As XmlWriter, ByVal Element As String, ByVal currentValue As String) As Boolean
+        If currentValue Is Nothing Then ' no values exist at all
+            Return False
+        Else
+            writer.WriteElementString(Element, currentValue)
+        Return True
+        End If
     End Function
 
     Private Function GetValueFromCurrentNode(ByVal CurrentNode As XmlNode, ByVal currentAttribute As String) As String
@@ -1999,13 +2039,13 @@ Public Module Module1
         Else
             If Not attr Is Nothing Then ' check for standard attr value
                 If attr.Value Is Nothing Then
-                    ReturnValue = ""
+                    ReturnValue = Nothing
                 Else
                     ReturnValue = attr.Value
                 End If
             ElseIf Not element Is Nothing Then  ' check for enhanced element value
                 If element.InnerText Is Nothing Then
-                    ReturnValue = ""
+                    ReturnValue = Nothing
                 Else
                     ReturnValue = element.InnerText
                 End If
