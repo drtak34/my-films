@@ -21,6 +21,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
+using System.Security.Permissions;
+
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System;
@@ -71,6 +73,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
   using WakeOnLanManager = MyFilmsPlugin.MyFilms.Utils.WakeOnLanManager;
   
   using TMDB = WatTmdb.V3;
+  using System.Net;
+  using System.Threading.Tasks;
 
   /// <summary>
   /// Summary description for GUIMyFilms.
@@ -15860,11 +15864,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           try
           {
-            LogMyFilms.Info("InitializeQueuedTrailerDownloader() - waiting '{0}' seconds to try starting '{1}' trailer download threads", delayToStart, maxThreads); 
+            LogMyFilms.Info("InitializeQueuedTrailerDownloader() - waiting '{0}' seconds to try starting '{1}' trailer download threads for '{2}' queue entries", delayToStart, maxThreads, TrailertoDownloadQueue.Count); 
 
             if (!Win32API.IsConnectedToInternet())
             {
               LogMyFilms.Error("InitializeQueuedTrailerDownloader() - No Internet connection available - aborting start of Trailer download threads!");
+              return;
+            }
+
+            if (!MyFilms.conf.CacheOnlineTrailer)
+            {
+              LogMyFilms.Error("InitializeQueuedTrailerDownloader() - trailer caching is disabled - exiting !");
               return;
             }
 
@@ -16969,7 +16979,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.setGUIProperty("statusmessage", "");
         }
       }
-      while (TrailertoDownloadQueue.Count > 0 && !bgDownloadTrailer.CancellationPending);
+      while (TrailertoDownloadQueue.Count > 0 && !bgDownloadTrailer.CancellationPending && MyFilms.conf.CacheOnlineTrailer);
       bgDownloadTrailerDoneEvent.Set();
     }
 
@@ -17025,6 +17035,81 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           string destinationfile = Path.Combine(f.DestinationDirectory, (MediaPortal.Util.Utils.FilterFileName(f.MovieTitle + " (trailer) " + f.Trailername + " (" + f.Quality.Replace(" ", "") + ")" + extension)));
           if (!File.Exists(destinationfile))
           {
+            //bool stopThread = false;
+            //while (stopThread == false)
+            //{
+            //  //DoWork();
+            //}
+            
+            ////// async webclient
+            //var client = new WebClient();
+            //var uri = new Uri(address);
+            //client.DownloadFileCompleted += (sender, e) => Console.WriteLine("Finished");
+            //client.DownloadFileAsync(uri, "Hamsters.txt");
+
+            //WebClient client = new WebClient();
+            //Uri uri = new Uri(address);
+            //client.DownloadFileCompleted += (sender, e) =>
+            //{
+            //  //inspect e here:
+            //  //e.Error
+            //};
+            //client.DownloadProgressChanged += (sender, e) =>
+            //{
+            //  //e.ProgressPercentage
+            //};
+            //client.DownloadFileAsync(uri, "blabla");
+            //client.CancelAsync(); // stop download
+            
+            //////token for cancellation
+            //CancellationTokenSource cts = new CancellationTokenSource();
+            //CancellationToken token = cts.Token;
+            //WebClient wc = new WebClient();
+
+            //// To request cancellation on the token
+            //// will call CancelAsync on the WebClient.
+            //token.Register(() => wc.CancelAsync());
+
+            //Console.WriteLine("Starting request");
+            //wc.DownloadStringAsync(new Uri("http://www.contoso.com"));
+
+            ////// origihnal method code
+            //try
+            //{
+            //  Directory.CreateDirectory(Path.GetDirectoryName(localFile));
+            //  if (!File.Exists(localFile))
+            //  {
+            //    LogMyFilms.Debug("DownloadFile() - downloading file from: {0}", url);
+            //    wc.DownloadFileAsync(new Uri(url), localFile);
+            //    wc.DownloadFile(url, localFile);
+            //  }
+            //  else
+            //  {
+            //    LogMyFilms.Debug("DownloadFile() - file already exists - {0}", localFile);
+            //  }
+            //  return;
+            //}
+            //catch (Exception ex)
+            //{
+            //  LogMyFilms.Error("Download failed from '{0}' to '{1}' - Error: '{2}'", url, localFile);
+            //  LogMyFilms.Debug("Error Reason: '{0}'", ex.Message);
+            //  try
+            //  {
+            //    if (File.Exists(localFile)) File.Delete(localFile);
+            //  }
+            //  catch
+            //  {
+            //  }
+            //}
+
+
+            WebClient wc = new WebClient();
+            Task<bool> downloadTask = Grabber.Updater.DownloadFileAsyncCore(wc, new Uri("request.Address"), "request.FileName");
+            bool success = true;
+            success = downloadTask.Result;
+            (downloadTask.AsyncState as WebClient).Dispose();
+        
+
             bool bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
             if (!bDownloadSuccess) // refresh urls for download - might have timed out ....
             {
@@ -17049,7 +17134,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Warn("Error loading trailer: " + ex.Message);
         }
       }
-      while (TrailertoDownloadQueue.Count > 0 && !threadArray[threadId].CancellationPending);
+      while (TrailertoDownloadQueue.Count > 0 && !threadArray[threadId].CancellationPending && MyFilms.conf.CacheOnlineTrailer);
       threadDoneEventArray[threadId].Set();
     }
 
