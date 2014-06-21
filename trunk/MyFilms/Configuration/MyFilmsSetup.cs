@@ -117,8 +117,8 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       
       if (MyFilms_PluginMode == "normal")
       {
-        this.tabPageSave = General.TabPages[11];
-        this.General.TabPages.Remove(tabPageSave); // Disable "About" Tab
+        //this.tabPageSave = General.TabPages[11];
+        //this.General.TabPages.Remove(tabPageSave); // Disable "About" Tab
 
         this.cbTrailerAutoregister.Visible = false;
         this.cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
@@ -6697,6 +6697,11 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       {
         btnTestMode.BackColor = System.Drawing.Color.OrangeRed;
       }
+    }
+
+    private void label28_Click(object sender, EventArgs e)
+    {
+
     }
   }
 
