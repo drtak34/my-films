@@ -5166,12 +5166,12 @@ namespace Grabber_Interface
         label8.Text = "#Filename#";
         btnLoadDetailInWeb.Text = "Show";
         textRedir.Visible = false;
+        // lblCleanup.Visible = false;
         // textSearchCleanup.Visible = false;
         textUserAgent.Visible = false;
         textAccept.Visible = false;
         textHeaders.Visible = false;
         label17.Visible = false;
-        label9.Visible = false;
         label35.Visible = false;
         label36.Visible = false;
         label37.Visible = false;
@@ -5191,12 +5191,12 @@ namespace Grabber_Interface
         label8.Text = "#Search#";
         btnLoadDetailInWeb.Text = "Web";
         textRedir.Visible = true;
+        // lblCleanup.Visible = true;
         // textSearchCleanup.Visible = true;
         textUserAgent.Visible = true;
         textAccept.Visible = true;
         textHeaders.Visible = true;
         label17.Visible = true;
-        label9.Visible = true;
         label35.Visible = true;
         label36.Visible = true;
         label37.Visible = true;
