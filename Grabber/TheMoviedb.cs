@@ -236,7 +236,7 @@ namespace Grabber
 
     private static DbMovieInfo GetMovieInformation(Tmdb api, TmdbMovie movieNode, string language)
     {
-      LogMyFilms.Debug("GetMovieInformation()");
+      LogMyFilms.Debug("GetMovieInformation() - language = '" + (language ?? "") + "'");
 
       if (movieNode == null) return null;
       DbMovieInfo movie = new DbMovieInfo();
@@ -336,26 +336,53 @@ namespace Grabber
 
         TmdbConfiguration tmdbConf = api.GetConfiguration();
 
+        // load posters
         TmdbMovieImages movieImages = api.GetMovieImages(movieNode.id, language);
-        if (movieImages.posters.Count == 0)
-        {
-          movieImages = api.GetMovieImages(movieNode.id, null); // fallback to non language sopecific images
-        }
+        LogMyFilms.Debug("GetMovieInformation() - language = '" + (language ?? "") + "', Posters: '" + movieImages.posters.Count + "', Backdrops: '" + movieImages.backdrops.Count + "'");
 
         foreach (Poster poster in movieImages.posters)
         {
           movie.Posters.Add(tmdbConf.images.base_url + "w500" + poster.file_path);
         }
-
-        if (movieImages.backdrops.Count == 0)
-        {
-          movieImages = api.GetMovieImages(movieNode.id, null); // fallback to non language sopecific images
-        }
-
         foreach (Backdrop backdrop in movieImages.backdrops)
         {
           movie.Backdrops.Add(tmdbConf.images.base_url + "original" + backdrop.file_path);
         }
+
+        // english posters and backdrops
+        movieImages = api.GetMovieImages(movieNode.id, "en"); // fallback to en language images
+        LogMyFilms.Debug("GetMovieInformation() - language = 'en', Posters: '" + movieImages.posters.Count + "', Backdrops: '" + movieImages.backdrops.Count + "'");
+        if (movie.Posters.Count < 5)
+        {
+          foreach (Poster poster in movieImages.posters)
+          {
+            movie.Posters.Add(tmdbConf.images.base_url + "w500" + poster.file_path);
+          }
+        }
+        foreach (Backdrop backdrop in movieImages.backdrops)
+        {
+          movie.Backdrops.Add(tmdbConf.images.base_url + "original" + backdrop.file_path);
+        }
+
+        // non language posters and backdrops
+        movieImages = api.GetMovieImages(movieNode.id, null); // fallback to non language images
+        LogMyFilms.Debug("GetMovieInformation() - language = 'null', Posters: '" + movieImages.posters.Count + "', Backdrops: '" + movieImages.backdrops.Count + "'");
+        if (movie.Posters.Count < 11)
+        {
+          foreach (Poster poster in movieImages.posters)
+          {
+            movie.Posters.Add(tmdbConf.images.base_url + "w500" + poster.file_path);
+          }
+        }
+
+        if (movie.Backdrops.Count < 11) // only load foreign backdrops, if not anough are availabole
+        {
+          foreach (Backdrop backdrop in movieImages.backdrops)
+          {
+            movie.Backdrops.Add(tmdbConf.images.base_url + "original" + backdrop.file_path);
+          }
+        }
+        LogMyFilms.Debug("GetMovieInformation() - Totals added - Posters: '" + movie.Posters.Count + "', Backdrops: '" + movie.Backdrops.Count + "'");
       }
       catch (Exception ex)
       {
