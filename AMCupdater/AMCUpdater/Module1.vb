@@ -1979,8 +1979,6 @@ Public Module Module1
                 writer.WriteEndElement()
             End If
 
-            writer.WriteEndElement()
-
             writer.WriteStartElement("mediainfo")
             ConditionalOutput(writer, "medialabel", GetValueFromCurrentNode(node, "MediaLabel"))
             ConditionalOutput(writer, "mediatype", GetValueFromCurrentNode(node, "MediaType"))
