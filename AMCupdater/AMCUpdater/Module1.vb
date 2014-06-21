@@ -2019,7 +2019,9 @@ Public Module Module1
     Private Function ConditionalOutput(ByVal writer As XmlWriter, ByVal Element As String, ByVal currentValue As String) As Boolean
         If currentValue Is Nothing Then ' no values exist at all
             Return False
-        Else
+        Else If currentValue.Length = 0Then
+            Return False
+        Else 
             writer.WriteElementString(Element, currentValue)
         Return True
         End If
