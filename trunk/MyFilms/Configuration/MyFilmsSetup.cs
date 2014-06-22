@@ -105,13 +105,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (MyFilms_PluginMode == "normal" || MyFilms_PluginMode == "test") // 'extended' or dev settings
       {
         //hide a tab by removing it from the TabPages collection
-        this.tabPageSave = General.TabPages[13];
-        this.General.TabPages.Remove(tabPageSave); // Disable "Old Stuff" Tab, as it has stuff not for public
-        this.tabPageSave = General.TabPages[12];
-        this.General.TabPages.Remove(tabPageSave); // Disable "Other" Tab, as it has stuff not for public
+        tabPageSave = General.TabPages[13];
+        General.TabPages.Remove(tabPageSave); // Disable "Old Stuff" Tab, as it has stuff not for public
+        tabPageSave = General.TabPages[12];
+        General.TabPages.Remove(tabPageSave); // Disable "Other" Tab, as it has stuff not for public
 
-        this.ShowTrailerWhenStartingMovie.Visible = false;
-        this.numUpDownTrailersInIntro.Visible = false;
+        ShowTrailerWhenStartingMovie.Visible = false;
+        numUpDownTrailersInIntro.Visible = false;
 
       }
       
@@ -120,14 +120,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //this.tabPageSave = General.TabPages[11];
         //this.General.TabPages.Remove(tabPageSave); // Disable "About" Tab
 
-        this.cbTrailerAutoregister.Visible = false;
-        this.cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
+        // cbTrailerAutoregister.Visible = false;
+        // cbCacheOnlineTrailer.Visible = false; // local caching for trailersof TMDB online content
 
-        this.buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
-        this.buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
-        this.groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
-        this.buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
-        this.chkVirtualPathBrowsing.Visible = false; // disable global option to use virtual path browsing
+        buttonOpenTmpFile.Visible = false; // disable button to open tmp catalog in editor on EC tab
+        buttonDeleteTmpCatalog.Visible = false; // disable button to delete tmp catalog on EC tab
+        groupBoxAMCsettings.Visible = false; // disable groupbox with setting for AMC exe path
+        buttonOpenTmpFileAMC.Visible = false; // disable Launch Button to start AMC with Catalogs externally
+        // chkVirtualPathBrowsing.Visible = false; // disable global option to use virtual path browsing
+        
         // Remove unused Catalog types -- also changes index, so doesn't work with existing code !
         //CatalogType.Items.Remove("MovingPicturesXML (V1.2 process plugin)");
         //CatalogType.Items.Remove("Ant Movie Catalog Xtended (V4.1)");
