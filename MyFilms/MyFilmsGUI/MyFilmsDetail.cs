@@ -21,6 +21,7 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
+using System.Reflection;
 using WakeOnLanManager = MyFilmsPlugin.MyFilms.Utils.WakeOnLanManager;
 
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
@@ -9560,6 +9561,40 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       file = file.Replace("ç", "[cç]");
       return file;
     }
+
+    ///// <summary>
+    ///// Execute as administrator the cmd file that enable the login screen change if enable == true.
+    ///// Otherwise, execute the cmd file that disable the login screen change.
+    ///// Shows an UAC prompt.
+    ///// </summary>
+    //bool launchCmd(bool enable)
+    //{
+    //  string path = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+    //  try
+    //  {
+    //    Process p = new Process();
+    //    p.StartInfo.FileName = "cmd.exe";
+    //    if (enable)
+    //      p.StartInfo.Arguments = "/C \"" + path + "\\enable background change\"";
+    //    else
+    //      p.StartInfo.Arguments = "/C \"" + path + "\\disable background change\"";
+    //    p.StartInfo.Verb = "runas"; //shows the uac prompt
+    //    p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+    //    if (enable)
+    //    {
+    //      p.EnableRaisingEvents = true;
+    //      p.Exited += new EventHandler(p_Exited);
+    //    }
+    //    p.Start();
+    //    alreadyAskedPermission = true;
+    //    return true;
+    //  }
+    //  catch (Exception)
+    //  {
+    //    showMessage(Util.getText("error"), Util.getText("operationCanceled"), "");
+    //  }
+    //  return false;
+    //}
 
     static public void RunProgram(string exeName, string argsLine)
     {

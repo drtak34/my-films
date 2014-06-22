@@ -16307,7 +16307,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //*****************************************************************************************
     //*  Update Database in batch mode                                                        *
     //*****************************************************************************************
-    public void AsynUpdateDatabase(string config)
+    private void AsynUpdateDatabase(string config)
     {
       LogMyFilms.Info("AsynUpdateDatabase() - Launch global AMCU update with config = '" + config + "'");
       if (!bgUpdateDB.IsBusy && !bgUpdateDB.CancellationPending)
@@ -16342,16 +16342,22 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           var psi = new ProcessStartInfo();
           psi.FileName = exeName;
           psi.UseShellExecute = true;
-          psi.WindowStyle = ProcessWindowStyle.Minimized;
+          //psi.WindowStyle = ProcessWindowStyle.Minimized;
+          psi.WindowStyle = ProcessWindowStyle.Hidden;
           psi.Arguments = argsLine;
           psi.ErrorDialog = false;
+          psi.CreateNoWindow = true;
+          // psi.RedirectStandardOutput = true; // redirect output to streamreader - ToDo: add reader to use and add console output to AMCU !
+          // psi.RedirectStandardError = true;
+
           if (OSInfo.OSInfo.VistaOrLater())
           {
             psi.Verb = "runas";
           }
-          // psi.RedirectStandardOutput = true; // redirect output to streamreader - ToDo: add reader to use and add console output to AMCU !
+
           p.StartInfo = psi;
           LogMyFilms.Debug("RunAMCupdater - Starting external command: {0} {1}", p.StartInfo.FileName, p.StartInfo.Arguments);
+
           try
           {
             p.Start();
@@ -16369,11 +16375,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               Thread.Sleep(1000);
             }
           }
+          catch (System.ComponentModel.Win32Exception)
+          {
+            // Person denied UAC escallation
+            LogMyFilms.Debug("RunAMCupdater - UAC was denied ! - end");
+          }
           catch (Exception ex)
           {
-            LogMyFilms.Debug(ex.Message.ToString());
+            LogMyFilms.Debug(ex.Message);
           }
           LogMyFilms.Debug("RunAMCupdater - External command finished");
+          //string output = p.StandardOutput.ReadToEnd();
+          //string error = p.StandardError.ReadToEnd();
         }
       }
     }
