@@ -2199,96 +2199,96 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         foreach (DataColumn dc in ds.Movie.Columns)
         {
-          if (
-              (dc.ColumnName != null && dc.ColumnName != "Contents_Id" && dc.ColumnName != "Movie_Id" &&
-               dc.ColumnName != "IsOnline" && dc.ColumnName != "IsOnlineTrailer" && dc.ColumnName != "LastPosition" && dc.ColumnName != BaseMesFilms.MultiUserStateField && dc.ColumnName != "VirtualPathTitle")
-              &&
-              ((conf.StrFileType != Configuration.CatalogType.AntMovieCatalog3 || MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Restrict DB field Selection for AMC3")) ||
-              (dc.ColumnName != "IMDB_Id" && dc.ColumnName != "TMDB_Id" && dc.ColumnName != "Watched" && dc.ColumnName != "Certification" &&
-               dc.ColumnName != "Writer" && dc.ColumnName != "SourceTrailer" && dc.ColumnName != "TagLine" && dc.ColumnName != "Tags" && dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" &&
-               dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" && dc.ColumnName != "Aspectratio" && dc.ColumnName != "AudioChannelCount" && dc.ColumnName != "CategoryTrakt" &&
-               dc.ColumnName != "Favorite" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles" && dc.ColumnName != "DateWatched"))
-            )
+          if ((dc.ColumnName == null || dc.ColumnName == "Contents_Id" || dc.ColumnName == "Movie_Id" || dc.ColumnName == "IsOnline" || dc.ColumnName == "IsOnlineTrailer" || dc.ColumnName == "LastPosition" ||
+               dc.ColumnName == BaseMesFilms.MultiUserStateField || dc.ColumnName == "VirtualPathTitle") ||
+              ((conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 &&
+                !MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended,
+                  "Restrict DB field Selection for AMC3")) &&
+               (dc.ColumnName == "IMDB_Id" || dc.ColumnName == "TMDB_Id" || dc.ColumnName == "Watched" ||
+                dc.ColumnName == "Certification" || dc.ColumnName == "Writer" || dc.ColumnName == "SourceTrailer" ||
+                dc.ColumnName == "TagLine" || dc.ColumnName == "Tags" || dc.ColumnName == "RatingUser" ||
+                dc.ColumnName == "Studio" || dc.ColumnName == "IMDB_Rank" || dc.ColumnName == "Edition" ||
+                dc.ColumnName == "Aspectratio" || dc.ColumnName == "AudioChannelCount" ||
+                dc.ColumnName == "CategoryTrakt" || dc.ColumnName == "Favorite" || dc.ColumnName == "Fanart" ||
+                dc.ColumnName == "AlternateTitles" || dc.ColumnName == "DateWatched"))) continue;
+          switch (displayoption)
           {
-            switch (displayoption)
-            {
-              case "sort":
-                if (//dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && 
-                    dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
-                    dc.ColumnName != "Description" && // dc.ColumnName != "URL" && 
-                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
-                  )
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
-                break;
-              case "view":
-                if (
-                  //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
-                  )
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
-                break;
-              case "deletedetails":
-                if (
-                    dc.ColumnName != MyFilms.conf.StrStorage && dc.ColumnName != MyFilms.conf.StrStorageTrailer &&
-                    dc.ColumnName != MyFilms.conf.StrTitle1 && // dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Number"
-                  )
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
-                break;
-              case "titles":
-                if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle") // || dc.ColumnName == "VirtualPathTitle" || dc.ColumnName == "AlternateTitles"
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
-                break;
-              case "viewitems":
-                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart") // added "DatedAdded" to remove filter
-                  itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
-                break;
+            case "sort":
+              if (//dc.ColumnName != "OriginalTitle" && dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "FormattedTitle" && 
+                dc.ColumnName != "IndexedTitle" && dc.ColumnName != "Comments" &&
+                dc.ColumnName != "Description" && // dc.ColumnName != "URL" && 
+                dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
+                )
+                itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
+              break;
+            case "view":
+              if (
+                //dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                dc.ColumnName != "Description" && dc.ColumnName != "Comments" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart" && dc.ColumnName != "AlternateTitles"
+                )
+                itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
+              break;
+            case "deletedetails":
+              if (
+                dc.ColumnName != MyFilms.conf.StrStorage && dc.ColumnName != MyFilms.conf.StrStorageTrailer &&
+                dc.ColumnName != MyFilms.conf.StrTitle1 && // dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                dc.ColumnName != "Number"
+                )
+                itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
+              break;
+            case "titles":
+              if (dc.ColumnName == "TranslatedTitle" || dc.ColumnName == "OriginalTitle" || dc.ColumnName == "FormattedTitle") // || dc.ColumnName == "VirtualPathTitle" || dc.ColumnName == "AlternateTitles"
+                itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
+              break;
+            case "viewitems":
+              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "Picture" && dc.ColumnName != "Fanart") // added "DatedAdded" to remove filter
+                itemsToDisplay.Add(new string[] { dc.ColumnName, BaseMesFilms.TranslateColumn(dc.ColumnName) });
+              break;
 
-              default:
-                if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) ||
-                    dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
-                    dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
-                {
-                  //AntStorage.Items.Add(dc.ColumnName);
-                  //AntStorageTrailer.Items.Add(dc.ColumnName);
-                }
+            default:
+              if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) ||
+                  dc.ColumnName == "URL" || dc.ColumnName == "Comments" || dc.ColumnName == "Borrower" ||
+                  dc.ColumnName == "Languages" || dc.ColumnName == "Subtitles")
+              {
+                //AntStorage.Items.Add(dc.ColumnName);
+                //AntStorageTrailer.Items.Add(dc.ColumnName);
+              }
 
-                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
-                {
-                  //AntFilterItem1.Items.Add(dc.ColumnName);
-                  //AntFilterItem2.Items.Add(dc.ColumnName);
-                }
-                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
-                {
-                  //AntSearchField.Items.Add(dc.ColumnName);
-                  //AntUpdField.Items.Add(dc.ColumnName);
-                }
-                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
-                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-                {
-                  //AntSearchItem1.Items.Add(dc.ColumnName);
-                  //AntSearchItem2.Items.Add(dc.ColumnName);
-                }
-                if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
-                    dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
-                    dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
-                    dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-                {
-                  //AntSort1.Items.Add(dc.ColumnName);
-                  //AntSort2.Items.Add(dc.ColumnName);
-                  //AntIdentItem.Items.Add(dc.ColumnName);
-                }
-                if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
-                {
-                  //AntUpdItem1.Items.Add(dc.ColumnName);
-                  //AntUpdItem2.Items.Add(dc.ColumnName);
-                  //cbfdupdate.Items.Add(dc.ColumnName);
-                  //cbWatched.Items.Add(dc.ColumnName);
-                  //CmdPar.Items.Add(dc.ColumnName);
-                }
-                break;
-            }
+              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded") // added "DatedAdded" to remove filter
+              {
+                //AntFilterItem1.Items.Add(dc.ColumnName);
+                //AntFilterItem2.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded")
+              {
+                //AntSearchField.Items.Add(dc.ColumnName);
+                //AntUpdField.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Actors" && dc.ColumnName != "DateAdded" &&
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                //AntSearchItem1.Items.Add(dc.ColumnName);
+                //AntSearchItem2.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "TranslatedTitle" && dc.ColumnName != "OriginalTitle" && dc.ColumnName != "FormattedTitle" &&
+                  dc.ColumnName != "Year" && dc.ColumnName != "Date" && dc.ColumnName != "DateAdded" && // disabled for Doug testing
+                  dc.ColumnName != "Length" && dc.ColumnName != "Rating" &&
+                  dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                //AntSort1.Items.Add(dc.ColumnName);
+                //AntSort2.Items.Add(dc.ColumnName);
+                //AntIdentItem.Items.Add(dc.ColumnName);
+              }
+              if (dc.ColumnName != "DateAdded" && dc.ColumnName != "RecentlyAdded" && dc.ColumnName != "AgeAdded" && dc.ColumnName != "IndexedTitle")
+              {
+                //AntUpdItem1.Items.Add(dc.ColumnName);
+                //AntUpdItem2.Items.Add(dc.ColumnName);
+                //cbfdupdate.Items.Add(dc.ColumnName);
+                //cbWatched.Items.Add(dc.ColumnName);
+                //CmdPar.Items.Add(dc.ColumnName);
+              }
+              break;
           }
         }
       }
@@ -2974,7 +2974,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       conf.ViewContext = (conf.BoolCollection) ? ViewContext.MovieCollection : ViewContext.Movie;
       LogMyFilms.Debug("GetFilmList finished!");
 
-      // GetOnlineMoviesFromTMDBforFilmList(); // add Online Movies from TMDB
+      GetOnlineMoviesFromTMDBforFilmList(); // add Online Movies from TMDB
       GetImagesFilmList(facadeDownloadItems);
       #endregion
       return !(this.facadeFilms.Count == 1 && item.IsFolder); //ret false if single folder found
@@ -2990,235 +2990,237 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void GetOnlineMoviesFromTMDBforFilmList()
     {
+      return;
       #region add online movies from TMDB
-      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "GetFilmlist() - Online info on person film list") && facadeFilms.Count < 200 && IsPersonsField(conf.WStrSort)) // only in "related display"
+      if (!MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "GetFilmlist() - Online info on person film list") || facadeFilms.Count >= 200 || !IsPersonsField(conf.WStrSort)) 
+        return;
+
+      var facadeDownloadItems = new List<GUIListItem>();
+      bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
+      string currentImage = "";
+      //sortascending = conf.StrSortSens;
+      //sortfield = conf.StrSorta;
+      string sortascending;
+      string sortfield;
+      if (conf.BoolCollection && Helper.FieldIsSet(conf.StrSortaInHierarchies)) // only use Collection sort, if there is a value - otherwise use default
       {
-        var facadeDownloadItems = new List<GUIListItem>();
-        bool IsPinIconsAvailable = LoadWatchedFlagPossible(); // do it only once, as it requires 4 IO ops
-        string currentImage = "";
-        //sortascending = conf.StrSortSens;
-        //sortfield = conf.StrSorta;
-        string sortascending;
-        string sortfield;
-        if (conf.BoolCollection && Helper.FieldIsSet(conf.StrSortaInHierarchies)) // only use Collection sort, if there is a value - otherwise use default
-        {
-          LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:    '" + conf.StrSortaInHierarchies + "'");
-          LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
-          sortascending = conf.StrSortSensInHierarchies;
-          sortfield = conf.StrSortaInHierarchies;
-        }
-        else
-        {
-          LogMyFilms.Debug("(GetFilmList) - conf.StrSorta:                  '" + conf.StrSorta + "'");
-          LogMyFilms.Debug("(GetFilmList) - conf.StrSortSens:               '" + conf.StrSortSens + "'");
-          sortascending = conf.StrSortSens;
-          sortfield = conf.StrSorta;
-          // special handling for Box Sets ! -> use mastertitle for sorting to get proper grouping of the collections/groups/box-sets
-          if (conf.StrViewSelect.Contains(@"*\*"))
-          {
-            sortfield = conf.StrTitle1;
-            LogMyFilms.Debug("(GetFilmList) - special case: set sort field to master title for box set ! -> sortfield = '" + sortfield + "'");
-          }
-        }
-        if (string.IsNullOrEmpty(sortfield))
-        {
-          sortfield = MyFilms.conf.StrTitle1;
-          LogMyFilms.Error("(GetFilmList) - sort field not properly set - resetting to mastertitle to avoid sort exception !");
-        }
-
-        IComparer myComparer = new AlphanumComparatorFast();
-        string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
-        Grabber.TheMoviedb tmdbapi = new Grabber.TheMoviedb();
-        TMDB.Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
-        TMDB.TmdbConfiguration tmdbConf = api.GetConfiguration();
-        TmdbPersonSearch personSearch = api.SearchPerson(conf.Wselectedlabel, 1);
-        GUIListItem item = null;
-        LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personSearch.results.Count + "' results found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
-        if (personSearch.results.Count > 0)
-        {
-          TmdbPersonCredits personCredits = api.GetPersonCredits(personSearch.results[0].id);
-          LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personCredits.cast.Count + "' cast movies found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
-          LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personCredits.crew.Count + "' crew movies found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
-          foreach (CastCredit personMovie in personCredits.cast)
-          {
-            bool toBeAddedToList = true;
-            int iInsertAt = int.MaxValue;
-            for (int i = 0; i < facadeFilms.Count; i++)
-            {
-              if (facadeFilms[i].Label == personMovie.title)
-                toBeAddedToList = false;
-              else
-              {
-                try
-                {
-                  if (sortfield == "Year" && personMovie.release_date.Length > 3)
-                  {
-                    if (sortascending == " ASC")
-                    {
-                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) > Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
-                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) < 0) iInsertAt = i;
-                    }
-                    else
-                    {
-                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) < Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
-                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) > 0) iInsertAt = i;
-                    }
-                  }
-                }
-                catch (Exception ex)
-                {
-                  LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
-                }
-              }
-            }
-            LogMyFilms.Debug("GetFilmList() - OnlineInfo - add = '" + toBeAddedToList + "' for '" + personMovie.title + "' (" + personMovie.release_date + ") to facade at position '" + ((iInsertAt != int.MaxValue) ? iInsertAt.ToString() : "end") + "'");
-            if (!toBeAddedToList) continue;
-
-            #region add item
-            item = new GUIListItem();
-            item.Label = personMovie.title; //reset to current single folder as > 1 entries
-            item.IsFolder = true;
-            item.ThumbnailImage = conf.DefaultCover;
-            item.IconImage = conf.DefaultCover;
-            #region Label2 ...
-            if (!MyFilms.conf.OnlyTitleList)
-            {
-              switch (sortfield)
-              {
-                case "TranslatedTitle":
-                case "OriginalTitle":
-                case "FormattedTitle":
-                case "Year":
-                  item.Label2 = (personMovie != null && personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : (personMovie.release_date ?? "");
-                  break;
-                case "Date":
-                case "DateAdded":
-                  break;
-                case "Rating":
-                  break;
-              }
-            }
-            #endregion
-            #region Label3 ...
-            item.Label3 = personMovie.character + " (cast)";
-            #endregion
-            #region Watched Status
-            item.IsPlayed = false;
-            #endregion
-
-            #region Availability Status
-            item.IsRemote = true;
-            // load special icons to indicate watched/available flags in listcontrol
-            if (IsPinIconsAvailable) LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
-            #endregion
-
-            #region Cover Picture
-            currentImage = string.Empty;
-            currentImage = tmdbConf.images.base_url + "w500" + personMovie.poster_path;
-            item.ThumbnailImage = currentImage;
-            item.IconImageBig = currentImage;
-            item.IconImage = currentImage;
-            item.TVTag = personMovie;
-            #endregion
-
-            facadeDownloadItems.Add(item);
-            item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-            if (iInsertAt == int.MaxValue)
-              facadeFilms.Add(item);
-            else
-              facadeFilms.Insert(0, item);
-            #endregion
-          }
-          foreach (CrewCredit personMovie in personCredits.crew)
-          {
-            bool toBeAddedToList = true;
-            int iInsertAt = int.MaxValue;
-            for (int i = 0; i < facadeFilms.Count; i++)
-            {
-              if (facadeFilms[i].Label == personMovie.title)
-                toBeAddedToList = false;
-              else
-              {
-                try
-                {
-                  if (sortfield == "Year" && personMovie.release_date.Length > 3)
-                  {
-                    if (sortascending == " ASC")
-                    {
-                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) > Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
-                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) < 0) iInsertAt = i;
-                    }
-                    else
-                    {
-                      //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) < Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
-                      if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) > 0) iInsertAt = i;
-                    }
-                  }
-                }
-                catch (Exception ex)
-                {
-                  LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
-                }
-              }
-            }
-            LogMyFilms.Debug("GetFilmList() - OnlineInfo - add = '" + toBeAddedToList + "' for '" + personMovie.title + "' (" + personMovie.release_date + ") to facade at position '" + ((iInsertAt != int.MaxValue) ? iInsertAt.ToString() : "end") + "'");
-            if (!toBeAddedToList) continue;
-
-            #region add item
-            item = new GUIListItem();
-            item.Label = personMovie.title; //reset to current single folder as > 1 entries
-            item.IsFolder = true;
-            item.ThumbnailImage = conf.DefaultCover;
-            item.IconImage = conf.DefaultCover;
-            #region Label2 ...
-            if (!MyFilms.conf.OnlyTitleList)
-            {
-              switch (sortfield)
-              {
-                case "TranslatedTitle":
-                case "OriginalTitle":
-                case "FormattedTitle":
-                case "Year":
-                  item.Label2 = (personMovie != null && personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : (personMovie.release_date ?? "");
-                  break;
-                case "Date":
-                case "DateAdded":
-                  break;
-                case "Rating":
-                  break;
-              }
-            }
-            #endregion
-            #region Label3 ...
-            item.Label3 = personMovie.job + " (" + personMovie.department + ")";
-            #endregion
-            #region Watched Status
-            item.IsPlayed = false;
-            #endregion
-
-            #region Availability Status
-            item.IsRemote = true;
-            // load special icons to indicate watched/available flags in listcontrol
-            if (IsPinIconsAvailable) LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
-            #endregion
-
-            #region Cover Picture
-            currentImage = string.Empty;
-            currentImage = tmdbConf.images.base_url + "w500" + personMovie.poster_path;
-            item.ThumbnailImage = currentImage;
-            item.IconImageBig = currentImage;
-            item.IconImage = currentImage;
-            item.TVTag = personMovie;
-            #endregion
-
-            facadeDownloadItems.Add(item);
-            item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-            facadeFilms.Insert(0, item);
-            #endregion
-          }
-        }
-        GetImagesFilmList(facadeDownloadItems);
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSortaInHierarchies:    '" + conf.StrSortaInHierarchies + "'");
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSortSensInHierarchies: '" + conf.StrSortSensInHierarchies + "'");
+        sortascending = conf.StrSortSensInHierarchies;
+        sortfield = conf.StrSortaInHierarchies;
       }
+      else
+      {
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSorta:                  '" + conf.StrSorta + "'");
+        LogMyFilms.Debug("(GetFilmList) - conf.StrSortSens:               '" + conf.StrSortSens + "'");
+        sortascending = conf.StrSortSens;
+        sortfield = conf.StrSorta;
+        // special handling for Box Sets ! -> use mastertitle for sorting to get proper grouping of the collections/groups/box-sets
+        if (conf.StrViewSelect.Contains(@"*\*"))
+        {
+          sortfield = conf.StrTitle1;
+          LogMyFilms.Debug("(GetFilmList) - special case: set sort field to master title for box set ! -> sortfield = '" + sortfield + "'");
+        }
+      }
+      if (string.IsNullOrEmpty(sortfield))
+      {
+        sortfield = MyFilms.conf.StrTitle1;
+        LogMyFilms.Error("(GetFilmList) - sort field not properly set - resetting to mastertitle to avoid sort exception !");
+      }
+
+      IComparer myComparer = new AlphanumComparatorFast();
+      string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+      Grabber.TheMoviedb tmdbapi = new Grabber.TheMoviedb();
+      TMDB.Tmdb api = new TMDB.Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+      TMDB.TmdbConfiguration tmdbConf = api.GetConfiguration();
+      TmdbPersonSearch personSearch = api.SearchPerson(conf.Wselectedlabel, 1);
+      GUIListItem item = null;
+      LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personSearch.results.Count + "' results found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
+      if (personSearch.results.Count > 0)
+      {
+        TmdbPersonCredits personCredits = api.GetPersonCredits(personSearch.results[0].id);
+        LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personCredits.cast.Count + "' cast movies found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
+        LogMyFilms.Debug("GetFilmList() - OnlineInfo - '" + personCredits.crew.Count + "' crew movies found for '" + (conf.Wselectedlabel ?? "") + "' ('" + conf.WStrSort + "')!");
+        foreach (CastCredit personMovie in personCredits.cast)
+        {
+          bool toBeAddedToList = true;
+          int iInsertAt = int.MaxValue;
+          for (int i = 0; i < facadeFilms.Count; i++)
+          {
+            if (facadeFilms[i].Label == personMovie.title)
+              toBeAddedToList = false;
+            else
+            {
+              try
+              {
+                if (sortfield == "Year" && personMovie.release_date.Length > 3)
+                {
+                  if (sortascending == " ASC")
+                  {
+                    //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) > Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                    if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) < 0) iInsertAt = i;
+                  }
+                  else
+                  {
+                    //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) < Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                    if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) > 0) iInsertAt = i;
+                  }
+                }
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
+              }
+            }
+          }
+          LogMyFilms.Debug("GetFilmList() - OnlineInfo - add = '" + toBeAddedToList + "' for '" + personMovie.title + "' (" + personMovie.release_date + ") to facade at position '" + ((iInsertAt != int.MaxValue) ? iInsertAt.ToString() : "end") + "'");
+          if (!toBeAddedToList) continue;
+
+          #region add item
+          item = new GUIListItem();
+          item.Label = personMovie.title; //reset to current single folder as > 1 entries
+          item.IsFolder = true;
+          item.ThumbnailImage = conf.DefaultCover;
+          item.IconImage = conf.DefaultCover;
+          #region Label2 ...
+          if (!MyFilms.conf.OnlyTitleList)
+          {
+            switch (sortfield)
+            {
+              case "TranslatedTitle":
+              case "OriginalTitle":
+              case "FormattedTitle":
+              case "Year":
+                item.Label2 = (personMovie != null && personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : (personMovie.release_date ?? "");
+                break;
+              case "Date":
+              case "DateAdded":
+                break;
+              case "Rating":
+                break;
+            }
+          }
+          #endregion
+          #region Label3 ...
+          item.Label3 = personMovie.character + " (cast)";
+          #endregion
+          #region Watched Status
+          item.IsPlayed = false;
+          #endregion
+
+          #region Availability Status
+          item.IsRemote = true;
+          // load special icons to indicate watched/available flags in listcontrol
+          if (IsPinIconsAvailable) LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
+          #endregion
+
+          #region Cover Picture
+          currentImage = string.Empty;
+          currentImage = tmdbConf.images.base_url + "w500" + personMovie.poster_path;
+          item.ThumbnailImage = currentImage;
+          item.IconImageBig = currentImage;
+          item.IconImage = currentImage;
+          item.TVTag = personMovie;
+          #endregion
+
+          facadeDownloadItems.Add(item);
+          item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+          if (iInsertAt == int.MaxValue)
+            facadeFilms.Add(item);
+          else
+            facadeFilms.Insert(0, item);
+          #endregion
+        }
+        foreach (CrewCredit personMovie in personCredits.crew)
+        {
+          bool toBeAddedToList = true;
+          int iInsertAt = int.MaxValue;
+          for (int i = 0; i < facadeFilms.Count; i++)
+          {
+            if (facadeFilms[i].Label == personMovie.title)
+              toBeAddedToList = false;
+            else
+            {
+              try
+              {
+                if (sortfield == "Year" && personMovie.release_date.Length > 3)
+                {
+                  if (sortascending == " ASC")
+                  {
+                    //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) > Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                    if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) < 0) iInsertAt = i;
+                  }
+                  else
+                  {
+                    //if (Convert.ToInt32(personMovie.release_date.Substring(0, 4)) < Convert.ToInt32(facadeFilms[i].Label2)) iInsertAt = i;
+                    if (myComparer.Compare(personMovie.release_date, facadeFilms[i].Label2) > 0) iInsertAt = i;
+                  }
+                }
+              }
+              catch (Exception ex)
+              {
+                LogMyFilms.Debug("GetFilmList() - Error in year parsing: " + ex.Message + " - " + ex.StackTrace);
+              }
+            }
+          }
+          LogMyFilms.Debug("GetFilmList() - OnlineInfo - add = '" + toBeAddedToList + "' for '" + personMovie.title + "' (" + personMovie.release_date + ") to facade at position '" + ((iInsertAt != int.MaxValue) ? iInsertAt.ToString() : "end") + "'");
+          if (!toBeAddedToList) continue;
+
+          #region add item
+          item = new GUIListItem();
+          item.Label = personMovie.title; //reset to current single folder as > 1 entries
+          item.IsFolder = true;
+          item.ThumbnailImage = conf.DefaultCover;
+          item.IconImage = conf.DefaultCover;
+          #region Label2 ...
+          if (!MyFilms.conf.OnlyTitleList)
+          {
+            switch (sortfield)
+            {
+              case "TranslatedTitle":
+              case "OriginalTitle":
+              case "FormattedTitle":
+              case "Year":
+                item.Label2 = (personMovie != null && personMovie.release_date.Length > 3) ? personMovie.release_date.Substring(0, 4) : (personMovie.release_date ?? "");
+                break;
+              case "Date":
+              case "DateAdded":
+                break;
+              case "Rating":
+                break;
+            }
+          }
+          #endregion
+          #region Label3 ...
+          item.Label3 = personMovie.job + " (" + personMovie.department + ")";
+          #endregion
+          #region Watched Status
+          item.IsPlayed = false;
+          #endregion
+
+          #region Availability Status
+          item.IsRemote = true;
+          // load special icons to indicate watched/available flags in listcontrol
+          if (IsPinIconsAvailable) LoadWatchedFlag(item, item.IsPlayed, !item.IsRemote);
+          #endregion
+
+          #region Cover Picture
+          currentImage = string.Empty;
+          currentImage = tmdbConf.images.base_url + "w500" + personMovie.poster_path;
+          item.ThumbnailImage = currentImage;
+          item.IconImageBig = currentImage;
+          item.IconImage = currentImage;
+          item.TVTag = personMovie;
+          #endregion
+
+          facadeDownloadItems.Add(item);
+          item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+          facadeFilms.Insert(0, item);
+          #endregion
+        }
+      }
+      GetImagesFilmList(facadeDownloadItems);
+
       #endregion
     }
 
@@ -4373,12 +4375,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         choiceView.Add("Menu");
 
         // add online movie lists as option
-
-        if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Menu: add online movie lists to selection"))
-        {
-          dlg.Add("*** " + GUILocalizeStrings.Get(10798825) + " ***"); // 10798825 online information
-          choiceView.Add("onlineinfo");
-        }
+        dlg.Add("*** " + GUILocalizeStrings.Get(10798825) + " ***"); // 10798825 online information
+        choiceView.Add("onlineinfo");
 
         dlg.DoModal(GetID);
         if (dlg.SelectedLabel == -1) return;
@@ -4687,18 +4685,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #endregion
 
         #region add online info entry
-        if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Menu: Edit Value and Filter via GUI")) // check if specialmode is configured for disabled features
-        {
-          item = new GUIListItem();
-          item.Label = "*** " + GUILocalizeStrings.Get(10798825) + " ***"; // 10798825 online information
-          item.DVDLabel = "onlineinfo";
-          item.IsFolder = true;
-          item.ThumbnailImage = GetImageforMenu(item);
-          item.IconImage = item.ThumbnailImage;
-          item.IconImageBig = item.ThumbnailImage;
-          item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
-          if (facadeFilms != null) facadeFilms.Add(item);
-        }
+        item = new GUIListItem();
+        item.Label = "*** " + GUILocalizeStrings.Get(10798825) + " ***"; // 10798825 online information
+        item.DVDLabel = "onlineinfo";
+        item.IsFolder = true;
+        item.ThumbnailImage = GetImageforMenu(item);
+        item.IconImage = item.ThumbnailImage;
+        item.IconImageBig = item.ThumbnailImage;
+        item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+        if (facadeFilms != null) facadeFilms.Add(item);
         #endregion
       }
       else
@@ -5394,7 +5389,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       //choiceViewGlobalOptions.Add("filterdbcustomfilter");
 
       // Change global Movie type Filter (all, 2d, 3d)
-      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Global Filter 3D movies"))
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Filter 3D movies"))
       {
         dlg1.Add(string.Format(GUILocalizeStrings.Get(10798972), GlobalFilterMovieFormat3D));
         choiceViewGlobalOptions.Add("filter3d");
@@ -9716,28 +9711,29 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlg1.Add(string.Format(GUILocalizeStrings.Get(1079841), conf.StrViewDfltItem)); // change default view
           choiceViewGlobalOptions.Add("changedefaultview");
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Settings for default config and always default config"))
+          //if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "wtf ..."))
+          //{
+          //}
+
+          if (MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798628)));
+          if (!MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798629)));
+          choiceViewGlobalOptions.Add("alwaysdefaultconfig");
+
+          string cDefaultConfig = "";
+          using (XmlSettings xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
           {
-            if (MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798628)));
-            if (!MyFilms.conf.AlwaysShowConfigMenu) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079920), GUILocalizeStrings.Get(10798629)));
-            choiceViewGlobalOptions.Add("alwaysdefaultconfig");
-
-            string cDefaultConfig = "";
-            using (XmlSettings xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
-            {
-              cDefaultConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
-            }
-            dlg1.Add(string.Format(GUILocalizeStrings.Get(1079842), cDefaultConfig)); // change default start config
-            choiceViewGlobalOptions.Add("changedefaultconfig");
-
-            if (MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798628))); // Always ask for playback quality for online content ({0})
-            if (!MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798629)));
-            choiceViewGlobalOptions.Add("askforplaybackquality");
-
-            if (MyFilms.conf.CacheOnlineTrailer) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079918), GUILocalizeStrings.Get(10798628))); // Cache trailers for online content ({0})
-            if (!MyFilms.conf.CacheOnlineTrailer) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079918), GUILocalizeStrings.Get(10798629)));
-            choiceViewGlobalOptions.Add("cacheonlinetrailer");
+            cDefaultConfig = xmlConfig.ReadXmlConfig("MyFilms", "MyFilms", "Default_Config", string.Empty);
           }
+          dlg1.Add(string.Format(GUILocalizeStrings.Get(1079842), cDefaultConfig)); // change default start config
+          choiceViewGlobalOptions.Add("changedefaultconfig");
+
+          if (MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798628))); // Always ask for playback quality for online content ({0})
+          if (!MyFilms.conf.BoolAskForPlaybackQuality) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079919), GUILocalizeStrings.Get(10798629)));
+          choiceViewGlobalOptions.Add("askforplaybackquality");
+
+          if (MyFilms.conf.CacheOnlineTrailer) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079918), GUILocalizeStrings.Get(10798628))); // Cache trailers for online content ({0})
+          if (!MyFilms.conf.CacheOnlineTrailer) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079918), GUILocalizeStrings.Get(10798629)));
+          choiceViewGlobalOptions.Add("cacheonlinetrailer");
 
           //if (MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798628)));
           //if (!MyFilms.conf.UseListViewForGoups) dlg1.Add(string.Format(GUILocalizeStrings.Get(1079897), GUILocalizeStrings.Get(10798629)));
@@ -9799,7 +9795,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewGlobalUpdates.Add("downfanart");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Update all PersonInfos")) // check if specialmode is configured for disabled features
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Update all PersonInfos"))
           {
             dlg2.Add(GUILocalizeStrings.Get(10798715)); // Load Person infos - all persons
             // Search all personinfos
@@ -9812,13 +9808,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewGlobalUpdates.Add("trailer-all");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Update - Download all (missing) trailers"))
+          // Global Update - Download all (missing) trailers"
+          if (MyFilms.conf.BoolEnableOnlineServices)
           {
-            if (MyFilms.conf.BoolEnableOnlineServices)
-            {
-              dlg2.Add("Download missing Trailers (TMDB)");
-              choiceViewGlobalUpdates.Add("trailer-all-download");
-            }
+            dlg2.Add("Download missing Trailers (TMDB)");
+            choiceViewGlobalUpdates.Add("trailer-all-download");
           }
 
           dlg2.Add(GUILocalizeStrings.Get(10798717)); // incomplete movie data
@@ -11208,22 +11202,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         #region Moviecontext and Groupcontext and TMDBonline context - add OnlineVideos and MyFilms search
         if (facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll && conf.ViewContext != ViewContext.Group))
         {
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Context Search for OnlineVideos"))
+          if (Helper.IsOnlineVideosAvailableAndEnabled)
           {
-            if (Helper.IsOnlineVideosAvailableAndEnabled)
-            {
-              dlg.Add(GUILocalizeStrings.Get(10798600)); // Search OnlineVideos ... 
-              choice.Add("searchonlinevideos");
-            }
+            dlg.Add(GUILocalizeStrings.Get(10798600)); // Search OnlineVideos ... TMDB Context Search for OnlineVideos
+            choice.Add("searchonlinevideos");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Context Search for MyFilms (local)"))
+          if (conf.ViewContext == ViewContext.TmdbMovies || conf.ViewContext == ViewContext.Person)
           {
-            if (conf.ViewContext == ViewContext.TmdbMovies || conf.ViewContext == ViewContext.Person)
-            {
-              dlg.Add(GUILocalizeStrings.Get(10798601)); // Search MyFilms ... 
-              choice.Add("searchmyfilms");
-            }
+            dlg.Add(GUILocalizeStrings.Get(10798601)); // Search MyFilms ... TMDB Context Search for MyFilms (local)
+            choice.Add("searchmyfilms");
           }
 
           if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: NZB Context Search for MyFilms (local)"))
@@ -11278,11 +11266,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
 
             // play random movies or trailers in "view context" (selected group)
-            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: random trailer scrobbling in views context"))
-            {
-              dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
-              choice.Add("playrandomtrailers");
-            }
+            dlg.Add(GUILocalizeStrings.Get(10798980)); // play random trailers
+            choice.Add("playrandomtrailers");
           }
 
           if (MyFilms.conf.GlobalUnwatchedOnlyValue != null && MyFilms.conf.StrWatchedField.Length > 0)
@@ -11292,7 +11277,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choice.Add("togglewatchedstatus");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: TMDB API play trailer")) // if (conf.ViewContext != ViewContext.TmdbMovies)
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: TMDB API play trailer - not yet implemented!")) // if (conf.ViewContext != ViewContext.TmdbMovies)
           {
             //// not yet implemented
             //dlg.Add(GUILocalizeStrings.Get(10798710) + " (TMDB)");//play trailer
@@ -11324,20 +11309,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               choice.Add("addtocollection");
             }
 
-            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: remove or add all films from collection"))
+            if (facadeFilms.Count > 1) // options only available, if there is multiple entries in facade list
             {
-              if (facadeFilms.Count > 1) // options only available, if there is multiple entries in facade list
+              if (conf.ViewContext == ViewContext.MovieCollection)
               {
-                if (conf.ViewContext == ViewContext.MovieCollection)
-                {
-                  dlg.Add(GUILocalizeStrings.Get(1079802)); // Remove all films from box set
-                  choice.Add("removefromcollectionall");
-                }
-                else
-                {
-                  dlg.Add(GUILocalizeStrings.Get(1079801)); // Add all films to box set ...
-                  choice.Add("addtocollectionall");
-                }
+                dlg.Add(GUILocalizeStrings.Get(1079802)); // Remove all films from box set
+                choice.Add("removefromcollectionall");
+              }
+              else
+              {
+                dlg.Add(GUILocalizeStrings.Get(1079801)); // Add all films to box set ...
+                choice.Add("addtocollectionall");
               }
             }
           }
@@ -11380,39 +11362,31 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Movies - show view options - only enabled when test features are enabled"))
-          {
-            dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
-            choice.Add("submenuoptions");
-          }
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
+          choice.Add("submenuoptions");
         }
         else if (this.facadeFilms.SelectedListItemIndex > -1 && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // when films with active movie facade
         {
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Movies with current collection selected -> update submenu!"))
-          {
-            dlg.Add(GUILocalizeStrings.Get(10798702)); // "Updates ..."
-            choice.Add("submenuupdates");
-          }
+          // Movie list with a group/collection selected ->  show update submenu!
+          dlg.Add(GUILocalizeStrings.Get(10798702)); // "Updates ..."
+          choice.Add("submenuupdates");
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Movies - show view options - only enabled when test features are enabled"))
-          {
-            dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
-            choice.Add("submenuoptions");
-          }
+          dlg.Add(GUILocalizeStrings.Get(10799502)); // View Options ...
+          choice.Add("submenuoptions");
         }
         #endregion
 
         #region Personcontext
         if (this.facadeFilms.SelectedListItemIndex > -1 && this.facadeFilms.SelectedListItem.IsFolder && IsPersonField(conf.WStrSort) && (conf.ViewContext != ViewContext.Menu && conf.ViewContext != ViewContext.MenuAll))
         {
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Artist: Show Infos of person via person dialog")) // check if specialmode is configured for disabled features
-          {
-            //dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
-            //choice.Add("artistdetail");
+          //if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context Artist: Show MP person dialog"))
+          //{
+          //  //dlg.Add(GUILocalizeStrings.Get(1079884)); //Show Infos of person (load persons detail dialog - MesFilmsActorDetails) - only available in personlist
+          //  //choice.Add("artistdetail");
+          //}
 
-            dlg.Add(GUILocalizeStrings.Get(1079893)); // Filmographie (TMDB)
-            choice.Add("artistdetailtmdb");
-          }
+          dlg.Add(GUILocalizeStrings.Get(1079893)); // Filmographie (TMDB)
+          choice.Add("artistdetailtmdb");
 
           dlg.Add(GUILocalizeStrings.Get(10799501)); // "Show web details ..."
           choice.Add("submenuwebdetails");
@@ -11598,23 +11572,17 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Moviecontext
             if (this.facadeFilms.SelectedListItemIndex > -1 && !this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext != ViewContext.TmdbMovies)
             {
-              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Collection images download"))
+              if (!this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext == ViewContext.MovieCollection) // inside a collection a selected collection movie
               {
-                if (!this.facadeFilms.SelectedListItem.IsFolder && conf.ViewContext == ViewContext.MovieCollection) // inside a collection a selected collection movie
-                {
-                  dlg.Add(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
-                  choice.Add("collectionimages");
-                }
+                dlg.Add(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
+                choice.Add("collectionimages");
               }
 
-              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB trailer downloads"))
-              {
-                dlg.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
-                choice.Add("downloadtrailertmdb");
+              dlg.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
+              choice.Add("downloadtrailertmdb");
 
-                dlg.Add(GUILocalizeStrings.Get(10798991)); // Load all trailers for these movies (TMDB)
-                choice.Add("downloadtrailertmdball");
-              }
+              dlg.Add(GUILocalizeStrings.Get(10798991)); // Load all trailers for these movies (TMDB) (in a view)
+              choice.Add("downloadtrailertmdball");
 
               if (conf.UseThumbsForPersons && !string.IsNullOrEmpty(conf.StrPathArtist))
               {
@@ -11630,11 +11598,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
             else if (this.facadeFilms.SelectedListItem.IsFolder && (conf.ViewContext == ViewContext.Movie || conf.ViewContext == ViewContext.MovieCollection)) // in a film list, a "collection folder"
             {
-              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: TMDB Collection images download"))
-              {
-                dlg.Add(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
-                choice.Add("collectionimages");
-              }
+              // TMDB Collection images download
+              dlg.Add(GUILocalizeStrings.Get(10798760)); // Load collection cover (Tmdb)
+              choice.Add("collectionimages");
             }
             #endregion
 
@@ -11739,12 +11705,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region Moviecontext or Views
             if (facadeFilms.SelectedListItemIndex > -1 && conf.ViewContext != ViewContext.TmdbMovies)
             {
-              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Context: Use Virtual Path Browsing"))
-              {
-                if (MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628))); // virtual path browsing
-                if (!MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));
-                choice.Add("virtualpathbrowsing");
-              }
+              // Use Virtual Path Browsing
+              if (MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798628))); // virtual path browsing
+              if (!MyFilms.conf.BoolVirtualPathBrowsing) dlg.Add(string.Format(GUILocalizeStrings.Get(1079865), GUILocalizeStrings.Get(10798629)));
+              choice.Add("virtualpathbrowsing");
             }
             #endregion
 
@@ -12950,7 +12914,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           //choiceViewGlobalOptions.Add("alwaysdefaultview");
 
           // Change global Movie type Filter (all, 2d, 3d)
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Global Filter 3D movies"))
+          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Global Filter 3D movies"))
           {
             dlg1.Add(string.Format(GUILocalizeStrings.Get(10798972), GlobalFilterMovieFormat3D));
             choiceViewGlobalOptions.Add("filter3d");
@@ -13007,14 +12971,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
       choiceViewMenu.Add("IMDb Movie Trailers");
 
-      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: FilmStarts.de and optional all OnlineVideoSites menu ..."))
-      {
-        dlgmenu.Add("FilmStarts.de (OnlineVideos)");
-        choiceViewMenu.Add("FilmStarts.de Trailer");
+      dlgmenu.Add("FilmStarts.de (OnlineVideos)"); // FilmStarts.de and optional all OnlineVideoSites menu ...
+      choiceViewMenu.Add("FilmStarts.de Trailer");
 
-        //dlgmenu.Add("*** show all ***");
-        //choiceViewMenu.Add("showall");
-      }
+      //dlgmenu.Add("*** show all ***");
+      //choiceViewMenu.Add("showall");
+
+      //if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: Bla !!!"))
+      //{
+      //}
 
       dlgmenu.DoModal(GetID);
       if (dlgmenu.SelectedLabel == -1) return;
