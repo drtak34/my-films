@@ -302,7 +302,7 @@
     <String id="10798721">Load films info from AMC file (local)</String>
     <String id="10798722">Store films info in AMC file (local)</String>
     <String id="10798723">Search trailer (local)</String>
-    <String id="10798724">Load trailer (online)</String>
+    <String id="10798724">Load single trailer (TMDb)</String>
     <String id="10798725">Remove trailer from catalog (selected film)</String>
     <String id="10798726">Search trailers - all films (local)</String>
     <String id="10798727">Show NAS server status</String>
