@@ -1001,15 +1001,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (Helper.IsTraktAvailableAndEnabled) //  && MyFilms.conf.AllowTraktSync
           {
-            dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt ...
-            choiceViewMenu.Add("trakt");
+            dlgmenu.Add(GUILocalizeStrings.Get(10798775)); // Trakt external menu...
+            choiceViewMenu.Add("traktinternal");
 
             if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
             {
-              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Detail context menu - new Trakt internal menu"))
+              if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Detail context menu - old MF Trakt menu"))
               {
-                dlgmenu.Add(GUILocalizeStrings.Get(10798775) + " (test internal menu)"); // Trakt ...
-                choiceViewMenu.Add("traktinternal");
+                dlgmenu.Add(GUILocalizeStrings.Get(10798775) + " (MF old menu)"); // Trakt ... (MF menu)
+                choiceViewMenu.Add("trakt");
               }
             }
           }
