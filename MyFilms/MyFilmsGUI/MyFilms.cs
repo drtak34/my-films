@@ -556,7 +556,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // Version for Skin Interface
     internal const int SkinInterfaceVersionMajor = 1;
 
-    internal const int SkinInterfaceVersionMinor = 0;
+    internal const int SkinInterfaceVersionMinor = 1;
 
     public static bool DebugPropertyLogging { get; set; }
 
