@@ -137,14 +137,15 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         //CatalogType.Items.Remove(CatalogType.Items[7]); // MF internal DB
         //CatalogType.Items.RemoveAt(8); // XBMC nfo reader (deparate files)
         //CatalogType.Items.Add("test");
-        Config_EnablePreload.Visible = false; // precaching of config and DB on Init phase
-        butNew.Visible = false; // disable "new" button for normal mode for V6.0.1
 
-        // autostart settings for AMCupdater background Launcher:
-        chkAMCUscanOnStartup.Visible = false;
-        chkAMCUwatchScanFolders.Visible = false;
-        labelAMCUstartdelay.Visible = false;
-        numericUpDownAMCUscanStartDelay.Visible = false;
+        //Config_EnablePreload.Visible = false; // precaching of config and DB on Init phase
+        //butNew.Visible = false; // disable "new" button for normal mode for V6.0.1
+
+        //// autostart settings for AMCupdater background Launcher:
+        //chkAMCUscanOnStartup.Visible = false;
+        //chkAMCUwatchScanFolders.Visible = false;
+        //labelAMCUstartdelay.Visible = false;
+        //numericUpDownAMCUscanStartDelay.Visible = false;
         btnTestMode.ResetBackColor();
       }
       else if (MyFilms_PluginMode == "test")
@@ -4727,7 +4728,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           CatalogType = "Ant Movie Catalog Xtended (V4.1)",
           Country = "USA (Full Detail Grabbing)",
           ShowOnlyName =  false,
-          TestMode = (MyFilms_PluginMode != "normal")
+          TestMode = true // always use feature, as it is moved to normal mode - before: TestMode = (MyFilms_PluginMode != "normal")
         };
       input.ShowDialog();
       #endregion
@@ -4896,12 +4897,13 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
       if (newCatalogSelectedIndex == 0 || newCatalogSelectedIndex == 10) // Configuration.CatalogType.AntMovieCatalog3
       {
-        if (MyFilms_PluginMode != "normal" || MyFilms_PluginMode == "normal") // added to only allow new catalogs in test mode // edit: reenabled for normal mode
-        {
-          useExistingCatalog = MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
-        }
-        else
-          MessageBox.Show("Please select the path to your existing catalog file !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //if (MyFilms_PluginMode != "normal" || MyFilms_PluginMode == "normal") // added to only allow new catalogs in test mode // edit: reenabled for normal mode
+        //{
+        //  useExistingCatalog = MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+        //}
+        //else
+        //  MessageBox.Show("Please select the path to your existing catalog file !", "MyFilms Configuration Wizard", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        useExistingCatalog = MessageBox.Show("Do you want to use an existing catalog? \n\nIf you select 'yes', you will be asked to select the path to your existing catalog file.\n If you select 'no' you will create a new empty catalog.", "MyFilms Configuration Wizard", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
       }
       else
       {
