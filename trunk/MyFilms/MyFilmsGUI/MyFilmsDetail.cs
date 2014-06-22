@@ -977,11 +977,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             choiceViewMenu.Add("delete");
           }
 
-          if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Detail context menu - moviepersonlisst"))
-          {
-            dlgmenu.Add(GUILocalizeStrings.Get(1079879)); //Search Infos to related persons (load persons in facadeview) - only available in filmlist
-            choiceViewMenu.Add("moviepersonlist");
-          }
+          dlgmenu.Add(GUILocalizeStrings.Get(1079879)); //Search Infos to related persons (load persons in facadeview)
+          choiceViewMenu.Add("moviepersonlist");
 
           dlgmenu.Add(GUILocalizeStrings.Get(10798702)); // Updates ...
           choiceViewMenu.Add("updatesmenu");
@@ -1072,14 +1069,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           dlgmenu.Add(GUILocalizeStrings.Get(10798716)); //search IMDB trailer with onlinevideos
           choiceViewMenu.Add("playtraileronlinevideosimdbtrailer");
 
-          if (ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: FilmStarts.de und all OnlineVideoSites menu ..."))
-          {
-            dlgmenu.Add("FilmStarts.de (OnlineVideos)");
-            choiceViewMenu.Add("playtraileronlinevideosfilmstarts");
+          dlgmenu.Add("FilmStarts.de (OnlineVideos)");
+          choiceViewMenu.Add("playtraileronlinevideosfilmstarts");
 
-            dlgmenu.Add("OnlineVideos ...");
-            choiceViewMenu.Add("playtraileronlinevideosall");
-          }
+          dlgmenu.Add("OnlineVideos ...");
+          choiceViewMenu.Add("playtraileronlinevideosall");
 
           if (Helper.FieldIsSet(MyFilms.conf.StrStorageTrailer)) // StrDirStorTrailer only required for extended search
           {
@@ -1089,12 +1083,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             dlgmenu.Add(GUILocalizeStrings.Get(10798725)); //delete Trailer entries from DB record
             choiceViewMenu.Add("trailer-delete");
 
-            if (ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Details context: Tmdb Trailer Download"))
-            {
-              dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
-              // dlgmenu.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
-              choiceViewMenu.Add("trailer-tmdb");
-            }
+            dlgmenu.Add(GUILocalizeStrings.Get(10798724)); //load IMDB Trailer, store locally and update DB
+            // dlgmenu.Add(GUILocalizeStrings.Get(10798990)); // Load single trailer (TMDB)
+            choiceViewMenu.Add("trailer-tmdb");
           }
 
           dlgmenu.DoModal(GetID);
