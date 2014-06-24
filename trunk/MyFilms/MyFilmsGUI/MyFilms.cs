@@ -16341,7 +16341,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           var psi = new ProcessStartInfo();
           psi.FileName = exeName;
-          psi.UseShellExecute = true;
+          // psi.UseShellExecute = true;
+          psi.UseShellExecute = false; // try to avoid UAC popup ...
           //psi.WindowStyle = ProcessWindowStyle.Minimized;
           psi.WindowStyle = ProcessWindowStyle.Hidden;
           psi.Arguments = argsLine;
@@ -16373,6 +16374,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 //if (aProc.Length > 0) {  Process myprc = aProc[0]; myprc.Kill(); }
               }
               Thread.Sleep(1000);
+              //string output = p.StandardOutput.ReadToEnd();
+              //string error = p.StandardError.ReadToEnd();
             }
           }
           catch (System.ComponentModel.Win32Exception)
