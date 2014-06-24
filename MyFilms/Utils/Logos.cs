@@ -121,12 +121,19 @@ namespace MyFilmsPlugin.MyFilms.Utils
             UseCountryLogos = true;
           }
         }
-
-        // use MP language, if directory exists
-        if (MyFilmsSettings.MPLanguage.Length > 0 && Directory.Exists(LogosPath + MyFilmsSettings.MPLanguage))
+        else
         {
-          Country = MyFilmsSettings.MPLanguage;
-          UseCountryLogos = true;
+          // fallback to use MP language, if directory exists and no specific country setting in logo manager
+          if (MyFilmsSettings.MPLanguage.Length > 0 && Directory.Exists(LogosPath + MyFilmsSettings.MPLanguage))
+          {
+            Country = MyFilmsSettings.MPLanguage;
+            UseCountryLogos = true;
+          }
+        }
+
+        if (UseCountryLogos)
+        {
+          MyFilmsDetail.setGUIProperty("config.country", Country, true);
         }
 
         LogMyFilms.Debug("Logo path for reading logos        : '" + LogosPath + "'");
