@@ -78,12 +78,25 @@
       <type>fadelabel</type>
       <id>1</id>
       <posX>0</posX>
-      <posY>95</posY>
+      <posY>88</posY>
       <width>1280</width>
       <label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
       <font>font16</font>
       <align>center</align>
       <textcolor>ff6FAFE1</textcolor>
+      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
+    </control>
+    <control>
+      <description>Secondary Title</description>
+      <type>fadelabel</type>
+      <id>1</id>
+      <posX>0</posX>
+      <posY>115</posY>
+      <width>1280</width>
+      <label>#(iif(neq(#myfilms.user.secondarytitle.value,#myfilms.user.mastertitle.value),#myfilms.user.secondarytitle.value,''))</label>
+      <font>font11</font>
+      <align>center</align>
+      <textcolor>90ffffff</textcolor>
       <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
@@ -429,7 +442,7 @@
       <type>label</type>
       <id>1</id>
       <posX>970</posX>
-      <posY>163</posY>
+      <posY>162</posY>
       <width>200</width>
       <align>left</align>
       <font>font10</font>
@@ -437,18 +450,6 @@
       <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value)',''))</label>
       <align>left</align>
       <visible>!control.hasfocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.rating.value)</visible>
-    </control>
-    <control>
-      <description>Secondary Title</description>
-      <type>fadelabel</type>
-      <id>1</id>
-      <posX>730</posX>
-      <posY>181</posY>
-      <width>500</width>
-      <label>#myfilms.user.secondarytitle.value</label>
-      <font>font11</font>
-      <textcolor>90ffffff</textcolor>
-      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
     </control>
 
     <!-- OVERVIEW -->

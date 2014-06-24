@@ -39,7 +39,7 @@
         <description>Heading text label</description>
         <type>label</type>
         <id>4</id>
-        <posX>230</posX>
+        <posX>210</posX>
         <posY>190</posY>
         <label>181</label>
         <width>555</width>
@@ -51,12 +51,12 @@
         <description>Exit button</description>
         <type>button</type>
         <id>2</id>
-        <posX>761</posX>
+        <posX>755</posX>
         <posY>175</posY>
         <width>30</width>
         <height>30</height>
-        <textureFocus>button_close_focus.png</textureFocus>
-        <textureNoFocus>button_close_nofocus.png</textureNoFocus>
+		<textureFocus>top_exit_enabled.png</textureFocus>
+		<textureNoFocus>top_exit_disabled.png</textureNoFocus>
         <label>-</label>
         <onleft>3</onleft>
         <onright>3</onright>

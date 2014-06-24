@@ -78,12 +78,25 @@
       <type>fadelabel</type>
       <id>1</id>
       <posX>0</posX>
-      <posY>95</posY>
+      <posY>88</posY>
       <width>960</width>
       <label>#myfilms.user.mastertitle.value#(iif(neq(#myfilms.db.edition.value,''),' - #myfilms.db.edition.value',''))</label>
       <font>font16</font>
       <align>center</align>
       <textcolor>ff6FAFE1</textcolor>
+      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
+    </control>
+    <control>
+      <description>Secondary Title</description>
+      <type>fadelabel</type>
+      <id>1</id>
+      <posX>0</posX>
+      <posY>115</posY>
+      <width>960</width>
+      <label>#(iif(neq(#myfilms.user.secondarytitle.value,#myfilms.user.mastertitle.value),#myfilms.user.secondarytitle.value,''))</label>
+      <font>font11</font>
+      <align>center</align>
+      <textcolor>90ffffff</textcolor>
       <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
     </control>
     <control>
@@ -137,7 +150,7 @@
         <type>image</type>
         <posX>19</posX>
         <posY>145</posY>
-        <width>240</width>
+        <width>290</width>
         <height>478</height>
         <texture>Backslide.png</texture>
         <colorDiffuse>ffffffff</colorDiffuse>
@@ -445,18 +458,6 @@
       <align>left</align>
       <visible>!control.hasfocus(10099)+!control.hasfocus(10100)+string.equals(#myfilms.user.rating.value)</visible>
     </control>
-    <control>
-      <description>Secondary Title</description>
-      <type>fadelabel</type>
-      <id>1</id>
-      <posX>547</posX>
-      <posY>181</posY>
-      <width>375</width>
-      <label>#myfilms.user.secondarytitle.value</label>
-      <font>font11</font>
-      <textcolor>90ffffff</textcolor>
-      <visible>!control.hasfocus(10099)+!control.hasfocus(10100)</visible>
-    </control>
 
     <!-- OVERVIEW -->
     <control>
@@ -670,7 +671,7 @@
       <posX>667</posX>
       <posY>400</posY>
       <width>270</width>
-      <height>53</height>
+      <height>50</height>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.value</label>
       <font>font11</font>
@@ -803,7 +804,7 @@
       <posX>547</posX>
       <posY>235</posY>
       <width>397</width>
-      <height>180</height>
+      <height>190</height>
       <textcolor>ivory</textcolor>
       <label>#myfilms.db.actors.value</label>
       <font>font11</font>
