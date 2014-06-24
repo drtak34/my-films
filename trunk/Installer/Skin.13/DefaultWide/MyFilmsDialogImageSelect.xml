@@ -55,8 +55,8 @@
         <posY>175</posY>
         <width>30</width>
         <height>30</height>
-        <textureFocus>button_close_focus.png</textureFocus>
-        <textureNoFocus>button_close_nofocus.png</textureNoFocus>
+		<textureFocus>top_exit_enabled.png</textureFocus>
+		<textureNoFocus>top_exit_disabled.png</textureNoFocus>
         <label>-</label>
         <onleft>3</onleft>
         <onright>3</onright>

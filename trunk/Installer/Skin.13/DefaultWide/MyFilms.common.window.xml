@@ -37,7 +37,7 @@
       <visible>string.equals(#selectedindex)+string.equals(#itemcount)</visible>
     </control>
 	<control>
-      <description>Config, User Name, Test Mode</description>
+      <description>Config, User Name</description>
       <type>fadelabel</type>      
       <id>1</id>
       <posX>1244</posX>
@@ -46,7 +46,7 @@
       <align>right</align>
       <font>font10</font>
       <textcolor>ivory</textcolor>
-      <label>#myfilms.config.currentconfig#(iif(neq(#myfilms.user.name.value,''),': #myfilms.user.name.value',''))#(iif(eq(#myfilms.user.onlinestatus,'online'),' (Trakt)',''))#(iif(neq(#myfilms.config.pluginmode,'normal'),' | #myfilms.config.pluginmode mode',''))</label>
+      <label>#myfilms.config.currentconfig#(iif(neq(#myfilms.user.name.value,''),': #myfilms.user.name.value',''))#(iif(eq(#myfilms.user.onlinestatus,'online'),' (Trakt)',''))</label>
     </control>
 	
     <!-- GLOBAL FILTERS -->
@@ -119,11 +119,11 @@
     </control>
     <control>
       <description>Global Updates Status Message</description>
-      <type>label</type>
+      <type>fadelabel</type>
       <id>0</id>
       <posX>693</posX>
       <posY>38</posY>
-      <width>401</width>
+      <width>350</width>
       <align>left</align>
       <font>font10</font>
       <textcolor>90ffffff</textcolor>

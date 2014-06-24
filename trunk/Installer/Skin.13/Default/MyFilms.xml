@@ -12,7 +12,7 @@
       <skininterfaceversion>
         <version>
           <major>1</major>
-          <minor>0</minor>
+          <minor>1</minor>
           <build>0</build>
           <revision>0</revision>
         </version>
@@ -193,7 +193,7 @@
         <type>image</type>
         <posX>19</posX>
         <posY>145</posY>
-        <width>240</width>
+        <width>280</width>
         <height>478</height>
         <texture>Backslide.png</texture>
         <colorDiffuse>ffffffff</colorDiffuse>
@@ -352,10 +352,24 @@
       <align>left</align>
       <font>font11</font>
       <textcolor>ivory</textcolor>
-      <label>(#myfilms.db.rating.value/10)</label>
+      <label>#myfilms.db.rating.value</label>
       <visible>string.equals(#myfilms.db.rating.value)+!control.isvisible(34)+!Control.isvisible(40)+[facadeview.list|facadeview.album]+!string.equals(#myfilms.user.mastertitle.groupcount)</visible>
     </control>
-    <control>
+	<control>
+      <description>User Rating</description>
+      <type>fadelabel</type>
+      <id>1</id>
+      <posX>730</posX>
+      <posY>162</posY>
+      <width>150</width>
+      <align>left</align>
+      <font>font10</font>
+      <textcolor>ff6FAFE1</textcolor>
+      <label>#(iif(neq(#myfilms.user.rating.value,''),'(#myfilms.user.rating.value)',''))</label>
+      <visible>string.equals(#myfilms.user.rating.value)+[control.isvisible(36)|control.isvisible(39)]+[facadeview.list|facadeview.album]</visible>
+    </control>
+
+    <!-- <control>
       <description>User Rating Label</description>
       <type>label</type>
       <id>1</id>
@@ -379,7 +393,7 @@
       <textcolor>ivory</textcolor>
       <label>#(iif(neq(#myfilms.user.rating.value,''),'#myfilms.user.rating.value/10',''))</label>
       <visible>string.equals(#myfilms.user.rating.value)+[control.isvisible(36)|control.isvisible(39)]+[facadeview.list|facadeview.album]</visible>
-    </control>
+    </control> -->
 
     <!-- Film Details -->
     <control>
@@ -411,7 +425,7 @@
       <id>0</id>
       <type>label</type>
       <label>299</label>
-      <posX>612</posX>
+      <posX>690</posX>
       <posY>187</posY>
       <font>font10</font>
       <align>left</align>
@@ -423,7 +437,7 @@
       <id>1002</id>
       <type>label</type>
       <label>#myfilms.db.length.value #myfilms.db.length.unit</label>
-      <posX>612</posX>
+      <posX>690</posX>
       <posY>206</posY>
       <width>225</width>
       <font>font12</font>
