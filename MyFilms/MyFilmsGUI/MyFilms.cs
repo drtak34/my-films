@@ -10548,7 +10548,27 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
           // XmlSettings.SaveCache(); // need to save to disk, as we did not write immediately
           LogMyFilms.Info("Update Option 'Cache trailers for online content' changed to " + MyFilms.conf.CacheOnlineTrailer.ToString());
-          this.Change_Menu_Action("globaloptions");
+
+          if (!MyFilms.conf.CacheOnlineTrailer && TrailertoDownloadQueue.Count > 0)
+          {
+            GUIDialogYesNo dlgYN = (GUIDialogYesNo)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_YES_NO);
+            if (dlgYN != null)
+            {
+              dlgYN.SetHeading(GUILocalizeStrings.Get(1079701) + " (" + TrailertoDownloadQueue.Count + ")"); // Delete Trailer Download Queue ... 
+              dlgYN.SetLine(1, GUILocalizeStrings.Get(927));// warning
+              dlgYN.SetLine(2, GUILocalizeStrings.Get(1079702)); //Delete all trailers from download queue ?
+              dlgYN.DoModal(GetID);
+              if (dlgYN.IsConfirmed)
+              {
+                lock (TrailertoDownloadQueue)
+                {
+                  TrailertoDownloadQueue.Clear();
+                }
+              }
+            }
+          }
+          
+          Change_Menu_Action("globaloptions");
           #endregion
           break;
         
@@ -16960,7 +16980,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           MyFilmsDetail.setGUIProperty("statusmessage", "");
         }
       }
-      while (TrailertoDownloadQueue.Count > 0 && !bgDownloadTrailer.CancellationPending && MyFilms.conf.CacheOnlineTrailer);
+      while (TrailertoDownloadQueue.Count > 0 && !bgDownloadTrailer.CancellationPending); //  && MyFilms.conf.CacheOnlineTrailer (removed from consition, as this does not alloow siongle trailer downloads, when caching is disabled !
       bgDownloadTrailerDoneEvent.Set();
     }
 
@@ -17115,7 +17135,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Warn("Error loading trailer: " + ex.Message);
         }
       }
-      while (TrailertoDownloadQueue.Count > 0 && !threadArray[threadId].CancellationPending && MyFilms.conf.CacheOnlineTrailer);
+      while (TrailertoDownloadQueue.Count > 0 && !threadArray[threadId].CancellationPending); // && MyFilms.conf.CacheOnlineTrailer);
       threadDoneEventArray[threadId].Set();
     }
 
