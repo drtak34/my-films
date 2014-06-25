@@ -248,37 +248,61 @@ namespace MyFilmsPlugin.MyFilms.Utils
       string fileLogoName = string.Empty;
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
       {
+        // value should be given to output directly - property like
+        if (wtab[1] == "value") wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2], "") + ".png"; // output value cleaned by regex expression
 
-        if (wtab[1] == "value") // value should be given to output directly - property like
-        {
-          wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2], "") + ".png"; // output value cleaned by regex expression
-        }
+        bool isLogoFound = false;
 
         // Added to also support specific Logos in language subdirectories
-        if (UseCountryLogos && File.Exists(LogosPath + "\\" + Country + "\\" + wtab[7])) // Check, if logofile is present in country name logo subdirectory of current skin
+        if (UseCountryLogos) // Check, if logofile is present in country name logo subdirectory of current skin
         {
-          wtab[7] = LogosPath + "\\" + Country + "\\" + wtab[7];
-        }
-        // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
-        else if (!File.Exists(wtab[7]) && File.Exists(LogosPath + wtab[7])) // Check, if logofile is present in logo directory of current skin
-        {
-          wtab[7] = LogosPath + wtab[7];
-        }
-        else
-        {
-          if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+          if (File.Exists(LogosPath + "\\" + Country + "\\" + wtab[7])) // Check, if logofile is present in country name logo subdirectory of current skin
           {
-            string[] filePathsLogoSearch = Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories);
-            if (filePathsLogoSearch.Length > 0)
-              try
+            wtab[7] = LogosPath + "\\" + Country + "\\" + wtab[7];
+            isLogoFound = true;
+          }
+          else
+          {
+            if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+            {
+              string filePathsLogoSearch = Directory.GetFiles(LogosPath + "\\" + Country, wtab[7], System.IO.SearchOption.AllDirectories).FirstOrDefault();
+              if (filePathsLogoSearch != null)
               {
-                wtab[7] = filePathsLogoSearch[0];
+                wtab[7] = filePathsLogoSearch;
+                isLogoFound = true;
               }
-              catch { }
+            }
           }
         }
 
-        if (File.Exists(wtab[7]) && Path.GetDirectoryName(wtab[7]).Length > 0)
+        if (!UseCountryLogos || !isLogoFound) // use standard search if either country logos disabled or no logos found in country subfolder(s)
+        {
+          if (File.Exists(wtab[7])) // Check, if logofile is present in logo directory of current skin
+          {
+            wtab[7] = LogosPath + wtab[7];
+            isLogoFound = true;
+          }
+          // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
+          if (!isLogoFound && File.Exists(LogosPath + wtab[7])) // Check, if logofile is present in logo directory of current skin
+          {
+            wtab[7] = LogosPath + wtab[7];
+            isLogoFound = true;
+          }
+          else
+          {
+            if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+            {
+              string filePathsLogoSearch = Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories).FirstOrDefault();
+              if (filePathsLogoSearch != null)
+              {
+                wtab[7] = filePathsLogoSearch;
+                isLogoFound = true;
+              }
+            }
+          }
+        }
+
+        if (isLogoFound && Path.GetDirectoryName(wtab[7]).Length > 0)
         {
           bool cond1 = GetRecordRule(r, wtab[0], wtab[1], wtab[2]);
           bool cond2 = GetRecordRule(r, wtab[4], wtab[5], wtab[6]);
