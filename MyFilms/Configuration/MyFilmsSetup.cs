@@ -4297,7 +4297,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       {
         var psi = new ProcessStartInfo();
         psi.FileName = Config.GetDirectoryInfo(Config.Dir.Base) + @"\AMCupdater.exe";
-        psi.UseShellExecute = true;
+        psi.UseShellExecute = false; // try to avoid UAC popup ...
         psi.WindowStyle = ProcessWindowStyle.Normal;
         psi.Arguments = "\"" + configParam + "\"" + " " + "LogDirectory" + " " + "GUI";
 
