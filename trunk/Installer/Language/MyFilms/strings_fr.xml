@@ -84,6 +84,7 @@
     <String id="107988">Films</String>
     <String id="1079701">Delete Trailer Download Queue ...</String>
     <String id="1079702">Delete all trailers from download queue ?</String>
+    <String id="1079703">Trailer added to DL queue !</String>
     <String id="1079801">Add all films to box set ...</String>
     <String id="1079802">Remove all films from box set</String>
     <String id="1079810">Import/Update AMCUpdater - import if internet lookup fails ({0})</String>
