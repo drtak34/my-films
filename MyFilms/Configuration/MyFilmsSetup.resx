@@ -1424,6 +1424,24 @@ You can enable or disable Trakt synchronisation separately for each My Films con
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
+  <data name="SOp1.ToolTip" xml:space="preserve">
+    <value>comparator to get rule match:
+equal
+not equal
+contains
+not contains
+greater
+lower
+filled
+not filled
+regex
+
+value:
+This is a special case - if selected, the selected logo will automatically be set to "value.png", 
+if a pattern is set, this will be used as cleanup for the value of the respective DB field.
+Example:
+"Certification", "value", "PG\-" with a DB value of PG-13 will search for a logo "13.png".</value>
+  </data>
   <data name="pictureBoxTMDBlogo.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAggAAACWCAYAAAC7D3B5AAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
