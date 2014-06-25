@@ -124,9 +124,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         else
         {
           // fallback to use MP language, if directory exists and no specific country setting in logo manager
-          if (MyFilmsSettings.MPLanguage.Length > 0 && Directory.Exists(LogosPath + MyFilmsSettings.MPLanguage))
+          if (MyFilmsSettings.MPLanguage.Length > 1 && Directory.Exists(LogosPath + MyFilmsSettings.MPLanguage.Substring(0,2)))
           {
-            Country = MyFilmsSettings.MPLanguage;
+            Country = MyFilmsSettings.MPLanguage.Substring(0, 2);
             UseCountryLogos = true;
           }
         }
