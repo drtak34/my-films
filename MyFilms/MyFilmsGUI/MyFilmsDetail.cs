@@ -9908,7 +9908,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           trailer.DestinationDirectory = destinationDirectory; // Path.Combine(Path.Combine(path, "Trailer"), (MediaPortal.Util.Utils.FilterFileName(titlename + " (trailer) " + selectedTrailer.name + " (" + dlg.SelectedLabelText.Replace(" ", "") + ")" + extension)));
           MyFilms.AddTrailerToDownloadQueue(trailer);
           LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - start loading single trailer '" + selectedTrailer.name + "' from URL: '" + selectedTrailerUrl + "'");
-          if (interactive) GUIUtils.ShowNotifyDialog("Starting trailer download!");
+          if (interactive) GUIUtils.ShowNotifyDialog(GUILocalizeStrings.Get(1079703)); //  trailer addd to DL queue
         }
         else
         {
