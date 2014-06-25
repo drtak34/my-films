@@ -248,6 +248,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
       string fileLogoName = string.Empty;
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
       {
+
+        if (wtab[1] == "value") // value should be given to output directly - property like
+        {
+          wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2], "") + ".png"; // output value cleaned by regex expression
+        }
+
         // Added to also support specific Logos in language subdirectories
         if (UseCountryLogos && File.Exists(LogosPath + "\\" + Country + "\\" + wtab[7])) // Check, if logofile is present in country name logo subdirectory of current skin
         {
@@ -311,6 +317,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       switch (compar)
       {
+        case "value":
+          return true;
+          break;
         case "regex":
           Match match = Regex.Match(r[field].ToString(), value, RegexOptions.IgnoreCase);
           if (match.Success) return true;

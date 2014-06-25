@@ -558,6 +558,7 @@
       this.Tab_Update = new System.Windows.Forms.TabPage();
       this.General = new System.Windows.Forms.TabControl();
       this.Tab_About = new System.Windows.Forms.TabPage();
+      this.lblTmdbNote = new System.Windows.Forms.Label();
       this.pictureBoxTMDBlogo = new System.Windows.Forms.PictureBox();
       this.groupBoxSupportedCatalogs = new System.Windows.Forms.GroupBox();
       this.label41 = new System.Windows.Forms.Label();
@@ -630,7 +631,6 @@
       this.sortFieldFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.sortDirectionFilmsComboBox = new System.Windows.Forms.ComboBox();
       this.layoutFilmsComboBox = new System.Windows.Forms.ComboBox();
-      this.lblTmdbNote = new System.Windows.Forms.Label();
       ownerLabel = new System.Windows.Forms.Label();
       mailLabel = new System.Windows.Forms.Label();
       siteLabel = new System.Windows.Forms.Label();
@@ -5847,11 +5847,13 @@
             "lower",
             "filled",
             "not filled",
-            "regex"});
+            "regex",
+            "value"});
       this.SOp1.Location = new System.Drawing.Point(291, 276);
       this.SOp1.Name = "SOp1";
       this.SOp1.Size = new System.Drawing.Size(74, 21);
       this.SOp1.TabIndex = 14;
+      this.ToolTip1.SetToolTip(this.SOp1, resources.GetString("SOp1.ToolTip"));
       this.SOp1.SelectedIndexChanged += new System.EventHandler(this.SOp1_SelectedIndexChanged);
       // 
       // SField1
@@ -5945,6 +5947,17 @@
       this.Tab_About.Text = "About";
       this.Tab_About.ToolTipText = "About Info for MyFilms";
       this.Tab_About.UseVisualStyleBackColor = true;
+      // 
+      // lblTmdbNote
+      // 
+      this.lblTmdbNote.AutoSize = true;
+      this.lblTmdbNote.ForeColor = System.Drawing.SystemColors.GrayText;
+      this.lblTmdbNote.Location = new System.Drawing.Point(498, 256);
+      this.lblTmdbNote.Name = "lblTmdbNote";
+      this.lblTmdbNote.Size = new System.Drawing.Size(199, 26);
+      this.lblTmdbNote.TabIndex = 79;
+      this.lblTmdbNote.Text = "This product uses the TMDb API \r\nbut is not endorsed or certified by TMDb.";
+      this.lblTmdbNote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // pictureBoxTMDBlogo
       // 
@@ -6581,17 +6594,6 @@
       this.layoutFilmsComboBox.Name = "layoutFilmsComboBox";
       this.layoutFilmsComboBox.Size = new System.Drawing.Size(70, 21);
       this.layoutFilmsComboBox.TabIndex = 34;
-      // 
-      // lblTmdbNote
-      // 
-      this.lblTmdbNote.AutoSize = true;
-      this.lblTmdbNote.ForeColor = System.Drawing.SystemColors.GrayText;
-      this.lblTmdbNote.Location = new System.Drawing.Point(498, 256);
-      this.lblTmdbNote.Name = "lblTmdbNote";
-      this.lblTmdbNote.Size = new System.Drawing.Size(199, 26);
-      this.lblTmdbNote.TabIndex = 79;
-      this.lblTmdbNote.Text = "This product uses the TMDb API \r\nbut is not endorsed or certified by TMDb.";
-      this.lblTmdbNote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
       // 
       // MyFilmsSetup
       // 
