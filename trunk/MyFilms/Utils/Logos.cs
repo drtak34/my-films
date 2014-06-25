@@ -138,7 +138,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         LogMyFilms.Debug("Logo path for reading logos        : '" + LogosPath + "'");
         LogMyFilms.Debug("Logo path for storing cached logos : '" + LogosPathThumbs + "' with spacing = '" + Spacer + "'");
-        LogMyFilms.Debug("Logo Country                       : '" + Country + "', MP language = '" + MyFilmsSettings.MPLanguage + "'");
+        LogMyFilms.Debug("Logo Country                       : '" + Country + "', MP language = '" + MyFilmsSettings.MPLanguage.Substring(0, 2) + "'");
         int i = 0;
         ID2001Logos.Clear();
         ID2002Logos.Clear();
