@@ -222,7 +222,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
              dc.ColumnName != "RatingUser" && dc.ColumnName != "Studio" && dc.ColumnName != "IMDB_Rank" && dc.ColumnName != "Edition" &&
              dc.ColumnName != "Aspectratio" && dc.ColumnName != "CategoryTrakt" && dc.ColumnName != "Favorite" &&
              dc.ColumnName != "CustomField1" && dc.ColumnName != "CustomField2" && dc.ColumnName != "CustomField3" && dc.ColumnName != "DateWatched" &&
-             dc.ColumnName != "DateReleased" && dc.ColumnName != "Budget" && dc.ColumnName != "Composer" && dc.ColumnName != "S3D" && dc.ColumnName != "Collection" && dc.ColumnName != "CollectionDetails"))
+             dc.ColumnName != "DateReleased" && dc.ColumnName != "Budget" && dc.ColumnName != "Composer" && dc.ColumnName != "S3D" && dc.ColumnName != "Collection" && dc.ColumnName != "CollectionDetails" && dc.ColumnName != "Votes"))
           )
         {
           if (dc.ColumnName == "MediaLabel" || dc.ColumnName == "MediaType" || dc.ColumnName == "Source" || (dc.ColumnName == "SourceTrailer" && CatalogType.SelectedIndex == 10) ||

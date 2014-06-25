@@ -5727,6 +5727,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "Year", true) == 0) return false;
       if (string.Compare(fieldname, "RecentlyAdded", true) == 0) return false;
       if (string.Compare(fieldname, "Budget", true) == 0) return false;
+      if (string.Compare(fieldname, "Votes", true) == 0) return false;
       if (IsDecimalField(fieldname)) return false;
       if (IsAlphaNumericalField(fieldname)) return false;
       return true;
@@ -5746,6 +5747,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (string.Compare(fieldname, "Resolution", true) == 0) return true;
       if (string.Compare(fieldname, "Number", true) == 0) return true;
       if (string.Compare(fieldname, "LastPosition", true) == 0) return true;
+      if (string.Compare(fieldname, "Votes", true) == 0) return true;
       //if (string.Compare(fieldname, "CustomField1", true) == 0) return true;
       //if (string.Compare(fieldname, "CustomField2", true) == 0) return true;
       //if (string.Compare(fieldname, "CustomField3", true) == 0) return true;
