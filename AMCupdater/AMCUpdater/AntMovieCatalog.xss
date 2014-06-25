@@ -15,8 +15,8 @@
     <Shape ID="DesignTable:CustomField" ZOrder="24" X="515" Y="248" Height="197" Width="172" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="193" />
     <Shape ID="DesignTable:ListValue" ZOrder="5" X="819" Y="302" Height="90" Width="158" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
     <Shape ID="DesignTable:Contents" ZOrder="23" X="290" Y="519" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="86" />
-    <Shape ID="DesignTable:Movie" ZOrder="22" X="510" Y="519" Height="636" Width="154" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="633" />
-    <Shape ID="DesignTable:CustomFields" ZOrder="21" X="868" Y="514" Height="638" Width="154" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="634" />
+    <Shape ID="DesignTable:Movie" ZOrder="22" X="510" Y="519" Height="543" Width="154" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="539" />
+    <Shape ID="DesignTable:CustomFields" ZOrder="21" X="868" Y="514" Height="543" Width="154" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="539" />
     <Shape ID="DesignTable:Persons" ZOrder="7" X="714" Y="71" Height="61" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="57" />
     <Shape ID="DesignTable:Person" ZOrder="20" X="994" Y="70" Height="334" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="330" />
   </Shapes>

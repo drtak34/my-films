@@ -103,6 +103,7 @@ namespace MyFilmsPlugin.MyFilms
               new string[] { "IMDB_Id", "IMDB_Id", "ftString" },
               new string[] { "TMDB_Id", "TMDB_Id", "ftString" },
               new string[] { "IMDB_Rank", "IMDB_Rank", "ftString" },
+              new string[] { "Votes", "Votes", "ftString" },
               new string[] { "SourceTrailer", "SourceTrailer", "ftString" },
               new string[] { "IsOnline", "IsOnline", "ftString" },
               new string[] { "IsOnlineTrailer", "IsOnlineTrailer", "ftString" },
@@ -2175,6 +2176,9 @@ namespace MyFilmsPlugin.MyFilms
         case "S3D":
         case "s3d":
           return GUILocalizeStrings.Get(10799707);
+        case "Votes":
+        case "votes":
+          return GUILocalizeStrings.Get(10799708);
 
         default:
           {

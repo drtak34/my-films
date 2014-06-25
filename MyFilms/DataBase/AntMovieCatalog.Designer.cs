@@ -3656,6 +3656,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnIMDB_Rank;
             
+            private global::System.Data.DataColumn columnVotes;
+            
             private global::System.Data.DataColumn columnAspectratio;
             
             private global::System.Data.DataColumn columnAudioChannelCount;
@@ -4143,6 +4145,14 @@ namespace MyFilmsPlugin.DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn VotesColumn {
+                get {
+                    return this.columnVotes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn AspectratioColumn {
                 get {
                     return this.columnAspectratio;
@@ -4406,6 +4416,7 @@ namespace MyFilmsPlugin.DataBase {
                         string Studio, 
                         string Budget, 
                         string IMDB_Rank, 
+                        string Votes, 
                         string Aspectratio, 
                         string AudioChannelCount, 
                         string CategoryTrakt, 
@@ -4480,6 +4491,7 @@ namespace MyFilmsPlugin.DataBase {
                         Studio,
                         Budget,
                         IMDB_Rank,
+                        Votes,
                         Aspectratio,
                         AudioChannelCount,
                         CategoryTrakt,
@@ -4503,7 +4515,7 @@ namespace MyFilmsPlugin.DataBase {
                         null,
                         null};
                 if ((parentContentsRowByContents_Movie != null)) {
-                    columnValuesArray[72] = parentContentsRowByContents_Movie[0];
+                    columnValuesArray[73] = parentContentsRowByContents_Movie[0];
                 }
                 rowMovieRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowMovieRow);
@@ -4578,6 +4590,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnStudio = base.Columns["Studio"];
                 this.columnBudget = base.Columns["Budget"];
                 this.columnIMDB_Rank = base.Columns["IMDB_Rank"];
+                this.columnVotes = base.Columns["Votes"];
                 this.columnAspectratio = base.Columns["Aspectratio"];
                 this.columnAudioChannelCount = base.Columns["AudioChannelCount"];
                 this.columnCategoryTrakt = base.Columns["CategoryTrakt"];
@@ -4707,6 +4720,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnBudget);
                 this.columnIMDB_Rank = new global::System.Data.DataColumn("IMDB_Rank", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnIMDB_Rank);
+                this.columnVotes = new global::System.Data.DataColumn("Votes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnVotes);
                 this.columnAspectratio = new global::System.Data.DataColumn("Aspectratio", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnAspectratio);
                 this.columnAudioChannelCount = new global::System.Data.DataColumn("AudioChannelCount", typeof(string), null, global::System.Data.MappingType.Element);
@@ -4964,6 +4979,8 @@ namespace MyFilmsPlugin.DataBase {
             
             private global::System.Data.DataColumn columnIMDB_Rank;
             
+            private global::System.Data.DataColumn columnVotes;
+            
             private global::System.Data.DataColumn columnSourceTrailer;
             
             private global::System.Data.DataColumn columnIsOnline;
@@ -5187,6 +5204,14 @@ namespace MyFilmsPlugin.DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn VotesColumn {
+                get {
+                    return this.columnVotes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn SourceTrailerColumn {
                 get {
                     return this.columnSourceTrailer;
@@ -5355,6 +5380,7 @@ namespace MyFilmsPlugin.DataBase {
                         string IMDB_Id, 
                         string TMDB_Id, 
                         string IMDB_Rank, 
+                        string Votes, 
                         string SourceTrailer, 
                         string IsOnline, 
                         string IsOnlineTrailer, 
@@ -5391,6 +5417,7 @@ namespace MyFilmsPlugin.DataBase {
                         IMDB_Id,
                         TMDB_Id,
                         IMDB_Rank,
+                        Votes,
                         SourceTrailer,
                         IsOnline,
                         IsOnlineTrailer,
@@ -5406,7 +5433,7 @@ namespace MyFilmsPlugin.DataBase {
                         CollectionDetails,
                         null};
                 if ((parentMovieRowByMovie_CustomFields != null)) {
-                    columnValuesArray[33] = parentMovieRowByMovie_CustomFields[71];
+                    columnValuesArray[34] = parentMovieRowByMovie_CustomFields[72];
                 }
                 rowCustomFieldsRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCustomFieldsRow);
@@ -5450,6 +5477,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIMDB_Id = base.Columns["IMDB_Id"];
                 this.columnTMDB_Id = base.Columns["TMDB_Id"];
                 this.columnIMDB_Rank = base.Columns["IMDB_Rank"];
+                this.columnVotes = base.Columns["Votes"];
                 this.columnSourceTrailer = base.Columns["SourceTrailer"];
                 this.columnIsOnline = base.Columns["IsOnline"];
                 this.columnIsOnlineTrailer = base.Columns["IsOnlineTrailer"];
@@ -5509,6 +5537,8 @@ namespace MyFilmsPlugin.DataBase {
                 base.Columns.Add(this.columnTMDB_Id);
                 this.columnIMDB_Rank = new global::System.Data.DataColumn("IMDB_Rank", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnIMDB_Rank);
+                this.columnVotes = new global::System.Data.DataColumn("Votes", typeof(string), null, global::System.Data.MappingType.Attribute);
+                base.Columns.Add(this.columnVotes);
                 this.columnSourceTrailer = new global::System.Data.DataColumn("SourceTrailer", typeof(string), null, global::System.Data.MappingType.Attribute);
                 base.Columns.Add(this.columnSourceTrailer);
                 this.columnIsOnline = new global::System.Data.DataColumn("IsOnline", typeof(string), null, global::System.Data.MappingType.Attribute);
@@ -5557,6 +5587,7 @@ namespace MyFilmsPlugin.DataBase {
                 this.columnIMDB_Id.Namespace = "";
                 this.columnTMDB_Id.Namespace = "";
                 this.columnIMDB_Rank.Namespace = "";
+                this.columnVotes.Namespace = "";
                 this.columnSourceTrailer.Namespace = "";
                 this.columnIsOnline.Namespace = "";
                 this.columnIsOnlineTrailer.Namespace = "";
@@ -8524,6 +8555,22 @@ namespace MyFilmsPlugin.DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Votes {
+                get {
+                    try {
+                        return ((string)(this[this.tableMovie.VotesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Votes in Tabelle Movie ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableMovie.VotesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string Aspectratio {
                 get {
                     try {
@@ -9494,6 +9541,18 @@ namespace MyFilmsPlugin.DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsVotesNull() {
+                return this.IsNull(this.tableMovie.VotesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetVotesNull() {
+                this[this.tableMovie.VotesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsAspectratioNull() {
                 return this.IsNull(this.tableMovie.AspectratioColumn);
             }
@@ -10092,6 +10151,22 @@ namespace MyFilmsPlugin.DataBase {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Votes {
+                get {
+                    try {
+                        return ((string)(this[this.tableCustomFields.VotesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Der Wert für Spalte Votes in Tabelle CustomFields ist DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCustomFields.VotesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string SourceTrailer {
                 get {
                     try {
@@ -10563,6 +10638,18 @@ namespace MyFilmsPlugin.DataBase {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetIMDB_RankNull() {
                 this[this.tableCustomFields.IMDB_RankColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsVotesNull() {
+                return this.IsNull(this.tableCustomFields.VotesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetVotesNull() {
+                this[this.tableCustomFields.VotesColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

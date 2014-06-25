@@ -3626,6 +3626,8 @@ Partial Public Class AntMovieCatalog
         
         Private columnIMDB_Rank As Global.System.Data.DataColumn
         
+        Private columnVotes As Global.System.Data.DataColumn
+        
         Private columnAspectratio As Global.System.Data.DataColumn
         
         Private columnAudioChannelCount As Global.System.Data.DataColumn
@@ -4115,6 +4117,14 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property VotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnVotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property AspectratioColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnAspectratio
@@ -4378,6 +4388,7 @@ Partial Public Class AntMovieCatalog
                     ByVal Studio As String,  _
                     ByVal Budget As String,  _
                     ByVal IMDB_Rank As String,  _
+                    ByVal Votes As String,  _
                     ByVal Aspectratio As String,  _
                     ByVal AudioChannelCount As String,  _
                     ByVal CategoryTrakt As String,  _
@@ -4400,9 +4411,9 @@ Partial Public Class AntMovieCatalog
                     ByVal Persons As String,  _
                     ByVal parentContentsRowByContents_Movie As ContentsRow) As MovieRow
             Dim rowMovieRow As MovieRow = CType(Me.NewRow,MovieRow)
-            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, RatingUser, Borrower, Rating, OriginalTitle, Edition, IndexedTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, DateAdded, RecentlyAdded, AgeAdded, Subtitles, Fanart, Certification, Writer, Composer, Watched, DateWatched, DateReleased, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, Budget, IMDB_Rank, Aspectratio, AudioChannelCount, CategoryTrakt, AlternateTitles, VirtualPathTitle, IsOnline, IsOnlineTrailer, LastPosition, Size, Disks, Picture, MultiUserState, S3D, Collection, CollectionImage, CollectionDetails, CustomField1, CustomField2, CustomField3, Persons, Nothing, Nothing}
+            Dim columnValuesArray() As Object = New Object() {Number, Checked, MediaLabel, MediaType, Source, _Date, RatingUser, Borrower, Rating, OriginalTitle, Edition, IndexedTitle, TranslatedTitle, FormattedTitle, Director, Producer, Country, Category, Year, Length, Actors, URL, Description, Comments, VideoFormat, VideoBitrate, AudioFormat, AudioBitrate, Resolution, Framerate, Languages, DateAdded, RecentlyAdded, AgeAdded, Subtitles, Fanart, Certification, Writer, Composer, Watched, DateWatched, DateReleased, Favorite, IMDB_Id, TMDB_Id, SourceTrailer, TagLine, Tags, Studio, Budget, IMDB_Rank, Votes, Aspectratio, AudioChannelCount, CategoryTrakt, AlternateTitles, VirtualPathTitle, IsOnline, IsOnlineTrailer, LastPosition, Size, Disks, Picture, MultiUserState, S3D, Collection, CollectionImage, CollectionDetails, CustomField1, CustomField2, CustomField3, Persons, Nothing, Nothing}
             If (Not (parentContentsRowByContents_Movie) Is Nothing) Then
-                columnValuesArray(72) = parentContentsRowByContents_Movie(0)
+                columnValuesArray(73) = parentContentsRowByContents_Movie(0)
             End If
             rowMovieRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowMovieRow)
@@ -4477,6 +4488,7 @@ Partial Public Class AntMovieCatalog
             Me.columnStudio = MyBase.Columns("Studio")
             Me.columnBudget = MyBase.Columns("Budget")
             Me.columnIMDB_Rank = MyBase.Columns("IMDB_Rank")
+            Me.columnVotes = MyBase.Columns("Votes")
             Me.columnAspectratio = MyBase.Columns("Aspectratio")
             Me.columnAudioChannelCount = MyBase.Columns("AudioChannelCount")
             Me.columnCategoryTrakt = MyBase.Columns("CategoryTrakt")
@@ -4609,6 +4621,8 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnBudget)
             Me.columnIMDB_Rank = New Global.System.Data.DataColumn("IMDB_Rank", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnIMDB_Rank)
+            Me.columnVotes = New Global.System.Data.DataColumn("Votes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnVotes)
             Me.columnAspectratio = New Global.System.Data.DataColumn("Aspectratio", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnAspectratio)
             Me.columnAudioChannelCount = New Global.System.Data.DataColumn("AudioChannelCount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -4869,6 +4883,8 @@ Partial Public Class AntMovieCatalog
         
         Private columnIMDB_Rank As Global.System.Data.DataColumn
         
+        Private columnVotes As Global.System.Data.DataColumn
+        
         Private columnSourceTrailer As Global.System.Data.DataColumn
         
         Private columnIsOnline As Global.System.Data.DataColumn
@@ -5094,6 +5110,14 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property VotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnVotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property SourceTrailerColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnSourceTrailer
@@ -5262,6 +5286,7 @@ Partial Public Class AntMovieCatalog
                     ByVal IMDB_Id As String,  _
                     ByVal TMDB_Id As String,  _
                     ByVal IMDB_Rank As String,  _
+                    ByVal Votes As String,  _
                     ByVal SourceTrailer As String,  _
                     ByVal IsOnline As String,  _
                     ByVal IsOnlineTrailer As String,  _
@@ -5277,9 +5302,9 @@ Partial Public Class AntMovieCatalog
                     ByVal CollectionDetails As String,  _
                     ByVal parentMovieRowByMovie_CustomFields As MovieRow) As CustomFieldsRow
             Dim rowCustomFieldsRow As CustomFieldsRow = CType(Me.NewRow,CustomFieldsRow)
-            Dim columnValuesArray() As Object = New Object() {CustomField1, CustomField2, CustomField3, Edition, Studio, Budget, Fanart, Certification, Writer, Composer, TagLine, Tags, Aspectratio, CategoryTrakt, Watched, Favorite, RatingUser, IMDB_Id, TMDB_Id, IMDB_Rank, SourceTrailer, IsOnline, IsOnlineTrailer, LastPosition, AudioChannelCount, AlternateTitles, DateWatched, DateReleased, MultiUserState, S3D, Collection, CollectionImage, CollectionDetails, Nothing}
+            Dim columnValuesArray() As Object = New Object() {CustomField1, CustomField2, CustomField3, Edition, Studio, Budget, Fanart, Certification, Writer, Composer, TagLine, Tags, Aspectratio, CategoryTrakt, Watched, Favorite, RatingUser, IMDB_Id, TMDB_Id, IMDB_Rank, Votes, SourceTrailer, IsOnline, IsOnlineTrailer, LastPosition, AudioChannelCount, AlternateTitles, DateWatched, DateReleased, MultiUserState, S3D, Collection, CollectionImage, CollectionDetails, Nothing}
             If (Not (parentMovieRowByMovie_CustomFields) Is Nothing) Then
-                columnValuesArray(33) = parentMovieRowByMovie_CustomFields(71)
+                columnValuesArray(34) = parentMovieRowByMovie_CustomFields(72)
             End If
             rowCustomFieldsRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowCustomFieldsRow)
@@ -5323,6 +5348,7 @@ Partial Public Class AntMovieCatalog
             Me.columnIMDB_Id = MyBase.Columns("IMDB_Id")
             Me.columnTMDB_Id = MyBase.Columns("TMDB_Id")
             Me.columnIMDB_Rank = MyBase.Columns("IMDB_Rank")
+            Me.columnVotes = MyBase.Columns("Votes")
             Me.columnSourceTrailer = MyBase.Columns("SourceTrailer")
             Me.columnIsOnline = MyBase.Columns("IsOnline")
             Me.columnIsOnlineTrailer = MyBase.Columns("IsOnlineTrailer")
@@ -5382,6 +5408,8 @@ Partial Public Class AntMovieCatalog
             MyBase.Columns.Add(Me.columnTMDB_Id)
             Me.columnIMDB_Rank = New Global.System.Data.DataColumn("IMDB_Rank", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
             MyBase.Columns.Add(Me.columnIMDB_Rank)
+            Me.columnVotes = New Global.System.Data.DataColumn("Votes", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
+            MyBase.Columns.Add(Me.columnVotes)
             Me.columnSourceTrailer = New Global.System.Data.DataColumn("SourceTrailer", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
             MyBase.Columns.Add(Me.columnSourceTrailer)
             Me.columnIsOnline = New Global.System.Data.DataColumn("IsOnline", GetType(String), Nothing, Global.System.Data.MappingType.Attribute)
@@ -5430,6 +5458,7 @@ Partial Public Class AntMovieCatalog
             Me.columnIMDB_Id.Namespace = ""
             Me.columnTMDB_Id.Namespace = ""
             Me.columnIMDB_Rank.Namespace = ""
+            Me.columnVotes.Namespace = ""
             Me.columnSourceTrailer.Namespace = ""
             Me.columnIsOnline.Namespace = ""
             Me.columnIsOnlineTrailer.Namespace = ""
@@ -8312,6 +8341,21 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Votes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableMovie.VotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Votes in Tabelle Movie ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableMovie.VotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property Aspectratio() As String
             Get
                 Try 
@@ -9261,6 +9305,18 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsVotesNull() As Boolean
+            Return Me.IsNull(Me.tableMovie.VotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetVotesNull()
+            Me(Me.tableMovie.VotesColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Function IsAspectratioNull() As Boolean
             Return Me.IsNull(Me.tableMovie.AspectratioColumn)
         End Function
@@ -9839,6 +9895,21 @@ Partial Public Class AntMovieCatalog
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Votes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCustomFields.VotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("Der Wert für Spalte Votes in Tabelle CustomFields ist DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCustomFields.VotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property SourceTrailer() As String
             Get
                 Try 
@@ -10296,6 +10367,18 @@ Partial Public Class AntMovieCatalog
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub SetIMDB_RankNull()
             Me(Me.tableCustomFields.IMDB_RankColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsVotesNull() As Boolean
+            Return Me.IsNull(Me.tableCustomFields.VotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetVotesNull()
+            Me(Me.tableCustomFields.VotesColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
