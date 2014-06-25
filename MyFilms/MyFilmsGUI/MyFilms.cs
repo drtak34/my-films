@@ -11311,11 +11311,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           if (this.facadeFilms.Count > 1) // not for single movie display ...
           {
-            if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Context: select random movie"))
-            {
-              dlg.Add(GUILocalizeStrings.Get(10798979)); // select random movie
-              choice.Add("selectrandommovie");
-            }
+            dlg.Add(GUILocalizeStrings.Get(10798979)); // select random movie
+            choice.Add("selectrandommovie");
+            //if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.test, "Context: select random movie"))
+            //{
+            //}
           }
 
           if (conf.StrFileType == Configuration.CatalogType.AntMovieCatalog3 || conf.StrFileType == Configuration.CatalogType.AntMovieCatalog4Xtended) // add or remove movie from/to box set (hierarchy)
