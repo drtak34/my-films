@@ -117,12 +117,14 @@ namespace MyFilmsPlugin.MyFilms
         using (var reader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
         {
           string language = reader.GetValueAsString("gui", "language", null);
-          MPLanguage = language != null ? Utils.GUILocalizeStrings.GetCultureName(language) : "xx";
+          // MPLanguage = language != null ? Utils.GUILocalizeStrings.GetCultureName(language) : "xx";
+          MPLanguage = (language != null && language.Length > 4) ? Utils.GUILocalizeStrings.GetCultureName(language).Substring(3,2).ToLower() : "xx"; // e.g. with "en-UK" use "uk"
+          
         }
       }
       catch (Exception)
       {
-        MPLanguage = "xx"; // use default 
+        MPLanguage = "en"; // use en as default
       }
     }
 

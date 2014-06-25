@@ -124,9 +124,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         else
         {
           // fallback to use MP language, if directory exists and no specific country setting in logo manager
-          if (MyFilmsSettings.MPLanguage.Length > 1 && Directory.Exists(LogosPath + MyFilmsSettings.MPLanguage.Substring(0,2)))
+          if (Directory.Exists(LogosPath + MyFilmsSettings.MPLanguage))
           {
-            Country = MyFilmsSettings.MPLanguage.Substring(0, 2);
+            Country = MyFilmsSettings.MPLanguage;
             UseCountryLogos = true;
           }
         }
@@ -138,7 +138,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         LogMyFilms.Debug("Logo path for reading logos        : '" + LogosPath + "'");
         LogMyFilms.Debug("Logo path for storing cached logos : '" + LogosPathThumbs + "' with spacing = '" + Spacer + "'");
-        LogMyFilms.Debug("Logo Country                       : '" + Country + "', MP language = '" + MyFilmsSettings.MPLanguage.Substring(0, 2) + "'");
+        LogMyFilms.Debug("Logo Country                       : '" + Country + "', MP language = '" + MyFilmsSettings.MPLanguage + "'");
         int i = 0;
         ID2001Logos.Clear();
         ID2002Logos.Clear();

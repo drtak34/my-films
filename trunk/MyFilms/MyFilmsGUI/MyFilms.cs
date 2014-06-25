@@ -17459,7 +17459,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         MyFilmsDetail.setGUIProperty("config.pluginmode", pluginmode);
         MyFilmsDetail.setGUIProperty("config.version", MyFilmsSettings.Version.ToString());
         MyFilmsDetail.setGUIProperty("config.mpversion", MyFilmsSettings.MPVersion.ToString());
-        MyFilmsDetail.setGUIProperty("config.country", MyFilmsSettings.MPLanguage.Substring(0, 2));
+        MyFilmsDetail.setGUIProperty("config.country", MyFilmsSettings.MPLanguage);
 
         LogMyFilms.Info("Startmode: '" + pluginmode + "'");
         DebugPropertyLogging = (xmlreader.GetValueAsString("MyFilms", "PropertyLogging", "false").ToLower() == "true");
