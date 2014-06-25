@@ -488,6 +488,7 @@
       this.Config_EnablePreload = new System.Windows.Forms.CheckBox();
       this.btnTestMode = new System.Windows.Forms.Button();
       this.txtCountry = new System.Windows.Forms.TextBox();
+      this.SOp1 = new System.Windows.Forms.ComboBox();
       this.Tab_Trakt = new System.Windows.Forms.TabPage();
       this.groupBoxExternal = new System.Windows.Forms.GroupBox();
       this.labelRecentlyAddedAPI = new System.Windows.Forms.Label();
@@ -551,7 +552,6 @@
       this.SOp2 = new System.Windows.Forms.ComboBox();
       this.SField2 = new System.Windows.Forms.ComboBox();
       this.SValue1 = new System.Windows.Forms.ComboBox();
-      this.SOp1 = new System.Windows.Forms.ComboBox();
       this.SField1 = new System.Windows.Forms.ComboBox();
       this.Tab_Artwork = new System.Windows.Forms.TabPage();
       this.Tab_AMCupdater = new System.Windows.Forms.TabPage();
@@ -5137,6 +5137,28 @@
       this.txtCountry.TabIndex = 86;
       this.ToolTip1.SetToolTip(this.txtCountry, resources.GetString("txtCountry.ToolTip"));
       // 
+      // SOp1
+      // 
+      this.SOp1.Enabled = false;
+      this.SOp1.FormattingEnabled = true;
+      this.SOp1.Items.AddRange(new object[] {
+            "equal",
+            "not equal",
+            "contains",
+            "not contains",
+            "greater",
+            "lower",
+            "filled",
+            "not filled",
+            "regex",
+            "value"});
+      this.SOp1.Location = new System.Drawing.Point(291, 276);
+      this.SOp1.Name = "SOp1";
+      this.SOp1.Size = new System.Drawing.Size(74, 21);
+      this.SOp1.TabIndex = 14;
+      this.ToolTip1.SetToolTip(this.SOp1, resources.GetString("SOp1.ToolTip"));
+      this.SOp1.SelectedIndexChanged += new System.EventHandler(this.SOp1_SelectedIndexChanged);
+      // 
       // Tab_Trakt
       // 
       this.Tab_Trakt.Controls.Add(this.groupBoxExternal);
@@ -5833,28 +5855,6 @@
       this.SValue1.Name = "SValue1";
       this.SValue1.Size = new System.Drawing.Size(110, 21);
       this.SValue1.TabIndex = 15;
-      // 
-      // SOp1
-      // 
-      this.SOp1.Enabled = false;
-      this.SOp1.FormattingEnabled = true;
-      this.SOp1.Items.AddRange(new object[] {
-            "equal",
-            "not equal",
-            "contains",
-            "not contains",
-            "greater",
-            "lower",
-            "filled",
-            "not filled",
-            "regex",
-            "value"});
-      this.SOp1.Location = new System.Drawing.Point(291, 276);
-      this.SOp1.Name = "SOp1";
-      this.SOp1.Size = new System.Drawing.Size(74, 21);
-      this.SOp1.TabIndex = 14;
-      this.ToolTip1.SetToolTip(this.SOp1, resources.GetString("SOp1.ToolTip"));
-      this.SOp1.SelectedIndexChanged += new System.EventHandler(this.SOp1_SelectedIndexChanged);
       // 
       // SField1
       // 
