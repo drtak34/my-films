@@ -1401,6 +1401,31 @@ preferring logos there.
 Both will fallback to the default logo directory in case the subdirectory does not exist 
 and also if the subdirectory exists, but no matching logo can be found.</value>
   </data>
+  <data name="SOp1.ToolTip" xml:space="preserve">
+    <value>comparator to get rule match:
+equal
+not equal
+contains
+not contains
+greater
+lower
+filled
+not filled
+regex
+
+value:
+This is a special case - if selected, the selected logo will automatically be set to "value.png", 
+if a pattern is set, this will be used as cleanup for the value of the respective DB field.
+Example:
+"Certification", "value", "-\d\d\b" with a DB value of PG-13 will search for a logo "PG.png".
+Example:
+DB value: 'PG-13'
+Cleanup: '-\d\d\b'
+Output: PG
+Logo used: pg.png
+You have to add all cleanup for a DB field you are handling into the regex cleanup expression to work properly with all upcoming values.
+Use "|" to separate them (regex notation).</value>
+  </data>
   <data name="labelTraktDescription.Text" xml:space="preserve">
     <value>"Trakt.TV" actively keeps a record of what TV shows and movies you are watching. 
 Based on your favorites, your friends, and the community, trakt recommends 
@@ -1424,24 +1449,6 @@ You can enable or disable Trakt synchronisation separately for each My Films con
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>111, 17</value>
   </metadata>
-  <data name="SOp1.ToolTip" xml:space="preserve">
-    <value>comparator to get rule match:
-equal
-not equal
-contains
-not contains
-greater
-lower
-filled
-not filled
-regex
-
-value:
-This is a special case - if selected, the selected logo will automatically be set to "value.png", 
-if a pattern is set, this will be used as cleanup for the value of the respective DB field.
-Example:
-"Certification", "value", "PG\-" with a DB value of PG-13 will search for a logo "13.png".</value>
-  </data>
   <data name="pictureBoxTMDBlogo.InitialImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAggAAACWCAYAAAC7D3B5AAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
