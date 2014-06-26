@@ -2456,7 +2456,11 @@ usage:
 For certain websites, you need some sort of cleanup to remove 
 certain characters from searchtitle (e.g. MoviePilot doesn't accept
 "-" char in search).
-This field allows you to "clean" your search expression.</value>
+This field allows you to "clean" your search expression.
+
+This pattern can also be used to cleanup media file names to strip e.g. multi part extensions.
+
+You can uise standard expression or regex, for regex don't forget to start with '#REGEX#'.</value>
   </data>
   <data name="&gt;&gt;textSearchCleanup.Name" xml:space="preserve">
     <value>textSearchCleanup</value>
@@ -5578,7 +5582,7 @@ If you want to create a new configuration based on the existing script, you can 
   <data name="pictureBoxFranceFlag.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
-        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr6AAAK+gEZ2P90AAACCUlE
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAr5AAAK+QG0Yd4ZAAACCUlE
         QVRIS7XV30uTURgH8F2IiEvn3hibW2zgNBxNmVKrZOgw3YKUBilerMSwMJzZptEMK2jRD4mVF9VdXQVB
         0F03/QEVBRG1ucJMQbQi2N/w7X3W287Fc+rcvH3hw3nfc/F84ZyLYwHwX0k3zSTdNBOlRrdDZzcZzaTZ
         lqaBgTuIx5elVFkfOv5XNJsKPLHYMpaWXkip8jP/QGr96Akq8FCBr78/j1zuOebmniKjo/UPVbazud8u
