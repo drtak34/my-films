@@ -43,7 +43,7 @@
   </scripts>
   <scripts>
     <name>IMDB-Full.xml</name>
-    <version>1.2.14</version>
+    <version>1.2.15</version>
   </scripts>
   <scripts>
     <name>IMDB-Person.xml</name>
@@ -71,7 +71,7 @@
   </scripts>
   <scripts>
     <name>MoviePilot.de.xml</name>
-    <version>1.1</version>
+    <version>1.2</version>
   </scripts>
   <scripts>
     <name>MoviePosterDB.xml</name>

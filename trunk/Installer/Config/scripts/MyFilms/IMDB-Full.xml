@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.14</Version>
+    <Version>1.2.15</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -137,7 +137,7 @@
       <KeyTaglinePage />
       <KeyStartCertification Param1="_x0023_REGEX_x0023__x005C__x0028__x007C__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_h5_x005B__x005E__x003E__x005D__x002A__x003E__x005B__x005E_D_x005D__x002A_Certification_x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h5_x003E__x005B__x005E__x003C__x005D__x002A_</KeyStartCertification>
       <KeyEndCertification>_x003C__x002F_div_x003E_</KeyEndCertification>
-      <KeyCertificationRegExp>certificates_x003D_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029_:_x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyCertificationRegExp>
+      <KeyCertificationRegExp>certificates_x003D_._x002A__x003F__x0022__x003E__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029_:_x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyCertificationRegExp>
       <KeyCertificationIndex />
       <KeyCertificationPage>URL_x0020_Redirection_x0020_Certification</KeyCertificationPage>
       <KeyCertificationLanguage />
