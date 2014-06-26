@@ -5,10 +5,10 @@
     <URLPrefix />
     <Language>all</Language>
     <Type>details|cover|fanart</Type>
-    <Version>1.3</Version>
+    <Version>1.4</Version>
     <Encoding>UTF-8</Encoding>
     <FileBasedReader>true</FileBasedReader>
-    <SearchCleanup />
+    <SearchCleanup>#REGEX#[-|_|.| +][cC][dD][0-9]|[-|_|.| +][dD][iI][sS][kKcC][0-9]|[0-9]of[0-9]</SearchCleanup>
     <Accept />
     <UserAgent />
     <Headers />
