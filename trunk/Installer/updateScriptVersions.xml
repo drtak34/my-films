@@ -43,7 +43,7 @@
   </scripts>
   <scripts>
     <name>IMDB-Full.xml</name>
-    <version>1.2.15</version>
+    <version>1.2.2</version>
   </scripts>
   <scripts>
     <name>IMDB-Person.xml</name>
@@ -83,7 +83,7 @@
   </scripts>
   <scripts>
     <name>NFO.xml</name>
-    <version>1.4</version>
+    <version>1.4.1</version>
   </scripts>
   <scripts>
     <name>OFDB.xml</name>
