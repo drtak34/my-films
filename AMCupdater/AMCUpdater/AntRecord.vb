@@ -506,7 +506,8 @@ Public Class AntRecord
                     If (wurl.Count = 1) And _internetLookupAlwaysPrompt = False Then
 
                         '_InternetData = Gb.GetDetail(wurl.Item(0).URL, _ImagePath, _ParserPath, _downloadImage)
-                        _internetData = Gb.GetDetail(wurl.Item(0).URL, _imagePath, _parserPath, _downloadImage, _grabberOverrideLanguage, _grabberOverridePersonLimit, _grabberOverrideTitleLimit, _grabberOverrideGetRoles)
+                        '_internetData = Gb.GetDetail(wurl.Item(0).URL, _imagePath, _parserPath, _downloadImage, _grabberOverrideLanguage, _grabberOverridePersonLimit, _grabberOverrideTitleLimit, _grabberOverrideGetRoles)
+                        _internetData = Gb.GetDetail(wurl.Item(0).URL, _imagePath, _parserPath, _downloadImage, _grabberOverrideLanguage, _grabberOverridePersonLimit, _grabberOverrideTitleLimit, _grabberOverrideGetRoles, _filePath)
                         _internetLookupOk = True
                         _lastOutputMessage = SearchString & " - " & " Movie found by 'single result' automatch."
 
