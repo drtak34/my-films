@@ -21,6 +21,8 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
+using System.ComponentModel;
+
 namespace MyFilmsPlugin.MyFilms.Utils
 {
   using System;
@@ -55,9 +57,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
     public Logos()
     {
-      var bgLogos = new System.ComponentModel.BackgroundWorker();
-      //string activeLogoConfigFile = Config.GetFile(Config.Dir.Config, "MyFilmsLogos_" + Configuration.CurrentConfig + ".xml"); // Default config customized logofile
-
+      // BackgroundWorker bgLogos = new System.ComponentModel.BackgroundWorker();
+      // string activeLogoConfigFile = Config.GetFile(Config.Dir.Config, "MyFilmsLogos_" + Configuration.CurrentConfig + ".xml"); // Default config customized logofile
       //string activeLogoConfig = "MyFilmsLogos_" + Configuration.CurrentConfig;
       string logoConfigPathSkin;
       string skinLogoPath;
@@ -139,6 +140,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         LogMyFilms.Debug("Logo path for reading logos        : '" + LogosPath + "'");
         LogMyFilms.Debug("Logo path for storing cached logos : '" + LogosPathThumbs + "' with spacing = '" + Spacer + "'");
         LogMyFilms.Debug("Logo Country                       : '" + Country + "', MP language = '" + MyFilmsSettings.MPLanguage + "'");
+
+        #region read logo rules
         int i = 0;
         ID2001Logos.Clear();
         ID2002Logos.Clear();
@@ -171,6 +174,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           ID2003Logos.Add(wline);
           i++;
         } while (true);
+        #endregion
       }
     }
 
@@ -205,9 +209,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
                          : "MyFilms_" + skinName + "_D" + LogoConfigOverride + fileLogoName + ".png";
         int wHeight = 0;
         int wWidth = 0;
-        if (!System.IO.Directory.Exists(LogosPathThumbs))
+        if (!Directory.Exists(LogosPathThumbs))
         {
-          try { System.IO.Directory.CreateDirectory(LogosPathThumbs); }
+          try { Directory.CreateDirectory(LogosPathThumbs); }
           catch { }
         }
         try
@@ -220,6 +224,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         catch (Exception)
         {
         }
+
         if (!File.Exists(LogosPathThumbs + fileLogoName) || wHeight != imgHeight || wWidth != imgWidth)
         {
           Bitmap b = new Bitmap(imgWidth, imgHeight);
@@ -246,6 +251,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
     static string GetLogos(DataRow r, ref List<string> listelogos, ArrayList rulesLogos)
     {
       string fileLogoName = string.Empty;
+      List<string> logoFiles = null; // to have a list of all logo files that can be reused to minimize IO
+
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
       {
         // value should be given to output directly - property like
@@ -265,10 +272,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
           {
             if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
             {
-              string filePathsLogoSearch = Directory.GetFiles(LogosPath + "\\" + Country, wtab[7], System.IO.SearchOption.AllDirectories).FirstOrDefault();
-              if (filePathsLogoSearch != null)
+              if (logoFiles == null) // if not yet read, do it now
               {
-                wtab[7] = filePathsLogoSearch;
+                logoFiles = new List<string>();
+                // LogoFiles.AddRange(Directory.GetFiles(LogosPath, "\\" + Country + "\\", SearchOption.AllDirectories)); // get all files, that match the selected country code
+                logoFiles.AddRange(Directory.GetFiles(LogosPath, "*.*", SearchOption.AllDirectories));
+              }
+              
+              string result = logoFiles.FirstOrDefault(logoFile => logoFile.Contains("\\" + Country + "\\") && logoFile.EndsWith(wtab[7]));
+              if (result != null)
+              {
+                wtab[7] = result;
                 isLogoFound = true;
               }
             }
@@ -282,6 +296,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
             wtab[7] = LogosPath + wtab[7];
             isLogoFound = true;
           }
+
           // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
           if (!isLogoFound && File.Exists(LogosPath + wtab[7])) // Check, if logofile is present in logo directory of current skin
           {
@@ -292,10 +307,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
           {
             if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
             {
-              string filePathsLogoSearch = Directory.GetFiles(LogosPath, wtab[7], System.IO.SearchOption.AllDirectories).FirstOrDefault();
-              if (filePathsLogoSearch != null)
+              if (logoFiles == null) // if not yet read, do it now
               {
-                wtab[7] = filePathsLogoSearch;
+                logoFiles = new List<string>();
+                // LogoFiles.AddRange(Directory.GetFiles(LogosPath, "\\" + Country + "\\", SearchOption.AllDirectories)); // get all files, that match the selected country code
+                logoFiles.AddRange(Directory.GetFiles(LogosPath, "*.*", SearchOption.AllDirectories));
+              }
+
+              string result = logoFiles.FirstOrDefault(logoFile => !logoFile.Contains("\\" + Country + "\\") && logoFile.EndsWith(wtab[7]));
+              if (result != null)
+              {
+                wtab[7] = result;
                 isLogoFound = true;
               }
             }
