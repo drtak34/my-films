@@ -36,7 +36,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     string _CurrentTaskDescription = null;
     Thread backgroundThread = null;
     bool abortedByUser = false;
-    System.Timers.Timer timeoutTimer = new System.Timers.Timer(25000) { AutoReset = false };
+    System.Timers.Timer timeoutTimer = new System.Timers.Timer(90000) { AutoReset = false };
 
     public void StopBackgroundTask()
     {
