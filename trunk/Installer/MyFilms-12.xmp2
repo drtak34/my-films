@@ -1308,128 +1308,9 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\0.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{939f1bb1-f5ff-41a8-95e0-dd411f65a24c}-0.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\0.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\12.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{2413de6c-e195-4aad-a9dc-3d1f3d6de80c}-12.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\12.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\12A.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{a0e58fb3-4260-4199-9d09-c6e2b3c6896c}-12A.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\12A.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\15.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{b6e38f0e-5fcc-4979-ad38-8d7e334b1d78}-15.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\15.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\16.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{74c7521a-0196-4a90-9312-418b025357d4}-16.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\16.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\18.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{9032863e-e5eb-46f6-be1b-47a53a8a0376}-18.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\18.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Thumbs\MyFilms\DefaultLogos\3D.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{47817998-2af5-4d1c-a98c-79c11986d9a9}-3D.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\3D.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\6.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{60af0fbf-06f4-49ea-9871-1dbf86e0a126}-6.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\6.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\G.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{8eda3bdd-a0a5-4c24-b537-d9f3aa8bef86}-G.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\G.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\NC-17.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f50ea76e-4fb6-4d38-9955-5d44042f7465}-NC-17.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\NC-17.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\PG-13.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{5e6c1dda-56b8-42a4-a0e8-c71f3b860ff9}-PG-13.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\PG-13.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\PG.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{bee0d09a-4b79-4771-87bb-605b15551b66}-PG.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\PG.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\R.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{cef57838-e02f-42ee-8966-6c8a751e423e}-R.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\R.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\R18.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{704f834f-b9d5-49f0-9a04-d96026646d3a}-R18.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\R18.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\U.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{ba92379a-9e96-4046-b07c-1a2728b7ba9e}-U.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\U.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Uc.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{f807a383-7673-4945-80bc-4843799ea29f}-Uc.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Uc.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Unrated.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{8e0d6461-8126-4655-b989-1b6c99f09dcd}-Unrated.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Unrated.png</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Thumbs\MyFilms\DefaultLogos\NotRated.png</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{77a8308f-8906-49e2-bce0-7c28fcf2b18e}-NotRated.png</ZipFileName>
-              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\NotRated.png</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
@@ -1605,6 +1486,356 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Thumbs\MyFilms\DefaultLogos\us\Unrated.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{00177f82-4095-4c66-82bc-8f202bde53f1}-Unrated.png</ZipFileName>
               <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\us\Unrated.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\Syndication.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e06fd563-3428-4414-a009-e4410f9a41a2}-Syndication.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Syndication.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\au\unrated.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{a4600daf-de61-45c5-a80f-742a5fdc3d11}-unrated.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\au\unrated.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\10.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cd7692eb-a3b1-48a7-98b2-78c748d05858}-10.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\10.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\12.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{f5513dac-b80e-4d97-ad40-51fdbab26971}-12.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\12.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\14.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2cc00891-7d8f-430a-abe4-234bedc9f350}-14.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\14.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\16.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7487cf62-7332-4178-9f6d-7cbac2f8de61}-16.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\16.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\18.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{77a23e53-c590-4106-8c19-d5ca6058a2aa}-18.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\18.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\livre.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b73391da-8708-46fe-a8b3-97475545431b}-livre.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\livre.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\13+.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{12b36872-7a10-45e8-a87b-9fd4bc35b4f9}-13+.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\13+.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\14A.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7fda4aa4-4fe8-44b9-827a-3f1094500cb6}-14A.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\14A.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\16+.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{da3c8cf2-f043-4d34-8165-425b50433de0}-16+.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\16+.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\18+.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{becc7b84-90c9-4856-a35e-42e1a417042b}-18+.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\18+.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\18A.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{58037a28-285e-4e99-8097-cb4c0ccd225f}-18A.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\18A.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\A.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e4df0b7b-67fe-459d-b699-a9df82dc18c7}-A.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\A.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\g.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6677802a-9ee3-4f87-a61e-372acb54872e}-g.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\g.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\pg.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{dc822d3e-d348-4791-9025-2c646f546d92}-pg.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\pg.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\r.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b0436034-2f4c-45f8-b73c-8df5c2966f1f}-r.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\r.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\unrated.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c45c5f3d-1898-40c2-b15f-ff005817e0d5}-unrated.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\unrated.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\-12.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d937e881-5ee0-4375-811c-9c34551ea990}--12.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\-12.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\-16.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7900836b-df2f-47de-b119-7f50c45542bd}--16.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\-16.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\-18.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{97f1b0ac-0c3d-4ef4-ac83-2c585386fe5f}--18.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\-18.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\U.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e9e68c16-54c7-4acf-9bea-f6839663b7ef}-U.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\U.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\12a.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{021b294b-93b7-474d-8ab2-53a76d1effbb}-12a.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\12a.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\15a.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c2bb7e7d-a2ac-4efe-9369-8d47ff0e996b}-15a.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\15a.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\16.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6eaa7cbe-3b1a-4bc3-af17-546d119b0408}-16.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\16.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\18.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5477e274-975e-46ef-bdb0-e9145657b494}-18.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\18.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\g.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c6abdce7-9157-4a89-8c1e-8ccf64b6152c}-g.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\g.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\pg.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{34f8738b-e869-4504-8adc-d0765cb4fc58}-pg.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\pg.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\12.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1b5191d7-4c69-4a58-b40d-aae66772b88c}-12.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\12.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\16.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{9b60143e-12ee-4d70-8698-30eadd3ccbd6}-16.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\16.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\6.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{16f8c9aa-1a77-4b96-a650-dea52a63e0cf}-6.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\6.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\9.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d8d178b0-4412-4109-b529-c6b08fff9b7c}-9.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\9.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\al.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{6281cb7a-ff29-4e11-9320-a9bb42c542a1}-al.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\al.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\g.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{82ea1108-c49a-4c5f-9e6c-86c97c2937a0}-g.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\g.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\ga.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c0b02f3d-ca68-4898-be5b-583d31d6821a}-ga.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\ga.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\m.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d7032d05-1623-43c9-9273-dfd045a4d967}-m.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\m.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\pg.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1ae1a7b1-fe75-47d6-957a-fc3ec35b5865}-pg.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\pg.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{c9b55080-8005-4785-bc82-82603c1ebedf}-r.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r13.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{315a9014-cffe-4f88-ae4b-47f7b1388465}-r13.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r13.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r15.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{b86136ac-4407-4bad-9055-cf50763a2710}-r15.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r15.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r16.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{eef305b5-4d9e-476e-b54c-bc242da8850e}-r16.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r16.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r18.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{330ba12a-13f0-44e2-8269-435938eddb58}-r18.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r18.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\rp13.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{cbe20260-ddd3-4870-901d-9caa33497504}-rp13.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\rp13.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\rp16.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7b32f1e6-69c8-4b2b-8fd5-94fe9fc03eff}-rp16.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\rp16.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\rp18.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{825ced19-b069-471a-b981-f47e12df202c}-rp18.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\rp18.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\11.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{0f675fe1-d903-47a3-a4f6-1468b46cb0df}-11.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\11.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\15.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{04e645c3-f9f1-4607-b54d-8f16e172ecde}-15.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\15.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\18.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{eacee3b2-2471-47fd-b173-d3edf65c6bd5}-18.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\18.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\btl.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{1f1fda40-3289-40d2-9b20-4ed424b9d739}-btl.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\btl.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Thumbs\MyFilms\DefaultLogos\uk\R18.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{dd266619-b791-4bbf-bd20-639be4a43283}-R18.png</ZipFileName>
+              <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\uk\R18.png</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -1860,6 +2091,13 @@ Main Components (Plugin, AMC Updater, Grabber Interface, Default Skin Files, Gra
               <LocalFileName>Config\scripts\MyFilms\Moviemeter.nl.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{5bc8c1ae-901c-4e7c-aeb0-329da5454175}-Moviemeter.nl.xml</ZipFileName>
               <DestinationFilename>%Config%\scripts\MyFilms\Moviemeter.nl.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>Config\scripts\MyFilms\IMDB-Top250.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5f84ff87-3c03-434f-ac57-6e43f36adb5c}-IMDB-Top250.xml</ZipFileName>
+              <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Top250.xml</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -5507,7 +5745,7 @@ Please refer to the Wiki online documentation.</Value>
       <Major>6</Major>
       <Minor>1</Minor>
       <Build>0</Build>
-      <Revision>3047</Revision>
+      <Revision>3069</Revision>
     </Version>
     <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
 
@@ -5683,7 +5921,7 @@ Cinefacts has relaunched their website, so grabbers don't work anymore
 Add GUI Global Options to change default config and default setting</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://my-films.googlecode.com/files/MyFilms-V6.0.3.2921.mpe1</OnlineLocation>
-    <ReleaseDate>2014-06-23T01:21:13.2794006+02:00</ReleaseDate>
+    <ReleaseDate>2014-06-26T02:59:42.9641796+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -6997,128 +7235,9 @@ Add GUI Global Options to change default config and default setting</VersionDesc
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\0.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{939f1bb1-f5ff-41a8-95e0-dd411f65a24c}-0.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\0.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\12.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{2413de6c-e195-4aad-a9dc-3d1f3d6de80c}-12.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\12.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\12A.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{a0e58fb3-4260-4199-9d09-c6e2b3c6896c}-12A.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\12A.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\15.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b6e38f0e-5fcc-4979-ad38-8d7e334b1d78}-15.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\15.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\16.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{74c7521a-0196-4a90-9312-418b025357d4}-16.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\16.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\18.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9032863e-e5eb-46f6-be1b-47a53a8a0376}-18.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\18.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Thumbs\MyFilms\DefaultLogos\3D.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{47817998-2af5-4d1c-a98c-79c11986d9a9}-3D.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\3D.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\6.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{60af0fbf-06f4-49ea-9871-1dbf86e0a126}-6.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\6.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\G.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{8eda3bdd-a0a5-4c24-b537-d9f3aa8bef86}-G.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\G.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\NC-17.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f50ea76e-4fb6-4d38-9955-5d44042f7465}-NC-17.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\NC-17.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\PG-13.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{5e6c1dda-56b8-42a4-a0e8-c71f3b860ff9}-PG-13.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\PG-13.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\PG.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{bee0d09a-4b79-4771-87bb-605b15551b66}-PG.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\PG.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\R.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{cef57838-e02f-42ee-8966-6c8a751e423e}-R.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\R.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\R18.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{704f834f-b9d5-49f0-9a04-d96026646d3a}-R18.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\R18.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\U.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{ba92379a-9e96-4046-b07c-1a2728b7ba9e}-U.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\U.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Uc.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{f807a383-7673-4945-80bc-4843799ea29f}-Uc.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Uc.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Unrated.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{8e0d6461-8126-4655-b989-1b6c99f09dcd}-Unrated.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Unrated.png</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Thumbs\MyFilms\DefaultLogos\NotRated.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{77a8308f-8906-49e2-bce0-7c28fcf2b18e}-NotRated.png</ZipFileName>
-        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\NotRated.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -7294,6 +7413,356 @@ Add GUI Global Options to change default config and default setting</VersionDesc
         <LocalFileName>Thumbs\MyFilms\DefaultLogos\us\Unrated.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{00177f82-4095-4c66-82bc-8f202bde53f1}-Unrated.png</ZipFileName>
         <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\us\Unrated.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\Syndication.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e06fd563-3428-4414-a009-e4410f9a41a2}-Syndication.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\Syndication.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\au\unrated.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{a4600daf-de61-45c5-a80f-742a5fdc3d11}-unrated.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\au\unrated.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\10.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cd7692eb-a3b1-48a7-98b2-78c748d05858}-10.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\10.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\12.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{f5513dac-b80e-4d97-ad40-51fdbab26971}-12.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\12.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\14.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{2cc00891-7d8f-430a-abe4-234bedc9f350}-14.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\14.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\16.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7487cf62-7332-4178-9f6d-7cbac2f8de61}-16.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\16.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\18.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{77a23e53-c590-4106-8c19-d5ca6058a2aa}-18.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\18.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\br\livre.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b73391da-8708-46fe-a8b3-97475545431b}-livre.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\br\livre.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\13+.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{12b36872-7a10-45e8-a87b-9fd4bc35b4f9}-13+.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\13+.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\14A.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7fda4aa4-4fe8-44b9-827a-3f1094500cb6}-14A.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\14A.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\16+.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{da3c8cf2-f043-4d34-8165-425b50433de0}-16+.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\16+.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\18+.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{becc7b84-90c9-4856-a35e-42e1a417042b}-18+.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\18+.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\18A.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{58037a28-285e-4e99-8097-cb4c0ccd225f}-18A.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\18A.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\A.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e4df0b7b-67fe-459d-b699-a9df82dc18c7}-A.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\A.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\g.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6677802a-9ee3-4f87-a61e-372acb54872e}-g.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\g.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\pg.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{dc822d3e-d348-4791-9025-2c646f546d92}-pg.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\pg.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\r.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b0436034-2f4c-45f8-b73c-8df5c2966f1f}-r.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\r.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ca\unrated.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c45c5f3d-1898-40c2-b15f-ff005817e0d5}-unrated.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ca\unrated.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\-12.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d937e881-5ee0-4375-811c-9c34551ea990}--12.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\-12.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\-16.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7900836b-df2f-47de-b119-7f50c45542bd}--16.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\-16.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\-18.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{97f1b0ac-0c3d-4ef4-ac83-2c585386fe5f}--18.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\-18.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\fr\U.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e9e68c16-54c7-4acf-9bea-f6839663b7ef}-U.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\fr\U.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\12a.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{021b294b-93b7-474d-8ab2-53a76d1effbb}-12a.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\12a.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\15a.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c2bb7e7d-a2ac-4efe-9369-8d47ff0e996b}-15a.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\15a.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\16.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6eaa7cbe-3b1a-4bc3-af17-546d119b0408}-16.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\16.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\18.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5477e274-975e-46ef-bdb0-e9145657b494}-18.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\18.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\g.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c6abdce7-9157-4a89-8c1e-8ccf64b6152c}-g.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\g.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\ie\pg.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{34f8738b-e869-4504-8adc-d0765cb4fc58}-pg.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\ie\pg.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\12.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1b5191d7-4c69-4a58-b40d-aae66772b88c}-12.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\12.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\16.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9b60143e-12ee-4d70-8698-30eadd3ccbd6}-16.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\16.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\6.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{16f8c9aa-1a77-4b96-a650-dea52a63e0cf}-6.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\6.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\9.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d8d178b0-4412-4109-b529-c6b08fff9b7c}-9.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\9.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nl\al.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{6281cb7a-ff29-4e11-9320-a9bb42c542a1}-al.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nl\al.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\g.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{82ea1108-c49a-4c5f-9e6c-86c97c2937a0}-g.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\g.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\ga.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c0b02f3d-ca68-4898-be5b-583d31d6821a}-ga.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\ga.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\m.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d7032d05-1623-43c9-9273-dfd045a4d967}-m.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\m.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\pg.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1ae1a7b1-fe75-47d6-957a-fc3ec35b5865}-pg.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\pg.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{c9b55080-8005-4785-bc82-82603c1ebedf}-r.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r13.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{315a9014-cffe-4f88-ae4b-47f7b1388465}-r13.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r13.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r15.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{b86136ac-4407-4bad-9055-cf50763a2710}-r15.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r15.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r16.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{eef305b5-4d9e-476e-b54c-bc242da8850e}-r16.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r16.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\r18.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{330ba12a-13f0-44e2-8269-435938eddb58}-r18.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\r18.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\rp13.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{cbe20260-ddd3-4870-901d-9caa33497504}-rp13.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\rp13.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\rp16.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7b32f1e6-69c8-4b2b-8fd5-94fe9fc03eff}-rp16.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\rp16.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\nz\rp18.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{825ced19-b069-471a-b981-f47e12df202c}-rp18.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\nz\rp18.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\11.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{0f675fe1-d903-47a3-a4f6-1468b46cb0df}-11.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\11.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\15.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{04e645c3-f9f1-4607-b54d-8f16e172ecde}-15.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\15.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\18.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{eacee3b2-2471-47fd-b173-d3edf65c6bd5}-18.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\18.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\sv\btl.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{1f1fda40-3289-40d2-9b20-4ed424b9d739}-btl.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\sv\btl.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Thumbs\MyFilms\DefaultLogos\uk\R18.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{dd266619-b791-4bbf-bd20-639be4a43283}-R18.png</ZipFileName>
+        <DestinationFilename>%Thumbs%\MyFilms\DefaultLogos\uk\R18.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
@@ -7539,6 +8008,13 @@ Add GUI Global Options to change default config and default setting</VersionDesc
         <LocalFileName>Config\scripts\MyFilms\Moviemeter.nl.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{5bc8c1ae-901c-4e7c-aeb0-329da5454175}-Moviemeter.nl.xml</ZipFileName>
         <DestinationFilename>%Config%\scripts\MyFilms\Moviemeter.nl.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>Config\scripts\MyFilms\IMDB-Top250.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5f84ff87-3c03-434f-ac57-6e43f36adb5c}-IMDB-Top250.xml</ZipFileName>
+        <DestinationFilename>%Config%\scripts\MyFilms\IMDB-Top250.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />

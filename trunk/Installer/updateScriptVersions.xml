@@ -50,6 +50,10 @@
     <version>1.4.3</version>
   </scripts>
   <scripts>
+    <name>IMDB-Top250.xml</name>
+    <version>1.0.0</version>
+  </scripts>
+  <scripts>
     <name>kino.de.xml</name>
     <version>1.2</version>
   </scripts>
