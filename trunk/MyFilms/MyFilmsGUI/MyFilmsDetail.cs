@@ -6656,6 +6656,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       clearGUIProperty("db.calc.aspectratio.value", log);
       clearGUIProperty("db.calc.imageformat.value", log);
 
+      clearGUIProperty("db.certification.logo.value", log);
+
       for (var j = 1; j < 7; j++)
       {
         clearGUIProperty("db.actors.actor" + j + ".name", log);
@@ -7222,6 +7224,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                   catch { LogMyFilms.Info("Error calculating aspectratio !"); }
                 setGUIProperty("db.calc.aspectratio.value", wstring);
                 setGUIProperty("db.calc.imageformat.value", ar);
+                break;
+                #endregion
+              case "certification":
+                #region set cleaned certification for logos
+                wstring = MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "";
+                setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
+                setGUIProperty("db.certification.logo.value", Regex.Replace(wstring, @"^.*\s", ""));
                 break;
                 #endregion
               case "year":
