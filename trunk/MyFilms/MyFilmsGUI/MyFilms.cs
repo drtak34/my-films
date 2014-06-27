@@ -184,6 +184,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     private IEnumerable<TmdbMovieSearchResult> upcomingMovies;
 
+    DateTime lastRequestImdbTop250;
+    IEnumerable<TmdbMovieSearchResult> ImdbTop250Movies
+    {
+      get
+      {
+        if (imdbTop250Movies == null || lastRequestImdbTop250 < DateTime.UtcNow.Subtract(new TimeSpan(0, MyFilmsSettings.WebRequestCacheMinutes, 0)))
+        {
+          imdbTop250Movies = GetImdbTop250Movies(true);
+          lastRequestImdbTop250 = DateTime.UtcNow;
+        }
+        return imdbTop250Movies;
+      }
+    }
+    private IEnumerable<TmdbMovieSearchResult> imdbTop250Movies;
+
     #endregion
 
     #region MapSettings class
@@ -2011,11 +2026,76 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       return movies.AsEnumerable().OrderBy(rd => rd.release_date).ThenByDescending(v => v.vote_average);
     }
 
+    private static IEnumerable<TmdbMovieSearchResult> GetImdbTop250Movies(bool all)
+    {
+      List<TmdbMovieSearchResult> movies = new List<TmdbMovieSearchResult>();
+      string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+      var api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+      // TmdbConfiguration tmdbConf = api.GetConfiguration();
+      LogMyFilms.Debug("GetImdbTop250Movies - detected language = '" + language + "', all = '" + all + "'");
+
+      watch.Reset(); watch.Start();
+      string wscript = MyFilmsSettings.GetPath(MyFilmsSettings.Path.GrabberScripts) + "\\IMDB-Top250.xml";
+      if (!File.Exists(wscript)) return movies;
+      
+      var grab = new Grabber_URLClass();
+      var listUrl = new ArrayList();
+
+      try
+      {
+        listUrl = grab.ReturnURL("top", wscript, 1, true, "");
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.ErrorException("GetImdbTop250Movies() - exception = '" + ex.Message + "'", ex);
+      }
+
+      LogMyFilms.Debug("GetImdbTop250Movies() - finished loading IMDB Top 250 movie list (" + (watch.ElapsedMilliseconds) + " ms)");
+
+      foreach (object item in listUrl)
+      {
+        try
+        {
+          Grabber_URLClass.IMDBUrl wurl = (Grabber_URLClass.IMDBUrl)item;
+          TmdbMovieSearchResult movie = new TmdbMovieSearchResult();
+          TmdbMovie tmdbmovie = api.GetMovieByIMDB(wurl.ID);
+          movie.id = tmdbmovie.id;
+          movie.original_title = tmdbmovie.original_title;
+          movie.release_date = tmdbmovie.release_date;
+          movie.backdrop_path = tmdbmovie.backdrop_path;
+          movie.poster_path = tmdbmovie.poster_path;
+
+          movie.title = wurl.Title;
+          // movie.id = -1; // tmdbmovie.id missing, get it later from IMDBid
+          // movie.imdb_id = wurl.ID;
+          // movie.original_title = wurl.Title;
+          // movie.release_date = wurl.Year;
+          int votecount;
+          int.TryParse(wurl.Akas, out votecount);
+          movie.vote_count = votecount; // int.Parse(wurl.Akas);
+          Double voteaverage;
+          Double.TryParse(wurl.Options.Replace(".", ","), out voteaverage);
+          movie.vote_average = voteaverage;
+          movies.Add(movie);
+          LogMyFilms.Debug("GetImdbTop250Movies() - Rating: '" + movie.vote_average + "', Title: " + movie.title + "");
+        }
+        catch (Exception ex)
+        {
+          LogMyFilms.ErrorException("GetImdbTop250Movies() - exception = '" + ex.Message + "'", ex);
+        }
+      }
+      // movies = movies.OrderBy(x => x.release_date).ToList();
+      // movies.OrderBy(x => x.release_date).ThenByDescending(x => x.vote_average).ThenByDescending(x => x.release_date);
+      watch.Stop();
+      LogMyFilms.Debug("GetImdbTop250Movies() - finished loading IMDB Top 250 movies (" + (watch.ElapsedMilliseconds) + " ms)");
+      return movies.AsEnumerable(); // .OrderBy(rd => rd.release_date).ThenByDescending(v => v.vote_average);
+    }
+
     private static IEnumerable<TmdbMovieSearchResult> GetPersonMovies(string personname, bool all)
     {
       List<TmdbMovieSearchResult> movies = new List<TmdbMovieSearchResult>();
       string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
-      LogMyFilms.Debug("GetUpcomingMovies - detected language = '" + language + "', all = '" + all + "'");
+      LogMyFilms.Debug("GetPersonMovies - detected language = '" + language + "', all = '" + all + "'");
       watch.Reset(); watch.Start();
       Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
       // TmdbConfiguration tmdbConf = api.GetConfiguration();
@@ -4549,6 +4629,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
       if (facadeFilms != null) facadeFilms.Add(item);
 
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Online lists - IMDB Top250"))
+      {
+        //Upcoming Movies - retrieve IMDB Top250 movies (via grabber script)
+        item = new GUIListItem();
+        item.Label = GUILocalizeStrings.Get(10798824);  // IMDB Top250 movies
+        item.DVDLabel = "TMDBaction";
+        item.IsFolder = true;
+        item.ThumbnailImage = GetImageforMenu(item);
+        item.IconImage = item.ThumbnailImage;
+        item.IconImageBig = item.ThumbnailImage;
+        item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
+        if (facadeFilms != null) facadeFilms.Add(item);
+      }
 
       if (facadeFilms == null) return;
 
@@ -6161,8 +6254,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       GUIPropertyManager.SetProperty("#itemcount", "0");
 
       bool allowSortchanges = !(tmdBfunction != GUILocalizeStrings.Get(10798826) && tmdBfunction != GUILocalizeStrings.Get(10798827) &&
-                                tmdBfunction != GUILocalizeStrings.Get(10798828) && tmdBfunction != GUILocalizeStrings.Get(10798829) &&
-                                !string.IsNullOrEmpty(tmdBfunction));
+                                tmdBfunction != GUILocalizeStrings.Get(10798828) && tmdBfunction != GUILocalizeStrings.Get(10798829) && 
+                                tmdBfunction != GUILocalizeStrings.Get(10798824) && !string.IsNullOrEmpty(tmdBfunction));
 
       BtnSrtBy.IsEnabled = allowSortchanges;
       _currentSortMethod = SortMethod.Date;
@@ -6193,6 +6286,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return TopRatedMovies;
         if (tmdBfunction == GUILocalizeStrings.Get(10798829)) // Upcoming Movies
           return UpcomingMovies;
+        if (tmdBfunction == GUILocalizeStrings.Get(10798824)) // IMDB Top250 movies
+          return ImdbTop250Movies;
+
         ispersonmovie = true;
       return !string.IsNullOrEmpty(tmdBfunction) ? GetPersonMovies(tmdBfunction, true) : null;
       },
@@ -6214,15 +6310,32 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           }
 
           #region Populate the facade ...
+          //string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+          //Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+
           int itemId = 0;
           foreach (TmdbMovieSearchResult movie in tmdbMovieSearchResults)
           {
             #region populate facade item
             GUIListItem item = new GUIListItem();
             OnlineMovie ovMovie = new OnlineMovie { MovieSearchResult = movie };
+
             // AntMovieCatalog.MovieRow AntMovie = new AntMovieCatalog.MovieDataTable().NewMovieRow();
-            string[] split = movie.original_title.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            // string[] split = movie.original_title.Split(new Char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
             // bool ispersoninfo = (split.Length > 1);
+
+
+            //#region search for TMDB id if it is missing ...
+            //if (ovMovie.MovieSearchResult.id == -1) // we have stored IMDBid in imdb_id, if id == -1
+            //{
+            //  TmdbMovie tmdbmovie = api.GetMovieByIMDB(ovMovie.MovieSearchResult.original_title);
+            //  ovMovie.MovieSearchResult.id = tmdbmovie.id;
+            //  ovMovie.MovieSearchResult.backdrop_path = tmdbmovie.backdrop_path;
+            //  ovMovie.MovieSearchResult.poster_path = tmdbmovie.poster_path;
+            //  ovMovie.MovieSearchResult.original_title = tmdbmovie.original_title;
+            //  ovMovie.MovieSearchResult.release_date = tmdbmovie.release_date;
+            //}
+            //#endregion
 
             item.ItemId = Int32.MaxValue - itemId;
             item.TVTag = ovMovie;
@@ -6275,6 +6388,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             _currentSortMethod = SortMethod.Date;
             _currentSortDirection = " ASC";
           }
+          else if (tmdBfunction == GUILocalizeStrings.Get(10798824)) // IMDB Top250 movies
+          {
+            // no sorting, already in correct order
+            _currentSortMethod = SortMethod.Rating;
+            _currentSortDirection = " DESC";
+          }
           else // it is a person movie list...
           {
             _currentSortMethod = SortMethod.Date;
@@ -6303,7 +6422,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIPropertyManager.SetProperty("#itemcount", this.facadeFilms.Count.ToString());
           GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
           // SetDummyControlsForFacade(conf.ViewContext); // set them here, as we don't need to change them in Lst_Detailed...
-          this.GetImagesAndUpdatesForTMDB();
+          GetImagesAndUpdatesForTMDB();
         }
       }, "GettingTmdbMovies", true, m_SearchAnimation); // false = no timeout !
 
@@ -6325,6 +6444,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         DataRow[] rtemp = BaseMesFilms.ReadDataMovies(this.GlobalFilterStringUnwatched + this.GlobalFilterStringIsOnline + this.GlobalFilterStringTrailersOnly + GlobalFilterStringMinRating + GlobalFilterStringMovieFormat3D + conf.StrDfltSelect, "", conf.WStrSort, conf.WStrSortSens);
         List<GUIListItem> itemlist = new List<GUIListItem>();
 
+        string language = CultureInfo.CurrentCulture.Name.Substring(0, 2);
+        Tmdb api = new Tmdb(TmdbApiKey, language); // language is optional, default is "en"
+
         for (int i = 0; i < facadeFilms.Count; i++)
         {
           #region check if local available ...
@@ -6338,6 +6460,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               continue;
             }
+
+            //#region search for TMDB id if it is missing ...
+            //if (movie.MovieSearchResult.id == -1) // we have stored IMDBid in imdb_id, if id == -1
+            //{
+            //  TmdbMovie tmdbmovie = api.GetMovieByIMDB(movie.MovieSearchResult.original_title);
+            //  movie.MovieSearchResult.id = tmdbmovie.id;
+            //  movie.MovieSearchResult.backdrop_path = tmdbmovie.backdrop_path;
+            //  movie.MovieSearchResult.poster_path = tmdbmovie.poster_path;
+            //  movie.MovieSearchResult.original_title = tmdbmovie.original_title;
+            //  movie.MovieSearchResult.release_date = tmdbmovie.release_date;
+            //}
+            //#endregion
+
             // iMoviesLocally = rtemp.Select("Year like '" + year + "' AND TranslatedTitle like '*" + item.Label + "*'", conf.StrSorta + conf.StrSortSens).Select(p => p[conf.StrTitle1] != DBNull.Value).Count();
             int year = DateTime.Parse(movie.MovieSearchResult.release_date).Year;
             bool any = rtemp.Any(x => (x[MyFilms.conf.StrTitle1].ToString().Contains(movie.MovieSearchResult.title) && (string.IsNullOrEmpty(x["Year"].ToString()) || year == 0 || x["Year"].ToString().Contains(year.ToString()))) || (!string.IsNullOrEmpty(x["TMDB_Id"].ToString()) && int.Parse(x["TMDB_Id"].ToString()) == movie.MovieSearchResult.id));
@@ -6467,6 +6602,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     continue;
                   }
                   #endregion
+
+                  //#region search for TMDB id if it is missing ...
+                  //if (movie.MovieSearchResult.id == 0) // we have stored IMDBid in original title
+                  //{
+                  //  TmdbMovie tmdbmovie = api.GetMovieByIMDB(movie.MovieSearchResult.original_title);
+                  //  movie.MovieSearchResult.id = tmdbmovie.id;
+                  //  movie.MovieSearchResult.backdrop_path = tmdbmovie.backdrop_path;
+                  //  movie.MovieSearchResult.poster_path = tmdbmovie.poster_path;
+                  //  movie.MovieSearchResult.original_title = tmdbmovie.original_title;
+                  //  // movie.MovieSearchResult.release_date = tmdbmovie.release_date;
+                  //}
+                  //#endregion
 
                   movie.MovieImages = api.GetMovieImages(movie.MovieSearchResult.id, language);
                   if (movie.MovieImages.posters.Count == 0)
