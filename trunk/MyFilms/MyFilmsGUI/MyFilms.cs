@@ -6348,7 +6348,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               item.Label2 = movie.release_date;
             }
-            item.Label3 = (!ispersonmovie) ? movie.vote_average + " (" + movie.vote_count + ")" : movie.original_title;
+            item.Label3 = (!ispersonmovie) ? movie.vote_average.ToString("0.0") + " (" + movie.vote_count + ")" : movie.original_title;
             if (ispersonmovie) item.Label2 = movie.original_title + " - " + item.Label2;
             // if (ispersonmovie) item.Label2 = split[1] + " - " + item.Label2;
             item.Path = "";
