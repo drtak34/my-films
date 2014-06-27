@@ -256,7 +256,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
       {
         // value should be given to output directly - property like
-        if (wtab[1] == "value") wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2], "") + ".png"; // output value cleaned by regex expression
+        if (wtab[1] == "value") wtab[7] = Regex.Replace(r[wtab[0].Replace("#REGEX#", "")].ToString(), wtab[2], "") + ".png"; // output value cleaned by regex expression
 
         bool isLogoFound = false;
 
