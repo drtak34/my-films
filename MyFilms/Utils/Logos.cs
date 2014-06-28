@@ -351,7 +351,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
             // if no logo found in the configured country context, try to find in any other country context (pattern matching "\??\") - however, if you're missing a logo, you might get a wrong one from other directory !
             if (!isLogoFound)
             {
-              result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
+              // result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase)); // search any language folders
+              result = LogoFileList.FirstOrDefault(logoFile => logoFile.IndexOf("\\us\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase)); // fallback to us language folder(s)
               if (result != null)
               {
                 wtab[7] = result;
