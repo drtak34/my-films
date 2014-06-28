@@ -278,6 +278,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     static string GetLogos(DataRow r, ref List<string> listelogos, ArrayList rulesLogos)
     {
       string fileLogoName = string.Empty;
+      string defaultlogo = null;
       // _logoFileList = null; // to reread logo files from disk in case users changed them
 
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
@@ -285,6 +286,27 @@ namespace MyFilmsPlugin.MyFilms.Utils
         // value should be given to output directly - property like
         if (wtab[1] == "value")
         {
+          #region set default logo for "value" rule - will be used later, if no matching possible
+          defaultlogo = null;
+          if (File.Exists(wtab[7]))
+          {
+            defaultlogo = wtab[7];
+          }
+          if (defaultlogo == null && File.Exists(LogosPath + wtab[7]))
+          {
+            defaultlogo  = LogosPath + wtab[7];
+          }
+          else
+          {
+            string result = LogoFileList.FirstOrDefault(logoFile => logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
+            if (result != null)
+            {
+              defaultlogo = result;
+            }
+          }
+          // finally defaultlogo is null, if none found, otherwise the value for the logo found
+          #endregion
+
           LogMyFilms.Debug("GetLogos() - raw value before cleaning : '" + wtab[7] + "', cleaner expression = '" + wtab[2].Replace("#REGEX#", "").Replace("#regex#", "") + "'");
           wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2].Replace("#REGEX#", "").Replace("#regex#", ""), "") + ".png"; // output value cleaned by regex expression
           LogMyFilms.Debug("GetLogos() - value after regex cleaning: '" + wtab[7] + "'");
@@ -353,6 +375,15 @@ namespace MyFilmsPlugin.MyFilms.Utils
               isLogoFound = true;
             }
           }
+        }
+        #endregion
+
+        #region use default logo, if nothing found, but the defaultlogo exists
+        if (!isLogoFound && defaultlogo != null)
+        {
+          LogMyFilms.Debug("GetLogos() - Missing logo for '" + wtab[7] + "' - using default logo instead: '" + defaultlogo + "'");
+          wtab[7] = defaultlogo;
+          isLogoFound = true;
         }
         #endregion
 

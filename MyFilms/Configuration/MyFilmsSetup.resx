@@ -1416,6 +1416,8 @@ regex
 value:
 This is a special case - if selected, the selected logo will automatically be set to "value.png", 
 if a pattern is set, this will be used as cleanup for the value of the respective DB field.
+The Image Path can be used to configure a "default logo" - that one is used, 
+if there is no matching possible using the (cleaned) value.
 Example:
 "Certification", "value", "-\d\d\b" with a DB value of PG-13 will search for a logo "PG.png".
 Example:
