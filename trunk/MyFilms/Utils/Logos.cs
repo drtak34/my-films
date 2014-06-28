@@ -312,7 +312,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
               wtab[7] = result;
               isLogoFound = true;
             }
-            // if no logo found in teh configured country context, try to find in any other country context (pattern matching "\??\") - however, if you're missing a logo, you might get a wrong one from other directory !
+            // if no logo found in the configured country context, try to find in any other country context (pattern matching "\??\") - however, if you're missing a logo, you might get a wrong one from other directory !
             if (!isLogoFound)
             {
               result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
@@ -320,6 +320,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
               {
                 wtab[7] = result;
                 isLogoFound = true;
+                LogMyFilms.Debug("GetLogos() - no logo found in '" + Country + "'-context - but logo found in other language-context, using: '" + wtab[7] + "'");
               }
             }
           }
