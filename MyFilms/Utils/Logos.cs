@@ -69,6 +69,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
           _logoFileList.AddRange(Directory.GetFiles(LogosPath, "*.*", SearchOption.AllDirectories));
           watch.Stop();
           LogMyFilms.Debug("Logos() - LogoFileList initialized ('" + watch.ElapsedMilliseconds + "' msec.) and loaded '" + _logoFileList.Count + "' elements from '" + LogosPath + "'");
+          foreach (string s in _logoFileList)
+          {
+            LogMyFilms.Debug("Logos() - LogoFileList content: '" + s + "'");
+          }
         }
         return _logoFileList;
       }
@@ -224,7 +228,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
       if (listelogos.Count > 0)
       {
         LogMyFilms.Debug("Logo picture to be added " + fileLogoName);
-        string skinName = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\") + 1);
+        string skinName = GUIGraphicsContext.Skin.Substring(GUIGraphicsContext.Skin.LastIndexOf("\\", System.StringComparison.Ordinal) + 1);
         fileLogoName = id == MyFilms.ID_MyFilms
                          ? "MyFilms_" + skinName + "_M" + LogoConfigOverride + fileLogoName + ".png"
                          : "MyFilms_" + skinName + "_D" + LogoConfigOverride + fileLogoName + ".png";
@@ -237,6 +241,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
         try
         {
+          // check if image exists and get its dimensions
           Image single = ImageFast.FastFromFile(LogosPathThumbs + fileLogoName);
           wHeight = single.Height;
           wWidth = single.Width;
@@ -273,17 +278,23 @@ namespace MyFilmsPlugin.MyFilms.Utils
     static string GetLogos(DataRow r, ref List<string> listelogos, ArrayList rulesLogos)
     {
       string fileLogoName = string.Empty;
-      // List<string> logoFiles = null; // to have a list of all logo files that can be reused to minimize IO
+      // _logoFileList = null; // to reread logo files from disk in case users changed them
 
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
       {
         // value should be given to output directly - property like
-        if (wtab[1] == "value") wtab[7] = Regex.Replace(r[wtab[0].Replace("#REGEX#", "").Replace("#regex#", "")].ToString(), wtab[2], "") + ".png"; // output value cleaned by regex expression
+        if (wtab[1] == "value")
+        {
+          LogMyFilms.Debug("BuildLogos() - raw value before cleaning with regex: '" + wtab[7] + "'");
+          wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2].Replace("#REGEX#", "").Replace("#regex#", ""), "") + ".png"; // output value cleaned by regex expression
+        }
+
+        LogMyFilms.Debug("BuildLogos() - searching for logo: '" + wtab[7] + "'");
 
         bool isLogoFound = false;
 
-        // Added to also support specific Logos in language subdirectories
-        if (UseCountryLogos) // Check, if logofile is present in country name logo subdirectory of current skin
+        // First check, if there is country specific logos, if it is enabled
+        if (UseCountryLogos)
         {
           if (File.Exists(LogosPath + "\\" + Country + "\\" + wtab[7])) // Check, if logofile is present in country name logo subdirectory of current skin
           {
@@ -292,9 +303,18 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
           else
           {
-            if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+            //if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+            //{ }
+            string result = LogoFileList.FirstOrDefault(logoFile => logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
+            if (result != null)
             {
-              string result = LogoFileList.FirstOrDefault(logoFile => logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith(wtab[7]));
+              wtab[7] = result;
+              isLogoFound = true;
+            }
+            // if no logo found in teh configured country context, try to find in any other country context (pattern matching "\??\") - however, if you're missing a logo, you might get a wrong one from other directory !
+            if (!isLogoFound)
+            {
+              result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
               if (result != null)
               {
                 wtab[7] = result;
@@ -306,7 +326,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
 
         if (!UseCountryLogos || !isLogoFound) // use standard search if either country logos disabled or no logos found in country subfolder(s)
         {
-          if (File.Exists(wtab[7])) // Check, if logofile is present in logo directory of current skin
+          if (File.Exists(wtab[7]))
           {
             wtab[7] = wtab[7];
             isLogoFound = true;
@@ -320,17 +340,18 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
           else
           {
-            if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+            //if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
+            //{ }
+            string result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) < 0 && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
+            if (result != null)
             {
-              string result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) < 0 && logoFile.EndsWith(wtab[7]));
-              if (result != null)
-              {
-                wtab[7] = result;
-                isLogoFound = true;
-              }
+              wtab[7] = result;
+              isLogoFound = true;
             }
           }
         }
+
+        LogMyFilms.Debug("BuildLogos() - isLogoFound = '" + isLogoFound + "', target = '" + wtab[7] + "'");
 
         if (isLogoFound)
         {
