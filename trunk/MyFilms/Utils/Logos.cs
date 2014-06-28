@@ -239,6 +239,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
           try { Directory.CreateDirectory(LogosPathThumbs); }
           catch { }
         }
+
+        foreach (string listelogo in listelogos)
+        {
+          LogMyFilms.Debug("Logo picture content: '" + listelogo + "'");
+        }
         try
         {
           // check if image exists and get its dimensions
@@ -266,7 +271,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
           catch (Exception e)
           {
-            LogMyFilms.Info("Unable to save Logo file ! error : " + e.Message);
+            LogMyFilms.Error("Unable to save Logo file ! error : " + e.Message);
           }
         }
         return LogosPathThumbs + fileLogoName;
@@ -286,8 +291,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         // value should be given to output directly - property like
         if (wtab[1] == "value")
         {
-          #region set default logo for "value" rule - will be used later, if no matching possible
           defaultlogo = null;
+          #region set default logo for "value" rule - will be used later, if no matching possible
           if (File.Exists(wtab[7]))
           {
             defaultlogo = wtab[7];
@@ -307,12 +312,21 @@ namespace MyFilmsPlugin.MyFilms.Utils
           // finally defaultlogo is null, if none found, otherwise the value for the logo found
           #endregion
 
+          string originalValue = r[wtab[0]].ToString();
+          string cleanedValue = Regex.Replace(originalValue, wtab[2].Replace("#REGEX#", "").Replace("#regex#", ""), "");
           LogMyFilms.Debug("GetLogos() - raw value before cleaning : '" + wtab[7] + "', cleaner expression = '" + wtab[2].Replace("#REGEX#", "").Replace("#regex#", "") + "'");
-          wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2].Replace("#REGEX#", "").Replace("#regex#", ""), "") + ".png"; // output value cleaned by regex expression
           LogMyFilms.Debug("GetLogos() - value after regex cleaning: '" + wtab[7] + "'");
+          if (cleanedValue.Length > 0)
+          {
+            wtab[7] = cleanedValue + ".png"; // output value cleaned by regex expression
+          }
+          else
+          {
+            LogMyFilms.Debug("GetLogos() - value is empty - try to use default logo: '" + wtab[7] + "'");
+          }
         }
 
-        // LogMyFilms.Debug("GetLogos() - searching for logo: '" + wtab[7] + "'");
+        LogMyFilms.Debug("searching for logo: '" + wtab[7] + "'");
 
         bool isLogoFound = false;
 
@@ -387,9 +401,9 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
         #endregion
 
-        // LogMyFilms.Debug("GetLogos() - isLogoFound = '" + isLogoFound + "', target = '" + wtab[7] + "'");
+        LogMyFilms.Debug("GetLogos() - isLogoFound = '" + isLogoFound + "', target = '" + wtab[7] + "'");
 
-        if (isLogoFound)
+        if (isLogoFound && File.Exists(wtab[7]))
         {
           #region build combined logo based on the rules
           bool cond1 = GetRecordRule(r, wtab[0], wtab[1], wtab[2]);
@@ -424,7 +438,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
         else
         {
-          LogMyFilms.Debug("GetLogos() - Missing logo for '" + wtab[7] + "'");
+          LogMyFilms.Debug("Missing logo for '" + wtab[7] + "'");
         }
       }
       return fileLogoName;
