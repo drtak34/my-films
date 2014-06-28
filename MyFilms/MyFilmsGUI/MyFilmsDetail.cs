@@ -7230,7 +7230,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 #region set cleaned certification for logos
                 wstring = MyFilms.r[itemId][dc.ColumnName].ToString().Length > 0 ? MyFilms.r[itemId][dc.ColumnName].ToString() : "";
                 setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                setGUIProperty("db.certification.logo.value", Regex.Replace(wstring, @"^.*\s", ""));
+                wstring = Regex.Replace(wstring, @"\(|\)", ""); // strip ( and )
+                wstring = Regex.Replace(wstring, @"^.*\s", ""); // strip start until forst white char
+                setGUIProperty("db.certification.logo.value", wstring.Trim());
                 break;
                 #endregion
               case "year":
