@@ -285,15 +285,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
         // value should be given to output directly - property like
         if (wtab[1] == "value")
         {
-          LogMyFilms.Debug("BuildLogos() - raw value before cleaning with regex: '" + wtab[7] + "'");
+          LogMyFilms.Debug("GetLogos() - raw value before cleaning : '" + wtab[7] + "', cleaner expression = '" + wtab[2].Replace("#REGEX#", "").Replace("#regex#", "") + "'");
           wtab[7] = Regex.Replace(r[wtab[0]].ToString(), wtab[2].Replace("#REGEX#", "").Replace("#regex#", ""), "") + ".png"; // output value cleaned by regex expression
+          LogMyFilms.Debug("GetLogos() - value after regex cleaning: '" + wtab[7] + "'");
         }
 
-        LogMyFilms.Debug("BuildLogos() - searching for logo: '" + wtab[7] + "'");
+        // LogMyFilms.Debug("GetLogos() - searching for logo: '" + wtab[7] + "'");
 
         bool isLogoFound = false;
 
-        // First check, if there is country specific logos, if it is enabled
+        #region First check, if there is country specific logos, if it is enabled
         if (UseCountryLogos)
         {
           if (File.Exists(LogosPath + "\\" + Country + "\\" + wtab[7])) // Check, if logofile is present in country name logo subdirectory of current skin
@@ -323,8 +324,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
           }
         }
+        #endregion
 
-        if (!UseCountryLogos || !isLogoFound) // use standard search if either country logos disabled or no logos found in country subfolder(s)
+        #region use standard search if either country logos disabled or no logos found in country subfolder(s)
+        if (!UseCountryLogos || !isLogoFound)
         {
           if (File.Exists(wtab[7]))
           {
@@ -350,11 +353,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
             }
           }
         }
+        #endregion
 
-        LogMyFilms.Debug("BuildLogos() - isLogoFound = '" + isLogoFound + "', target = '" + wtab[7] + "'");
+        // LogMyFilms.Debug("GetLogos() - isLogoFound = '" + isLogoFound + "', target = '" + wtab[7] + "'");
 
         if (isLogoFound)
         {
+          #region build combined logo based on the rules
           bool cond1 = GetRecordRule(r, wtab[0], wtab[1], wtab[2]);
           bool cond2 = GetRecordRule(r, wtab[4], wtab[5], wtab[6]);
           if (wtab[3].Length == 0 && cond1)
@@ -383,6 +388,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
               fileLogoName = fileLogoName + "_" + Path.GetFileNameWithoutExtension(wtab[7]);
             }
           }
+          #endregion
+        }
+        else
+        {
+          LogMyFilms.Debug("GetLogos() - Missing logo for '" + wtab[7] + "'");
         }
       }
       return fileLogoName;
