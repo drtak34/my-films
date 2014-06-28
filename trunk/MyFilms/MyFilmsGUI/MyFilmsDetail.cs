@@ -7206,7 +7206,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     decimal aspectratio;
                     wstring = MyFilms.r[itemId][dc.ColumnName].ToString();
                     setGUIProperty("db." + dc.ColumnName.ToLower() + ".value", wstring);
-                    if (!Decimal.TryParse(MyFilms.r[itemId]["Aspectratio"].ToString(), out aspectratio)) // if no media info data available, calculate data from video resolution - might not be exact DAR (display aspect ratio)
+                    if (!Decimal.TryParse(MyFilms.r[itemId]["Aspectratio"].ToString(), NumberStyles.Any, CultureInfo.InvariantCulture, out aspectratio)) // if no media info data available, calculate data from video resolution - might not be exact DAR (display aspect ratio) // if (!Decimal.TryParse(MyFilms.r[itemId]["Aspectratio"].ToString().Replace(".", CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator).Replace(",", CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator), out aspectratio)) // if no media info data available, calculate data from video resolution - might not be exact DAR (display aspect ratio)
                     {
                       string[] arSplit = wstring.Split(new string[] { "x" }, StringSplitOptions.RemoveEmptyEntries);
                       aspectratio = Math.Round(decimal.Divide(Convert.ToInt32(arSplit[0]), Convert.ToInt32(arSplit[1])), 2);
@@ -7219,7 +7219,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                     if (aspectratio < (decimal)(1.4)) ar = "4:3";
                     else if (aspectratio < (decimal)(1.9)) ar = "16:9";
                     else if (aspectratio >= (decimal)(1.9)) ar = "cinemascope";
-                    wstring = aspectratio.ToString();
+                    wstring = aspectratio.ToString(CultureInfo.InstalledUICulture);
                   }
                   catch { LogMyFilms.Info("Error calculating aspectratio !"); }
                 setGUIProperty("db.calc.aspectratio.value", wstring);
