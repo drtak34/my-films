@@ -283,34 +283,19 @@ namespace MyFilmsPlugin.MyFilms.Utils
     static string GetLogos(DataRow r, ref List<string> listelogos, ArrayList rulesLogos)
     {
       string fileLogoName = string.Empty;
-      string defaultlogo = null;
       // _logoFileList = null; // to reread logo files from disk in case users changed them
 
       foreach (string[] wtab in from string wline in rulesLogos select wline.Split(new Char[] { ';' }))
       {
+        // reset the default logo for this rule
+        string defaultlogo = null;
+        string foundlogo = null;
+
         // value should be given to output directly - property like
         if (wtab[1] == "value")
         {
-          defaultlogo = null;
-          #region set default logo for "value" rule - will be used later, if no matching possible
-          if (File.Exists(wtab[7]))
-          {
-            defaultlogo = wtab[7];
-          }
-          if (defaultlogo == null && File.Exists(LogosPath + wtab[7]))
-          {
-            defaultlogo  = LogosPath + wtab[7];
-          }
-          else
-          {
-            string result = LogoFileList.FirstOrDefault(logoFile => logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
-            if (result != null)
-            {
-              defaultlogo = result;
-            }
-          }
-          // finally defaultlogo is null, if none found, otherwise the value for the logo found
-          #endregion
+          #region search default logo and set search value to DB value
+          defaultlogo = SearchLogoPath(wtab[7]); // return null, if nothing found
 
           string originalValue = r[wtab[0]].ToString();
           string cleanedValue = Regex.Replace(originalValue, wtab[2].Replace("#REGEX#", "").Replace("#regex#", ""), "");
@@ -322,89 +307,32 @@ namespace MyFilmsPlugin.MyFilms.Utils
           }
           else
           {
-            LogMyFilms.Debug("GetLogos() - value is empty - try to use default logo: '" + wtab[7] + "'");
+            wtab[7] = "emptyvalue.png"; // this will not find a result, so will use default logo, if set and found
           }
+          #endregion
         }
 
         LogMyFilms.Debug("searching for logo: '" + wtab[7] + "'");
 
-        bool isLogoFound = false;
+        foundlogo = SearchLogoPath(wtab[7]);
 
-        #region First check, if there is country specific logos, if it is enabled
-        if (UseCountryLogos)
+        if (foundlogo != null)
         {
-          if (File.Exists(LogosPath + "\\" + Country + "\\" + wtab[7])) // Check, if logofile is present in country name logo subdirectory of current skin
-          {
-            wtab[7] = LogosPath + "\\" + Country + "\\" + wtab[7];
-            isLogoFound = true;
-          }
-          else
-          {
-            //if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
-            //{ }
-            string result = LogoFileList.FirstOrDefault(logoFile => logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
-            if (result != null)
-            {
-              wtab[7] = result;
-              isLogoFound = true;
-            }
-            // if no logo found in the configured country context, try to find in any other country context (pattern matching "\??\") - however, if you're missing a logo, you might get a wrong one from other directory !
-            if (!isLogoFound)
-            {
-              // result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase)); // search any language folders
-              result = LogoFileList.FirstOrDefault(logoFile => logoFile.IndexOf("\\us\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase)); // fallback to us language folder(s)
-              if (result != null)
-              {
-                wtab[7] = result;
-                isLogoFound = true;
-                LogMyFilms.Debug("GetLogos() - no logo found in '" + Country + "'-context - but logo found in other language-context, using: '" + wtab[7] + "'");
-              }
-            }
-          }
+          wtab[7] = foundlogo;
+          LogMyFilms.Debug("GetLogos() - Logo found, target = '" + wtab[7] + "'");
         }
-        #endregion
-
-        #region use standard search if either country logos disabled or no logos found in country subfolder(s)
-        if (!UseCountryLogos || !isLogoFound)
-        {
-          if (File.Exists(wtab[7]))
-          {
-            wtab[7] = wtab[7];
-            isLogoFound = true;
-          }
-
-          // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
-          if (!isLogoFound && File.Exists(LogosPath + wtab[7])) // Check, if logofile is present in logo directory of current skin
-          {
-            wtab[7] = LogosPath + wtab[7];
-            isLogoFound = true;
-          }
-          else
-          {
-            //if (!wtab[7].Contains("\\")) // Check, if logo file is present in subdirectories of logo directory of current skin - only if not already full path defined !
-            //{ }
-            string result = LogoFileList.FirstOrDefault(logoFile => Country.Length > 0 && logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) < 0 && logoFile.EndsWith(wtab[7], StringComparison.OrdinalIgnoreCase));
-            if (result != null)
-            {
-              wtab[7] = result;
-              isLogoFound = true;
-            }
-          }
-        }
-        #endregion
-
-        #region use default logo, if nothing found, but the defaultlogo exists
-        if (!isLogoFound && defaultlogo != null)
+        else if (defaultlogo != null)
         {
           LogMyFilms.Debug("GetLogos() - Missing logo for '" + wtab[7] + "' - using default logo instead: '" + defaultlogo + "'");
           wtab[7] = defaultlogo;
-          isLogoFound = true;
         }
-        #endregion
+        else
+        {
+          LogMyFilms.Debug("GetLogos() - Logo NOT found");
+        }
 
-        LogMyFilms.Debug("GetLogos() - isLogoFound = '" + isLogoFound + "', target = '" + wtab[7] + "'");
 
-        if (isLogoFound && File.Exists(wtab[7]))
+        if (File.Exists(wtab[7]))
         {
           #region build combined logo based on the rules
           bool cond1 = GetRecordRule(r, wtab[0], wtab[1], wtab[2]);
@@ -443,6 +371,59 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
       }
       return fileLogoName;
+    }
+
+    static string SearchLogoPath(string logo)
+    {
+      string logopath = null;
+      #region First check, if there is country specific logos, if it is enabled
+      if (UseCountryLogos)
+      {
+        logopath = LogoFileList.FirstOrDefault(logoFile => logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase));
+
+        //// if no logo found in the configured country context, try to find in any other country context (pattern matching "\??\") - however, if you're missing a logo, you might get a wrong one from other directory !
+        //if (logopath == null)
+        //{
+        //  logopath = LogoFileList.FirstOrDefault(logoFile => logoFile.IndexOf("\\us\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase)); // fallback to us language folder(s)
+        //  if (logopath != null) LogMyFilms.Debug("GetLogos() - no logo found in '" + Country + "'-context - but logo found in other language-context, using: '" + logopath + "'");
+        //}
+      }
+      #endregion
+
+      #region use standard search if either country logos disabled or no logos found in country subfolder(s)
+      if (logopath == null)
+      {
+        if (File.Exists(logo))
+        {
+          logopath = logo;
+        }
+
+        // Added to also support Logo Mediafiles without path names - makes it independant from Skin also ...
+        if (logopath == null && File.Exists(LogosPath + logo)) // Check, if logofile is present in logo directory of current skin
+        {
+          logopath = LogosPath + logo;
+        }
+
+        if (logopath == null)
+        {
+          if (UseCountryLogos)
+          {
+            // search for any default logo match but not in country folders
+            // logopath = LogoFileList.FirstOrDefault(logoFile => (Country.Length > 0) && logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase));
+            logopath = LogoFileList.FirstOrDefault(logoFile => !Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase));
+            if (logopath != null) LogMyFilms.Debug("GetLogos() - no logo found in '" + Country + "'-context - but logo found in non language-context, using: '" + logopath + "'");
+          }
+          else
+          {
+            // search for any logo match in any folder
+            logopath = LogoFileList.FirstOrDefault(logoFile => logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase)); 
+          }
+        }
+      }
+      #endregion
+      
+      // finally logopath is null, if none found, otherwise the value for the logo found
+      return logopath;
     }
 
     static bool GetRecordRule(DataRow r, string field, string compar, string value)
