@@ -9,7 +9,7 @@
     </entry>
   </section>
   <section name="ID2001">
-    <entry name="ID2001_0">Certification;value;^.*\s;;;;;default.png</entry>
+    <entry name="ID2001_0">Certification;value;\(|\)|^.*\s;;;;;default.png</entry>
     <entry name="ID2001_1">Source;contains;bluray;or;Source;contains;bdmv;BluRay.png</entry>
     <entry name="ID2001_2">VideoFormat;contains;dvd;or;Source;contains;video_ts;DVD.png</entry>
     <entry name="ID2001_3">VideoFormat;contains;cd;;;;;CD.png</entry>
