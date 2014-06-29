@@ -143,9 +143,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
         Country = xmlConfig.ReadXmlConfig(activeLogoConfigFile, "ID0000", "Country", string.Empty);
 
         // use Country setting of Logos if available
-        if (Country.Length > 0 && (Directory.Exists(LogosPath + Country) || LogoFileList.Any(x => x.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0)))
+        if (Country.Length > 0)
         {
           UseCountryLogos = true;
+          //if (Directory.Exists(LogosPath + Country) || LogoFileList.Any(x => x.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0))
+          //{
+          //}
         }
         else
         {
