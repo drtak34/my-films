@@ -307,14 +307,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
           #endregion
         }
 
-        LogMyFilms.Debug("searching for logo: '" + wtab[7] + "'");
-
+        // LogMyFilms.Debug("searching for logo: '" + wtab[7] + "'");
         foundlogo = SearchLogoPath(wtab[7]);
-
         if (foundlogo != null)
         {
           wtab[7] = foundlogo;
-          LogMyFilms.Debug("GetLogos() - Logo found, target = '" + wtab[7] + "'");
+          // LogMyFilms.Debug("GetLogos() - Logo found, target = '" + wtab[7] + "'");
         }
         else if (defaultlogo != null)
         {
@@ -323,9 +321,8 @@ namespace MyFilmsPlugin.MyFilms.Utils
         }
         else
         {
-          LogMyFilms.Debug("GetLogos() - Logo NOT found");
+          LogMyFilms.Debug("GetLogos() - Logo NOT found for '" + (wtab[7]??"") + "'");
         }
-
 
         if (File.Exists(wtab[7]))
         {
