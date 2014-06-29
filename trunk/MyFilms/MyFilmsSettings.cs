@@ -26,6 +26,7 @@ using MediaPortal.Configuration;
 using System.IO;
 using System.Reflection;
 using Microsoft.Win32;
+using MyFilmsPlugin.MyFilms.Utils;
 
 namespace MyFilmsPlugin.MyFilms
 {
@@ -117,9 +118,14 @@ namespace MyFilmsPlugin.MyFilms
         using (var reader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml")))
         {
           string language = reader.GetValueAsString("gui", "language", null);
-          // MPLanguage = language != null ? Utils.GUILocalizeStrings.GetCultureName(language) : "xx";
-          MPLanguage = (language != null && language.Length > 4) ? Utils.GUILocalizeStrings.GetCultureName(language).Substring(3,2).ToLower() : "xx"; // e.g. with "en-UK" use "uk"
-          
+          string cultureName = language != null ? GUILocalizeStrings.GetCultureName(language) : null;
+          if (string.IsNullOrEmpty(cultureName))
+            MPLanguage = "xx";
+          else if (cultureName.Length > 4)
+            MPLanguage = GUILocalizeStrings.GetCultureName(cultureName).Substring(3, 2).ToLower(); // e.g. with "en-UK" use "uk"
+          else
+            MPLanguage = (cultureName.Length > 1) ? GUILocalizeStrings.GetCultureName(cultureName).Substring(0, 2).ToLower() : "xx"; // e.g. with "en-UK" use "uk"
+          LogMyFilms.Debug("MyFilmsSettings: language name = '" + (language ?? "<null>") + "', culture name = '" + (cultureName ?? "<null>") + "', selected culture = '" + MPLanguage + "'");
         }
       }
       catch (Exception)
