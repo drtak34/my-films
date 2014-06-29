@@ -4629,7 +4629,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       item.OnItemSelected += new MediaPortal.GUI.Library.GUIListItem.ItemSelectedHandler(item_OnItemSelected);
       if (facadeFilms != null) facadeFilms.Add(item);
 
-      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Extended, "Online lists - IMDB Top250"))
+      if (MyFilmsDetail.ExtendedStartmode(MyFilmsDetail.PluginMode.Test, "Online lists - IMDB Top250"))
       {
         //Upcoming Movies - retrieve IMDB Top250 movies (via grabber script)
         item = new GUIListItem();
