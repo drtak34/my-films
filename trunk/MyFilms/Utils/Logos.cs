@@ -43,7 +43,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   {
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
-    #region conteneurs
+    #region Variables
     private static ArrayList ID2001Logos = new ArrayList();
     private static ArrayList ID2002Logos = new ArrayList();
     private static ArrayList ID2003Logos = new ArrayList();
@@ -69,10 +69,10 @@ namespace MyFilmsPlugin.MyFilms.Utils
           _logoFileList.AddRange(Directory.GetFiles(LogosPath, "*.*", SearchOption.AllDirectories));
           watch.Stop();
           LogMyFilms.Debug("Logos() - LogoFileList initialized ('" + watch.ElapsedMilliseconds + "' msec.) and loaded '" + _logoFileList.Count + "' elements from '" + LogosPath + "'");
-          foreach (string s in _logoFileList)
-          {
-            LogMyFilms.Debug("Logos() - LogoFileList content: '" + s + "'");
-          }
+          //foreach (string s in _logoFileList)
+          //{
+          //  LogMyFilms.Debug("Logos() - LogoFileList content: '" + s + "'");
+          //}
         }
         return _logoFileList;
       }
@@ -404,14 +404,16 @@ namespace MyFilmsPlugin.MyFilms.Utils
           if (UseCountryLogos)
           {
             // search for any default logo match but not in country folders
-            // logopath = LogoFileList.FirstOrDefault(logoFile => (Country.Length > 0) && logoFile.IndexOf("\\" + Country + "\\", StringComparison.OrdinalIgnoreCase) >= 0 && logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase));
             logopath = LogoFileList.FirstOrDefault(logoFile => !Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase));
-            if (logopath != null) LogMyFilms.Debug("GetLogos() - no logo found in '" + Country + "'-context - but logo found in non language-context, using: '" + logopath + "'");
+            // if (logopath != null) LogMyFilms.Debug("GetLogos() - no logo found in '" + Country + "'-context - but logo found in non language-context, using: '" + logopath + "'");
           }
           else
           {
-            // search for any logo match in any folder
-            logopath = LogoFileList.FirstOrDefault(logoFile => logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase)); 
+            //// search for any logo match in any folder
+            //logopath = LogoFileList.FirstOrDefault(logoFile => logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase));
+
+            // general fallback only to "non-language-folder-logos" - so never put generic logos in folders with 2 letters or they might not be found !
+            logopath = LogoFileList.FirstOrDefault(logoFile => !Regex.IsMatch(logoFile, @"\\{1}\D{2}\\{1}") && logoFile.EndsWith("\\" + logo, StringComparison.OrdinalIgnoreCase));
           }
         }
       }
