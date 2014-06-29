@@ -298,17 +298,12 @@ namespace MyFilmsPlugin.MyFilms.Utils
           defaultlogo = SearchLogoPath(wtab[7]); // return null, if nothing found
 
           string originalValue = r[wtab[0]].ToString();
-          string cleanedValue = Regex.Replace(originalValue, wtab[2].Replace("#REGEX#", "").Replace("#regex#", ""), "");
-          LogMyFilms.Debug("GetLogos() - raw value before cleaning : '" + wtab[7] + "', cleaner expression = '" + wtab[2].Replace("#REGEX#", "").Replace("#regex#", "") + "'");
-          LogMyFilms.Debug("GetLogos() - value after regex cleaning: '" + wtab[7] + "'");
-          if (cleanedValue.Length > 0)
-          {
-            wtab[7] = cleanedValue + ".png"; // output value cleaned by regex expression
-          }
-          else
-          {
-            wtab[7] = "emptyvalue.png"; // this will not find a result, so will use default logo, if set and found
-          }
+          string cleanervalue = wtab[2].Replace("#REGEX#", "").Replace("#regex#", "");
+          string cleanedValue = Regex.Replace(originalValue, cleanervalue, "");
+          string defaultlogosetting = wtab[7];
+          LogMyFilms.Debug("GetLogos() - raw value before cleaning : '" + originalValue + "', cleaner expression = '" + cleanervalue + "', DefaultLogo setting = '" + (defaultlogosetting ?? "") + "'");
+          LogMyFilms.Debug("GetLogos() - value after regex cleaning: '" + cleanedValue + "', DefaultLogo found = '" + (defaultlogo ?? "<null>") + "'");
+          wtab[7] = cleanedValue.Length > 0 ? cleanedValue + ".png" : "emptyvalue.png";
           #endregion
         }
 
