@@ -119,18 +119,22 @@ namespace MyFilmsPlugin.MyFilms
         {
           string language = reader.GetValueAsString("gui", "language", null);
           string cultureName = language != null ? GUILocalizeStrings.GetCultureName(language) : null;
-          if (string.IsNullOrEmpty(cultureName))
-            MPLanguage = "xx";
-          else if (cultureName.Length > 4)
-            MPLanguage = GUILocalizeStrings.GetCultureName(cultureName).Substring(3, 2).ToLower(); // e.g. with "en-UK" use "uk"
+          
+          if (cultureName != null && cultureName.Length > 1)
+          {
+            MPLanguage = cultureName.Substring(cultureName.Length - 2).ToLower(); // e.g. with "en-UK" use "uk"
+          }
           else
-            MPLanguage = (cultureName.Length > 1) ? GUILocalizeStrings.GetCultureName(cultureName).Substring(0, 2).ToLower() : "xx"; // e.g. with "en-UK" use "uk"
-          LogMyFilms.Debug("MyFilmsSettings: language name = '" + (language ?? "<null>") + "', culture name = '" + (cultureName ?? "<null>") + "', selected culture = '" + MPLanguage + "'");
+          {
+            MPLanguage = "en";
+          }
+          LogMyFilms.Debug("MyFilmsSettings: language name = '" + (language ?? "<null>") + "', culture name = '" + (cultureName ?? "<null>") + "', selected (sub) culture = '" + MPLanguage + "'");
         }
       }
-      catch (Exception)
+      catch (Exception ex)
       {
-        MPLanguage = "en"; // use en as default
+        LogMyFilms.Debug("MyFilmsSettings: language exception: " + ex.Message);
+        MPLanguage = "ex";
       }
     }
 
