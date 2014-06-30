@@ -571,7 +571,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     // Version for Skin Interface
     internal const int SkinInterfaceVersionMajor = 1;
 
-    internal const int SkinInterfaceVersionMinor = 1;
+    internal const int SkinInterfaceVersionMinor = 0;
 
     public static bool DebugPropertyLogging { get; set; }
 
@@ -17876,7 +17876,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               return false; // leave plugin
             }
           }
-          else if (versionMinor != SkinInterfaceVersionMinor)
+          else if (versionMinor < SkinInterfaceVersionMinor)
           {
             InitMainScreen(false);
             GUIUtils.ShowOKDialog(
