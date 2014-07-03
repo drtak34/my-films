@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com/title/</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.2.8</Version>
+    <Version>1.2.9</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -56,8 +56,8 @@
       <KeyTTitleMaxItems>_x0039_99</KeyTTitleMaxItems>
       <KeyTTitleLanguage />
       <KeyTTitleLanguageAll>USA_x002C__x0020_Argentina_x002C__x0020_Austria_x002C__x0020_Belgium_x002C__x0020_Brazil_x002C__x0020_Croatia_x002C__x0020_Czech_x0020_Republic_x002C__x0020_Estonia_x002C__x0020_Finland_x002C__x0020_France_x002C__x0020_Germany_x002C__x0020_Italy_x002C__x0020_Japan_x002C__x0020_Mexico_x002C__x0020_Poland_x002C__x0020_Portugal_x002C__x0020_Romania_x002C__x0020_Slovakia_x002C__x0020_Spain_x002C__x0020_Sweden_x002C__x0020_Turkey_x002C__x0020_Uruguay_x002C__x0020_Denmark_x002C__x0020_Greece_x002C__x0020_Norway_x002C__x0020_Russia_x002C__x0020_Canada_x002C__x0020_Hungary_x002C__x0020_Estonia_x002C__x0020_Slovenia</KeyTTitleLanguageAll>
-      <KeyStartImg Param1="SY1200_CR90_x002C_0_x002C_630_x002C_1200_AL" Param2="V1_SX640_SY720">_x0023_REGEX_x0023_link_x0020_rel_x003D__x005B__x0022__x0027__x005D_image_src_x005B__x0022__x0027__x005D__x0020_href_x003D__x0022_</KeyStartImg>
-      <KeyEndImg>_x0022_</KeyEndImg>
+      <KeyStartImg Param1="SY1200_CR90_x002C_0_x002C_630_x002C_1200_AL" Param2="V1_SX640_SY720">_x0023_REGEX_x0023_id_x003D__x0022_primary-img_x0022_._x002A__x003F_src_x003D__x0022_</KeyStartImg>
+      <KeyEndImg>_x0022__x0020__x002F__x003E_</KeyEndImg>
       <KeyImgIndex />
       <KeyImgPage>URL_x0020_Redirection_x0020_Cover</KeyImgPage>
       <KeyStartLinkImg Param1="_x002F_rm" Param2="http:_x002F__x002F_akas.imdb.com_x002F_media_x002F_rm">_x0023_REGEX_x0023__x0020_id_x003D__x0022_img_primary_x0022__x003E_._x002A__x003F_href_x003D__x0022__x002F_media</KeyStartLinkImg>
@@ -82,7 +82,7 @@
       <KeyEndRealise>_x003C__x002F_div_x003E_</KeyEndRealise>
       <KeyRealiseIndex />
       <KeyRealisePage />
-      <KeyRealiseRegExp>href_x003D__x0022__x002F_name_x002F_nm_x005C_d_x007B_7_x007D__x002F__x0022_._x002A__x003F__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyRealiseRegExp>
+      <KeyRealiseRegExp>itemprop_x003D__x0022_name_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyRealiseRegExp>
       <KeyRealiseMaxItems />
       <KeyStartProduct Param1="" Param2="" />
       <KeyEndProduct />
