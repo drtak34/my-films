@@ -21,6 +21,10 @@
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #endregion
 
+using System.Diagnostics;
+using System.Xml;
+using MyFilmsPlugin.Utils;
+
 namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 {
   using System;
@@ -1065,9 +1069,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       using (var xmlConfig = new XmlSettings(Config.GetFile(Config.Dir.Config, "MyFilms.xml")))
       {
         string Dwp = xmlConfig.ReadXmlConfig("MyFilms", configname, "Dwp", string.Empty);
-        if (Dwp.Length == 0) return configname;
-        var keyboard = (MediaPortal.Dialogs.VirtualKeyboard)MediaPortal.GUI.Library.GUIWindowManager.GetWindow((int)MediaPortal.GUI.Library.GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
-        if (null == keyboard) return string.Empty;
+        if (Dwp.Length == 0)
+        {
+          return configname;
+        }
+        var keyboard = (VirtualKeyboard)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_VIRTUAL_KEYBOARD);
+        if (null == keyboard)
+        {
+          return string.Empty;
+        }
         keyboard.Reset();
         keyboard.SetLabelAsInitialText(false); // set to false, otherwise our intial text is cleared
         keyboard.Text = string.Empty;
@@ -1081,6 +1091,58 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         return string.Empty;
       }
     }
+
+    public static bool IsValidDb(string catalogfile)
+    {
+      // check, if the catalog file is a vlaid db format (e.g. exclude AMC4.2 format, as we don't support it !
+
+      //<AntMovieCatalog Format="42" Version="4.2.0 (2013-11-03)" Date="1/28/2014 3:39:00 PM">
+      // <Catalog>
+      //  <Properties Owner="SampleOwner" Mail="myfilms@gmail.com" Site="www.team-mediaportal.com" Description="Sample description"/>
+      //  <Contents>
+      
+      bool isvaliddb = true;
+      var stopwatch = new Stopwatch();
+      stopwatch.Reset();
+      stopwatch.Start();
+
+      try
+      {
+        using (var fs = new FileStream(catalogfile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+        {
+          XmlReader rdr = XmlReader.Create(fs);
+          while (rdr.Read())
+          {
+            if (rdr.NodeType == XmlNodeType.Attribute && rdr.LocalName == "Format" && rdr.HasValue)
+            {
+              LogMyFilms.Debug("IsValidDB() - AMC version info found - Format = '" + rdr.Value + "'");
+              if (rdr.Value == "42")
+              {
+                LogMyFilms.Error("IsValidDB() - invalid AMC4.2 format found! (Format=\"42\")");
+                isvaliddb = false;
+              }
+              break;
+            }
+
+            if (rdr.NodeType == XmlNodeType.Element && rdr.LocalName == "Contents") // stream has reached movie content, so no info in header found
+            {
+              LogMyFilms.Debug("IsValidDB() - no AMC version info found!");
+              break;
+            }
+          }
+          rdr.Close();
+          fs.Close();
+        }
+      }
+      catch (Exception ex)
+      {
+        LogMyFilms.Debug("IsValidDB() - Error: " + ex.Message);
+      }
+      stopwatch.Stop();
+      LogMyFilms.Debug("IsValidDB(): db format validity check = '" + isvaliddb + "' (" + stopwatch.ElapsedMilliseconds + " ms.)");
+      return isvaliddb;
+    }
+
     //--------------------------------------------------------------------------------------------
     //  Choice Configuration
     //--------------------------------------------------------------------------------------------
