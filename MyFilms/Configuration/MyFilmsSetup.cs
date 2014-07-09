@@ -94,6 +94,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
 
     private void MesFilmsSetup_Load(object sender, EventArgs e)
     {
+      Config_Name.Items.Clear(); // clear entries in config dropdown befoer loading/adding new ones ...
       Refresh_Items(true);
       if (!System.IO.File.Exists(Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml"))
         RunWizardAfterInstall = true;
