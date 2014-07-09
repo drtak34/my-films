@@ -105,10 +105,16 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       if (MyFilms_PluginMode == "normal" || MyFilms_PluginMode == "test") // 'extended' or dev settings
       {
         //hide a tab by removing it from the TabPages collection
-        tabPageSave = General.TabPages[13];
-        General.TabPages.Remove(tabPageSave); // Disable "Old Stuff" Tab, as it has stuff not for public
-        tabPageSave = General.TabPages[12];
-        General.TabPages.Remove(tabPageSave); // Disable "Other" Tab, as it has stuff not for public
+        if (General.TabPages.Count > 13)
+        {
+          tabPageSave = General.TabPages[13];
+          General.TabPages.Remove(tabPageSave); // Disable "Old Stuff" Tab, as it has stuff not for public
+        }
+        if (General.TabPages.Count > 12)
+        {
+          tabPageSave = General.TabPages[12];
+          General.TabPages.Remove(tabPageSave); // Disable "Other" Tab, as it has stuff not for public
+        }
 
         ShowTrailerWhenStartingMovie.Visible = false;
         numUpDownTrailersInIntro.Visible = false;
@@ -6584,7 +6590,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
     {
       var syncSetup = new CentralConfigSetup();
       if (syncSetup.ShowDialog(this) == DialogResult.OK)
-        MesFilmsSetup_Load(sender, e); // reload setup config
+        MesFilmsSetup_Load(null, null); // reload setup config
       else
         LoadCentralConfigSetupAndUpdateVisibility();
     }
