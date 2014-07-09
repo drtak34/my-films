@@ -8852,6 +8852,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       stopwatch.Stop();
       LogMyFilms.Debug("Load_Config(): Finished loading config '" + CurrentConfig + "' (" + (stopwatch.ElapsedMilliseconds) + " ms)");
 
+      // check, if the file is a valid DB type
+      bool valid = Configuration.IsValidDb(conf.StrFileXml);
+
       if (conf.Boolreturn && conf.Wselectedlabel == string.Empty)
       {
         conf.Boolselect = true;
