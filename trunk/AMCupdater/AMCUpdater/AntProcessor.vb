@@ -1250,7 +1250,7 @@ Public Class AntProcessor
                                         Dim persondetails As Grabber.DbPersonInfo = New DbPersonInfo()
                                         Dim TheMoviedb As New Grabber.TheMoviedb()
                                         persondetails = TheMoviedb.GetPersonsById(person.Id, String.Empty)
-                                        bgwManualUpdate.ReportProgress(ProcessCounter, "PersonImages : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString & "Person Artwork - " + persondetails.Images.Count & " Images found for '" + persondetails.Name & "'")
+                                        bgwManualUpdate.ReportProgress(ProcessCounter, "PersonImages : " & CurrentNode.Attributes("Number").Value & " | " & row("AntTitle").ToString & "Person Artwork - " + persondetails.Images.Count.ToString() & " Images found for '" + persondetails.Name & "'")
                                         If persondetails.Images.Count > 0 Then
                                             Dim i As Integer = 0
                                             For Each image As String In persondetails.Images
