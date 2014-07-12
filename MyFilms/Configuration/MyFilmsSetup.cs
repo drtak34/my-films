@@ -2027,6 +2027,20 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           mydivx.Clear();
         }
         catch { }
+
+        try
+        {
+          bool valid = BaseMesFilms.IsValidDb(MesFilmsCat.Text);
+          if (!valid)
+          {
+            MessageBox.Show("Your XML file is using invalid format (AMC4.2), make sure your DB is in campatible format!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            return false;
+          }
+        }
+        catch (Exception)
+        {
+        }
+
         mydivx = ReadXml();
         if (mydivx != null)
         {
@@ -4955,6 +4969,14 @@ namespace MyFilmsPlugin.MyFilms.Configuration
         if (openFileDialog1.ShowDialog(this) == DialogResult.OK)
         {
           Control_Database(openFileDialog1.FileName);
+          // check, if it is invalid AMC4.2 catalog - if yes, abort !!!
+          if (!BaseMesFilms.IsValidDb(openFileDialog1.FileName))
+          {
+            Config_Name.Text = "";
+            Refresh_Items(true); // Reset all
+            MessageBox.Show("The catalog you try to use is not compatible with MyFilms (AMC4.2 format) \n\n Please use a compatible DB format!", "MyFilms Configuration Wizard - Abort !", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            return;
+          }
         }
       }
       else
