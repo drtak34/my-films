@@ -1012,7 +1012,16 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           return;
         }
 
-        Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
+        bool isvalidDb = Load_Config(Configuration.CurrentConfig, true, loadParamInfo);
+
+        // check if it is a valid DB
+        if (!isvalidDb)
+        {
+          LogMyFilms.Error("OnPageLoad(): DB has invalud AMC4.2 format - returning calling ShowPreviousWindow() !");
+          GUIUtils.ShowErrorDialog("Movie DB has invalud AMC4.2 format !");
+          GUIWindowManager.ShowPreviousWindow();
+          return;
+        }
 
         InitFSwatcher(); // load DB watcher for multiseat
         if (InitialStart) InitAmcImporter(MyFilms.conf); // load watcher for movie directories
@@ -8840,7 +8849,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     }
     #endregion
 
-    private static void Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
+    private static bool Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
       var stopwatch = new Stopwatch();
       stopwatch.Reset();
@@ -8853,7 +8862,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       LogMyFilms.Debug("Load_Config(): Finished loading config '" + CurrentConfig + "' (" + (stopwatch.ElapsedMilliseconds) + " ms)");
 
       // check, if the file is a valid DB type
-      bool valid = Configuration.IsValidDb(conf.StrFileXml);
+      bool valid = BaseMesFilms.IsValidDb(conf.StrFileXml);
+      if (!valid)
+        return false;
 
       if (conf.Boolreturn && conf.Wselectedlabel == string.Empty)
       {
@@ -8939,6 +8950,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Debug("Load_Config(): Error setting views to GUIproperties: '" + ex.Message);
       }
+      return true;
     }
 
     private void Refreshfacade()
