@@ -2033,7 +2033,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           bool valid = BaseMesFilms.IsValidDb(MesFilmsCat.Text);
           if (!valid)
           {
-            MessageBox.Show("Your XML file is using invalid format (AMC4.2), make sure your DB is in campatible format!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            MessageBox.Show("Your XML file is using invalid format (AMC4.2), make sure your DB is in compatible format!", "Configuration", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             return false;
           }
         }
