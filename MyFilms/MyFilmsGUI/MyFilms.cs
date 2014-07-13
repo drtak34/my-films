@@ -1218,10 +1218,15 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         var preloadWatch = new Stopwatch(); preloadWatch.Reset(); preloadWatch.Start();
         PreviousConfig = Configuration.CurrentConfig;
         bool isDefaultConfig = Configuration.Current_Config(false); // don't show selection menu
-        Load_Config(Configuration.CurrentConfig, true, null);
+        bool isvalidDb = Load_Config(Configuration.CurrentConfig, true, null);
         if (string.IsNullOrEmpty(Configuration.CurrentConfig))
         {
           LogMyFilms.Error("InitConfigPreload(): Config is empty - exiting precaching!");
+          return;
+        }
+        if (!isvalidDb)
+        {
+          LogMyFilms.Error("InitConfigPreload(): Config is valid, but catalog format is not valid (AMC42) - exiting precaching!");
           return;
         }
         InitFSwatcher(); // load DB watcher for multiseat
@@ -8851,9 +8856,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private static bool Load_Config(string CurrentConfig, bool create_temp, LoadParameterInfo loadParams)
     {
-      var stopwatch = new Stopwatch();
-      stopwatch.Reset();
-      stopwatch.Start();
+      var stopwatch = new Stopwatch(); stopwatch.Reset(); stopwatch.Start();
       string oldXmlDb = (conf != null) ? conf.StrFileXml : "";
       conf = new Configuration(CurrentConfig, true, create_temp, loadParams);
       conf.IsDbReloadRequired = (oldXmlDb != conf.StrFileXml);
@@ -10831,10 +10834,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private bool ChooseNewConfig()
     {
-      // bool success = false;
       GUIControl.ShowControl(GetID, 34); // hide elements in skin
       currentFanartList.Clear();
       Fanartstatus(false); // disable Fanart
+      string oldconfig = Configuration.CurrentConfig; // save current config, in case we need to abort and return to this
       string newConfig = Configuration.ChoiceConfig(GetID);
       newConfig = Configuration.ControlAccessConfig(newConfig, GetID);
       if (string.IsNullOrEmpty(newConfig)) // if user escapes dialog or bad value leave system unchanged
@@ -10844,23 +10847,33 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        //success = true;
         currentFanartList.Clear(); // clear fanart list
         NavigationStack.Clear(); // clear navigation stack
         internalLoadParam = null; // clear internal start params
         InitMainScreen(false); // reset all properties and values
         InitGlobalFilters(false); // reset global filters, when loading new config !
+
         //Change "Config":
-        if (this.facadeFilms.SelectedListItem != null) 
+        if (facadeFilms.SelectedListItem != null) 
           Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
         else 
           Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
         Configuration.CurrentConfig = newConfig;
+        
+        bool isvalidDb = Load_Config(newConfig, true, null);
+        if (!isvalidDb) // abort, if it is invalid DB
+        {
+          LogMyFilms.Error("ChooseNewConfig(): DB has invalud AMC4.2 format - returning to previous config !");
+          GUIUtils.ShowErrorDialog("Movie DB has invalud AMC4.2 format - returning !");
+          Configuration.CurrentConfig = oldconfig;
+          Load_Config(oldconfig, true, null);
+          GUIControl.HideControl(GetID, 34); // show elements in skin
+          return false;
+        }
+
         ClearFacade(); // facadeFilms.Clear();        facadeFilms.ListLayout.Clear();
         InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
         InitialStart = true; //Set to true to make sure initial View is initialized for new DB view
-
-        Load_Config(newConfig, true, null);
 
         new Thread(delegate()
         {
