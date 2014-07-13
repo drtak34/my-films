@@ -10847,15 +10847,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
       else
       {
-        currentFanartList.Clear(); // clear fanart list
-        NavigationStack.Clear(); // clear navigation stack
-        internalLoadParam = null; // clear internal start params
-        InitMainScreen(false); // reset all properties and values
-        InitGlobalFilters(false); // reset global filters, when loading new config !
-
         //Change "Config":
         if (facadeFilms.SelectedListItem != null) 
-          Configuration.SaveConfiguration(Configuration.CurrentConfig, this.facadeFilms.SelectedListItem.ItemId, this.facadeFilms.SelectedListItem.Label);
+          Configuration.SaveConfiguration(Configuration.CurrentConfig, facadeFilms.SelectedListItem.ItemId, facadeFilms.SelectedListItem.Label);
         else 
           Configuration.SaveConfiguration(Configuration.CurrentConfig, -1, string.Empty);
         Configuration.CurrentConfig = newConfig;
@@ -10870,6 +10864,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           GUIControl.HideControl(GetID, 34); // show elements in skin
           return false;
         }
+
+        currentFanartList.Clear(); // clear fanart list
+        NavigationStack.Clear(); // clear navigation stack
+        internalLoadParam = null; // clear internal start params
+        InitMainScreen(false); // reset all properties and values
+        InitGlobalFilters(false); // reset global filters, when loading new config !
 
         ClearFacade(); // facadeFilms.Clear();        facadeFilms.ListLayout.Clear();
         InitialIsOnlineScan = false; // set false, so facade does not display false media status !!!
