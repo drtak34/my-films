@@ -1017,8 +1017,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         // check if it is a valid DB
         if (!isvalidDb)
         {
-          LogMyFilms.Error("OnPageLoad(): DB has invalud AMC4.2 format - returning calling ShowPreviousWindow() !");
-          GUIUtils.ShowErrorDialog("Movie DB has invalud AMC4.2 format !");
+          LogMyFilms.Error("OnPageLoad(): DB has unsupported AMC4.2 format - returning calling ShowPreviousWindow() !");
+          GUIUtils.ShowErrorDialog("Movie DB has unsupported AMC4.2 format !");
           GUIWindowManager.ShowPreviousWindow();
           return;
         }
@@ -10857,7 +10857,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         bool isvalidDb = Load_Config(newConfig, true, null);
         if (!isvalidDb) // abort, if it is invalid DB
         {
-          LogMyFilms.Error("ChooseNewConfig(): DB has invalud AMC4.2 format - returning to previous config !");
+          LogMyFilms.Error("ChooseNewConfig(): DB has unsupported AMC4.2 format - returning to previous config !");
           GUIUtils.ShowErrorDialog("Movie DB has invalud AMC4.2 format - returning !");
           Configuration.CurrentConfig = oldconfig;
           Load_Config(oldconfig, true, null);
