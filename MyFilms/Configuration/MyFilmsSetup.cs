@@ -4974,7 +4974,7 @@ namespace MyFilmsPlugin.MyFilms.Configuration
           {
             Config_Name.Text = "";
             Refresh_Items(true); // Reset all
-            MessageBox.Show("The catalog you try to use is not compatible with MyFilms (AMC4.2 format) \n\n Please use a compatible DB format!", "MyFilms Configuration Wizard - Abort !", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            MessageBox.Show("The selected catalog is not compatible with MyFilms (AMC4.2 format) \n\n Please use a compatible DB format!", "MyFilms Configuration Wizard - Abort !", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             return;
           }
         }
