@@ -4937,13 +4937,24 @@ namespace MyFilmsPlugin.MyFilms.Configuration
       {
         case (int)MyFilms.SetupType.Local:
           catalogDirectory = MyFilmsSettings.GetPath(MyFilmsSettings.Path.MyFilmsPath) + @"\Catalog";
+          if (!Directory.Exists(catalogDirectory))
+          {
+            try { Directory.CreateDirectory(catalogDirectory); }
+            catch (Exception ex)
+            {
+              MessageBox.Show("The directory could not be created. \n\nError: " + ex.Message, "MyFilms Configuration Wizard - Abort !", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
+          }
           break;
         case (int)MyFilms.SetupType.CentralMaster:
           catalogDirectory = Path.Combine(myFilmsCentralConfigDir, "Catalog");
           if (!Directory.Exists(catalogDirectory))
           {
             try { Directory.CreateDirectory(catalogDirectory); }
-            catch { }
+            catch (Exception ex)
+            {
+              MessageBox.Show("The directory could not be created. \n\nError: " + ex.Message, "MyFilms Configuration Wizard - Abort !", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
           }
           break;
         case (int)MyFilms.SetupType.CentralClient:
