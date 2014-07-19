@@ -10757,25 +10757,24 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       string arguments = MyFilms.conf.ExternalPlayerStartParams;
       string videoRoot = Utility.GetMovieBaseDirectory(new FileInfo(videoPath).Directory).FullName;
       string filename = Utility.IsDriveRoot(videoRoot) ? videoRoot : videoPath;
-      string fps = GetFPS(videoPath);
+      double fps = GetFPS(videoPath);
       string virtualDrive = DaemonTools.GetVirtualDrive();
       if (virtualDrive.LastIndexOf("\\") != virtualDrive.Length - 1) virtualDrive = virtualDrive.Trim() + "\\";
 
       arguments = arguments.Replace("%filename%", filename);
-      arguments = arguments.Replace("%fps%", fps);
+      arguments = arguments.Replace("%fps%", fps.ToString(CultureInfo.InvariantCulture));
       arguments = arguments.Replace("%root%", videoRoot);
       arguments = arguments.Replace("%drive%", virtualDrive);
 
-      LogMyFilms.Debug("External Player: Video='{0}', Root={1}, FPS={2}, ExecPath={3}, CommandLine={4}, VirtualDrive={5}", filename, videoRoot, fps, execPath, arguments, virtualDrive);
+      LogMyFilms.Debug("External Player: Video='{0}', Root={1}, FPS={2}, ExecPath={3}, CommandLine={4}, VirtualDrive={5}", filename, videoRoot, fps.ToString(CultureInfo.InvariantCulture), execPath, arguments, virtualDrive);
       LogMyFilms.Debug("Command Line: '" + arguments + "'");
 
       // Set Refresh Rate Based On FPS if needed
       bool UseDynamicRefreshRateChangerWithExternalPlayer = true; // Todo: add setting "Settings.UseDynamicRefreshRateChangerWithExternalPlayer"
-      if (UseDynamicRefreshRateChangerWithExternalPlayer)
+      if (fps > 0 && UseDynamicRefreshRateChangerWithExternalPlayer)
       {
-        double framerate = double.Parse(GetFPS(videoPath).ToString(NumberFormatInfo.InvariantInfo), NumberFormatInfo.InvariantInfo);
-        LogMyFilms.Info("Requesting new refresh rate: FPS={0}", framerate.ToString());
-        RefreshRateChanger.SetRefreshRateBasedOnFPS(framerate, filename, RefreshRateChanger.MediaType.Video);
+        LogMyFilms.Info("Requesting new refresh rate: FPS={0}", fps.ToString(CultureInfo.InvariantCulture));
+        RefreshRateChanger.SetRefreshRateBasedOnFPS(fps, filename, RefreshRateChanger.MediaType.Video);
         if (RefreshRateChanger.RefreshRateChangePending)
         {
           TimeSpan ts = DateTime.Now - RefreshRateChanger.RefreshRateChangeExecutionTime;
@@ -10889,25 +10888,25 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     /// <summary>
     /// Get refresh rate for file
     /// </summary>
-    private static string GetFPS(string file)
+    private static double GetFPS(string file)
     {
-      LogMyFilms.Debug("GetFPS - Get RefreshRate for file '" + file + "'.");
-      if (!System.IO.File.Exists(file))
+      LogMyFilms.Debug("GetFPS - Get RefreshRate for file '" + file + "'");
+      if (!File.Exists(file))
       {
-        return "";
+        return -1;
       }
 
       double fps = -1;
-      string _BD_Framerate = "";
+      string bdFramerate;
       try
       {
-        MediaInfo MI = new MediaInfo();
-        MI.Open(file);
-        _BD_Framerate = MI.Get(Grabber.StreamKind.Video, 0, "FrameRate");
+        MediaInfo mi = new MediaInfo();
+        mi.Open(file);
+        bdFramerate = mi.Get(Grabber.StreamKind.Video, 0, "FrameRate");
 
-        LogMyFilms.Info("GetFPS() - Framerate via Mediainfo: - {0}", _BD_Framerate);
+        LogMyFilms.Info("GetFPS() - Framerate via Mediainfo: '{0}'", bdFramerate);
 
-        switch (_BD_Framerate)
+        switch (bdFramerate)
         {
           case "23.976":
             fps = 23.976;
@@ -10942,10 +10941,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         LogMyFilms.Error("GetFPS() - failed to get refresh rate from disk!");
         LogMyFilms.Error("GetFPS() - exception {0}", e);
-        return "";
+        return -1;
       }
-      LogMyFilms.Debug("GetFPS - _BD_Framerate = '" + _BD_Framerate + "', -> fps = '" + fps.ToString() + "'");
-      return _BD_Framerate;
+      LogMyFilms.Debug("GetFPS - bdFramerate = '" + bdFramerate + "', -> fps = '" + fps + "'");
+      return fps;
     }
 
     #endregion

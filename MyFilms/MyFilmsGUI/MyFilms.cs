@@ -833,7 +833,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // load trailer queue
       TrailertoDownloadQueue = BaseMesFilms.LoadQueueFromDisk("Trailer");
-      InitializeQueuedTrailerDownloader(30); // initialize trailer download threads with delayed start (to let OV assembly initialize)
+      InitializeQueuedTrailerDownloader(45); // initialize trailer download threads with delayed start (to let OV assembly initialize)
 
       #region launch TMDB data loader in background ... (disabled)
       //new System.Threading.Thread(delegate()
@@ -3806,7 +3806,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (currentItem.ItemId == -1)
       {
         // reinit some fields //filmcover.Filename = ""; //backdrop.Filename = ""; //MyFilmsDetail.Init_Detailed_DB(false);
-        LogMyFilms.Warn("Load_Lstdetail() - Skipping: ItemId == -1 -> return");
+        LogMyFilms.Debug("Load_Lstdetail() - Skipping: ItemId == -1 -> return");
         return;
       }
       if ((r == null || currentItem.ItemId > r.Length - 1) && conf.ViewContext != ViewContext.TmdbMovies)
@@ -3819,7 +3819,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       if ((currentItem.ItemId == Prev_ItemID && currentItem.Label == Prev_Label) && !forceLoading)
       {
-        LogMyFilms.Warn("Load_Lstdetail() - Skipping: ItemId == Prev_ItemID ('" + Prev_ItemID + "') AND  currentItem.Label == Prev_Label ('" + Prev_Label + "') -> return");
+        LogMyFilms.Debug("Load_Lstdetail() - Skipping: ItemId == Prev_ItemID ('" + Prev_ItemID + "') AND  currentItem.Label == Prev_Label ('" + Prev_Label + "') -> return");
         return;
       }
       Prev_ItemID = currentItem.ItemId;
@@ -16030,13 +16030,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             if (!Win32API.IsConnectedToInternet())
             {
-              LogMyFilms.Error("InitializeQueuedTrailerDownloader() - No Internet connection available - aborting start of Trailer download threads!");
+              LogMyFilms.Warn("InitializeQueuedTrailerDownloader() - No Internet connection available - aborting start of Trailer download threads!");
               return;
             }
 
             if (!MyFilms.conf.CacheOnlineTrailer)
             {
-              LogMyFilms.Error("InitializeQueuedTrailerDownloader() - trailer caching is disabled - exiting !");
+              LogMyFilms.Info("InitializeQueuedTrailerDownloader() - trailer caching is disabled - exiting !");
               return;
             }
 

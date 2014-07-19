@@ -1180,13 +1180,13 @@ namespace MyFilmsPlugin.MyFilms.Utils
         if (!File.Exists(filename))
         {
           CreateEmptyHiddenFile(filename);
-          LogMyFilms.Error("SetLastModified() - created file '" + filename + "'");
+          LogMyFilms.Debug("SetLastModified() - created file '" + filename + "'");
           return true;
         }
         else
         {
           File.SetLastWriteTime(filename, DateTime.Now);
-          LogMyFilms.Error("SetLastModified() - updated file '" + filename + "'");
+          LogMyFilms.Debug("SetLastModified() - updated file '" + filename + "'");
         }
         return true;
       }
