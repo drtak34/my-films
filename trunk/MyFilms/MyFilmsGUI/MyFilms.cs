@@ -558,9 +558,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     //PlayList currentPlaylist = null;
     //PlayListItem currentPlayingItem = null;
 
-    private bool NetworkAvailabilityChanged_Subscribed = false;
-    private bool PowerModeChanged_Subscribed = false;
-
     private double lastPublished = 0;
     private Timer publishTimer;
 
@@ -610,6 +607,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     private SortMethod _currentSortMethod = SortMethod.Date;
     private string _currentSortDirection = " DESC";
 
+    // os handler variables
+    private static bool m_bResumeFromStandby = false;
+    private static bool m_bIsNetworkAvailable = true;
     #endregion
 
     #region Enums
@@ -827,6 +827,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // Register Eventhandler for AMCupdater Background progress reporting
       //AMCupdaterStartEventHandler();
 
+      // register handlers for os powerevent and network availability messages
+      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
+      // LogMyFilms.Debug("Init() - Successfully subscribed NetworkAvailabilityChanged Handler !");
+      Microsoft.Win32.SystemEvents.PowerModeChanged += SystemEvents_PowerModeChanged;
+      // LogMyFilms.Debug("Init() - Successfully subscribed PowerModeChanged Handler !");
+      
       // Initialize Backgroundworker
       InitializeBackgroundWorker();
       InitFolders();
@@ -879,6 +885,10 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       // save trailer queue
       BaseMesFilms.SaveQueueToDisk("Trailer", TrailertoDownloadQueue);
 
+      // deregister network and powerevent handlers
+      System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged -= NetworkAvailabilityChanged;
+      Microsoft.Win32.SystemEvents.PowerModeChanged -= SystemEvents_PowerModeChanged;
+
       LogMyFilms.Debug("MyFilms.DeInit() - Shutdown completed...");
       base.DeInit();
     }
@@ -901,8 +911,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         InitMainScreen(false); // don't log to MyFilms.log Property clear
         //InitGlobalFilters(false);
       }
-
-      InitBSHandler(); // Register PowerEventMode and Networkavailability Changed Handler
 
       #region Support for StartParameters - load  them ...
 
@@ -16076,47 +16084,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       MyFilmsDetail.setGUIProperty("statusmessage", newText, true);
     }
 
-    private void InitBSHandler()
-    {
-      try
-      {
-        if (!NetworkAvailabilityChanged_Subscribed)
-        {
-          System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged += NetworkAvailabilityChanged;
-          NetworkAvailabilityChanged_Subscribed = true;
-          LogMyFilms.Debug("InitBSHandler() - Successfully subscribed NetworkAvailabilityChanged Handler !");
-        }
-      }
-      catch (Exception ex)
-      {
-        NetworkAvailabilityChanged_Subscribed = false;
-        LogMyFilms.Debug("InitBSHandler() - Error on initializing NetworkAvailabilityChanged Handler: '" + ex.Message + "', stackstrace: '" + ex.StackTrace + "'");
-      }
-      try
-      {
-        if (!PowerModeChanged_Subscribed)
-        {
-          Microsoft.Win32.SystemEvents.PowerModeChanged += new Microsoft.Win32.PowerModeChangedEventHandler(SystemEvents_PowerModeChanged);
-          PowerModeChanged_Subscribed = true;
-          LogMyFilms.Debug("InitBSHandler() - Successfully subscribed PowerModeChanged Handler !");
-        }
-      }
-      catch (Exception ex)
-      {
-        PowerModeChanged_Subscribed = false;
-        LogMyFilms.Debug("InitBSHandler() - Error on initializing PowerModeChanged Handler: '" + ex.Message + "', stackstrace: '" + ex.StackTrace + "'");
-        // throw;
-      }
-      //// subscribe events for main window trailer scrobble playback
-      //if (!PlayerEvents_Subscribed)
-      //{
-      //  MediaPortal.Player.g_Player.PlayBackEnded += new MediaPortal.Player.g_Player.EndedHandler(OnPlayBackEnded);
-      //  MediaPortal.Player.g_Player.PlayBackStopped += new MediaPortal.Player.g_Player.StoppedHandler(OnPlayBackStopped);
-      //  PlayerEvents_Subscribed = true;
-      //  LogMyFilms.Debug("InitBSHandler() - Successfully subscribed PlayerEvents !");
-      //}
-    }
-
     private void InitAmcImporter(Configuration mfConf)
     {
       LogMyFilms.Debug("InitAmcImporter() - Starting initial import run in: {0} secs", mfConf.AMCUscanStartDelay);
@@ -16380,6 +16347,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
+    #region GetSet for Network and Powermode
+    private static bool IsResumeFromStandby
+    {
+      get { return m_bResumeFromStandby; }
+      set { m_bResumeFromStandby = value; }
+    }
+
+    private static bool IsNetworkAvailable
+    {
+      get { return m_bIsNetworkAvailable; }
+      set { m_bIsNetworkAvailable = value; }
+    }
+    #endregion
+
     void SystemEvents_PowerModeChanged(object sender, Microsoft.Win32.PowerModeChangedEventArgs e)
     {
       switch (e.Mode)
@@ -16387,7 +16368,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case Microsoft.Win32.PowerModes.Resume:
           {
             LogMyFilms.Debug("PowerModeChanged() - MyFilms is resuming from standby");
-            conf.IsResumeFromStandby = true;
+            IsResumeFromStandby = true;
 
             Thread.Sleep(250);
 
@@ -16412,7 +16393,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
                 }
                 else
                 {
-                  this.Loadfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+                  Loadfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
                 }
                 BaseMesFilms.RestartBackgroundWorker();
                 success = true;
@@ -16434,6 +16415,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             }
           }
           break;
+
         case Microsoft.Win32.PowerModes.Suspend:
           stopFolderWatches();
           if (BaseMesFilms.UpdateWorker != null && BaseMesFilms.UpdateWorker.IsBusy)
@@ -16446,8 +16428,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           BaseMesFilms.StopBackgroundWorker();
           LogMyFilms.Debug("PowerModeChanged() - MyFilms is entering standby");
           break;
+
         default:
-          LogMyFilms.Debug("PowerModeChanged() - MyFilms detected unhandled PowerModeChanged event - no action.");
+          LogMyFilms.Debug("PowerModeChanged() - MyFilms detected unhandled PowerModeChanged event ('" + e.Mode.ToString() + "') - no action.");
           break;
       }
     }
@@ -16457,13 +16440,13 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (e.IsAvailable)
       {
         LogMyFilms.Debug("MyFilms is connected to the network");
-        conf.IsNetworkAvailable = true;
+        IsNetworkAvailable = true;
       }
       else
       {
         LogMyFilms.Debug("MyFilms is disconnected from the network");
         // DBOnlineMirror.IsMirrorsAvailable = false; // Force to recheck later
-        conf.IsNetworkAvailable = false;
+        IsNetworkAvailable = false;
       }
     }
 

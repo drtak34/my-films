@@ -94,8 +94,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       StrSuppressPlayed = string.Empty;
       MovieList = new List<string[]>();
       TrailerList = new List<string[]>();
-      IsNetworkAvailable = true;
-      IsResumeFromStandby = false;
       MyFilmsPlaybackActive = false;
       StrArtist = false;
       BoolMenuShowAll = false;
@@ -974,11 +972,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
     public List<string[]> MovieList { get; set; }
     public List<string[]> TrailerList { get; set; }
     public bool MyFilmsPlaybackActive { get; set; }
-
-    #region GetSet for Network and Powermode
-    public bool IsResumeFromStandby { get; set; }
-    public bool IsNetworkAvailable { get; set; }
-    #endregion
 
     public bool BoolEnableOnlineServices { get; set; }
 
