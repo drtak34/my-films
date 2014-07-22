@@ -7689,19 +7689,19 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             // Search the NAS where movie is located:
             if ((UNCpath.Equals(MyFilms.conf.StrNasName1, StringComparison.InvariantCultureIgnoreCase)) &&
-                (MyFilms.conf.StrNasMAC1.ToString().Length > 1))
+                (MyFilms.conf.StrNasMAC1.Length > 1))
             {
               NasServerName = MyFilms.conf.StrNasName1;
               NasMACAddress = MyFilms.conf.StrNasMAC1;
             }
             else if ((UNCpath.Equals(MyFilms.conf.StrNasName2, StringComparison.InvariantCultureIgnoreCase)) &&
-                     (MyFilms.conf.StrNasMAC2.ToString().Length > 1))
+                     (MyFilms.conf.StrNasMAC2.Length > 1))
             {
               NasServerName = MyFilms.conf.StrNasName2;
               NasMACAddress = MyFilms.conf.StrNasMAC2;
             }
             else if ((UNCpath.Equals(MyFilms.conf.StrNasName3, StringComparison.InvariantCultureIgnoreCase)) &&
-                     (MyFilms.conf.StrNasMAC3.ToString().Length > 1))
+                     (MyFilms.conf.StrNasMAC3.Length > 1))
             {
               NasServerName = MyFilms.conf.StrNasName3;
               NasMACAddress = MyFilms.conf.StrNasMAC3;
@@ -7714,8 +7714,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
             // Start NAS Server
 
-            bool SuccessFulStart = wakeOnLanManager.WakeupSystem(
-              wakeOnLanManager.GetHwAddrBytes(NasMACAddress), NasServerName, wTimeout);
+            bool SuccessFulStart = wakeOnLanManager.WakeupSystem(wakeOnLanManager.GetHwAddrBytes(NasMACAddress), NasServerName, wTimeout);
 
             if (MyFilms.conf.StrCheckWOLuserdialog)
             {
