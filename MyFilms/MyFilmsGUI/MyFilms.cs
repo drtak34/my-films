@@ -3644,7 +3644,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private bool GetRandomFanartForGroups(int limit)
     {
-      var fanartItems = new ArrayList();
+      ArrayList fanartItems = new ArrayList();
       int i = 0;
       try
       {
@@ -3658,7 +3658,21 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         fanartItems.SafeDispose();
         return false;
       }
+
+      // sort randomize
+      Random r = new Random();
+      for (int cnt = 0; cnt < fanartItems.Count; cnt++)
+      {
+        object tmp = fanartItems[cnt];
+        int idx = r.Next(fanartItems.Count - cnt) + cnt;
+        fanartItems[cnt] = fanartItems[idx];
+        fanartItems[idx] = tmp;
+      }
+
       currentFanartList.Clear(); // clear list from former content
+
+      // Random rnd = new Random(); // return source.OrderBy<T, int>((item) => rnd.Next());
+
       foreach (string[] wfanart in fanartItems.Cast<GUIListItem>().Select(randomFanartItem => MyFilmsDetail.Search_Fanart(randomFanartItem.Label, true, "file", false, string.Empty, string.Empty)).Where(wfanart => wfanart[0] != " " && wfanart[0] != MyFilms.conf.DefaultFanartImage && !currentFanartList.Contains(wfanart[0])))
       {
         currentFanartList.Add(wfanart[0]);
