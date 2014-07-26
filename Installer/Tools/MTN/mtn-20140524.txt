@@ -1,0 +1,309 @@
+177a178,179
+> #define GB_M_BRIEF_MEDIA_INFO 0;
+> int gb_m_brief_media_info = GB_M_BRIEF_MEDIA_INFO;
+181a184,185
+> #define GB_FILENAME_USE_FULL 0
+> int gb_filename_use_full = GB_FILENAME_USE_FULL; // use full input filename (include extension)
+199a204,205
+> #define GB_S_SELECT_VIDEO_STREAM 0
+> int gb_S_select_video_stream = GB_S_SELECT_VIDEO_STREAM;
+214a221,223
+> #define GB_D_DEPTH 0
+> int gb_d_depth = GB_D_DEPTH; // 0 is unlimited directory recursion depth
+> int gb_current_depth = 0;
+812c821
+<     pFrameRGB = avcodec_alloc_frame();
+---
+>     pFrameRGB = av_frame_alloc();
+831c840
+<     sws_scale(pSwsCtx, pFrame->data, pFrame->linesize, 0, src_height, 
+---
+>     sws_scale(pSwsCtx, (const uint8_t * const *)pFrame->data, pFrame->linesize, 0, src_height, 
+934c943
+< void get_stream_info_type(AVFormatContext *ic, enum CodecType type, char *buf, AVRational sample_aspect_ratio)
+---
+> void get_stream_info_type(AVFormatContext *ic, enum AVMediaType type, char *buf, AVRational sample_aspect_ratio)
+941a951
+>         AVDictionaryEntry *language = av_dict_get(ic->metadata, "language", NULL, 0);
+947,949c957,959
+<         if (CODEC_TYPE_SUBTITLE == st->codec->codec_type) {
+<             if (strlen(st->language) > 0) {
+<                 sprintf(sub_buf + strlen(sub_buf), "%s ", st->language);
+---
+>         if (AVMEDIA_TYPE_SUBTITLE == st->codec->codec_type) {
+>             if (language != NULL) {
+>                 sprintf(sub_buf + strlen(sub_buf), "%s ", language->value);
+970c980,981
+<         // remove [PAR DAR] from string, it's not very useful.
+---
+> /* re-enable SAR & DAR
+>         // remove [SAR DAR] from string, it's not very useful.
+972c983
+<         if ((begin=strstr(codec_buf, " [PAR")) != NULL 
+---
+>         if ((begin=strstr(codec_buf, " [SAR")) != NULL 
+978a990
+> */
+981c993
+<         if (st->codec->codec_type == CODEC_TYPE_VIDEO){
+---
+>         if (st->codec->codec_type == AVMEDIA_TYPE_VIDEO){
+997,998c1009,1010
+<         if (strlen(st->language) > 0) {
+<             sprintf(buf + strlen(buf), " (%s)", st->language);
+---
+>         if (language != NULL) {
+>             sprintf(buf + strlen(buf), " (%s)", language->value);
+1023c1035
+<     sprintf(buf + strlen(buf), "%sSize: %"PRId64" bytes (%s)", NEWLINE, ic->file_size, format_size(ic->file_size, "B"));
+---
+>     sprintf(buf + strlen(buf), "%sSize: %"PRId64" bytes (%s)", NEWLINE, avio_size(ic->pb), format_size(avio_size(ic->pb), "B"));
+1048c1060
+<         sprintf(buf + strlen(buf), ", avg.bitrate: %.0f kb/s%s", (double) ic->file_size * 8 / duration / 1000, NEWLINE);
+---
+>         sprintf(buf + strlen(buf), ", avg.bitrate: %.0f kb/s%s", (double) avio_size(ic->pb) * 8 / duration / 1000, NEWLINE);
+1055,1057c1067,1071
+<     get_stream_info_type(ic, CODEC_TYPE_AUDIO, buf, sample_aspect_ratio);
+<     get_stream_info_type(ic, CODEC_TYPE_VIDEO, buf, sample_aspect_ratio);
+<     get_stream_info_type(ic, CODEC_TYPE_SUBTITLE, buf, sample_aspect_ratio);
+---
+>     if (!gb_m_brief_media_info) {
+>       get_stream_info_type(ic, AVMEDIA_TYPE_AUDIO, buf, sample_aspect_ratio);
+>       get_stream_info_type(ic, AVMEDIA_TYPE_VIDEO, buf, sample_aspect_ratio);
+>     }
+>     get_stream_info_type(ic, AVMEDIA_TYPE_SUBTITLE, buf, sample_aspect_ratio);
+1061c1075
+<     //strfmon(buf + strlen(buf), 100, "strfmon: %!i\n", ic->file_size);
+---
+>     //strfmon(buf + strlen(buf), 100, "strfmon: %!i\n", avio_size(ic->pb));
+1076c1090
+<         p->start_time, p->duration, p->file_size);
+---
+>         p->start_time, p->duration, avio_size(p->pb));
+1079,1094c1093,1118
+<     if (p->track != 0)
+<         av_log(NULL, LOG_INFO, "  Track: %d\n", p->track);
+<     if (p->title[0] != '\0')
+<         av_log(NULL, LOG_INFO, "  Title: %s\n", p->title);
+<     if (p->author[0] != '\0')
+<         av_log(NULL, LOG_INFO, "  Author: %s\n", p->author);
+<     if (p->copyright[0] != '\0')
+<         av_log(NULL, LOG_INFO, "  Copyright: %s\n", p->copyright);
+<     if (p->comment[0] != '\0')
+<         av_log(NULL, LOG_INFO, "  Comment: %s\n", p->comment);
+<     if (p->album[0] != '\0')
+<         av_log(NULL, LOG_INFO, "  Album: %s\n", p->album);
+<     if (p->year != 0)
+<         av_log(NULL, LOG_INFO, "  Year: %d\n", p->year);
+<     if (p->genre[0] != '\0')
+<         av_log(NULL, LOG_INFO, "  Genre: %s\n", p->genre);
+---
+> 
+>     AVDictionaryEntry* track = av_dict_get(p->metadata, "track", NULL, 0);
+>     AVDictionaryEntry* title = av_dict_get(p->metadata, "title", NULL, 0);
+>     AVDictionaryEntry* author = av_dict_get(p->metadata, "author", NULL, 0);
+>     AVDictionaryEntry* copyright = av_dict_get(p->metadata, "copyright", NULL, 0);
+>     AVDictionaryEntry* comment = av_dict_get(p->metadata, "comment", NULL, 0);
+>     AVDictionaryEntry* album = av_dict_get(p->metadata, "album", NULL, 0);
+>     AVDictionaryEntry* year = av_dict_get(p->metadata, "year", NULL, 0);
+>     AVDictionaryEntry* genre = av_dict_get(p->metadata, "genre", NULL, 0);
+> 
+>     if (track != NULL)
+>         av_log(NULL, LOG_INFO, "  Track: %s\n", track->value);
+>     if (title != NULL)
+>         av_log(NULL, LOG_INFO, "  Title: %s\n", title->value);
+>     if (author != NULL)
+>         av_log(NULL, LOG_INFO, "  Author: %s\n", author->value);
+>     if (copyright != NULL)
+>         av_log(NULL, LOG_INFO, "  Copyright: %s\n", copyright->value);
+>     if (comment != NULL)
+>         av_log(NULL, LOG_INFO, "  Comment: %s\n", comment->value);
+>     if (album != NULL)
+>         av_log(NULL, LOG_INFO, "  Album: %s\n", album->value);
+>     if (year != NULL)
+>         av_log(NULL, LOG_INFO, "  Year: %s\n", year->value);
+>     if (genre != NULL)
+>         av_log(NULL, LOG_INFO, "  Genre: %s\n", genre->value);
+1185c1209
+<         || (1 == key_only && !(1 == pFrame->key_frame || FF_I_TYPE == pFrame->pict_type)); // same as version 2.42
+---
+>         || (1 == key_only && !(1 == pFrame->key_frame || AV_PICTURE_TYPE_I == pFrame->pict_type)); // same as version 2.42
+1190c1214
+<             if (url_ferror(pFormatCtx->pb) != 0) { // from ffplay - not documented
+---
+>             if (pFormatCtx->pb->error) {
+1206c1230
+<         if (1 == skip_non_key && 1 == key_only && !(packet.flags & PKT_FLAG_KEY)) {
+---
+>         if (1 == skip_non_key && 1 == key_only && !(packet.flags & AV_PKT_FLAG_KEY)) {
+1218c1242
+<         avcodec_decode_video(pCodecCtx, pFrame, &got_picture, packet.data, packet.size);
+---
+>         avcodec_decode_video2(pCodecCtx, pFrame, &got_picture, &packet);
+1220c1244
+<         av_log(NULL, AV_LOG_VERBOSE, "*avcodec_decode_video: got_picture: %d, key_frame: %d, pict_type: %d\n", got_picture, pFrame->key_frame, pFrame->pict_type);
+---
+>         av_log(NULL, AV_LOG_VERBOSE, "*avcodec_decode_video2: got_picture: %d, key_frame: %d, pict_type: %d\n", got_picture, pFrame->key_frame, pFrame->pict_type);
+1230c1254
+<                 av_log(NULL, AV_LOG_ERROR, "  * avcodec_decode_video couldn't decode picture\n");
+---
+>                 av_log(NULL, AV_LOG_ERROR, "  * avcodec_decode_video2 couldn't decode picture\n");
+1324,1325c1348,1349
+<     if (pStream->codec->bit_rate > 0 && pFormatCtx->file_size > 0) {
+<         guess = 0.9 * pFormatCtx->file_size / (pStream->codec->bit_rate / 8);
+---
+>     if (pStream->codec->bit_rate > 0 && avio_size(pFormatCtx->pb) > 0) {
+>         guess = 0.9 * avio_size(pFormatCtx->pb) / (pStream->codec->bit_rate / 8);
+1412c1436
+<     if (pFormatCtx->file_size <= 0) {
+---
+>     if (avio_size(pFormatCtx->pb) <= 0) {
+1416,1417c1440,1441
+<         int64_t byte_pos = av_rescale(timestamp, pFormatCtx->file_size, duration_tb);
+<         av_log(NULL, LOG_INFO, "AVSEEK_FLAG_BYTE: byte_pos: %"PRId64", timestamp: %"PRId64", file_size: %"PRId64", duration_tb: %"PRId64"\n", byte_pos, timestamp, pFormatCtx->file_size, duration_tb);
+---
+>         int64_t byte_pos = av_rescale(timestamp, avio_size(pFormatCtx->pb), duration_tb);
+>         av_log(NULL, LOG_INFO, "AVSEEK_FLAG_BYTE: byte_pos: %"PRId64", timestamp: %"PRId64", file_size: %"PRId64", duration_tb: %"PRId64"\n", byte_pos, timestamp, avio_size(pFormatCtx->pb), duration_tb);
+1474a1499
+>     AVDictionary *pDict = NULL;
+1500,1501c1525,1528
+<     if (NULL == suffix) {
+<         strcat(tn.out_filename, gb_o_suffix);
+---
+> 
+>     if (gb_filename_use_full) {
+>       strcat(tn.out_filename, gb_o_suffix);
+>       strcat(tn.info_filename, gb_o_suffix);
+1503c1530,1534
+<         strcpy(suffix, gb_o_suffix);
+---
+>       if (NULL == suffix) {
+>           strcat(tn.out_filename, gb_o_suffix);
+>       } else {
+>           strcpy(suffix, gb_o_suffix);
+>       }
+1504a1536
+> 
+1557c1589
+<     ret = av_open_input_file(&pFormatCtx, file, NULL, 0, NULL);
+---
+>     ret = avformat_open_input(&pFormatCtx, file, NULL, NULL);
+1559c1591
+<         av_log(NULL, AV_LOG_ERROR, "\n%s: av_open_input_file %s failed: %d\n", gb_argv0, file, ret);
+---
+>         av_log(NULL, AV_LOG_ERROR, "\n%s: avformat_open_input %s failed: %d\n", gb_argv0, file, ret);
+1569c1601
+<     ret = av_find_stream_info(pFormatCtx);
+---
+>     ret = avformat_find_stream_info(pFormatCtx, NULL);
+1571c1603
+<         av_log(NULL, AV_LOG_ERROR, "\n%s: av_find_stream_info %s failed: %d\n", gb_argv0, file, ret);
+---
+>         av_log(NULL, AV_LOG_ERROR, "\n%s: avformat_find_stream_info %s failed: %d\n", gb_argv0, file, ret);
+1578a1611
+>     int n_video_stream = 0;
+1580c1613,1614
+<         if (CODEC_TYPE_VIDEO == pFormatCtx->streams[i]->codec->codec_type) {
+---
+>         if (AVMEDIA_TYPE_VIDEO == pFormatCtx->streams[i]->codec->codec_type) {
+>           if (!gb_S_select_video_stream) {
+1582a1617,1622
+>           } else {
+>             if (++n_video_stream == gb_S_select_video_stream) {
+>               video_index = i;
+>               break;
+>             }
+>           }
+1614c1654
+<     ret = avcodec_open(pCodecCtx, pCodec);
+---
+>     ret = avcodec_open2(pCodecCtx, pCodec, &pDict);
+1623c1663
+<     pFrame = avcodec_alloc_frame();
+---
+>     pFrame = av_frame_alloc();
+1810c1850
+<     pFrameRGB = avcodec_alloc_frame();
+---
+>     pFrameRGB = av_frame_alloc();
+1849a1890,1893
+>     if (gb_S_select_video_stream > 0) {
+>       av_log(NULL, LOG_INFO, "Selecting video stream (-S): %d\n", gb_S_select_video_stream);
+>     }
+> 
+1863a1908
+>   restart: ;
+1865,1866d1909
+<   restart:
+<     seek_mode = seek_mode; // target for restart
+1890a1934,1941
+>             // restart in seek mode of skipping shots (FIXME)
+>             if (seek_mode == 1) {
+>               av_log(NULL, LOG_INFO, "  *** previous seek overshot target %s; switching to non-seek mode\n", time_tmp);
+>               av_seek_frame(pFormatCtx, video_index, 0, 0);
+>               avcodec_flush_buffers(pCodecCtx);
+>               seek_mode = 0;
+>               goto restart;
+>             }
+2016c2067
+<         sws_scale(pSwsCtx, pFrame->data, pFrame->linesize, 0, pCodecCtx->height, 
+---
+>         sws_scale(pSwsCtx, (const uint8_t * const*)pFrame->data, pFrame->linesize, 0, pCodecCtx->height, 
+2136,2138c2187
+<   eof:
+<     idx = idx; // target for eof:
+< 
+---
+>   eof: ;
+2202a2252,2253
+>     av_dict_free(&pDict);
+>  
+2210c2261
+<         av_close_input_file(pFormatCtx);
+---
+>         avformat_close_input(&pFormatCtx);
+2242c2293
+<         "rmvb", "swf", "ts", "vob", "wmv", "xvid"
+---
+>         "rmvb", "swf", "ts", "vob", "webm", "wmv", "xvid"
+2353d2403
+< 
+2365c2415,2420
+<             process_dir(files[i]);
+---
+>             if (gb_d_depth <= 0) { // no depth limit
+>               process_dir(files[i]);
+>             } else if (gb_current_depth < gb_d_depth) {
+>               gb_current_depth++;
+>               process_dir(files[i]);
+>             }
+2642c2697
+<     //av_log(NULL, AV_LOG_ERROR, "  -d : this option shouldn't be needed anymore\n");
+---
+>     av_log(NULL, AV_LOG_ERROR, "  -d %d: recursion depth; 0:unlimited\n", GB_D_DEPTH);
+2663a2719
+>     av_log(NULL, AV_LOG_ERROR, "  -S #: select specific stream number");
+2668a2725
+>     av_log(NULL, AV_LOG_ERROR, "  -X : use full input filename (include extension)\n");
+2717c2774
+<     while (-1 != (c = getopt(argc, argv, "a:b:B:c:C:D:e:E:f:F:g:h:iIj:k:L:nN:o:O:pPqr:s:tT:vVw:WzZ"))) {
+---
+>     while (-1 != (c = getopt(argc, argv, "a:b:B:c:C:d:D:e:E:f:F:g:h:iIj:k:L:nN:o:O:pPqr:s:S:tT:vVw:WXzZ"))) {
+2746a2804,2806
+>         case 'd':
+>             parse_error += get_int_opt('d', &gb_d_depth, optarg, 0);
+>             break;
+2789a2850,2852
+>         case 'm':
+>             gb_m_brief_media_info = 1;
+>             break;
+2817a2881,2883
+>         case 'S':
+>             parse_error += get_int_opt('S', &gb_S_select_video_stream, optarg, 0);
+>             break;
+2836a2903,2905
+>         case 'X':
+>             gb_filename_use_full = 1;
+>             break;
+2909a2979
+>     gb_current_depth = 0;
