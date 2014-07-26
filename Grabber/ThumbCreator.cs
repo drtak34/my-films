@@ -17,6 +17,8 @@ namespace Grabber
 {
   public class ThumbCreator
   {
+    // updated mtn build: http://sourceforge.net/p/moviethumbnail/patches/5/
+
     private static NLog.Logger LogMyFilms = NLog.LogManager.GetCurrentClassLogger();  //log
 
     private const string ExtractApp = "mtn.exe";
@@ -163,7 +165,7 @@ namespace Grabber
                                            PreviewRows,
                                            blank,
                                            0, //ArtworkWidth, 
-                                           aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1),
+                                           aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")),
                                            aVideoPath,
                                            IndividualShots,
                                            LimitScanArea);
@@ -183,14 +185,22 @@ namespace Grabber
         if (!File.Exists(outputThumb)) // No thumb in share although it should be there
         {
           LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", outputThumb, extractorArgs);
-          Success = Utils.StartProcess(ExtractorPath, extractorArgs, tempPath, 15000, true, GetMtnConditions());
-          if (!Success)
+          Success = Utils.StartProcess(ExtractorPath, extractorArgs, tempPath, 60000, true, GetMtnConditions());
+          if (Success)
+          {
+            LogMyFilms.Debug("First try successful !");
+          }
+          else
           {
             // Maybe the pre-gap was too large or not enough sharp & light scenes could be caught
-            Thread.Sleep(100);
+            Thread.Sleep(250);
             LogMyFilms.Debug("First try failed - trying fallback with arguments: {0}", extractorFallbackArgs);
-            Success = Utils.StartProcess(ExtractorPath, extractorFallbackArgs, tempPath, 30000, true, GetMtnConditions());
-            if (!Success)
+            Success = Utils.StartProcess(ExtractorPath, extractorFallbackArgs, tempPath, 120000, true, GetMtnConditions());
+            if (Success)
+            {
+              LogMyFilms.Debug("Second try successful !");
+            }
+            else
             {
               LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp, extractorFallbackArgs);
               //try
@@ -214,7 +224,7 @@ namespace Grabber
               //}              
             }
           }
-          Thread.Sleep(100); // give the system a few IO cycles
+          Thread.Sleep(250); // give the system a few IO cycles
           Utils.KillProcess(Path.ChangeExtension(ExtractApp, null)); // make sure there's no process hanging
           try
           {
@@ -263,7 +273,10 @@ namespace Grabber
                 Thread.Sleep(50);
               }
             }
-            catch (Exception) { }
+            catch (Exception eix)
+            {
+              LogMyFilms.Debug("VideoThumbCreator: {0} did not extract - error: '{1}'", ExtractApp, eix.Message);
+            }
           }
         }
         Thread.Sleep(30);
@@ -366,7 +379,7 @@ namespace Grabber
       bool success = false;
       string extractorArgs = string.Format(" -D 6 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"",
                                            preGapSec, postGapSec, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")), aVideoPath);
-      string extractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"", 0, 0, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\") + 1), aVideoPath);
+      string extractorFallbackArgs = string.Format(" -D 8 -B {0} -E {1} -c {2} -r {3} -b {4} -t -i -w {5} -n -O \"{6}\" -P \"{7}\"", 0, 0, PreviewColumns, PreviewRows, blank, 0, aThumbPath.Substring(0, aThumbPath.LastIndexOf("\\")), aVideoPath);
       // Honour we are using a unix app
       extractorArgs = extractorArgs.Replace('\\', '/');
       try
@@ -382,17 +395,27 @@ namespace Grabber
             || (!LeaveShareThumb && !File.Exists(aThumbPath))) // No thumb cached and no chance to find it in share
         {
           //LogMyFilms.Debug("VideoThumbCreator: No thumb in share {0} - trying to create one with arguments: {1}", ShareThumb, ExtractorArgs);
-          success = Utils.StartProcess(ExtractorPath, extractorArgs, tempPath, 15000, true, GetMtnConditions());
-          if (!success)
+          success = Utils.StartProcess(ExtractorPath, extractorArgs, tempPath, 45000, true, GetMtnConditions());
+          if (success)
+          {
+            LogMyFilms.Debug("First try successful !");
+          }
+          else
           {
             // Maybe the pre-gap was too large or not enough sharp & light scenes could be caught
-            Thread.Sleep(100);
-            success = Utils.StartProcess(ExtractorPath, extractorFallbackArgs, tempPath, 30000, true, GetMtnConditions());
-            if (!success)
+            Thread.Sleep(250);
+            success = Utils.StartProcess(ExtractorPath, extractorFallbackArgs, tempPath, 90000, true, GetMtnConditions());
+            if (success)
+            {
+              LogMyFilms.Debug("Second try successful !");
+            }
+            else
+            {
               LogMyFilms.Info("VideoThumbCreator: {0} has not been executed successfully with arguments: {1}", ExtractApp, extractorFallbackArgs);
+            }
           }
           // give the system a few IO cycles
-          Thread.Sleep(100);
+          Thread.Sleep(250);
           // make sure there's no process hanging
           Utils.KillProcess(Path.ChangeExtension(ExtractApp, null));
           try
@@ -437,7 +460,10 @@ namespace Grabber
             File.Delete(shareThumb);
             Thread.Sleep(30);
           }
-          catch (Exception) { }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("VideoThumbCreator: {0} did not extract - error: '{1}'", ExtractApp, ex.Message);
+          }
         }
       }
       catch (Exception ex)
