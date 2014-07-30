@@ -4533,48 +4533,6 @@ It was removed from MP since V1.4</Description>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Tools\MTN\avcodec-52.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{b159db50-4aaa-42ce-aab6-7e092acdc311}-avcodec-52.dll</ZipFileName>
-              <DestinationFilename>%Base%\MovieThumbNailer\avcodec-52.dll</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Tools\MTN\avcore-0.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e35b21cd-a426-420d-827e-a9fac63c80b1}-avcore-0.dll</ZipFileName>
-              <DestinationFilename>%Base%\MovieThumbNailer\avcore-0.dll</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Tools\MTN\avdevice-52.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{7b6337c1-7cb0-4596-ad68-9beeb74dc01b}-avdevice-52.dll</ZipFileName>
-              <DestinationFilename>%Base%\MovieThumbNailer\avdevice-52.dll</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Tools\MTN\avfilter-1.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{1ba6b5fe-e5bd-48b0-83bb-0c48722e4791}-avfilter-1.dll</ZipFileName>
-              <DestinationFilename>%Base%\MovieThumbNailer\avfilter-1.dll</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Tools\MTN\avformat-52.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{bb7f64db-8fb5-4209-9c32-93830b3941a6}-avformat-52.dll</ZipFileName>
-              <DestinationFilename>%Base%\MovieThumbNailer\avformat-52.dll</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Tools\MTN\avutil-50.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{29f4b151-3d5b-4884-8e0f-29455fb2452f}-avutil-50.dll</ZipFileName>
-              <DestinationFilename>%Base%\MovieThumbNailer\avutil-50.dll</DestinationFilename>
-            </FileItem>
-            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-              <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
               <LocalFileName>Tools\MTN\bgd.dll</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{85a3e787-cf59-4c41-be4a-2d000bf1b61f}-bgd.dll</ZipFileName>
               <DestinationFilename>%Base%\MovieThumbNailer\bgd.dll</DestinationFilename>
@@ -4603,9 +4561,72 @@ It was removed from MP since V1.4</Description>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
               <Param1 />
               <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>Tools\MTN\swscale-0.dll</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{0615b705-2b95-4b96-9332-a22c9065e878}-swscale-0.dll</ZipFileName>
-              <DestinationFilename>%Base%\MovieThumbNailer\swscale-0.dll</DestinationFilename>
+              <LocalFileName>Tools\MTN\avcodec-55.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{5debbed6-ee3d-4c1f-b960-ce76bd845d99}-avcodec-55.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avcodec-55.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avdevice-55.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{001c67c2-fe03-4146-bd5d-821cceaec45a}-avdevice-55.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avdevice-55.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avfilter-4.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7c6ffa73-3f34-402c-839d-fd4177d4f5e9}-avfilter-4.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avfilter-4.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avformat-55.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ee4007f0-1af9-4bfd-95e1-6b4250f82ff4}-avformat-55.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avformat-55.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\avutil-52.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{53f83c0f-587c-46d0-8e3f-4eb9e34b2799}-avutil-52.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\avutil-52.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\mtn-20140524.txt</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d5bca174-c4d4-47ca-a2b9-49d48d06a6b2}-mtn-20140524.txt</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\mtn-20140524.txt</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\mtn_drop.cmd</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{67cf640d-4d2c-429c-9095-534f8dc73de5}-mtn_drop.cmd</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\mtn_drop.cmd</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\postproc-52.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ea177b4a-2aa4-4421-a1b6-9b245af7c709}-postproc-52.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\postproc-52.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\swresample-0.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d09480e2-389e-4c6a-acae-e88338295c4b}-swresample-0.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\swresample-0.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+              <Param1 />
+              <UpdateOption>OverwriteIfOlder</UpdateOption>
+              <LocalFileName>Tools\MTN\swscale-2.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{145fd78d-5741-4da1-bd98-d05213c85566}-swscale-2.dll</ZipFileName>
+              <DestinationFilename>%Base%\MovieThumbNailer\swscale-2.dll</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -5770,79 +5791,209 @@ Please refer to the Wiki online documentation.</Value>
     <Version>
       <Major>6</Major>
       <Minor>1</Minor>
-      <Build>0</Build>
-      <Revision>3107</Revision>
+      <Build>1</Build>
+      <Revision>3131</Revision>
     </Version>
-    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
-
-
-The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
-
+    <ExtensionDescription>MyFilms is a movie plugin to use your ANTmovie catalog (AMC) video database or other external catalog managers in mediaportal.
+
+
+
+
+
+
+
+
+The My Films plugin allows you to combine the media center features of MediaPortal with the advantages of the movie catalog/database of your choice - like the popular freeware Ant Movie Catalog (AMC), EAX Movie Catalog, Personal Video Database or shareware catalogs like DVD Profiler, Extreme Movie Manager (XMM), My Movies or Movie Collector.
+
+
+
+
+
 My Films offers a huge amout of features to use and manage your movie collection inside and outside Mediaportal.</ExtensionDescription>
-    <VersionDescription>This version is a feature release of MyFilms 6.1.
-
-Please report bugs in MyFilms forum.
-
-Features:
-- Support 'Cleanup' option on Grabber Editor Search page for filebased reader grabbers like NFO
-- Display attribution when downloading from TMDB - especially API
-- MP 1.6/7/8 compatibility
-- Remove Obsolete grabbers
-- Certification logos by country
-- Button for Trakt dailog window
-- Jump to random movie overview card from all the movies that are on your catalogue
-- Improve Setup Wizard to support central config setups
-- Add support for TMDB ID to IMDB grabbers
-- Allow sorting for Online Movie Info/Lists
-- Upgrade fanart loader to TMDB v3
-- Add dialog for visual image selection
-- Download of collection covers from TMDB
-- Improve Box Sets management in GUI
-- Autorun AMCU when plugin starts
-- Allow local caching for trailers of online content
-- Precaching of movie DB on startup
-- Add context search option for online content to seach local content by facade label keywords
-- Add OnlineVideos search to movie context menu
-- Allow trailer downloads for single movies via context menu
-- Add more OV sites to trailer submenu to choose for searching trailers
-- Allow download for trailers for multiple movies
-- Add option to person context menu to get TMDB filmographie
-- Allow manual selection of playback quality for online trailers
-- Add virtual path browsing
-- Add online info about current, upcoming and most liked movies
-- Trailer 'Scrobbling' - Play random trailers from a group of films
-- Add "about" tab and credits
-- Support for movie thumbs in Details screen &amp; removal of old separate MyFilmsThumbs screen
-- Add virtual path title
-- View related persons view from Details Window
-- Add OV stream player for trailers
-- Auto Register Trailers downloaded via Online Videos
-- Remove Actor screen - is replaced by person facades
-- Move verified items from 6.0.3 testmode to normal mode
-- DB schema extension
-- Update MF skininterfaceversion to 1.1 due to V6.1 changes
-
-Fixes:
-- Apectratio is not parsed properly for some globalizations
-- Default Wide Skins need update
-- Roles are no more displayed in TMDB movie list for a person
-- Collection covers grabbed via TMDB grabbers don't display
-- Grabber Editor displays error when using hardcoded names for filebased reader in Search URL
-- Grabber may grab unpredicatable results when a parameter is not found
-- External media player does not open film as pathname is not quoted in the command line
-- Cannot import nfo files created by AMCU Update nfo files
-- Trakt Friends no longer works
-- Trakt (test internal menu) in test mode, does not work
-- New movies don't display in global unwatched filter
-- plugin fanart loading not working anymore - TMDB API v2.1 was retired on sep. 15th
-- IMDB_Id field is not pushed to property
-- List separators do not support "new line" separation
-- Suppress some alerts
-- "Online Infos" and adaption to TMDB v3 api
+    <VersionDescription>This version is a feature release of MyFilms 6.1.
+
+
+
+
+
+Please report bugs in MyFilms forum.
+
+
+
+
+
+Features:
+
+
+- Support 'Cleanup' option on Grabber Editor Search page for filebased reader grabbers like NFO
+
+
+- Display attribution when downloading from TMDB - especially API
+
+
+- MP 1.6/7/8 compatibility
+
+
+- Remove Obsolete grabbers
+
+
+- Certification logos by country
+
+
+- Button for Trakt dailog window
+
+
+- Jump to random movie overview card from all the movies that are on your catalogue
+
+
+- Improve Setup Wizard to support central config setups
+
+
+- Add support for TMDB ID to IMDB grabbers
+
+
+- Allow sorting for Online Movie Info/Lists
+
+
+- Upgrade fanart loader to TMDB v3
+
+
+- Add dialog for visual image selection
+
+
+- Download of collection covers from TMDB
+
+
+- Improve Box Sets management in GUI
+
+
+- Autorun AMCU when plugin starts
+
+
+- Allow local caching for trailers of online content
+
+
+- Precaching of movie DB on startup
+
+
+- Add context search option for online content to seach local content by facade label keywords
+
+
+- Add OnlineVideos search to movie context menu
+
+
+- Allow trailer downloads for single movies via context menu
+
+
+- Add more OV sites to trailer submenu to choose for searching trailers
+
+
+- Allow download for trailers for multiple movies
+
+
+- Add option to person context menu to get TMDB filmographie
+
+
+- Allow manual selection of playback quality for online trailers
+
+
+- Add virtual path browsing
+
+
+- Add online info about current, upcoming and most liked movies
+
+
+- Trailer 'Scrobbling' - Play random trailers from a group of films
+
+
+- Add "about" tab and credits
+
+
+- Support for movie thumbs in Details screen &amp; removal of old separate MyFilmsThumbs screen
+
+
+- Add virtual path title
+
+
+- View related persons view from Details Window
+
+
+- Add OV stream player for trailers
+
+
+- Auto Register Trailers downloaded via Online Videos
+
+
+- Remove Actor screen - is replaced by person facades
+
+
+- Move verified items from 6.0.3 testmode to normal mode
+
+
+- DB schema extension
+
+
+- Update MF skininterfaceversion to 1.1 due to V6.1 changes
+
+
+
+
+
+Fixes:
+
+
+- Apectratio is not parsed properly for some globalizations
+
+
+- Default Wide Skins need update
+
+
+- Roles are no more displayed in TMDB movie list for a person
+
+
+- Collection covers grabbed via TMDB grabbers don't display
+
+
+- Grabber Editor displays error when using hardcoded names for filebased reader in Search URL
+
+
+- Grabber may grab unpredicatable results when a parameter is not found
+
+
+- External media player does not open film as pathname is not quoted in the command line
+
+
+- Cannot import nfo files created by AMCU Update nfo files
+
+
+- Trakt Friends no longer works
+
+
+- Trakt (test internal menu) in test mode, does not work
+
+
+- New movies don't display in global unwatched filter
+
+
+- plugin fanart loading not working anymore - TMDB API v2.1 was retired on sep. 15th
+
+
+- IMDB_Id field is not pushed to property
+
+
+- List separators do not support "new line" separation
+
+
+- Suppress some alerts
+
+
+- "Online Infos" and adaption to TMDB v3 api
+
+
 - Add GUI Global Options to change default config and default setting</VersionDescription>
     <DevelopmentStatus>Stable</DevelopmentStatus>
     <OnlineLocation>http://www.team-mediaportal.com/index.php?option=com_mtree&amp;task=att_download&amp;link_id=155&amp;cf_id=64</OnlineLocation>
-    <ReleaseDate>2014-06-30T23:04:57.7230658+02:00</ReleaseDate>
+    <ReleaseDate>2014-07-26T17:42:35.0288307+02:00</ReleaseDate>
     <Tags>movies, films, videos, myfilms, catalog, manager, ant movie catalog (amc), dvdprofiler, extreme movie manager, xbmc, personal video database (pvd), eax movie catalog (eax), dvd profiler, extreme movie manager (xmm) , movie collector pro, mymovies</Tags>
     <Location>.\MPE-Packages\MyFilms-V[Version].mpe1</Location>
     <Params>
@@ -9725,48 +9876,6 @@ Fixes:
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Tools\MTN\avcodec-52.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{b159db50-4aaa-42ce-aab6-7e092acdc311}-avcodec-52.dll</ZipFileName>
-        <DestinationFilename>%Base%\MovieThumbNailer\avcodec-52.dll</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Tools\MTN\avcore-0.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e35b21cd-a426-420d-827e-a9fac63c80b1}-avcore-0.dll</ZipFileName>
-        <DestinationFilename>%Base%\MovieThumbNailer\avcore-0.dll</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Tools\MTN\avdevice-52.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{7b6337c1-7cb0-4596-ad68-9beeb74dc01b}-avdevice-52.dll</ZipFileName>
-        <DestinationFilename>%Base%\MovieThumbNailer\avdevice-52.dll</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Tools\MTN\avfilter-1.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{1ba6b5fe-e5bd-48b0-83bb-0c48722e4791}-avfilter-1.dll</ZipFileName>
-        <DestinationFilename>%Base%\MovieThumbNailer\avfilter-1.dll</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Tools\MTN\avformat-52.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{bb7f64db-8fb5-4209-9c32-93830b3941a6}-avformat-52.dll</ZipFileName>
-        <DestinationFilename>%Base%\MovieThumbNailer\avformat-52.dll</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Tools\MTN\avutil-50.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{29f4b151-3d5b-4884-8e0f-29455fb2452f}-avutil-50.dll</ZipFileName>
-        <DestinationFilename>%Base%\MovieThumbNailer\avutil-50.dll</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
         <LocalFileName>Tools\MTN\bgd.dll</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{85a3e787-cf59-4c41-be4a-2d000bf1b61f}-bgd.dll</ZipFileName>
         <DestinationFilename>%Base%\MovieThumbNailer\bgd.dll</DestinationFilename>
@@ -9795,9 +9904,72 @@ Fixes:
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
         <Param1 />
         <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>Tools\MTN\swscale-0.dll</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{0615b705-2b95-4b96-9332-a22c9065e878}-swscale-0.dll</ZipFileName>
-        <DestinationFilename>%Base%\MovieThumbNailer\swscale-0.dll</DestinationFilename>
+        <LocalFileName>Tools\MTN\avcodec-55.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{5debbed6-ee3d-4c1f-b960-ce76bd845d99}-avcodec-55.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avcodec-55.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avdevice-55.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{001c67c2-fe03-4146-bd5d-821cceaec45a}-avdevice-55.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avdevice-55.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avfilter-4.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7c6ffa73-3f34-402c-839d-fd4177d4f5e9}-avfilter-4.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avfilter-4.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avformat-55.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ee4007f0-1af9-4bfd-95e1-6b4250f82ff4}-avformat-55.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avformat-55.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\avutil-52.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{53f83c0f-587c-46d0-8e3f-4eb9e34b2799}-avutil-52.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\avutil-52.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\mtn-20140524.txt</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d5bca174-c4d4-47ca-a2b9-49d48d06a6b2}-mtn-20140524.txt</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\mtn-20140524.txt</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\mtn_drop.cmd</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{67cf640d-4d2c-429c-9095-534f8dc73de5}-mtn_drop.cmd</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\mtn_drop.cmd</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\postproc-52.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{ea177b4a-2aa4-4421-a1b6-9b245af7c709}-postproc-52.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\postproc-52.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\swresample-0.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{d09480e2-389e-4c6a-acae-e88338295c4b}-swresample-0.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\swresample-0.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="false">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>Tools\MTN\swscale-2.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{145fd78d-5741-4da1-bd98-d05213c85566}-swscale-2.dll</ZipFileName>
+        <DestinationFilename>%Base%\MovieThumbNailer\swscale-2.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
         <Param1 />
