@@ -212,7 +212,7 @@ namespace Grabber.Importer
     /// </summary>
     public event WatcherProgressHandler WatcherProgress;
 
-    public Watcher(List<String> watchedFolders, int nScanLapse)
+    public Watcher(IEnumerable<string> watchedFolders, int nScanLapse)
     {
       LogMyFilms.Info("File Watcher: Creating new File System Watcher");
 
@@ -240,7 +240,7 @@ namespace Grabber.Importer
               break;
           }
         }
-        catch (System.ArgumentException)
+        catch (ArgumentException)
         {
           // this has to be a UNC path
           LogMyFilms.Info(string.Format("File Watcher: Adding watcher on folder: {0}", folder));
@@ -251,11 +251,11 @@ namespace Grabber.Importer
       DeviceManager.OnVolumeInserted += OnVolumeInsertedRemoved;
       DeviceManager.OnVolumeRemoved += OnVolumeInsertedRemoved;
 
-      this.Worker.WorkerReportsProgress = true;
-      this.Worker.WorkerSupportsCancellation = true;
-      this.Worker.ProgressChanged += new ProgressChangedEventHandler(WorkerProgressChanged);
-      this.Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerCompleted);
-      this.Worker.DoWork += new DoWorkEventHandler(this.WorkerWatcherDoWork);
+      Worker.WorkerReportsProgress = true;
+      Worker.WorkerSupportsCancellation = true;
+      Worker.ProgressChanged += new ProgressChangedEventHandler(WorkerProgressChanged);
+      Worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(WorkerCompleted);
+      Worker.DoWork += new DoWorkEventHandler(WorkerWatcherDoWork);
     }
 
     void WorkerProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -272,14 +272,14 @@ namespace Grabber.Importer
     public void StartFolderWatch()
     {
       // start the thread that is going to handle the addition in the db when files change
-      this.Worker.RunWorkerAsync();
+      Worker.RunWorkerAsync();
     }
 
     public void StopFolderWatch()
     {
       LogMyFilms.Debug("Stopping File System Watchers...");
-      if (this.Worker.IsBusy)
-        this.Worker.CancelAsync();
+      if (Worker.IsBusy)
+        Worker.CancelAsync();
     }
 
     void RemoveFromModifiedFilesList(string filePath, WatcherItemType type, bool isFolder)
@@ -367,7 +367,7 @@ namespace Grabber.Importer
       {
         if (e.ChangeType == WatcherChangeTypes.Deleted)
         {
-          this.RemoveFromModifiedFilesList(e.FullPath, WatcherItemType.Added, true);
+          RemoveFromModifiedFilesList(e.FullPath, WatcherItemType.Added, true);
           //ToDo: Add updates from MyFilms DB here ...
           //SQLCondition condition = new SQLCondition(new DBEpisode(), DBEpisode.cFilename, e.FullPath + "\\%", SQLConditionType.Like);
           //List<DBEpisode> dbepisodes = DBEpisode.Get(condition, false);
@@ -384,7 +384,7 @@ namespace Grabber.Importer
         {
           foreach (PathPair pathPair in filesChanged)
           {
-            this.RemoveFromModifiedFilesList(pathPair.m_sFull_FileName, WatcherItemType.Deleted, false);
+            RemoveFromModifiedFilesList(pathPair.m_sFull_FileName, WatcherItemType.Deleted, false);
             m_modifiedFilesList.Add(new WatcherItem(pathPair, WatcherItemType.Added));
           }
         }
@@ -401,7 +401,7 @@ namespace Grabber.Importer
           String sExtention = Path.GetExtension(e.FullPath);
           if (MediaPortal.Util.Utils.VideoExtensions.IndexOf(sExtention) != -1)
           {
-            this.RemoveFromModifiedFilesList(e.FullPath, e.ChangeType == WatcherChangeTypes.Deleted ? WatcherItemType.Added : WatcherItemType.Deleted, false);
+            RemoveFromModifiedFilesList(e.FullPath, e.ChangeType == WatcherChangeTypes.Deleted ? WatcherItemType.Added : WatcherItemType.Deleted, false);
             m_modifiedFilesList.Add(new WatcherItem(sender as FileSystemWatcher, e));
           }
         }
@@ -418,11 +418,11 @@ namespace Grabber.Importer
         foreach (FileSystemWatcher watcher in m_watchersList)
         {
           watcher.EnableRaisingEvents = false;
-          watcher.Changed -= new FileSystemEventHandler(this.WatcherChanged);
-          watcher.Created -= new FileSystemEventHandler(this.WatcherChanged);
-          watcher.Deleted -= new FileSystemEventHandler(this.WatcherChanged);
-          watcher.Renamed -= new RenamedEventHandler(this.WatcherRenamed);
-          watcher.Error -= new ErrorEventHandler(this.WatcherError);
+          watcher.Changed -= new FileSystemEventHandler(WatcherChanged);
+          watcher.Created -= new FileSystemEventHandler(WatcherChanged);
+          watcher.Deleted -= new FileSystemEventHandler(WatcherChanged);
+          watcher.Renamed -= new RenamedEventHandler(WatcherRenamed);
+          watcher.Error -= new ErrorEventHandler(WatcherError);
         }
         m_watchersList.Clear();
       }
@@ -438,11 +438,11 @@ namespace Grabber.Importer
           watcher.Path = sWatchedFolder;
           watcher.IncludeSubdirectories = true;
           watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName | NotifyFilters.Size;
-          watcher.Changed += new FileSystemEventHandler(this.WatcherChanged);
-          watcher.Created += new FileSystemEventHandler(this.WatcherChanged);
-          watcher.Deleted += new FileSystemEventHandler(this.WatcherChanged);
-          watcher.Renamed += new RenamedEventHandler(this.WatcherRenamed);
-          watcher.Error += new ErrorEventHandler(this.WatcherError);
+          watcher.Changed += new FileSystemEventHandler(WatcherChanged);
+          watcher.Created += new FileSystemEventHandler(WatcherChanged);
+          watcher.Deleted += new FileSystemEventHandler(WatcherChanged);
+          watcher.Renamed += new RenamedEventHandler(WatcherRenamed);
+          watcher.Error += new ErrorEventHandler(WatcherError);
           watcher.EnableRaisingEvents = true;
           m_watchersList.Add(watcher);
         }
@@ -643,7 +643,7 @@ namespace Grabber.Importer
       Thread.Sleep(30 * 1000); // wait 30 seconds before starting watching ....
 
       LogMyFilms.Debug("File Watcher: Starting File System Watcher Background Task");
-      this.SetUpWatches();
+      SetUpWatches();
 
       // do the initial scan
       m_PreviousScan = Filelister.GetFiles(m_ScannedFolders);
@@ -652,7 +652,7 @@ namespace Grabber.Importer
       DateTime timeLastScan = DateTime.Now;
 
       // then start the watcher loop
-      while (!this.Worker.CancellationPending)
+      while (!Worker.CancellationPending)
       {
         TimeSpan tsUpdate = DateTime.Now - timeLastScan;
         if ((int)tsUpdate.TotalMinutes > m_nScanLapse)
@@ -661,10 +661,10 @@ namespace Grabber.Importer
           DoFileScan();
         }
 
-        this.SignalModifiedFiles();
+        SignalModifiedFiles();
 
         if (refreshWatchers)
-          this.SetUpWatches();
+          SetUpWatches();
 
         Thread.Sleep(1000);
       }

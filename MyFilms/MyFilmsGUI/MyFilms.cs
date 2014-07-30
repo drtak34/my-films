@@ -16149,6 +16149,8 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     private void stopFolderWatches()
     {
+      if (watcherUpdater == null) return; // in case the watcher feature was not enabled in setup, there was no instance created.
+
       watcherUpdater.StopFolderWatch();
       watcherUpdater.WatcherProgress -= new Watcher.WatcherProgressHandler(watcherUpdater_WatcherProgress);
       watcherUpdater = null;
@@ -16377,74 +16379,116 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
     void SystemEvents_PowerModeChanged(object sender, Microsoft.Win32.PowerModeChangedEventArgs e)
     {
+      LogMyFilms.Debug("MyFilms received power event {0}", e.Mode);
       switch (e.Mode)
       {
         case Microsoft.Win32.PowerModes.Resume:
+        {
+          LogMyFilms.Info("PowerModeChanged() - MyFilms is resuming from standby");
+          IsResumeFromStandby = true;
+
+          Thread.Sleep(250);
+
+          const int maxretries = 10; // max retries 10 * 500 = 5 seconds
+          int i = 0;
+          bool success = false; // result of update operation
+
+          while (!success && i < maxretries)
           {
-            LogMyFilms.Debug("PowerModeChanged() - MyFilms is resuming from standby");
-            IsResumeFromStandby = true;
-
-            Thread.Sleep(250);
-
-            const int maxretries = 10; // max retries 10 * 500 = 5 seconds
-            int i = 0;
-            bool success = false; // result of update operation
-
-            while (!success && i < maxretries)
+            // first check, if the network is ready and DB is accessible
+            if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && File.Exists(conf.StrFileXml))
             {
-              // first check, if the network is ready and DB is accessible
-              if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && File.Exists(conf.StrFileXml))
+              LogMyFilms.Debug("PowerModeChanged() - MyFilms is reloading movie data to memory cache.");
+              FSwatcher.EnableRaisingEvents = false;
+              if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
               {
-                LogMyFilms.Debug("PowerModeChanged() - MyFilms is reloading movie data to memory cache.");
-                FSwatcher.EnableRaisingEvents = false;
-                if (GUIWindowManager.ActiveWindow != MyFilms.ID_MyFilms)
-                {
-                  // reload data, as it might have changed while sleeping
-                  BaseMesFilms.LoadMyFilms(conf.StrFileXml); // load dataset
-                  // disabled, we do it only on init phase!
-                  // MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
-                  r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens); // (re)populate films
-                }
-                else
-                {
-                  Loadfacade(); // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
-                }
-                BaseMesFilms.RestartBackgroundWorker();
-                success = true;
+                // reload data, as it might have changed while MF/MP was sleeping
+                BaseMesFilms.LoadMyFilms(conf.StrFileXml); // load dataset
+                // disabled, we do it only on init phase!
+                // MyFilmsDetail.SetGlobalLock(false, MyFilms.conf.StrFileXml); // make sure, no global lock is left
+                r = BaseMesFilms.ReadDataMovies(conf.StrDfltSelect, conf.StrFilmSelect, conf.StrSorta, conf.StrSortSens);
+                // (re)populate films
               }
               else
               {
-                i += 1;
-                LogMyFilms.Info("PowerModeChanged() - Network not yet ready or file not accessible on try '" + i + " of " + maxretries + "' to reload - waiting for next retry");
-                Thread.Sleep(1000);
+                // loading threaded : Fin_Charge_Init(false, true); //need to load default view as asked in setup or load current selection as reloaded from myfilms.xml file to remember position
+                Loadfacade(); 
               }
+              LogMyFilms.Debug("PowerModeChanged() - MyFilms finished reloading movie data to memory cache.");
+
+              LogMyFilms.Debug("PowerModeChanged() - restarting backgroundworker for trailer queue...");
+              BaseMesFilms.RestartBackgroundWorker();
+              success = true;
             }
-            try
+            else
             {
-              FSwatcher.EnableRaisingEvents = true;
-            }
-            catch (Exception ex)
-            {
-              LogMyFilms.Debug("PowerModeChanged()- FSwatcher - problem enabling Raisingevents - Message:  '" + ex.Message);
+              i += 1;
+              LogMyFilms.Debug("PowerModeChanged() - Network not yet ready or DB file not accessible on try '" + i + " of " + maxretries + "' to reload - waiting for next retry");
+              Thread.Sleep(2000);
             }
           }
+
+          LogMyFilms.Debug("PowerModeChanged() - restarting DB file watcher to monitor for changes ...");
+          try
+          {
+            FSwatcher.EnableRaisingEvents = true;
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Debug("PowerModeChanged()- FSwatcher - problem enabling Raisingevents - Message:  '" + ex.Message);
+          }
+
+          try
+          {
+            if (conf != null && conf.AMCUwatchScanFolders)
+            {
+              LogMyFilms.Debug("PowerModeChanged() - starting folders watchers ...");
+              // DeviceManager.StartMonitor(); // we disable device monitoring for now
+              setUpFolderWatches(conf);
+            }
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("PowerModeChanged() - Error when attempting to start folder watchers: " + ex.Message);
+          }
+
+          LogMyFilms.Debug("PowerModeChanged() - MyFilms finished Resuming.");
+        }
           break;
 
         case Microsoft.Win32.PowerModes.Suspend:
-          stopFolderWatches();
+          try
+          {
+            LogMyFilms.Debug("PowerModeChanged() - stopping folders watchers ...");
+            stopFolderWatches();
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("PowerModeChanged() - Error when attempting to stop folder watchers: " + ex.Message);
+          }
+
+          LogMyFilms.Debug("PowerModeChanged() - Checking for ongoing DB update ...");
           if (BaseMesFilms.UpdateWorker != null && BaseMesFilms.UpdateWorker.IsBusy)
           {
-            LogMyFilms.Info("PowerModeChanged() - DB updates still active ! - waiting for background worker to complete ...");
+            LogMyFilms.Debug("PowerModeChanged() - DB updates still active ! - waiting for background worker to complete ...");
             BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(60000);
-            LogMyFilms.Info("PowerModeChanged() - DB updates in background worker thread finished");
+            LogMyFilms.Debug("PowerModeChanged() - DB updates in background worker thread finished");
             BaseMesFilms.UpdateWorkerDoneEvent.WaitOne(1000); // wait another second to finish log entries
           }
-          BaseMesFilms.StopBackgroundWorker();
-          LogMyFilms.Debug("PowerModeChanged() - MyFilms is entering standby");
-          break;
 
+          try
+          {
+            LogMyFilms.Debug("PowerModeChanged() - stopping backgroundworker for trailer queue ...");
+            BaseMesFilms.StopBackgroundWorker();
+          }
+          catch (Exception ex)
+          {
+            LogMyFilms.Error("PowerModeChanged() - Error when attempting to stop backgroundworker for trailer queue: " + ex.Message);
+          }
+          LogMyFilms.Info("PowerModeChanged() - MyFilms is entering standby");
+          break;
         default:
-          LogMyFilms.Debug("PowerModeChanged() - MyFilms detected unhandled PowerModeChanged event ('" + e.Mode.ToString() + "') - no action.");
+          LogMyFilms.Info("PowerModeChanged() - MyFilms detected unhandled PowerModeChanged event ('" + e.Mode + "') - no action.");
           break;
       }
     }
