@@ -5,7 +5,7 @@
     <URLPrefix>http://akas.imdb.com</URLPrefix>
     <Language>en</Language>
     <Type>details|cover</Type>
-    <Version>1.3.2</Version>
+    <Version>1.3.3</Version>
     <Encoding>utf-8</Encoding>
     <SearchCleanup />
     <Accept>application/json</Accept>
@@ -110,7 +110,7 @@
       <KeyCountryPage />
       <KeyStartGenre Param1="_x0023_REGEX_x0023_" Param2="">_x0023_REGEX_x0023__x003C_h4_x005B__x005E__x003E__x005D__x002A__x003E_Genre_x005B_s_x005D__x003F_:_x005B__x005E__x003C__x005D__x002A__x003C__x002F_h4_x003E_</KeyStartGenre>
       <KeyEndGenre>_x003C__x002F_div_x003E_</KeyEndGenre>
-      <KeyGenreRegExp>genre._x002A__x003F__x0022__x0020__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyGenreRegExp>
+      <KeyGenreRegExp>genre._x002A__x003F__x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_a_x003E_</KeyGenreRegExp>
       <KeyGenreIndex />
       <KeyGenrePage />
       <KeyStartYear Param1="_x0023_REVERSE_x0023__x0023_REGEX_x0023__x005C_D" Param2="">_x0023_REGEX_x0023__x003C__x002F_title_x003E_</KeyStartYear>
