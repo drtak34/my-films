@@ -5,7 +5,7 @@
     <URLPrefix>http://port.hu/</URLPrefix>
     <Language>hu</Language>
     <Type>details|cover</Type>
-    <Version>1.4.1</Version>
+    <Version>1.4.2</Version>
     <Encoding />
     <SearchCleanup />
     <Accept />
@@ -94,7 +94,7 @@
       <KeyEndWriter>_x0023_REGEX_x0023__x003C__x002F_div_x003E__x007C__x002C__x0020__x003C_a_x0020_href_x003D__x0022_fullcredits</KeyEndWriter>
       <KeyWriterIndex />
       <KeyWriterPage>URL_x0020_Gateway</KeyWriterPage>
-      <KeyWriterRegExp>itemprop_x003D__x0022_name_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_span._x002A__x003F__x005C__x0028__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x005C__x0029_</KeyWriterRegExp>
+      <KeyWriterRegExp>itemprop_x003D__x0022_name_x0022__x003E__x0028__x003F__x003C_person_x003E_._x002A__x003F__x0029__x003C__x002F_._x002A__x003F__x0028__x003F_:_x0028__x003F_:span_x003E__x003C__x002F_a_x003E__x005C_s_x002A__x005B__x005C__x0028__x005D__x002B__x0029__x007C_an_x003E__x0029__x0028__x003F__x003C_role_x003E_._x002A__x003F__x0029__x0028__x003F_:_x005C__x002C__x007C__x005C__x0029__x007C__x003C__x002F__x0029_</KeyWriterRegExp>
       <KeyWriterMaxItems />
       <KeyStartCredits Param1="_x0023_REGEX_x0023__x0020__x0020__x007C__x005C_s_x005C__x0028_._x002A__x005C__x0029__x007C__x005C__x0028_._x002A__x005C__x0029_" Param2="">_x0023_REGEX_x0023__x003C_table_x0020_class_x003D__x0022_cast_x0022__x003E_._x002A__x003F__x003C__x002F_table_x003E__x007C__x003C_table_x0020_class_x003D__x0022_cast_list_x0022__x003E_._x002A__x003F_</KeyStartCredits>
       <KeyEndCredits>_x003C__x002F_table_x003E_</KeyEndCredits>
