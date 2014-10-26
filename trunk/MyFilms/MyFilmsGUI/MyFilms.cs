@@ -1274,18 +1274,18 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         }
         else
         {
-          if (File.Exists(localConfigFile))
-          {
-            try
-            {
-              string backupfile = localConfigFile.Replace(".xml", " - " + DateTime.Now.ToString("u").Replace(":", "-") + ".xml").Replace("/", "-");
-              File.Copy(localConfigFile, backupfile, true);
-            }
-            catch (Exception)
-            {
-              LogMyFilms.Error("SyncConfigFromRemoteServer() - could not backup local MyFilms.xml config file !");
-            }
-          }
+          //if (File.Exists(localConfigFile))
+          //{
+          //  try
+          //  {
+          //    string backupfile = localConfigFile.Replace(".xml", " - " + DateTime.Now.ToString("u").Replace(":", "-") + ".xml").Replace("/", "-");
+          //    File.Copy(localConfigFile, backupfile, true);
+          //  }
+          //  catch (Exception)
+          //  {
+          //    LogMyFilms.Error("SyncConfigFromRemoteServer() - could not backup local MyFilms.xml config file !");
+          //  }
+          //}
           try
           {
             File.Copy(serverConfigFile, localConfigFile, true);

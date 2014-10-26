@@ -47,6 +47,22 @@ namespace MyFilmsPlugin.Configuration
         }
         // all ok, set color for indication to red and save
         cbSyncFromServerOnStartup.ForeColor = System.Drawing.Color.Red;
+        
+        // take a backup copy of the local config file, if it exists
+        string localConfigFile = Config.GetFolder(Config.Dir.Config) + @"\MyFilms.xml";
+        if (System.IO.File.Exists(localConfigFile))
+        {
+          try
+          {
+            string backupfile = localConfigFile.Replace(".xml", " - " + DateTime.Now.ToString("u").Replace(":", "-") + ".xml").Replace("/", "-");
+            System.IO.File.Copy(localConfigFile, backupfile, true);
+          }
+          catch (Exception ex)
+          {
+            MessageBox.Show("SyncConfigFromRemoteServer() - could not backup local MyFilms.xml config file !\n" + ex.Message);
+          }
+        }
+
         SaveCentralConfig();
       }
       else
