@@ -426,27 +426,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
       {
         case "value":
           return true;
-          break;
         case "regex":
           Match match = Regex.Match(r[field].ToString(), value, RegexOptions.IgnoreCase);
-          if (match.Success) return true;
-          break;
+          return match.Success;
         case "equal":
-          if (r[field].ToString().ToLower() == value.ToLower())
-            return true;
-          break;
+          return r[field].ToString().ToLower() == value.ToLower();
         case "not equal":
-          if (r[field].ToString().ToLower() != value.ToLower())
-            return true;
-          break;
+          return r[field].ToString().ToLower() != value.ToLower();
         case "contains":
-          if (r[field].ToString().ToLower().Contains(value.ToLower()))
-            return true;
-          break;
+          return r[field].ToString().ToLower().Contains(value.ToLower());
         case "not contains":
-          if (!(r[field].ToString().ToLower().Contains(value.ToLower())))
-            return true;
-          break;
+          return !(r[field].ToString().ToLower().Contains(value.ToLower()));
         case "greater":
           int number;
           int ivalue;
@@ -465,16 +455,14 @@ namespace MyFilmsPlugin.MyFilms.Utils
               isnumericref = int.TryParse(value, out ivalue);
               if (isnumeric && isnumericref)
               {
-                if (number > ivalue)
-                  return true;
+                return number > ivalue;
               }
               else
               {
                 // if (r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0) return true;
                 IComparer myComparer = new MyFilms.AlphanumComparatorFast();
-                if (myComparer.Compare(r[field].ToString().ToLower(), value.ToLower()) > 0) return true;
+                return myComparer.Compare(r[field].ToString().ToLower(), value.ToLower()) > 0;
               }
-              break;
           }
           break;
         case "lower":
@@ -487,26 +475,20 @@ namespace MyFilmsPlugin.MyFilms.Utils
               isnumericref = int.TryParse(value, out ivalue);
               if (isnumeric && isnumericref)
               {
-                if (number <= ivalue)
-                  return true;
+                return number <= ivalue;
               }
               else
               {
                 // if (!(r[field].ToString().ToLower().CompareTo(value.ToLower()) > 0)) return true;
                 IComparer myComparer = new MyFilms.AlphanumComparatorFast();
-                if (myComparer.Compare(r[field].ToString().ToLower(), value.ToLower()) < 0) return true;
+                return myComparer.Compare(r[field].ToString().ToLower(), value.ToLower()) < 0;
               }
-              break;
           }
           break;
         case "filled":
-          if (r[field].ToString().Length > 0)
-            return true;
-          break;
+          return r[field].ToString().Length > 0;
         case "not filled":
-          if (r[field].ToString().Length == 0)
-            return true;
-          break;
+          return r[field].ToString().Length == 0;
       }
       return false;
     }
