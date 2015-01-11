@@ -26,6 +26,81 @@
 
     <!-- <import>common.window.background.xml</import> -->
 
+<!--
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>100</posY>
+      <label>#date</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>120</posY>
+      <label>#date.short</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>140</posY>
+      <label>#date.long</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>160</posY>
+      <label>#date.short.local</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>180</posY>
+      <label>#date.long.local</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>200</posY>
+      <label>#date.universal</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>220</posY>
+      <label>#date.rfc1123</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+    <control>
+      <type>label</type>
+      <id>0</id>
+      <posX>400</posX>
+      <posY>240</posY>
+      <label>#(string.format('{0:ddd dd MMM}', cdate(#date.short)))</label>
+      <align>left</align>
+      <textcolor>60ffffff</textcolor>
+    </control>
+-->
+
     <control>
       <description>Background</description>
       <id>0</id>
