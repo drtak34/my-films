@@ -1504,7 +1504,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "traktinternal":
-          #region trakt internal menu - inclusing context and noncontext items
+          #region trakt internal menu - including context and noncontext items
           if (!TraktInternalMenu(MyFilms.currentMovie))
           {
             Change_Menu("mainmenu");
@@ -1595,7 +1595,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "trakt-AddToWatchedListMovies":
           if (Helper.IsTraktAvailableAndEnabledAndNewVersion)
           {
-            TraktAddToWatchedList(MyFilms.currentMovie);
+            GUIUtils.ShowErrorDialog("This feature is no more supported - use the Trakt menu instead!");
           }
           else
           {
@@ -1635,7 +1635,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         case "trakt-Rate":
           if (Helper.IsTraktAvailableAndEnabled)
           {
-            TraktRate(MyFilms.currentMovie);
+            GUIUtils.ShowErrorDialog("This feature is no more supported - use the Trakt menu instead!");
           }
           else
           {
@@ -2591,39 +2591,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         LogMyFilms.Error("TraktInternalMenu(): Error - Exception '" + ex.Message + "'");
       }
       return success;
-    }
-
-    private void TraktRate(MFMovie movie)
-    {
-      LogMyFilms.Debug("TraktRate(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "', tmdb = '" + movie.TMDBNumber + "'");
-      ExternalPlugins::TraktPlugin.TraktAPI.DataStructures.TraktRateMovie rateObject = new ExternalPlugins::TraktPlugin.TraktAPI.DataStructures.TraktRateMovie
-      {
-        IMDBID = movie.IMDBNumber,
-        TMDBID = movie.TMDBNumber,
-        Title = movie.Title,
-        Year = movie.Year.ToString(),
-        Rating = "5",
-        UserName = ExternalPlugins::TraktPlugin.TraktSettings.Username,
-        Password = ExternalPlugins::TraktPlugin.TraktSettings.Password
-      };
-      ExternalPlugins::TraktPlugin.GUI.GUIUtils.ShowRateDialog<ExternalPlugins::TraktPlugin.TraktAPI.DataStructures.TraktRateMovie>(rateObject);
-    }
-
-    private void TraktAddToWatchedList(MFMovie movie)
-    {
-      LogMyFilms.Debug("TraktAddToWatchedList(): Call with Title = '" + movie.Title + "', year = '" + movie.Year + "', imdb = '" + movie.IMDBNumber + "'");
-      new Thread(delegate()
-      {
-        try
-        {
-          ExternalPlugins::TraktPlugin.TraktAPI.TraktAPI.SyncMovieLibrary(ExternalPlugins::TraktPlugin.TraktHandlers.BasicHandler.CreateMovieSyncData(movie.Title, movie.Year.ToString(), movie.IMDBNumber), ExternalPlugins::TraktPlugin.TraktAPI.TraktSyncModes.watchlist);
-          ExternalPlugins::TraktPlugin.GUI.GUIWatchListMovies.ClearCache(ExternalPlugins::TraktPlugin.TraktSettings.Username);
-        }
-        catch (Exception ex)
-        {
-          LogMyFilms.Error("TraktAddToWatchedList(): Error - Exception '" + ex.Message + "'");
-        }
-      }) { Name = "MyFilms-AddFilmToTraktWatchlist", IsBackground = true }.Start();
     }
 
     private void TraktRelatedMovies(MFMovie movie)
@@ -7875,7 +7842,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         else
         {
           GUIUtils.ShowOKDialog("", GUILocalizeStrings.Get(1036), MyFilms.r[select_item][MyFilms.conf.StrSTitle].ToString(), ""); //no video found
-          LogMyFilms.Info("File not found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle]);
+          LogMyFilms.Info("File not found for movie '" + MyFilms.r[select_item][MyFilms.conf.StrSTitle] + "'");
         }
       }
     }

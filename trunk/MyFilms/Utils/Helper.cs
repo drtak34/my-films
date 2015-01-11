@@ -51,7 +51,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
   using System.Xml;
   using FileIO = Microsoft.VisualBasic;
 
-  using ConnectionState = ExternalPlugins::TraktPlugin.TraktAPI.ConnectionState;
+  using ConnectionState = ExternalPlugins::TraktPlugin.TraktAPI.Enums.ConnectionState;
   using System.Drawing;
 
   #region String Extension Methods
@@ -60,7 +60,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     public static bool IsNumerical(this string number)
     {
       double isNumber = 0;
-      return System.Double.TryParse(number, out isNumber);
+      return Double.TryParse(number, out isNumber);
     }
 
     /// <summary>
@@ -868,17 +868,17 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       get
       {
-        bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(1, 5, 1, 0), false) && IsPluginEnabled("Trakt");
+        bool status = Helper.IsAssemblyAvailable("TraktPlugin", new Version(5, 0, 5, 0), false) && IsPluginEnabled("Trakt");
         // LogMyFilms.Debug("Helper() - TraktPlugin available and enabled = '" + status + "'");
         return status;
       }
     }
 
-    internal static bool IsTraktAvailableAndEnabledAndNewVersion
+    internal static bool IsTraktAvailableAndEnabledAndNewVersion // currently, it is the same as standard Trakt plugin, we don't support the very old versions anymore due to API v2 change
     {
       get
       {
-        bool status = IsAssemblyAvailable("TraktPlugin", new Version(3, 1, 0, 0), true) && IsPluginEnabled("Trakt");
+        bool status = IsAssemblyAvailable("TraktPlugin", new Version(5, 0, 5, 0), true) && IsPluginEnabled("Trakt");
         // LogMyFilms.Debug("Helper() - TraktPlugin (new version) available and enabled = '" + status + "'");
         return status;
       }
