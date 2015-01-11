@@ -111,8 +111,39 @@
       <font>font10</font>
       <textcolor>aaffffff</textcolor>
       <width>750</width>
-      <label>#WOLPowerManager.Servername0: #WOLPowerManager.Serverstate0</label>
+      <!-- <label>#WOLPowerManager.Servername0: #WOLPowerManager.Serverstate0</label> -->
+      <label>#WOLPowerManager.Servername0:</label>
       <visible>plugin.isenabled(WOL-PowerManager)</visible>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+    <control>
+      <description>GreenButton</description>
+      <type>image</type>
+      <visible>string.contains(#WOLPowerManager.Serverstate0,online)</visible>
+      <posX>990</posX>
+      <posY>27</posY>
+      <width>13</width>
+      <height>13</height>
+      <colordiffuse>a0ffffff</colordiffuse>
+      <texture>MyFilms\status_led_green.png</texture>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+    <control>
+      <description>RedButton</description>
+      <type>image</type>
+      <visible>string.contains(#WOLPowerManager.Serverstate0,offline)</visible>
+      <posX>990</posX>
+      <posY>27</posY>
+      <width>13</width>
+      <height>13</height>
+      <colordiffuse>a0ffffff</colordiffuse>
+      <texture>MyFilms\status_led_red.png</texture>
       <animation effect="fade" time="150">WindowClose</animation>	
       <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
       <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
@@ -127,8 +158,39 @@
       <font>font10</font>
       <textcolor>aaffffff</textcolor>
       <width>750</width>
-      <label>#WOLPowerManager.Servername1: #WOLPowerManager.Serverstate1</label>
+      <!-- <label>#WOLPowerManager.Servername1: #WOLPowerManager.Serverstate1</label> -->
+      <label>#WOLPowerManager.Servername1:</label>
       <visible>plugin.isenabled(WOL-PowerManager)</visible>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+    <control>
+      <description>GreenButton</description>
+      <type>image</type>
+      <visible>string.contains(#WOLPowerManager.Serverstate1,online)</visible>
+      <posX>990</posX>
+      <posY>45</posY>
+      <width>13</width>
+      <height>13</height>
+      <colordiffuse>a0ffffff</colordiffuse>
+      <texture>MyFilms\status_led_green.png</texture>
+      <animation effect="fade" time="150">WindowClose</animation>	
+      <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
+      <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
+      <animation effect="slide" tween="sine" easing="in" time="200" end="450,0" condition="!control.hasfocus(50)">conditional</animation>
+    </control>
+    <control>
+      <description>RedButton</description>
+      <type>image</type>
+      <visible>string.contains(#WOLPowerManager.Serverstate1,offline)</visible>
+      <posX>990</posX>
+      <posY>45</posY>
+      <width>13</width>
+      <height>13</height>
+      <colordiffuse>a0ffffff</colordiffuse>
+      <texture>MyFilms\status_led_red.png</texture>
       <animation effect="fade" time="150">WindowClose</animation>	
       <animation effect="slide" tween="circle" easing="out" time="200" start="900,0" reversible="false">WindowOpen</animation>
       <animation effect="slide" tween="circle" easing="out" time="200" end="900,0" reversible="false">WindowClose</animation>
