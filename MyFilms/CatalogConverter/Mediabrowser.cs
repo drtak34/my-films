@@ -23,10 +23,13 @@
 
 using MediaBrowser.ApiInteraction;
 //using MediaBrowser.ApiInteraction.net35;
+using MediaBrowser.ApiInteraction.net35;
 using MediaBrowser.ApiInteraction.WebSocket;
+using MediaBrowser.Model;
 using MediaBrowser.Model.Dto;
 using MediaBrowser.Model.Entities;
 using MediaBrowser.Model.Querying;
+using MediaBrowser.Model.Session;
 using MediaBrowser.Model.Users;
 using MediaPortal.GUI.Library;
 using System;
@@ -36,7 +39,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MediaPortal.Hardware;
+//using MediaPortal.Hardware;
 using NLog;
 
 
@@ -121,50 +124,93 @@ namespace MyFilmsPlugin.MyFilms.CatalogConverter
       {
         #region mediabrowser infos
 
-        //After authentication you'll need to set the CurrentUserId property, and you'll need to update that value anytime the user changes (or logs out).
-        //Web Socket
+        ////After authentication you'll need to set the CurrentUserId property, and you'll need to update that value anytime the user changes (or logs out).
+        ////Web Socket
 
-        //In addition to http requests, you can also connect to the server's web socket to receive notifications of events from the server.
+        ////In addition to http requests, you can also connect to the server's web socket to receive notifications of events from the server.
 
-        //The first thing you will need to do is get the SystemInfo resource to discover what port the web socket is running on.
+        ////The first thing you will need to do is get the SystemInfo resource to discover what port the web socket is running on.
 
-        //            var systemInfo = await client.GetSystemInfoAsync();
+        ////            var systemInfo = await client.GetSystemInfoAsync();
 
-        //            var webSocketPort = systemInfo.WebSocketPortNumber;
+        ////            var webSocketPort = systemInfo.WebSocketPortNumber;
 
-        //Then you can simply instantiate ApiWebSocket and open a connection.
+        ////Then you can simply instantiate ApiWebSocket and open a connection.
 
-        //            var webSocket = new ApiWebSocket("localhost", webSocketPort, deviceId, appName, appVersion, ClientWebSocketFactory.CreateWebSocket);
+        ////            var webSocket = new ApiWebSocket("localhost", webSocketPort, deviceId, appName, appVersion, ClientWebSocketFactory.CreateWebSocket);
 
-        //The last constructor param is a factory method used to create an instance of IClientWebSocket. This will be called anytime a new connection is made. The full .net ApiClient library includes CilentWebSocketFactory. If using the portable version, you'll have to provide your own implementation.
+        ////The last constructor param is a factory method used to create an instance of IClientWebSocket. This will be called anytime a new connection is made. The full .net ApiClient library includes CilentWebSocketFactory. If using the portable version, you'll have to provide your own implementation.
 
-        //Once instantiated, simply call EnsureConnectionAsync. Even once connected, this method can be called at anytime to verify connection status and reconnect if needed.
+        ////Once instantiated, simply call EnsureConnectionAsync. Even once connected, this method can be called at anytime to verify connection status and reconnect if needed.
 
-        //            await webSocket.EnsureConnectionAsync(CancellationToken.None);
+        ////            await webSocket.EnsureConnectionAsync(CancellationToken.None);
 
-        //There is a Closed event that will fire anytime the connection is lost. From there you can attempt to reconnect. ApiWebSocket also supports the use of a timer to periodically call EnsureConnectionAsync:
+        ////There is a Closed event that will fire anytime the connection is lost. From there you can attempt to reconnect. ApiWebSocket also supports the use of a timer to periodically call EnsureConnectionAsync:
 
-        //            webSocket.StartEnsureConnectionTimer(int intervalMs);
+        ////            webSocket.StartEnsureConnectionTimer(int intervalMs);
 
-        //            webSocket.StopEnsureConnectionTimer();
+        ////            webSocket.StopEnsureConnectionTimer();
 
-        //ApiWebSocket has various events that can be used to receive notifications from the server:
+        ////ApiWebSocket has various events that can be used to receive notifications from the server:
 
-        //            webSocket.UserUpdated += webSocket_UserUpdated;
+        ////            webSocket.UserUpdated += webSocket_UserUpdated;
 
-        //Linking with ApiClient
+        ////Linking with ApiClient
 
-        //ApiClient has a WebSocketConnection property. After creating ApiWebSocket, if you set the property onto ApiClient, some commands will then be sent over the socket as opposed to the http api, resuling in lower overhead. This is optional and omitting this will not result in any loss of functionality with the http-based ApiClient.
-        //Logging and Interfaces
+        ////ApiClient has a WebSocketConnection property. After creating ApiWebSocket, if you set the property onto ApiClient, some commands will then be sent over the socket as opposed to the http api, resuling in lower overhead. This is optional and omitting this will not result in any loss of functionality with the http-based ApiClient.
+        ////Logging and Interfaces
 
-        //ApiClient and ApiWebSocket both have additional constructors available allowing you to pass in your own implementation of ILogger. The default implementation is NullLogger, which provides no logging. In addition you can also pass in your own implementation of IJsonSerializer, or use our NewtonsoftJsonSerializer. ClientWebSocketFactory also has an additional overload allowing you to pass in your own ILogger
-        #endregion
+        ////ApiClient and ApiWebSocket both have additional constructors available allowing you to pass in your own implementation of ILogger. The default implementation is NullLogger, which provides no logging. In addition you can also pass in your own implementation of IJsonSerializer, or use our NewtonsoftJsonSerializer. ClientWebSocketFactory also has an additional overload allowing you to pass in your own ILogger
+        //#endregion
 
+        //// Developers are encouraged to create their own ILogger implementation
+        //var logger = new NullLogger();
+
+        //// This describes the device capabilities
+        //var capabilities = new ClientCapabilities();
+
+        //// If using the portable class library you'll need to supply your own IDevice implementation.
+        //var device = new Device
+        //{
+        //    DeviceName = "My Device Name",
+        //    DeviceId = "My Device Id"
+        //};
+
+        //// If using the portable class library you'll need to supply your own ICryptographyProvider implementation.
+        //var cryptoProvider = new CryptographyProvider();
+
+        //var client = new ApiClient(Logger, "http://localhost:8096", "My client name", device, capabilities, cryptoProvider);
+
+        //var authResult = await AuthenticateUserAsync("username", passwordHash);
+
+        //// RemoteLoggedOut indicates the user was logged out remotely by the server
+        //ApiClient.RemoteLoggedOut += ApiClient_RemoteLoggedOut;
+
+        //// Get the ten most recently added items for the current user
+        //var items = await client.GetItemsAsync(new ItemQuery
+        //{
+        //    UserId = client.UserId,
+
+        //    SortBy = new[] { ItemSortBy.DateCreated },
+        //    SortOrder = SortOrder.Descending,
+
+        //    // Get media only, don't return folder items
+        //    Filters = new[] { ItemFilter.IsNotFolder },
+
+        //    Limit = 10,
+
+        //    // Search recursively through the user's library
+        //    Recursive = true
+        //});
+
+        //await client.Logout();        
+        
+        
         ApiClient client = new ApiClient(mbhost, 8096, "MyFilms", "HTPC", "My device id", "1.0");
 
         // Get users
-        //UserDto[] users = await client.GetUsersAsync(null);
-        var users = client.GetUsersAsync(null);
+        // UserDto[] users = await client.GetUsersAsync(null);
+        var users = client.GetUsers(new Action<UserDto[]>(null), null);
 
         var currentUser = users.Result.First();
 
