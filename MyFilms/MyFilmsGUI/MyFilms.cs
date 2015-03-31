@@ -865,7 +865,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
       // preload config and dataset
       InitConfigPreload();
-      
+
       LogMyFilms.Debug("MyFilms.Init() completed. Loading main skin file.");
       return result;
     }
@@ -16051,11 +16051,23 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           try
           {
-            LogMyFilms.Info("InitializeQueuedTrailerDownloader() - waiting '{0}' seconds to try starting '{1}' trailer download threads for '{2}' queue entries", delayToStart, maxThreads, TrailertoDownloadQueue.Count); 
+            LogMyFilms.Info("InitializeQueuedTrailerDownloader() - waiting '{0}' seconds to try starting '{1}' trailer download threads for '{2}' queue entries", delayToStart, maxThreads, TrailertoDownloadQueue.Count);
 
             if (!Helper.IsConnectedToInternet())
             {
               LogMyFilms.Warn("InitializeQueuedTrailerDownloader() - No Internet connection available - aborting start of Trailer download threads!");
+              return;
+            }
+
+            if (MyFilms.conf == null)
+            {
+              LogMyFilms.Info("InitializeQueuedTrailerDownloader() - MyFilms config not yet loaded - waiting 10 seconds!");
+              Thread.Sleep(10000);
+            }
+
+            if (MyFilms.conf == null)
+            {
+              LogMyFilms.Info("InitializeQueuedTrailerDownloader() - No MyFilms config loaded - exiting!");
               return;
             }
 
