@@ -1024,9 +1024,11 @@ namespace MyFilmsPlugin.MyFilms.Utils
       try
       {
         using (var client = new WebClient())
-        using (var stream = client.OpenRead("http://www.google.com"))
         {
-          return true;
+          using (var stream = client.OpenRead("http://www.google.com"))
+          {
+            return true;
+          }
         }
       }
       catch
