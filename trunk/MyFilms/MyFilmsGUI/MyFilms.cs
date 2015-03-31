@@ -17142,7 +17142,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         if (bgDownloadTrailer.CancellationPending)
         {
-          LogMyFilms.Debug("cancel trailer image download...");
+          LogMyFilms.Debug("cancel trailer download...");
           return;
         }
 

@@ -7,17 +7,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using ExternalPlugins::OnlineVideos;
-using ExternalPlugins::OnlineVideos.Hoster.Base;
 using ExternalPlugins::OnlineVideos.MediaPortal1;
 using ExternalPlugins::OnlineVideos.MediaPortal1.Player;
-using PlayerFactory = ExternalPlugins::OnlineVideos.MediaPortal1.Player.PlayerFactory;
 using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using MediaPortal.Player;
 using System.Threading;
-//using TraktPlugin.GUI;
-//using TraktPlugin.TraktAPI;
-//using TraktPlugin.TraktAPI.DataStructures;
 
 namespace MyFilmsPlugin.Utils
 {
@@ -45,7 +40,7 @@ namespace MyFilmsPlugin.Utils
 
         try
         {
-          var ovHosterProxy = OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
+          OnlineVideosHosterProxy ovHosterProxy = ExternalPlugins::OnlineVideos.CrossDomain.OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
           downloadUrls = ovHosterProxy.GetDownloadUrls(stream);
         }
         catch (Exception ex)
@@ -104,7 +99,7 @@ namespace MyFilmsPlugin.Utils
 
           if (!interactiveSuccessful)
           {
-            var ovHosterProxy = OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
+            var ovHosterProxy = ExternalPlugins::OnlineVideos.CrossDomain.OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
             stream = ovHosterProxy.GetVideoUrls(stream);
           }
         }
@@ -136,7 +131,7 @@ namespace MyFilmsPlugin.Utils
       GUIBackgroundTask.Instance.ExecuteInBackgroundAndCallback(() =>
       {
         LogMyFilms.Info("OnlineVideo Pre-Buffering Started");
-        if (((OnlineVideosPlayer)factory.PreparedPlayer).BufferFile())
+        if (((OnlineVideosPlayer)factory.PreparedPlayer).BufferFile(YouTubeSiteUtil))
         {
           LogMyFilms.Info("OnlineVideo Pre-Buffering Complete");
           return true;
@@ -176,6 +171,26 @@ namespace MyFilmsPlugin.Utils
       return true;
     }
 
+
+    static ExternalPlugins::OnlineVideos.Sites.SiteUtilBase _youTubeSiteUtil = null;
+
+    private static ExternalPlugins::OnlineVideos.Sites.SiteUtilBase YouTubeSiteUtil
+    {
+      get
+      {
+        if (_youTubeSiteUtil == null)
+        {
+          LogMyFilms.Info("Getting YouTube site util from OnlineVideos.");
+          ExternalPlugins::OnlineVideos.Sites.SiteUtilBase siteUtil;
+          OnlineVideoSettings.Instance.SiteUtilsList.TryGetValue("YouTube", out siteUtil);
+          _youTubeSiteUtil = siteUtil;
+
+          LogMyFilms.Info("Finished getting YouTube site util, Success = '{0}'", siteUtil != null);
+        }
+        return _youTubeSiteUtil;
+      }
+    }
+    
     #endregion
   }
 
@@ -190,18 +205,18 @@ namespace MyFilmsPlugin.Utils
 
     public Dictionary<string, string> GetDownloadUrls(string url)
     {
-      return HosterFactory.GetHoster("Youtube").getPlaybackOptions(url);
+      return ExternalPlugins::OnlineVideos.Hoster.HosterFactory.GetHoster("Youtube").GetPlaybackOptions(url);
     }
 
     public string GetVideoUrls(string url)
     {
-      return HosterFactory.GetHoster("Youtube").getVideoUrls(url);
+      return ExternalPlugins::OnlineVideos.Hoster.HosterFactory.GetHoster("Youtube").GetVideoUrl(url);
     }
 
     // not yet used
-    public List<HosterBase> GetAllHoster()
+    public List<ExternalPlugins::OnlineVideos.Hoster.HosterBase> GetAllHoster()
     {
-      return HosterFactory.GetAllHosters();
+      return ExternalPlugins::OnlineVideos.Hoster.HosterFactory.GetAllHosters();
     }
 
   }
