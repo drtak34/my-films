@@ -36,12 +36,15 @@ namespace MyFilmsPlugin.Utils
       if (stream.Contains("youtube.com"))
       {
         // get playback url from streamURL
-        LogMyFilms.Info("Getting playback options from page '{0}'", stream);
+        LogMyFilms.Debug("Getting playback options from page '{0}'", stream);
 
         try
         {
-          OnlineVideosHosterProxy ovHosterProxy = ExternalPlugins::OnlineVideos.CrossDomain.OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
-          downloadUrls = ovHosterProxy.GetDownloadUrls(stream);
+          //OnlineVideosHosterProxy ovHosterProxy = ExternalPlugins::OnlineVideos.CrossDomain.OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
+          //downloadUrls = ovHosterProxy.GetDownloadUrls(stream);
+          // var hosterBase = ExternalPlugins::OnlineVideos.Hoster.HosterFactory.GetHoster("Youtube");
+          // downloadUrls = hosterBase.GetPlaybackOptions(stream);
+          downloadUrls = ExternalPlugins::OnlineVideos.Hoster.HosterFactory.GetHoster("Youtube").GetPlaybackOptions(stream);
         }
         catch (Exception ex)
         {
@@ -52,9 +55,9 @@ namespace MyFilmsPlugin.Utils
 
         if (downloadUrls != null)
         {
-          LogMyFilms.Info("Found playback options: '{0}'", downloadUrls.Count);
+          LogMyFilms.Info("Found playback options: '{0}' for link '{1}'", downloadUrls.Count, stream);
           foreach (KeyValuePair<string, string> downloadUrl in downloadUrls) 
-            LogMyFilms.Info("playback option: '{0}'", downloadUrl.Key); // LogMyFilms.Info("playback option: '{0}' - '{1}'", downloadUrl.Key, downloadUrl.Value);
+            LogMyFilms.Debug("playback option: '{0}'", downloadUrl.Key); // LogMyFilms.Info("playback option: '{0}' - '{1}'", downloadUrl.Key, downloadUrl.Value);
         }
         else
         {
@@ -68,8 +71,7 @@ namespace MyFilmsPlugin.Utils
     {
       if (string.IsNullOrEmpty(stream)) return false;
 
-      // use onlinevideo youtube siteutils to get
-      // playback urls as myfilms only gives us the html page
+      // use onlinevideo youtube siteutils to get playback urls as myfilms only gives us the html page
       if (stream.Contains("youtube.com"))
       {
         // get playback url from streamURL
@@ -82,6 +84,15 @@ namespace MyFilmsPlugin.Utils
           {
             Dictionary<string, string> availableTrailerFiles = GetYoutubeDownloadUrls(stream);
             var choiceView = new List<string>();
+
+            //GUIWindowManager.SendThreadCallbackAndWait((p1, p2, o) =>
+            //{
+            //  {
+                
+            //  }
+            //  return 0;
+            //}, 0, 0, null);
+            
             var dlg = (MediaPortal.Dialogs.GUIDialogMenu)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_MENU);
             if (dlg == null) return false;
             dlg.Reset();
@@ -99,8 +110,9 @@ namespace MyFilmsPlugin.Utils
 
           if (!interactiveSuccessful)
           {
-            var ovHosterProxy = ExternalPlugins::OnlineVideos.CrossDomain.OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
-            stream = ovHosterProxy.GetVideoUrls(stream);
+            //var ovHosterProxy = ExternalPlugins::OnlineVideos.CrossDomain.OnlineVideosAppDomain.Domain.CreateInstanceAndUnwrap(typeof(OnlineVideosHosterProxy).Assembly.FullName, typeof(OnlineVideosHosterProxy).FullName) as OnlineVideosHosterProxy;
+            //stream = ovHosterProxy.GetVideoUrls(stream);
+            stream = ExternalPlugins::OnlineVideos.Hoster.HosterFactory.GetHoster("Youtube").GetVideoUrl(stream);
           }
         }
         catch (Exception ex)
@@ -173,7 +185,6 @@ namespace MyFilmsPlugin.Utils
 
 
     static ExternalPlugins::OnlineVideos.Sites.SiteUtilBase _youTubeSiteUtil = null;
-
     private static ExternalPlugins::OnlineVideos.Sites.SiteUtilBase YouTubeSiteUtil
     {
       get
