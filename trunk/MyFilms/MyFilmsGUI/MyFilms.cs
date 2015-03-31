@@ -17192,8 +17192,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               LogMyFilms.Debug("bgDownloadTrailer_DoWork() - no success - retry with refreshed web link !");
               Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
+              KeyValuePair<string, string> highestQualitySelection = MyFilmsPlugin.Utils.OVplayer.GetPreferredQualityOption(availableTrailerFiles, "FHD");
               string newUrl;
-              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Last().Value;
+              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : highestQualitySelection.Value;
               bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
             }
             LogMyFilms.Debug("bgDownloadTrailer_DoWork() - success = '" + bDownloadSuccess + "' for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");
@@ -17259,8 +17260,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           if (f.SourceUrl == null)
           {
             Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
-            f.SourceUrl = availableTrailerFiles.Last().Value;
-            f.Quality = availableTrailerFiles.Last().Key;
+            KeyValuePair<string, string> highestQualitySelection = MyFilmsPlugin.Utils.OVplayer.GetPreferredQualityOption(availableTrailerFiles, "FHD");
+            f.SourceUrl = highestQualitySelection.Value;
+            f.Quality = highestQualitySelection.Key;
           }
           #endregion
 
@@ -17349,8 +17351,9 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             {
               LogMyFilms.Debug("Download Thread '" + threadId + "' - no success - retry with refreshed web link !");
               Dictionary<string, string> availableTrailerFiles = MyFilmsPlugin.Utils.OVplayer.GetYoutubeDownloadUrls(f.OriginalUrl);
+              KeyValuePair<string, string> highestQualitySelection = MyFilmsPlugin.Utils.OVplayer.GetPreferredQualityOption(availableTrailerFiles, "FHD");
               string newUrl;
-              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : availableTrailerFiles.Last().Value;
+              f.SourceUrl = (availableTrailerFiles.TryGetValue(f.Quality, out newUrl)) ? newUrl : highestQualitySelection.Value;
               bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);
             }
             LogMyFilms.Debug("Download Thread '" + threadId + "' - success = '" + bDownloadSuccess + "' for movie '" + f.MovieTitle + "' - trailer = '" + f.Trailername + "', trailerpath = '" + destinationfile + "'");

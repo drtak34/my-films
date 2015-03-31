@@ -9911,8 +9911,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               string quality = null;
               if (availableTrailerFiles != null && availableTrailerFiles.Count > 0)
               {
-                url = availableTrailerFiles.Last().Value;
-                quality = availableTrailerFiles.Last().Key;
+                //url = availableTrailerFiles.Last().Value;
+                //quality = availableTrailerFiles.Last().Key;
+                KeyValuePair<string, string> highestQualitySelection = MyFilmsPlugin.Utils.OVplayer.GetPreferredQualityOption(availableTrailerFiles, "FHD");
+                url = highestQualitySelection.Value;
+                quality = highestQualitySelection.Key;
+                LogMyFilms.Debug("SearchAndDownloadTrailerOnlineTMDB() - selected trailer with quality = '" + quality ?? "" + "', url = '" + url ?? "" + "'");
               }
               else
               {
