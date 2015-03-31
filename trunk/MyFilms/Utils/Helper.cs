@@ -914,7 +914,7 @@ namespace MyFilmsPlugin.MyFilms.Utils
     {
       get
       {
-        bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(1, 2, 0, 0), true) && IsPluginEnabled("OnlineVideos");
+        bool status = Helper.IsAssemblyAvailable("OnlineVideos", new Version(2, 0, 0, 0), true) && IsPluginEnabled("OnlineVideos");
         // LogMyFilms.Debug("Helper() - OnlineVideos available and enabled = '" + status + "'");
         return status;
       }
