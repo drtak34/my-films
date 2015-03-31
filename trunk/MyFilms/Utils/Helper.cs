@@ -1017,6 +1017,24 @@ namespace MyFilmsPlugin.MyFilms.Utils
         return false;
       }
     }
+
+    //Checks if the computer is connected to the internet...
+    public static bool IsConnectedToInternet()
+    {
+      try
+      {
+        using (var client = new WebClient())
+        using (var stream = client.OpenRead("http://www.google.com"))
+        {
+          return true;
+        }
+      }
+      catch
+      {
+        return false;
+      }
+    }
+    
     #endregion
 
     public static bool IsFileUsedbyAnotherProcess(string filename)
