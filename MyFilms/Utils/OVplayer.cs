@@ -183,6 +183,87 @@ namespace MyFilmsPlugin.Utils
       return true;
     }
 
+    /// <summary>
+    /// returns the highest quality download options for a given preferred quality
+    /// </summary>
+    internal static KeyValuePair<string, string> GetPreferredQualityOption(Dictionary<string, string> downloadOptions, string preferredQuality)
+    {
+      // available mp4 options are:
+      // 1. 320x240
+      // 2. 426x240
+      // 3. 640x360
+      // 4. 1280x720
+      // 5. 1920x1080 (currently no high resolutions supported by OV due to split video/audio and missing support in URLsplitter)
+
+      IEnumerable<KeyValuePair<string, string>> options;
+      switch (preferredQuality)
+      {
+        case "FHD":
+          options = downloadOptions.Where(o => o.Key.Contains("1080"));
+          if (options.Any())
+          {
+            return new KeyValuePair<string, string>(options.First().Key, options.First().Value);
+          }
+          else
+          {
+            return GetPreferredQualityOption(downloadOptions, "HD");
+          }
+        case "HD":
+          options = downloadOptions.Where(o => o.Key.Contains("720"));
+          if (options.Any())
+          {
+            return new KeyValuePair<string, string>(options.First().Key, options.First().Value);
+          }
+          else
+          {
+            return GetPreferredQualityOption(downloadOptions, "HQ");
+          }
+        case "HQ":
+          options = downloadOptions.Where(o => o.Key.Contains("640x360 | mp4"));
+          if (options.Any())
+          {
+            return new KeyValuePair<string, string>(options.First().Key, options.First().Value);
+          }
+          else
+          {
+            return GetPreferredQualityOption(downloadOptions, "LQ");
+          }
+        case "LQ":
+          options = downloadOptions.Where(o => o.Key.Contains("426x240 | mp4"));
+          if (options.Any())
+          {
+            return new KeyValuePair<string, string>(options.First().Key, options.First().Value);
+          }
+          else
+          {
+            return GetPreferredQualityOption(downloadOptions, "BadQ");
+          }
+          break;
+        case "BadQ":
+          options = downloadOptions.Where(o => o.Key.Contains("320x240 | mp4"));
+          if (options.Any())
+          {
+            return new KeyValuePair<string, string>(options.First().Key, options.First().Value);
+          }
+          else
+          {
+            // use any available ...
+            return GetPreferredQualityOption(downloadOptions, "");
+          }
+          break;
+
+        default:
+          // return any trailer, take last in the list, assuming that is best quality
+          if (downloadOptions.Any())
+          {
+            return new KeyValuePair<string, string>(downloadOptions.Last().Key, downloadOptions.Last().Value);
+          }
+          break;
+      }
+
+      // no videos available
+      return new KeyValuePair<string, string>(null, null);
+    }
 
     static ExternalPlugins::OnlineVideos.Sites.SiteUtilBase _youTubeSiteUtil = null;
     private static ExternalPlugins::OnlineVideos.Sites.SiteUtilBase YouTubeSiteUtil
