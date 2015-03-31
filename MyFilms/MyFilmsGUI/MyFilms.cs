@@ -1368,7 +1368,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       if (this.facadeFilms.SelectedListItemIndex > -1)
       {
         if (!facadeFilms.Focus) GUIControl.FocusControl(GetID, (int)Controls.CTRL_ListFilms);
-        Context_Menu_Movie(this.facadeFilms.SelectedListItem.ItemId);
+        Context_Menu_Movie(facadeFilms.SelectedListItem.ItemId);
         return;
       }
       base.OnShowContextMenu();
@@ -7752,7 +7752,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             #region load actor details for person lists
             Thread.Sleep(25);
             stopwatch.Reset(); stopwatch.Start();
-            if (Win32API.IsConnectedToInternet() && MyFilms.conf.PersonsEnableDownloads && isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
+            if (Helper.IsConnectedToInternet() && MyFilms.conf.PersonsEnableDownloads && isperson && conf.StrPersons.Length > 0 && (!(conf.IndexedChars > 0 && conf.Boolindexed && !conf.Boolindexedreturn && MyFilms.conf.StrViewsShowIndexedImgInIndViews)))
             {
               for (i = 0; i < facadeFilms.Count; i++)
               {
@@ -7818,7 +7818,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       {
         try
         {
-          if (facadeFilms != null && Win32API.IsConnectedToInternet())
+          if (facadeFilms != null && Helper.IsConnectedToInternet())
           {
             for (int i = 0; i < facadeFilms.Count; i++)
             {
@@ -12025,7 +12025,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               {
                 try
                 {
-                  if (!Win32API.IsConnectedToInternet()) return;
+                  if (!Helper.IsConnectedToInternet()) return;
 
                   for (int i = 0; i < r.Length; i++)
                   {
@@ -13029,8 +13029,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "fanart":
-          if (!MyFilmsDetail.IsInternetConnectionAvailable())
+          if (!Helper.IsConnectedToInternet())
+          {
+            GUIUtils.ShowErrorDialog(GUILocalizeStrings.Get(703));
             break; // stop, if no internet available
+          }
           else
           {
             // Grabber.Grabber_URLClass Grab = new Grabber.Grabber_URLClass();
@@ -16050,7 +16053,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           {
             LogMyFilms.Info("InitializeQueuedTrailerDownloader() - waiting '{0}' seconds to try starting '{1}' trailer download threads for '{2}' queue entries", delayToStart, maxThreads, TrailertoDownloadQueue.Count); 
 
-            if (!Win32API.IsConnectedToInternet())
+            if (!Helper.IsConnectedToInternet())
             {
               LogMyFilms.Warn("InitializeQueuedTrailerDownloader() - No Internet connection available - aborting start of Trailer download threads!");
               return;
@@ -17322,11 +17325,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
             //}
 
 
-            WebClient wc = new WebClient();
-            Task<bool> downloadTask = Grabber.Updater.DownloadFileAsyncCore(wc, new Uri("request.Address"), "request.FileName");
-            bool success = true;
-            success = downloadTask.Result;
-            (downloadTask.AsyncState as WebClient).Dispose();
+            //WebClient wc = new WebClient();
+            //Task<bool> downloadTask = Grabber.Updater.DownloadFileAsyncCore(wc, new Uri("request.Address"), "request.FileName");
+            //bool success = true;
+            //success = downloadTask.Result;
+            //(downloadTask.AsyncState as WebClient).Dispose();
         
 
             bool bDownloadSuccess = Grabber.Updater.DownloadFile(f.SourceUrl, destinationfile);

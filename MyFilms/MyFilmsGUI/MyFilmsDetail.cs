@@ -2163,12 +2163,20 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           break;
 
         case "personimages":
-          if (!MyFilmsDetail.IsInternetConnectionAvailable()) break; // stop, if no internet available
+          if (!Helper.IsConnectedToInternet())
+          {
+            GUIUtils.ShowErrorDialog(GUILocalizeStrings.Get(703));
+            break; // stop, if no internet available
+          }
           Menu_LoadPersonImages();
           break;
 
         case "fanart":
-          if (!MyFilmsDetail.IsInternetConnectionAvailable()) break; // stop, if no internet available
+          if (!Helper.IsConnectedToInternet())
+          {
+            GUIUtils.ShowErrorDialog(GUILocalizeStrings.Get(703));
+            break; // stop, if no internet available
+          }
           // Remove_Backdrops_Fanart(MyFilms.r[MyFilms.conf.StrIndex][MyFilms.conf.StrTitle1].ToString(), false); // do not remove, as user might only want to "update" fanart ...
           Menu_LoadFanart(false);
           break;
@@ -2850,6 +2858,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       row["DateWatched"] = (userData.GetUserState(userprofilename).WatchedDate == MultiUserData.NoWatchedDate || userData.GetUserState(MyFilms.conf.StrUserProfileName).Watched == false) ? Convert.DBNull : userData.GetUserState(userprofilename).WatchedDate;
       row["RatingUser"] = (userData.GetUserState(userprofilename).UserRating == -1) ? Convert.DBNull : userData.GetUserState(userprofilename).UserRating;
       row[MyFilms.conf.StrWatchedField] = userData.GetUserState(userprofilename).Watched ? "true" : MyFilms.conf.GlobalUnwatchedOnlyValue.ToLower();
+      // row["LastPosition"] = (userData.GetUserState(userprofilename).ResumeData == -1) ? Convert.DBNull : userData.GetUserState(userprofilename).ResumeData;
       //if (MyFilms.conf.StrUserProfileName.Length > 0 && row["RatingUser"] != System.Convert.DBNull && row["RatingUser"] != MultiUserData.NoRating)
       //{
       //  string newValue = (row["RatingUser"] > MultiUserData.FavoriteRating) ? MultiUserData.Add(row["Favorite"].ToString(), MyFilms.conf.StrUserProfileName) : MultiUserData.Remove(row["Favorite"].ToString(), MyFilms.conf.StrUserProfileName);
@@ -8460,7 +8469,11 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
 
           GUIUtils.GetFilesForMovie(iidMovie, ref movies);
 
-          if (movies.Count <= 0) return;
+          if (movies.Count <= 0)
+          {
+            LogMyFilms.Warn("GetFilesForMovie() - no movie files found in MyVideoDB for iidMovie = '" + iidMovie + "', filename = '" + filename + "'");            
+            return;
+          }
 
           #region disabled code
           //HashSet<string> watchedMovies = new HashSet<string>();
@@ -8515,12 +8528,12 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
               break;
             }
 
-            LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie.ToString() + "', g_player.Player.Duration = '" + g_Player.Player.Duration.ToString() + "', Duration of former playlist items = '" + duration.ToString() + "'");
+            LogMyFilms.Debug("TotalRuntimeMovie = '" + totalRuntimeMovie + "', g_player.Player.Duration = '" + g_Player.Player.Duration + "', Duration of former playlist items = '" + duration.ToString() + "'");
             if (totalRuntimeMovie > g_Player.Player.Duration)
               playTimePercentage = (int)Math.Ceiling(((duration + timeMovieStopped) / totalRuntimeMovie) * 100);
             else
               playTimePercentage = (int)Math.Ceiling(((duration + timeMovieStopped) / g_Player.Player.Duration) * 100);
-            LogMyFilms.Debug("Calculated playtimepercentage: '" + playTimePercentage + "' - g_player.Duration: '" + g_Player.Duration.ToString() + "' - playlistPlayer.g_Player.Duration: '" + playlistPlayer.g_Player.Duration.ToString() + "'");
+            LogMyFilms.Debug("Calculated playtimepercentage: '" + playTimePercentage + "' - g_player.Duration: '" + g_Player.Duration + "' - playlistPlayer.g_Player.Duration: '" + playlistPlayer.g_Player.Duration.ToString() + "'");
           }
 
           foreach (object moviepart in movies)
@@ -8616,6 +8629,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           LogMyFilms.Debug("Movie set to watched - reason: ended = " + ended + ", stopped = " + stopped + ", playTimePercentage = '" + playTimePercentage + "'" + ", 'update on movie end'");
           #endregion
         }
+
         #region tell any listeners that movie is watched
         MFMovie movie = GetMovieFromRecord(MyFilms.conf.StrPlayedRow); // create movie before DB record is deleted ...
         if ((ended && isLastPart) || (stopped && (playTimePercentage >= 80 || g_Player.IsDVDMenu)))
@@ -8656,7 +8670,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
           Update_XML_database();
           if (GetID == MyFilms.ID_MyFilmsDetail)  // only update GUI, when currently active
             afficher_detail(true);
-          //GUIWindowManager.Process(); // Enabling creates lock in handler !!!
         }
 
         MyFilms.conf.StrPlayedRow = null;
@@ -10358,18 +10371,6 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
       }
     }
 
-    public static bool IsInternetConnectionAvailable()
-    {
-      // Check Internet connection
-      if (!Win32API.IsConnectedToInternet())
-      {
-        GUIUtils.ShowErrorDialog(GUILocalizeStrings.Get(703));
-        return false;
-      }
-      else
-        return true;
-    }
-
     /// <summary>
     /// make a cleaned title out of the filename/original title
     /// </summary>
@@ -10922,7 +10923,7 @@ namespace MyFilmsPlugin.MyFilms.MyFilmsGUI
         {
           try
           {
-            if (!Win32API.IsConnectedToInternet()) return;
+            if (!Helper.IsConnectedToInternet()) return;
 
             if (MyFilms.conf.UseThumbsForPersons && Directory.Exists(MyFilms.conf.StrPathArtist) && MyFilms.r != null && MyFilms.r.Length > MyFilms.conf.StrIndex)
             {
